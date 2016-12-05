@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "English"; ObjectID = "F9J-hw-P33"; */
+"F9J-hw-P33.text" = "English";
+
+/* Class = "UILabel"; text = "SELECT LANGUAGE"; ObjectID = "Tq8-mA-B5V"; */
+"Tq8-mA-B5V.text" = "SELECT LANGUAGE";
+
+/* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "VYU-aG-co2"; */
+"VYU-aG-co2.normalTitle" = "LOG IN";
+
+/* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "gOQ-1b-PZF"; */
+"gOQ-1b-PZF.normalTitle" = "REGISTER";
+
+/* Class = "UILabel"; text = "Welcome"; ObjectID = "jzt-FS-zG8"; */
+"jzt-FS-zG8.text" = "Welcome";

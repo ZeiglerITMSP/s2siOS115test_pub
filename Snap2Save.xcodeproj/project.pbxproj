@@ -14,6 +14,7 @@
 		E88BA5601DF53C1300714C65 /* Snap2SaveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA55F1DF53C1300714C65 /* Snap2SaveTests.swift */; };
 		E88BA56B1DF53C1300714C65 /* Snap2SaveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA56A1DF53C1300714C65 /* Snap2SaveUITests.swift */; };
 		E88BA57C1DF53D1500714C65 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA57B1DF53D1500714C65 /* WelcomeVC.swift */; };
+		E88BA59A1DF5B25D00714C65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E88BA59C1DF5B25D00714C65 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,10 @@
 		E88BA56A1DF53C1300714C65 /* Snap2SaveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snap2SaveUITests.swift; sourceTree = "<group>"; };
 		E88BA56C1DF53C1300714C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E88BA57B1DF53D1500714C65 /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
+		E88BA5961DF5B1CA00714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		E88BA5971DF5B1CA00714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		E88BA59B1DF5B25D00714C65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E88BA59D1DF5B26100714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +108,7 @@
 				E88BA5781DF53CD600714C65 /* Controller */,
 				E88BA54E1DF53C1300714C65 /* Main.storyboard */,
 				E88BA5511DF53C1300714C65 /* Assets.xcassets */,
+				E88BA59C1DF5B25D00714C65 /* Localizable.strings */,
 				E88BA5531DF53C1300714C65 /* LaunchScreen.storyboard */,
 				E88BA5561DF53C1300714C65 /* Info.plist */,
 			);
@@ -238,6 +244,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = E88BA53E1DF53C1200714C65;
 			productRefGroup = E88BA5481DF53C1300714C65 /* Products */;
@@ -257,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E88BA5551DF53C1300714C65 /* LaunchScreen.storyboard in Resources */,
+				E88BA59A1DF5B25D00714C65 /* Localizable.strings in Resources */,
 				E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */,
 				E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */,
 			);
@@ -324,6 +332,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				E88BA54F1DF53C1300714C65 /* Base */,
+				E88BA5961DF5B1CA00714C65 /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -332,8 +341,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				E88BA5541DF53C1300714C65 /* Base */,
+				E88BA5971DF5B1CA00714C65 /* es */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E88BA59C1DF5B25D00714C65 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E88BA59B1DF5B25D00714C65 /* en */,
+				E88BA59D1DF5B26100714C65 /* es */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -343,6 +362,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -393,6 +413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -531,6 +552,7 @@
 				E88BA5711DF53C1300714C65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E88BA5721DF53C1300714C65 /* Build configuration list for PBXNativeTarget "Snap2SaveTests" */ = {
 			isa = XCConfigurationList;
@@ -539,6 +561,7 @@
 				E88BA5741DF53C1300714C65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E88BA5751DF53C1300714C65 /* Build configuration list for PBXNativeTarget "Snap2SaveUITests" */ = {
 			isa = XCConfigurationList;
@@ -547,6 +570,7 @@
 				E88BA5771DF53C1300714C65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
