@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA54A1DF53C1300714C65 /* AppDelegate.swift */; };
-		E88BA54D1DF53C1300714C65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA54C1DF53C1300714C65 /* ViewController.swift */; };
 		E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA54E1DF53C1300714C65 /* Main.storyboard */; };
 		E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E88BA5511DF53C1300714C65 /* Assets.xcassets */; };
 		E88BA5551DF53C1300714C65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA5531DF53C1300714C65 /* LaunchScreen.storyboard */; };
 		E88BA5601DF53C1300714C65 /* Snap2SaveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA55F1DF53C1300714C65 /* Snap2SaveTests.swift */; };
 		E88BA56B1DF53C1300714C65 /* Snap2SaveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA56A1DF53C1300714C65 /* Snap2SaveUITests.swift */; };
+		E88BA57C1DF53D1500714C65 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA57B1DF53D1500714C65 /* WelcomeVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,6 @@
 /* Begin PBXFileReference section */
 		E88BA5471DF53C1300714C65 /* Snap2Save.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap2Save.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA54A1DF53C1300714C65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E88BA54C1DF53C1300714C65 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E88BA54F1DF53C1300714C65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E88BA5511DF53C1300714C65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E88BA5541DF53C1300714C65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +46,7 @@
 		E88BA5661DF53C1300714C65 /* Snap2SaveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Snap2SaveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA56A1DF53C1300714C65 /* Snap2SaveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snap2SaveUITests.swift; sourceTree = "<group>"; };
 		E88BA56C1DF53C1300714C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E88BA57B1DF53D1500714C65 /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				E88BA54A1DF53C1300714C65 /* AppDelegate.swift */,
-				E88BA54C1DF53C1300714C65 /* ViewController.swift */,
+				E88BA5791DF53CF500714C65 /* Model */,
+				E88BA57A1DF53CF500714C65 /* View */,
+				E88BA5781DF53CD600714C65 /* Controller */,
 				E88BA54E1DF53C1300714C65 /* Main.storyboard */,
 				E88BA5511DF53C1300714C65 /* Assets.xcassets */,
 				E88BA5531DF53C1300714C65 /* LaunchScreen.storyboard */,
@@ -123,6 +125,28 @@
 				E88BA56C1DF53C1300714C65 /* Info.plist */,
 			);
 			path = Snap2SaveUITests;
+			sourceTree = "<group>";
+		};
+		E88BA5781DF53CD600714C65 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E88BA57B1DF53D1500714C65 /* WelcomeVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E88BA5791DF53CF500714C65 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E88BA57A1DF53CF500714C65 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +283,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E88BA54D1DF53C1300714C65 /* ViewController.swift in Sources */,
 				E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */,
+				E88BA57C1DF53D1500714C65 /* WelcomeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +437,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Snap2Save/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appit.Snap2Save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -425,6 +450,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Snap2Save/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appit.Snap2Save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
