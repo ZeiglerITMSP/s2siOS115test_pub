@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */; };
-		E84AE9CE1E07F35B00C5E7F3 /* SignupRequiredFieldsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CD1E07F35B00C5E7F3 /* SignupRequiredFieldsTVC.swift */; };
+		E84AE9CE1E07F35B00C5E7F3 /* SignupTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */; };
 		E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */; };
 		E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */; };
 		E84AE9D51E07F4B100C5E7F3 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9D41E07F4B100C5E7F3 /* ForgotPasswordVC.swift */; };
@@ -45,7 +45,7 @@
 
 /* Begin PBXFileReference section */
 		E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		E84AE9CD1E07F35B00C5E7F3 /* SignupRequiredFieldsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupRequiredFieldsTVC.swift; sourceTree = "<group>"; };
+		E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupTVC.swift; sourceTree = "<group>"; };
 		E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupAdditionalFieldsTVC.swift; sourceTree = "<group>"; };
 		E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePageVC.swift; sourceTree = "<group>"; };
 		E84AE9D41E07F4B100C5E7F3 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		E84AE9C91E07F2A000C5E7F3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
-				E84AE9CD1E07F35B00C5E7F3 /* SignupRequiredFieldsTVC.swift */,
+				E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */,
 				E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */,
 				E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */,
 			);
@@ -352,7 +352,7 @@
 				E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */,
 				E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */,
 				E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */,
-				E84AE9CE1E07F35B00C5E7F3 /* SignupRequiredFieldsTVC.swift in Sources */,
+				E84AE9CE1E07F35B00C5E7F3 /* SignupTVC.swift in Sources */,
 				E84AE9D71E07F4BC00C5E7F3 /* ResetPasswordVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

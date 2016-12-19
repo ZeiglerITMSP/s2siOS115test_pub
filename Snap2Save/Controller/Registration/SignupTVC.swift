@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignupRequiredFieldsTVC: UITableViewController {
+class SignupTVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
