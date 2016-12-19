@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52949BC23A183914DF6D1992 /* Pods_Snap2Save.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */; };
+		6EB2D01CF1914BAE898F61AF /* Pods_Snap2SaveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */; };
+		ADAD175DD539ADB713A16CA4 /* Pods_Snap2SaveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */; };
 		E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */; };
 		E84AE9CE1E07F35B00C5E7F3 /* SignupTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */; };
 		E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */; };
@@ -44,6 +47,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01D642EF4D8FB61B5E3AF801 /* Pods-Snap2SaveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveTests/Pods-Snap2SaveTests.release.xcconfig"; sourceTree = "<group>"; };
+		23C55B236A435BA0D7B2F840 /* Pods-Snap2Save.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2Save.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2Save/Pods-Snap2Save.debug.xcconfig"; sourceTree = "<group>"; };
+		390369A27A4965626A26EA86 /* Pods-Snap2Save.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2Save.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2Save/Pods-Snap2Save.release.xcconfig"; sourceTree = "<group>"; };
+		46C44F5042A0C6D237EF6803 /* Pods-Snap2SaveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveTests/Pods-Snap2SaveTests.debug.xcconfig"; sourceTree = "<group>"; };
+		70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2Save.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF7E97EAA3E320EEC646D6B9 /* Pods-Snap2SaveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupTVC.swift; sourceTree = "<group>"; };
 		E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupAdditionalFieldsTVC.swift; sourceTree = "<group>"; };
@@ -70,6 +81,7 @@
 		E88BA5971DF5B1CA00714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E88BA59B1DF5B25D00714C65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E88BA59D1DF5B26100714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EFDB6F762935CD4621302544 /* Pods-Snap2SaveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52949BC23A183914DF6D1992 /* Pods_Snap2Save.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADAD175DD539ADB713A16CA4 /* Pods_Snap2SaveTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,12 +105,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EB2D01CF1914BAE898F61AF /* Pods_Snap2SaveUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40000D964F18893D39F24818 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */,
+				A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */,
+				95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A5AC032866C285AFF18A5452 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				23C55B236A435BA0D7B2F840 /* Pods-Snap2Save.debug.xcconfig */,
+				390369A27A4965626A26EA86 /* Pods-Snap2Save.release.xcconfig */,
+				46C44F5042A0C6D237EF6803 /* Pods-Snap2SaveTests.debug.xcconfig */,
+				01D642EF4D8FB61B5E3AF801 /* Pods-Snap2SaveTests.release.xcconfig */,
+				EFDB6F762935CD4621302544 /* Pods-Snap2SaveUITests.debug.xcconfig */,
+				CF7E97EAA3E320EEC646D6B9 /* Pods-Snap2SaveUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E84AE9C81E07F28300C5E7F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +179,8 @@
 				E88BA55E1DF53C1300714C65 /* Snap2SaveTests */,
 				E88BA5691DF53C1300714C65 /* Snap2SaveUITests */,
 				E88BA5481DF53C1300714C65 /* Products */,
+				A5AC032866C285AFF18A5452 /* Pods */,
+				40000D964F18893D39F24818 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -213,9 +253,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E88BA56F1DF53C1300714C65 /* Build configuration list for PBXNativeTarget "Snap2Save" */;
 			buildPhases = (
+				4734F9CBF5CCECF9F75E7268 /* [CP] Check Pods Manifest.lock */,
 				E88BA5431DF53C1300714C65 /* Sources */,
 				E88BA5441DF53C1300714C65 /* Frameworks */,
 				E88BA5451DF53C1300714C65 /* Resources */,
+				8FED331991A43E97A3A505BD /* [CP] Embed Pods Frameworks */,
+				A2188C599B0232C370C6CDD2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -230,9 +273,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E88BA5721DF53C1300714C65 /* Build configuration list for PBXNativeTarget "Snap2SaveTests" */;
 			buildPhases = (
+				C8471602E50DF9F20E5A3BF7 /* [CP] Check Pods Manifest.lock */,
 				E88BA5571DF53C1300714C65 /* Sources */,
 				E88BA5581DF53C1300714C65 /* Frameworks */,
 				E88BA5591DF53C1300714C65 /* Resources */,
+				6F32594BA67D4D2EA7DF241D /* [CP] Embed Pods Frameworks */,
+				AE448CAD8AABF5BE70C52FF6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,9 +294,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E88BA5751DF53C1300714C65 /* Build configuration list for PBXNativeTarget "Snap2SaveUITests" */;
 			buildPhases = (
+				B913E39EC42B0E2A20804F37 /* [CP] Check Pods Manifest.lock */,
 				E88BA5621DF53C1300714C65 /* Sources */,
 				E88BA5631DF53C1300714C65 /* Frameworks */,
 				E88BA5641DF53C1300714C65 /* Resources */,
+				56C931F49DD7A5AFDE8CA466 /* [CP] Embed Pods Frameworks */,
+				7CB486B9439844A7EE6DFBF0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -337,6 +386,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4734F9CBF5CCECF9F75E7268 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		56C931F49DD7A5AFDE8CA466 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F32594BA67D4D2EA7DF241D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Snap2SaveTests/Pods-Snap2SaveTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7CB486B9439844A7EE6DFBF0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8FED331991A43E97A3A505BD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Snap2Save/Pods-Snap2Save-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2188C599B0232C370C6CDD2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Snap2Save/Pods-Snap2Save-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE448CAD8AABF5BE70C52FF6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Snap2SaveTests/Pods-Snap2SaveTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B913E39EC42B0E2A20804F37 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C8471602E50DF9F20E5A3BF7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E88BA5431DF53C1300714C65 /* Sources */ = {
@@ -438,6 +625,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -489,6 +677,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -516,7 +705,9 @@
 		};
 		E88BA5701DF53C1300714C65 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23C55B236A435BA0D7B2F840 /* Pods-Snap2Save.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U76Y58U2TN;
 				INFOPLIST_FILE = Snap2Save/Info.plist;
@@ -531,7 +722,9 @@
 		};
 		E88BA5711DF53C1300714C65 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 390369A27A4965626A26EA86 /* Pods-Snap2Save.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U76Y58U2TN;
 				INFOPLIST_FILE = Snap2Save/Info.plist;
@@ -546,6 +739,7 @@
 		};
 		E88BA5731DF53C1300714C65 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46C44F5042A0C6D237EF6803 /* Pods-Snap2SaveTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -560,6 +754,7 @@
 		};
 		E88BA5741DF53C1300714C65 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01D642EF4D8FB61B5E3AF801 /* Pods-Snap2SaveTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -574,6 +769,7 @@
 		};
 		E88BA5761DF53C1300714C65 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFDB6F762935CD4621302544 /* Pods-Snap2SaveUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = Snap2SaveUITests/Info.plist;
@@ -587,6 +783,7 @@
 		};
 		E88BA5771DF53C1300714C65 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF7E97EAA3E320EEC646D6B9 /* Pods-Snap2SaveUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = Snap2SaveUITests/Info.plist;

@@ -1,0 +1,6 @@
+framework module Pods_Snap2SaveUITests {
+  umbrella header "Pods-Snap2SaveUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
