@@ -7,13 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */; };
+		E84AE9CE1E07F35B00C5E7F3 /* SignupRequiredFieldsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CD1E07F35B00C5E7F3 /* SignupRequiredFieldsTVC.swift */; };
+		E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */; };
+		E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */; };
+		E84AE9D51E07F4B100C5E7F3 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9D41E07F4B100C5E7F3 /* ForgotPasswordVC.swift */; };
+		E84AE9D71E07F4BC00C5E7F3 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9D61E07F4BC00C5E7F3 /* ResetPasswordVC.swift */; };
+		E84AE9DA1E07F53300C5E7F3 /* AccountTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9D91E07F53300C5E7F3 /* AccountTVC.swift */; };
+		E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */; };
+		E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */; };
 		E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA54A1DF53C1300714C65 /* AppDelegate.swift */; };
 		E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA54E1DF53C1300714C65 /* Main.storyboard */; };
 		E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E88BA5511DF53C1300714C65 /* Assets.xcassets */; };
 		E88BA5551DF53C1300714C65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA5531DF53C1300714C65 /* LaunchScreen.storyboard */; };
 		E88BA5601DF53C1300714C65 /* Snap2SaveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA55F1DF53C1300714C65 /* Snap2SaveTests.swift */; };
 		E88BA56B1DF53C1300714C65 /* Snap2SaveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA56A1DF53C1300714C65 /* Snap2SaveUITests.swift */; };
-		E88BA57C1DF53D1500714C65 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA57B1DF53D1500714C65 /* WelcomeVC.swift */; };
+		E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA57B1DF53D1500714C65 /* LandingVC.swift */; };
 		E88BA59A1DF5B25D00714C65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E88BA59C1DF5B25D00714C65 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +44,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		E84AE9CD1E07F35B00C5E7F3 /* SignupRequiredFieldsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupRequiredFieldsTVC.swift; sourceTree = "<group>"; };
+		E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupAdditionalFieldsTVC.swift; sourceTree = "<group>"; };
+		E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePageVC.swift; sourceTree = "<group>"; };
+		E84AE9D41E07F4B100C5E7F3 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		E84AE9D61E07F4BC00C5E7F3 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
+		E84AE9D91E07F53300C5E7F3 /* AccountTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTVC.swift; sourceTree = "<group>"; };
+		E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalInformationTVC.swift; sourceTree = "<group>"; };
+		E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTVC.swift; sourceTree = "<group>"; };
 		E88BA5471DF53C1300714C65 /* Snap2Save.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap2Save.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA54A1DF53C1300714C65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E88BA54F1DF53C1300714C65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -47,7 +65,7 @@
 		E88BA5661DF53C1300714C65 /* Snap2SaveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Snap2SaveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA56A1DF53C1300714C65 /* Snap2SaveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snap2SaveUITests.swift; sourceTree = "<group>"; };
 		E88BA56C1DF53C1300714C65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E88BA57B1DF53D1500714C65 /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
+		E88BA57B1DF53D1500714C65 /* LandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingVC.swift; sourceTree = "<group>"; };
 		E88BA5961DF5B1CA00714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		E88BA5971DF5B1CA00714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E88BA59B1DF5B25D00714C65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -79,6 +97,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E84AE9C81E07F28300C5E7F3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E84AE9C91E07F2A000C5E7F3 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				E84AE9CD1E07F35B00C5E7F3 /* SignupRequiredFieldsTVC.swift */,
+				E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */,
+				E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		E84AE9CA1E07F2B300C5E7F3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */,
+				E84AE9D41E07F4B100C5E7F3 /* ForgotPasswordVC.swift */,
+				E84AE9D61E07F4BC00C5E7F3 /* ResetPasswordVC.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		E84AE9D81E07F50600C5E7F3 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				E84AE9D91E07F53300C5E7F3 /* AccountTVC.swift */,
+				E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */,
+				E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 		E88BA53E1DF53C1200714C65 = {
 			isa = PBXGroup;
 			children = (
@@ -104,7 +159,7 @@
 			children = (
 				E88BA54A1DF53C1300714C65 /* AppDelegate.swift */,
 				E88BA5791DF53CF500714C65 /* Model */,
-				E88BA57A1DF53CF500714C65 /* View */,
+				E84AE9C81E07F28300C5E7F3 /* View */,
 				E88BA5781DF53CD600714C65 /* Controller */,
 				E88BA54E1DF53C1300714C65 /* Main.storyboard */,
 				E88BA5511DF53C1300714C65 /* Assets.xcassets */,
@@ -136,7 +191,10 @@
 		E88BA5781DF53CD600714C65 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E88BA57B1DF53D1500714C65 /* WelcomeVC.swift */,
+				E88BA57B1DF53D1500714C65 /* LandingVC.swift */,
+				E84AE9CA1E07F2B300C5E7F3 /* Login */,
+				E84AE9C91E07F2A000C5E7F3 /* Registration */,
+				E84AE9D81E07F50600C5E7F3 /* Account */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -146,13 +204,6 @@
 			children = (
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		E88BA57A1DF53CF500714C65 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +274,7 @@
 				TargetAttributes = {
 					E88BA5461DF53C1300714C65 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = U76Y58U2TN;
 						ProvisioningStyle = Automatic;
 					};
 					E88BA55A1DF53C1300714C65 = {
@@ -292,7 +344,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */,
-				E88BA57C1DF53D1500714C65 /* WelcomeVC.swift in Sources */,
+				E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */,
+				E84AE9DA1E07F53300C5E7F3 /* AccountTVC.swift in Sources */,
+				E84AE9D51E07F4B100C5E7F3 /* ForgotPasswordVC.swift in Sources */,
+				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
+				E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */,
+				E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */,
+				E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */,
+				E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */,
+				E84AE9CE1E07F35B00C5E7F3 /* SignupRequiredFieldsTVC.swift in Sources */,
+				E84AE9D71E07F4BC00C5E7F3 /* ResetPasswordVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,12 +518,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = U76Y58U2TN;
 				INFOPLIST_FILE = Snap2Save/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appit.Snap2Save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -470,12 +533,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = U76Y58U2TN;
 				INFOPLIST_FILE = Snap2Save/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appit.Snap2Save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -1,28 +1,19 @@
 //
-//  WelcomeVC.swift
+//  LoginVC.swift
 //  Snap2Save
 //
-//  Created by Appit on 12/5/16.
+//  Created by Appit on 12/19/16.
 //  Copyright © 2016 Appit. All rights reserved.
 //
 
 import UIKit
 
-class WelcomeVC: UIViewController {
+class LoginVC: UIViewController {
 
-    
-    // Outlets
-    
-    @IBAction func handleLanguageSelection(_ sender: UITapGestureRecognizer) {
-        
-        print(#function)
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
