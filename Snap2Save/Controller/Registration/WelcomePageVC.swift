@@ -9,11 +9,27 @@
 import UIKit
 
 class WelcomePageVC: UIViewController {
-
+//outlets
+    
+    @IBOutlet var congratulationsLabel: UILabel!
+    
+    @IBOutlet var welcomeToLabel: UILabel!
+    
+    @IBOutlet var getStartedButton: UIButton!
+    
+    @IBAction func getStartedButtonAction(_ sender: UIButton) {
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        congratulationsLabel.text = "Congratulations!".localized
+        welcomeToLabel.text = "WelcomeText".localized
+        getStartedButton.setTitle("Get Started!".localized, for: .normal)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

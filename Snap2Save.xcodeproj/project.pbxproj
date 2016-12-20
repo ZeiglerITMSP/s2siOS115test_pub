@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9767E6CB1E0820B0002FC88B /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767E6CA1E0820B0002FC88B /* AppHelper.swift */; };
+		978729DB1E09094E00908301 /* AITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978729DA1E09094D00908301 /* AITextField.swift */; };
 		E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */; };
 		E84AE9CE1E07F35B00C5E7F3 /* SignupTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */; };
 		E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9767E6CA1E0820B0002FC88B /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
+		978729DA1E09094D00908301 /* AITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AITextField.swift; sourceTree = "<group>"; };
 		E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupTVC.swift; sourceTree = "<group>"; };
 		E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupAdditionalFieldsTVC.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				E88BA54A1DF53C1300714C65 /* AppDelegate.swift */,
+				9767E6CA1E0820B0002FC88B /* AppHelper.swift */,
+				978729DA1E09094D00908301 /* AITextField.swift */,
 				E88BA5791DF53CF500714C65 /* Model */,
 				E84AE9C81E07F28300C5E7F3 /* View */,
 				E88BA5781DF53CD600714C65 /* Controller */,
@@ -350,6 +356,8 @@
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
 				E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */,
 				E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */,
+				978729DB1E09094E00908301 /* AITextField.swift in Sources */,
+				9767E6CB1E0820B0002FC88B /* AppHelper.swift in Sources */,
 				E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */,
 				E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */,
 				E84AE9CE1E07F35B00C5E7F3 /* SignupTVC.swift in Sources */,
