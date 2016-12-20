@@ -45,6 +45,9 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
     var placeHolderLabel: UILabel?
     
     
+    var selectedColor: UIColor!
+    var normalColor: UIColor!
+    
     required init(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)!
@@ -314,12 +317,12 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("focused")
-        createUnderline(withColor: .green, padding: 0, height: 2)
+        createUnderline(withColor: selectedColor, padding: 0, height: 2)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("lost focus")
-        createUnderline(withColor: .gray, padding: 0, height: 1)
+        createUnderline(withColor: normalColor, padding: 0, height: 2)
         self.aiDelegate?.keyBoardHidden(textField: self)
     }
     
