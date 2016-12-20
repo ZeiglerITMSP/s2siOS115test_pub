@@ -11,6 +11,7 @@
 		6EB2D01CF1914BAE898F61AF /* Pods_Snap2SaveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */; };
 		ADAD175DD539ADB713A16CA4 /* Pods_Snap2SaveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */; };
 		E826FBCD1E0917BD0089AEA6 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E826FBCC1E0917BD0089AEA6 /* AppHelper.swift */; };
+		E826FBCF1E0932830089AEA6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E826FBCE1E0932830089AEA6 /* Home.storyboard */; };
 		E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */; };
 		E84AE9CE1E07F35B00C5E7F3 /* SignupTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */; };
 		E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */; };
@@ -58,6 +59,7 @@
 		A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7E97EAA3E320EEC646D6B9 /* Pods-Snap2SaveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E826FBCC1E0917BD0089AEA6 /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
+		E826FBCE1E0932830089AEA6 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupTVC.swift; sourceTree = "<group>"; };
 		E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupAdditionalFieldsTVC.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				E84AE9C81E07F28300C5E7F3 /* View */,
 				E88BA5781DF53CD600714C65 /* Controller */,
 				E88BA54E1DF53C1300714C65 /* Main.storyboard */,
+				E826FBCE1E0932830089AEA6 /* Home.storyboard */,
 				E88BA5511DF53C1300714C65 /* Assets.xcassets */,
 				E88BA59C1DF5B25D00714C65 /* Localizable.strings */,
 				E88BA5531DF53C1300714C65 /* LaunchScreen.storyboard */,
@@ -379,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E88BA5551DF53C1300714C65 /* LaunchScreen.storyboard in Resources */,
+				E826FBCF1E0932830089AEA6 /* Home.storyboard in Resources */,
 				E88BA59A1DF5B25D00714C65 /* Localizable.strings in Resources */,
 				E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */,
 				E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */,
