@@ -1,0 +1,6 @@
+framework module Pods_Snap2Save {
+  umbrella header "Pods-Snap2Save-umbrella.h"
+
+  export *
+  module * { export * }
+}
