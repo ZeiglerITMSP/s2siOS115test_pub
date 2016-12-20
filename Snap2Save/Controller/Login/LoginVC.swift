@@ -12,10 +12,28 @@ import UIKit
 
 class LoginVC: UIViewController {
 
+    
+    
+    @IBOutlet weak var placeholderLabel: UILabel!
+    @IBOutlet weak var phoneNumberTextField: AITextField!
+    
+    
+    @IBOutlet weak var emilPlaceholderLabel: UILabel!
+    @IBOutlet weak var emailTextField: AITextField!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        phoneNumberTextField.placeHolderLabel = placeholderLabel
+        phoneNumberTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
+        phoneNumberTextField.createUnderline(withColor: .gray, padding: 0, height: 1)
+     
+        emailTextField.placeHolderLabel = emilPlaceholderLabel
+        emailTextField.textFieldType = AITextField.AITextFieldType.EmailTextField
+        emailTextField.createUnderline(withColor: .gray, padding: 0, height: 1)
+        
     }
 
     override func didReceiveMemoryWarning() {
