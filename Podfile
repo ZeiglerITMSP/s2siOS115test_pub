@@ -7,6 +7,7 @@ target 'Snap2Save' do
 
   # Pods for Snap2Save
   pod 'Localize-Swift'
+  pod 'PKHUD', '~> 4.0'
 
   target 'Snap2SaveTests' do
     inherit! :search_paths

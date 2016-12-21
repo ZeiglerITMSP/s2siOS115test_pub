@@ -12,6 +12,8 @@
 		978729DD1E0937B000908301 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978729DC1E0937B000908301 /* Constants.swift */; };
 		ADAD175DD539ADB713A16CA4 /* Pods_Snap2SaveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */; };
 		E822839E1E0A61F4008FE084 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E82283A01E0A61F4008FE084 /* Home.storyboard */; };
+		E82283AA1E0A72BC008FE084 /* EBTWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82283A91E0A72BC008FE084 /* EBTWebView.swift */; };
+		E82283AC1E0A72D3008FE084 /* BrowserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82283AB1E0A72D3008FE084 /* BrowserVC.swift */; };
 		E826FBCD1E0917BD0089AEA6 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E826FBCC1E0917BD0089AEA6 /* AppHelper.swift */; };
 		E826FBD21E0940A20089AEA6 /* ServicesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */; };
 		E826FBD61E0946970089AEA6 /* EBTLoginTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E826FBD51E0946970089AEA6 /* EBTLoginTVC.swift */; };
@@ -66,6 +68,8 @@
 		CF7E97EAA3E320EEC646D6B9 /* Pods-Snap2SaveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E822839F1E0A61F4008FE084 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		E82283A21E0A6AA5008FE084 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Home.strings; sourceTree = "<group>"; };
+		E82283A91E0A72BC008FE084 /* EBTWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTWebView.swift; sourceTree = "<group>"; };
+		E82283AB1E0A72D3008FE084 /* BrowserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserVC.swift; sourceTree = "<group>"; };
 		E826FBCC1E0917BD0089AEA6 /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 		E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesTVC.swift; sourceTree = "<group>"; };
 		E826FBD51E0946970089AEA6 /* EBTLoginTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTLoginTVC.swift; sourceTree = "<group>"; };
@@ -150,6 +154,15 @@
 				CF7E97EAA3E320EEC646D6B9 /* Pods-Snap2SaveUITests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E82283A81E0A72A6008FE084 /* EBTTracking */ = {
+			isa = PBXGroup;
+			children = (
+				E82283A91E0A72BC008FE084 /* EBTWebView.swift */,
+				E82283AB1E0A72D3008FE084 /* BrowserVC.swift */,
+			);
+			path = EBTTracking;
 			sourceTree = "<group>";
 		};
 		E826FBD01E09408D0089AEA6 /* Services */ = {
@@ -239,6 +252,7 @@
 				E84AE9E11E0821AB00C5E7F3 /* Helpers */,
 				E88BA5791DF53CF500714C65 /* Model */,
 				E84AE9C81E07F28300C5E7F3 /* View */,
+				E82283A81E0A72A6008FE084 /* EBTTracking */,
 				E88BA5781DF53CD600714C65 /* Controller */,
 				E88BA54E1DF53C1300714C65 /* Main.storyboard */,
 				E82283A01E0A61F4008FE084 /* Home.storyboard */,
@@ -582,10 +596,12 @@
 				E826FBD61E0946970089AEA6 /* EBTLoginTVC.swift in Sources */,
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
 				E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */,
+				E82283AA1E0A72BC008FE084 /* EBTWebView.swift in Sources */,
 				E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */,
 				E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */,
 				E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */,
 				E84AE9CE1E07F35B00C5E7F3 /* SignupTVC.swift in Sources */,
+				E82283AC1E0A72D3008FE084 /* BrowserVC.swift in Sources */,
 				E826FBDC1E094FF80089AEA6 /* AIPlaceHolderTextField.swift in Sources */,
 				978729DD1E0937B000908301 /* Constants.swift in Sources */,
 				E84AE9D71E07F4BC00C5E7F3 /* ResetPasswordVC.swift in Sources */,
