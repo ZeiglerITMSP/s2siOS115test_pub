@@ -11,10 +11,15 @@ import UIKit
 class EBTLoginTVC: UITableViewController {
 
     
-    // Outlets
+    // Properties
+    var errorMessage:String?
     
+    
+    // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
     @IBOutlet weak var passwordField: AIPlaceHolderTextField!
+    @IBOutlet weak var errorMessageLabel: UILabel!
+    
     
     // Action
     
@@ -25,29 +30,41 @@ class EBTLoginTVC: UITableViewController {
         print(userIdField.contentTextField.text!)
         print(passwordField.contentTextField.text!)
         
+        
+        self.tableView.reloadData()
+        
     }
     
     @IBAction func registrationAction(_ sender: UIButton) {
         
+        self.view.endEditing(true)
         
         
         
     }
     
-    
+    // MARK:-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         userIdField.contentTextField.textFieldType = .PhoneNumberTextField
         userIdField.contentTextField.textFieldType = .NormalTextField
-        userIdField.contentTextField.isSecureTextEntry = true
+        
+        passwordField.contentTextField.isSecureTextEntry = true
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44
+        
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,6 +74,18 @@ class EBTLoginTVC: UITableViewController {
 
     // MARK: - Table view data source
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 {
+            if (errorMessage == nil) {
+                return 0
+            }
+        }
+        
+        return UITableViewAutomaticDimension
+    }
+    
+    
 //    override func numberOfSections(in tableView: UITableView) -> Int {
 //        // #warning Incomplete implementation, return the number of sections
 //        return 0

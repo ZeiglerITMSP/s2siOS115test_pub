@@ -1,0 +1,48 @@
+
+/* Class = "UITableViewController"; title = "EBT"; ObjectID = "1Ir-th-9tA"; */
+"1Ir-th-9tA.title" = "EBT";
+
+/* Class = "UINavigationItem"; title = "Account"; ObjectID = "C2p-qD-EPk"; */
+"C2p-qD-EPk.title" = "Account";
+
+/* Class = "UIButton"; normalTitle = "Registration"; ObjectID = "OKr-em-SLD"; */
+"OKr-em-SLD.normalTitle" = "Registration";
+
+/* Class = "UILabel"; text = "About Snap2Save"; ObjectID = "Oxd-zh-nW3"; */
+"Oxd-zh-nW3.text" = "About Snap2Save";
+
+/* Class = "UILabel"; text = "Privacy Policy"; ObjectID = "Sun-lx-nL5"; */
+"Sun-lx-nL5.text" = "Privacy Policy";
+
+/* Class = "UITabBarItem"; title = "OFFERS"; ObjectID = "TKB-Bc-gsy"; */
+"TKB-Bc-gsy.title" = "OFFERS";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "UlW-qM-MjE"; */
+"UlW-qM-MjE.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "Terms Of Service"; ObjectID = "VdY-kT-Ked"; */
+"VdY-kT-Ked.text" = "Terms Of Service";
+
+/* Class = "UILabel"; text = "Recipes/Nutrition"; ObjectID = "X1v-sZ-Xcw"; */
+"X1v-sZ-Xcw.text" = "Recipes/Nutrition";
+
+/* Class = "UINavigationItem"; title = "Services"; ObjectID = "YUZ-Nu-FNa"; */
+"YUZ-Nu-FNa.title" = "Services";
+
+/* Class = "UILabel"; text = "EBT"; ObjectID = "cQa-rt-KnW"; */
+"cQa-rt-KnW.text" = "EBT";
+
+/* Class = "UILabel"; text = "Contact Us"; ObjectID = "hmI-nt-TKY"; */
+"hmI-nt-TKY.text" = "Contact Us";
+
+/* Class = "UILabel"; text = "Reward Program"; ObjectID = "jkh-ra-mZE"; */
+"jkh-ra-mZE.text" = "Reward Program";
+
+/* Class = "UILabel"; text = "FAQ"; ObjectID = "sUS-Ma-Ebe"; */
+"sUS-Ma-Ebe.text" = "FAQ";
+
+/* Class = "UITabBarItem"; title = "SERVICES"; ObjectID = "sdH-xJ-ytH"; */
+"sdH-xJ-ytH.title" = "SERVICES";
+
+/* Class = "UITabBarItem"; title = "ACCOUNT"; ObjectID = "ztZ-bL-cSV"; */
+"ztZ-bL-cSV.title" = "ACCOUNT";
