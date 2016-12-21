@@ -29,6 +29,7 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
         case PhoneNumberTextField
         
     }
+    @IBInspectable var text_Color: UIColor? = UIColor.white
 
     var textFieldType:AITextFieldType = AITextFieldType.NormalTextField
     var datePicker:UIDatePicker? = nil
@@ -45,8 +46,8 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
     var placeHolderLabel: UILabel?
     
     
-    var selectedColor: UIColor!
-    var normalColor: UIColor!
+    var selectedColor: UIColor = UIColor(red: 84/255, green: 190/255, blue: 56/255, alpha: 1.0)
+    var normalColor: UIColor = UIColor(red: 104/255, green: 128/255, blue: 94/255, alpha: 0.5)
     
     required init(coder aDecoder: NSCoder)
     {
@@ -175,8 +176,9 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
             break;
         }
         self.textColor = UIColor.white
-        self.font = UIFont.systemFont(ofSize: 16)
+       // self.font = UIFont.systemFont(ofSize: 16)
         self.layoutIfNeeded()
+        self.tintColor = APP_ORANGE_COLOR
     }
     func addTextPicker()
     {

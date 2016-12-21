@@ -28,10 +28,16 @@ class WelcomePageVC: UIViewController {
         congratulationsLabel.text = "Congratulations!".localized
         welcomeToLabel.text = "WelcomeText".localized
         getStartedButton.setTitle("Get Started!".localized, for: .normal)
+        AppHelper.setRoundCornersToView(borderColor:UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0), view: getStartedButton, radius: 2.0, width: 1.0)
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true;
         
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

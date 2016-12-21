@@ -25,10 +25,14 @@ class LandingVC: UIViewController {
     
     @IBAction func loginButtonAction(_ sender: UIButton) {
         
+        let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+        self.navigationController?.show(loginVc, sender: self)
     }
     
     @IBAction func registerButtonAction(_ sender: UIButton) {
-        
+        let signUpVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignupTVC")
+        self.navigationController?.show(signUpVc, sender: self)
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +44,17 @@ class LandingVC: UIViewController {
         AppHelper.setRoundCornersToView(borderColor: registerButton.backgroundColor!, view: registerButton, radius: 2.0, width: 1)
         welcomeLabel.text = "WELCOME".localized
         selectLanguageLabel.text = "SELECTLANGUAGE".localized
-        loginButton.setTitle("LOGIN".localized, for: .normal)
+        loginButton.setTitle("LOG IN".localized, for: .normal)
         registerButton.setTitle("REGISTER".localized, for: .normal)
         
-        let welcomeVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC")
-        self.navigationController?.show(welcomeVc, sender: self)
+//        let welcomeVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC")
+//        self.navigationController?.show(welcomeVc, sender: self)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true;
         
     }
 
@@ -70,19 +80,18 @@ class LandingVC: UIViewController {
         let englishBtn = UIAlertAction.init(title: "English".localized, style: .default, handler:{
             (action) in
             print("Selected English")
-        })
+            })
         let spanishBtn = UIAlertAction.init(title: "Spanish".localized, style: .default, handler:{
             (action) in
             print("Selected Spanish")
 
         })
-        let cancelBtn = UIAlertAction.init(title: "Cancel", style: .cancel, handler:{
+        let cancelBtn = UIAlertAction.init(title: "Cancel".localized, style: .cancel, handler:{
             (action) in
             
         })
         
-        let tintColor = UIColor(hexString:"#54BE38")
-        languageAlert.view.tintColor = tintColor
+        languageAlert.view.tintColor = APP_GRREN_COLOR
         languageAlert .addAction(englishBtn)
         languageAlert.addAction(spanishBtn)
         languageAlert.addAction(cancelBtn)
