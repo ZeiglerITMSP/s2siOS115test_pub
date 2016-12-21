@@ -29,6 +29,7 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
         case PhoneNumberTextField
         
     }
+    @IBInspectable var text_Color: UIColor? = UIColor.white
 
     var textFieldType:AITextFieldType = AITextFieldType.NormalTextField
     var datePicker:UIDatePicker? = nil
@@ -172,8 +173,9 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
             break;
         }
         self.textColor = UIColor.white
-        self.font = UIFont.systemFont(ofSize: 16)
+       // self.font = UIFont.systemFont(ofSize: 16)
         self.layoutIfNeeded()
+        self.tintColor = APP_ORANGE_COLOR
     }
     func addTextPicker()
     {
@@ -319,7 +321,7 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("lost focus")
-        createUnderline(withColor: .gray, padding: 0, height: 1)
+        createUnderline(withColor: .white, padding: 0, height: 2)
         self.aiDelegate?.keyBoardHidden(textField: self)
     }
     

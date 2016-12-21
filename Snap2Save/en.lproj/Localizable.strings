@@ -9,13 +9,22 @@
 //LandingVc
 "SELECT LANGUAGE" = "SELECT LANGUAGE";
 "WELCOME" = "Welcome";
-"LOGIN" = "Login";
-"REGISTER" = "Register";
-"ENGLISH" = "English";
-"SPANISH" = "Spanish";
+"LOG IN" = "LOG IN";
+"REGISTER" = "REGISTER";
+"English" = "English";
+"Spanish" = "Spanish";
+"Cancel" = "Cancel";
 
 //WelcomePageVc
 "Congratulations!" = "Congratulations!";
 "WelcomeText" = "Welcome to Snap2Save.Your registration is now complete.";
 "Get Started!" = "Get Started!";
 
+//LoginVC
+"Log In with Facebook" = "Log In with Facebook";
+"or" = "or";
+"10-DIGIT CELL PHONE NUMBER" = "10-DIGIT CELL PHONE NUMBER";
+"PASSWORD" = "PASSWORD";
+"Forgot Password?" = "Forgot Password?";
+"LOG IN" = "LOG IN";
+"ENGLISH" = "ENGLISH";

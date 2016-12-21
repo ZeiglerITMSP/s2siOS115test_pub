@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		52949BC23A183914DF6D1992 /* Pods_Snap2Save.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */; };
 		6EB2D01CF1914BAE898F61AF /* Pods_Snap2SaveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */; };
+		978729DD1E0937B000908301 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978729DC1E0937B000908301 /* Constants.swift */; };
 		ADAD175DD539ADB713A16CA4 /* Pods_Snap2SaveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */; };
 		E826FBCD1E0917BD0089AEA6 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E826FBCC1E0917BD0089AEA6 /* AppHelper.swift */; };
 		E826FBCF1E0932830089AEA6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E826FBCE1E0932830089AEA6 /* Home.storyboard */; };
@@ -56,6 +57,7 @@
 		46C44F5042A0C6D237EF6803 /* Pods-Snap2SaveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveTests/Pods-Snap2SaveTests.debug.xcconfig"; sourceTree = "<group>"; };
 		70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2Save.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		978729DC1E0937B000908301 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7E97EAA3E320EEC646D6B9 /* Pods-Snap2SaveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E826FBCC1E0917BD0089AEA6 /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			children = (
 				E826FBCC1E0917BD0089AEA6 /* AppHelper.swift */,
 				E84AE9E21E0821B900C5E7F3 /* AITextField.swift */,
+				978729DC1E0937B000908301 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */,
 				E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */,
 				E84AE9CE1E07F35B00C5E7F3 /* SignupTVC.swift in Sources */,
+				978729DD1E0937B000908301 /* Constants.swift in Sources */,
 				E84AE9D71E07F4BC00C5E7F3 /* ResetPasswordVC.swift in Sources */,
 				E826FBCD1E0917BD0089AEA6 /* AppHelper.swift in Sources */,
 			);
