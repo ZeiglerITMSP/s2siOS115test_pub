@@ -7,13 +7,22 @@
 //
 
 import UIKit
-
+import PKHUD
 
 class EBTLoginTVC: UITableViewController {
-
+    
+    enum ActionType {
+        
+        case loadPage
+        case sumbit
+        case dob
+    }
+    
     
     // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
+    var actionType: ActionType?
+    
     
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
@@ -28,6 +37,7 @@ class EBTLoginTVC: UITableViewController {
         print(userIdField.contentTextField.text!)
         print(passwordField.contentTextField.text!)
         
+        validateLoginpageUrl()
     }
     
     @IBAction func registrationAction(_ sender: UIButton) {
@@ -52,19 +62,21 @@ class EBTLoginTVC: UITableViewController {
         
         ebtWebView.responder = self
         
+        HUD.allowsInteraction = true
+        
         loadLoginPage()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 0 {
-            if (errorMessageLabel.text == nil) {
+            if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
         }
@@ -79,23 +91,139 @@ class EBTLoginTVC: UITableViewController {
         
         let loginUrl_en = "https://ucard.chase.com/chp"
         //let loginUrl_es = "https://ucard.chase.com/locale?request_locale=es"
-        
         let url = NSURL(string: loginUrl_en)
         let request = NSURLRequest(url: url! as URL)
         
+        actionType = .loadPage
         ebtWebView.webView.load(request as URLRequest)
+    }
+    
+    // validate loginpage url
+    func validateLoginpageUrl() {
         
+        let jsGetPageUrl = "window.location.href"
+        ebtWebView.webView.evaluateJavaScript(jsGetPageUrl) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                
+                let pageUrl = result as! String
+                
+                if pageUrl == "https://ucard.chase.com/chp" {
+                    
+                    self.autoFill(withUserId: self.userIdField.contentTextField.text!, password: self.passwordField.contentTextField.text!)
+                } else {
+                    print("page not loaded")
+                }
+                
+            }
+        }
     }
     
     // validate fields
     // autofill fields
-    // submit action
+    func autoFill(withUserId userid:String, password:String) {
+        
+        //$('#submit').click();
+        
+        // autofill
+        
+        actionType = ActionType.sumbit
+        
+        let jsUserIdPassword = "$('#userId').val('\(userid)');$('#password').val('\(password)');$('#submit').click();"
+        
+//        let jsUserIdPassword = "$('#userId').val('\(userid)');$('#password').val('\(password)');validateCredentials();"
+      //  HUD.show(.progress)
+        ebtWebView.webView.evaluateJavaScript(jsUserIdPassword) { (result, error) in
+            
+            self.getErrorMessage()
+        }
+    }
     
     // check status
+    func validateSubmitAction() {
+        
+        let jsPageTitle = "$('.PageHeader').text();"
+        ebtWebView.webView.evaluateJavaScript(jsPageTitle) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result!)
+                let stringResult = result as! String
+                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(pageTitle)
+                
+                if pageTitle == "We don’t recognize the computer you’re using." {
+                    
+                    self.performSegue(withIdentifier: "EBTLoginAuthenticationTVC", sender: nil)
+                    
+                } else {
+                    // fail
+                    
+                }
+                
+            }
+        }
+        
+    }
+    
+    func getErrorMessage() {
+        // $(\".errorInvalidField\").text();
+        let jsErrorMessage = "$('.errorTextLogin').text();"
+        
+        ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmedErrorMessage)
+
+                if trimmedErrorMessage.characters.count > 0 {
+                    print("====== FAIL =======")
+                    
+                    self.errorMessageLabel.text = trimmedErrorMessage
+                    self.tableView.reloadData()
+                    
+                } else {
+                    print("====== SUCCESS =======")
+                    
+                   // self.submitForm()
+                }
+            }
+        }
+    }
+
+    func submitForm() {
+        
+        //$('#submit').click();
+        
+        // autofill
+        
+        let jsSubmit = "$('#userId').val('\(userIdField.contentTextField.text!)');$('#password').val('\(passwordField.contentTextField.text!)');$('#submit').click();"
+//        let jsSubmit = "$('#submit').click();"
+//        let jsSubmit = "void($('form')[1].submit())"
+        //void($('form')[1].submit())
+        //  HUD.show(.progress)
+        actionType = ActionType.sumbit
+        ebtWebView.webView.evaluateJavaScript(jsSubmit) { (result, error) in
+            
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result!)
+            }
+        }
+    }
+
+   
+    
     // success action
     // fail action
     
-
+    
 }
 
 extension EBTLoginTVC: EBTWebViewDelegate {
@@ -114,6 +242,11 @@ extension EBTLoginTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
+       // HUD.hide()
+         if actionType == .sumbit {
+            
+            validateSubmitAction()
+        }
         
         
     }

@@ -29,6 +29,7 @@
 		E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */; };
 		E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */; };
 		E84AE9E31E0821B900C5E7F3 /* AITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9E21E0821B900C5E7F3 /* AITextField.swift */; };
+		E87D83331E0AD6A500304B5E /* EBTLoginAuthenticationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D83321E0AD6A500304B5E /* EBTLoginAuthenticationTVC.swift */; };
 		E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA54A1DF53C1300714C65 /* AppDelegate.swift */; };
 		E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA54E1DF53C1300714C65 /* Main.storyboard */; };
 		E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E88BA5511DF53C1300714C65 /* Assets.xcassets */; };
@@ -85,6 +86,7 @@
 		E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalInformationTVC.swift; sourceTree = "<group>"; };
 		E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTVC.swift; sourceTree = "<group>"; };
 		E84AE9E21E0821B900C5E7F3 /* AITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AITextField.swift; sourceTree = "<group>"; };
+		E87D83321E0AD6A500304B5E /* EBTLoginAuthenticationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTLoginAuthenticationTVC.swift; sourceTree = "<group>"; };
 		E88BA5471DF53C1300714C65 /* Snap2Save.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap2Save.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA54A1DF53C1300714C65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E88BA54F1DF53C1300714C65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */,
 				E826FBD51E0946970089AEA6 /* EBTLoginTVC.swift */,
+				E87D83321E0AD6A500304B5E /* EBTLoginAuthenticationTVC.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				978729DD1E0937B000908301 /* Constants.swift in Sources */,
 				E84AE9D71E07F4BC00C5E7F3 /* ResetPasswordVC.swift in Sources */,
 				E826FBCD1E0917BD0089AEA6 /* AppHelper.swift in Sources */,
+				E87D83331E0AD6A500304B5E /* EBTLoginAuthenticationTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
