@@ -66,3 +66,14 @@ extension String {
         return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
     }
 }
+
+
+// MARK: - Navigation Bar
+extension UIViewController {
+    
+    func updateBackButtonText() {
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+    }
+}
+

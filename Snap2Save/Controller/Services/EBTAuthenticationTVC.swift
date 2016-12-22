@@ -48,6 +48,8 @@ class EBTAuthenticationTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateBackButtonText()
+        
         // Automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44

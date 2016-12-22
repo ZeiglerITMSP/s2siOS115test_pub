@@ -322,6 +322,7 @@
 				E8BAE2A71E0BDEFD00A85AAB /* EBTCardNumberTVC.swift */,
 				E8BAE2A91E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift */,
 				E8BAE2AB1E0BE24400A85AAB /* EBTSelectPinTVC.swift */,
+				E8BAE2AE1E0BEF8000A85AAB /* EBTUserInformationTVC.swift */,
 				E8BAE2B01E0BF52E00A85AAB /* EBTConfirmationTVC.swift */,
 				E8BAE2B21E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift */,
 			);
@@ -333,7 +334,6 @@
 			children = (
 				E826FBD51E0946970089AEA6 /* EBTLoginTVC.swift */,
 				E8BAE2A11E0BABEF00A85AAB /* EBTAuthenticationTVC.swift */,
-				E8BAE2AE1E0BEF8000A85AAB /* EBTUserInformationTVC.swift */,
 			);
 			name = EBTLogin;
 			sourceTree = "<group>";

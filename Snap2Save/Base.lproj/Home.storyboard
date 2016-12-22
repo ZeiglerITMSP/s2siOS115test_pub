@@ -24,11 +24,11 @@
                                         <rect key="frame" x="0.0" y="35" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zxC-Bs-CsD" id="cDu-bb-Ho8">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="EBT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cQa-rt-KnW">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -45,11 +45,11 @@
                                         <rect key="frame" x="0.0" y="115" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n6Q-Uq-tBw" id="G67-P4-DGz">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Reward Program" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jkh-ra-mZE">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -62,11 +62,11 @@
                                         <rect key="frame" x="0.0" y="159" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ehj-nO-RDu" id="9k7-au-6ci">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="About Snap2Save" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Oxd-zh-nW3">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -79,11 +79,11 @@
                                         <rect key="frame" x="0.0" y="203" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CQp-6E-eMg" id="L9p-bY-QfN">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="FAQ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sUS-Ma-Ebe">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -96,11 +96,11 @@
                                         <rect key="frame" x="0.0" y="247" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="baa-1E-efx" id="IJB-JF-n4L">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Contact Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hmI-nt-TKY">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -117,11 +117,11 @@
                                         <rect key="frame" x="0.0" y="327" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="znr-Se-y4N" id="rdE-9u-isI">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Recipes/Nutrition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="X1v-sZ-Xcw">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -134,11 +134,11 @@
                                         <rect key="frame" x="0.0" y="371" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QeQ-FJ-Ulm" id="G2s-xC-kch">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Terms Of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VdY-kT-Ked">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -151,11 +151,11 @@
                                         <rect key="frame" x="0.0" y="415" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Vq-Ws-sGX" id="LUv-23-bTB">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sun-lx-nL5">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -173,7 +173,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Services" id="YUZ-Nu-FNa">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="uWe-BE-3DJ"/>
+                        <barButtonItem key="backBarButtonItem" title="Back" id="DHa-p5-vgT"/>
                     </navigationItem>
                     <connections>
                         <segue destination="1Ir-th-9tA" kind="show" identifier="EBTLoginTVC" id="rpT-dS-E3s"/>
@@ -840,6 +840,9 @@
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Next"/>
+                                                    <connections>
+                                                        <action selector="nextAction:" destination="Hjr-6T-QF7" eventType="touchUpInside" id="79t-XD-0Pz"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -866,6 +869,9 @@
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Cancel"/>
+                                                    <connections>
+                                                        <action selector="cancelAction:" destination="Hjr-6T-QF7" eventType="touchUpInside" id="jeI-zv-ZDp"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -886,6 +892,8 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="cardNumberField" destination="fBk-fx-AeC" id="k3J-3O-cuV"/>
+                        <outlet property="messageLabel" destination="otU-7k-02g" id="ph1-a0-xOg"/>
                         <segue destination="MJg-Gu-TKy" kind="show" identifier="EBTDateOfBirthTVC" id="SgZ-yD-kId"/>
                     </connections>
                 </tableViewController>
@@ -1001,7 +1009,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Next"/>
                                                     <connections>
-                                                        <action selector="confirmAction:" destination="MJg-Gu-TKy" eventType="touchUpInside" id="tkr-Eb-QeN"/>
+                                                        <action selector="nextAction:" destination="MJg-Gu-TKy" eventType="touchUpInside" id="M29-Tu-qEJ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1030,7 +1038,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Cancel"/>
                                                     <connections>
-                                                        <action selector="regenerateAction:" destination="MJg-Gu-TKy" eventType="touchUpInside" id="J0L-MX-tcT"/>
+                                                        <action selector="cancelAction:" destination="MJg-Gu-TKy" eventType="touchUpInside" id="toZ-6s-nxy"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1052,8 +1060,9 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="authenticationCodeField" destination="nNd-T7-Czk" id="W2Q-Ok-bFX"/>
-                        <outlet property="errorMessageLabel" destination="RS5-Wm-AU3" id="oTJ-EK-RZL"/>
+                        <outlet property="dobField" destination="nNd-T7-Czk" id="Ort-V2-F3x"/>
+                        <outlet property="messageLabel" destination="RS5-Wm-AU3" id="rDy-zY-dKr"/>
+                        <outlet property="socialSecurityNumberField" destination="RRJ-Zz-zMc" id="tQZ-wA-byt"/>
                         <segue destination="TOt-xF-XbE" kind="show" identifier="EBTSelectPinTVC" id="hIx-bI-bpi"/>
                     </connections>
                 </tableViewController>
@@ -1169,7 +1178,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Next"/>
                                                     <connections>
-                                                        <action selector="confirmAction:" destination="TOt-xF-XbE" eventType="touchUpInside" id="yHg-Xn-N34"/>
+                                                        <action selector="nextAction:" destination="TOt-xF-XbE" eventType="touchUpInside" id="7GD-kA-KGf"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1198,7 +1207,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Use Current PIN"/>
                                                     <connections>
-                                                        <action selector="regenerateAction:" destination="TOt-xF-XbE" eventType="touchUpInside" id="Tbu-g6-e7b"/>
+                                                        <action selector="useCurrentPinAction:" destination="TOt-xF-XbE" eventType="touchUpInside" id="phx-3S-2NJ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1220,8 +1229,9 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="authenticationCodeField" destination="iqf-kK-byq" id="x7F-Ii-ldw"/>
-                        <outlet property="errorMessageLabel" destination="uzG-hb-NAf" id="W9H-So-cBf"/>
+                        <outlet property="confirmPinField" destination="MoT-vo-whH" id="xEa-wS-OQ9"/>
+                        <outlet property="messageLabel" destination="uzG-hb-NAf" id="LcH-gw-pkA"/>
+                        <outlet property="pinField" destination="iqf-kK-byq" id="i0a-ow-6rX"/>
                         <segue destination="HwX-iY-C9v" kind="show" identifier="EBTUserInformationTVC" id="Iza-yb-Cva"/>
                     </connections>
                 </tableViewController>
@@ -1630,7 +1640,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Next"/>
                                                     <connections>
-                                                        <action selector="confirmAction:" destination="HwX-iY-C9v" eventType="touchUpInside" id="oSd-pf-SI6"/>
+                                                        <action selector="nextAction:" destination="HwX-iY-C9v" eventType="touchUpInside" id="y2n-p9-iIb"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1659,7 +1669,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Cancel"/>
                                                     <connections>
-                                                        <action selector="regenerateAction:" destination="HwX-iY-C9v" eventType="touchUpInside" id="4AM-Gj-XDt"/>
+                                                        <action selector="cancelAction:" destination="HwX-iY-C9v" eventType="touchUpInside" id="pgh-MD-hJm"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1683,8 +1693,19 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1467"/>
                     <connections>
-                        <outlet property="authenticationCodeField" destination="6IU-YG-Xks" id="PR8-Xs-viw"/>
-                        <outlet property="errorMessageLabel" destination="Gd6-KK-Vep" id="1az-RS-yEn"/>
+                        <outlet property="ConfirmPasswordField" destination="WDe-jz-Lng" id="Kmn-gV-JPn"/>
+                        <outlet property="answerOneField" destination="6yD-LH-10K" id="Gwe-Xk-mEO"/>
+                        <outlet property="answerThreeField" destination="WZM-d7-e8t" id="WzI-sS-kms"/>
+                        <outlet property="answerTwoField" destination="0ub-AH-O7T" id="aNe-jU-e8g"/>
+                        <outlet property="confirmEmailField" destination="rfC-uO-c2h" id="7Tk-NK-tuB"/>
+                        <outlet property="emailAddressField" destination="VTq-a1-bUz" id="Yr9-E7-qpt"/>
+                        <outlet property="messageLabel" destination="Gd6-KK-Vep" id="ra7-U0-Ncz"/>
+                        <outlet property="passwordField" destination="xJi-sH-RGA" id="aJv-gf-KVz"/>
+                        <outlet property="phoneNumberField" destination="g3W-Sh-h9W" id="VeJ-Pe-edD"/>
+                        <outlet property="questionOneField" destination="Zs4-Pl-FzB" id="rVm-Wh-btX"/>
+                        <outlet property="questionThreeField" destination="CZU-HT-ERU" id="IUA-al-3gV"/>
+                        <outlet property="questionTwoField" destination="vl6-jO-GsO" id="410-I2-0CI"/>
+                        <outlet property="userIdField" destination="6IU-YG-Xks" id="M1H-N7-MbQ"/>
                         <segue destination="ibf-uI-hCF" kind="show" identifier="EBTConfirmationTVC" id="jFZ-f2-voZ"/>
                     </connections>
                 </tableViewController>
@@ -1771,7 +1792,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Validate"/>
                                                     <connections>
-                                                        <action selector="confirmAction:" destination="ibf-uI-hCF" eventType="touchUpInside" id="yFB-yo-Kwg"/>
+                                                        <action selector="validateAction:" destination="ibf-uI-hCF" eventType="touchUpInside" id="HZH-ta-FvZ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1800,7 +1821,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Resend"/>
                                                     <connections>
-                                                        <action selector="regenerateAction:" destination="ibf-uI-hCF" eventType="touchUpInside" id="Msw-7h-Dzl"/>
+                                                        <action selector="resendAction:" destination="ibf-uI-hCF" eventType="touchUpInside" id="T09-Vc-MZ1"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1829,7 +1850,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Change Email"/>
                                                     <connections>
-                                                        <action selector="regenerateAction:" destination="ibf-uI-hCF" eventType="touchUpInside" id="3MJ-gf-ElC"/>
+                                                        <action selector="changeEmailAction:" destination="ibf-uI-hCF" eventType="touchUpInside" id="5gW-Hr-joi"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1853,8 +1874,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
-                        <outlet property="authenticationCodeField" destination="scF-NE-hb3" id="jKK-Uu-zaU"/>
-                        <outlet property="errorMessageLabel" destination="xnq-WX-cka" id="WY8-NU-Id5"/>
+                        <outlet property="messageLabel" destination="xnq-WX-cka" id="sDl-g3-3Uu"/>
+                        <outlet property="validationCodeField" destination="scF-NE-hb3" id="zl1-iP-Dls"/>
                         <segue destination="UmL-OF-hMj" kind="show" identifier="EBTSecurityQuestionTVC" id="eCQ-EA-Y8B"/>
                     </connections>
                 </tableViewController>
@@ -1971,7 +1992,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Confirm"/>
                                                     <connections>
-                                                        <action selector="confirmAction:" destination="UmL-OF-hMj" eventType="touchUpInside" id="pPp-6M-3zy"/>
+                                                        <action selector="confirmAction:" destination="UmL-OF-hMj" eventType="touchUpInside" id="tdO-Lc-xgh"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2000,7 +2021,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Cancel"/>
                                                     <connections>
-                                                        <action selector="regenerateAction:" destination="UmL-OF-hMj" eventType="touchUpInside" id="OSJ-wQ-LMM"/>
+                                                        <action selector="cancelAction:" destination="UmL-OF-hMj" eventType="touchUpInside" id="NzP-Mg-BK8"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2022,8 +2043,9 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="authenticationCodeField" destination="oYP-oa-aPG" id="hCy-p6-K5z"/>
-                        <outlet property="errorMessageLabel" destination="l30-Ah-A0m" id="huo-4h-d0P"/>
+                        <outlet property="messageLabel" destination="l30-Ah-A0m" id="ynD-8u-1En"/>
+                        <outlet property="securityAnswerField" destination="kDQ-eH-4Wm" id="I4o-rc-OCY"/>
+                        <outlet property="securityQuestionField" destination="oYP-oa-aPG" id="VYi-Vp-J3d"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wg-m7-dHT" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -10,6 +10,22 @@ import UIKit
 
 class EBTCardNumberTVC: UITableViewController {
 
+    
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    @IBOutlet weak var cardNumberField: AIPlaceHolderTextField!
+    
+    
+    @IBAction func nextAction(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: nil)
+    }
+    
+    @IBAction func cancelAction(_ sender: UIButton) {
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +34,7 @@ class EBTCardNumberTVC: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        updateBackButtonText()
     }
 
     override func didReceiveMemoryWarning() {

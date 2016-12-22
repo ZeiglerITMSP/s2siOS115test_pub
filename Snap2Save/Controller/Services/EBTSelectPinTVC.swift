@@ -10,9 +10,33 @@ import UIKit
 
 class EBTSelectPinTVC: UITableViewController {
 
+    
+    // Outlets
+    
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    @IBOutlet weak var pinField: AIPlaceHolderTextField!
+    
+    
+    @IBOutlet weak var confirmPinField: AIPlaceHolderTextField!
+    
+    @IBAction func nextAction(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "EBTUserInformationTVC", sender: nil)
+    }
+    
+    @IBAction func useCurrentPinAction(_ sender: UIButton) {
+        
+        
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateBackButtonText()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

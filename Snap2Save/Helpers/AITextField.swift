@@ -30,12 +30,13 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
         case PhoneNumberTextField
         
     }
+    
     @IBInspectable var text_Color: UIColor? = UIColor.white
 
     var textFieldType:AITextFieldType = AITextFieldType.NormalTextField
     var datePicker:UIDatePicker? = nil
     var picker:UIPickerView? = nil
-    let dateFormatString = "MMM dd, yyyy"
+    var dateFormatString = "MMM dd, yyyy"
     let timeFormatString = "hh:mm a"
     var selectedDate:NSDate? = nil
     var pickerViewArray:NSMutableArray? = nil

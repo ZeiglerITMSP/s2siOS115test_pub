@@ -43,12 +43,15 @@ class EBTLoginTVC: UITableViewController {
         
         self.view.endEditing(true)
         
+        performSegue(withIdentifier: "EBTCardNumberTVC", sender: nil)
     }
     
     // MARK:-
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateBackButtonText()
         
         userIdField.contentTextField.textFieldType = .PhoneNumberTextField
         userIdField.contentTextField.textFieldType = .NormalTextField

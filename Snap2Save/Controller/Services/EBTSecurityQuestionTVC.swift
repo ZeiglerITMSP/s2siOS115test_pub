@@ -10,9 +10,29 @@ import UIKit
 
 class EBTSecurityQuestionTVC: UITableViewController {
 
+    // Ouetles
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    @IBOutlet weak var securityQuestionField: AIPlaceHolderTextField!
+    
+    @IBOutlet weak var securityAnswerField: AIPlaceHolderTextField!
+    
+    // Actions
+    
+    @IBAction func confirmAction(_ sender: UIButton) {
+        
+       // performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: nil)
+    }
+    
+    @IBAction func cancelAction(_ sender: UIButton) {
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        updateBackButtonText()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

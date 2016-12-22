@@ -10,14 +10,36 @@ import UIKit
 
 class EBTDateOfBirthTVC: UITableViewController {
 
+    
+    // Outles
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    @IBOutlet weak var dobField: AIPlaceHolderTextField!
+    
+    @IBOutlet weak var socialSecurityNumberField: AIPlaceHolderTextField!
+    
+    
+    @IBAction func nextAction(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "EBTSelectPinTVC", sender: nil)
+    }
+    
+    @IBAction func cancelAction(_ sender: UIButton) {
+        
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        updateBackButtonText()
+        
+        self.dobField.contentTextField.textFieldType = .DatePickerTextField
+        self.dobField.contentTextField.dateFormatString = "mm/dd/yyyy"
+        
+        self.dobField.contentTextField.updateUIAsPerTextFieldType()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,3 +49,6 @@ class EBTDateOfBirthTVC: UITableViewController {
 
    
 }
+
+
+
