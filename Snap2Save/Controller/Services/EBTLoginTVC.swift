@@ -7,17 +7,28 @@
 //
 
 import UIKit
+import PKHUD
 
 class EBTLoginTVC: UITableViewController {
-
+    
+    fileprivate enum ActionType {
+        
+        case loadPage
+        case sumbit
+    }
+    
+    
+    // Properties
+    let ebtWebView: EBTWebView = EBTWebView.shared
+    fileprivate var actionType: ActionType?
+    
     
     // Outlets
-    
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
     @IBOutlet weak var passwordField: AIPlaceHolderTextField!
+    @IBOutlet weak var errorMessageLabel: UILabel!
     
     // Action
-    
     @IBAction func loginAction(_ sender: UIButton) {
         
         self.view.endEditing(true)
@@ -25,101 +36,224 @@ class EBTLoginTVC: UITableViewController {
         print(userIdField.contentTextField.text!)
         print(passwordField.contentTextField.text!)
         
+        validateLoginpageUrl()
     }
     
     @IBAction func registrationAction(_ sender: UIButton) {
         
-        
-        
+        self.view.endEditing(true)
         
     }
     
-    
+    // MARK:-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         userIdField.contentTextField.textFieldType = .PhoneNumberTextField
         userIdField.contentTextField.textFieldType = .NormalTextField
-        userIdField.contentTextField.isSecureTextEntry = true
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        passwordField.contentTextField.isSecureTextEntry = true
+        
+        // Automatic height
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44
+        
+        ebtWebView.responder = self
+        
+        HUD.allowsInteraction = true
+        
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        loadLoginPage()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    
+    // MARK: - Table view
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 {
+            if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
+                return 0
+            }
+        }
+        
+        return UITableViewAutomaticDimension
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    // MARK: - WebView
+    
+    // load webpage
+    func loadLoginPage() {
+        
+        let loginUrl_en = "https://ucard.chase.com/chp"
+        //let loginUrl_es = "https://ucard.chase.com/locale?request_locale=es"
+        let url = NSURL(string: loginUrl_en)
+        let request = NSURLRequest(url: url! as URL)
+        
+        actionType = .loadPage
+        ebtWebView.webView.load(request as URLRequest)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    // validate loginpage url
+    func validateLoginpageUrl() {
+        
+        let jsGetPageUrl = "window.location.href"
+        ebtWebView.webView.evaluateJavaScript(jsGetPageUrl) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                
+                let pageUrl = result as! String
+                
+                if pageUrl == "https://ucard.chase.com/chp" {
+                    
+                    self.autoFill(withUserId: self.userIdField.contentTextField.text!, password: self.passwordField.contentTextField.text!)
+                } else {
+                    print("page not loaded")
+                }
+                
+            }
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    // validate fields
+    // autofill fields
+    func autoFill(withUserId userid:String, password:String) {
+        
+        //$('#submit').click();
+        
+        // autofill
+        
+        actionType = ActionType.sumbit
+        
+        let jsUserIdPassword = "$('#userId').val('\(userid)');$('#password').val('\(password)');$('#submit').click();"
+        
+//        let jsUserIdPassword = "$('#userId').val('\(userid)');$('#password').val('\(password)');validateCredentials();"
+      //  HUD.show(.progress)
+        ebtWebView.webView.evaluateJavaScript(jsUserIdPassword) { (result, error) in
+            
+            self.getErrorMessage()
+        }
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    // check status
+    func validateSubmitAction() {
+        
+        let jsPageTitle = "$('.PageHeader').text();"
+        ebtWebView.webView.evaluateJavaScript(jsPageTitle) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result!)
+                let stringResult = result as! String
+                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(pageTitle)
+                
+                if pageTitle == "We don’t recognize the computer you’re using." {
+                    
+                    self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
+                    
+                } else {
+                    // fail
+                    
+                }
+                
+            }
+        }
+        
     }
-    */
+    
+    func getErrorMessage() {
+        // $(\".errorInvalidField\").text();
+        let jsErrorMessage = "$('.errorTextLogin').text();"
+        
+        ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmedErrorMessage)
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+                if trimmedErrorMessage.characters.count > 0 {
+                    print("====== FAIL =======")
+                    
+                    self.errorMessageLabel.text = trimmedErrorMessage
+                    self.tableView.reloadData()
+                    
+                } else {
+                    print("====== SUCCESS =======")
+                    
+                   // self.submitForm()
+                }
+            }
+        }
     }
-    */
 
+    func submitForm() {
+        
+        //$('#submit').click();
+        
+        // autofill
+        
+        let jsSubmit = "$('#userId').val('\(userIdField.contentTextField.text!)');$('#password').val('\(passwordField.contentTextField.text!)');$('#submit').click();"
+//        let jsSubmit = "$('#submit').click();"
+//        let jsSubmit = "void($('form')[1].submit())"
+        //void($('form')[1].submit())
+        //  HUD.show(.progress)
+        actionType = ActionType.sumbit
+        ebtWebView.webView.evaluateJavaScript(jsSubmit) { (result, error) in
+            
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result!)
+            }
+        }
+    }
+
+   
+    
+    // success action
+    // fail action
+    
+    
 }
+
+extension EBTLoginTVC: EBTWebViewDelegate {
+    
+    func didFail(withError message: String) {
+        
+        errorMessageLabel.text = message
+        self.tableView.reloadData()
+    }
+    
+    func didSuccess() {
+        
+      //  performSegue(withIdentifier: "CalenderInputVC", sender: nil)
+        
+    }
+    
+    func didFinishLoadingWebView() {
+        
+       // HUD.hide()
+         if actionType == .sumbit {
+            
+            validateSubmitAction()
+        }
+        
+        
+    }
+    
+}
+
