@@ -38,6 +38,12 @@
 		E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA57B1DF53D1500714C65 /* LandingVC.swift */; };
 		E88BA59A1DF5B25D00714C65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E88BA59C1DF5B25D00714C65 /* Localizable.strings */; };
 		E8BAE2A21E0BABEF00A85AAB /* EBTAuthenticationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2A11E0BABEF00A85AAB /* EBTAuthenticationTVC.swift */; };
+		E8BAE2A81E0BDEFD00A85AAB /* EBTCardNumberTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2A71E0BDEFD00A85AAB /* EBTCardNumberTVC.swift */; };
+		E8BAE2AA1E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2A91E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift */; };
+		E8BAE2AC1E0BE24400A85AAB /* EBTSelectPinTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2AB1E0BE24400A85AAB /* EBTSelectPinTVC.swift */; };
+		E8BAE2AF1E0BEF8000A85AAB /* EBTUserInformationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2AE1E0BEF8000A85AAB /* EBTUserInformationTVC.swift */; };
+		E8BAE2B11E0BF52E00A85AAB /* EBTConfirmationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2B01E0BF52E00A85AAB /* EBTConfirmationTVC.swift */; };
+		E8BAE2B31E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2B21E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +110,12 @@
 		E88BA59B1DF5B25D00714C65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E88BA59D1DF5B26100714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E8BAE2A11E0BABEF00A85AAB /* EBTAuthenticationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTAuthenticationTVC.swift; sourceTree = "<group>"; };
+		E8BAE2A71E0BDEFD00A85AAB /* EBTCardNumberTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTCardNumberTVC.swift; sourceTree = "<group>"; };
+		E8BAE2A91E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTDateOfBirthTVC.swift; sourceTree = "<group>"; };
+		E8BAE2AB1E0BE24400A85AAB /* EBTSelectPinTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTSelectPinTVC.swift; sourceTree = "<group>"; };
+		E8BAE2AE1E0BEF8000A85AAB /* EBTUserInformationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTUserInformationTVC.swift; sourceTree = "<group>"; };
+		E8BAE2B01E0BF52E00A85AAB /* EBTConfirmationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTConfirmationTVC.swift; sourceTree = "<group>"; };
+		E8BAE2B21E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTSecurityQuestionTVC.swift; sourceTree = "<group>"; };
 		EFDB6F762935CD4621302544 /* Pods-Snap2SaveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,8 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */,
-				E826FBD51E0946970089AEA6 /* EBTLoginTVC.swift */,
-				E8BAE2A11E0BABEF00A85AAB /* EBTAuthenticationTVC.swift */,
+				E8BAE2A41E0BDDFB00A85AAB /* EBTLogin */,
+				E8BAE2A31E0BDDE200A85AAB /* EBTRegistration */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -302,6 +314,28 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E8BAE2A31E0BDDE200A85AAB /* EBTRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				E8BAE2A71E0BDEFD00A85AAB /* EBTCardNumberTVC.swift */,
+				E8BAE2A91E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift */,
+				E8BAE2AB1E0BE24400A85AAB /* EBTSelectPinTVC.swift */,
+				E8BAE2B01E0BF52E00A85AAB /* EBTConfirmationTVC.swift */,
+				E8BAE2B21E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift */,
+			);
+			name = EBTRegistration;
+			sourceTree = "<group>";
+		};
+		E8BAE2A41E0BDDFB00A85AAB /* EBTLogin */ = {
+			isa = PBXGroup;
+			children = (
+				E826FBD51E0946970089AEA6 /* EBTLoginTVC.swift */,
+				E8BAE2A11E0BABEF00A85AAB /* EBTAuthenticationTVC.swift */,
+				E8BAE2AE1E0BEF8000A85AAB /* EBTUserInformationTVC.swift */,
+			);
+			name = EBTLogin;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -590,6 +624,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8BAE2A81E0BDEFD00A85AAB /* EBTCardNumberTVC.swift in Sources */,
 				E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */,
 				E826FBD21E0940A20089AEA6 /* ServicesTVC.swift in Sources */,
 				E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */,
@@ -599,6 +634,9 @@
 				E84AE9D51E07F4B100C5E7F3 /* ForgotPasswordVC.swift in Sources */,
 				E826FBD61E0946970089AEA6 /* EBTLoginTVC.swift in Sources */,
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
+				E8BAE2AA1E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift in Sources */,
+				E8BAE2AF1E0BEF8000A85AAB /* EBTUserInformationTVC.swift in Sources */,
+				E8BAE2B11E0BF52E00A85AAB /* EBTConfirmationTVC.swift in Sources */,
 				E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */,
 				E82283AA1E0A72BC008FE084 /* EBTWebView.swift in Sources */,
 				E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */,
@@ -607,7 +645,9 @@
 				E82283AC1E0A72D3008FE084 /* BrowserVC.swift in Sources */,
 				E8BAE2A21E0BABEF00A85AAB /* EBTAuthenticationTVC.swift in Sources */,
 				E826FBDC1E094FF80089AEA6 /* AIPlaceHolderTextField.swift in Sources */,
+				E8BAE2B31E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift in Sources */,
 				978729DD1E0937B000908301 /* Constants.swift in Sources */,
+				E8BAE2AC1E0BE24400A85AAB /* EBTSelectPinTVC.swift in Sources */,
 				E84AE9D71E07F4BC00C5E7F3 /* ResetPasswordVC.swift in Sources */,
 				E826FBCD1E0917BD0089AEA6 /* AppHelper.swift in Sources */,
 			);

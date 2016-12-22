@@ -23,6 +23,13 @@ import UIKit
         }
     }
     
+    @IBInspectable var placeholderTextField: String = "" {
+        didSet {
+            contentTextField.placeholder = placeholderTextField
+        }
+    }
+    
+    
     @IBInspectable var contentText: String = "" {
         didSet {
             contentTextField.text = contentText
