@@ -8,10 +8,11 @@
 
 import UIKit
 
-protocol AITextFieldProtocol {
+@objc protocol AITextFieldProtocol {
     // protocol definition
     
-    func keyBoardHidden(textField:UITextField)
+    @objc optional func keyBoardHidden(textField:UITextField)
+    @objc optional func textFieldShouldReturn(_ textField: UITextField) -> Bool
 
 }
 class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource
@@ -175,9 +176,9 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
             setToolBar()
             break;
         }
-        self.textColor = UIColor.white
+        self.textColor = text_Color
        // self.font = UIFont.systemFont(ofSize: 16)
-        self.layoutIfNeeded()
+       // self.layoutIfNeeded()
         self.tintColor = APP_ORANGE_COLOR
     }
     func addTextPicker()
@@ -244,7 +245,7 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
         default:
             break
         }
-        self.aiDelegate?.keyBoardHidden(textField: self)
+        self.aiDelegate?.keyBoardHidden?(textField: self)
         self.resignFirstResponder()
     }
     /*
@@ -319,14 +320,32 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("focused")
-        createUnderline(withColor: selectedColor, padding: 0, height: 2)
+        createUnderline(withColor: selectedColor, padding: 0, height: 1)
+        
+        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("lost focus")
-        createUnderline(withColor: normalColor, padding: 0, height: 2)
-        self.aiDelegate?.keyBoardHidden(textField: self)
+        createUnderline(withColor: normalColor, padding: 0, height: 1)
+        self.aiDelegate?.keyBoardHidden?(textField: self)
     }
+    
+    /*
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        // ..
+      //  self.aiDelegate?.keyBoardHidden?(textField: self)
+        
+        let status = self.aiDelegate?.textFieldShouldReturn?(textField)
+        if let status = status {
+            return status
+        } else {
+            return true
+        }
+        
+    //    return  (self.aiDelegate?.textFieldShouldReturn!(textField))!
+    }*/
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return (self.pickerViewArray?.count)!

@@ -28,3 +28,19 @@
 "Forgot Password?" = "Forgot Password?";
 "LOG IN" = "LOG IN";
 "ENGLISH" = "ENGLISH";
+
+//signUpTVC
+"10-DIGIT CELL PHONE NUMBER" = "10-DIGIT CELL PHONE NUMBER";
+"RE-ENTER 10-DIGIT CELL PHONE NUMBER" = "RE-ENTER 10-DIGIT CELL PHONE NUMBER";
+"PASSWORD (MUST BE AT LEAST 6 CHARACTERS)" = "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)";
+"RE-ENTER PASSWORD" = "RE-ENTER PASSWORD";
+"ZIP CODE" = "ZIP CODE";
+"Contact Preference"= "Contact Preference";
+"Text Message" = "Text Message";
+"Email" = "Email";
+"EMAIL" = "EMAIL";
+"RE-ENTER EMAIL" = "RE-ENTER EMAIL";
+"Terms Of Service" = "By becoming a registered user, you agree to our Terms of Service.";
+"CONTINUE" = "CONTINUE";
+
+

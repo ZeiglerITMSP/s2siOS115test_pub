@@ -19,7 +19,19 @@ class func setRoundCornersToView(borderColor:UIColor,view:UIView,radius:CGFloat,
     view.layer.masksToBounds = true
     ////print("border created")
 }
-    
+    class func imageWithColor( color:UIColor) -> UIImage
+    {
+        
+        let rect = CGRect.init(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
+        UIGraphicsBeginImageContextWithOptions(CGSize.init(width: 1.0, height: 1.0), false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
+  
 }
 
 extension UIColor {

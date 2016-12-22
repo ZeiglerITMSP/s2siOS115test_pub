@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		52949BC23A183914DF6D1992 /* Pods_Snap2Save.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */; };
 		6EB2D01CF1914BAE898F61AF /* Pods_Snap2SaveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */; };
+		9759BE781E0A65AA00A5C76A /* SignUpTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */; };
 		978729DD1E0937B000908301 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978729DC1E0937B000908301 /* Constants.swift */; };
 		ADAD175DD539ADB713A16CA4 /* Pods_Snap2SaveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */; };
 		E822839E1E0A61F4008FE084 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E82283A01E0A61F4008FE084 /* Home.storyboard */; };
@@ -20,7 +21,6 @@
 		E826FBDA1E094F720089AEA6 /* AIPlaceHolderTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = E826FBD91E094F720089AEA6 /* AIPlaceHolderTextField.xib */; };
 		E826FBDC1E094FF80089AEA6 /* AIPlaceHolderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E826FBDB1E094FF80089AEA6 /* AIPlaceHolderTextField.swift */; };
 		E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */; };
-		E84AE9CE1E07F35B00C5E7F3 /* SignupTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */; };
 		E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */; };
 		E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */; };
 		E84AE9D51E07F4B100C5E7F3 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9D41E07F4B100C5E7F3 /* ForgotPasswordVC.swift */; };
@@ -64,6 +64,7 @@
 		46C44F5042A0C6D237EF6803 /* Pods-Snap2SaveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveTests/Pods-Snap2SaveTests.debug.xcconfig"; sourceTree = "<group>"; };
 		70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2Save.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTVC.swift; sourceTree = "<group>"; };
 		978729DC1E0937B000908301 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7E97EAA3E320EEC646D6B9 /* Pods-Snap2SaveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -77,7 +78,6 @@
 		E826FBD91E094F720089AEA6 /* AIPlaceHolderTextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AIPlaceHolderTextField.xib; sourceTree = "<group>"; };
 		E826FBDB1E094FF80089AEA6 /* AIPlaceHolderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIPlaceHolderTextField.swift; sourceTree = "<group>"; };
 		E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupTVC.swift; sourceTree = "<group>"; };
 		E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupAdditionalFieldsTVC.swift; sourceTree = "<group>"; };
 		E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePageVC.swift; sourceTree = "<group>"; };
 		E84AE9D41E07F4B100C5E7F3 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
@@ -187,8 +187,8 @@
 		E84AE9C91E07F2A000C5E7F3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
-				E84AE9CD1E07F35B00C5E7F3 /* SignupTVC.swift */,
 				E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */,
+				9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */,
 				E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */,
 			);
 			path = Registration;
@@ -595,6 +595,7 @@
 				E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */,
 				E84AE9DA1E07F53300C5E7F3 /* AccountTVC.swift in Sources */,
 				E84AE9E31E0821B900C5E7F3 /* AITextField.swift in Sources */,
+				9759BE781E0A65AA00A5C76A /* SignUpTVC.swift in Sources */,
 				E84AE9D51E07F4B100C5E7F3 /* ForgotPasswordVC.swift in Sources */,
 				E826FBD61E0946970089AEA6 /* EBTLoginTVC.swift in Sources */,
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
@@ -603,7 +604,6 @@
 				E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */,
 				E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */,
 				E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */,
-				E84AE9CE1E07F35B00C5E7F3 /* SignupTVC.swift in Sources */,
 				E82283AC1E0A72D3008FE084 /* BrowserVC.swift in Sources */,
 				E8BAE2A21E0BABEF00A85AAB /* EBTAuthenticationTVC.swift in Sources */,
 				E826FBDC1E094FF80089AEA6 /* AIPlaceHolderTextField.swift in Sources */,
