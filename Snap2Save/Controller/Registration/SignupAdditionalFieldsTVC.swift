@@ -143,6 +143,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
 
     func loadTextFields(){
         
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: registerButton, radius: 2.0, width: 1.0)
         firstNameTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         firstNameTextField.updateUIAsPerTextFieldType()
         firstNameTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)

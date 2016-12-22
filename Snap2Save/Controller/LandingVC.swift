@@ -57,6 +57,8 @@ class LandingVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = true;
         
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -73,7 +75,7 @@ class LandingVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
+    /*
     func showLanguageSelectionAlert(){
         
         let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -98,5 +100,39 @@ class LandingVC: UIViewController {
 
         self.present(languageAlert, animated: true, completion:nil)
     }
-
+*/
 }
+
+
+extension UIViewController {
+    
+    
+    func showLanguageSelectionAlert(){
+        
+        let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        let englishBtn = UIAlertAction.init(title: "English".localized, style: .default, handler:{
+            (action) in
+            print("Selected English")
+        })
+        let spanishBtn = UIAlertAction.init(title: "Spanish".localized, style: .default, handler:{ (action) in
+            print("Selected Spanish")
+            
+            
+            
+        })
+        let cancelBtn = UIAlertAction.init(title: "Cancel".localized, style: .cancel, handler:{
+            (action) in
+            
+        })
+        
+        languageAlert.view.tintColor = APP_GRREN_COLOR
+        languageAlert .addAction(englishBtn)
+        languageAlert.addAction(spanishBtn)
+        languageAlert.addAction(cancelBtn)
+        
+        self.present(languageAlert, animated: true, completion:nil)
+    }
+
+    
+}
+

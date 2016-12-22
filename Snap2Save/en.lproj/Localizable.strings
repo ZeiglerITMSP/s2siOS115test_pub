@@ -43,4 +43,18 @@
 "Terms Of Service" = "By becoming a registered user, you agree to our Terms of Service.";
 "CONTINUE" = "CONTINUE";
 
+//AddtionalSignUpTVC
+
+//ForgotPassword
+"forgotPasswordMessage" = "Please enter the 10-digit cell phone number associated with your account.";
+"10-DIGIT CELL PHONE NUMBER" = "10-DIGIT CELL PHONE NUMBER";
+"SUBMIT" = "SUBMIT";
+
+//Reset Password
+"resetPasswordMessage" = "Your new password must be at least 6 characters in length.";
+"NEW PASSWORD" = "NEW PASSWORD";
+"RE-ENTER NEW PASSWORD" = "RE-ENTER NEW PASSWORD";
+"RESET PASSWORD" = "RESET PASSWORD";
+
+
 

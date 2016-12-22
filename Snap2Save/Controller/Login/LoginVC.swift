@@ -30,6 +30,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
     }
     @IBAction func forgotPasswordButtonAction(_ sender: UIButton) {
+        let forgotPasswordVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ForgotPasswordVC")
+        self.navigationController?.show(forgotPasswordVC, sender: self)
         
     }
     
@@ -135,27 +137,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
 
     func languageButtonClicked(){
         
-        let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-        let englishBtn = UIAlertAction.init(title: "English".localized, style: .default, handler:{
-            (action) in
-            print("Selected English")
-        })
-        let spanishBtn = UIAlertAction.init(title: "Spanish".localized, style: .default, handler:{
-            (action) in
-            print("Selected Spanish")
-            
-        })
-        let cancelBtn = UIAlertAction.init(title: "Cancel", style: .cancel, handler:{
-            (action) in
-            
-        })
-        
-        languageAlert.view.tintColor = APP_GRREN_COLOR
-        languageAlert .addAction(englishBtn)
-        languageAlert.addAction(spanishBtn)
-        languageAlert.addAction(cancelBtn)
-        
-        self.present(languageAlert, animated: true, completion:nil)
+        self.showLanguageSelectionAlert()
 
     }
     func backButtonAction(){
