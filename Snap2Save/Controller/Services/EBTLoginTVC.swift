@@ -11,17 +11,16 @@ import PKHUD
 
 class EBTLoginTVC: UITableViewController {
     
-    enum ActionType {
+    fileprivate enum ActionType {
         
         case loadPage
         case sumbit
-        case dob
     }
     
     
     // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
-    var actionType: ActionType?
+    fileprivate var actionType: ActionType?
     
     
     // Outlets
@@ -63,6 +62,11 @@ class EBTLoginTVC: UITableViewController {
         ebtWebView.responder = self
         
         HUD.allowsInteraction = true
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         loadLoginPage()
     }
@@ -156,7 +160,7 @@ class EBTLoginTVC: UITableViewController {
                 
                 if pageTitle == "We don’t recognize the computer you’re using." {
                     
-                    self.performSegue(withIdentifier: "EBTLoginAuthenticationTVC", sender: nil)
+                    self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
                     
                 } else {
                     // fail
@@ -236,7 +240,7 @@ extension EBTLoginTVC: EBTWebViewDelegate {
     
     func didSuccess() {
         
-        performSegue(withIdentifier: "CalenderInputVC", sender: nil)
+      //  performSegue(withIdentifier: "CalenderInputVC", sender: nil)
         
     }
     

@@ -29,7 +29,6 @@
 		E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */; };
 		E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */; };
 		E84AE9E31E0821B900C5E7F3 /* AITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9E21E0821B900C5E7F3 /* AITextField.swift */; };
-		E87D83331E0AD6A500304B5E /* EBTLoginAuthenticationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D83321E0AD6A500304B5E /* EBTLoginAuthenticationTVC.swift */; };
 		E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA54A1DF53C1300714C65 /* AppDelegate.swift */; };
 		E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA54E1DF53C1300714C65 /* Main.storyboard */; };
 		E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E88BA5511DF53C1300714C65 /* Assets.xcassets */; };
@@ -38,6 +37,7 @@
 		E88BA56B1DF53C1300714C65 /* Snap2SaveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA56A1DF53C1300714C65 /* Snap2SaveUITests.swift */; };
 		E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA57B1DF53D1500714C65 /* LandingVC.swift */; };
 		E88BA59A1DF5B25D00714C65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E88BA59C1DF5B25D00714C65 /* Localizable.strings */; };
+		E8BAE2A21E0BABEF00A85AAB /* EBTAuthenticationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2A11E0BABEF00A85AAB /* EBTAuthenticationTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,7 +86,6 @@
 		E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalInformationTVC.swift; sourceTree = "<group>"; };
 		E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTVC.swift; sourceTree = "<group>"; };
 		E84AE9E21E0821B900C5E7F3 /* AITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AITextField.swift; sourceTree = "<group>"; };
-		E87D83321E0AD6A500304B5E /* EBTLoginAuthenticationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTLoginAuthenticationTVC.swift; sourceTree = "<group>"; };
 		E88BA5471DF53C1300714C65 /* Snap2Save.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap2Save.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA54A1DF53C1300714C65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E88BA54F1DF53C1300714C65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,6 +103,7 @@
 		E88BA5971DF5B1CA00714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E88BA59B1DF5B25D00714C65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E88BA59D1DF5B26100714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E8BAE2A11E0BABEF00A85AAB /* EBTAuthenticationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTAuthenticationTVC.swift; sourceTree = "<group>"; };
 		EFDB6F762935CD4621302544 /* Pods-Snap2SaveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,7 +172,7 @@
 			children = (
 				E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */,
 				E826FBD51E0946970089AEA6 /* EBTLoginTVC.swift */,
-				E87D83321E0AD6A500304B5E /* EBTLoginAuthenticationTVC.swift */,
+				E8BAE2A11E0BABEF00A85AAB /* EBTAuthenticationTVC.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -605,11 +605,11 @@
 				E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */,
 				E84AE9CE1E07F35B00C5E7F3 /* SignupTVC.swift in Sources */,
 				E82283AC1E0A72D3008FE084 /* BrowserVC.swift in Sources */,
+				E8BAE2A21E0BABEF00A85AAB /* EBTAuthenticationTVC.swift in Sources */,
 				E826FBDC1E094FF80089AEA6 /* AIPlaceHolderTextField.swift in Sources */,
 				978729DD1E0937B000908301 /* Constants.swift in Sources */,
 				E84AE9D71E07F4BC00C5E7F3 /* ResetPasswordVC.swift in Sources */,
 				E826FBCD1E0917BD0089AEA6 /* AppHelper.swift in Sources */,
-				E87D83331E0AD6A500304B5E /* EBTLoginAuthenticationTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
