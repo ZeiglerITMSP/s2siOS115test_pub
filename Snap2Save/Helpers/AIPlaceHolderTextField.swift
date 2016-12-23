@@ -8,11 +8,20 @@
 
 import UIKit
 
+protocol AIPlaceHolderTextFieldDelegate {
+    
+    func didTapOnInfoButton(textfield: AIPlaceHolderTextField)
+    
+}
+
 @IBDesignable class AIPlaceHolderTextField: UIView {
 
     // Outlets
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var contentTextField: AITextField!
+    @IBOutlet weak var requiredLabel: UILabel!
+    
+    var delegate:AIPlaceHolderTextFieldDelegate?
     
     var underlineLayer: CALayer!
     
@@ -22,6 +31,8 @@ import UIKit
             placeholderLabel.text = placeholderText
         }
     }
+    
+    
     
     @IBInspectable var placeholderTextField: String = "" {
         didSet {
@@ -42,7 +53,29 @@ import UIKit
             
             refreshView()
         }
+    }
+    
+    @IBInspectable var isRequredField:Bool = false {
         
+        didSet {
+            
+           requiredLabel.isHidden = !isRequredField
+        }
+    }
+    
+    @IBInspectable var showInfoButton:Bool = false {
+        
+        didSet {
+            
+            infoButton.isHidden = !showInfoButton
+        }
+    }
+    
+    @IBOutlet weak var infoButton: UIButton!
+    
+    @IBAction func infoButtonAction(_ sender: UIButton) {
+        
+        self.delegate?.didTapOnInfoButton(textfield: self)
     }
     
     @IBInspectable var selectedColor: UIColor = UIColor(red: 84/255, green: 190/255, blue: 56/255, alpha: 1.0) {
@@ -108,6 +141,9 @@ import UIKit
         contentTextField.normalColor = normalColor
         
         contentTextField.createUnderline(withColor: normalColor, padding: 0, height: 1)
+        
+        self.infoButton.isHidden = !showInfoButton
+        self.requiredLabel.isHidden = !isRequredField
         
         return view
     }

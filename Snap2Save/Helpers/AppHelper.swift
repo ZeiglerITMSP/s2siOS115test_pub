@@ -91,12 +91,32 @@ extension String {
 // MARK: - Alert
 extension UIViewController {
     
-    func showAlert(title:String , message:String) {
+    func showAlert(title:String? , message:String?) {
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(defaultAction)
+        DispatchQueue.main.async {
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func showAlert(title:String? , message:String?, action:Selector) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        
+        let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+            self.perform(action)
+        })
+        
+        let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel, handler: nil)
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
         DispatchQueue.main.async {
             
             self.present(alertController, animated: true, completion: nil)
@@ -114,6 +134,29 @@ extension UIViewController {
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
+}
+
+extension UINavigationItem {
+    
+    
+    func addBackButton(withTarge target: Any, action: Selector) {
+        
+        // Back Action
+        let backButton = UIButton.init(type: .custom)
+        backButton.frame = CGRect(x:0,y:0,width:80,height:25)
+        backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
+        backButton.setTitle("Back", for: .normal)
+        backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.7), for: .normal)
+        
+        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
+        backButton.addTarget(target, action: action, for: .touchUpInside)
+        backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
+        
+        let leftBarButton = UIBarButtonItem()
+        leftBarButton.customView = backButton
+        self.leftBarButtonItem = leftBarButton
+    }
+    
 }
 
 // MARK: - Language

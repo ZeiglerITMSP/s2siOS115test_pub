@@ -48,7 +48,8 @@ class EBTAuthenticationTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        updateBackButtonText()
+        // Back Action
+        self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         // Automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -56,7 +57,6 @@ class EBTAuthenticationTVC: UITableViewController {
         
         ebtWebView.responder = self
 
-        
     
     
     }
@@ -166,8 +166,21 @@ extension EBTAuthenticationTVC: EBTWebViewDelegate {
             
             //validateSubmitAction()
         }
-        
-        
     }
+    
+    
+    func backAction() {
+        
+        showAlert(title: "Are you sure ?", message: "The registration process will be cancelled.", action: #selector(cancelProcess))
+    }
+    
+    func cancelProcess() {
+        
+        // Define identifier
+        let notificationName = Notification.Name("POPTOLOGIN")
+        // Post notification
+        NotificationCenter.default.post(name: notificationName, object: nil)
+    }
+
     
 }
