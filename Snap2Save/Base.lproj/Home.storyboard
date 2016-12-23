@@ -489,10 +489,10 @@
             </objects>
             <point key="canvasLocation" x="-2274" y="952"/>
         </scene>
-        <!--Item-->
+        <!--WebView-->
         <scene sceneID="KVY-NQ-84T">
             <objects>
-                <viewController id="RUE-Su-nIk" customClass="BrowserVC" customModule="Snap2Save" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="WebView" id="RUE-Su-nIk" customClass="BrowserVC" customModule="Snap2Save" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CFm-1I-v6f"/>
                         <viewControllerLayoutGuide type="bottom" id="GjO-jr-F29"/>
@@ -514,7 +514,7 @@
                             <constraint firstItem="bhY-Go-MKp" firstAttribute="leading" secondItem="Zrw-JT-Ewe" secondAttribute="leading" id="mPD-xV-rtG"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="gYH-Et-OKY"/>
+                    <tabBarItem key="tabBarItem" title="WebView" id="gYH-Et-OKY"/>
                     <connections>
                         <outlet property="broswerView" destination="bhY-Go-MKp" id="1vz-77-yzE"/>
                     </connections>
