@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import Alamofire
 
 class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
     
@@ -54,7 +55,11 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
     }
     
     @IBAction func continueButtonClicked(_ sender: UIButton) {
-        let additionalSignUpVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignupAdditionalFieldsTVC")
+        
+        let userDetails : NSDictionary = ["phone_number":mobileNumTextField.text ?? "","password":passwordTextField.text ?? "","zipcode":zipCodeTextField.text ?? "","contact_preference":contactPreferenceSegmentControl.selectedSegmentIndex,"email":emailTextField.text ?? "","social_id":""];
+        
+        let additionalSignUpVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignupAdditionalFieldsTVC") as! SignupAdditionalFieldsTVC
+        additionalSignUpVc.userDetailsDict = userDetails
         self.navigationController?.show(additionalSignUpVc, sender: self)
     }
     override func viewDidLoad() {
@@ -365,6 +370,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
         textField.resignFirstResponder()
         return true
     }
+    
     /*
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -419,5 +425,26 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
      // Pass the selected object to the new view controller.
      }
      */
-    
+    func isValidData(){
+        if AppHelper.validMobileNumber(mobileNumber: mobileNumTextField.text!){
+            showAlert(title: "", message: "Please reEnter your PhoneNumber")
+        }
+        else if reEnterMobileNumTextField.text?.characters.count == 0 {
+            showAlert(title: "", message: "Please reEnter your PhoneNumber")
+        }
+       else if reEnterEmailTextField.text != emailTextField.text{
+            showAlert(title: "", message: "Emails doesn't match")
+        }
+        else if passwordTextField.text != reEnterPasswordTextField.text{
+            showAlert(title: "", message: "Password doesn't match")
+        }
+        else if zipCodeTextField.text?.characters.count == 0{
+            showAlert(title: "", message: "Please enter ZipCode")
+        }
+//        if !AppHelper.isValidEmail(testStr: emailTextField.text!) || (emailTextField.text?.isEmpty)!
+//        {
+//            showAlert(title: "", message: "Enter a valid email")
+//        }
+
+    }
 }

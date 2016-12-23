@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Localize_Swift
 
 class AppHelper
 {
@@ -31,6 +32,24 @@ class func setRoundCornersToView(borderColor:UIColor,view:UIView,radius:CGFloat,
         
         return image
     }
+    
+    class func validMobileNumber( mobileNumber : String) -> Bool{
+        
+        if mobileNumber.characters.count > 0 && mobileNumber.characters.count > 10{
+            return true
+        }
+        return false
+    }
+    
+    class func isValidEmail(testStr:String) -> Bool {
+        // //print("validate calendar: \(testStr)")
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
+    
+  
   
 }
 
@@ -65,4 +84,62 @@ extension String {
     var localized: String {
         return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
     }
+    
+    
 }
+
+// MARK: - Alert
+extension UIViewController {
+    
+    func showAlert(title:String , message:String) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        DispatchQueue.main.async {
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+
+    
+}
+
+// MARK: - Language
+extension UIViewController {
+    
+    
+    func showLanguageSelectionAlert(){
+        let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        
+        let englishBtn = UIAlertAction.init(title: "English".localized(), style: .default, handler:{
+            (action) in
+            print("Selected English")
+            Localize.setCurrentLanguage("en")
+            
+        })
+        let spanishBtn = UIAlertAction.init(title: "Spanish".localized(), style: .default, handler:{ (action) in
+            print("Selected Spanish")
+            Localize.setCurrentLanguage("es")
+        })
+        let cancelBtn = UIAlertAction.init(title: "Cancel".localized(), style: .cancel, handler:{
+            (action) in
+            
+        })
+        
+        languageAlert.view.tintColor = APP_GRREN_COLOR
+        languageAlert .addAction(englishBtn)
+        languageAlert.addAction(spanishBtn)
+        languageAlert.addAction(cancelBtn)
+        
+        self.present(languageAlert, animated: true, completion:nil)
+    }
+    
+    
+}
+
+
+
+

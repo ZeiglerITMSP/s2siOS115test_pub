@@ -7,9 +7,11 @@
 //
 
 import UIKit
-
+//import Alamofire
+import SwiftyJSON
 class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITextFieldProtocol{
-
+    
+    var userDetailsDict : NSDictionary = NSDictionary()
     
     @IBOutlet var earn200PointsLabel: UILabel!
     
@@ -58,6 +60,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     @IBOutlet var stateLabel: UILabel!
     
     @IBOutlet var cityTextField: AITextField!
+    
     @IBAction func registerButtonAction(_ sender: UIButton) {
         
         
@@ -350,5 +353,89 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     */
     func keyBoardHidden(textField: UITextField) {
         
+    }
+    
+    func userSignUp(){
+        
+        /*   "password": "123456",
+         "phone_number": "8179968861",
+         "email": "test@gmail.com",
+         "zipcode": "233242",
+         "social_id": "23432423432433",
+         "contact_preference": "1",
+         "first_name": "test",
+         "last_name": "test",
+         "address_line1": "Cook Street",
+         "address_line2": "1-33-3",
+         "city": "Denver",
+         "state": "Colorado",
+         "gender": "1",
+         "age_group": "1",
+         "referral_code": "232",
+         "ethnicity": "2",
+         "platform": "1",
+         "version": "1",
+         "device_id": "23423423werwerwerwe23",
+         "push_token": "123123dwfwwe234234",
+         "language": "en"*/
+        
+//        let parameters: Parameters = ["password" : userDetailsDict.value(forKey: "password") ?? "",
+//                                      "phone_number" : userDetailsDict.value(forKey: "phone_number") ?? "",
+//                                      "email" :userDetailsDict.value(forKey: "email") ?? "",
+//                                      "zipcode":userDetailsDict.value(forKey: "zipcode") ?? "",
+//                                      "social_id":"",
+//                                      "contact_preference": userDetailsDict.value(forKey: "contact_preference") ?? "",
+//                                      "first_name": firstNameTextField.text ?? "",
+//                                      "last_name": lastNameTextField.text ?? "",
+//                                      "address_line1": addressLine1TextField.text ?? "",
+//                                      "address_line2": addressLine2TextField.text ?? "",
+//                                      "city": cityTextField.text ?? "",
+//                                      "state": stateTextField.text ?? "",
+//                                      "gender": "1" ?? "",
+//                                      "age_group": "1" ?? "",
+//                                      "referral_code": "232" ?? "",
+//                                      "ethnicity": "2" ?? "",
+//                                      "platform": "1" ?? "",
+//                                      "version": "1",
+//                                      "device_id": "23423423werwerwerwe23",
+//                                      "push_token": "123123dwfwwe234234",
+//                                      "language": "en"
+//                                        ]
+//
+//        
+//        print(parameters)
+//
+//        
+//        let url = String(format: "%@api/signUp", hostUrl)
+//        
+//        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+//            
+//            switch response.result {
+//            case .success:
+//                
+//                let json = JSON(data: response.data!)
+//                print("json response\(json)")
+//                let alertMessage = json.stringValue
+//                
+////                DispatchQueue.main.async {
+////                    _ = EZLoadingActivity.hide()
+////                    self.showAlert(title: "", message: alertMessage)
+////                    _ = self.navigationController?.popViewController(animated: true)
+//                
+//            
+//                break
+//            
+//            case .failure(let error):
+//            
+//                DispatchQueue.main.async {
+//                  //  _ = EZLoadingActivity.hide()
+//                }
+//                print(error)
+//                break
+//            }
+//    
+//    
+//        }
+//
     }
 }

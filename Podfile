@@ -8,15 +8,17 @@ target 'Snap2Save' do
   # Pods for Snap2Save
   pod 'Localize-Swift'
   pod 'PKHUD', '~> 4.0'
+  # pod 'Alamofire', '~> 4.0'
+  pod 'SwiftyJSON'
 
-  target 'Snap2SaveTests' do
+target 'Snap2SaveTests' do
     inherit! :search_paths
     # Pods for testing
-  end
+end
 
-  target 'Snap2SaveUITests' do
+target 'Snap2SaveUITests' do
     inherit! :search_paths
     # Pods for testing
-  end
+end
 
 end

@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+var hostUrl = "http://35.163.6.45/snap2save-api/"
+
+
 var SCREEN_WIDTH = UIScreen.main.bounds.size.width
 
 var SCREEN_HEIGHT = UIScreen.main.bounds.size.height

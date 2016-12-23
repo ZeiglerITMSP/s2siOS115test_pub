@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Localize_Swift
 
 class LandingVC: UIViewController {
+
 
     // Outlets
     @IBOutlet var downArrowImage: UIImageView!
@@ -34,6 +36,8 @@ class LandingVC: UIViewController {
         self.navigationController?.show(signUpVc, sender: self)
 
     }
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let languageGes:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(self.showLanguageSelectionAlert))
@@ -42,22 +46,31 @@ class LandingVC: UIViewController {
         
         AppHelper.setRoundCornersToView(borderColor: loginButton.backgroundColor!, view: loginButton, radius: 2.0, width: 1)
         AppHelper.setRoundCornersToView(borderColor: registerButton.backgroundColor!, view: registerButton, radius: 2.0, width: 1)
-        welcomeLabel.text = "WELCOME".localized
-        selectLanguageLabel.text = "SELECTLANGUAGE".localized
-        loginButton.setTitle("LOG IN".localized, for: .normal)
-        registerButton.setTitle("REGISTER".localized, for: .normal)
         
-//        let welcomeVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC")
-//        self.navigationController?.show(welcomeVc, sender: self)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true;
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadContent), name: NSNotification.Name( LCLLanguageChangeNotification), object: nil)
         
+        reloadContent()
     }
     
+    
+    func reloadContent() {
+        
+         DispatchQueue.main.async {
+            
+            self.welcomeLabel.text = "WELCOME".localized()
+            self.selectLanguageLabel.text = "SELECT LANGUAGE".localized()
+            self.loginButton.setTitle("LOG IN".localized() , for: .normal)
+            self.registerButton.setTitle("REGISTER".localized(), for: .normal)
+        }
+        
+    }
+
     
 
     override func didReceiveMemoryWarning() {
@@ -104,35 +117,4 @@ class LandingVC: UIViewController {
 }
 
 
-extension UIViewController {
-    
-    
-    func showLanguageSelectionAlert(){
-        
-        let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-        let englishBtn = UIAlertAction.init(title: "English".localized, style: .default, handler:{
-            (action) in
-            print("Selected English")
-        })
-        let spanishBtn = UIAlertAction.init(title: "Spanish".localized, style: .default, handler:{ (action) in
-            print("Selected Spanish")
-            
-            
-            
-        })
-        let cancelBtn = UIAlertAction.init(title: "Cancel".localized, style: .cancel, handler:{
-            (action) in
-            
-        })
-        
-        languageAlert.view.tintColor = APP_GRREN_COLOR
-        languageAlert .addAction(englishBtn)
-        languageAlert.addAction(spanishBtn)
-        languageAlert.addAction(cancelBtn)
-        
-        self.present(languageAlert, animated: true, completion:nil)
-    }
-
-    
-}
 

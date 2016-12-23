@@ -7,8 +7,7 @@
 //
 
 import UIKit
-
-
+//import Alamofire
 
 class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScrollViewDelegate {
     
