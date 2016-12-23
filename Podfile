@@ -8,7 +8,7 @@ target 'Snap2Save' do
   # Pods for Snap2Save
   pod 'Localize-Swift'
   pod 'PKHUD', '~> 4.0'
-  # pod 'Alamofire', '~> 4.0'
+  pod 'Alamofire', '~> 4.0'
   pod 'SwiftyJSON'
 
 target 'Snap2SaveTests' do
