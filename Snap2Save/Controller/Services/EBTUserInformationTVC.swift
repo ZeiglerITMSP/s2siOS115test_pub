@@ -81,6 +81,9 @@ class EBTUserInformationTVC: UITableViewController {
         questionThreeField.contentTextField.pickerViewArray = ["Curabitur blandit tempus porttitor.", "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.", "Etiam porta sem malesuada magna mollis euismod."]
         questionThreeField.contentTextField.updateUIAsPerTextFieldType()
         
+        // Automatic height
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44
         
         
         
@@ -116,7 +119,6 @@ extension EBTUserInformationTVC: AIPlaceHolderTextFieldDelegate {
         if textfield.tag == 100 {
             // User ID
             showMyAlert(title: "User ID Rules:", message: "* Minimum of 6 and maximum of 15 long \n* Alphanumeric \n* Must include at least 1 number \n* Case insensitive * No special characters like @#$%^&*() \n* No spaces")
-           
             
         } else if textfield.tag == 101 {
             // Password

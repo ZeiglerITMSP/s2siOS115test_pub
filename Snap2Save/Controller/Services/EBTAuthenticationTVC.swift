@@ -16,8 +16,8 @@ class EBTAuthenticationTVC: UITableViewController {
     
     fileprivate enum ActionType {
         
-        case loadPage
-        case sumbit
+        case generate
+        case regenerate
     }
     
     
@@ -29,6 +29,8 @@ class EBTAuthenticationTVC: UITableViewController {
     // Outlets
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var authenticationCodeField: AIPlaceHolderTextField!
+    @IBOutlet weak var confirmActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var regenerateActivityIndicator: UIActivityIndicatorView!
     
     // Actions
     @IBAction func confirmAction(_ sender: UIButton) {
@@ -40,8 +42,7 @@ class EBTAuthenticationTVC: UITableViewController {
     @IBAction func regenerateAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        
-        
+        regenerate()
     }
     
     
@@ -57,8 +58,12 @@ class EBTAuthenticationTVC: UITableViewController {
         
         ebtWebView.responder = self
 
+    }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ebtWebView.responder = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,11 +86,57 @@ class EBTAuthenticationTVC: UITableViewController {
     
     // MARK: - Webview
     
+    func regenerate() {
+        
+        regenerateActivityIndicator.startAnimating()
+        
+        // autofill
+        actionType = ActionType.regenerate
+        
+        let jsRegenerate = "$('#cancelBtn').click();"
+        let javaScript = jsRegenerate
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+//            self.checkForStatusMessage()
+        }
+        
+    }
+    
+    func checkForStatusMessage() {
+        
+        regenerateActivityIndicator.stopAnimating()
+        
+        let jsStatusMessage = "$('.completionText').text()"
+        
+        ebtWebView.webView.evaluateJavaScript(jsStatusMessage) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print("status mesage ========")
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmedErrorMessage)
+                
+                if trimmedErrorMessage.characters.count > 0 {
+                    
+                    self.errorMessageLabel.text = trimmedErrorMessage
+                    self.tableView.reloadData()
+                    
+                } else {
+                    
+                }
+            }
+        }
+    }
+    
+    
     // autofill fields
     func autoFill(withAuthenticationCoe authenticationCode:String) {
         
         // autofill
-        actionType = ActionType.sumbit
+        actionType = ActionType.generate
         
         let jsAuthenticationCode = "$('#txtAuthenticationCode').val('\(authenticationCode)');"
         let jsSubmit = "$('#okButton').click();"
@@ -104,7 +155,9 @@ class EBTAuthenticationTVC: UITableViewController {
             if error != nil {
                 print(error ?? "error nil")
             } else {
+                
                 print(result!)
+                
                 let stringResult = result as! String
                 let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 print(pageTitle)
@@ -114,7 +167,6 @@ class EBTAuthenticationTVC: UITableViewController {
             }
         }
     }
-    
     
     
     func checkForErrorMessage() {
@@ -142,32 +194,6 @@ class EBTAuthenticationTVC: UITableViewController {
         }
     }
 
-}
-
-extension EBTAuthenticationTVC: EBTWebViewDelegate {
-    
-    func didFail(withError message: String) {
-        
-        errorMessageLabel.text = message
-        self.tableView.reloadData()
-    }
-    
-    func didSuccess() {
-        
-        performSegue(withIdentifier: "CalenderInputVC", sender: nil)
-        
-    }
-    
-    func didFinishLoadingWebView() {
-        
-        // HUD.hide()
-        if actionType == .sumbit {
-            
-            //validateSubmitAction()
-        }
-    }
-    
-    
     func backAction() {
         
         showAlert(title: "Are you sure ?", message: "The registration process will be cancelled.", action: #selector(cancelProcess))
@@ -181,5 +207,25 @@ extension EBTAuthenticationTVC: EBTWebViewDelegate {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
 
+    
+}
+
+
+
+
+extension EBTAuthenticationTVC: EBTWebViewDelegate {
+    
+
+    func didFinishLoadingWebView() {
+        
+        if actionType == .generate {
+            
+            //validateSubmitAction()
+        } else if actionType == .regenerate {
+            
+            actionType = nil
+            checkForStatusMessage()
+        }
+    }
     
 }

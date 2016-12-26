@@ -71,6 +71,7 @@ class EBTLoginTVC: UITableViewController {
         self.tableView.estimatedRowHeight = 44
         
         ebtWebView.responder = self
+        
         HUD.allowsInteraction = true
         
         // language selection
@@ -85,6 +86,7 @@ class EBTLoginTVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        ebtWebView.responder = self
         reloadContent()
     }
     
@@ -275,27 +277,11 @@ class EBTLoginTVC: UITableViewController {
 
 extension EBTLoginTVC: EBTWebViewDelegate {
     
-    func didFail(withError message: String) {
-        
-        errorMessageLabel.text = message
-        self.tableView.reloadData()
-    }
-    
-    func didSuccess() {
-        
-        //        performSegue(withIdentifier: "CalenderInputVC", sender: nil)
-        
-    }
-    
     func didFinishLoadingWebView() {
         
-        // HUD.hide()
         if actionType == .sumbit {
-            
             validateSubmitAction()
         }
-        
-        
     }
     
 }

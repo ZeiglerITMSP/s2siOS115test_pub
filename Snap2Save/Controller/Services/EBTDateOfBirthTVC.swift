@@ -32,6 +32,10 @@ class EBTDateOfBirthTVC: UITableViewController {
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
+        // Automatic height
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44
+        
         
         self.dobField.contentTextField.textFieldType = .DatePickerTextField
         self.dobField.contentTextField.dateFormatString = "mm/dd/yyyy"

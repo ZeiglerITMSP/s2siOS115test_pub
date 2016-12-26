@@ -11,8 +11,6 @@ import WebKit
 
 protocol EBTWebViewDelegate {
     
-    func didFail(withError message:String)
-    func didSuccess()
     func didFinishLoadingWebView()
     
 }
@@ -109,7 +107,7 @@ class EBTWebView: NSObject {
                 print(trimmed)
                 if trimmed.characters.count > 0 {
                     print("====== FAIL =======")
-                    self.responder?.didFail(withError: trimmed)
+//                    self.responder?.didFail(withError: trimmed)
                 } else {
                     print("====== SUCCESS =======")
                     self.webView.evaluateJavaScript(self.jsSubmit) { (result, error) in
@@ -119,7 +117,7 @@ class EBTWebView: NSObject {
                             print(result ?? "result nil")
                         }
                     }
-                    self.responder?.didSuccess()
+//                    self.responder?.didSuccess()
                 }
             }
         }
@@ -160,7 +158,7 @@ class EBTWebView: NSObject {
                 print(trimmed)
                 if trimmed.characters.count > 0 {
                     print("====== FAIL =======")
-                    self.responder?.didFail(withError: trimmed)
+//                    self.responder?.didFail(withError: trimmed)
                 } else {
                     print("====== SUCCESS =======")
                     self.webView.evaluateJavaScript(self.jsSubmit) { (result, error) in
@@ -170,7 +168,7 @@ class EBTWebView: NSObject {
                             print(result ?? "result nil")
                         }
                     }
-                    self.responder?.didSuccess()
+//                    self.responder?.didSuccess()
                 }
             }
         }
@@ -205,8 +203,6 @@ extension EBTWebView: WKNavigationDelegate {
         
         print(navigationResponse.response)
         
-        
-        
         decisionHandler(.allow)
     }
     
@@ -217,12 +213,6 @@ extension EBTWebView: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("\n -- didFinish -- \n")
-        
-//        if actionType == .cardNumber {
-//            validateCardNumberError()
-//        } else if actionType == .dob {
-//            validateDOBError()
-//        }
 
         self.responder?.didFinishLoadingWebView()
     }
