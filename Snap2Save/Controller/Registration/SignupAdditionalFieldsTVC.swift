@@ -7,11 +7,16 @@
 //
 
 import UIKit
-//import Alamofire
+import Alamofire
 import SwiftyJSON
+
 class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITextFieldProtocol{
     
-    var userDetailsDict : NSDictionary = NSDictionary()
+    var userDetailsDict:[String: Any]!
+    var ageGroupArray : NSMutableArray!
+    var statesArray : NSMutableArray!
+    var ethnicityArray : NSMutableArray!
+    var genderArray : NSMutableArray!
     
     @IBOutlet var earn200PointsLabel: UILabel!
     
@@ -63,7 +68,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     @IBAction func registerButtonAction(_ sender: UIButton) {
         
-        
+        userSignUp()
     }
     
     override func viewDidLoad() {
@@ -111,6 +116,8 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
 
         loadTextFields();
+        
+        print(userDetailsDict)
     }
 
     func languageButtonClicked(){
@@ -147,7 +154,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     func loadTextFields(){
         
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: registerButton, radius: 2.0, width: 1.0)
-        firstNameTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
+        firstNameTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         firstNameTextField.updateUIAsPerTextFieldType()
         firstNameTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         firstNameTextField.placeHolderLabel = firstNameLabel
@@ -156,7 +163,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         firstNameTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         firstNameTextField.text_Color =  UIColor.black
         
-        lastNameTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
+        lastNameTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         lastNameTextField.updateUIAsPerTextFieldType()
         lastNameTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         lastNameTextField.placeHolderLabel = lastNameLabel
@@ -165,7 +172,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         lastNameTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         lastNameTextField.text_Color =  UIColor.black
 
-        addressLine1TextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
+        addressLine1TextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         addressLine1TextField.updateUIAsPerTextFieldType()
         addressLine1TextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         addressLine1TextField.placeHolderLabel = addressLine1Label
@@ -174,7 +181,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         addressLine1TextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         addressLine1TextField.text_Color =  UIColor.black
         
-        addressLine2TextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
+        addressLine2TextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         addressLine2TextField.updateUIAsPerTextFieldType()
         addressLine2TextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         addressLine2TextField.placeHolderLabel = addressLine2Label
@@ -228,7 +235,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         referralCodeTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         referralCodeTextField.text_Color =  UIColor.black
         
-        cityTextField.textFieldType = AITextField.AITextFieldType.UIPickerTextField
+        cityTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         cityTextField.updateUIAsPerTextFieldType()
         cityTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         cityTextField.placeHolderLabel = referralCodeLabel
@@ -237,7 +244,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         cityTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         cityTextField.text_Color =  UIColor.black
         
-        stateTextField.textFieldType = AITextField.AITextFieldType.UIPickerTextField
+        stateTextField.textFieldType = AITextField.AITextFieldType.TextPickerTextField
         stateTextField.updateUIAsPerTextFieldType()
         stateTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         stateTextField.placeHolderLabel = referralCodeLabel
@@ -277,6 +284,16 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         stateTextField.aiDelegate = self
         cityTextField.aiDelegate = self
         zipCodeTextField.aiDelegate = self
+
+        genderArray = ["Male","Female"];
+        ageGroupArray = ["16-25","26-35","36-45","46-55","56+"]
+        ethnicityArray = ["1","2"]
+        statesArray = ["Colorado","NewYork"]
+        
+        genderTextField.pickerViewArray = genderArray
+        ageGroupTextField.pickerViewArray = ageGroupArray
+        ethnicityTextField.pickerViewArray = ethnicityArray
+        stateTextField.pickerViewArray = statesArray
 
 
     }
@@ -357,85 +374,94 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     func userSignUp(){
         
-        /*   "password": "123456",
-         "phone_number": "8179968861",
-         "email": "test@gmail.com",
-         "zipcode": "233242",
-         "social_id": "23432423432433",
-         "contact_preference": "1",
-         "first_name": "test",
-         "last_name": "test",
-         "address_line1": "Cook Street",
-         "address_line2": "1-33-3",
-         "city": "Denver",
-         "state": "Colorado",
-         "gender": "1",
-         "age_group": "1",
-         "referral_code": "232",
-         "ethnicity": "2",
-         "platform": "1",
-         "version": "1",
-         "device_id": "23423423werwerwerwe23",
-         "push_token": "123123dwfwwe234234",
-         "language": "en"*/
+        let password = userDetailsDict["password"] as! String
+        let phone_number = userDetailsDict["phone_number"] as! String
+        let email = userDetailsDict["email"] as! String
+        let zipcode = userDetailsDict["zipcode"] as! String
+        let social_id = userDetailsDict["social_id"] as! String 
+        let contact_preference = userDetailsDict["contact_preference"]
         
-//        let parameters: Parameters = ["password" : userDetailsDict.value(forKey: "password") ?? "",
-//                                      "phone_number" : userDetailsDict.value(forKey: "phone_number") ?? "",
-//                                      "email" :userDetailsDict.value(forKey: "email") ?? "",
-//                                      "zipcode":userDetailsDict.value(forKey: "zipcode") ?? "",
-//                                      "social_id":"",
-//                                      "contact_preference": userDetailsDict.value(forKey: "contact_preference") ?? "",
-//                                      "first_name": firstNameTextField.text ?? "",
-//                                      "last_name": lastNameTextField.text ?? "",
-//                                      "address_line1": addressLine1TextField.text ?? "",
-//                                      "address_line2": addressLine2TextField.text ?? "",
-//                                      "city": cityTextField.text ?? "",
-//                                      "state": stateTextField.text ?? "",
-//                                      "gender": "1" ?? "",
-//                                      "age_group": "1" ?? "",
-//                                      "referral_code": "232" ?? "",
-//                                      "ethnicity": "2" ?? "",
-//                                      "platform": "1" ?? "",
-//                                      "version": "1",
-//                                      "device_id": "23423423werwerwerwe23",
-//                                      "push_token": "123123dwfwwe234234",
-//                                      "language": "en"
-//                                        ]
-//
-//        
-//        print(parameters)
-//
-//        
-//        let url = String(format: "%@api/signUp", hostUrl)
-//        
-//        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
-//            
-//            switch response.result {
-//            case .success:
-//                
-//                let json = JSON(data: response.data!)
-//                print("json response\(json)")
-//                let alertMessage = json.stringValue
-//                
-////                DispatchQueue.main.async {
-////                    _ = EZLoadingActivity.hide()
-////                    self.showAlert(title: "", message: alertMessage)
-////                    _ = self.navigationController?.popViewController(animated: true)
-//                
-//            
-//                break
-//            
-//            case .failure(let error):
-//            
+       // let contact_preference =  String(describing: userDetailsDict["contact_preference"])
+
+        let first_name = firstNameTextField.text ?? ""
+        let last_name = lastNameTextField.text ?? ""
+        let address_line1 = addressLine1TextField.text ?? ""
+        let address_line2 = addressLine2TextField.text ?? ""
+        let city = cityTextField.text ?? ""
+        let state = stateTextField.text ?? ""
+        let gender = genderTextField.text ?? ""
+        let age_group = ageGroupTextField.text ?? ""
+        let referral_code = referralCodeTextField.text ?? ""
+        let ethnicity = ethnicityTextField.text ?? ""
+        let platform = "1"
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let push_token = "123213"
+        let language = "en"
+        
+        let parameters = ["password" : password,
+                          "phone_number" : phone_number,
+                          "email" : email,
+                          "zipcode": zipcode,
+                          "social_id":social_id,
+                          "contact_preference": "1",
+                          "first_name": first_name,
+                          "last_name": last_name,
+                          "address_line1": address_line1,
+                          "address_line2": address_line2,
+                          "city": city,
+                          "state": state,
+                          "gender": gender,
+                          "age_group": age_group,
+                          "referral_code": referral_code,
+                          "ethnicity": ethnicity,
+                          "platform": platform,
+                          "version": "1",
+                          "device_id": device_id,
+                          "push_token": push_token,
+                          "language": language
+        ] as [String : Any]
+        
+        print(parameters)
+
+       
+        let url = String(format: "%@api/signUp", hostUrl)
+        print(url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            
+            switch response.result {
+            case .success:
+                
+                let json = JSON(data: response.data!)
+                print("json response\(json)")
+                let alertMessage = json.stringValue
+                
 //                DispatchQueue.main.async {
-//                  //  _ = EZLoadingActivity.hide()
-//                }
-//                print(error)
-//                break
-//            }
-//    
-//    
-//        }
-//
+//                    _ = EZLoadingActivity.hide()
+//                    self.showAlert(title: "", message: alertMessage)
+//                    _ = self.navigationController?.popViewController(animated: true)
+                
+            
+                break
+            
+            case .failure(let error):
+            
+                DispatchQueue.main.async {
+                  //  _ = EZLoadingActivity.hide()
+                }
+                print(error)
+                break
+            }
+    
+    
+        }
+ 
+
     }
+    
+    
+    func getSelectedIndexFromPicker(selectedIndex: NSInteger) {
+        let index = selectedIndex
+        print("Index\(index)")
+    }
+    
 }
