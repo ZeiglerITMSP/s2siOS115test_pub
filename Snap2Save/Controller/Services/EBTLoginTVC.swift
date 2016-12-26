@@ -24,6 +24,8 @@ class EBTLoginTVC: UITableViewController {
     
     let notificationName = Notification.Name("POPTOLOGIN")
     
+    var languageSelectionButton: UIButton!
+    
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
     @IBOutlet weak var passwordField: AIPlaceHolderTextField!
@@ -34,12 +36,12 @@ class EBTLoginTVC: UITableViewController {
         
         self.view.endEditing(true)
         
-        self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
+//        self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
         
 //        print(userIdField.contentTextField.text!)
 //        print(passwordField.contentTextField.text!)
 //        
-//        validateLoginpageUrl()
+        validateLoginpageUrl()
     }
     
     @IBAction func registrationAction(_ sender: UIButton) {
@@ -66,17 +68,31 @@ class EBTLoginTVC: UITableViewController {
         self.tableView.estimatedRowHeight = 44
         
         ebtWebView.responder = self
-        
         HUD.allowsInteraction = true
         
+        // language selection
+        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        
+        reloadContent()
+        
+        loadLoginPage()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadContent()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-      //  loadLoginPage()
+//        loadLoginPage()
         // Stop listening notification
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
+        
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
         
     }
     
@@ -84,6 +100,8 @@ class EBTLoginTVC: UITableViewController {
         
         // Register to receive notification
         NotificationCenter.default.addObserver(self, selector: #selector(popToLoginVC), name: notificationName, object: nil)
+        
+        LanguageUtility.removeObserverForLanguageChange(self)
         
         super.viewDidDisappear(animated)
     }
@@ -93,6 +111,25 @@ class EBTLoginTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: -
+    
+    func languageButtonClicked() {
+        
+        self.showLanguageSelectionAlert()
+        
+    }
+    
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.updateBackButtonText()
+            
+        }
+
+        
+    }
     
     func popToLoginVC() {
         
@@ -158,9 +195,9 @@ class EBTLoginTVC: UITableViewController {
         
         actionType = ActionType.sumbit
         
-        let jsUserIdPassword = "$('#userId').val('\(userid)');$('#password').val('\(password)');$('#submit').click();"
+//        let jsUserIdPassword = "$('#userId').val('\(userid)');$('#password').val('\(password)');$(\"form[name='form1']\").submit();"
         
-//        let jsUserIdPassword = "$('#userId').val('\(userid)');$('#password').val('\(password)');validateCredentials();"
+        let jsUserIdPassword = "$('#userId').val('\(userid)');$('#password').val('\(password)');validateCredentials();"
       //  HUD.show(.progress)
         ebtWebView.webView.evaluateJavaScript(jsUserIdPassword) { (result, error) in
             
@@ -217,7 +254,7 @@ class EBTLoginTVC: UITableViewController {
                 } else {
                     print("====== SUCCESS =======")
                     
-                   // self.submitForm()
+                    self.submitForm()
                 }
             }
         }
@@ -229,9 +266,9 @@ class EBTLoginTVC: UITableViewController {
         
         // autofill
         
-        let jsSubmit = "$('#userId').val('\(userIdField.contentTextField.text!)');$('#password').val('\(passwordField.contentTextField.text!)');$('#submit').click();"
+//        let jsSubmit = "$('#userId').val('\(userIdField.contentTextField.text!)');$('#password').val('\(passwordField.contentTextField.text!)');$('#submit').click();"
 //        let jsSubmit = "$('#submit').click();"
-//        let jsSubmit = "void($('form')[1].submit())"
+        let jsSubmit = "$(\"form[name='form1']\").submit();"
         //void($('form')[1].submit())
         //  HUD.show(.progress)
         actionType = ActionType.sumbit

@@ -15,6 +15,8 @@
 "Spanish" = "Spanish";
 "Cancel" = "Cancel";
 
+"language.button.title" = "Español";
+
 //WelcomePageVc
 "Congratulations!" = "Congratulations!";
 "WelcomeText" = "Welcome to Snap2Save.Your registration is now complete.";

@@ -49,8 +49,7 @@ class func setRoundCornersToView(borderColor:UIColor,view:UIView,radius:CGFloat,
         return emailTest.evaluate(with: testStr)
     }
     
-  
-  
+    
 }
 
 extension UIColor {
@@ -132,12 +131,11 @@ extension UIViewController {
     
     func updateBackButtonText() {
         
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back".localized() , style: .plain, target: nil, action: nil)
     }
 }
 
 extension UINavigationItem {
-    
     
     func addBackButton(withTarge target: Any, action: Selector) {
         
@@ -159,39 +157,6 @@ extension UINavigationItem {
     
 }
 
-// MARK: - Language
-extension UIViewController {
-    
-    
-    func showLanguageSelectionAlert(){
-        let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        
-        let englishBtn = UIAlertAction.init(title: "English".localized(), style: .default, handler:{
-            (action) in
-            print("Selected English")
-            Localize.setCurrentLanguage("en")
-            
-        })
-        let spanishBtn = UIAlertAction.init(title: "Spanish".localized(), style: .default, handler:{ (action) in
-            print("Selected Spanish")
-            Localize.setCurrentLanguage("es")
-        })
-        let cancelBtn = UIAlertAction.init(title: "Cancel".localized(), style: .cancel, handler:{
-            (action) in
-            
-        })
-        
-        languageAlert.view.tintColor = APP_GRREN_COLOR
-        languageAlert .addAction(englishBtn)
-        languageAlert.addAction(spanishBtn)
-        languageAlert.addAction(cancelBtn)
-        
-        self.present(languageAlert, animated: true, completion:nil)
-    }
-    
-    
-}
 
 
 

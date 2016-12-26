@@ -11,6 +11,18 @@
 "WELCOME" = "fertrt....";
 "LOG IN" = "LOG erterte";
 "REGISTER" = "erter";
-"English" = "etert";
-"Spanish" = "ert";
-"Cancel" = "ert";
+"English" = "Inglés";
+"Spanish" = "Español";
+"Cancel" = "Cancelar";
+
+"Back" = "Espalda";
+
+"language.button.title" = "English";
+
+
+// EBT
+"User ID" = "Identificación De Usuario";
+"Password" = "Contraseña";
+"Remember my username" = "Recordar mi nombre de usuario";
+"Login" = "Iniciar sesión";
+"Registration" = "Registro";
