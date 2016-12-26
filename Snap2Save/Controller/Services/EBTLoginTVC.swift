@@ -31,16 +31,19 @@ class EBTLoginTVC: UITableViewController {
     @IBOutlet weak var passwordField: AIPlaceHolderTextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     
+    
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registrationButton: UIButton!
+    
+    @IBOutlet weak var remmeberMyUserNameLabel: UILabel!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     // Action
     @IBAction func loginAction(_ sender: UIButton) {
         
         self.view.endEditing(true)
         
-//        self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
-        
-//        print(userIdField.contentTextField.text!)
-//        print(passwordField.contentTextField.text!)
-//        
         validateLoginpageUrl()
     }
     
@@ -88,7 +91,7 @@ class EBTLoginTVC: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        loadLoginPage()
+        //        loadLoginPage()
         // Stop listening notification
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
         
@@ -127,13 +130,19 @@ class EBTLoginTVC: UITableViewController {
             self.updateBackButtonText()
             
         }
-
+        
         
     }
     
     func popToLoginVC() {
         
         _ = self.navigationController?.popToViewController(self, animated: true)
+        loadLoginPage()
+        userIdField.contentTextField.text = ""
+        passwordField.contentTextField.text = ""
+        errorMessageLabel.text = ""
+        loginButton.isEnabled = true
+        self.tableView.reloadData()
     }
     
     // MARK: - Table view
@@ -167,43 +176,70 @@ class EBTLoginTVC: UITableViewController {
         
         let jsGetPageUrl = "window.location.href"
         ebtWebView.webView.evaluateJavaScript(jsGetPageUrl) { (result, error) in
+            
             if error != nil {
                 print(error ?? "error nil")
             } else {
                 print(result ?? "result nil")
-                
                 let pageUrl = result as! String
-                
                 if pageUrl == "https://ucard.chase.com/chp" {
-                    
-                    self.autoFill(withUserId: self.userIdField.contentTextField.text!, password: self.passwordField.contentTextField.text!)
+                    self.autoFill(withUserId: self.userIdField.contentTextField.text!,
+                                  password: self.passwordField.contentTextField.text!)
                 } else {
                     print("page not loaded")
                 }
-                
             }
         }
     }
     
-    // validate fields
     // autofill fields
     func autoFill(withUserId userid:String, password:String) {
         
-        //$('#submit').click();
-        
-        // autofill
+        loginButton.isEnabled = false
+        activityIndicator.startAnimating()
         
         actionType = ActionType.sumbit
+        let jsUserID = "$('#userId').val('\(userid)');"
+        let jspassword = "$('#password').val('\(password)');"
+        let jsSubmit = "$('#submit').click();"
         
-//        let jsUserIdPassword = "$('#userId').val('\(userid)');$('#password').val('\(password)');$(\"form[name='form1']\").submit();"
-        
-        let jsUserIdPassword = "$('#userId').val('\(userid)');$('#password').val('\(password)');validateCredentials();"
-      //  HUD.show(.progress)
-        ebtWebView.webView.evaluateJavaScript(jsUserIdPassword) { (result, error) in
+        let javaScript = jsUserID + jspassword + jsSubmit
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
-            self.getErrorMessage()
+            self.checkForErrorMessage()
         }
     }
+    
+    func checkForErrorMessage() {
+        
+        let jsErrorMessage = "$('.errorTextLogin').text();"
+        
+        ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmedErrorMessage)
+                
+                if trimmedErrorMessage.characters.count > 0 {
+                    print("got error message")
+                    
+                    self.loginButton.isEnabled = true
+                    self.activityIndicator.stopAnimating()
+                    
+                    self.errorMessageLabel.text = trimmedErrorMessage
+                    self.tableView.reloadData()
+                    
+                } else {
+                    
+                    print("form is submitting..")
+                }
+            }
+        }
+    }
+
     
     // check status
     func validateSubmitAction() {
@@ -220,10 +256,10 @@ class EBTLoginTVC: UITableViewController {
                 
                 if pageTitle == "We don’t recognize the computer you’re using." {
                     
-//                    self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
-                    
+                    self.activityIndicator.stopAnimating()
+                    self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
                 } else {
-                    // fail
+                    
                     
                 }
                 
@@ -232,60 +268,7 @@ class EBTLoginTVC: UITableViewController {
         
     }
     
-    func getErrorMessage() {
-        // $(\".errorInvalidField\").text();
-        let jsErrorMessage = "$('.errorTextLogin').text();"
-        
-        ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
-            if error != nil {
-                print(error ?? "error nil")
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! String
-                let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedErrorMessage)
-
-                if trimmedErrorMessage.characters.count > 0 {
-                    print("====== FAIL =======")
-                    
-                    self.errorMessageLabel.text = trimmedErrorMessage
-                    self.tableView.reloadData()
-                    
-                } else {
-                    print("====== SUCCESS =======")
-                    
-                    self.submitForm()
-                }
-            }
-        }
-    }
-
-    func submitForm() {
-        
-        //$('#submit').click();
-        
-        // autofill
-        
-//        let jsSubmit = "$('#userId').val('\(userIdField.contentTextField.text!)');$('#password').val('\(passwordField.contentTextField.text!)');$('#submit').click();"
-//        let jsSubmit = "$('#submit').click();"
-        let jsSubmit = "$(\"form[name='form1']\").submit();"
-        //void($('form')[1].submit())
-        //  HUD.show(.progress)
-        actionType = ActionType.sumbit
-        ebtWebView.webView.evaluateJavaScript(jsSubmit) { (result, error) in
-            
-            if error != nil {
-                print(error ?? "error nil")
-            } else {
-                print(result!)
-            }
-        }
-    }
-
-   
     
-    // success action
-    // fail action
     
     
 }
@@ -300,14 +283,14 @@ extension EBTLoginTVC: EBTWebViewDelegate {
     
     func didSuccess() {
         
-      //  performSegue(withIdentifier: "CalenderInputVC", sender: nil)
+        //        performSegue(withIdentifier: "CalenderInputVC", sender: nil)
         
     }
     
     func didFinishLoadingWebView() {
         
-       // HUD.hide()
-         if actionType == .sumbit {
+        // HUD.hide()
+        if actionType == .sumbit {
             
             validateSubmitAction()
         }

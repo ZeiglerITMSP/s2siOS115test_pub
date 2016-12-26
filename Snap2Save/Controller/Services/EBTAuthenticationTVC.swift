@@ -87,11 +87,13 @@ class EBTAuthenticationTVC: UITableViewController {
         // autofill
         actionType = ActionType.sumbit
         
-        let jsAuthenticationCode = "$('#txtAuthenticationCode').val('\(authenticationCode)');validateAuthenticationCode();"
+        let jsAuthenticationCode = "$('#txtAuthenticationCode').val('\(authenticationCode)');"
+        let jsSubmit = "$('#okButton').click();"
+        let javaScript = jsAuthenticationCode + jsSubmit
 
-        ebtWebView.webView.evaluateJavaScript(jsAuthenticationCode) { (result, error) in
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
-            self.getErrorMessage()
+            self.checkForErrorMessage()
         }
     }
 
@@ -115,9 +117,9 @@ class EBTAuthenticationTVC: UITableViewController {
     
     
     
-    func getErrorMessage() {
-        // $(\".errorInvalidField\").text();
-        let jsErrorMessage = "$('.errorInvalidField').text();"
+    func checkForErrorMessage() {
+    
+        let jsErrorMessage = "$('#VallidationExcpMsg').text();"
         
         ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
             if error != nil {
@@ -129,15 +131,12 @@ class EBTAuthenticationTVC: UITableViewController {
                 print(trimmedErrorMessage)
                 
                 if trimmedErrorMessage.characters.count > 0 {
-                    print("====== FAIL =======")
                     
                     self.errorMessageLabel.text = trimmedErrorMessage
                     self.tableView.reloadData()
                     
                 } else {
-                    print("====== SUCCESS =======")
-                    
-                    // self.submitForm()
+                
                 }
             }
         }

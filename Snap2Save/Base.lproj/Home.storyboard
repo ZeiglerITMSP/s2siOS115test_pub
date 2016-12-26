@@ -328,11 +328,16 @@
                                                         <action selector="loginAction:" destination="1Ir-th-9tA" eventType="touchUpInside" id="wNh-hq-mai"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="De5-Mh-fbD">
+                                                    <rect key="frame" x="315" y="28" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="UlW-qM-MjE" secondAttribute="bottom" constant="2" id="600-Lz-vHt"/>
+                                                <constraint firstItem="De5-Mh-fbD" firstAttribute="leading" secondItem="UlW-qM-MjE" secondAttribute="trailing" constant="-40" id="VaX-Sg-dXD"/>
                                                 <constraint firstItem="UlW-qM-MjE" firstAttribute="top" secondItem="ppt-Qb-Dxa" secondAttribute="top" constant="18" id="WjO-t0-LcA"/>
                                                 <constraint firstAttribute="trailing" secondItem="UlW-qM-MjE" secondAttribute="trailing" constant="20" id="nIT-VJ-wXu"/>
+                                                <constraint firstItem="De5-Mh-fbD" firstAttribute="centerY" secondItem="UlW-qM-MjE" secondAttribute="centerY" id="tUw-7v-dcq"/>
                                                 <constraint firstItem="UlW-qM-MjE" firstAttribute="leading" secondItem="ppt-Qb-Dxa" secondAttribute="leading" constant="20" id="xcL-08-3nn"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -375,8 +380,12 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="activityIndicator" destination="De5-Mh-fbD" id="uIB-Et-vJV"/>
                         <outlet property="errorMessageLabel" destination="28r-5U-TsR" id="444-yX-Wo9"/>
+                        <outlet property="loginButton" destination="UlW-qM-MjE" id="mGG-Cd-FPb"/>
                         <outlet property="passwordField" destination="Um2-Bq-u0F" id="l0m-Tp-F70"/>
+                        <outlet property="registrationButton" destination="OKr-em-SLD" id="W7c-qw-U9p"/>
+                        <outlet property="remmeberMyUserNameLabel" destination="0fX-Yf-qAf" id="IIC-gV-AiF"/>
                         <outlet property="userIdField" destination="ehI-Dc-bH2" id="8OS-V8-ctC"/>
                         <segue destination="2mD-cw-ekd" kind="show" identifier="EBTAuthenticationTVC" id="tOY-Is-UR3"/>
                         <segue destination="Hjr-6T-QF7" kind="show" identifier="EBTCardNumberTVC" id="ViJ-dY-SB4"/>
