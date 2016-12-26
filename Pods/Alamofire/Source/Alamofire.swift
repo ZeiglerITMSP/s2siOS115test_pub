@@ -145,7 +145,22 @@ public func request(
         headers: headers
     )
 }
-
+public func postRequest(
+    _ url: URLConvertible,
+    method: HTTPMethod = .post,
+    parameters: Parameters? = nil,
+    encoding: ParameterEncoding = URLEncoding.default,
+    headers: HTTPHeaders? = nil)
+    -> DataRequest
+{
+    return SessionManager.default.request(
+        url,
+        method: method,
+        parameters: parameters,
+        encoding: encoding,
+        headers: headers
+    )
+}
 /// Creates a `DataRequest` using the default `SessionManager` to retrieve the contents of a URL based on the
 /// specified `urlRequest`.
 ///

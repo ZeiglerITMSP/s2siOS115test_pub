@@ -7,7 +7,8 @@
 //
 
 import UIKit
-//import Alamofire
+import Alamofire
+import SwiftyJSON
 
 class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScrollViewDelegate {
     
@@ -26,7 +27,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     
     @IBAction func loginButtonAction(_ sender: UIButton) {
-        
+        userLogin()
     }
     @IBAction func forgotPasswordButtonAction(_ sender: UIButton) {
         let forgotPasswordVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ForgotPasswordVC")
@@ -51,10 +52,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
         backButton.setTitle("Back", for: .normal)
         backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.7), for: .normal)
-       
+        
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-       // ratingButton.contentEdgeInsets = UIEdgeInsets
+        // ratingButton.contentEdgeInsets = UIEdgeInsets
         //UIEdgeInsetsMake(<#T##top: CGFloat##CGFloat#>, <#T##left: CGFloat##CGFloat#>, <#T##bottom: CGFloat##CGFloat#>, <#T##right: CGFloat##CGFloat#>)
         backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
         
@@ -75,14 +76,14 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = languageButton
         self.navigationItem.rightBarButtonItem = rightBarButton
-
+        
         mobileNumTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         mobileNumTextField.updateUIAsPerTextFieldType()
         mobileNumTextField.createBorder(borderColor: UIColor.white,xpos: 0)
         mobileNumTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         mobileNumTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         mobileNumTextField.text_Color =  UIColor.white
-
+        
         passwordTextField.textFieldType = AITextField.AITextFieldType.PasswordTextField
         passwordTextField.updateUIAsPerTextFieldType()
         passwordTextField.createBorder(borderColor: UIColor.white,xpos: 0)
@@ -100,8 +101,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         print("loginButton\(loginButton.frame)")
         print("width \(self.view.bounds.size.width)")
         print("height \(self.view.bounds.size.height)")
-
-
+        
+        
     }
     
     func animateWithKeyboard(notification: NSNotification) {
@@ -133,15 +134,15 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         }
         
     }
-
+    
     func languageButtonClicked(){
         
         self.showLanguageSelectionAlert()
-
+        
     }
     func backButtonAction(){
         
-       _ = self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -158,12 +159,12 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
         let lineView = UIView(frame: CGRect(x: 0, y: 44, width: SCREEN_WIDTH, height: 1))
         lineView.backgroundColor = UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.4)
-
+        
         self.navigationController?.navigationBar.addSubview(lineView)
-       // bgScrollView.contentSize = CGSize(width : 0, height:loginButton.frame.maxY+40)
-
+        // bgScrollView.contentSize = CGSize(width : 0, height:loginButton.frame.maxY+40)
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -173,7 +174,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         if textField == mobileNumTextField {
             passwordTextField.becomeFirstResponder()
         }
-       textField.resignFirstResponder()
+        textField.resignFirstResponder()
         
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -198,7 +199,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     func setNavigationBarImage(image:UIImage)
     {
         self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
-        
+      //  self.navigationController?.navigationBar.backgroundColor = UIColor.clear        // Set translucent. (Default value is already true, so this can be removed if desired.)
+ 
     }
     func setTransparentNavigationBar()
     {
@@ -206,15 +208,67 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    func userLogin(){
+        
+        let password = passwordTextField.text ?? ""
+        let mobileNumber = mobileNumTextField.text ?? ""
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        
+        let parameters = ["password": password,
+                          "phone_number": mobileNumber,
+                          "email":"test@gmail.com",
+                          "social_id":"",
+                          "platform":"1",
+                          "version":"1",
+                          "device_id": device_id,
+                          "push_token":"123123",
+                          "language":"en"
+            ] as [String : Any]
+        
+        print(parameters)
+        
+        let url = String(format: "%@api/logIn", hostUrl)
+        print(url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            
+            switch response.result {
+            case .success:
+                
+                let json = JSON(data: response.data!)
+                print("json response\(json)")
+                let alertMessage = json.stringValue
+                
+                //                DispatchQueue.main.async {
+                //                    _ = EZLoadingActivity.hide()
+                //                    self.showAlert(title: "", message: alertMessage)
+                //                    _ = self.navigationController?.popViewController(animated: true)
+                
+                
+                break
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    //  _ = EZLoadingActivity.hide()
+                }
+                print(error)
+                break
+            }
+            
+            
+        }
+        
+        
     }
-    */
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }

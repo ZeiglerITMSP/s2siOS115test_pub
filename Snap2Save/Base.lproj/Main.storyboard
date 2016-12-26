@@ -44,7 +44,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <visualEffectView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5Y-92-hRL">
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5Y-92-hRL">
                                 <rect key="frame" x="0.0" y="360.5" width="375" height="52"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bhI-Rz-HGL">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
@@ -1268,6 +1268,11 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
+                                                            <color key="value" cocoaTouchSystemColor="darkTextColor"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AGE GROUP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEg-te-wdS">
                                                     <rect key="frame" x="197.5" y="8" width="152.5" height="21"/>
@@ -1500,24 +1505,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZM-JC-uzn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2665" y="607"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Wvh-9x-PFm">
-            <objects>
-                <viewController id="z0Z-dh-W44" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="giu-ss-Jn8"/>
-                        <viewControllerLayoutGuide type="bottom" id="r8t-iR-C26"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PET-zM-HxT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ckK-l5-IZP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3660" y="1039.4302848575712"/>
         </scene>
         <!--Welcome PageVC-->
         <scene sceneID="dGv-uL-Qwn">

@@ -35,7 +35,7 @@ class func setRoundCornersToView(borderColor:UIColor,view:UIView,radius:CGFloat,
     
     class func validMobileNumber( mobileNumber : String) -> Bool{
         
-        if mobileNumber.characters.count > 0 && mobileNumber.characters.count > 10{
+        if  mobileNumber.characters.count == 10{
             return true
         }
         return false

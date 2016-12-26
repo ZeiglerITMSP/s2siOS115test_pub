@@ -56,12 +56,26 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
     
     @IBAction func continueButtonClicked(_ sender: UIButton) {
         
-        let userDetails : NSDictionary = ["phone_number":mobileNumTextField.text ?? "","password":passwordTextField.text ?? "","zipcode":zipCodeTextField.text ?? "","contact_preference":contactPreferenceSegmentControl.selectedSegmentIndex,"email":emailTextField.text ?? "","social_id":""];
+        if !isValidData(){
+            return
+        }
+        let userDetails:[String:Any] = ["phone_number":mobileNumTextField.text ?? "",
+                                        "password":passwordTextField.text ?? "",
+                                        "zipcode":zipCodeTextField.text ?? "",
+                                        "contact_preference":contactPreferenceSegmentControl.selectedSegmentIndex,
+                                        "email":emailTextField.text ?? "",
+                                        "social_id":""];
         
         let additionalSignUpVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignupAdditionalFieldsTVC") as! SignupAdditionalFieldsTVC
         additionalSignUpVc.userDetailsDict = userDetails
         self.navigationController?.show(additionalSignUpVc, sender: self)
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+            super.viewDidDisappear(animated)
+            self.view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -225,8 +239,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
         reEnterMobileNumTextField.updateUIAsPerTextFieldType()
         // reEnterMobileNumTextField.createBorder(borderColor:APP_LINE_COLOR,xpos: 0)
         reEnterMobileNumTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
-        reEnterMobileNumTextField.placeHolderLabel = reEnterPasswordLabel
-        
+        reEnterMobileNumTextField.placeHolderLabel = reEnterMobileNumLabel
         reEnterMobileNumTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         reEnterMobileNumTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         reEnterMobileNumTextField.text_Color =  UIColor.black
@@ -425,26 +438,42 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
      // Pass the selected object to the new view controller.
      }
      */
-    func isValidData(){
+    func isValidData() -> Bool{
         if AppHelper.validMobileNumber(mobileNumber: mobileNumTextField.text!){
-            showAlert(title: "", message: "Please reEnter your PhoneNumber")
+            showAlert(title: "", message: "Please enter 10 digit PhoneNumber")
+            return false
         }
-        else if reEnterMobileNumTextField.text?.characters.count == 0 {
-            showAlert(title: "", message: "Please reEnter your PhoneNumber")
+        else if reEnterMobileNumTextField.text != mobileNumTextField.text {
+            showAlert(title: "", message: "PhoneNumbers doesn't match")
+            return false
         }
-       else if reEnterEmailTextField.text != emailTextField.text{
-            showAlert(title: "", message: "Emails doesn't match")
+           
+        else if (passwordTextField.text?.characters.count)! < 6 {
+            showAlert(title: "", message: "Please enter Password")
+            return false
         }
-        else if passwordTextField.text != reEnterPasswordTextField.text{
+        else if reEnterPasswordTextField.text != passwordTextField.text{
             showAlert(title: "", message: "Password doesn't match")
+            return false
         }
         else if zipCodeTextField.text?.characters.count == 0{
             showAlert(title: "", message: "Please enter ZipCode")
+            return false
         }
-//        if !AppHelper.isValidEmail(testStr: emailTextField.text!) || (emailTextField.text?.isEmpty)!
-//        {
-//            showAlert(title: "", message: "Enter a valid email")
-//        }
+        else if (emailTextField.text?.characters.count)! > 0 {
+            if !AppHelper.isValidEmail(testStr: emailTextField.text!){
+                showAlert(title: "", message: "Enter a valid email")
+                return false
+            }
+        }
+        
+        else if reEnterEmailTextField.text != emailTextField.text{
+            showAlert(title: "", message: "Emails doesn't match")
+            return false
+        }
 
+        return true
     }
+    
+
 }
