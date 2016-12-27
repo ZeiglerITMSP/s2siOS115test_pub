@@ -157,41 +157,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
     
     func loadTextFields(){
         
-        //        let main_string = "10-DIGIT CELL PHONE NUMBER *".localized
-        //        let string_to_color = "*"
-        //        let range = (main_string as NSString).range(of: string_to_color)
-        //        let attribute = NSMutableAttributedString.init(string: main_string)
-        //        attribute.addAttribute(NSForegroundColorAttributeName, value: APP_ORANGE_COLOR , range: range)
-        //        mobileNumLabel.attributedText = attribute
-        //
-        //        let reEnterMob = "RE-ENTER 10-DIGIT CELL PHONE NUMBER *".localized
-        //        //let string_to_color = "*"
-        //        let mobRange = (reEnterMob as NSString).range(of: string_to_color)
-        //        let reEnterMobAttr = NSMutableAttributedString.init(string: reEnterMob)
-        //        reEnterMobAttr.addAttribute(NSForegroundColorAttributeName, value: APP_ORANGE_COLOR , range: mobRange)
-        //        reEnterMobileNumLabel.attributedText = reEnterMobAttr
-        //
-        //        let passwordStr = "PASSWORD (MUST BE AT LEAST 6 CHARACTERS) *".localized
-        //        //let string_to_color = "*"
-        //        let passwordRange = (passwordStr as NSString).range(of: string_to_color)
-        //        let  passWordRangeStrAttr = NSMutableAttributedString.init(string: passwordStr)
-        //        passWordRangeStrAttr.addAttribute(NSForegroundColorAttributeName, value: APP_ORANGE_COLOR , range: passwordRange)
-        //        passwordLabel.attributedText = passWordRangeStrAttr
-        //
-        //        let reEnterPasswdStr = "RE-ENTER PASSWORD *".localized
-        //        //let string_to_color = "*"
-        //        let reEnterPasswdStrRange = (reEnterPasswdStr as NSString).range(of: string_to_color)
-        //        let reEnterPasswdStrAttribute = NSMutableAttributedString.init(string: reEnterPasswdStr)
-        //        reEnterPasswdStrAttribute.addAttribute(NSForegroundColorAttributeName, value: APP_ORANGE_COLOR , range: reEnterPasswdStrRange)
-        //        reEnterPasswordLabel.attributedText = reEnterPasswdStrAttribute
-        //
-        //        let zipCodeStr = "ZIP CODE *".localized
-        //       // let string_to_color = "*"
-        //        let zipCodeStrRange = (zipCodeStr as NSString).range(of: string_to_color)
-        //        let zipCodeStrAttribute = NSMutableAttributedString.init(string: zipCodeStr)
-        //        zipCodeStrAttribute.addAttribute(NSForegroundColorAttributeName, value: APP_ORANGE_COLOR , range: zipCodeStrRange)
-        //        zipCodeLabel.attributedText = zipCodeStrAttribute
-        //
+             //
         //        let contactStr = "Contact Preference *".localized
         //       // let string_to_color = "*"
         //        let contactStrRange = (contactStr as NSString).range(of: string_to_color)
@@ -439,7 +405,8 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
      }
      */
     func isValidData() -> Bool{
-        if AppHelper.validMobileNumber(mobileNumber: mobileNumTextField.text!){
+        let validMobileNum = AppHelper.validMobileNumber(mobileNumber: mobileNumTextField.text!)
+        if mobileNumTextField.text?.characters.count == 0 || validMobileNum == false {
             showAlert(title: "", message: "Please enter 10 digit PhoneNumber")
             return false
         }
@@ -461,7 +428,8 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
             return false
         }
         else if (emailTextField.text?.characters.count)! > 0 {
-            if !AppHelper.isValidEmail(testStr: emailTextField.text!){
+            let validEmail = AppHelper.isValidEmail(testStr: emailTextField.text!)
+            if  validEmail == false{
                 showAlert(title: "", message: "Enter a valid email")
                 return false
             }

@@ -19,7 +19,9 @@ class WelcomePageVC: UIViewController {
     
     @IBAction func getStartedButtonAction(_ sender: UIButton) {
         
-        
+        let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+        self.navigationController?.show(loginVc, sender: self)
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()

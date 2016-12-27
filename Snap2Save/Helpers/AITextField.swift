@@ -13,7 +13,7 @@ import UIKit
     
     @objc optional func keyBoardHidden(textField:UITextField)
     @objc optional func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    @objc optional func getSelectedIndexFromPicker(selectedIndex : NSInteger)
+    @objc optional func getSelectedIndexFromPicker(selectedIndex : NSInteger,textField:AITextField)
 }
 class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource
 {
@@ -276,7 +276,9 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
         let selectedOption:String = self.pickerViewArray?.object(at: (self.picker?.selectedRow(inComponent: 0))!) as! String
         self.text = selectedOption
         self.selectedTextInPicker = selectedOption
-        aiDelegate?.getSelectedIndexFromPicker!(selectedIndex: (self.picker?.selectedRow(inComponent: 0))!)
+      //  aiDelegate?.getSelectedIndexFromPicker!(selectedIndex: (self.picker?.selectedRow(inComponent: 0))!)
+        
+        aiDelegate?.getSelectedIndexFromPicker!(selectedIndex:(self.picker?.selectedRow(inComponent: 0))! , textField: self)
 
     }
     func setSelectedCountryTexttoTextField()
@@ -367,7 +369,4 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
         return NSAttributedString(string: selectedOption as String, attributes: nil)
     }
     
-    func getSelectedIndexFromPicker() -> NSInteger{
-        return 0
-    }
 }
