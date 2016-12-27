@@ -12,6 +12,8 @@ import SwiftyJSON
 
 class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScrollViewDelegate {
     
+    var blueNavBarImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
+
     @IBOutlet var bgContainerView: UIView!
     @IBOutlet var bgScrollView: UIScrollView!
     @IBOutlet var FbLoginBgView: UIView!
@@ -27,7 +29,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     
     @IBAction func loginButtonAction(_ sender: UIButton) {
-        userLogin()
+        if !isValid(){
+            return
+        }
+            userLogin()
     }
     @IBAction func forgotPasswordButtonAction(_ sender: UIButton) {
         let forgotPasswordVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ForgotPasswordVC")
@@ -98,11 +103,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
         NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        print("loginButton\(loginButton.frame)")
-        print("width \(self.view.bounds.size.width)")
-        print("height \(self.view.bounds.size.height)")
         
-        
+        bgScrollView.delegate = self
     }
     
     func animateWithKeyboard(notification: NSNotification) {
@@ -189,7 +191,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         ////print("scrollViewDidScroll \(scrollView.contentOffset)")
         if scrollView.contentOffset.y > 0.0
         {
-            //self.setNavigationBarImage(image: blueNavBarImg)
+            self.setNavigationBarImage(image: blueNavBarImg)
         }
         else
         {
@@ -199,7 +201,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     func setNavigationBarImage(image:UIImage)
     {
         self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
-      //  self.navigationController?.navigationBar.backgroundColor = UIColor.clear        // Set translucent. (Default value is already true, so this can be removed if desired.)
+        //self.navigationController?.navigationBar.backgroundColor = UIColor.clear
  
     }
     func setTransparentNavigationBar()
@@ -216,35 +218,48 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let mobileNumber = mobileNumTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         
-        let parameters = ["password": password,
-                          "phone_number": mobileNumber,
-                          "email":"test@gmail.com",
+        let parameters = ["username": mobileNumber,
+                          "password": password,
                           "social_id":"",
                           "platform":"1",
-                          "version":"1",
+                          "version_code": "1",
+                          "version_name": "1",
                           "device_id": device_id,
                           "push_token":"123123",
                           "language":"en"
             ] as [String : Any]
         
+
         print(parameters)
         
-        let url = String(format: "%@api/logIn", hostUrl)
+        let url = String(format: "%@/logIn", hostUrl)
         print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             switch response.result {
             case .success:
-                
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
-                let alertMessage = json.stringValue
+                let responseDict = json.dictionaryObject
                 
-                //                DispatchQueue.main.async {
-                //                    _ = EZLoadingActivity.hide()
-                //                    self.showAlert(title: "", message: alertMessage)
-                //                    _ = self.navigationController?.popViewController(animated: true)
-                
+                if let auth_token = responseDict?["auth_token"] as? String {
+                    UserDefaults.standard.set(auth_token, forKey: AUTH_TOKEN)
+                    
+                    if let userDict = responseDict?["user"] as? [String:Any] {
+                        let user_id = userDict["id"]
+                        UserDefaults.standard.set(user_id, forKey: USER_ID)
+                    }
+                    
+                    
+                    self.presentHome()
+
+                } else {
+                    
+                    if let responseDict = json.dictionaryObject {
+                        let alertMessage = responseDict["message"] as! String
+                        self.showAlert(title: "", message: alertMessage)
+                    }
+                }
                 
                 break
                 
@@ -271,4 +286,23 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
      // Pass the selected object to the new view controller.
      }
      */
+    
+    func presentHome() {
+        self.performSegue(withIdentifier: "HomeStoryboard", sender: self)
+    }
+    
+    func isValid() -> Bool{
+        let validNum = AppHelper.validate(value: mobileNumTextField.text!)
+        
+        if ((mobileNumTextField.text?.characters.count)! == 0 || validNum == false ){
+            showAlert(title: "", message: "Please enter 10 digit PhoneNumber")
+            return false
+        }
+        else if passwordTextField.text?.characters.count == 0{
+            self.showAlert(title: "", message: "Please enter Password")
+            return false
+        }
+        return true
+    }
+    
 }

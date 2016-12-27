@@ -9,14 +9,28 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Localize_Swift
 
 class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITextFieldProtocol{
+    
+    
+    enum DropDownTags:Int {
+        case states = 100
+        case gender
+        case ageGroup
+        case ethnicity
+    }
+    
     
     var userDetailsDict:[String: Any]!
     var ageGroupArray : NSMutableArray!
     var statesArray : NSMutableArray!
     var ethnicityArray : NSMutableArray!
     var genderArray : NSMutableArray!
+    var selectedStateIndex : NSInteger!
+    var selectedGenderIndex : NSInteger!
+    var selectedAgeGroupIndex : NSInteger!
+    var SelectedEthnicityIndex : NSInteger!
     
     @IBOutlet var earn200PointsLabel: UILabel!
     
@@ -153,6 +167,12 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
 
     func loadTextFields(){
         
+        stateTextField.tag = 100
+        genderTextField.tag = 101
+        ageGroupTextField.tag = 102
+        ethnicityTextField.tag = 103
+        
+        
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: registerButton, radius: 2.0, width: 1.0)
         firstNameTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         firstNameTextField.updateUIAsPerTextFieldType()
@@ -238,7 +258,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         cityTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         cityTextField.updateUIAsPerTextFieldType()
         cityTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
-        cityTextField.placeHolderLabel = referralCodeLabel
+        cityTextField.placeHolderLabel = cityLabel
         //        mobileNumTextField.createBorder(borderColor: UIColor.red,xpos: 0)
         cityTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         cityTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
@@ -247,7 +267,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         stateTextField.textFieldType = AITextField.AITextFieldType.TextPickerTextField
         stateTextField.updateUIAsPerTextFieldType()
         stateTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
-        stateTextField.placeHolderLabel = referralCodeLabel
+        stateTextField.placeHolderLabel = stateLabel
         //        mobileNumTextField.createBorder(borderColor: UIColor.red,xpos: 0)
         stateTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         stateTextField.setRightGap(width: 10, placeHolderImage:UIImage.init(named: "ic_downarrow_input")!)
@@ -256,7 +276,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         zipCodeTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         zipCodeTextField.updateUIAsPerTextFieldType()
         zipCodeTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
-        zipCodeTextField.placeHolderLabel = referralCodeLabel
+        zipCodeTextField.placeHolderLabel = zipCodeLabel
         //        mobileNumTextField.createBorder(borderColor: UIColor.red,xpos: 0)
         zipCodeTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         zipCodeTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
@@ -288,14 +308,24 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         genderArray = ["Male","Female"];
         ageGroupArray = ["16-25","26-35","36-45","46-55","56+"]
         ethnicityArray = ["1","2"]
-        statesArray = ["Colorado","NewYork"]
         
         genderTextField.pickerViewArray = genderArray
         ageGroupTextField.pickerViewArray = ageGroupArray
         ethnicityTextField.pickerViewArray = ethnicityArray
+        
+        
+        var statesDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "USStateAbbreviations", ofType: "plist") {
+            statesDict = NSDictionary(contentsOfFile: path)
+        }
+        
+        let states = statesDict?.allKeys as! [String]
+        statesArray = NSMutableArray()
+        for state in states {
+            statesArray.add(state)
+        }
+        
         stateTextField.pickerViewArray = statesArray
-
-
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -379,9 +409,13 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let email = userDetailsDict["email"] as! String
         let zipcode = userDetailsDict["zipcode"] as! String
         let social_id = userDetailsDict["social_id"] as! String 
-        let contact_preference = userDetailsDict["contact_preference"]
-        
-       // let contact_preference =  String(describing: userDetailsDict["contact_preference"])
+        let contactPrefernce: Int = userDetailsDict["contact_preference"] as! Int
+        var contact_preference = "1"
+        if contactPrefernce == 0 {
+            contact_preference = "1"
+        } else{
+                contact_preference = "2"
+        }
 
         let first_name = firstNameTextField.text ?? ""
         let last_name = lastNameTextField.text ?? ""
@@ -389,10 +423,10 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let address_line2 = addressLine2TextField.text ?? ""
         let city = cityTextField.text ?? ""
         let state = stateTextField.text ?? ""
-        let gender = genderTextField.text ?? ""
-        let age_group = ageGroupTextField.text ?? ""
+        let gender: String =  String.init(format: "%d", selectedGenderIndex)
+        let age_group : String = String.init(format: "%d", selectedAgeGroupIndex)
         let referral_code = referralCodeTextField.text ?? ""
-        let ethnicity = ethnicityTextField.text ?? ""
+        let ethnicity : String = String.init(format: "%d", SelectedEthnicityIndex)
         let platform = "1"
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let push_token = "123213"
@@ -403,7 +437,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                           "email" : email,
                           "zipcode": zipcode,
                           "social_id":social_id,
-                          "contact_preference": "1",
+                          "contact_preference": contact_preference,
                           "first_name": first_name,
                           "last_name": last_name,
                           "address_line1": address_line1,
@@ -415,31 +449,36 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                           "referral_code": referral_code,
                           "ethnicity": ethnicity,
                           "platform": platform,
-                          "version": "1",
+                          "version_code":"1",
+                          "version_name":"1",
                           "device_id": device_id,
                           "push_token": push_token,
-                          "language": language
+                          "language": language,
+                          "signup_type": "1"
         ] as [String : Any]
         
         print(parameters)
 
        
-        let url = String(format: "%@api/signUp", hostUrl)
+        let url = String(format: "%@/signUp", hostUrl)
         print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             switch response.result {
             case .success:
-                
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
-                let alertMessage = json.stringValue
                 
-//                DispatchQueue.main.async {
-//                    _ = EZLoadingActivity.hide()
-//                    self.showAlert(title: "", message: alertMessage)
-//                    _ = self.navigationController?.popViewController(animated: true)
-                
+                if (json.dictionary != nil){
+                    let jsonDict = json
+                   // let codeVal : NSDictionary = (jsonDict as? NSDictionary)!
+                    
+                    if let responseDict = json.dictionaryObject {
+                        let alertMessage = responseDict["message"] as! String
+                        self.showAlert(title: "", message: alertMessage)
+                    }
+                    
+                }
             
                 break
             
@@ -458,10 +497,35 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
 
     }
     
-    
-    func getSelectedIndexFromPicker(selectedIndex: NSInteger) {
+    func getSelectedIndexFromPicker(selectedIndex: NSInteger, textField: AITextField) {
         let index = selectedIndex
         print("Index\(index)")
+        if (textField.tag == DropDownTags.states.rawValue) {
+            selectedStateIndex = index
+        }
+        else if textField.tag == DropDownTags.gender.rawValue{
+            selectedGenderIndex = index+1
+        }
+        else if textField.tag == DropDownTags.ageGroup.rawValue{
+            selectedAgeGroupIndex = index+1
+        }
+        else if textField.tag == DropDownTags.ethnicity.rawValue{
+            SelectedEthnicityIndex = index+1
+        }
+    }
+    
+    func showSignUpAlert(){
+        
+        let signUpAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        let englishBtn = UIAlertAction.init(title: "Thank you for joining Snap2Save!".localized(), style: .default, handler:{
+            (action) in
+            print("Selected English")
+        })
+        signUpAlert.view.tintColor = APP_GRREN_COLOR
+        signUpAlert .addAction(englishBtn)
+        
+        self.present(signUpAlert, animated: true, completion:nil)
+
     }
     
 }
