@@ -22,6 +22,7 @@ class EBTLoginTVC: UITableViewController {
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
+    let notificationName = Notification.Name("POPTOLOGIN")
     
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
@@ -33,10 +34,12 @@ class EBTLoginTVC: UITableViewController {
         
         self.view.endEditing(true)
         
-        print(userIdField.contentTextField.text!)
-        print(passwordField.contentTextField.text!)
+        self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
         
-        validateLoginpageUrl()
+//        print(userIdField.contentTextField.text!)
+//        print(passwordField.contentTextField.text!)
+//        
+//        validateLoginpageUrl()
     }
     
     @IBAction func registrationAction(_ sender: UIButton) {
@@ -71,12 +74,29 @@ class EBTLoginTVC: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        loadLoginPage()
+      //  loadLoginPage()
+        // Stop listening notification
+        NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        // Register to receive notification
+        NotificationCenter.default.addObserver(self, selector: #selector(popToLoginVC), name: notificationName, object: nil)
+        
+        super.viewDidDisappear(animated)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func popToLoginVC() {
+        
+        _ = self.navigationController?.popToViewController(self, animated: true)
     }
     
     // MARK: - Table view
@@ -163,7 +183,7 @@ class EBTLoginTVC: UITableViewController {
                 
                 if pageTitle == "We don’t recognize the computer you’re using." {
                     
-                    self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
+//                    self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
                     
                 } else {
                     // fail

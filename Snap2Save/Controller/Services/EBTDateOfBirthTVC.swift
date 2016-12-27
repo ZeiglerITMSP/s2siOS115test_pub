@@ -24,16 +24,14 @@ class EBTDateOfBirthTVC: UITableViewController {
         performSegue(withIdentifier: "EBTSelectPinTVC", sender: nil)
     }
     
-    @IBAction func cancelAction(_ sender: UIButton) {
-        
-        
-    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        updateBackButtonText()
+        // Back Action
+        self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
+        
         
         self.dobField.contentTextField.textFieldType = .DatePickerTextField
         self.dobField.contentTextField.dateFormatString = "mm/dd/yyyy"
@@ -47,7 +45,21 @@ class EBTDateOfBirthTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-   
+    
+    func backAction() {
+
+        showAlert(title: "Are you sure ?", message: "The registration process will be cancelled.", action: #selector(cancelProcess))
+    }
+    
+    func cancelProcess() {
+        
+        // Define identifier
+        let notificationName = Notification.Name("POPTOLOGIN")
+        // Post notification
+        NotificationCenter.default.post(name: notificationName, object: nil)
+    }
+    
+
 }
 
 

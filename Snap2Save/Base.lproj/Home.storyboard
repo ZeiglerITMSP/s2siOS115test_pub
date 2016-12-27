@@ -201,7 +201,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28r-5U-TsR">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28r-5U-TsR">
                                                     <rect key="frame" x="8" y="8" width="359" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -233,6 +233,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="User ID"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -262,6 +263,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Password"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -275,8 +277,40 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="5wb-Zw-Xl3">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="U5U-7c-z3C">
                                         <rect key="frame" x="0.0" y="240" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U5U-7c-z3C" id="dln-af-UTt">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yk0-6L-p9n">
+                                                    <rect key="frame" x="26" y="19" width="22" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="22" id="pSY-Qf-DLM"/>
+                                                        <constraint firstAttribute="width" constant="22" id="x0R-wD-RHi"/>
+                                                    </constraints>
+                                                    <state key="normal" image="check_on"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember my username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fX-Yf-qAf">
+                                                    <rect key="frame" x="61" y="23" width="140.5" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="0fX-Yf-qAf" firstAttribute="centerY" secondItem="yk0-6L-p9n" secondAttribute="centerY" id="ADI-AW-tly"/>
+                                                <constraint firstItem="yk0-6L-p9n" firstAttribute="leading" secondItem="dln-af-UTt" secondAttribute="leading" constant="26" id="EVG-aw-HyJ"/>
+                                                <constraint firstItem="yk0-6L-p9n" firstAttribute="centerY" secondItem="dln-af-UTt" secondAttribute="centerY" id="XUl-OM-ayb"/>
+                                                <constraint firstItem="0fX-Yf-qAf" firstAttribute="leading" secondItem="yk0-6L-p9n" secondAttribute="trailing" constant="13" id="eWl-48-Bhv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="5wb-Zw-Xl3">
+                                        <rect key="frame" x="0.0" y="300" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5wb-Zw-Xl3" id="ppt-Qb-Dxa">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -284,7 +318,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UlW-qM-MjE">
                                                     <rect key="frame" x="20" y="18" width="335" height="40"/>
-                                                    <color key="backgroundColor" red="0.90980392156862744" green="0.49411764705882355" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="2AM-Kj-kRa"/>
                                                     </constraints>
@@ -305,7 +339,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="cAN-RQ-TiI">
-                                        <rect key="frame" x="0.0" y="300" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="360" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cAN-RQ-TiI" id="ySB-hv-hyD">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -313,13 +347,11 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKr-em-SLD">
                                                     <rect key="frame" x="20" y="18" width="335" height="40"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.3294117647" green="0.74509803919999995" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="bvh-cq-Nrd"/>
                                                     </constraints>
-                                                    <state key="normal" title="Registration">
-                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
-                                                    </state>
+                                                    <state key="normal" title="Registration"/>
                                                     <connections>
                                                         <action selector="registrationAction:" destination="1Ir-th-9tA" eventType="touchUpInside" id="p4p-Fy-5Mg"/>
                                                     </connections>
@@ -352,7 +384,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fk0-5I-VkB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="468" y="1085"/>
+            <point key="canvasLocation" x="468" y="1084.4077961019491"/>
         </scene>
         <!--PreferencesTVC-->
         <scene sceneID="7Wk-Tb-Pgy">
@@ -463,7 +495,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="OFFERS" id="TKB-Bc-gsy"/>
+                    <tabBarItem key="tabBarItem" title="OFFERS" image="tabbarOffersInactive" id="TKB-Bc-gsy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qlu-Wl-qkm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -527,7 +559,7 @@
         <scene sceneID="q4i-mi-P6r">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hvU-s9-CbF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="ACCOUNT" id="ztZ-bL-cSV"/>
+                    <tabBarItem key="tabBarItem" title="ACCOUNT" image="tabbarAccountActive" selectedImage="tabbarAccountActive" id="ztZ-bL-cSV"/>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="8bh-wb-wO1">
@@ -605,7 +637,7 @@
         <scene sceneID="jTO-xw-hsB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="owa-1n-xbu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="SERVICES" id="sdH-xJ-ytH"/>
+                    <tabBarItem key="tabBarItem" title="SERVICES" image="tabbarServicesInactive" id="sdH-xJ-ytH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0HH-Oa-rMg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -642,7 +674,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tl8-U3-bXL">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tl8-U3-bXL">
                                                     <rect key="frame" x="8" y="8" width="359" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -674,6 +706,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Authentication Code"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -725,7 +758,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZA-nc-lir">
                                                     <rect key="frame" x="20" y="18" width="335" height="40"/>
-                                                    <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.3294117647" green="0.74509803919999995" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="7zG-1s-t4O"/>
                                                     </constraints>
@@ -780,7 +813,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your current card number." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otU-7k-02g">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your current card number." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otU-7k-02g">
                                                     <rect key="frame" x="8" y="8" width="359" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -812,6 +845,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Card Number"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -854,35 +888,6 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="r2Y-HG-Ajt">
-                                        <rect key="frame" x="0.0" y="224" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r2Y-HG-Ajt" id="Wdw-vp-AuV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ead-hW-hOY">
-                                                    <rect key="frame" x="20" y="18" width="335" height="40"/>
-                                                    <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="M4h-fk-tgA"/>
-                                                    </constraints>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Cancel"/>
-                                                    <connections>
-                                                        <action selector="cancelAction:" destination="Hjr-6T-QF7" eventType="touchUpInside" id="jeI-zv-ZDp"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ead-hW-hOY" firstAttribute="leading" secondItem="Wdw-vp-AuV" secondAttribute="leading" constant="20" id="8O9-fU-h7u"/>
-                                                <constraint firstAttribute="bottom" secondItem="ead-hW-hOY" secondAttribute="bottom" constant="2" id="BBv-Db-NdQ"/>
-                                                <constraint firstItem="ead-hW-hOY" firstAttribute="top" secondItem="Wdw-vp-AuV" secondAttribute="top" constant="18" id="K7Q-4H-saK"/>
-                                                <constraint firstAttribute="trailing" secondItem="ead-hW-hOY" secondAttribute="trailing" constant="20" id="xtb-Z2-AWa"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -919,7 +924,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 1: Please provide the following information to validate your identity." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RS5-Wm-AU3">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 1: Please provide the following information to validate your identity." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RS5-Wm-AU3">
                                                     <rect key="frame" x="8" y="8" width="359" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -951,6 +956,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="What is your date of birth? (mm/dd/yyyy)"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -980,6 +986,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="What is your Social Security Number?"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1022,35 +1029,6 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Af4-fl-4cy">
-                                        <rect key="frame" x="0.0" y="300" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Af4-fl-4cy" id="j4J-Qs-z4z">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ou5-ZI-VAF">
-                                                    <rect key="frame" x="20" y="18" width="335" height="40"/>
-                                                    <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="DjY-08-BDn"/>
-                                                    </constraints>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Cancel"/>
-                                                    <connections>
-                                                        <action selector="cancelAction:" destination="MJg-Gu-TKy" eventType="touchUpInside" id="toZ-6s-nxy"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Ou5-ZI-VAF" secondAttribute="trailing" constant="20" id="6dx-la-2us"/>
-                                                <constraint firstItem="Ou5-ZI-VAF" firstAttribute="leading" secondItem="j4J-Qs-z4z" secondAttribute="leading" constant="20" id="Fe3-Pm-rEA"/>
-                                                <constraint firstAttribute="bottom" secondItem="Ou5-ZI-VAF" secondAttribute="bottom" constant="2" id="iGD-iQ-Tpd"/>
-                                                <constraint firstItem="Ou5-ZI-VAF" firstAttribute="top" secondItem="j4J-Qs-z4z" secondAttribute="top" constant="18" id="iKd-fL-Tn1"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1088,7 +1066,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 2: Select PIN" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzG-hb-NAf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 2: Select PIN" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzG-hb-NAf">
                                                     <rect key="frame" x="8" y="8" width="359" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1120,6 +1098,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="PIN"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1149,6 +1128,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Confirm PIN"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1200,7 +1180,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cqF-K9-bbg">
                                                     <rect key="frame" x="20" y="18" width="335" height="40"/>
-                                                    <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.3294117647" green="0.74509803919999995" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="17j-E0-k27"/>
                                                     </constraints>
@@ -1257,7 +1237,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 3: Please enter the following user information" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gd6-KK-Vep">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 3: Please enter the following user information" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gd6-KK-Vep">
                                                     <rect key="frame" x="8" y="8" width="359" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1289,6 +1269,8 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="User ID"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="showInfoButton" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1318,6 +1300,8 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Password"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="showInfoButton" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1347,6 +1331,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Confirm New Password"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1376,6 +1361,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Email Address"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1405,6 +1391,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Comfirm Email Address"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1434,6 +1421,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Phone Number"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1464,6 +1452,7 @@
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Question 1"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderTextField" value="Please select a question"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1493,6 +1482,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Answer 1"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1523,6 +1513,7 @@
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Question 2"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderTextField" value="Please select a question"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1552,6 +1543,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Answer 2"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1582,6 +1574,7 @@
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Question 3"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderTextField" value="Please select a question"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1611,6 +1604,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Answer 3"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1649,35 +1643,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="gJP-N0-29e" secondAttribute="trailing" constant="20" id="JUh-JJ-5sz"/>
                                                 <constraint firstItem="gJP-N0-29e" firstAttribute="top" secondItem="SGN-zj-rru" secondAttribute="top" constant="18" id="aSD-en-z38"/>
                                                 <constraint firstItem="gJP-N0-29e" firstAttribute="leading" secondItem="SGN-zj-rru" secondAttribute="leading" constant="20" id="mgf-ie-Hnk"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="O06-6B-GCA">
-                                        <rect key="frame" x="0.0" y="1060" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O06-6B-GCA" id="iCd-Q1-ZHt">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rEQ-NV-wgR">
-                                                    <rect key="frame" x="20" y="18" width="335" height="40"/>
-                                                    <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="Q7P-vP-Sgg"/>
-                                                    </constraints>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Cancel"/>
-                                                    <connections>
-                                                        <action selector="cancelAction:" destination="HwX-iY-C9v" eventType="touchUpInside" id="pgh-MD-hJm"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="rEQ-NV-wgR" firstAttribute="top" secondItem="iCd-Q1-ZHt" secondAttribute="top" constant="18" id="RzG-Df-stY"/>
-                                                <constraint firstAttribute="bottom" secondItem="rEQ-NV-wgR" secondAttribute="bottom" constant="2" id="ZQ5-iW-FLr"/>
-                                                <constraint firstItem="rEQ-NV-wgR" firstAttribute="leading" secondItem="iCd-Q1-ZHt" secondAttribute="leading" constant="20" id="f5t-sT-1Yo"/>
-                                                <constraint firstAttribute="trailing" secondItem="rEQ-NV-wgR" secondAttribute="trailing" constant="20" id="m2w-bl-pKp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1731,7 +1696,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 5: Registration Complete" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnq-WX-cka">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 5: Registration Complete" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnq-WX-cka">
                                                     <rect key="frame" x="8" y="8" width="359" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1763,6 +1728,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter Email validation code"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1784,10 +1750,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s38-RL-DYZ">
-                                                    <rect key="frame" x="20" y="18" width="335" height="40"/>
+                                                    <rect key="frame" x="20" y="18" width="106.5" height="40"/>
                                                     <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="6Bx-i0-jRm"/>
+                                                        <constraint firstAttribute="height" constant="40" id="1mZ-h1-o59"/>
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Validate"/>
@@ -1795,58 +1761,18 @@
                                                         <action selector="validateAction:" destination="ibf-uI-hCF" eventType="touchUpInside" id="HZH-ta-FvZ"/>
                                                     </connections>
                                                 </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="s38-RL-DYZ" secondAttribute="trailing" constant="20" id="Doh-jG-Pgs"/>
-                                                <constraint firstAttribute="bottom" secondItem="s38-RL-DYZ" secondAttribute="bottom" constant="2" id="JKM-DX-7E6"/>
-                                                <constraint firstItem="s38-RL-DYZ" firstAttribute="leading" secondItem="omx-pN-itM" secondAttribute="leading" constant="20" id="jiE-od-soI"/>
-                                                <constraint firstItem="s38-RL-DYZ" firstAttribute="top" secondItem="omx-pN-itM" secondAttribute="top" constant="18" id="kpi-5e-PEW"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Z15-q6-RDu">
-                                        <rect key="frame" x="0.0" y="224" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z15-q6-RDu" id="BA6-C6-eLM">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhQ-09-jxC">
-                                                    <rect key="frame" x="20" y="18" width="335" height="40"/>
-                                                    <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="dhV-qA-pyL"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="134.5" y="18" width="106" height="40"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Resend"/>
                                                     <connections>
                                                         <action selector="resendAction:" destination="ibf-uI-hCF" eventType="touchUpInside" id="T09-Vc-MZ1"/>
                                                     </connections>
                                                 </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="fhQ-09-jxC" firstAttribute="top" secondItem="BA6-C6-eLM" secondAttribute="top" constant="18" id="ESB-Xu-5tX"/>
-                                                <constraint firstAttribute="trailing" secondItem="fhQ-09-jxC" secondAttribute="trailing" constant="20" id="HL2-4Q-Rd4"/>
-                                                <constraint firstAttribute="bottom" secondItem="fhQ-09-jxC" secondAttribute="bottom" constant="2" id="JPD-F1-8yY"/>
-                                                <constraint firstItem="fhQ-09-jxC" firstAttribute="leading" secondItem="BA6-C6-eLM" secondAttribute="leading" constant="20" id="ayY-cE-x0X"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="n9J-0D-IBF">
-                                        <rect key="frame" x="0.0" y="284" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n9J-0D-IBF" id="E9H-wI-nhL">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bss-6O-Ym1">
-                                                    <rect key="frame" x="20" y="18" width="335" height="40"/>
-                                                    <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="cbC-4e-xkg"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="248.5" y="18" width="106.5" height="40"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Change Email"/>
                                                     <connections>
@@ -1855,10 +1781,18 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="bss-6O-Ym1" firstAttribute="top" secondItem="E9H-wI-nhL" secondAttribute="top" constant="18" id="7fe-GV-9I1"/>
-                                                <constraint firstAttribute="trailing" secondItem="bss-6O-Ym1" secondAttribute="trailing" constant="20" id="FpI-p8-o1f"/>
-                                                <constraint firstItem="bss-6O-Ym1" firstAttribute="leading" secondItem="E9H-wI-nhL" secondAttribute="leading" constant="20" id="TAT-fu-m2Y"/>
-                                                <constraint firstAttribute="bottom" secondItem="bss-6O-Ym1" secondAttribute="bottom" constant="2" id="fXx-pR-a4M"/>
+                                                <constraint firstItem="fhQ-09-jxC" firstAttribute="leading" secondItem="s38-RL-DYZ" secondAttribute="trailing" constant="8" id="02D-a2-Nex"/>
+                                                <constraint firstAttribute="bottom" secondItem="s38-RL-DYZ" secondAttribute="bottom" constant="2" id="5ov-Ol-6O4"/>
+                                                <constraint firstItem="bss-6O-Ym1" firstAttribute="height" secondItem="fhQ-09-jxC" secondAttribute="height" id="A2z-77-SXw"/>
+                                                <constraint firstItem="fhQ-09-jxC" firstAttribute="centerY" secondItem="s38-RL-DYZ" secondAttribute="centerY" id="Bdb-g0-9nU"/>
+                                                <constraint firstItem="bss-6O-Ym1" firstAttribute="width" secondItem="s38-RL-DYZ" secondAttribute="width" id="Mti-0P-eqb"/>
+                                                <constraint firstAttribute="trailing" secondItem="bss-6O-Ym1" secondAttribute="trailing" constant="20" id="UXX-Ei-uR5"/>
+                                                <constraint firstItem="fhQ-09-jxC" firstAttribute="height" secondItem="s38-RL-DYZ" secondAttribute="height" id="YWY-jg-MRc"/>
+                                                <constraint firstItem="s38-RL-DYZ" firstAttribute="leading" secondItem="omx-pN-itM" secondAttribute="leading" constant="20" id="Z5i-yO-MpE"/>
+                                                <constraint firstItem="bss-6O-Ym1" firstAttribute="leading" secondItem="fhQ-09-jxC" secondAttribute="trailing" constant="8" id="fVM-xH-Qps"/>
+                                                <constraint firstItem="fhQ-09-jxC" firstAttribute="width" secondItem="s38-RL-DYZ" secondAttribute="width" id="kVb-7C-N8Q"/>
+                                                <constraint firstItem="s38-RL-DYZ" firstAttribute="top" secondItem="omx-pN-itM" secondAttribute="top" constant="18" id="npq-nU-0Wh"/>
+                                                <constraint firstItem="bss-6O-Ym1" firstAttribute="centerY" secondItem="fhQ-09-jxC" secondAttribute="centerY" id="zdo-wE-6mx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1881,7 +1815,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G4Q-QW-JVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4385" y="1254"/>
+            <point key="canvasLocation" x="4384.8000000000002" y="1253.5232383808097"/>
         </scene>
         <!--Verify Security Question-->
         <scene sceneID="yuN-23-jAu">
@@ -1901,7 +1835,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid response to the security question." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l30-Ah-A0m">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid response to the security question." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l30-Ah-A0m">
                                                     <rect key="frame" x="8" y="8" width="359" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1934,6 +1868,7 @@
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Security Question"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="contentText" value="What was your first concert?"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1963,6 +1898,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Security Answer"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -2005,35 +1941,6 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Dhv-QY-3em">
-                                        <rect key="frame" x="0.0" y="300" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dhv-QY-3em" id="SGQ-Dt-g23">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1I5-Qe-skz">
-                                                    <rect key="frame" x="20" y="18" width="335" height="40"/>
-                                                    <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="H6M-ZC-SA0"/>
-                                                    </constraints>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Cancel"/>
-                                                    <connections>
-                                                        <action selector="cancelAction:" destination="UmL-OF-hMj" eventType="touchUpInside" id="NzP-Mg-BK8"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="1I5-Qe-skz" secondAttribute="bottom" constant="2" id="Jwj-jX-60l"/>
-                                                <constraint firstItem="1I5-Qe-skz" firstAttribute="top" secondItem="SGQ-Dt-g23" secondAttribute="top" constant="18" id="Pk5-md-Tsp"/>
-                                                <constraint firstItem="1I5-Qe-skz" firstAttribute="leading" secondItem="SGQ-Dt-g23" secondAttribute="leading" constant="20" id="ngg-iU-UaQ"/>
-                                                <constraint firstAttribute="trailing" secondItem="1I5-Qe-skz" secondAttribute="trailing" constant="20" id="vrt-gl-Cef"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -2053,5 +1960,11 @@
             <point key="canvasLocation" x="5127" y="1255"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="check_on" width="53" height="56"/>
+        <image name="tabbarAccountActive" width="30" height="30"/>
+        <image name="tabbarOffersInactive" width="30" height="30"/>
+        <image name="tabbarServicesInactive" width="30" height="30"/>
+    </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

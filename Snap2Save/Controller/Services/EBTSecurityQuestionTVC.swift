@@ -32,7 +32,10 @@ class EBTSecurityQuestionTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateBackButtonText()
+        // Back Action
+        self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -43,6 +46,19 @@ class EBTSecurityQuestionTVC: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    func backAction() {
+        
+        showAlert(title: "Are you sure ?", message: "The registration process will be cancelled.", action: #selector(cancelProcess))
+    }
+    
+    func cancelProcess() {
+        
+        // Define identifier
+        let notificationName = Notification.Name("POPTOLOGIN")
+        // Post notification
+        NotificationCenter.default.post(name: notificationName, object: nil)
     }
 
     

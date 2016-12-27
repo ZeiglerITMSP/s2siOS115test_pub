@@ -66,7 +66,7 @@ class EBTWebView: NSObject {
     func loadWebView() {
         
         // loading URL :
-        let url = NSURL(string: registrationUrlString)
+//        let url = NSURL(string: registrationUrlString)
        // let request = NSURLRequest(url: url! as URL)
         
         // init and load request in webview.
