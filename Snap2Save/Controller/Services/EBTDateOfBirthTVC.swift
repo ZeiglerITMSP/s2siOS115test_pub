@@ -49,6 +49,8 @@ class EBTDateOfBirthTVC: UITableViewController {
         
         ebtWebView.responder = self
         
+        errorMessageLabel.text = nil
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -141,7 +143,6 @@ class EBTDateOfBirthTVC: UITableViewController {
                 
             } else {
                 print(result ?? "result nil")
-                self.validateDOBError()
             }
         }
     }
@@ -162,7 +163,10 @@ class EBTDateOfBirthTVC: UITableViewController {
                 print(trimmed)
                 if trimmed.characters.count > 0 {
                     // got error
+                    self.nextActivityIndicator.stopAnimating()
                     
+                    self.errorMessageLabel.text = trimmed
+                    self.tableView.reloadData()
                     
                 } else {
                     // success

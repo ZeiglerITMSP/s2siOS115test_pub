@@ -59,17 +59,10 @@ class EBTCardNumberTVC: UITableViewController {
         loadSignupPage()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         ebtWebView.responder = self
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        ebtWebView.responder = nil
-        
-        super.viewDidDisappear(animated)
     }
     
     override func didReceiveMemoryWarning() {
@@ -147,10 +140,12 @@ class EBTCardNumberTVC: UITableViewController {
         
         actionType = ActionType.cardNumber
         
+        
+        
         let jsCardNumber = "$('#txtCardNumber').val('\(cardNumber)');"
         let jsSubmit = "void($('form')[1].submit());"
         
-        let javaScript = jsCardNumber + jsSubmit
+        let javaScript =  jsCardNumber + jsSubmit
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             if error != nil {
@@ -182,7 +177,7 @@ class EBTCardNumberTVC: UITableViewController {
                     self.tableView.reloadData()
                     
                 } else {
-                    
+                    // no error message
                     self.checkPageHeader()
                 }
             }
@@ -205,9 +200,9 @@ class EBTCardNumberTVC: UITableViewController {
                 let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 print(pageTitle)
                 
-                if pageTitle == "'Online Terms and Conditions" {
+                if pageTitle == "Online Terms and Conditions" {
                     
-                    
+                    self.acceptSubmit()
                 }
             }
         }
@@ -215,15 +210,18 @@ class EBTCardNumberTVC: UITableViewController {
     
     func acceptSubmit() {
         
-        let jsAcceptClick = "$('#btnAcceptTandC).click();"
+        actionType = ActionType.accept
+        
+        // "$('#btnAcceptTandC).click();"
+        let jsAcceptClick = "void($('form')[1].submit());"
         ebtWebView.webView.evaluateJavaScript(jsAcceptClick) { (result, error) in
             if error != nil {
                 print(error ?? "error nil")
             } else {
-                print(result!)
-                let stringResult = result as! String
-                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(pageTitle)
+                print(result ?? "result nil")
+//                let stringResult = result as! String
+//                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+//                print(pageTitle)
                 
             }
         }
@@ -238,6 +236,7 @@ extension EBTCardNumberTVC: EBTWebViewDelegate {
         
         if actionType == ActionType.accept {
             actionType = nil
+            nextActivityIndicator.stopAnimating()
             // move to view controller
             self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
         } else if actionType == ActionType.cardNumber {

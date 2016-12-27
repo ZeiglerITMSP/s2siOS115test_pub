@@ -9,6 +9,8 @@
 import UIKit
 import PKHUD
 
+import LocalAuthentication
+
 class EBTLoginTVC: UITableViewController {
     
     fileprivate enum ActionType {
@@ -86,13 +88,13 @@ class EBTLoginTVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        ebtWebView.responder = self
         reloadContent()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        ebtWebView.responder = self
         //        loadLoginPage()
         // Stop listening notification
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
@@ -107,8 +109,6 @@ class EBTLoginTVC: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(popToLoginVC), name: notificationName, object: nil)
         
         LanguageUtility.removeObserverForLanguageChange(self)
-        
-        ebtWebView.responder = nil
         
         super.viewDidDisappear(animated)
     }
@@ -272,7 +272,41 @@ class EBTLoginTVC: UITableViewController {
         
     }
     
+    // MARK: - Touch ID
     
+    func authenticateUser() {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Identify yourself!"
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
+                [unowned self] success, authenticationError in
+                
+                DispatchQueue.main.async {
+                    if success {
+                        self.autofillUserID()
+                    } else {
+                        let ac = UIAlertController(title: "Authentication failed", message: "Sorry!", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(ac, animated: true)
+                    }
+                }
+            }
+        } else {
+            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+    }
+    
+    func autofillUserID() {
+        
+//        UserDefaults.standard.value(forKey: "")
+        userIdField.contentTextField.text = "asdf"
+        
+    }
     
     
 }
