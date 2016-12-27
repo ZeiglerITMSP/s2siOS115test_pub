@@ -38,12 +38,7 @@ class EBTWebView: NSObject {
     
     var responder: EBTWebViewDelegate?
     
-    // javascript
-    let registrationUrlString = "https://ucard.chase.com/cardValidation_setup.action?screenName=register&page=logon"
     
-    let cardNumberFailUrl = "https://ucard.chase.com/cardValidation_successRedirect.action?screenName=register"
-    
-    let jsCardNumberAutoFill = "if ($('h1.PageHeader').html()==\"Identify Your Card and Accounts\"){ void($('#txtCardNumber').val(\"9999999999999999999\"));}"
     let jsSubmit = "void($('form')[1].submit())"
     
     let jsGetAllElements = "document.documentElement.outerHTML"
@@ -69,57 +64,6 @@ class EBTWebView: NSObject {
         
     }
     
-    
-    // MARK:- DOB Filling
-    func autoFill(dob:String) {
-        
-        actionType = ActionType.dob
-        // javascript:void($('#txtSecurityKeyQuestionAnswer').val("25/06/2016")); void($('form')[1].submit());
-        
-        let dobJS = "void($('#txtSecurityKeyQuestionAnswer').val(\"\(dob)\")); void($('form')[1].submit());"
-        
-        webView.evaluateJavaScript(dobJS) { (result, error) in
-            if error != nil {
-                print(result ?? "result nil")
-            } else {
-                print(error ?? "error nil")
-            }
-        }
-    }
-    
-    func validateDOBError() {
-        
-        // javascript:void(android.errorText($("#VallidationExcpMsg").text(),$(".errorInvalidField").text()));
-        let dobErrorCode = "($(\"#VallidationExcpMsg\").text(),$(\".errorInvalidField\").text())"
-        
-        actionType = .none
-        webView.evaluateJavaScript(dobErrorCode) { (result, error) in
-            if error != nil {
-                
-                print(error ?? "error nil")
-                
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! String
-                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmed)
-                if trimmed.characters.count > 0 {
-                    print("====== FAIL =======")
-//                    self.responder?.didFail(withError: trimmed)
-                } else {
-                    print("====== SUCCESS =======")
-                    self.webView.evaluateJavaScript(self.jsSubmit) { (result, error) in
-                        if error != nil {
-                            print(error ?? "error nil")
-                        } else {
-                            print(result ?? "result nil")
-                        }
-                    }
-//                    self.responder?.didSuccess()
-                }
-            }
-        }
-    }
     
     
     

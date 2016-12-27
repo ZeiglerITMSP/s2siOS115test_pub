@@ -989,16 +989,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 1: Please provide the following information to validate your identity." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RS5-Wm-AU3">
-                                                    <rect key="frame" x="8" y="8" width="359" height="72"/>
+                                                    <rect key="frame" x="20" y="8" width="335" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="RS5-Wm-AU3" secondAttribute="trailing" constant="8" id="Oko-uT-9p1"/>
+                                                <constraint firstAttribute="trailing" secondItem="RS5-Wm-AU3" secondAttribute="trailing" constant="20" id="Oko-uT-9p1"/>
                                                 <constraint firstAttribute="bottom" secondItem="RS5-Wm-AU3" secondAttribute="bottom" constant="8" id="bh5-om-TJw"/>
-                                                <constraint firstItem="RS5-Wm-AU3" firstAttribute="leading" secondItem="SHo-ed-spe" secondAttribute="leading" constant="8" id="wad-eh-kCD"/>
+                                                <constraint firstItem="RS5-Wm-AU3" firstAttribute="leading" secondItem="SHo-ed-spe" secondAttribute="leading" constant="20" id="wad-eh-kCD"/>
                                                 <constraint firstItem="RS5-Wm-AU3" firstAttribute="top" secondItem="SHo-ed-spe" secondAttribute="top" constant="8" id="ylV-me-q0z"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1171,7 +1171,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 2: Select PIN" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzG-hb-NAf">
-                                                    <rect key="frame" x="8" y="8" width="359" height="72"/>
+                                                    <rect key="frame" x="20" y="8" width="335" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1180,8 +1180,8 @@
                                             <constraints>
                                                 <constraint firstItem="uzG-hb-NAf" firstAttribute="top" secondItem="2Zi-l9-t6C" secondAttribute="top" constant="8" id="7Ul-EQ-cfr"/>
                                                 <constraint firstAttribute="bottom" secondItem="uzG-hb-NAf" secondAttribute="bottom" constant="8" id="LM0-Ac-t0d"/>
-                                                <constraint firstItem="uzG-hb-NAf" firstAttribute="leading" secondItem="2Zi-l9-t6C" secondAttribute="leading" constant="8" id="jRG-fn-Ffy"/>
-                                                <constraint firstAttribute="trailing" secondItem="uzG-hb-NAf" secondAttribute="trailing" constant="8" id="uK1-uD-XUK"/>
+                                                <constraint firstItem="uzG-hb-NAf" firstAttribute="leading" secondItem="2Zi-l9-t6C" secondAttribute="leading" constant="20" id="jRG-fn-Ffy"/>
+                                                <constraint firstAttribute="trailing" secondItem="uzG-hb-NAf" secondAttribute="trailing" constant="20" id="uK1-uD-XUK"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
@@ -1354,16 +1354,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 3: Please enter the following user information" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gd6-KK-Vep">
-                                                    <rect key="frame" x="8" y="8" width="359" height="72"/>
+                                                    <rect key="frame" x="20" y="8" width="335" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Gd6-KK-Vep" firstAttribute="leading" secondItem="7zi-Go-Wgj" secondAttribute="leading" constant="8" id="0gm-cw-FLm"/>
+                                                <constraint firstItem="Gd6-KK-Vep" firstAttribute="leading" secondItem="7zi-Go-Wgj" secondAttribute="leading" constant="20" id="0gm-cw-FLm"/>
                                                 <constraint firstItem="Gd6-KK-Vep" firstAttribute="top" secondItem="7zi-Go-Wgj" secondAttribute="top" constant="8" id="5Jr-Pt-Eyg"/>
-                                                <constraint firstAttribute="trailing" secondItem="Gd6-KK-Vep" secondAttribute="trailing" constant="8" id="Re9-Pg-AcR"/>
+                                                <constraint firstAttribute="trailing" secondItem="Gd6-KK-Vep" secondAttribute="trailing" constant="20" id="Re9-Pg-AcR"/>
                                                 <constraint firstAttribute="bottom" secondItem="Gd6-KK-Vep" secondAttribute="bottom" constant="8" id="dtH-En-tMz"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1813,7 +1813,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 5: Registration Complete" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnq-WX-cka">
-                                                    <rect key="frame" x="8" y="8" width="359" height="72"/>
+                                                    <rect key="frame" x="20" y="8" width="335" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1821,9 +1821,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="xnq-WX-cka" firstAttribute="top" secondItem="qBZ-vL-6V3" secondAttribute="top" constant="8" id="E9b-Rf-KFh"/>
-                                                <constraint firstAttribute="trailing" secondItem="xnq-WX-cka" secondAttribute="trailing" constant="8" id="THU-Eh-Q6H"/>
+                                                <constraint firstAttribute="trailing" secondItem="xnq-WX-cka" secondAttribute="trailing" constant="20" id="THU-Eh-Q6H"/>
                                                 <constraint firstAttribute="bottom" secondItem="xnq-WX-cka" secondAttribute="bottom" constant="8" id="lsT-Cp-NTA"/>
-                                                <constraint firstItem="xnq-WX-cka" firstAttribute="leading" secondItem="qBZ-vL-6V3" secondAttribute="leading" constant="8" id="mfA-Nq-By5"/>
+                                                <constraint firstItem="xnq-WX-cka" firstAttribute="leading" secondItem="qBZ-vL-6V3" secondAttribute="leading" constant="20" id="mfA-Nq-By5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
@@ -1952,7 +1952,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid response to the security question." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l30-Ah-A0m">
-                                                    <rect key="frame" x="8" y="8" width="359" height="72"/>
+                                                    <rect key="frame" x="20" y="8" width="335" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1961,8 +1961,8 @@
                                             <constraints>
                                                 <constraint firstItem="l30-Ah-A0m" firstAttribute="top" secondItem="yi8-Se-iL8" secondAttribute="top" constant="8" id="2kx-93-x2M"/>
                                                 <constraint firstAttribute="bottom" secondItem="l30-Ah-A0m" secondAttribute="bottom" constant="8" id="A70-pc-0kT"/>
-                                                <constraint firstItem="l30-Ah-A0m" firstAttribute="leading" secondItem="yi8-Se-iL8" secondAttribute="leading" constant="8" id="Bgp-tk-sUT"/>
-                                                <constraint firstAttribute="trailing" secondItem="l30-Ah-A0m" secondAttribute="trailing" constant="8" id="slm-9s-Eg6"/>
+                                                <constraint firstItem="l30-Ah-A0m" firstAttribute="leading" secondItem="yi8-Se-iL8" secondAttribute="leading" constant="20" id="Bgp-tk-sUT"/>
+                                                <constraint firstAttribute="trailing" secondItem="l30-Ah-A0m" secondAttribute="trailing" constant="20" id="slm-9s-Eg6"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>

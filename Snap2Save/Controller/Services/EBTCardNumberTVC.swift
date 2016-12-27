@@ -10,9 +10,17 @@ import UIKit
 
 class EBTCardNumberTVC: UITableViewController {
 
+    fileprivate enum ActionType {
+        
+        case cardNumber
+        case accept
+    }
+    
     // Properties
     var errorMessage:String?
     let ebtWebView: EBTWebView = EBTWebView.shared
+    
+    fileprivate var actionType: ActionType?
     
     
     // Outlets
@@ -20,17 +28,13 @@ class EBTCardNumberTVC: UITableViewController {
     @IBOutlet weak var cardNumberField: AIPlaceHolderTextField!
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
-    
     @IBOutlet weak var nextActivityIndicator: UIActivityIndicatorView!
     
     // Actions
     
     @IBAction func nextAction(_ sender: UIButton) {
         
-//        validatePageUrl()
-        
         autoFill(cardNumber: cardNumberField.contentTextField.text!)
-        
     }
     
     @IBAction func cancelAction(_ sender: UIButton) {
@@ -139,6 +143,10 @@ class EBTCardNumberTVC: UITableViewController {
     // MARK:- Card Number Filling
     func autoFill(cardNumber:String) {
         
+        nextActivityIndicator.startAnimating()
+        
+        actionType = ActionType.cardNumber
+        
         let jsCardNumber = "$('#txtCardNumber').val('\(cardNumber)');"
         let jsSubmit = "void($('form')[1].submit());"
         
@@ -167,51 +175,60 @@ class EBTCardNumberTVC: UITableViewController {
                 let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if trimmedErrorMessage.characters.count > 0 {
+                    
+                    self.nextActivityIndicator.stopAnimating()
                     // handle error message
                     self.errorMessageLabel.text = trimmedErrorMessage
                     self.tableView.reloadData()
                     
                 } else {
                     
-                    self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
+                    self.checkPageHeader()
                 }
             }
         }
     }
     
     
+    // MARK: - Agree
     
-//    func validateCardNumberError() {
-//        
-//        let jsStatusMessage = "$('#VallidationExcpMsg').text();"
-//        ebtWebView.evaluateJavaScript(jsStatusMessage) { (result, error) in
-//            if error != nil {
-//                
-//                print(error ?? "error nil")
-//                
-//            } else {
-//                print(result ?? "result nil")
-//                let stringResult = result as! String
-//                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-//                print(trimmed)
-//                if trimmed.characters.count > 0 {
-//                    print("====== FAIL =======")
-//                    //                    self.responder?.didFail(withError: trimmed)
-//                } else {
-//                    print("====== SUCCESS =======")
-//                    self.webView.evaluateJavaScript(self.jsSubmit) { (result, error) in
-//                        if error != nil {
-//                            print(error ?? "error nil")
-//                        } else {
-//                            print(result ?? "result nil")
-//                        }
-//                    }
-//                    //                    self.responder?.didSuccess()
-//                }
-//            }
-//        }
-//    }
-
+    func checkPageHeader() {
+        
+        let jsPageTitle = "$('.PageHeader').text();"
+        ebtWebView.webView.evaluateJavaScript(jsPageTitle) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result!)
+                
+                let stringResult = result as! String
+                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(pageTitle)
+                
+                if pageTitle == "'Online Terms and Conditions" {
+                    
+                    
+                }
+            }
+        }
+    }
+    
+    func acceptSubmit() {
+        
+        let jsAcceptClick = "$('#btnAcceptTandC).click();"
+        ebtWebView.webView.evaluateJavaScript(jsAcceptClick) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result!)
+                let stringResult = result as! String
+                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(pageTitle)
+                
+            }
+        }
+    }
+    
 
 }
 
@@ -219,7 +236,14 @@ extension EBTCardNumberTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
-        checkForErrorMessage()
+        if actionType == ActionType.accept {
+            actionType = nil
+            // move to view controller
+            self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
+        } else if actionType == ActionType.cardNumber {
+            actionType = nil
+            checkForErrorMessage()
+        }
     }
     
 }
