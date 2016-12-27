@@ -62,66 +62,13 @@ class EBTWebView: NSObject {
     }
     
     func loadWebView() {
-        
-        // loading URL :
-//        let url = NSURL(string: registrationUrlString)
-       // let request = NSURLRequest(url: url! as URL)
-        
+       
         // init and load request in webview.
         webView = WKWebView()
-//        webView = WKWebView(frame: self.outerView.frame)
         webView.navigationDelegate = self
-        //webView.load(request as URLRequest)
-//        self.outerView.addSubview(webView)
         
     }
     
-    // MARK:- Card Number Filling
-    func autoFill(cardNumber:String) {
-        
-        actionType = ActionType.cardNumber
-        let cardNumberJS = "if ($('h1.PageHeader').html()==\"Identify Your Card and Accounts\"){ void($('#txtCardNumber').val(\"\(cardNumber)\"));void($('form')[1].submit());}"
-        
-        webView.evaluateJavaScript(cardNumberJS) { (result, error) in
-            if error != nil {
-                print(result ?? "result nil")
-            } else {
-                print(error ?? "error nil")
-            }
-        }
-    }
-    
-    
-    func validateCardNumberError() {
-        
-        actionType = .none
-        webView.evaluateJavaScript(jsGetErrorCode) { (result, error) in
-            if error != nil {
-                
-                print(error ?? "error nil")
-                
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! String
-                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmed)
-                if trimmed.characters.count > 0 {
-                    print("====== FAIL =======")
-//                    self.responder?.didFail(withError: trimmed)
-                } else {
-                    print("====== SUCCESS =======")
-                    self.webView.evaluateJavaScript(self.jsSubmit) { (result, error) in
-                        if error != nil {
-                            print(error ?? "error nil")
-                        } else {
-                            print(result ?? "result nil")
-                        }
-                    }
-//                    self.responder?.didSuccess()
-                }
-            }
-        }
-    }
     
     // MARK:- DOB Filling
     func autoFill(dob:String) {

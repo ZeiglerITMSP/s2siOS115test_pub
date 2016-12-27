@@ -13,10 +13,12 @@ class EBTDateOfBirthTVC: UITableViewController {
     
     // Outles
     @IBOutlet weak var messageLabel: UILabel!
-    
     @IBOutlet weak var dobField: AIPlaceHolderTextField!
-    
     @IBOutlet weak var socialSecurityNumberField: AIPlaceHolderTextField!
+    @IBOutlet weak var errorTitleLabel: UILabel!
+    @IBOutlet weak var errorMessageLabel: UILabel!
+    @IBOutlet weak var nextActivityIndicator: UIActivityIndicatorView!
+    
     
     
     @IBAction func nextAction(_ sender: UIButton) {

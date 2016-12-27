@@ -108,6 +108,8 @@ class EBTLoginTVC: UITableViewController {
         
         LanguageUtility.removeObserverForLanguageChange(self)
         
+        ebtWebView.responder = nil
+        
         super.viewDidDisappear(animated)
     }
     
@@ -176,7 +178,7 @@ class EBTLoginTVC: UITableViewController {
     // validate loginpage url
     func validateLoginpageUrl() {
         
-        let jsGetPageUrl = "window.location.href"
+        let jsGetPageUrl = "window.location.href;"
         ebtWebView.webView.evaluateJavaScript(jsGetPageUrl) { (result, error) in
             
             if error != nil {

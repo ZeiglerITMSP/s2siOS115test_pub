@@ -14,12 +14,14 @@ class EBTSelectPinTVC: UITableViewController {
     // Outlets
     
     @IBOutlet weak var messageLabel: UILabel!
-    
     @IBOutlet weak var pinField: AIPlaceHolderTextField!
-    
-    
     @IBOutlet weak var confirmPinField: AIPlaceHolderTextField!
     
+    @IBOutlet weak var nextActivityIndicator: UIActivityIndicatorView!
+   
+    @IBOutlet weak var currentPinActivityIndicator: UIActivityIndicatorView!
+    
+    // Actions
     @IBAction func nextAction(_ sender: UIButton) {
         
         performSegue(withIdentifier: "EBTUserInformationTVC", sender: nil)

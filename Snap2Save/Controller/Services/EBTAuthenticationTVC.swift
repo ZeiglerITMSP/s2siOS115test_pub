@@ -66,6 +66,13 @@ class EBTAuthenticationTVC: UITableViewController {
         ebtWebView.responder = self
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        ebtWebView.responder = nil
+        
+        super.viewDidDisappear(animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
