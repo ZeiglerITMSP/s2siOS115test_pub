@@ -48,6 +48,7 @@ class LanguageUtility: NSObject {
         NotificationCenter.default.removeObserver(observer, name: NSNotification.Name( LCLLanguageChangeNotification), object: nil)
     }
     
+    
 }
 
 // MARK: - Language

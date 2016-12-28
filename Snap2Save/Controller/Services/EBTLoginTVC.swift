@@ -56,6 +56,15 @@ class EBTLoginTVC: UITableViewController {
         performSegue(withIdentifier: "EBTCardNumberTVC", sender: nil)
     }
     
+    
+    @IBOutlet weak var rememberMeButton: UIButton!
+    
+    @IBAction func rememberMeAction(_ sender: UIButton) {
+        
+        
+        
+    }
+    
     // MARK:-
     
     override func viewDidLoad() {
@@ -86,6 +95,13 @@ class EBTLoginTVC: UITableViewController {
         
         
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
+        
+        
+        
+        let rememberUser = UserDefaults.standard.bool(forKey: "EBT_rememberme")
+        rememberMeButton.isSelected = rememberUser
+    
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

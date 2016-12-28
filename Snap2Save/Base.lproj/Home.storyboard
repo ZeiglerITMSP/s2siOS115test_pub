@@ -290,8 +290,11 @@
                                                         <constraint firstAttribute="height" constant="22" id="pSY-Qf-DLM"/>
                                                         <constraint firstAttribute="width" constant="22" id="x0R-wD-RHi"/>
                                                     </constraints>
-                                                    <state key="normal" image="check_off"/>
-                                                    <state key="selected" image="check_on"/>
+                                                    <state key="normal" image="checkOff"/>
+                                                    <state key="selected" image="checkOn"/>
+                                                    <connections>
+                                                        <action selector="rememberMeAction:" destination="1Ir-th-9tA" eventType="touchUpInside" id="hwV-4H-a32"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember my username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fX-Yf-qAf">
                                                     <rect key="frame" x="61" y="23" width="141" height="15"/>
@@ -386,6 +389,7 @@
                         <outlet property="loginButton" destination="UlW-qM-MjE" id="mGG-Cd-FPb"/>
                         <outlet property="passwordField" destination="Um2-Bq-u0F" id="l0m-Tp-F70"/>
                         <outlet property="registrationButton" destination="OKr-em-SLD" id="W7c-qw-U9p"/>
+                        <outlet property="rememberMeButton" destination="yk0-6L-p9n" id="vmn-4b-VW6"/>
                         <outlet property="remmeberMyUserNameLabel" destination="0fX-Yf-qAf" id="IIC-gV-AiF"/>
                         <outlet property="userIdField" destination="ehI-Dc-bH2" id="8OS-V8-ctC"/>
                         <segue destination="2mD-cw-ekd" kind="show" identifier="EBTAuthenticationTVC" id="tOY-Is-UR3"/>
@@ -2228,8 +2232,8 @@
     </scenes>
     <resources>
         <image name="arrowRight" width="8" height="13"/>
-        <image name="check_off" width="64" height="65"/>
-        <image name="check_on" width="53" height="56"/>
+        <image name="checkOff" width="18" height="18"/>
+        <image name="checkOn" width="18" height="18"/>
         <image name="tabbarAccountActive" width="30" height="30"/>
         <image name="tabbarOffersInactive" width="30" height="30"/>
         <image name="tabbarServicesInactive" width="30" height="30"/>
