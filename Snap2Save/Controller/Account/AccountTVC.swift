@@ -116,7 +116,9 @@ class AccountTVC: UITableViewController {
                 
             }
             else if indexPath.row == 2 {
-                
+                //PreferencesTVC
+                self.performSegue(withIdentifier: "PreferencesTVC", sender: self)
+
             }
             else if indexPath.row == 3 {
                 
@@ -165,9 +167,7 @@ class AccountTVC: UITableViewController {
                           "language":"en"
             ] as [String : Any]
         
-        
         print(parameters)
-        
         let url = String(format: "%@/logOut", hostUrl)
         print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
