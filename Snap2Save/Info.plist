@@ -22,7 +22,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.appit.Snap2Save</string>
+			<string>com.gp.snap2save</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>s2sregistrationconfirm</string>
@@ -32,7 +32,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.appit.Snap2Save</string>
+			<string>com.gp.snap2save</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>s2sresetpassword</string>
@@ -62,6 +62,11 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

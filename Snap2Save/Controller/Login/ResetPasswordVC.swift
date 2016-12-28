@@ -41,9 +41,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         self.title = "Reset Password"
-        
         let languageButton = UIButton.init(type: .system)
         languageButton.frame = CGRect(x:0,y:0,width:60,height:25)
         languageButton.setTitle("ENGLISH".localized, for: .normal)
@@ -84,11 +82,10 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.isTranslucent = false
-        let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
-        self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
+        //let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
+        //self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
+        self.navigationController?.navigationBar.barTintColor = APP_GRREN_COLOR
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        //self.navigationController?.navigationBar.barTintColor = UIColor.red
-        
         let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: navigationController, action: nil)
         self.navigationItem.leftBarButtonItem = backButton
 

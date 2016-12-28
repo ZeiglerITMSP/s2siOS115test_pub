@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		52949BC23A183914DF6D1992 /* Pods_Snap2Save.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */; };
 		6FB268A6557A795CAD814A61 /* Pods_Snap2SaveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */; };
+		97526AAF1E128F0300470DBB /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97526AAE1E128F0300470DBB /* ChangePasswordVC.swift */; };
 		9759BE781E0A65AA00A5C76A /* SignUpTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */; };
 		978729DD1E0937B000908301 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978729DC1E0937B000908301 /* Constants.swift */; };
 		97E4338B1E10E5F10095EABA /* USStateAbbreviations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97E4338A1E10E5F10095EABA /* USStateAbbreviations.plist */; };
@@ -72,6 +73,7 @@
 		6F98011C784DEC5A46937289 /* Pods-Snap2SaveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveTests/Pods-Snap2SaveTests.release.xcconfig"; sourceTree = "<group>"; };
 		70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2Save.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		97526AAE1E128F0300470DBB /* ChangePasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTVC.swift; sourceTree = "<group>"; };
 		978729DC1E0937B000908301 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		97E4338A1E10E5F10095EABA /* USStateAbbreviations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = USStateAbbreviations.plist; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				E84AE9D91E07F53300C5E7F3 /* AccountTVC.swift */,
 				E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */,
 				E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */,
+				97526AAE1E128F0300470DBB /* ChangePasswordVC.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				E84AE9DA1E07F53300C5E7F3 /* AccountTVC.swift in Sources */,
 				E84AE9E31E0821B900C5E7F3 /* AITextField.swift in Sources */,
 				9759BE781E0A65AA00A5C76A /* SignUpTVC.swift in Sources */,
+				97526AAF1E128F0300470DBB /* ChangePasswordVC.swift in Sources */,
 				E84AE9D51E07F4B100C5E7F3 /* ForgotPasswordVC.swift in Sources */,
 				E826FBD61E0946970089AEA6 /* EBTLoginTVC.swift in Sources */,
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
@@ -840,7 +844,7 @@
 				INFOPLIST_FILE = Snap2Save/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appit.Snap2Save;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gp.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -858,7 +862,7 @@
 				INFOPLIST_FILE = Snap2Save/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appit.Snap2Save;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gp.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

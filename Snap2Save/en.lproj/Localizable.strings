@@ -31,6 +31,11 @@
 "LOG IN" = "LOG IN";
 "ENGLISH" = "ENGLISH";
 
+//signUpAlert
+"SignUpAlertTitle" = "Thank you for joining Snap2Save!";
+"SignUpAlertMessage" = "Before you are able to log in we need to verify your [cell phone number/email address]. You should receive a confirmation [text/email] soon. When it arrives, simply click on the link in the [text/email] and that will complete your registration process.";
+"Close" = "Close";
+
 //signUpTVC
 "10-DIGIT CELL PHONE NUMBER" = "10-DIGIT CELL PHONE NUMBER";
 "RE-ENTER 10-DIGIT CELL PHONE NUMBER" = "RE-ENTER 10-DIGIT CELL PHONE NUMBER";
@@ -58,5 +63,10 @@
 "RE-ENTER NEW PASSWORD" = "RE-ENTER NEW PASSWORD";
 "RESET PASSWORD" = "RESET PASSWORD";
 
-
+// AccountVc
+"Auto Log In" = "Auto Log In";
+"Personal Information" = "Personal Information";
+"Preferences" = "Preferences";
+"Change Password" = "Change Password";
+"Log Out" = "Log Out";
 

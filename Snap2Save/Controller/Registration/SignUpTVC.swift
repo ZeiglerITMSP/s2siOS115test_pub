@@ -151,6 +151,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
     }
     func backButtonAction(){
         
+        self.view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)
         
     }
@@ -433,6 +434,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
                 showAlert(title: "", message: "Enter a valid email")
                 return false
             }
+            
         }
         
         else if reEnterEmailTextField.text != emailTextField.text{
