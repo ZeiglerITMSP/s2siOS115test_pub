@@ -97,7 +97,7 @@ class EBTUserInformationTVC: UITableViewController {
 
     func backAction() {
         
-        showAlert(title: "Are you sure ?", message: "The registration process will be cancelled.", action: #selector(cancelProcess))
+        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {

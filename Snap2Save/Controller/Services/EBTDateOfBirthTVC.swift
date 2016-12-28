@@ -25,9 +25,9 @@ class EBTDateOfBirthTVC: UITableViewController {
     // Actions
     @IBAction func nextAction(_ sender: UIButton) {
         
+        self.view.endEditing(true)
         autoFill(dob: dobField.contentTextField.text!)
         
-//        performSegue(withIdentifier: "EBTSelectPinTVC", sender: nil)
     }
     
     
@@ -88,7 +88,7 @@ class EBTDateOfBirthTVC: UITableViewController {
     // MARK: -
     func backAction() {
 
-        showAlert(title: "Are you sure ?", message: "The registration process will be cancelled.", action: #selector(cancelProcess))
+        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
