@@ -7,10 +7,12 @@
 //
 
 import UIKit
-//import Alamofire
+import Localize_Swift
 
 class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
     
+    var languageSelectionButton: UIButton!
+
     @IBOutlet var loginWithFBButton: UIButton!
     @IBOutlet var facebookBtnBgView: UIView!
     @IBOutlet var messageLabel: UILabel!
@@ -52,6 +54,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
     }
     
     @IBAction func contactPreferenceSegmentControl(_ sender: UISegmentedControl) {
+        
     }
     
     @IBAction func continueButtonClicked(_ sender: UIButton) {
@@ -69,11 +72,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
         let additionalSignUpVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignupAdditionalFieldsTVC") as! SignupAdditionalFieldsTVC
         additionalSignUpVc.userDetailsDict = userDetails
         self.navigationController?.show(additionalSignUpVc, sender: self)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-            super.viewDidDisappear(animated)
-            self.view.endEditing(true)
+        
     }
     
     override func viewDidLoad() {
@@ -105,50 +104,58 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
         leftBarButton.customView = backButton
         self.navigationItem.leftBarButtonItem = leftBarButton
         
-        let languageButton = UIButton.init(type: .system)
-        languageButton.frame = CGRect(x:0,y:0,width:60,height:25)
-        languageButton.setTitle("ENGLISH".localized, for: .normal)
-        languageButton.setTitleColor(UIColor.white, for: .normal)
-        languageButton.backgroundColor = UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0)
-        languageButton.addTarget(self, action: #selector(languageButtonClicked), for: .touchUpInside)
-        languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 11.0)
-        AppHelper.setRoundCornersToView(borderColor: UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0), view:languageButton , radius:2.0, width: 1.0)
-        let rightBarButton = UIBarButtonItem()
-        rightBarButton.customView = languageButton
-        self.navigationItem.rightBarButtonItem = rightBarButton
-        
         let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         // super.setNavigationBarImage(image: navBarBGImg)
         self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
+        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        
+        reloadContent()
+        
     }
     
-    func languageButtonClicked(){
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        reloadContent()
+    }
+    
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.view.endEditing(true)
+        LanguageUtility.removeObserverForLanguageChange(self)
+    }
+    
+
+    func languageButtonClicked() {
         
-        let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-        let englishBtn = UIAlertAction.init(title: "English".localized, style: .default, handler:{
-            (action) in
-            print("Selected English")
-        })
-        let spanishBtn = UIAlertAction.init(title: "Spanish".localized, style: .default, handler:{
-            (action) in
-            print("Selected Spanish")
-            
-        })
-        let cancelBtn = UIAlertAction.init(title: "Cancel", style: .cancel, handler:{
-            (action) in
-            
-        })
-        
-        languageAlert.view.tintColor = APP_GRREN_COLOR
-        languageAlert .addAction(englishBtn)
-        languageAlert.addAction(spanishBtn)
-        languageAlert.addAction(cancelBtn)
-        
-        self.present(languageAlert, animated: true, completion:nil)
+        self.showLanguageSelectionAlert()
         
     }
+    
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.updateBackButtonText()
+            self.mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized()
+            self.reEnterMobileNumLabel.text = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
+            self.passwordLabel.text = "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)".localized()
+            self.reEnterPasswordLabel.text = "RE-ENTER PASSWORD".localized()
+            self.zipCodeLabel.text = "ZIP CODE".localized()
+            self.contactPreferenceLabel.text = "Contact Preference".localized()
+            self.emailLabel.text = "EMAIL".localized()
+            self.reEnterEmailLabel.text = "RE-ENTER EMAIL".localized()
+            self.contactPreferenceSegmentControl.setTitle("Text Message".localized(), forSegmentAt: 0)
+            self.contactPreferenceSegmentControl.setTitle("Email".localized(), forSegmentAt: 1)
+            self.terms_serviceLabel.text = "Terms Of Service".localized()
+            self.continueButton.setTitle("CONTINUE".localized(), for: .normal)
+        }
+    }
+
     func backButtonAction(){
         
         self.view.endEditing(true)
@@ -165,19 +172,6 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
         //        let contactStrAttribute = NSMutableAttributedString.init(string: contactStr)
         //        contactStrAttribute.addAttribute(NSForegroundColorAttributeName, value: APP_ORANGE_COLOR , range: contactStrRange)
         //        contactPreferenceLabel.attributedText = contactStrAttribute
-        
-        mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized
-        reEnterMobileNumLabel.text = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized
-        passwordLabel.text = "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)".localized
-        reEnterPasswordLabel.text = "RE-ENTER PASSWORD".localized
-        zipCodeLabel.text = "ZIP CODE".localized
-        contactPreferenceLabel.text = "Contact Preference".localized
-        emailLabel.text = "EMAIL".localized
-        reEnterEmailLabel.text = "RE-ENTER EMAIL".localized
-        contactPreferenceSegmentControl.setTitle("Text Message".localized, forSegmentAt: 0)
-        contactPreferenceSegmentControl.setTitle("Email".localized, forSegmentAt: 1)
-        terms_serviceLabel.text = "Terms Of Service".localized
-        continueButton.setTitle("CONTINUE".localized, for: .normal)
         
         
         

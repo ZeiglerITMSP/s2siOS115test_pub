@@ -106,12 +106,9 @@ class EBTLoginTVC: UITableViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        
         // Register to receive notification
         NotificationCenter.default.addObserver(self, selector: #selector(popToLoginVC), name: notificationName, object: nil)
-        
         LanguageUtility.removeObserverForLanguageChange(self)
-        
         super.viewDidDisappear(animated)
     }
     

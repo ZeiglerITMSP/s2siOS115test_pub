@@ -12,6 +12,8 @@ import SwiftyJSON
 
 class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScrollViewDelegate {
     
+    var languageSelectionButton: UIButton!
+    
     var blueNavBarImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
 
     @IBOutlet var bgContainerView: UIView!
@@ -44,17 +46,11 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "Log In"
+
         AppHelper.setRoundCornersToView(borderColor:APP_ORANGE_COLOR, view:loginButton , radius:3.0, width: 1.0)
         
         AppHelper.setRoundCornersToView(borderColor: UIColor.init(red: 59.0/255.0, green: 89.0/255.0, blue: 152.0/255.0, alpha: 1.0), view:FbLoginBgView , radius:3.0, width: 1.0)
-        loginWithFacebookButton.setTitle("Log In with Facebook".localized, for: .normal)
-        orLabel.text = "or".localized
-        mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized
-        passwordLabel.text = "PASSWORD".localized
-        forgotPasswordButton.setTitle("Forgot Password?".localized, for: .normal)
-        loginButton.setTitle("LOG IN".localized, for: .normal)
         
         let backButton = UIButton.init(type: .custom)
         backButton.frame = CGRect(x:0,y:0,width:80,height:25)
@@ -64,17 +60,14 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        // ratingButton.contentEdgeInsets = UIEdgeInsets
-        //UIEdgeInsetsMake(<#T##top: CGFloat##CGFloat#>, <#T##left: CGFloat##CGFloat#>, <#T##bottom: CGFloat##CGFloat#>, <#T##right: CGFloat##CGFloat#>)
         backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
         
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = backButton
         self.navigationItem.leftBarButtonItem = leftBarButton
-        print("loginButton\(loginButton.frame)")
         
         
-        let languageButton = UIButton.init(type: .system)
+       /* let languageButton = UIButton.init(type: .system)
         languageButton.frame = CGRect(x:0,y:0,width:60,height:25)
         languageButton.setTitle("ENGLISH".localized, for: .normal)
         languageButton.setTitleColor(UIColor.white, for: .normal)
@@ -84,7 +77,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         AppHelper.setRoundCornersToView(borderColor: UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0), view:languageButton , radius:2.0, width: 1.0)
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = languageButton
-        self.navigationItem.rightBarButtonItem = rightBarButton
+        self.navigationItem.rightBarButtonItem = rightBarButton*/
         
         mobileNumTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         mobileNumTextField.updateUIAsPerTextFieldType()
@@ -109,7 +102,43 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         bgScrollView.delegate = self
+        
+        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        reloadContent()
+        
+
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        reloadContent()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        LanguageUtility.removeObserverForLanguageChange(self)
+        super.viewDidDisappear(animated)
+    }
+    
+    func languageButtonClicked() {
+        
+        self.showLanguageSelectionAlert()
+        
+    }
+    
+    func reloadContent(){
+        DispatchQueue.main.async {
+        self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+        self.loginWithFacebookButton.setTitle("Log In with Facebook".localized, for: .normal)
+        self.orLabel.text = "or".localized
+        self.mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized
+        self.passwordLabel.text = "PASSWORD".localized
+        self.forgotPasswordButton.setTitle("Forgot Password?".localized, for: .normal)
+        self.loginButton.setTitle("LOG IN".localized, for: .normal)
+        self.title = "Log In".localized()
+        }
+    }
+
     
     func animateWithKeyboard(notification: NSNotification) {
         
@@ -141,11 +170,6 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
     }
     
-    func languageButtonClicked(){
-        
-        self.showLanguageSelectionAlert()
-        
-    }
     func backButtonAction(){
         
         _ = self.navigationController?.popViewController(animated: true)

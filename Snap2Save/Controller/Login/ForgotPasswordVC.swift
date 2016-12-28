@@ -9,10 +9,14 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Localize_Swift
 
 class ForgotPasswordVC: UIViewController {
     
+    // Properties
+    var languageSelectionButton: UIButton!
     
+    // Outlets
     @IBOutlet var msgLabel: UILabel!
     
     @IBOutlet var mobileNumberLabel: UILabel!
@@ -21,6 +25,8 @@ class ForgotPasswordVC: UIViewController {
     
     @IBOutlet var submitButton: UIButton!
     
+    
+    // Actions
     @IBAction func submitButtonAction(_ sender: UIButton) {
         /*let ResetPasswordVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResetPasswordVC")
         self.navigationController?.show(ResetPasswordVC, sender: self)*/
@@ -35,6 +41,9 @@ class ForgotPasswordVC: UIViewController {
         
         
     }
+    
+    // MARK: -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,7 +64,7 @@ class ForgotPasswordVC: UIViewController {
         leftBarButton.customView = backButton
         self.navigationItem.leftBarButtonItem = leftBarButton
         
-        let languageButton = UIButton.init(type: .system)
+       /* let languageButton = UIButton.init(type: .system)
         languageButton.frame = CGRect(x:0,y:0,width:60,height:25)
         languageButton.setTitle("ENGLISH".localized, for: .normal)
         languageButton.setTitleColor(UIColor.white, for: .normal)
@@ -65,7 +74,7 @@ class ForgotPasswordVC: UIViewController {
         AppHelper.setRoundCornersToView(borderColor: UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0), view:languageButton , radius:2.0, width: 1.0)
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = languageButton
-        self.navigationItem.rightBarButtonItem = rightBarButton
+        self.navigationItem.rightBarButtonItem = rightBarButton*/
         
         let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         // super.setNavigationBarImage(image: navBarBGImg)
@@ -83,11 +92,45 @@ class ForgotPasswordVC: UIViewController {
         mobileNumberTextField.text_Color =  UIColor.black
         
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: submitButton, radius: 2.0, width: 1.0)
-        msgLabel.text = "forgotPasswordMessage".localized
-        mobileNumberLabel.text = "10-DIGIT CELL PHONE NUMBER".localized
-        submitButton.setTitle("SUBMIT".localized, for: .normal)
         
+        // LANGUAGE BUTTON
+        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        reloadContent()
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        reloadContent()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        LanguageUtility.removeObserverForLanguageChange(self)
+        super.viewDidDisappear(animated)
+    }
+
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: -
+    
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            self.title = "Forgot Password".localized()
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.msgLabel.text = "forgotPasswordMessage".localized()
+            self.mobileNumberLabel.text = "10-DIGIT CELL PHONE NUMBER".localized()
+            self.submitButton.setTitle("SUBMIT".localized(), for: .normal)
+            self.updateBackButtonText()
+        }
+    }
+    
     
     func languageButtonClicked(){
         
@@ -98,14 +141,8 @@ class ForgotPasswordVC: UIViewController {
         _ = self.navigationController?.popViewController(animated: true)
         
     }
+
     
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     func forgotPassword(){
         
         let mobileNumber = mobileNumberTextField.text ?? ""

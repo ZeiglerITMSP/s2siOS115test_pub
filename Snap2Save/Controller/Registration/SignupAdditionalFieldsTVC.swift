@@ -13,6 +13,7 @@ import Localize_Swift
 
 class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITextFieldProtocol{
     
+    var languageSelectionButton: UIButton!
     
     enum DropDownTags:Int {
         case states = 100
@@ -131,37 +132,63 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         
         loadTextFields();
         print(userDetailsDict)
+        
+        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        
+        reloadContent()
+
     }
     
-    func languageButtonClicked(){
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        reloadContent()
+    }
+    
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.view.endEditing(true)
+        LanguageUtility.removeObserverForLanguageChange(self)
+    }
+    
+    
+    func languageButtonClicked() {
         
-        let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-        let englishBtn = UIAlertAction.init(title: "English".localized, style: .default, handler:{
-            (action) in
-            print("Selected English")
-        })
-        let spanishBtn = UIAlertAction.init(title: "Spanish".localized, style: .default, handler:{
-            (action) in
-            print("Selected Spanish")
-            
-        })
-        let cancelBtn = UIAlertAction.init(title: "Cancel", style: .cancel, handler:{
-            (action) in
-            
-        })
-        
-        languageAlert.view.tintColor = APP_GRREN_COLOR
-        languageAlert .addAction(englishBtn)
-        languageAlert.addAction(spanishBtn)
-        languageAlert.addAction(cancelBtn)
-        
-        self.present(languageAlert, animated: true, completion:nil)
+        self.showLanguageSelectionAlert()
         
     }
+    
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.updateBackButtonText()
+            self.earn200PointsLabel.text = "EARN 200 POINTS!".localized()
+            self.msgLabel.text = "AdditionalSignUpMsg".localized()
+            self.userInfoLabel.text = "USER INFORMATION".localized()
+            self.firstNameLabel.text = "FIRST NAME".localized()
+            self.lastNameLabel.text = "LAST NAME".localized()
+            self.addressLabel.text = "ADDRESS".localized()
+            self.addressMsgLabel.text = "AddressMsg".localized()
+            self.addressLine1Label.text = "ADDRESS LINE 1".localized()
+            self.addressLine2Label.text = "ADDRESS LINE 2".localized()
+            self.cityLabel.text = "CITY".localized()
+            self.additionalInfoLabel.text = "ADDITIONAL INFORMATION".localized()
+            self.stateLabel.text = "STATE".localized()
+            self.zipCodeLabel.text = "ZIP CODE".localized()
+            self.genderLabel.text = "GENDER".localized()
+            self.ethnicityLabel.text = "ETHNICITY / RACE".localized()
+            self.ageGroupLabel.text = "AGE GROUP".localized()
+            self.groupCodeLabel.text = "GROUP CODE (IF APPLICABLE)".localized()
+            self.referralCodeLabel.text = "REFERRAL CODE (IF APPLICABLE)".localized()
+            self.registerButton.setTitle("REGISTER".localized(), for: .normal)
+        }
+    }
+
     func backButtonAction(){
-        
         _ = self.navigationController?.popViewController(animated: true)
-        
     }
     
     func loadTextFields(){
