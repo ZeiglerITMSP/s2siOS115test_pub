@@ -112,6 +112,8 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
             self.passwordLabel.text = "NEW PASSWORD".localized()
             self.reEnterPasswordLabel.text = "RE-ENTER NEW PASSWORD".localized()
             self.resetPasswordButton.setTitle("RESET PASSWORD".localized(), for: .normal)
+            self.updateBackButtonText()
+
         }
     }
     

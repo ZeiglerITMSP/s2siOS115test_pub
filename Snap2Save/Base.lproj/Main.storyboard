@@ -130,6 +130,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="JlG-oz-OPw"/>
                     <connections>
+                        <outlet property="currentSelectedLabel" destination="F9J-hw-P33" id="9wJ-0d-hgp"/>
                         <outlet property="downArrowImage" destination="KMR-da-1EC" id="G2H-Qs-fce"/>
                         <outlet property="languageSelectionView" destination="bhI-Rz-HGL" id="0Gk-Fd-vfr"/>
                         <outlet property="loginButton" destination="VYU-aG-co2" id="Shr-KQ-DHR"/>

@@ -16,7 +16,7 @@
 "Cancel" = "Cancelar";
 "Back" = "Espalda";
 "language.button.title" = "ENGLISH";
-
+"selectedLanguageTitle" = "Español";
 
 // EBT
 "User ID" = "Identificación De Usuario";

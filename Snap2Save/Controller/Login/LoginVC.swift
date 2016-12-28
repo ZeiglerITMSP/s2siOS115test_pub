@@ -143,6 +143,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         self.forgotPasswordButton.setTitle("Forgot Password?".localized, for: .normal)
         self.loginButton.setTitle("LOG IN".localized, for: .normal)
         self.title = "Log In".localized()
+            self.updateBackButtonText()
+
         }
     }
 
