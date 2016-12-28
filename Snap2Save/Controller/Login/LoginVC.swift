@@ -80,21 +80,31 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         self.navigationItem.rightBarButtonItem = rightBarButton*/
         
         mobileNumTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
-        mobileNumTextField.updateUIAsPerTextFieldType()
+        
         mobileNumTextField.createBorder(borderColor: UIColor.white,xpos: 0)
         mobileNumTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         mobileNumTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
-        mobileNumTextField.text_Color =  UIColor.white
+//        mobileNumTextField.text_Color =  UIColor.white
+        mobileNumTextField.placeHolderLabel = mobileNumLabel
+        mobileNumTextField.selectedColor = UIColor(white: 1, alpha: 1)
+        mobileNumTextField.normalColor = UIColor(white: 1, alpha: 0.7)
+        mobileNumTextField.updateUIAsPerTextFieldType()
+        
         
         passwordTextField.textFieldType = AITextField.AITextFieldType.PasswordTextField
-        passwordTextField.updateUIAsPerTextFieldType()
+        
         passwordTextField.createBorder(borderColor: UIColor.white,xpos: 0)
         passwordTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         passwordTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         passwordTextField.text_Color =  UIColor.white
+        passwordTextField.placeHolderLabel = passwordLabel
+        passwordTextField.selectedColor = UIColor(white: 1, alpha: 1)
+        passwordTextField.normalColor = UIColor(white: 1, alpha: 0.7)
+        passwordTextField.updateUIAsPerTextFieldType()
         
-        mobileNumTextField.delegate = self
-        passwordTextField.delegate = self
+        
+//        mobileNumTextField.delegate = self
+//        passwordTextField.delegate = self
         mobileNumTextField.aiDelegate = self
         passwordTextField.aiDelegate = self
         
@@ -200,20 +210,15 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         // Dispose of any resources that can be recreated.
     }
     
-    func keyBoardHidden(textField:UITextField){
-        if textField == mobileNumTextField {
-            passwordTextField.becomeFirstResponder()
-        }
-        textField.resignFirstResponder()
+    func keyBoardHidden(textField:UITextField) {
         
-    }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == mobileNumTextField {
             passwordTextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
         }
-        textField.resignFirstResponder()
-        return true
     }
+
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         ////print("scrollViewDidScroll \(scrollView.contentOffset)")

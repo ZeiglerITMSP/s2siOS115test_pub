@@ -15,10 +15,12 @@ import UIKit
     @objc optional func textFieldShouldReturn(_ textField: UITextField) -> Bool
     @objc optional func getSelectedIndexFromPicker(selectedIndex : NSInteger,textField:AITextField)
 }
-class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource
-{
-    enum AITextFieldType
-    {
+
+
+class AITextField: UITextField {
+    
+    enum AITextFieldType {
+        
         case NormalTextField
         case UIPickerTextField
         case UICountryCodePickerTextField
@@ -51,6 +53,8 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
     var selectedColor: UIColor = UIColor(red: 84/255, green: 190/255, blue: 56/255, alpha: 1.0)
     var normalColor: UIColor = UIColor(red: 104/255, green: 128/255, blue: 94/255, alpha: 0.5)
     
+    // MARK: -
+    
     required init(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)!
@@ -64,74 +68,6 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
         super.init(frame: frame)
         delegate = self
         createBorder(borderColor: UIColor.white,xpos: 10)
-    }
-    
-    func createBorder(borderColor:UIColor, xpos:CGFloat) {
-        
-        let border = CALayer()
-        let width = CGFloat(1.0)
-        border.borderColor = borderColor.cgColor
-        border.frame = CGRect(x: xpos, y: self.frame.size.height-width, width: self.frame.size.width-(2*xpos), height: self.frame.size.height)
-        border.borderWidth = width
-        self.layer.addSublayer(border)
-        self.layer.masksToBounds = true
-    }
-    
-    
-    
-    // MARK: Underline
-    func createUnderline(withColor color:UIColor, padding:CGFloat, height:CGFloat) {
-        
-        if (underlineLayer != nil) {
-            underlineLayer.removeFromSuperlayer()
-        }
-        
-        underlineLayer = CALayer()
-        underlineLayer.borderColor = color.cgColor
-        underlineLayer.frame = CGRect(x: padding, y: self.frame.size.height - height, width: self.frame.size.width-(2*padding), height: self.frame.size.height)
-        underlineLayer.borderWidth = height
-        self.layer.addSublayer(underlineLayer)
-        self.layer.masksToBounds = true
-        
-        
-        //..
-        placeHolderLabel?.textColor = color
-    }
-    
-    
-    
-    
-    func setLeftGap (width:Int, placeHolderImage:UIImage)
-    {
-        let leftGap:UIView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: Int(self.frame.size.height)))
-        leftGap.backgroundColor = UIColor.clear
-        
-        let imageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: Int(self.frame.size.height)))
-        
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
-        imageView.image = placeHolderImage
-        
-        leftGap.addSubview(imageView)
-        
-        self.leftView = leftGap;
-        self.leftViewMode = UITextFieldViewMode.always
-
-    }
-    
-    func setRightGap (width:Int, placeHolderImage:UIImage)
-    {
-        let rightGap:UIView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: Int(self.frame.size.height)))
-        rightGap.backgroundColor = UIColor.clear
-        
-        let imageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: Int(self.frame.size.height)))
-        
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
-        imageView.image = placeHolderImage
-        
-        rightGap.addSubview(imageView)
-        
-        self.rightView = rightGap
-        self.rightViewMode = UITextFieldViewMode.always
     }
     
     func updateUIAsPerTextFieldType() {
@@ -178,10 +114,89 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
             break;
         }
         self.textColor = text_Color
-       // self.font = UIFont.systemFont(ofSize: 16)
-       // self.layoutIfNeeded()
+        // self.font = UIFont.systemFont(ofSize: 16)
+        // self.layoutIfNeeded()
         self.tintColor = APP_ORANGE_COLOR
+        self.placeHolderLabel?.textColor = normalColor
     }
+    
+    // MARK: - Style
+    
+    func createBorder(borderColor:UIColor, xpos:CGFloat) {
+        
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = borderColor.cgColor
+        border.frame = CGRect(x: xpos, y: self.frame.size.height-width, width: self.frame.size.width-(2*xpos), height: self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
+    
+    func createUnderline(withColor color:UIColor, padding:CGFloat, height:CGFloat) {
+        
+        if (underlineLayer != nil) {
+            underlineLayer.removeFromSuperlayer()
+        }
+        
+        underlineLayer = CALayer()
+        underlineLayer.borderColor = color.cgColor
+        underlineLayer.frame = CGRect(x: padding, y: self.frame.size.height - height, width: self.frame.size.width-(2*padding), height: self.frame.size.height)
+        underlineLayer.borderWidth = height
+        self.layer.addSublayer(underlineLayer)
+        self.layer.masksToBounds = true
+        
+        
+    }
+    
+    //  MARK: - Placeholder text
+    func updatePlaceHolderTextColor(color: UIColor) {
+        
+        // placeholder text update
+        placeHolderLabel?.textColor = color
+    }
+    
+    
+    
+    // MARK: - Gap
+    
+    func setLeftGap (width:Int, placeHolderImage:UIImage)
+    {
+        let leftGap:UIView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: Int(self.frame.size.height)))
+        leftGap.backgroundColor = UIColor.clear
+        
+        let imageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: Int(self.frame.size.height)))
+        
+        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        imageView.image = placeHolderImage
+        
+        leftGap.addSubview(imageView)
+        
+        self.leftView = leftGap;
+        self.leftViewMode = UITextFieldViewMode.always
+
+    }
+    
+    func setRightGap (width:Int, placeHolderImage:UIImage)
+    {
+        let rightGap:UIView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: Int(self.frame.size.height)))
+        rightGap.backgroundColor = UIColor.clear
+        
+        let imageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: Int(self.frame.size.height)))
+        
+        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        imageView.image = placeHolderImage
+        
+        rightGap.addSubview(imageView)
+        
+        self.rightView = rightGap
+        self.rightViewMode = UITextFieldViewMode.always
+    }
+    
+    
+    
+    // MARK: - Add Pickers
+    
     func addTextPicker()
     {
         self.picker = UIPickerView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 255))
@@ -200,6 +215,9 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
         self.datePicker?.datePickerMode = UIDatePickerMode.time
         self.inputView = self.datePicker
     }
+    
+    
+    // MARK: - ToolBar
     func setToolBar()
     {
         let toolBar = UIToolbar()
@@ -246,8 +264,9 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
         default:
             break
         }
+        
         self.aiDelegate?.keyBoardHidden?(textField: self)
-        self.resignFirstResponder()
+//        self.resignFirstResponder()
     }
     /*
      When user clicked cancel button.
@@ -270,6 +289,8 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
         }
         self.resignFirstResponder()
     }
+    
+    // MARK: -
     
     func setPickerViewTexttoTextField()
     {
@@ -323,34 +344,48 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
         }
         return 100000
     }
+    
+    
+}
+
+
+extension AITextField: UITextFieldDelegate {
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("focused")
+        
         createUnderline(withColor: selectedColor, padding: 0, height: 1)
-        
-        
+        updatePlaceHolderTextColor(color: selectedColor)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("lost focus")
+        
         createUnderline(withColor: normalColor, padding: 0, height: 1)
-        self.aiDelegate?.keyBoardHidden?(textField: self)
+        updatePlaceHolderTextColor(color: normalColor)
+        
+//        self.aiDelegate?.keyBoardHidden?(textField: self)
     }
     
-    /*
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        // ..
-      //  self.aiDelegate?.keyBoardHidden?(textField: self)
+    
+     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+     
+     // ..
+     //  self.aiDelegate?.keyBoardHidden?(textField: self)
         
         let status = self.aiDelegate?.textFieldShouldReturn?(textField)
         if let status = status {
             return status
         } else {
+            
+            self.aiDelegate?.keyBoardHidden?(textField: self)
             return true
         }
         
-    //    return  (self.aiDelegate?.textFieldShouldReturn!(textField))!
-    }*/
+     //    return  (self.aiDelegate?.textFieldShouldReturn!(textField))!
+     }
+    
+}
+
+extension AITextField: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return (self.pickerViewArray?.count)!
@@ -359,14 +394,17 @@ class AITextField: UITextField, UITextFieldDelegate,UIPickerViewDelegate,UIPicke
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+    
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        if self.textFieldType == AITextFieldType.UICountryCodePickerTextField
-        {
+        if self.textFieldType == AITextFieldType.UICountryCodePickerTextField {
+            
             let selectedOption:NSDictionary = self.pickerViewArray?.object(at: row) as! NSDictionary
             return NSAttributedString(string: selectedOption["code"] as! String, attributes: nil)
         }
         let selectedOption:NSString = self.pickerViewArray?.object(at: row) as! NSString
         return NSAttributedString(string: selectedOption as String, attributes: nil)
     }
+    
+    
     
 }

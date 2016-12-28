@@ -114,7 +114,7 @@ class EBTLoginTVC: UITableViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         
-        
+        // remember userID
         let rememberUser = UserDefaults.standard.bool(forKey: kRememberMeEBT)
         rememberMeButton.isSelected = rememberUser
         

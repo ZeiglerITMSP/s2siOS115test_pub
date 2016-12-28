@@ -124,9 +124,19 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
     
 
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        
+//        mobileNumTextField.aiDelegate = nil
+//        reEnterMobileNumTextField.aiDelegate = nil
+//        passwordTextField.aiDelegate = nil
+//        reEnterPasswordTextField.aiDelegate = nil
+//        zipCodeTextField.aiDelegate = nil
+//        emailTextField.aiDelegate = nil
+//        reEnterEmailTextField.aiDelegate = nil
+        
         self.view.endEditing(true)
         LanguageUtility.removeObserverForLanguageChange(self)
+        
+        super.viewDidDisappear(animated)
     }
     
 
@@ -317,33 +327,11 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
         }
         else if textField == emailTextField {
             reEnterEmailTextField.becomeFirstResponder()
+        } else {
+          textField.resignFirstResponder()  
         }
-        textField.resignFirstResponder()
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == mobileNumTextField{
-            reEnterMobileNumTextField.becomeFirstResponder()
-        }
-        else if textField == reEnterMobileNumTextField{
-            passwordTextField.becomeFirstResponder()
-        }
-            
-        else if textField == passwordTextField{
-            reEnterPasswordTextField.becomeFirstResponder()
-        }
-        else if textField == reEnterPasswordTextField{
-            zipCodeTextField.becomeFirstResponder()
-        }
-        else if textField == zipCodeTextField{
-            emailTextField.becomeFirstResponder()
-        }
-        else if textField == emailTextField {
-            reEnterEmailTextField.becomeFirstResponder()
-        }
-        textField.resignFirstResponder()
-        return true
-    }
     
     /*
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
