@@ -19,6 +19,8 @@ class EBTLoginTVC: UITableViewController {
         case sumbit
     }
     
+    let kRememberMeEBT = "kRememberMeEBT"
+    let kUserIdEBT = "kUserIdEBT"
     
     // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
@@ -46,6 +48,10 @@ class EBTLoginTVC: UITableViewController {
         
         self.view.endEditing(true)
         
+        if rememberMeButton.isSelected {
+            saveUserID()
+        }
+        
         validateLoginpageUrl()
     }
     
@@ -61,7 +67,12 @@ class EBTLoginTVC: UITableViewController {
     
     @IBAction func rememberMeAction(_ sender: UIButton) {
         
+        sender.isSelected = !sender.isSelected
+        UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
         
+        if sender.isSelected == false {
+            UserDefaults.standard.removeObject(forKey: kUserIdEBT)
+        }
         
     }
     
@@ -83,7 +94,13 @@ class EBTLoginTVC: UITableViewController {
         
         ebtWebView.responder = self
         
-        HUD.allowsInteraction = true
+//        HUD.dimsBackground = false
+//        HUD.allowsInteraction = false
+//        
+//        HUD.show(.progress)
+//        HUD.hide()
+        
+        
         
         // language selection
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
@@ -98,9 +115,15 @@ class EBTLoginTVC: UITableViewController {
         
         
         
-        let rememberUser = UserDefaults.standard.bool(forKey: "EBT_rememberme")
+        let rememberUser = UserDefaults.standard.bool(forKey: kRememberMeEBT)
         rememberMeButton.isSelected = rememberUser
-    
+        
+        if rememberUser {
+            let userId = UserDefaults.standard.value(forKey: kUserIdEBT) as? String
+            if userId != nil {
+                authenticateUserWithTouchID()
+            }
+        }
         
     }
     
@@ -120,8 +143,6 @@ class EBTLoginTVC: UITableViewController {
         
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
         
-        
-        authenticateUser()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -297,7 +318,7 @@ class EBTLoginTVC: UITableViewController {
     
     // MARK: - Touch ID
     
-    func authenticateUser() {
+    func authenticateUserWithTouchID() {
         let context = LAContext()
         var error: NSError?
         
@@ -311,26 +332,32 @@ class EBTLoginTVC: UITableViewController {
                     if success {
                         self.autofillUserID()
                     } else {
-                        let ac = UIAlertController(title: "Authentication failed", message: "Sorry!", preferredStyle: .alert)
-                        ac.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(ac, animated: true)
+//                        let ac = UIAlertController(title: "Authentication failed", message: "Sorry!", preferredStyle: .alert)
+//                        ac.addAction(UIAlertAction(title: "OK", style: .default))
+//                        self.present(ac, animated: true)
                     }
                 }
             }
         } else {
-//            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
-//            ac.addAction(UIAlertAction(title: "OK", style: .default))
-//            present(ac, animated: true)
+            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
         }
     }
     
     func autofillUserID() {
         
-//        UserDefaults.standard.value(forKey: "")
-        userIdField.contentTextField.text = "asdf"
-        
+        let userId = UserDefaults.standard.value(forKey: kUserIdEBT) as? String
+        userIdField.contentTextField.text = userId
     }
     
+    func saveUserID() {
+        
+        if let userId = userIdField.contentTextField.text {
+            UserDefaults.standard.set(userId, forKey: kUserIdEBT)
+        }
+        
+    }
     
 }
 
