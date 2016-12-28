@@ -34,6 +34,7 @@ class EBTCardNumberTVC: UITableViewController {
     
     @IBAction func nextAction(_ sender: UIButton) {
         
+        self.view.endEditing(true)
         autoFill(cardNumber: cardNumberField.contentTextField.text!)
     }
     
@@ -87,7 +88,7 @@ class EBTCardNumberTVC: UITableViewController {
     
     func backAction() {
         
-        showAlert(title: "Are you sure ?", message: "The registration process will be cancelled.", action: #selector(cancelProcess))
+        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {

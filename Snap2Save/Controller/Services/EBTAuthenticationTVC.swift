@@ -42,6 +42,7 @@ class EBTAuthenticationTVC: UITableViewController {
     @IBAction func regenerateAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
+        self.view.endEditing(true)
         regenerate()
     }
     
@@ -107,7 +108,8 @@ class EBTAuthenticationTVC: UITableViewController {
         
         regenerateActivityIndicator.stopAnimating()
         
-        let jsStatusMessage = "$('.completionText').text()"
+//        let jsStatusMessage = "$('.completionText').text()"
+        let jsStatusMessage = "$('.completionText').first().text()"
         
         ebtWebView.webView.evaluateJavaScript(jsStatusMessage) { (result, error) in
             if error != nil {
@@ -196,7 +198,7 @@ class EBTAuthenticationTVC: UITableViewController {
 
     func backAction() {
         
-        showAlert(title: "Are you sure ?", message: "The registration process will be cancelled.", action: #selector(cancelProcess))
+        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
