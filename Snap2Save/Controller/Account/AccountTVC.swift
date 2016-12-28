@@ -8,6 +8,10 @@
 
 import UIKit
 import Localize_Swift
+import Alamofire
+import SwiftyJSON
+import PKHUD
+
 
 class AccountTVC: UITableViewController {
 
@@ -41,7 +45,7 @@ class AccountTVC: UITableViewController {
         
         infoArray = ["Auto Log In","Personal Information","Preferences","Change Password"];
         
-
+        reloadContent()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -55,9 +59,7 @@ class AccountTVC: UITableViewController {
     }
     
     func languageButtonClicked() {
-        
         self.showLanguageSelectionAlert()
-        
     }
 
     func reloadContent(){
@@ -104,6 +106,89 @@ class AccountTVC: UITableViewController {
         return 20.0
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            if indexPath.row == 0 {
+               self.showAlert()
+            }
+            
+        }
+    }
+    func showAlert() {
+        
+        let logOutAlert = UIAlertController.init(title: nil, message: "Are you sure \nDo you want to Logout", preferredStyle: .alert)
+        let englishBtn = UIAlertAction.init(title: "Ok", style: .default, handler:{
+            (action) in
+           self.userLogout()
+        })
+        
+        let cancelBtn = UIAlertAction.init(title: "Cancel".localized(), style: .cancel, handler:nil)
+        
+        logOutAlert.view.tintColor = APP_GRREN_COLOR
+        logOutAlert .addAction(englishBtn)
+        logOutAlert.addAction(cancelBtn)
+        
+        self.present(logOutAlert, animated: true, completion:nil)
+
+    }
+    
+    func userLogout() {
+        HUD.dimsBackground = false
+        HUD.allowsInteraction = false
+        HUD.show(.progress)
+
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
+        let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
+
+        let parameters = ["user_id": user_id,
+                          "auth_token": auth_token,
+                          "platform":"1",
+                          "version_code": "1",
+                          "version_name": "1",
+                          "device_id": device_id,
+                          "push_token":"123123",
+                          "language":"en"
+            ] as [String : Any]
+        
+        
+        print(parameters)
+        
+        let url = String(format: "%@/logOut", hostUrl)
+        print(url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            HUD.hide()
+            switch response.result {
+               
+            case .success:
+                let json = JSON(data: response.data!)
+                print("json response\(json)")
+                
+                let appDomain = Bundle.main.bundleIdentifier
+                UserDefaults.standard.removePersistentDomain(forName: appDomain!)
+                
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil);
+                let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
+
+                let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+                initialViewController.pushViewController(loginVc, animated: true)
+
+                UIApplication.shared.keyWindow?.rootViewController = initialViewController
+                
+                break
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    
+                }
+                print(error)
+                break
+            }
+            
+
+    }
+    }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

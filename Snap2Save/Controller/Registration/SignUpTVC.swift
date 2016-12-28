@@ -161,7 +161,17 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
             self.reEnterEmailLabel.text = "RE-ENTER EMAIL".localized()
             self.contactPreferenceSegmentControl.setTitle("Text Message".localized(), forSegmentAt: 0)
             self.contactPreferenceSegmentControl.setTitle("Email".localized(), forSegmentAt: 1)
-            self.terms_serviceLabel.text = "Terms Of Service".localized()
+            let msgStr = "Terms Of Service".localized()
+            let string              = msgStr
+            let rangeMsgStr            = (string as NSString).range(of: "Terms of Service.")
+            let attributedString    = NSMutableAttributedString(string: string)
+            
+            attributedString.addAttribute(NSLinkAttributeName, value:("https://appitventures.teamwork.com/dashboard"), range: rangeMsgStr)
+            attributedString.addAttribute(NSUnderlineStyleAttributeName, value: NSNumber(value: 1), range: rangeMsgStr)
+            attributedString.addAttribute(NSUnderlineColorAttributeName, value: APP_GRREN_COLOR, range: rangeMsgStr)
+            attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red , range: rangeMsgStr)
+            self.terms_serviceLabel.attributedText = attributedString
+
             self.continueButton.setTitle("CONTINUE".localized(), for: .normal)
         }
     }
@@ -185,9 +195,9 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
         
         
         
-        let msgStr = "Terms Of Service".localized
+        let msgStr = "Terms Of Service".localized()
         let string              = msgStr
-        let rangeMsgStr            = (string as NSString).range(of: "Terms of Service")
+        let rangeMsgStr            = (string as NSString).range(of: "Terms of Service.")
         let attributedString    = NSMutableAttributedString(string: string)
         
         attributedString.addAttribute(NSLinkAttributeName, value:("https://appitventures.teamwork.com/dashboard"), range: rangeMsgStr)
@@ -406,7 +416,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
             showAlert(title: "", message: "Password doesn't match")
             return false
         }
-        else if zipCodeTextField.text?.characters.count == 0{
+        else if zipCodeTextField.text?.characters.count == 0 {
             showAlert(title: "", message: "Please enter ZipCode")
             return false
         }
@@ -418,7 +428,6 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
             }
             
         }
-        
         else if reEnterEmailTextField.text != emailTextField.text{
             showAlert(title: "", message: "Emails doesn't match")
             return false

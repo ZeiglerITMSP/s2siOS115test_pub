@@ -126,13 +126,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
                             let json = JSON(data: response.data!)
                             print("json response\(json)")
-                            
-                            let appDomain = Bundle.main.bundleIdentifier
-                            UserDefaults.standard.removePersistentDomain(forName: appDomain!)
-                            
-                            let loginVc:WelcomePageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC") as! WelcomePageVC
-                            initialViewController.pushViewController(loginVc, animated: true)
-                            
+                            let responseDict = json.dictionaryObject
+                            let code = responseDict?["code"] as! NSNumber
+                            if code.intValue == 200{
+                                let appDomain = Bundle.main.bundleIdentifier
+                                UserDefaults.standard.removePersistentDomain(forName: appDomain!)
+                                
+                                let loginVc:WelcomePageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC") as! WelcomePageVC
+                                initialViewController.pushViewController(loginVc, animated: true)
+
+                            }
+
+                            else {
+                                if let responseDict = json.dictionaryObject {
+                                    let alertMessage = responseDict["message"] as! String
+                                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                                    
+                                    
+                                    let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+                                    })
+                                    
+                                    alertController.addAction(okAction)
+                                    
+                                    DispatchQueue.main.async {
+                                        
+                                        UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+                                    }
+                                }
+                            }
                             break
                             
                         case .failure(let error):

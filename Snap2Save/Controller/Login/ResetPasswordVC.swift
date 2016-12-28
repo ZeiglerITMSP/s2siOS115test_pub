@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import PKHUD
 
 class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     
@@ -83,7 +84,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.isTranslucent = false
+       // self.navigationController?.navigationBar.isTranslucent = false
         //let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         //self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
         self.navigationController?.navigationBar.barTintColor = APP_GRREN_COLOR
@@ -131,7 +132,10 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     }
     */
     func resetPassword(){
-        
+        HUD.dimsBackground = false
+        HUD.allowsInteraction = false
+        HUD.show(.progress)
+        self.view.endEditing(true)
         let password = passwordTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id = self.user_id ?? ""
@@ -156,7 +160,10 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
             
             switch response.result {
             case .success:
-                
+                DispatchQueue.main.async {
+                    HUD.hide()
+                }
+
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
                 
@@ -167,6 +174,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
                         (action) in
                         let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
                         self.navigationController?.show(loginVc, sender: self)
+                        self.view.endEditing(true)
                     })
                     
                     alertController.addAction(defaultAction)
@@ -180,7 +188,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    //  _ = EZLoadingActivity.hide()
+                    HUD.hide()
                 }
                 print(error)
                 break
