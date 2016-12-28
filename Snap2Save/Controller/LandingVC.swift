@@ -13,6 +13,7 @@ class LandingVC: UIViewController {
 
 
     // Outlets
+    @IBOutlet var currentSelectedLabel: UILabel!
     @IBOutlet var downArrowImage: UIImageView!
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var registerButton: UIButton!
@@ -61,6 +62,7 @@ class LandingVC: UIViewController {
             self.selectLanguageLabel.text = "SELECT LANGUAGE".localized()
             self.loginButton.setTitle("LOG IN".localized() , for: .normal)
             self.registerButton.setTitle("REGISTER".localized(), for: .normal)
+            self.currentSelectedLabel.text = "selectedLanguageTitle".localized()
         }
         
     }

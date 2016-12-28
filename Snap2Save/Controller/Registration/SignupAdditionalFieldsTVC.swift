@@ -185,11 +185,15 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             self.groupCodeLabel.text = "GROUP CODE (IF APPLICABLE)".localized()
             self.referralCodeLabel.text = "REFERRAL CODE (IF APPLICABLE)".localized()
             self.registerButton.setTitle("REGISTER".localized(), for: .normal)
+            self.updateBackButtonText()
+
         }
     }
 
     func backButtonAction(){
         _ = self.navigationController?.popViewController(animated: true)
+        self.view.endEditing(true)
+
     }
     
     func loadTextFields(){
@@ -309,15 +313,6 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         zipCodeTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         zipCodeTextField.text_Color =  UIColor.black
         
-        /*  firstNameTextField.delegate = self
-         lastNameTextField.delegate = self
-         addressLine1TextField.delegate = self
-         addressLine2TextField.delegate = self
-         genderTextField.delegate = self
-         ageGroupTextField.delegate = self
-         ethnicityTextField.delegate = self
-         groupCodeTextField.delegate = self
-         referralCodeTextField.delegate = self*/
         
         firstNameTextField.aiDelegate = self
         lastNameTextField.aiDelegate = self
@@ -426,6 +421,43 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
      }
      */
     func keyBoardHidden(textField: UITextField) {
+        if textField == firstNameTextField{
+            lastNameTextField.becomeFirstResponder()
+        }
+        else if textField == lastNameTextField{
+            addressLine1TextField.becomeFirstResponder()
+        }
+            
+        else if textField == addressLine1TextField{
+            addressLine2TextField.becomeFirstResponder()
+        }
+        else if textField == addressLine2TextField{
+            cityTextField.becomeFirstResponder()
+        }
+        else if textField == cityTextField{
+            stateTextField.becomeFirstResponder()
+        }
+        else if textField == stateTextField {
+            zipCodeTextField.becomeFirstResponder()
+        }
+        else if textField == zipCodeTextField {
+            genderTextField.becomeFirstResponder()
+        }
+        else if textField == genderTextField {
+            ageGroupTextField.becomeFirstResponder()
+        }
+        else if textField == ageGroupTextField {
+            ethnicityTextField.becomeFirstResponder()
+        }
+        else if textField == ethnicityTextField {
+            groupCodeTextField.becomeFirstResponder()
+        }
+        else if textField == groupCodeTextField {
+            referralCodeTextField.becomeFirstResponder()
+        }else {
+            textField.resignFirstResponder()
+        }
+
         
     }
     
