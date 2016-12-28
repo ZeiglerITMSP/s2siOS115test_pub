@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import PKHUD
 
 class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScrollViewDelegate {
     
@@ -85,6 +86,9 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         mobileNumTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         mobileNumTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         mobileNumTextField.text_Color =  UIColor.white
+        mobileNumTextField.selectedColor = UIColor.red //UIColor(white: 0, alpha: 0.8)
+        mobileNumTextField.normalColor = UIColor.blue
+        
         
         passwordTextField.textFieldType = AITextField.AITextFieldType.PasswordTextField
         passwordTextField.updateUIAsPerTextFieldType()
@@ -92,6 +96,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         passwordTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         passwordTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         passwordTextField.text_Color =  UIColor.white
+        passwordTextField.selectedColor = UIColor(white: 0, alpha: 0.8)
+        
         
         mobileNumTextField.delegate = self
         passwordTextField.delegate = self
@@ -242,6 +248,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     func userLogin(){
         
+        HUD.dimsBackground = false
+        HUD.allowsInteraction = false
+        
+        HUD.show(.progress)
         let password = passwordTextField.text ?? ""
         let mobileNumber = mobileNumTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
@@ -266,6 +276,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             
             switch response.result {
             case .success:
+                DispatchQueue.main.async {
+                    HUD.hide()
+                }
+
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
                 let responseDict = json.dictionaryObject
@@ -294,7 +308,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    //  _ = EZLoadingActivity.hide()
+                    HUD.hide()
                 }
                 print(error)
                 break

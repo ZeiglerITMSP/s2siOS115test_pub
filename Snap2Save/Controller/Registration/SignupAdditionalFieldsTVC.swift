@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Localize_Swift
+import PKHUD
 
 class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITextFieldProtocol{
     
@@ -430,6 +431,10 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     func userSignUp(){
         
+        HUD.dimsBackground = false
+        HUD.allowsInteraction = false
+        HUD.show(.progress)
+
         let password = userDetailsDict["password"] as! String
         let phone_number = userDetailsDict["phone_number"] as! String
         let email = userDetailsDict["email"] as! String
@@ -438,9 +443,9 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let contactPrefernce: Int = userDetailsDict["contact_preference"] as! Int
         var contact_preference = "1"
         if contactPrefernce == 0 {
-            contact_preference = "1"
-        } else{
             contact_preference = "2"
+        } else{
+            contact_preference = "1"
         }
         
         let first_name = firstNameTextField.text ?? ""
@@ -463,6 +468,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             ethnicity  = String.init(format: "%d", SelectedEthnicityIndex)
         }
         let referral_code = referralCodeTextField.text ?? ""
+        let group_code = groupCodeTextField.text ?? ""
         let platform = "1"
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let push_token = "123213"
@@ -477,6 +483,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                                   "gender": gender,
                                   "age_group": age_group,
                                   "referral_code": referral_code,
+                                  "group_code": group_code,
                                   "ethnicity": ethnicity]
         
         let parameters = ["password" : password,
@@ -504,6 +511,10 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             
             switch response.result {
             case .success:
+                DispatchQueue.main.async {
+                    HUD.hide()
+                }
+
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
                 
@@ -528,7 +539,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    //  _ = EZLoadingActivity.hide()
+                    HUD.hide()
                 }
                 print(error)
                 break

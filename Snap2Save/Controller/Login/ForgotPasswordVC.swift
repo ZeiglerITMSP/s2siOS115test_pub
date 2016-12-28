@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Localize_Swift
+import PKHUD
 
 class ForgotPasswordVC: UIViewController {
     
@@ -145,6 +146,10 @@ class ForgotPasswordVC: UIViewController {
     
     func forgotPassword(){
         
+        HUD.dimsBackground = false
+        HUD.allowsInteraction = false
+        HUD.show(.progress)
+        
         let mobileNumber = mobileNumberTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         
@@ -169,7 +174,10 @@ class ForgotPasswordVC: UIViewController {
                 
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
-                
+                DispatchQueue.main.async {
+                    HUD.hide()
+                }
+
                 if let responseDict = json.dictionaryObject {
                     let alertMessage = responseDict["message"] as! String
                     let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
@@ -191,7 +199,7 @@ class ForgotPasswordVC: UIViewController {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    //  _ = EZLoadingActivity.hide()
+                    HUD.hide()
                 }
                 print(error)
                 break
