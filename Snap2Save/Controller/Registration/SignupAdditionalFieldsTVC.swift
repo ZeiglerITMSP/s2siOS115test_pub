@@ -58,12 +58,12 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     @IBOutlet var genderLabel: UILabel!
     @IBOutlet var additionalInfoLabel: UILabel!
     
-   
+    
     @IBOutlet var ageGroupTextField: AITextField!
     @IBOutlet var ageGroupLabel: UILabel!
     @IBOutlet var ethnicityLabel: UILabel!
     @IBOutlet var ethnicityTextField: AITextField!
-
+    
     @IBOutlet var registerButton: UIButton!
     
     @IBOutlet var referralCodeTextField: AITextField!
@@ -87,17 +87,17 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.title = "Register"
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 60
         self.navigationController?.navigationBar.isHidden = false
-
+        
         let backButton = UIButton.init(type: .custom)
         backButton.frame = CGRect(x:0,y:0,width:80,height:25)
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
@@ -128,12 +128,11 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         // super.setNavigationBarImage(image: navBarBGImg)
         self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-
-        loadTextFields();
         
+        loadTextFields();
         print(userDetailsDict)
     }
-
+    
     func languageButtonClicked(){
         
         let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -164,7 +163,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         _ = self.navigationController?.popViewController(animated: true)
         
     }
-
+    
     func loadTextFields(){
         
         stateTextField.tag = 100
@@ -172,10 +171,10 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         ageGroupTextField.tag = 102
         ethnicityTextField.tag = 103
         
-        
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: registerButton, radius: 2.0, width: 1.0)
         firstNameTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         firstNameTextField.updateUIAsPerTextFieldType()
+        
         firstNameTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         firstNameTextField.placeHolderLabel = firstNameLabel
         //        mobileNumTextField.createBorder(borderColor: UIColor.red,xpos: 0)
@@ -191,7 +190,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         lastNameTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         lastNameTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         lastNameTextField.text_Color =  UIColor.black
-
+        
         addressLine1TextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         addressLine1TextField.updateUIAsPerTextFieldType()
         addressLine1TextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
@@ -218,7 +217,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         genderTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         genderTextField.setRightGap(width: 10, placeHolderImage: UIImage.init(named: "ic_downarrow_input")!)
         genderTextField.text_Color =  UIColor.black
-
+        
         ageGroupTextField.textFieldType = AITextField.AITextFieldType.TextPickerTextField
         ageGroupTextField.updateUIAsPerTextFieldType()
         ageGroupTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
@@ -227,7 +226,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         ageGroupTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         ageGroupTextField.setRightGap(width:10, placeHolderImage: UIImage.init(named: "ic_downarrow_input")!)
         ageGroupTextField.text_Color =  UIColor.black
-
+        
         ethnicityTextField.textFieldType = AITextField.AITextFieldType.TextPickerTextField
         ethnicityTextField.updateUIAsPerTextFieldType()
         ethnicityTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
@@ -236,7 +235,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         ethnicityTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         ethnicityTextField.setRightGap(width: 10, placeHolderImage:  UIImage.init(named: "ic_downarrow_input")!)
         ethnicityTextField.text_Color =  UIColor.black
-
+        
         groupCodeTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         groupCodeTextField.updateUIAsPerTextFieldType()
         groupCodeTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
@@ -245,7 +244,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         groupCodeTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         groupCodeTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         groupCodeTextField.text_Color =  UIColor.black
-
+        
         referralCodeTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         referralCodeTextField.updateUIAsPerTextFieldType()
         referralCodeTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
@@ -272,7 +271,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         stateTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         stateTextField.setRightGap(width: 10, placeHolderImage:UIImage.init(named: "ic_downarrow_input")!)
         stateTextField.text_Color =  UIColor.black
-
+        
         zipCodeTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         zipCodeTextField.updateUIAsPerTextFieldType()
         zipCodeTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
@@ -281,16 +280,16 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         zipCodeTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         zipCodeTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         zipCodeTextField.text_Color =  UIColor.black
-
-      /*  firstNameTextField.delegate = self
-        lastNameTextField.delegate = self
-        addressLine1TextField.delegate = self
-        addressLine2TextField.delegate = self
-        genderTextField.delegate = self
-        ageGroupTextField.delegate = self
-        ethnicityTextField.delegate = self
-        groupCodeTextField.delegate = self
-        referralCodeTextField.delegate = self*/
+        
+        /*  firstNameTextField.delegate = self
+         lastNameTextField.delegate = self
+         addressLine1TextField.delegate = self
+         addressLine2TextField.delegate = self
+         genderTextField.delegate = self
+         ageGroupTextField.delegate = self
+         ethnicityTextField.delegate = self
+         groupCodeTextField.delegate = self
+         referralCodeTextField.delegate = self*/
         
         firstNameTextField.aiDelegate = self
         lastNameTextField.aiDelegate = self
@@ -304,7 +303,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         stateTextField.aiDelegate = self
         cityTextField.aiDelegate = self
         zipCodeTextField.aiDelegate = self
-
+        
         genderArray = ["Male","Female"];
         ageGroupArray = ["16-25","26-35","36-45","46-55","56+"]
         ethnicityArray = ["1","2"]
@@ -331,73 +330,73 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 14
     }
-
+    
     /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
+     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+     
+     // Configure the cell...
+     
+     return cell
+     }
+     */
+    
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
     /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     func keyBoardHidden(textField: UITextField) {
         
     }
@@ -408,29 +407,50 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let phone_number = userDetailsDict["phone_number"] as! String
         let email = userDetailsDict["email"] as! String
         let zipcode = userDetailsDict["zipcode"] as! String
-        let social_id = userDetailsDict["social_id"] as! String 
+        let social_id = userDetailsDict["social_id"] as! String
         let contactPrefernce: Int = userDetailsDict["contact_preference"] as! Int
         var contact_preference = "1"
         if contactPrefernce == 0 {
             contact_preference = "1"
         } else{
-                contact_preference = "2"
+            contact_preference = "2"
         }
-
+        
         let first_name = firstNameTextField.text ?? ""
         let last_name = lastNameTextField.text ?? ""
         let address_line1 = addressLine1TextField.text ?? ""
         let address_line2 = addressLine2TextField.text ?? ""
         let city = cityTextField.text ?? ""
         let state = stateTextField.text ?? ""
-        let gender: String =  String.init(format: "%d", selectedGenderIndex)
-        let age_group : String = String.init(format: "%d", selectedAgeGroupIndex)
+        var gender = ""
+        var age_group = ""
+        var ethnicity = ""
+        
+        if selectedGenderIndex != nil{
+            gender =  String.init(format: "%d", selectedGenderIndex)
+        }
+        if selectedAgeGroupIndex != nil{
+            age_group  = String.init(format: "%d", selectedAgeGroupIndex)
+        }
+        if SelectedEthnicityIndex != nil{
+            ethnicity  = String.init(format: "%d", SelectedEthnicityIndex)
+        }
         let referral_code = referralCodeTextField.text ?? ""
-        let ethnicity : String = String.init(format: "%d", SelectedEthnicityIndex)
         let platform = "1"
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let push_token = "123213"
         let language = "en"
+        
+        let additionalInfoDict : Dictionary = ["first_name": first_name,
+                                  "last_name": last_name,
+                                  "address_line1": address_line1,
+                                  "address_line2": address_line2,
+                                  "city": city,
+                                  "state": state,
+                                  "gender": gender,
+                                  "age_group": age_group,
+                                  "referral_code": referral_code,
+                                  "ethnicity": ethnicity]
         
         let parameters = ["password" : password,
                           "phone_number" : phone_number,
@@ -438,16 +458,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                           "zipcode": zipcode,
                           "social_id":social_id,
                           "contact_preference": contact_preference,
-                          "first_name": first_name,
-                          "last_name": last_name,
-                          "address_line1": address_line1,
-                          "address_line2": address_line2,
-                          "city": city,
-                          "state": state,
-                          "gender": gender,
-                          "age_group": age_group,
-                          "referral_code": referral_code,
-                          "ethnicity": ethnicity,
+                          "additional_info" : additionalInfoDict,
                           "platform": platform,
                           "version_code":"1",
                           "version_name":"1",
@@ -455,11 +466,11 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                           "push_token": push_token,
                           "language": language,
                           "signup_type": "1"
-        ] as [String : Any]
+            ] as [String : Any]
         
         print(parameters)
-
-       
+        
+        
         let url = String(format: "%@/signUp", hostUrl)
         print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -470,31 +481,36 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                 print("json response\(json)")
                 
                 if (json.dictionary != nil){
-                    let jsonDict = json
-                   // let codeVal : NSDictionary = (jsonDict as? NSDictionary)!
-                    
-                    if let responseDict = json.dictionaryObject {
-                        let alertMessage = responseDict["message"] as! String
-                        self.showAlert(title: "", message: alertMessage)
+                    // let jsonDict = json
+                    let responseDict = json.dictionaryObject
+                    let code = responseDict?["code"] as! NSNumber
+                    if code.intValue == 200{
+                        self.showSignUpAlert();
+                        self.view.endEditing(true)
                     }
-                    
+                    else{
+                        if let responseDict = json.dictionaryObject {
+                            let alertMessage = responseDict["message"] as! String
+                            self.showAlert(title: "", message: alertMessage)
+                        }
+                        
+                    }
                 }
-            
                 break
-            
+                
             case .failure(let error):
-            
+                
                 DispatchQueue.main.async {
-                  //  _ = EZLoadingActivity.hide()
+                    //  _ = EZLoadingActivity.hide()
                 }
                 print(error)
                 break
             }
-    
-    
+            
+            
         }
- 
-
+        
+        
     }
     
     func getSelectedIndexFromPicker(selectedIndex: NSInteger, textField: AITextField) {
@@ -516,16 +532,31 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     func showSignUpAlert(){
         
-        let signUpAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-        let englishBtn = UIAlertAction.init(title: "Thank you for joining Snap2Save!".localized(), style: .default, handler:{
-            (action) in
-            print("Selected English")
-        })
-        signUpAlert.view.tintColor = APP_GRREN_COLOR
-        signUpAlert .addAction(englishBtn)
+        let titleStr : String = "SignUpAlertTitle".localized()
+        let messageStr : String = "SignUpAlertMessage".localized()
         
+        let signUpAlert = UIAlertController.init(title: titleStr, message:messageStr, preferredStyle: .alert)
+        
+        let hogan = NSMutableAttributedString(string: titleStr)
+        
+        //Make the attributes, like size and color
+        hogan.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFont(ofSize: 16.0), range: NSMakeRange(0,NSString(string: hogan.string).length))
+        
+        hogan.addAttribute(NSForegroundColorAttributeName, value: APP_GRREN_COLOR, range: NSMakeRange(0, NSString(string: hogan.string).length))
+        
+        signUpAlert.setValue(hogan, forKey: "attributedTitle")
+        
+        let closeBtn = UIAlertAction.init(title: "Close".localized(), style: .default, handler:{
+            (action) in
+            let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+            self.navigationController?.show(loginVc, sender: self)
+            
+        })
+        
+        signUpAlert.view.tintColor = APP_GRREN_COLOR
+        signUpAlert .addAction(closeBtn)
         self.present(signUpAlert, animated: true, completion:nil)
-
+        
     }
     
 }

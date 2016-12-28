@@ -7,9 +7,26 @@
 //
 
 import UIKit
+import Localize_Swift
 
 class AccountTVC: UITableViewController {
 
+    var languageSelectionButton: UIButton!
+    var infoArray : NSMutableArray!
+    
+    @IBOutlet var autoLoginLabel: UILabel!
+    
+    @IBOutlet var preferencesLabel: UILabel!
+    @IBOutlet var personalInfoLabel: UILabel!
+    
+    @IBOutlet var logOutLabel: UILabel!
+    @IBOutlet var changePasswordLabel: UILabel!
+    
+    @IBOutlet var loginSwitch: UISwitch!
+    
+    @IBAction func autoLoginSwitchAction(_ sender: UISwitch) {
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,8 +35,41 @@ class AccountTVC: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        
+        infoArray = ["Auto Log In","Personal Information","Preferences","Change Password"];
+        
+
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        reloadContent()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        LanguageUtility.removeObserverForLanguageChange(self)
+        super.viewDidDisappear(animated)
+    }
+    
+    func languageButtonClicked() {
+        
+        self.showLanguageSelectionAlert()
+        
     }
 
+    func reloadContent(){
+        
+        autoLoginLabel.text = "Auto Log In".localized()
+        personalInfoLabel.text = "Personal Information".localized()
+        preferencesLabel.text = "Preferences".localized()
+        changePasswordLabel.text = "Change Password".localized()
+        logOutLabel.text = "Log Out".localized()
+        
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -29,12 +79,29 @@ class AccountTVC: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        if section == 0{
+            return infoArray.count
+        }
+        else if section == 1{
+            return 1
+        }
+        else{
+            return 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if section == 0 {
+            return 0.1
+        }
+        
+        return 20.0
     }
 
     /*

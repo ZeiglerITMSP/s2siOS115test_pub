@@ -882,7 +882,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -923,7 +923,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -998,7 +998,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1040,7 +1040,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1076,7 +1076,7 @@
                                                             </constraints>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                                     <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1155,7 +1155,7 @@
                                                                     </constraints>
                                                                     <nil key="textColor"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <textInputTraits key="textInputTraits"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1367,7 +1367,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1409,7 +1409,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1748,7 +1748,7 @@ Your registration is now complete.</string>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKV-XA-LTN">
                                                 <rect key="frame" x="20" y="611" width="335" height="40"/>
-                                                <color key="backgroundColor" red="0.92549019610000005" green="0.4941176471" blue="0.20000000000000001" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.92549019610000005" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Byq-Bu-jj4"/>
                                                 </constraints>
@@ -1881,7 +1881,7 @@ Your registration is now complete.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNx-RB-Het">
-                                <rect key="frame" x="30" y="325.5" width="315" height="40"/>
+                                <rect key="frame" x="30" y="345.5" width="315" height="40"/>
                                 <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="imT-4p-NJQ"/>
@@ -1905,7 +1905,7 @@ Your registration is now complete.</string>
                             <constraint firstAttribute="trailing" secondItem="rzA-3S-2Ke" secondAttribute="trailing" constant="25" id="fbp-7e-xuz"/>
                             <constraint firstAttribute="trailing" secondItem="q89-8F-B9S" secondAttribute="trailing" constant="20" id="q3Z-ob-7f8"/>
                             <constraint firstItem="LIa-Po-7qK" firstAttribute="top" secondItem="q89-8F-B9S" secondAttribute="bottom" constant="50" id="rAQ-ef-uQF"/>
-                            <constraint firstItem="cNx-RB-Het" firstAttribute="top" secondItem="rzA-3S-2Ke" secondAttribute="bottom" constant="80" id="rlO-ha-hSH"/>
+                            <constraint firstItem="cNx-RB-Het" firstAttribute="top" secondItem="rzA-3S-2Ke" secondAttribute="bottom" constant="100" id="rlO-ha-hSH"/>
                             <constraint firstItem="q89-8F-B9S" firstAttribute="leading" secondItem="dyG-Na-tTT" secondAttribute="leading" constant="20" id="uZx-Yc-mH6"/>
                             <constraint firstAttribute="trailing" secondItem="cNx-RB-Het" secondAttribute="trailing" constant="30" id="uep-rj-arS"/>
                             <constraint firstItem="rzA-3S-2Ke" firstAttribute="top" secondItem="LIa-Po-7qK" secondAttribute="bottom" constant="5" id="yYc-3x-dBg"/>
@@ -1987,7 +1987,7 @@ Your registration is now complete.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSf-I6-GQm">
-                                <rect key="frame" x="25" y="351" width="325" height="40"/>
+                                <rect key="frame" x="25" y="358" width="325" height="40"/>
                                 <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="p6s-L1-doe"/>
@@ -2005,7 +2005,7 @@ Your registration is now complete.</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="7az-Kn-XkN" secondAttribute="trailing" constant="25" id="3Dg-yD-2mY"/>
-                            <constraint firstItem="MSf-I6-GQm" firstAttribute="top" secondItem="Y94-ly-yFp" secondAttribute="bottom" constant="83" id="3pr-XA-fuE"/>
+                            <constraint firstItem="MSf-I6-GQm" firstAttribute="top" secondItem="Y94-ly-yFp" secondAttribute="bottom" constant="90" id="3pr-XA-fuE"/>
                             <constraint firstAttribute="trailing" secondItem="95Y-Yd-PAg" secondAttribute="trailing" constant="24" id="Dlf-1F-zoR"/>
                             <constraint firstItem="Y94-ly-yFp" firstAttribute="top" secondItem="7az-Kn-XkN" secondAttribute="bottom" constant="5" id="GJ8-Db-mSg"/>
                             <constraint firstItem="Y94-ly-yFp" firstAttribute="leading" secondItem="xKC-cK-s9g" secondAttribute="leading" constant="25" id="GJd-ui-9Aq"/>

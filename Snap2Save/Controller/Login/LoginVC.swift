@@ -34,7 +34,9 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         }
             userLogin()
     }
+    
     @IBAction func forgotPasswordButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         let forgotPasswordVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ForgotPasswordVC")
         self.navigationController?.show(forgotPasswordVC, sender: self)
         
@@ -44,6 +46,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         super.viewDidLoad()
         
         self.title = "Log In"
+        AppHelper.setRoundCornersToView(borderColor:APP_ORANGE_COLOR, view:loginButton , radius:3.0, width: 1.0)
+        
         AppHelper.setRoundCornersToView(borderColor: UIColor.init(red: 59.0/255.0, green: 89.0/255.0, blue: 152.0/255.0, alpha: 1.0), view:FbLoginBgView , radius:3.0, width: 1.0)
         loginWithFacebookButton.setTitle("Log In with Facebook".localized, for: .normal)
         orLabel.text = "or".localized

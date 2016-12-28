@@ -34,7 +34,6 @@ class LandingVC: UIViewController {
     @IBAction func registerButtonAction(_ sender: UIButton) {
         let signUpVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignupTVC")
         self.navigationController?.show(signUpVc, sender: self)
-
     }
     
 
