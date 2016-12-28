@@ -15,7 +15,7 @@
 "Spanish" = "Spanish";
 "Cancel" = "Cancel";
 
-"language.button.title" = "Español";
+"language.button.title" = "ESPAÑOL";
 
 "Back" = "Back";
 
@@ -25,13 +25,14 @@
 "Get Started!" = "Get Started!";
 
 //LoginVC
+"Log In" = "Log In";
 "Log In with Facebook" = "Log In with Facebook";
 "or" = "or";
 "10-DIGIT CELL PHONE NUMBER" = "10-DIGIT CELL PHONE NUMBER";
 "PASSWORD" = "PASSWORD";
 "Forgot Password?" = "Forgot Password?";
 "LOG IN" = "LOG IN";
-"ENGLISH" = "ENGLISH";
+//"ENGLISH" = "ENGLISH";
 
 //signUpAlert
 "SignUpAlertTitle" = "Thank you for joining Snap2Save!";
@@ -53,13 +54,34 @@
 "CONTINUE" = "CONTINUE";
 
 //AddtionalSignUpTVC
+"EARN 200 POINTS!" = "EARN 200 POINTS!";
+"AdditionalSignUpMsg" = "Provide the following optional information and earn 200 bonus points!";
+"USER INFORMATION" = "USER INFORMATION";
+"FIRST NAME" = "FIRST NAME";
+"LAST NAME" = "LAST NAME";
+"ADDRESS" = "ADDRESS";
+"AddressMsg" = "Gift cards earned under the Reward Program will be mailed to this address.";
+"ADDRESS LINE 1" = "ADDRESS LINE 1";
+"ADDRESS LINE 2" = "ADDRESS LINE 2";
+"CITY" = "CITY";
+"ADDITIONAL INFORMATION" = "ADDITIONAL INFORMATION";
+"STATE" = "STATE";
+"ZIP CODE" = "ZIP CODE";
+"GENDER" = "GENDER";
+"ETHNICITY / RACE" = "ETHNICITY / RACE";
+"AGE GROUP" = "AGE GROUP";
+"GROUP CODE (IF APPLICABLE)" = "GROUP CODE (IF APPLICABLE)";
+"REFERRAL CODE (IF APPLICABLE)" = "REFERRAL CODE (IF APPLICABLE)";
+"REGISTER" = "REGISTER";
 
 //ForgotPassword
+"Forgot Password" = "Forgot Password";
 "forgotPasswordMessage" = "Please enter the 10-digit cell phone number associated with your account.";
 "10-DIGIT CELL PHONE NUMBER" = "10-DIGIT CELL PHONE NUMBER";
 "SUBMIT" = "SUBMIT";
 
 //Reset Password
+"Reset Password" = "Reset Password";
 "resetPasswordMessage" = "Your new password must be at least 6 characters in length.";
 "NEW PASSWORD" = "NEW PASSWORD";
 "RE-ENTER NEW PASSWORD" = "RE-ENTER NEW PASSWORD";

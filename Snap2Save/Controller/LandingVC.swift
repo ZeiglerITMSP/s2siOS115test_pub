@@ -16,15 +16,12 @@ class LandingVC: UIViewController {
     @IBOutlet var downArrowImage: UIImageView!
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var registerButton: UIButton!
-    
-    
-    // Actions
     @IBOutlet var languageSelectionView: UIView!
-    
     @IBOutlet var welcomeLabel: UILabel!
-    
     @IBOutlet var selectLanguageLabel: UILabel!
     
+    // Actions
+
     @IBAction func loginButtonAction(_ sender: UIButton) {
         
         let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
@@ -42,10 +39,8 @@ class LandingVC: UIViewController {
         let languageGes:UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(self.showLanguageSelectionAlert))
         languageGes.numberOfTapsRequired = 1
         languageSelectionView.addGestureRecognizer(languageGes)
-        
         AppHelper.setRoundCornersToView(borderColor: loginButton.backgroundColor!, view: loginButton, radius: 2.0, width: 1)
         AppHelper.setRoundCornersToView(borderColor: registerButton.backgroundColor!, view: registerButton, radius: 2.0, width: 1)
-        
         
     }
     
@@ -87,33 +82,7 @@ class LandingVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    /*
-    func showLanguageSelectionAlert(){
-        
-        let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-        let englishBtn = UIAlertAction.init(title: "English".localized, style: .default, handler:{
-            (action) in
-            print("Selected English")
-            })
-        let spanishBtn = UIAlertAction.init(title: "Spanish".localized, style: .default, handler:{
-            (action) in
-            print("Selected Spanish")
-
-        })
-        let cancelBtn = UIAlertAction.init(title: "Cancel".localized, style: .cancel, handler:{
-            (action) in
-            
-        })
-        
-        languageAlert.view.tintColor = APP_GRREN_COLOR
-        languageAlert .addAction(englishBtn)
-        languageAlert.addAction(spanishBtn)
-        languageAlert.addAction(cancelBtn)
-
-        self.present(languageAlert, animated: true, completion:nil)
-    }
-*/
-}
+   }
 
 
 

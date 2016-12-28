@@ -8,16 +8,14 @@
 
 
 "SELECT LANGUAGE" = "SELECCIONE EL IDIOMA";
-"WELCOME" = "fertrt....";
-"LOG IN" = "LOG erterte";
-"REGISTER" = "erter";
+"WELCOME" = "Bienvenido";
+"LOG IN" = "INICIAR SESIÓN";
+"REGISTER" = "REGISTRO";
 "English" = "Inglés";
 "Spanish" = "Español";
 "Cancel" = "Cancelar";
-
 "Back" = "Espalda";
-
-"language.button.title" = "English";
+"language.button.title" = "ENGLISH";
 
 
 // EBT

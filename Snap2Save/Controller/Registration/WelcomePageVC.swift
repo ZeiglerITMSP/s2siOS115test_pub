@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Localize_Swift
 
 class WelcomePageVC: UIViewController {
+    
+    var languageSelectionButton: UIButton!
+
 //outlets
     
     @IBOutlet var congratulationsLabel: UILabel!
@@ -27,16 +31,29 @@ class WelcomePageVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        congratulationsLabel.text = "Congratulations!".localized
-        welcomeToLabel.text = "WelcomeText".localized
-        getStartedButton.setTitle("Get Started!".localized, for: .normal)
         AppHelper.setRoundCornersToView(borderColor:UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0), view: getStartedButton, radius: 2.0, width: 1.0)
+        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        
+        reloadContent()
+
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true;
+        reloadContent()
         
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        LanguageUtility.removeObserverForLanguageChange(self)
+        
+        super.viewDidDisappear(animated)
     }
 
     
@@ -55,5 +72,29 @@ class WelcomePageVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: -
+    
+    func languageButtonClicked() {
+        
+        self.showLanguageSelectionAlert()
+        
+    }
+    
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.updateBackButtonText()
+            self.congratulationsLabel.text = "Congratulations!".localized()
+            self.welcomeToLabel.text = "WelcomeText".localized()
+            self.getStartedButton.setTitle("Get Started!".localized(), for: .normal)
+
+            
+        }
+        
+        
+    }
 
 }

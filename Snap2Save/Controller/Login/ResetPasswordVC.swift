@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     
+    var languageSelectionButton: UIButton!
     var user_id : String!
     @IBOutlet var msgLabel: UILabel!
     
@@ -42,25 +43,10 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
 
         // Do any additional setup after loading the view.
         self.title = "Reset Password"
-        let languageButton = UIButton.init(type: .system)
-        languageButton.frame = CGRect(x:0,y:0,width:60,height:25)
-        languageButton.setTitle("ENGLISH".localized, for: .normal)
-        languageButton.setTitleColor(UIColor.white, for: .normal)
-        languageButton.backgroundColor = UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0)
-        languageButton.addTarget(self, action: #selector(languageButtonClicked), for: .touchUpInside)
-        languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 11.0)
-        AppHelper.setRoundCornersToView(borderColor: UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0), view:languageButton , radius:2.0, width: 1.0)
-        let rightBarButton = UIBarButtonItem()
-        rightBarButton.customView = languageButton
-        self.navigationItem.rightBarButtonItem = rightBarButton
-        
-        
-        
         passwordTextField.textFieldType = AITextField.AITextFieldType.PasswordTextField
         passwordTextField.updateUIAsPerTextFieldType()
         passwordTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         passwordTextField.placeHolderLabel = passwordLabel
-        //        mobileNumTextField.createBorder(borderColor: UIColor.red,xpos: 0)
         passwordTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         passwordTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         passwordTextField.text_Color =  UIColor.black
@@ -76,8 +62,24 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         
         passwordTextField.aiDelegate = self
         reEnterPasswordTextField.aiDelegate = self
+        
+        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        reloadContent()
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        reloadContent()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        LanguageUtility.removeObserverForLanguageChange(self)
+        super.viewDidDisappear(animated)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
@@ -90,42 +92,29 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         self.navigationItem.leftBarButtonItem = backButton
 
     }
-    func languageButtonClicked(){
-        
-        let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-        let englishBtn = UIAlertAction.init(title: "English".localized, style: .default, handler:{
-            (action) in
-            print("Selected English")
-        })
-        let spanishBtn = UIAlertAction.init(title: "Spanish".localized, style: .default, handler:{
-            (action) in
-            print("Selected Spanish")
-            
-        })
-        let cancelBtn = UIAlertAction.init(title: "Cancel", style: .cancel, handler:{
-            (action) in
-            
-        })
-        
-        languageAlert.view.tintColor = APP_GRREN_COLOR
-        languageAlert .addAction(englishBtn)
-        languageAlert.addAction(spanishBtn)
-        languageAlert.addAction(cancelBtn)
-        
-        self.present(languageAlert, animated: true, completion:nil)
-        
-        msgLabel.text = "resetPasswordMessage".localized
-        passwordLabel.text = "NEW PASSWORD".localized
-        reEnterPasswordLabel.text = "RE-ENTER NEW PASSWORD".localized
-
-        resetPasswordButton.setTitle("RESET PASSWORD".localized, for: .normal)
-
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func languageButtonClicked() {
+        self.showLanguageSelectionAlert()
+        
+    }
+    
+    func reloadContent(){
+        DispatchQueue.main.async {
+            self.title = "Reset Password".localized()
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.msgLabel.text = "resetPasswordMessage".localized()
+            self.passwordLabel.text = "NEW PASSWORD".localized()
+            self.reEnterPasswordLabel.text = "RE-ENTER NEW PASSWORD".localized()
+            self.resetPasswordButton.setTitle("RESET PASSWORD".localized(), for: .normal)
+        }
+    }
+    
+
     func keyBoardHidden(textField: UITextField) {
         if textField == passwordTextField{
             reEnterPasswordTextField.becomeFirstResponder()
