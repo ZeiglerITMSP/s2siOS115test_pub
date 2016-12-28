@@ -101,6 +101,8 @@ class EBTLoginTVC: UITableViewController {
         
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
         
+        
+        authenticateUser()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -295,9 +297,9 @@ class EBTLoginTVC: UITableViewController {
                 }
             }
         } else {
-            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
+//            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
+//            ac.addAction(UIAlertAction(title: "OK", style: .default))
+//            present(ac, animated: true)
         }
     }
     
