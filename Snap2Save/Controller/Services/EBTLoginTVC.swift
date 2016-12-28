@@ -83,6 +83,9 @@ class EBTLoginTVC: UITableViewController {
         reloadContent()
         
         loadLoginPage()
+        
+        
+        self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,6 +124,11 @@ class EBTLoginTVC: UITableViewController {
     }
     
     // MARK: -
+    
+    func backAction() {
+        
+       _ = self.navigationController?.popViewController(animated: true)
+    }
     
     func languageButtonClicked() {
         

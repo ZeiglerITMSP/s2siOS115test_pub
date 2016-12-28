@@ -138,7 +138,9 @@ extension UIViewController {
     
     func updateBackButtonText() {
         
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back".localized() , style: .plain, target: nil, action: nil)
+        let backButton = self.navigationItem.leftBarButtonItem?.customView as? UIButton
+        backButton?.setTitle("Back".localized() , for: .normal)
+        
     }
 }
 
@@ -150,7 +152,7 @@ extension UINavigationItem {
         let backButton = UIButton.init(type: .custom)
         backButton.frame = CGRect(x:0,y:0,width:80,height:25)
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
-        backButton.setTitle("Back", for: .normal)
+        backButton.setTitle("Back".localized() , for: .normal)
         backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.7), for: .normal)
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
@@ -161,6 +163,9 @@ extension UINavigationItem {
         leftBarButton.customView = backButton
         self.leftBarButtonItem = leftBarButton
     }
+    
+    
+    
     
 }
 
