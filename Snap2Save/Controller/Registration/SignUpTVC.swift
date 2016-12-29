@@ -42,8 +42,8 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
     @IBOutlet var emailLabel: UILabel!
     @IBOutlet var emailTextField: AITextField!
     
-    @IBOutlet var terms_serviceLabel: UILabel!
     
+    @IBOutlet weak var termsTextView: UITextView!
     
     @IBOutlet var continueButton: UIButton!
     @IBOutlet var reEnterEmailTextField: AITextField!
@@ -161,21 +161,60 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
             self.reEnterEmailLabel.text = "RE-ENTER EMAIL".localized()
             self.contactPreferenceSegmentControl.setTitle("Text Message".localized(), forSegmentAt: 0)
             self.contactPreferenceSegmentControl.setTitle("Email".localized(), forSegmentAt: 1)
-            let msgStr = "Terms Of Service".localized()
-            let string              = msgStr
-            let rangeMsgStr            = (string as NSString).range(of: "Terms of Service.")
-            let attributedString    = NSMutableAttributedString(string: string)
             
-            attributedString.addAttribute(NSLinkAttributeName, value:("https://appitventures.teamwork.com/dashboard"), range: rangeMsgStr)
-            attributedString.addAttribute(NSUnderlineStyleAttributeName, value: NSNumber(value: 1), range: rangeMsgStr)
-            attributedString.addAttribute(NSUnderlineColorAttributeName, value: APP_GRREN_COLOR, range: rangeMsgStr)
-            attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red , range: rangeMsgStr)
-            self.terms_serviceLabel.attributedText = attributedString
+            self.updateTermsText()
+            
+            
+//            let msgStr = "Terms Of Service".localized()
+//            let string = msgStr
+//            let rangeMsgStr = (string as NSString).range(of: "Terms of Service")
+//            let attributedString = NSMutableAttributedString(string: string)
+//            
+////            attributedString.addAttribute(NSLinkAttributeName, value:("https://appitventures.teamwork.com/dashboard"), range: rangeMsgStr)
+////            attributedString.addAttribute(NSUnderlineStyleAttributeName, value: NSNumber(value: 1), range: rangeMsgStr)
+////            attributedString.addAttribute(NSUnderlineColorAttributeName, value: APP_GRREN_COLOR, range: rangeMsgStr)
+//            attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red , range: rangeMsgStr)
+//            
+//            
+//            self.terms_serviceLabel.attributedText = attributedString
 
+            
             self.continueButton.setTitle("CONTINUE".localized(), for: .normal)
         }
     }
 
+    func updateTermsText() {
+        
+        // Terms of Service
+        let fullMessage = "TermsMessage".localized()
+        let rangeMessage = "TermsLink".localized()
+        let link = "https://appitventures.teamwork.com/dashboard"
+        
+        let attributedString = NSMutableAttributedString(string: fullMessage)
+        
+        let fullMessageRange = (attributedString.string as NSString).range(of: fullMessage)
+        // default text style
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: self.termsTextView.textColor!, range: fullMessageRange)
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: fullMessageRange)
+        let titleParagraphStyle = NSMutableParagraphStyle()
+        titleParagraphStyle.alignment = .center
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: titleParagraphStyle, range: fullMessageRange)
+        
+        // linkRange
+        let linkRange = (attributedString.string as NSString).range(of: rangeMessage)
+        attributedString.addAttribute(NSLinkAttributeName, value: link, range: linkRange)
+        
+        let linkAttributes = [
+            NSForegroundColorAttributeName: APP_GRREN_COLOR,
+            NSUnderlineColorAttributeName: APP_GRREN_COLOR,
+            NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue ] as [String : Any]
+        
+        // textView is a UITextView
+        self.termsTextView.linkTextAttributes = linkAttributes
+        self.termsTextView.attributedText = attributedString
+        
+    }
+    
     func backButtonAction(){
         
         self.view.endEditing(true)
@@ -194,18 +233,20 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
         //        contactPreferenceLabel.attributedText = contactStrAttribute
         
         
+//        
+//        let msgStr = "Terms Of Service".localized()
+//        let string              = msgStr
+//        let rangeMsgStr            = (string as NSString).range(of: "Terms of Service.")
+//        let attributedString    = NSMutableAttributedString(string: string)
+//        
+//        attributedString.addAttribute(NSLinkAttributeName, value:("https://appitventures.teamwork.com/dashboard"), range: rangeMsgStr)
+//        attributedString.addAttribute(NSUnderlineStyleAttributeName, value: NSNumber(value: 1), range: rangeMsgStr)
+//        attributedString.addAttribute(NSUnderlineColorAttributeName, value: APP_GRREN_COLOR, range: rangeMsgStr)
+//        attributedString.addAttribute(NSForegroundColorAttributeName, value: APP_GRREN_COLOR , range: rangeMsgStr)
+//        terms_serviceLabel.attributedText = attributedString
+//        
         
-        let msgStr = "Terms Of Service".localized()
-        let string              = msgStr
-        let rangeMsgStr            = (string as NSString).range(of: "Terms of Service.")
-        let attributedString    = NSMutableAttributedString(string: string)
-        
-        attributedString.addAttribute(NSLinkAttributeName, value:("https://appitventures.teamwork.com/dashboard"), range: rangeMsgStr)
-        attributedString.addAttribute(NSUnderlineStyleAttributeName, value: NSNumber(value: 1), range: rangeMsgStr)
-        attributedString.addAttribute(NSUnderlineColorAttributeName, value: APP_GRREN_COLOR, range: rangeMsgStr)
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: APP_GRREN_COLOR , range: rangeMsgStr)
-        terms_serviceLabel.attributedText = attributedString
-        
+        self.updateTermsText()
         
         mobileNumTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         mobileNumTextField.updateUIAsPerTextFieldType()

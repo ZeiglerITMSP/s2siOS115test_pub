@@ -30,3 +30,9 @@
 "Remember my username" = "Recordar mi nombre de usuario";
 "Login" = "Iniciar sesión";
 "Registration" = "Registro";
+
+
+// signUpTVC
+"TermsMessage" = "Al convertirse en un usuario registrado, acepta nuestros Términos de servicio.";
+"TermsLink" = "Términos de servicio";
+"CONTINUE" = "CONTINUE";

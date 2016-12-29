@@ -57,7 +57,8 @@
 "Email" = "Email";
 "EMAIL" = "EMAIL";
 "RE-ENTER EMAIL" = "RE-ENTER EMAIL";
-"Terms Of Service" = "By becoming a registered user, you agree to our Terms of Service.";
+"TermsMessage" = "By becoming a registered user, you agree to our Terms of Service.";
+"TermsLink" = "Terms of Service";
 "CONTINUE" = "CONTINUE";
 
 //AddtionalSignUpTVC
