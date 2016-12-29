@@ -51,7 +51,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DownArrow" translatesAutoresizingMaskIntoConstraints="NO" id="KMR-da-1EC">
-                                            <rect key="frame" x="347" y="16" width="20" height="20"/>
+                                            <rect key="frame" x="333" y="16" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="KBk-Pc-t5I"/>
                                                 <constraint firstAttribute="height" constant="20" id="eBL-SW-sE8"/>
@@ -65,7 +65,7 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="KMR-da-1EC" secondAttribute="trailing" constant="8" id="F3G-Xb-xHF"/>
+                                        <constraint firstAttribute="trailing" secondItem="KMR-da-1EC" secondAttribute="trailing" constant="22" id="F3G-Xb-xHF"/>
                                         <constraint firstItem="KMR-da-1EC" firstAttribute="centerY" secondItem="bhI-Rz-HGL" secondAttribute="centerY" id="VWG-fk-C8h"/>
                                         <constraint firstItem="F9J-hw-P33" firstAttribute="centerY" secondItem="bhI-Rz-HGL" secondAttribute="centerY" id="i7K-Du-JbC"/>
                                         <constraint firstItem="F9J-hw-P33" firstAttribute="leading" secondItem="bhI-Rz-HGL" secondAttribute="leading" constant="26" id="o3a-Ro-9jt"/>
@@ -1635,7 +1635,7 @@ Your registration is now complete.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4JJ-sg-926">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="699"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="iaJ-f6-FEI">
                                                 <rect key="frame" x="35" y="134" width="305" height="58"/>
@@ -1786,7 +1786,7 @@ Your registration is now complete.</string>
                                             <constraint firstAttribute="trailing" secondItem="iZW-JY-VpG" secondAttribute="trailing" constant="26" id="7Wa-40-YUu"/>
                                             <constraint firstAttribute="trailing" secondItem="iaJ-f6-FEI" secondAttribute="trailing" constant="35" id="8Lj-c9-ZzZ"/>
                                             <constraint firstItem="jKV-XA-LTN" firstAttribute="top" secondItem="iZW-JY-VpG" secondAttribute="bottom" constant="25" id="AgH-dt-EjX"/>
-                                            <constraint firstAttribute="bottom" secondItem="jKV-XA-LTN" secondAttribute="bottom" constant="10" id="B9K-IG-TBC"/>
+                                            <constraint firstAttribute="bottom" secondItem="jKV-XA-LTN" secondAttribute="bottom" constant="40" id="B9K-IG-TBC"/>
                                             <constraint firstItem="5cw-Ll-YbS" firstAttribute="leading" secondItem="4JJ-sg-926" secondAttribute="leading" constant="20" id="DgJ-Ll-J72"/>
                                             <constraint firstItem="lfQ-OI-Z8f" firstAttribute="leading" secondItem="4JJ-sg-926" secondAttribute="leading" constant="26" id="EHn-of-phU"/>
                                             <constraint firstItem="UKO-wY-TWK" firstAttribute="leading" secondItem="4JJ-sg-926" secondAttribute="leading" constant="26" id="GYM-NI-Oe4"/>
