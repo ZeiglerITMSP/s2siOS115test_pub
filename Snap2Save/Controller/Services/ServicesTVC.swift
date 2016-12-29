@@ -52,16 +52,7 @@ class ServicesTVC: UITableViewController {
         
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        if section == 0 {
-            return 0.1
-        }
-        
-        return 20.0
-    }
-    
-    // MARK: - 
+    // MARK: -
     
     func languageButtonClicked() {
         

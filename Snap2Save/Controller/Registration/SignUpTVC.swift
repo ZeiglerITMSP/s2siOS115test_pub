@@ -156,7 +156,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
             self.passwordLabel.text = "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)".localized()
             self.reEnterPasswordLabel.text = "RE-ENTER PASSWORD".localized()
             self.zipCodeLabel.text = "ZIP CODE".localized()
-            self.contactPreferenceLabel.text = "Contact Preference".localized()
+            self.contactPreferenceLabel.text = "CONTACT PREFERENCE".localized()
             self.emailLabel.text = "EMAIL".localized()
             self.reEnterEmailLabel.text = "RE-ENTER EMAIL".localized()
             self.contactPreferenceSegmentControl.setTitle("Text Message".localized(), forSegmentAt: 0)
@@ -315,7 +315,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 13
+        return 14
     }
     
     func keyBoardHidden(textField: UITextField) {
