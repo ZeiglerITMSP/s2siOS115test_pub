@@ -10,7 +10,6 @@ import UIKit
 import Localize_Swift
 import Alamofire
 import SwiftyJSON
-import PKHUD
 
 
 class AccountTVC: UITableViewController {
@@ -113,7 +112,7 @@ class AccountTVC: UITableViewController {
 
             }
             else if indexPath.row == 3 {
-                
+                self.performSegue(withIdentifier: "ChangePasswordTVC", sender: self)
             }
         }
        else if indexPath.section == 1 {
@@ -121,6 +120,9 @@ class AccountTVC: UITableViewController {
                self.showAlert()
             }
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+
     }
     func showAlert() {
         
@@ -141,10 +143,7 @@ class AccountTVC: UITableViewController {
     }
     
     func userLogout() {
-        HUD.dimsBackground = false
-        HUD.allowsInteraction = false
-        HUD.show(.progress)
-
+        
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -163,7 +162,6 @@ class AccountTVC: UITableViewController {
         let url = String(format: "%@/logOut", hostUrl)
         print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
-            HUD.hide()
             switch response.result {
                
             case .success:
@@ -195,6 +193,7 @@ class AccountTVC: UITableViewController {
 
     }
     }
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
