@@ -20,12 +20,16 @@ class ServicesTVC: UITableViewController {
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
         reloadContent()
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        
+//        selectedTabBackground()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -53,6 +57,9 @@ class ServicesTVC: UITableViewController {
     }
     
     // MARK: -
+    
+    
+    
     
     func languageButtonClicked() {
         

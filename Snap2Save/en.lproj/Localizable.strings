@@ -20,6 +20,12 @@
 
 "Back" = "Back";
 
+
+// TabBar Titles
+"OFFERS" = "OFFERS";
+"SERVICES" = "SERVICES";
+"ACCOUNT" = "ACCOUNT";
+
 // WelcomePageVc
 "Congratulations!" = "Congratulations!";
 "WelcomeText" = "Welcome to Snap2Save.Your registration is now complete.";

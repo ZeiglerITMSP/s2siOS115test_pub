@@ -22,6 +22,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Status
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
+//        selectedTabBackground()
+        
+        
+//        let tabIndicator = UIImage(named: "tabbarbg")?.withRenderingMode(.alwaysTemplate)
+//        let tabResizableIndicator = tabIndicator?.resizableImage(
+//            withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
+//        UITabBar.appearance().selectionIndicatorImage = tabResizableIndicator
+//        UITabBar.appearance().tintColor = UIColor.green
+//        
+        
+       
+        
         let user_id = UserDefaults.standard.object(forKey: USER_ID)
         let auth_token = UserDefaults.standard.object(forKey: AUTH_TOKEN)
         let storyBoard:UIStoryboard?
@@ -185,5 +197,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
         
     }
+    
+    
+    func selectedTabBackground() {
+        
+        
+        
+        let imageWidht = Int(SCREEN_WIDTH) / 4
+        
+        let size = CGSize(width: imageWidht, height: 49)
+        
+        let tabIndicator = UIImage(color: UIColor.green, size: size)
+//        let tabResizableIndicator = tabIndicator?.resizableImage(
+//            withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
+        
+        UITabBar.appearance().selectionIndicatorImage = tabIndicator
+        
+    }
+    
+
     
 }

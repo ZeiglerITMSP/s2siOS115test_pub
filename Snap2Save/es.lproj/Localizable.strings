@@ -18,6 +18,12 @@
 "language.button.title" = "ESPAÑOL";
 "selectedLanguageTitle" = "Español";
 
+// TabBar Titles
+"OFFERS" = "OFERTAS";
+"SERVICES" = "SERVICIOS";
+"ACCOUNT" = "CUENTA";
+
+
 // EBT
 "User ID" = "Identificación De Usuario";
 "Password" = "Contraseña";
