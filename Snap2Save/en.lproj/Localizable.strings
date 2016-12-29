@@ -6,7 +6,7 @@
   Copyright © 2016 Appit. All rights reserved.
 */
 
-//LandingVc
+// LandingVc
 "SELECT LANGUAGE" = "SELECT LANGUAGE";
 "WELCOME" = "Welcome";
 "LOG IN" = "LOG IN";
@@ -20,7 +20,7 @@
 
 "Back" = "Back";
 
-//WelcomePageVc
+// WelcomePageVc
 "Congratulations!" = "Congratulations!";
 "WelcomeText" = "Welcome to Snap2Save.Your registration is now complete.";
 "Get Started!" = "Get Started!";

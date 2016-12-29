@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Jb5-Eo-rzl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Jb5-Eo-rzl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -732,7 +732,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="OFFERS" image="tabbarOffersInactive" id="TKB-Bc-gsy"/>
+                    <tabBarItem key="tabBarItem" title="OFFERS" image="tabbarOffersInactive" selectedImage="tabbarOffersActive" id="TKB-Bc-gsy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qlu-Wl-qkm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -746,6 +746,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="1fa-fQ-MFI" kind="relationship" relationship="viewControllers" id="Zu8-6t-Ggp"/>
@@ -796,7 +798,7 @@
         <scene sceneID="q4i-mi-P6r">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hvU-s9-CbF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="ACCOUNT" image="tabbarAccountActive" selectedImage="tabbarAccountActive" id="ztZ-bL-cSV"/>
+                    <tabBarItem key="tabBarItem" title="ACCOUNT" image="tabbarAccountInactive" selectedImage="tabbarAccountActive" id="ztZ-bL-cSV"/>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="8bh-wb-wO1">
@@ -1004,7 +1006,7 @@
         <scene sceneID="jTO-xw-hsB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="owa-1n-xbu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="SERVICES" image="tabbarServicesInactive" id="sdH-xJ-ytH"/>
+                    <tabBarItem key="tabBarItem" title="SERVICES" image="tabbarServicesInactive" selectedImage="tabbarServicesActive" id="sdH-xJ-ytH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0HH-Oa-rMg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -2439,7 +2441,10 @@
         <image name="checkOff" width="18" height="18"/>
         <image name="checkOn" width="18" height="18"/>
         <image name="tabbarAccountActive" width="30" height="30"/>
+        <image name="tabbarAccountInactive" width="30" height="30"/>
+        <image name="tabbarOffersActive" width="30" height="30"/>
         <image name="tabbarOffersInactive" width="30" height="30"/>
+        <image name="tabbarServicesActive" width="30" height="30"/>
         <image name="tabbarServicesInactive" width="30" height="30"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
