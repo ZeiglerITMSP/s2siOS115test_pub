@@ -101,3 +101,14 @@
 "Change Password" = "Change Password";
 "Log Out" = "Log Out";
 
+// PREFERENCE VC
+"Preferences" = "Preferences";
+
+// CHANGEPASSWORD VC
+"RE-ENTER NEW PASSWORD" = "RE-ENTER NEW PASSWORD";
+"NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)" = "NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)";
+"CURRENT PASSWORD" = "CURRENT PASSWORD";
+"SAVE" = "SAVE";
+"Change Password" = "Change Password";
+
+

@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import PKHUD
 
 class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScrollViewDelegate {
     
@@ -30,6 +29,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     @IBOutlet var loginButton: UIButton!
     
+    @IBOutlet var loginActivityIndicator: UIActivityIndicatorView!
     
     @IBAction func loginButtonAction(_ sender: UIButton) {
         if !isValid(){
@@ -243,10 +243,6 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     func userLogin(){
         
-        HUD.dimsBackground = false
-        HUD.allowsInteraction = false
-        
-        HUD.show(.progress)
         let password = passwordTextField.text ?? ""
         let mobileNumber = mobileNumTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
@@ -262,9 +258,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                           "language":"en"
             ] as [String : Any]
         
-
         print(parameters)
-        
+        loginActivityIndicator.startAnimating()
         let url = String(format: "%@/logIn", hostUrl)
         print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -272,7 +267,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             switch response.result {
             case .success:
                 DispatchQueue.main.async {
-                    HUD.hide()
+                    self.loginActivityIndicator.stopAnimating()
                 }
 
                 let json = JSON(data: response.data!)
@@ -303,7 +298,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    HUD.hide()
+                    self.loginActivityIndicator.stopAnimating()
                 }
                 print(error)
                 break

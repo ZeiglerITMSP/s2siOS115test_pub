@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
-class PreferencesTVC: UITableViewController {
+class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
     var languageSelectionButton: UIButton!
     
@@ -17,13 +19,19 @@ class PreferencesTVC: UITableViewController {
     @IBOutlet var contactPreferenceSegmentControl: UISegmentedControl!
     @IBOutlet var saveButton: UIButton!
     
+    @IBOutlet var reEnterMobileNumberTextField: AIPlaceHolderTextField!
+    @IBOutlet var mobileNumberTextField: AIPlaceHolderTextField!
+    @IBOutlet var emailPlaceHolderTextField: AIPlaceHolderTextField!
     // Actions
     @IBAction func contactPreferenceSegmentControlAction(_ sender: UISegmentedControl) {
         
     }
     
     @IBAction func saveButtonAction(_ sender: UIButton) {
-        
+        if !isValid(){
+            return
+        }
+        updatePreferences()
     }
     
     // MARK: -
@@ -50,6 +58,18 @@ class PreferencesTVC: UITableViewController {
         leftBarButton.customView = backButton
         self.navigationItem.leftBarButtonItem = leftBarButton
 
+        emailPlaceHolderTextField.contentTextField.textFieldType = AITextField.AITextFieldType.EmailTextField
+        mobileNumberTextField.contentTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
+        reEnterMobileNumberTextField.contentTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
+        
+        emailPlaceHolderTextField.contentTextField.updateUIAsPerTextFieldType()
+        mobileNumberTextField.contentTextField.updateUIAsPerTextFieldType()
+        reEnterMobileNumberTextField.contentTextField.updateUIAsPerTextFieldType()
+
+        emailPlaceHolderTextField.contentTextField.aiDelegate = self
+        mobileNumberTextField.contentTextField.aiDelegate = self
+        reEnterMobileNumberTextField.contentTextField.aiDelegate = self
+        
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: saveButton, radius: 2.0, width: 1.0)
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -69,6 +89,12 @@ class PreferencesTVC: UITableViewController {
         super.viewDidDisappear(animated)
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
     // MARK: -
     func languageButtonClicked() {
         self.showLanguageSelectionAlert()
@@ -81,21 +107,32 @@ class PreferencesTVC: UITableViewController {
     }
 
     func reloadContent() {
-        
+        self.updateBackButtonText()
+        self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
         self.title = "Preferences".localized()
         saveButton.setTitle("SAVE".localized(), for: .normal)
         contactPreferenceLabel.text = "CONTACT PREFERENCE".localized()
         contactPreferenceSegmentControl.setTitle("Text Message".localized(), forSegmentAt: 0)
         contactPreferenceSegmentControl.setTitle("Email".localized(), forSegmentAt: 1)
-        self.updateBackButtonText()
-        self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+        emailPlaceHolderTextField.placeholderText = "EMAIL".localized()
+        mobileNumberTextField.placeholderText = "10-DIGIT CELL PHONE NUMBER".localized()
+        reEnterMobileNumberTextField.placeholderText = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
+        
+        
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func keyBoardHidden(textField: UITextField) {
+        if textField == emailPlaceHolderTextField.contentTextField {
+            mobileNumberTextField.contentTextField.becomeFirstResponder()
+            
+        } else if textField == mobileNumberTextField.contentTextField {
+            reEnterMobileNumberTextField.contentTextField.becomeFirstResponder()
+            
+        } else {
+            textField.resignFirstResponder()
+            
+        }
     }
-    
+
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -170,4 +207,92 @@ class PreferencesTVC: UITableViewController {
      }
      */
     
+    func updatePreferences(){
+        /*{
+            "user_id": "1",
+            "phone_number": "8179968861",
+            "email": "test@gmail.com",
+            "contact_preference": "1",
+            "platform": "1",
+            "version": "1",
+            "device_id": "23423423werwerwerwe23",
+            "push_token": "123123dwfwwe234234",
+            "auth_token": "2322wwerwer324234",
+            "language": "en"
+        }*/
+        
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
+        let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
+        let mobileNumber = mobileNumberTextField.contentTextField.text ?? ""
+        var contact_preference = "1"
+        let contactPreference = contactPreferenceSegmentControl.selectedSegmentIndex
+        if contactPreference == 0{
+            contact_preference = "2"
+        }
+        else if contactPreference == 1{
+            contact_preference = "1"
+        }
+        let email = emailPlaceHolderTextField.contentTextField.text ?? ""
+        
+        let parameters = ["user_id": user_id,
+                          "phone_number": mobileNumber,
+                          "email": email,
+                          "contact_preference": contact_preference,
+                          "platform":"1",
+                          "version_code": "1",
+                          "version_name": "1",
+                          "device_id": device_id,
+                          "push_token":"123123",
+                          "auth_token": auth_token,
+                          "language":"en"
+            ] as [String : Any]
+        
+        print(parameters)
+        let url = String(format: "%@/updatePreferences", hostUrl)
+        print(url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            switch response.result {
+                
+            case .success:
+                let json = JSON(data: response.data!)
+                print("json response\(json)")
+                
+
+                
+                break
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    
+                }
+                print(error)
+                break
+            }
+            
+            
+        }
+
+        
+    }
+    
+    func isValid() -> Bool{
+        let validEmail = AppHelper.isValidEmail(testStr: emailPlaceHolderTextField.contentTextField.text!)
+        let validPhoneNumber = AppHelper.validate(value: mobileNumberTextField.contentTextField.text!)
+        
+        if emailPlaceHolderTextField.contentTextField.text?.characters.count == 0 || validEmail == false{
+            self.showAlert(title: "", message: "Please enter valid Email")
+            return false
+        }
+        else if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
+            self.showAlert(title: "", message: "Please enter 10 digit Phone Number")
+            return false
+        }
+        else if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
+            self.showAlert(title: "", message: "Phone Numbers doesn't match")
+            return false
+        }
+        return true
+    }
 }

@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import PKHUD
 
 class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     
@@ -26,6 +25,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     
     @IBOutlet var resetPasswordButton: UIButton!
     
+    @IBOutlet var resetPasswordActivityIndicator: UIActivityIndicatorView!
     @IBAction func resetPasswordButtonAction(_ sender: UIButton) {
         
         if (passwordTextField.text?.characters.count)! == 0 || (passwordTextField.text?.characters.count)! < 6{
@@ -121,10 +121,12 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     
 
     func keyBoardHidden(textField: UITextField) {
-        if textField == passwordTextField{
+        if textField == passwordTextField {
             reEnterPasswordTextField.becomeFirstResponder()
         }
+        else {
        textField.resignFirstResponder()
+        }
     }
     /*
     // MARK: - Navigation
@@ -136,9 +138,6 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     }
     */
     func resetPassword(){
-        HUD.dimsBackground = false
-        HUD.allowsInteraction = false
-        HUD.show(.progress)
         self.view.endEditing(true)
         let password = passwordTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
@@ -157,7 +156,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         
         
         print(parameters)
-        
+        resetPasswordActivityIndicator.startAnimating()
         let url = String(format: "%@/resetPassword", hostUrl)
         print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -165,7 +164,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
             switch response.result {
             case .success:
                 DispatchQueue.main.async {
-                    HUD.hide()
+                    self.resetPasswordActivityIndicator.stopAnimating()
                 }
 
                 let json = JSON(data: response.data!)
@@ -192,7 +191,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    HUD.hide()
+                    self.resetPasswordActivityIndicator.stopAnimating()
                 }
                 print(error)
                 break

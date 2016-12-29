@@ -10,9 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Localize_Swift
-import PKHUD
 
-class ForgotPasswordVC: UIViewController {
+class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
     
     // Properties
     var languageSelectionButton: UIButton!
@@ -26,6 +25,7 @@ class ForgotPasswordVC: UIViewController {
     
     @IBOutlet var submitButton: UIButton!
     
+    @IBOutlet var submitActivityIndicator: UIActivityIndicatorView!
     
     // Actions
     @IBAction func submitButtonAction(_ sender: UIButton) {
@@ -65,18 +65,6 @@ class ForgotPasswordVC: UIViewController {
         leftBarButton.customView = backButton
         self.navigationItem.leftBarButtonItem = leftBarButton
         
-       /* let languageButton = UIButton.init(type: .system)
-        languageButton.frame = CGRect(x:0,y:0,width:60,height:25)
-        languageButton.setTitle("ENGLISH".localized, for: .normal)
-        languageButton.setTitleColor(UIColor.white, for: .normal)
-        languageButton.backgroundColor = UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0)
-        languageButton.addTarget(self, action: #selector(languageButtonClicked), for: .touchUpInside)
-        languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 11.0)
-        AppHelper.setRoundCornersToView(borderColor: UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0), view:languageButton , radius:2.0, width: 1.0)
-        let rightBarButton = UIBarButtonItem()
-        rightBarButton.customView = languageButton
-        self.navigationItem.rightBarButtonItem = rightBarButton*/
-        
         let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         // super.setNavigationBarImage(image: navBarBGImg)
         self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
@@ -91,7 +79,7 @@ class ForgotPasswordVC: UIViewController {
         mobileNumberTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         mobileNumberTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         mobileNumberTextField.text_Color =  UIColor.black
-        
+        mobileNumberTextField.aiDelegate = self
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: submitButton, radius: 2.0, width: 1.0)
         
         // LANGUAGE BUTTON
@@ -146,10 +134,6 @@ class ForgotPasswordVC: UIViewController {
     
     func forgotPassword(){
         
-        HUD.dimsBackground = false
-        HUD.allowsInteraction = false
-        HUD.show(.progress)
-        
         let mobileNumber = mobileNumberTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         
@@ -164,6 +148,7 @@ class ForgotPasswordVC: UIViewController {
         
         
         print(parameters)
+        submitActivityIndicator.startAnimating()
         
         let url = String(format: "%@/forgotPassword", hostUrl)
         print(url)
@@ -175,7 +160,7 @@ class ForgotPasswordVC: UIViewController {
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
                 DispatchQueue.main.async {
-                    HUD.hide()
+                    self.submitActivityIndicator.stopAnimating()
                 }
 
                 if let responseDict = json.dictionaryObject {
@@ -199,7 +184,7 @@ class ForgotPasswordVC: UIViewController {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    HUD.hide()
+                    self.submitActivityIndicator.stopAnimating()
                 }
                 print(error)
                 break
@@ -207,6 +192,16 @@ class ForgotPasswordVC: UIViewController {
             
             
         }
+    }
+    
+    func keyBoardHidden(textField: UITextField) {
+        if textField == mobileNumberTextField{
+            textField.resignFirstResponder()
+        }
+        else {
+            textField.resignFirstResponder()
+        }
+
     }
     /*
      // MARK: - Navigation

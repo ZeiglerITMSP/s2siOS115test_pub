@@ -245,7 +245,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
         reEnterPasswordTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         reEnterPasswordTextField.text_Color =  UIColor.black
         
-        zipCodeTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
+        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         zipCodeTextField.updateUIAsPerTextFieldType()
         zipCodeTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         zipCodeTextField.placeHolderLabel = zipCodeLabel

@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Localize_Swift
-import PKHUD
 
 class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITextFieldProtocol{
     
@@ -82,6 +81,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     @IBOutlet var cityTextField: AITextField!
     
+    @IBOutlet var registerActivityIndicator: UIActivityIndicatorView!
     @IBAction func registerButtonAction(_ sender: UIButton) {
         
         userSignUp()
@@ -463,10 +463,6 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     func userSignUp(){
         
-        HUD.dimsBackground = false
-        HUD.allowsInteraction = false
-        HUD.show(.progress)
-
         let password = userDetailsDict["password"] as! String
         let phone_number = userDetailsDict["phone_number"] as! String
         let email = userDetailsDict["email"] as! String
@@ -536,7 +532,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         
         print(parameters)
         
-        
+        registerActivityIndicator.startAnimating()
         let url = String(format: "%@/signUp", hostUrl)
         print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -544,7 +540,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             switch response.result {
             case .success:
                 DispatchQueue.main.async {
-                    HUD.hide()
+                    self.registerActivityIndicator.stopAnimating()
                 }
 
                 let json = JSON(data: response.data!)
@@ -571,7 +567,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    HUD.hide()
+                    self.registerActivityIndicator.stopAnimating()
                 }
                 print(error)
                 break

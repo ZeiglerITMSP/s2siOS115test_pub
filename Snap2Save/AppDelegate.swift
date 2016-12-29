@@ -95,11 +95,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let mutableDict = NSMutableDictionary()
                 for component:String in components!
                 {
-                    let bits = component.components(separatedBy: "=")
+                    let bits = component.components(separatedBy: "userid=")
+                    print("bits\(bits)")
                     if bits.count == 2
                     {
                         
-                        let key_string = bits[0] as String
+                        let key_string = "userid"
                         let value = bits[1] as String
                         
                         mutableDict.setObject(value, forKey: key_string as NSCopying)
