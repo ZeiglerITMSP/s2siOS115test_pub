@@ -97,14 +97,6 @@ class AccountTVC: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        if section == 0 {
-            return 0.1
-        }
-        
-        return 20.0
-    }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -184,7 +176,7 @@ class AccountTVC: UITableViewController {
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil);
                 let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
 
-                let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+                let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LandingVC")
                 initialViewController.pushViewController(loginVc, animated: true)
 
                 UIApplication.shared.keyWindow?.rootViewController = initialViewController

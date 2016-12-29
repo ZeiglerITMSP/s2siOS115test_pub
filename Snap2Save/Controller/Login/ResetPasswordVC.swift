@@ -64,6 +64,8 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         passwordTextField.aiDelegate = self
         reEnterPasswordTextField.aiDelegate = self
         
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: resetPasswordButton, radius: 3.0, width: 1.0)
+        
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()

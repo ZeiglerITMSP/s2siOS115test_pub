@@ -81,7 +81,6 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         self.navigationItem.rightBarButtonItem = rightBarButton*/
         
         mobileNumTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
-        
         mobileNumTextField.createBorder(borderColor: UIColor.white,xpos: 0)
         mobileNumTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         mobileNumTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
@@ -90,10 +89,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         mobileNumTextField.normalColor = UIColor(white: 1, alpha: 0.7)
         mobileNumTextField.updateUIAsPerTextFieldType()
 
-        
-        
         passwordTextField.textFieldType = AITextField.AITextFieldType.PasswordTextField
-        
         passwordTextField.createBorder(borderColor: UIColor.white,xpos: 0)
         passwordTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         passwordTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
@@ -133,8 +129,9 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
     }
     
-    func reloadContent(){
+    func reloadContent() {
         DispatchQueue.main.async {
+            
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
         self.loginWithFacebookButton.setTitle("Log In with Facebook".localized, for: .normal)
         self.orLabel.text = "or".localized
@@ -143,7 +140,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         self.forgotPasswordButton.setTitle("Forgot Password?".localized, for: .normal)
         self.loginButton.setTitle("LOG IN".localized, for: .normal)
         self.title = "Log In".localized()
-            self.updateBackButtonText()
+        self.updateBackButtonText()
 
         }
     }
@@ -181,7 +178,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     func backButtonAction(){
         
-        _ = self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popToRootViewController(animated: true)
         
     }
     override func viewWillAppear(_ animated: Bool) {
