@@ -541,11 +541,16 @@
                                                         <action selector="saveButtonAction:" destination="NOe-q7-a3E" eventType="touchUpInside" id="beF-Ee-m8E"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="JI0-t8-9FV">
+                                                    <rect key="frame" x="315" y="30" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="JI0-t8-9FV" firstAttribute="centerY" secondItem="NX0-Jk-5zX" secondAttribute="centerY" id="0nW-jY-5nM"/>
                                                 <constraint firstItem="NX0-Jk-5zX" firstAttribute="leading" secondItem="fIp-wv-Jlo" secondAttribute="leading" constant="20" id="3xi-kX-L0U"/>
                                                 <constraint firstItem="NX0-Jk-5zX" firstAttribute="centerY" secondItem="fIp-wv-Jlo" secondAttribute="centerY" id="Qb3-xC-Ess"/>
                                                 <constraint firstAttribute="trailing" secondItem="NX0-Jk-5zX" secondAttribute="trailing" constant="20" id="XTy-Wt-txa"/>
+                                                <constraint firstItem="JI0-t8-9FV" firstAttribute="leading" secondItem="NX0-Jk-5zX" secondAttribute="trailing" constant="-40" id="n3r-PZ-6Yp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -563,6 +568,7 @@
                         <outlet property="emailPlaceHolderTextField" destination="cku-hZ-H0W" id="ZMq-Xw-yrK"/>
                         <outlet property="mobileNumberTextField" destination="NmZ-da-U4L" id="Wmk-1K-5IW"/>
                         <outlet property="reEnterMobileNumberTextField" destination="byz-q5-Qcn" id="twI-ck-jrl"/>
+                        <outlet property="saveActivityIndicator" destination="JI0-t8-9FV" id="HCA-l8-2UM"/>
                         <outlet property="saveButton" destination="NX0-Jk-5zX" id="cIM-cU-bTK"/>
                     </connections>
                 </tableViewController>
@@ -677,12 +683,17 @@
                                                         <action selector="saveButtonAction:" destination="8Ny-aK-dgp" eventType="touchUpInside" id="O4F-xM-TQR"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="bok-qj-sPU">
+                                                    <rect key="frame" x="315" y="30" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="BeR-v5-c8N" firstAttribute="top" secondItem="2GK-LF-Z6p" secondAttribute="top" constant="18" id="Can-0Z-o2a"/>
                                                 <constraint firstAttribute="trailing" secondItem="BeR-v5-c8N" secondAttribute="trailing" constant="20" id="MP9-c2-QbE"/>
                                                 <constraint firstAttribute="bottom" secondItem="BeR-v5-c8N" secondAttribute="bottom" constant="18" id="bkJ-Dz-wf1"/>
+                                                <constraint firstItem="bok-qj-sPU" firstAttribute="leading" secondItem="BeR-v5-c8N" secondAttribute="trailing" constant="-40" id="g8c-af-cQE"/>
                                                 <constraint firstItem="BeR-v5-c8N" firstAttribute="leading" secondItem="2GK-LF-Z6p" secondAttribute="leading" constant="20" id="hb5-cF-utw"/>
+                                                <constraint firstItem="bok-qj-sPU" firstAttribute="centerY" secondItem="BeR-v5-c8N" secondAttribute="centerY" id="pyH-to-xUi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -698,6 +709,7 @@
                         <outlet property="currentPasswordTextField" destination="tgN-YO-mgY" id="rDc-WX-WAb"/>
                         <outlet property="newPasswordTextField" destination="tgF-3x-7ed" id="C6f-Hh-Gtu"/>
                         <outlet property="reEnterNewPasswordTextField" destination="9Ws-86-Gwn" id="Jy9-gD-CqH"/>
+                        <outlet property="saveActivityIndicator" destination="bok-qj-sPU" id="GB8-FY-t9E"/>
                         <outlet property="saveButton" destination="BeR-v5-c8N" id="9Ld-wY-1xX"/>
                     </connections>
                 </tableViewController>
