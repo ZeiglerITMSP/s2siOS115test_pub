@@ -8,11 +8,13 @@
 
 import UIKit
 import Localize_Swift
+import SwiftyJSON
+import Alamofire
 
 class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
-
+    
     var languageSelectionButton: UIButton!
-
+    
     // outlets
     
     
@@ -25,16 +27,20 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
     
     @IBOutlet var saveButton: UIButton!
     
+    @IBOutlet var saveActivityIndicator: UIActivityIndicatorView!
     
     @IBAction func saveButtonAction(_ sender: UIButton) {
-        
+        if !isValid(){
+            return
+        }
+        changePassword()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
@@ -49,7 +55,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         currentPasswordTextField.contentTextField.aiDelegate = self
         newPasswordTextField.contentTextField.aiDelegate = self
         reEnterNewPasswordTextField.contentTextField.aiDelegate = self
-
+        
         
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -68,12 +74,12 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         LanguageUtility.removeObserverForLanguageChange(self)
         super.viewDidDisappear(animated)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: -
     
     func languageButtonClicked() {
@@ -97,7 +103,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         reEnterNewPasswordTextField.placeholderText = "RE-ENTER NEW PASSWORD".localized()
         
     }
-
+    
     func keyBoardHidden(textField: UITextField) {
         if textField == currentPasswordTextField.contentTextField{
             newPasswordTextField.contentTextField.becomeFirstResponder()
@@ -109,76 +115,147 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
             textField.resignFirstResponder()
         }
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 5
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.1
     }
-
+    
     /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+     
+     // Configure the cell...
+     
+     return cell
+     }
+     */
+    
+    /*
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
+    /*
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
+    /*
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
+    /*
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    func changePassword(){
+        
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
+        let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
+        let newPassword = newPasswordTextField.contentTextField.text ?? ""
+        let password = currentPasswordTextField.contentTextField.text ?? ""
+        
+        let parameters = ["password": password,
+                          "new_password": newPassword,
+                          "user_id": user_id,
+                          "platform":"1",
+                          "version_code": "1",
+                          "version_name": "1",
+                          "device_id": device_id,
+                          "push_token":"123123",
+                          "auth_token": auth_token,
+                          "language":"en"
+            ] as [String : Any]
+        
+        saveActivityIndicator.startAnimating()
+        print(parameters)
+        let url = String(format: "%@/changePassword", hostUrl)
+        print(url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            switch response.result {
+                
+            case .success:
+                DispatchQueue.main.async {
+                    self.saveActivityIndicator.stopAnimating()
+                    
+                }
+                
+                let json = JSON(data: response.data!)
+                print("json response\(json)")
+                let responseDict = json.dictionaryObject
+                //let code : NSNumber = responseDict?["code"] as! NSNumber
+                if let messageString = responseDict?["message"]{
+                    
+                    let alertMessage : String = messageString as! String
+                    self.showAlert(title: "", message: alertMessage)
+                    
+                }
+                break
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    self.saveActivityIndicator.stopAnimating()
+                }
+                print(error)
+                break
+            }
+    
+        }
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+    
+    func isValid() -> Bool{
+        if currentPasswordTextField.contentTextField.text?.characters.count == 0 {
+            self.showAlert(title: "", message: "Please enter current password")
+            return false
+        }
+        else if (newPasswordTextField.contentTextField.text?.characters.count)! < 6 {
+            self.showAlert(title: "", message: "Please enter new password")
+            return false
+        }
+        else if reEnterNewPasswordTextField.contentTextField.text != newPasswordTextField.contentTextField.text {
+            self.showAlert(title: "", message: "Passwords doesn't match")
+            return false
+        }
         return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

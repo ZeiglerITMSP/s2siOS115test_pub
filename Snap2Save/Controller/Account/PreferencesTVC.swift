@@ -19,6 +19,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     @IBOutlet var contactPreferenceSegmentControl: UISegmentedControl!
     @IBOutlet var saveButton: UIButton!
     
+    @IBOutlet var saveActivityIndicator: UIActivityIndicatorView!
     @IBOutlet var reEnterMobileNumberTextField: AIPlaceHolderTextField!
     @IBOutlet var mobileNumberTextField: AIPlaceHolderTextField!
     @IBOutlet var emailPlaceHolderTextField: AIPlaceHolderTextField!
@@ -247,7 +248,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                           "auth_token": auth_token,
                           "language":"en"
             ] as [String : Any]
-        
+        saveActivityIndicator.startAnimating()
         print(parameters)
         let url = String(format: "%@/updatePreferences", hostUrl)
         print(url)
@@ -257,7 +258,19 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             case .success:
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
-                
+                DispatchQueue.main.async {
+                    self.saveActivityIndicator.stopAnimating()
+                    
+                }
+
+                let responseDict = json.dictionaryObject
+                //let code : NSNumber = responseDict?["code"] as! NSNumber
+                if let messageString = responseDict?["message"]{
+                    
+                    let alertMessage : String = messageString as! String
+                    self.showAlert(title: "", message: alertMessage)
+                    
+                }
 
                 
                 break
@@ -265,7 +278,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    
+                    self.saveActivityIndicator.stopAnimating()
+
                 }
                 print(error)
                 break
