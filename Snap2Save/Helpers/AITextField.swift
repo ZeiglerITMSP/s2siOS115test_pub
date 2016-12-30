@@ -344,8 +344,6 @@ class AITextField: UITextField {
         }
         return 100000
     }
-    
-    
 }
 
 
