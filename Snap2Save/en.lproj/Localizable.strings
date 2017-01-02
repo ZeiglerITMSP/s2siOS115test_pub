@@ -113,3 +113,118 @@
 "Change Password" = "Change Password";
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// EBT
+
+// Services
+"Services" = "Services";
+"EBT" = "EBT";
+"About Snap2Save" = "About Snap2Save";
+"FAQ" = "FAQ";
+"Contact Us" = "Contact Us";
+"Terms of Service" = "Terms of Service";
+"Privacy Policy" = "Privacy Policy";
+
+// login screen
+"USER ID" = "USER ID";
+"PASSWORD" = "PASSWORD";
+"Remember my user ID" = "Remember my user ID";
+"LOGIN" = "LOGIN";
+"REGISTRATION" = "REGISTRATION";
+
+// Authentication Code
+"AUTHENTICATION CODE" = "AUTHENTICATION CODE";
+"CONFIRM" = "CONFIRM";
+"REGENERATE" = "REGENERATE";
+
+
+"NEXT" = "NEXT";
+
+// Registration
+"Registration" = "Registration";
+"Please enter your current card number." = "Please enter your current card number.";
+"CARD NUMBER" = "CARD NUMBER";
+
+// DOB screen
+
+"Validate Identity" = "Validate Identity";
+"Step 1: Please provide the following information to validate your identity." = "Step 1: Please provide the following information to validate your identity.";
+"WHAT IS YOUR DATE OF BIRTH?" = "WHAT IS YOUR DATE OF BIRTH?";
+"WHAT IS YOUR SOCIAL SECURITY NUMBER?" = "WHAT IS YOUR SOCIAL SECURITY NUMBER?";
+
+// Select PIN
+
+"Step 2: Select PIN" = "Step 2: Select PIN";
+"PIN" = "PIN";
+"CONFIRM PIN" = "CONFIRM PIN";
+"Use Current PIN" = "Use Current PIN";
+
+// User Information
+
+"User Information" = "User Information";
+"Step 3: Please enter the following user information" = "Step 3: Please enter the following user information";
+"USER ID" = "USER ID";
+"PASSWORD" = "PASSWORD";
+"CONFIRM NEW PASSWORD" = "CONFIRM NEW PASSWORD";
+"EMAIL ADDRESS" = "EMAIL ADDRESS";
+"CONFIRM EMAIL ADDRESS" = "CONFIRM EMAIL ADDRESS";
+"PHONE NUMBER" = "PHONE NUMBER";
+"QUESTION 1" = "QUESTION 1";
+"QUESTION 2" = "QUESTION 2";
+"QUESTION 3" = "QUESTION 3";
+
+
+"ANSWER 1" = "ANSWER 1";
+"ANSWER 2" = "ANSWER 2";
+"ANSWER 3" = "ANSWER 3";
+
+// Confirmation screen
+"Confirmation" = "Confirmation";
+"Step 5: Registration Complete" = "Step 5: Registration Complete";
+"ENTER EMAIL VALIDATION CODE" = "ENTER EMAIL VALIDATION CODE";
+"VALIDATE" = "VALIDATE";
+"RESEND" = "RESEND";
+"CHANGE EMAIL" = "CHANGE EMAIL";
+
+
+// Verify Security Question
+
+"Verify Security Question" = "Verify Security Question";
+"Please enter a valid response to the security question." = "Please enter a valid response to the security question.";
+"SECURITY QUESTION" = "SECURITY QUESTION";
+"SECURITY ANSWER" = "SECURITY ANSWER";
+"CONFIRM" = "CONFIRM";
+
+
+
+
+
+
+
+
+
+

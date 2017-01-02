@@ -23,16 +23,94 @@
 "SERVICES" = "SERVICIOS";
 "ACCOUNT" = "CUENTA";
 
-
-// EBT
-"User ID" = "Identificación De Usuario";
-"Password" = "Contraseña";
-"Remember my username" = "Recordar mi nombre de usuario";
-"Login" = "Iniciar sesión";
-"Registration" = "Registro";
-
-
 // signUpTVC
 "TermsMessage" = "Al convertirse en un usuario registrado, acepta nuestros Términos de servicio.";
 "TermsLink" = "Términos de servicio";
 "CONTINUE" = "CONTINUE";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// EBT
+
+// Services
+"Services" = "Servicios";
+"EBT" = "EBT";
+"About Snap2Save" = "Acerca de Snap2Save";
+"FAQ" = "Preguntas más frecuentes";
+"Contact Us" = "Contáctenos";
+"Terms of Service" = "Términos de servicio";
+"Privacy Policy" = "Política de privacidad";
+
+// login screen
+"USER ID" = "IDENTIDAD DE USUARIO";
+"PASSWORD" = "CONTRASEÑA";
+"Remember my user ID" = "Recuerda mi ID de usuario";
+"LOGIN" = "INICIAR SESIÓN";
+"REGISTRATION" = "REGISTRO";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -48,11 +48,16 @@ class EBTLoginTVC: UITableViewController {
         
         self.view.endEditing(true)
         
-        if rememberMeButton.isSelected {
-            saveUserID()
+        if isValid(userId: userIdField.contentTextField.text) &&
+            isValid(password: passwordField.contentTextField.text) {
+            
+            if rememberMeButton.isSelected {
+                saveUserID()
+            }
+            
+            validateLoginpageUrl()
         }
         
-        validateLoginpageUrl()
     }
     
     @IBAction func registrationAction(_ sender: UIButton) {
@@ -94,14 +99,6 @@ class EBTLoginTVC: UITableViewController {
         
         ebtWebView.responder = self
         
-//        HUD.dimsBackground = false
-//        HUD.allowsInteraction = false
-//        
-//        HUD.show(.progress)
-//        HUD.hide()
-        
-        
-        
         // language selection
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -124,6 +121,9 @@ class EBTLoginTVC: UITableViewController {
                 authenticateUserWithTouchID()
             }
         }
+        
+        userIdField.contentTextField.aiDelegate = self
+        passwordField.contentTextField.aiDelegate = self
         
     }
     
@@ -176,6 +176,14 @@ class EBTLoginTVC: UITableViewController {
             
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
+            self.title = "EBT".localized()
+            self.userIdField.placeholderText = "USER ID".localized()
+            self.passwordField.placeholderText = "PASSWORD".localized()
+            
+            self.remmeberMyUserNameLabel.text = "Remember my user ID".localized()
+            
+            self.loginButton.setTitle("LOGIN".localized(), for: .normal)
+            self.registrationButton.setTitle("REGISTRATION".localized(), for: .normal)
             
         }
         
@@ -205,16 +213,43 @@ class EBTLoginTVC: UITableViewController {
         return UITableViewAutomaticDimension
     }
     
+    
+    // MARK: - Fields validation 
+    
+    func isValid(userId:String?) -> Bool {
+        
+        if (userId != nil) && (userId != "") {
+            return true
+        }
+        
+        return false
+    }
+    
+    func isValid(password:String?) -> Bool {
+        
+        if (password != nil) && (password != "") {
+            return true
+        }
+        
+        return false
+    }
+    
+    
+    
+    
+    
     // MARK: - WebView
     
     // load webpage
     func loadLoginPage() {
         
-        let loginUrl_en = "https://ucard.chase.com/chp"
+//        let loginUrl_en = "https://ucard.chase.com/chp"
+        let loginUrl_en = "https://www.gmail.com"
+        
         //let loginUrl_es = "https://ucard.chase.com/locale?request_locale=es"
         let url = NSURL(string: loginUrl_en)
         let request = NSURLRequest(url: url! as URL)
-        
+        print("asdfasdf")
         actionType = .loadPage
         ebtWebView.webView.load(request as URLRequest)
     }
@@ -368,6 +403,23 @@ extension EBTLoginTVC: EBTWebViewDelegate {
         if actionType == .sumbit {
             validateSubmitAction()
         }
+    }
+    
+}
+
+extension EBTLoginTVC: AITextFieldProtocol {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == userIdField.contentTextField {
+            
+            passwordField.contentTextField.becomeFirstResponder()
+        } else if textField == passwordField.contentTextField {
+            
+            textField.resignFirstResponder()
+        }
+        
+        return true
     }
     
 }

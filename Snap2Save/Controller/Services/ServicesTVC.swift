@@ -10,6 +10,16 @@ import UIKit
 
 class ServicesTVC: UITableViewController {
 
+    
+    // Outlets
+    @IBOutlet weak var ebtLabel: UILabel!
+    @IBOutlet weak var aboutLabel: UILabel!
+    @IBOutlet weak var faqLabel: UILabel!
+    @IBOutlet weak var contactUsLabel: UILabel!
+    @IBOutlet weak var termsLabel: UILabel!
+    @IBOutlet weak var privacyPolicyLabel: UILabel!
+    
+    
     var languageSelectionButton: UIButton!
     
     override func viewDidLoad() {
@@ -29,7 +39,6 @@ class ServicesTVC: UITableViewController {
         
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
         
-//        selectedTabBackground()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -71,6 +80,15 @@ class ServicesTVC: UITableViewController {
         DispatchQueue.main.async {
             
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.title = "Services".localized()
+            
+            
+            self.ebtLabel.text = "EBT".localized()
+            self.aboutLabel.text = "About Snap2Save".localized()
+            self.faqLabel.text = "FAQ".localized()
+            self.contactUsLabel.text = "Contact Us".localized()
+            self.termsLabel.text = "Terms of Service".localized()
+            self.privacyPolicyLabel.text = "Privacy Policy".localized()
         }
     }
 

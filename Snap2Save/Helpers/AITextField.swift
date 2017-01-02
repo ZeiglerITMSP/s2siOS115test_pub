@@ -43,7 +43,7 @@ class AITextField: UITextField {
     var selectedDate:NSDate? = nil
     var pickerViewArray:NSMutableArray? = nil
     var selectedTextInPicker:String = ""
-    var aiDelegate:AITextFieldProtocol? = nil
+    weak var aiDelegate: AITextFieldProtocol?
     var selectedCountryRegion:String? = nil
     
     var underlineLayer: CALayer!

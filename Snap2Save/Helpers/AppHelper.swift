@@ -182,33 +182,5 @@ public extension UIImage {
     }
 }
 
-//extension NSMutableAttributedString {
-//    
-//    func addUnderlineAttribute(forText text:String) {
-//        
-//        let textRange = NSMakeRange(0, text.characters.count)
-//        
-//        attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
-//        // Add other attributes if needed
-//       // self.attributedText = attributedText
-//        
-//        
-//        
-//        // Terms of Service
-//        let msgStr = "Terms Of Service".localized()
-//        let string = msgStr
-//        let rangeMsgStr = (string as NSString).range(of: "Terms of Service.")
-//        let attributedString = NSMutableAttributedString(string: string)
-//        
-//        attributedString.addAttribute(NSLinkAttributeName, value:("https://appitventures.teamwork.com/dashboard"), range: rangeMsgStr)
-//        attributedString.addAttribute(NSUnderlineStyleAttributeName, value: NSNumber(value: 1), range: rangeMsgStr)
-//        attributedString.addAttribute(NSUnderlineColorAttributeName, value: APP_GRREN_COLOR, range: rangeMsgStr)
-//        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red , range: rangeMsgStr)
-//        self.terms_serviceLabel.attributedText = attributedString
-//
-//        
-//    }
 
-    
-//}
 
