@@ -35,7 +35,10 @@ class EBTCardNumberTVC: UITableViewController {
     @IBAction func nextAction(_ sender: UIButton) {
         
         self.view.endEditing(true)
-        autoFill(cardNumber: cardNumberField.contentTextField.text!)
+        
+        self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
+        
+//        autoFill(cardNumber: cardNumberField.contentTextField.text!)
     }
     
     @IBAction func cancelAction(_ sender: UIButton) {
@@ -103,8 +106,10 @@ class EBTCardNumberTVC: UITableViewController {
     
     // load webpage
     func loadSignupPage() {
+
+        let signupUrl_en = Bundle.main.path(forResource: "cardNumber", ofType: "html")!
         
-        let signupUrl_en = "https://ucard.chase.com/cardValidation_setup.action?screenName=register&page=logon"
+//        let signupUrl_en = "https://ucard.chase.com/cardValidation_setup.action?screenName=register&page=logon"
         
         let url = NSURL(string: signupUrl_en)
         let request = NSURLRequest(url: url! as URL)
