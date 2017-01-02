@@ -13,9 +13,9 @@ import SwiftyJSON
 class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScrollViewDelegate {
     
     var languageSelectionButton: UIButton!
-    
+    var user:User = User()
     var blueNavBarImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
-
+    
     @IBOutlet var bgContainerView: UIView!
     @IBOutlet var bgScrollView: UIScrollView!
     @IBOutlet var FbLoginBgView: UIView!
@@ -35,7 +35,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         if !isValid(){
             return
         }
-            userLogin()
+        userLogin()
     }
     
     @IBAction func forgotPasswordButtonAction(_ sender: UIButton) {
@@ -48,7 +48,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Log In"
-
+        
         AppHelper.setRoundCornersToView(borderColor:APP_ORANGE_COLOR, view:loginButton , radius:3.0, width: 1.0)
         
         AppHelper.setRoundCornersToView(borderColor: UIColor.init(red: 59.0/255.0, green: 89.0/255.0, blue: 152.0/255.0, alpha: 1.0), view:FbLoginBgView , radius:3.0, width: 1.0)
@@ -68,17 +68,17 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         self.navigationItem.leftBarButtonItem = leftBarButton
         
         
-       /* let languageButton = UIButton.init(type: .system)
-        languageButton.frame = CGRect(x:0,y:0,width:60,height:25)
-        languageButton.setTitle("ENGLISH".localized, for: .normal)
-        languageButton.setTitleColor(UIColor.white, for: .normal)
-        languageButton.backgroundColor = UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0)
-        languageButton.addTarget(self, action: #selector(languageButtonClicked), for: .touchUpInside)
-        languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 11.0)
-        AppHelper.setRoundCornersToView(borderColor: UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0), view:languageButton , radius:2.0, width: 1.0)
-        let rightBarButton = UIBarButtonItem()
-        rightBarButton.customView = languageButton
-        self.navigationItem.rightBarButtonItem = rightBarButton*/
+        /* let languageButton = UIButton.init(type: .system)
+         languageButton.frame = CGRect(x:0,y:0,width:60,height:25)
+         languageButton.setTitle("ENGLISH".localized, for: .normal)
+         languageButton.setTitleColor(UIColor.white, for: .normal)
+         languageButton.backgroundColor = UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0)
+         languageButton.addTarget(self, action: #selector(languageButtonClicked), for: .touchUpInside)
+         languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 11.0)
+         AppHelper.setRoundCornersToView(borderColor: UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0), view:languageButton , radius:2.0, width: 1.0)
+         let rightBarButton = UIBarButtonItem()
+         rightBarButton.customView = languageButton
+         self.navigationItem.rightBarButtonItem = rightBarButton*/
         
         mobileNumTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         mobileNumTextField.createBorder(borderColor: UIColor.white,xpos: 0)
@@ -88,7 +88,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         mobileNumTextField.selectedColor = UIColor(white: 1, alpha: 1)
         mobileNumTextField.normalColor = UIColor(white: 1, alpha: 0.7)
         mobileNumTextField.updateUIAsPerTextFieldType()
-
+        
         passwordTextField.textFieldType = AITextField.AITextFieldType.PasswordTextField
         passwordTextField.createBorder(borderColor: UIColor.white,xpos: 0)
         passwordTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
@@ -97,7 +97,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         passwordTextField.selectedColor = UIColor(white: 1, alpha: 1)
         passwordTextField.normalColor = UIColor(white: 1, alpha: 0.7)
         passwordTextField.updateUIAsPerTextFieldType()
-
+        
         mobileNumTextField.aiDelegate = self
         passwordTextField.aiDelegate = self
         
@@ -110,7 +110,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
         
-
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -132,19 +132,19 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     func reloadContent() {
         DispatchQueue.main.async {
             
-        self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-        self.loginWithFacebookButton.setTitle("Log In with Facebook".localized, for: .normal)
-        self.orLabel.text = "or".localized
-        self.mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized
-        self.passwordLabel.text = "PASSWORD".localized
-        self.forgotPasswordButton.setTitle("Forgot Password?".localized, for: .normal)
-        self.loginButton.setTitle("LOG IN".localized, for: .normal)
-        self.title = "Log In".localized()
-        self.updateBackButtonText()
-
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.loginWithFacebookButton.setTitle("Log In with Facebook".localized, for: .normal)
+            self.orLabel.text = "or".localized
+            self.mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized
+            self.passwordLabel.text = "PASSWORD".localized
+            self.forgotPasswordButton.setTitle("Forgot Password?".localized, for: .normal)
+            self.loginButton.setTitle("LOG IN".localized, for: .normal)
+            self.title = "Log In".localized()
+            self.updateBackButtonText()
+            
         }
     }
-
+    
     
     func animateWithKeyboard(notification: NSNotification) {
         
@@ -214,7 +214,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             textField.resignFirstResponder()
         }
     }
-
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         ////print("scrollViewDidScroll \(scrollView.contentOffset)")
@@ -231,7 +231,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     {
         self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
         //self.navigationController?.navigationBar.backgroundColor = UIColor.clear
- 
+        
     }
     func setTransparentNavigationBar()
     {
@@ -269,23 +269,39 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                 DispatchQueue.main.async {
                     self.loginActivityIndicator.stopAnimating()
                 }
-
+                
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
+                
                 let responseDict = json.dictionaryObject
                 
-                if let auth_token = responseDict?["auth_token"] as? String {
-                    UserDefaults.standard.set(auth_token, forKey: AUTH_TOKEN)
-                    
-                    if let userDict = responseDict?["user"] as? [String:Any] {
-                        let user_id = userDict["id"]
-                        UserDefaults.standard.set(user_id, forKey: USER_ID)
+                if let code = responseDict?["code"] {
+                    let code = code as! NSNumber
+                    if code.intValue == 200 {
+                        
+                        if let userDict = responseDict?["user"] {
+                            self.user = User.prepareUser(dictionary: userDict as! [String : Any])
+                            let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
+                            UserDefaults.standard.set(userData, forKey: LOGGED_USER)
+                        }
+                        if let auth_token = responseDict?["auth_token"] as? String {
+                            UserDefaults.standard.set(auth_token, forKey: AUTH_TOKEN)
+                            
+                            if let userDict = responseDict?["user"] as? [String:Any] {
+                                let user_id = userDict["id"]
+                                UserDefaults.standard.set(user_id, forKey: USER_ID)
+                            }
+                            
+                            
+                            self.presentHome()
+                            
+                        }
                     }
+                    print("user id\(self.user.id)")
+                    print("user info \(self.user.userInfo)")
                     
-                    
-                    self.presentHome()
-
-                } else {
+                }
+                else {
                     
                     if let responseDict = json.dictionaryObject {
                         let alertMessage = responseDict["message"] as! String
@@ -309,6 +325,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
         
     }
+    
     /*
      // MARK: - Navigation
      
@@ -327,10 +344,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let validNum = AppHelper.validate(value: mobileNumTextField.text!)
         
         if ((mobileNumTextField.text?.characters.count)! == 0 || validNum == false ){
-            showAlert(title: "", message: "Please enter 10 digit PhoneNumber")
+            showAlert(title: "", message: "Please enter 10 digit Phone Number")
             return false
         }
-        else if passwordTextField.text?.characters.count == 0{
+        else if (passwordTextField.text?.characters.count)! < 6{
             self.showAlert(title: "", message: "Please enter Password")
             return false
         }

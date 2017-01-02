@@ -441,7 +441,7 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
     func isValidData() -> Bool{
         let validMobileNum = AppHelper.validMobileNumber(mobileNumber: mobileNumTextField.text!)
         if mobileNumTextField.text?.characters.count == 0 || validMobileNum == false {
-            showAlert(title: "", message: "Please enter 10 digit PhoneNumber")
+            showAlert(title: "", message: "Please enter 10 digit Phone Number")
             return false
         }
         else if reEnterMobileNumTextField.text != mobileNumTextField.text {

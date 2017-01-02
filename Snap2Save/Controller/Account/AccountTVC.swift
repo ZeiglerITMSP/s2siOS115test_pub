@@ -104,7 +104,7 @@ class AccountTVC: UITableViewController {
                 
             }
            else if indexPath.row == 1 {
-                
+                self.performSegue(withIdentifier: "PersonalInformationTVC", sender: self)
             }
             else if indexPath.row == 2 {
                 //PreferencesTVC

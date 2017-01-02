@@ -185,7 +185,6 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             self.groupCodeLabel.text = "GROUP CODE (IF APPLICABLE)".localized()
             self.referralCodeLabel.text = "REFERRAL CODE (IF APPLICABLE)".localized()
             self.registerButton.setTitle("REGISTER".localized(), for: .normal)
-            self.updateBackButtonText()
 
         }
     }
@@ -304,7 +303,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         stateTextField.setRightGap(width: 10, placeHolderImage:UIImage.init(named: "ic_downarrow_input")!)
         stateTextField.text_Color =  UIColor.black
         
-        zipCodeTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
+        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         zipCodeTextField.updateUIAsPerTextFieldType()
         zipCodeTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         zipCodeTextField.placeHolderLabel = zipCodeLabel
