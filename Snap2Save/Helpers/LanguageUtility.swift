@@ -65,7 +65,7 @@ extension UIViewController {
             Localize.setCurrentLanguage("en")
             
         })
-        let spanishBtn = UIAlertAction.init(title: "Español", style: .default, handler:{ (action) in
+        let spanishBtn = UIAlertAction.init(title: "Spanish", style: .default, handler:{ (action) in
             print("Selected Spanish")
             Localize.setCurrentLanguage("es")
         })
