@@ -216,19 +216,25 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
             case .success:
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
-                    
-                }
-                
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
                 let responseDict = json.dictionaryObject
                 //let code : NSNumber = responseDict?["code"] as! NSNumber
-                if let messageString = responseDict?["message"]{
+                if let messageString = responseDict?["message"] {
                     
-                    let alertMessage : String = messageString as! String
-                    self.showAlert(title: "", message: alertMessage)
+                    let alertMessage = messageString as! String
+                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                        (action) in
+                        self.view.endEditing(true)
+                        _ = self.navigationController?.popViewController(animated: true)
+                    })
                     
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
                 }
+                
+            }
                 break
                 
             case .failure(let error):

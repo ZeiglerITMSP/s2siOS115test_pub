@@ -12,7 +12,7 @@
 		9737ED0C1E14042400120B54 /* ChangePasswordTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */; };
 		9759BE781E0A65AA00A5C76A /* SignUpTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */; };
 		977B64F51E163B5600AA802D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F41E163B5600AA802D /* User.swift */; };
-		977B64F71E16407A00AA802D /* UserAdditionalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F61E16407A00AA802D /* UserAdditionalInformation.swift */; };
+		977B64F71E16407A00AA802D /* AdditionalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F61E16407A00AA802D /* AdditionalInformation.swift */; };
 		978729DD1E0937B000908301 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978729DC1E0937B000908301 /* Constants.swift */; };
 		97E4338B1E10E5F10095EABA /* USStateAbbreviations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97E4338A1E10E5F10095EABA /* USStateAbbreviations.plist */; };
 		E81B74AC1E1105EA00D5EC61 /* LanguageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81B74AB1E1105EA00D5EC61 /* LanguageUtility.swift */; };
@@ -93,7 +93,7 @@
 		9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordTVC.swift; sourceTree = "<group>"; };
 		9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTVC.swift; sourceTree = "<group>"; };
 		977B64F41E163B5600AA802D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Snap2Save/Controller/Account/User.swift; sourceTree = SOURCE_ROOT; };
-		977B64F61E16407A00AA802D /* UserAdditionalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAdditionalInformation.swift; path = Snap2Save/Controller/Account/UserAdditionalInformation.swift; sourceTree = SOURCE_ROOT; };
+		977B64F61E16407A00AA802D /* AdditionalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdditionalInformation.swift; path = Snap2Save/Controller/Account/AdditionalInformation.swift; sourceTree = SOURCE_ROOT; };
 		978729DC1E0937B000908301 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		97E4338A1E10E5F10095EABA /* USStateAbbreviations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = USStateAbbreviations.plist; sourceTree = "<group>"; };
 		9FA0F034D23D4324814FDA78 /* Pods-Snap2SaveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveTests/Pods-Snap2SaveTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -254,7 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				977B64F41E163B5600AA802D /* User.swift */,
-				977B64F61E16407A00AA802D /* UserAdditionalInformation.swift */,
+				977B64F61E16407A00AA802D /* AdditionalInformation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -705,7 +705,7 @@
 				E83156021E1A561E001D30D2 /* EBTDashboardTVC.swift in Sources */,
 				E8BAE2A81E0BDEFD00A85AAB /* EBTCardNumberTVC.swift in Sources */,
 				E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */,
-				977B64F71E16407A00AA802D /* UserAdditionalInformation.swift in Sources */,
+				977B64F71E16407A00AA802D /* AdditionalInformation.swift in Sources */,
 				E826FBD21E0940A20089AEA6 /* ServicesTVC.swift in Sources */,
 				E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */,
 				E84AE9DA1E07F53300C5E7F3 /* AccountTVC.swift in Sources */,

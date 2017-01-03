@@ -20,7 +20,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         case ethnicity
     }
     var user : User = User()
-    var additionalInfo : UserAdditionalInformation = UserAdditionalInformation()
+    var additionalInfo : AdditionalInformation = AdditionalInformation()
     var languageSelectionButton: UIButton!
     var ageGroupArray : NSMutableArray!
     var statesArray : NSMutableArray!
@@ -99,7 +99,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
         loadTextFields()
-        loadUserInformation()
+        //loadUserInformation()
         getProfile()
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
     }
@@ -420,17 +420,30 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let address_line2 = addressLine2TextField.text ?? ""
         let city = cityTextField.text ?? ""
         let state = stateTextField.text ?? ""
-        
+        var gender = ""
+        var age_group = ""
+        var ethnicity = ""
+
+        if selectedGenderIndex != nil{
+            gender =  String.init(format: "%d", selectedGenderIndex)
+        }
+        if selectedAgeGroupIndex != nil{
+            age_group  = String.init(format: "%d", selectedAgeGroupIndex)
+        }
+        if SelectedEthnicityIndex != nil{
+            ethnicity  = String.init(format: "%d", SelectedEthnicityIndex)
+        }
+
         let parameters = ["first_name" : first_name,
                           "last_name" : last_name,
                           "address_line1" : address_line1,
                           "address_line2" : address_line2,
                           "city":city,
                           "state": state,
-                          "gender": selectedGenderIndex,
-                          "age_group": selectedAgeGroupIndex,
+                          "gender": gender,
+                          "age_group": age_group,
                           "referral_code": "",
-                          "ethnicity": SelectedEthnicityIndex,
+                          "ethnicity": ethnicity,
                           "user_id": user_id,
                           "platform":"1",
                           "version_code": "1",
@@ -451,15 +464,23 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             case .success:
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
-                }
-                
-                let json = JSON(data: response.data!)
-                print("json response\(json)")
-                let responseDict = json.dictionaryObject
-                //let code : NSNumber = responseDict?["code"] as! NSNumber
-                if let messageString = responseDict?["message"]{
-                    let alertMessage : String = messageString as! String
-                    self.showAlert(title: "", message: alertMessage)
+                    let json = JSON(data: response.data!)
+                    print("json response\(json)")
+                    let responseDict = json.dictionaryObject
+                    //let code : NSNumber = responseDict?["code"] as! NSNumber
+                    if let messageString = responseDict?["message"] {
+                        
+                        let alertMessage = messageString as! String
+                        let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                            (action) in
+                            self.view.endEditing(true)
+                            _ = self.navigationController?.popViewController(animated: true)
+                        })
+                        
+                        alertController.addAction(defaultAction)
+                        self.present(alertController, animated: true, completion: nil)
+                    }
                     
                 }
                 break
@@ -477,30 +498,48 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
     }
 
     func loadUserInformation(){
-        print("user id\(self.user.id)")
-        print("user info \(self.user.userInfo)")
-        //let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
-        ///UserDefaults.standard.set(userData, forKey: LOGGED_USER)
-        //let userData = UserDefaults.standard.object(forKey: LOGGED_USER)
-        //let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
+       // print("user id\(self.user.id)")
+        print("user info \(self.user.additionalInformation)")
+        let userData = UserDefaults.standard.object(forKey: LOGGED_USER)
+        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
         
-        //print("user info \(userInfo)")
+        print("user info \(userInfo)")
         
-       // let user:User = userInfo as! User
-       // print("user id \(user.id)")
-       // print("user info \(user.email)")
+        let user:User = userInfo as! User
+        print("user id \(user.id)")
+        print("user info \(user.email)")
+        print("user add info \(user.additionalInformation)")
+       // print("user add info \(user.userInfo.fir)")
 
-      //  additionalInfo = user.userInfo as! [String : Any]
-       /* firstNameTextField.text = user.first_name
+        if user.additionalInformation != nil {
+            
+            additionalInfo = user.additionalInformation!
+            print("user info \(user.first_name)")
+            print("user info \(user.last_name)")
+            print("user zipcode \(user.zipcode)")
+            
+            print("user info \(user.additionalInformation?.address_line1)")
+            print("user info \(additionalInfo.address_line2)")
+            print("user info \(additionalInfo.city)")
+            print("user info \(user.additionalInformation?.state)")
+            print("user info \(additionalInfo.gender)")
+            print("user info \(additionalInfo.age_group)")
+            print("user info \(additionalInfo.ethnicity)")
+            
+        }
+        
+        
+       // let userAdditionalInfo : AdditionalInformation = self.user.additionalInformation!
+        firstNameTextField.text = user.first_name
         lastNameTextField.text = user.last_name
-        addressLine1TextField.text = additionalInfo.address_line1
-        addressLine2TextField.text = ""
-        cityTextField.text = ""
-        stateTextField.text = ""
-        zipCodeTextField.text = ""
-        genderTextField.text = ""
-        ageGroupTextField.text = ""
-        ethnicityTextField.text = ""*/
+        addressLine1TextField.text = user.additionalInformation?.address_line1
+        addressLine2TextField.text = user.additionalInformation?.address_line2
+        cityTextField.text = user.additionalInformation?.city
+        stateTextField.text = user.additionalInformation?.state
+        zipCodeTextField.text = self.user.zipcode
+        genderTextField.text = user.additionalInformation?.gender
+        ageGroupTextField.text = user.additionalInformation?.age_group
+        ethnicityTextField.text = user.additionalInformation?.ethnicity
         
     }
     
@@ -528,30 +567,29 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 DispatchQueue.main.async {
+                    
                 }
                 
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
                 let responseDict = json.dictionaryObject
-                //let code : NSNumber = responseDict?["code"] as! NSNumber
-                //if let messageString = responseDict?["message"]{
-                  //  let alertMessage : String = messageString as! String
-                  //  self.showAlert(title: "", message: alertMessage)
-                    
-               // }
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
                 if code.intValue == 200 {
-                    
                     if let userDict = responseDict?["user"] {
                         self.user = User.prepareUser(dictionary: userDict as! [String : Any])
                         let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
                         UserDefaults.standard.set(userData, forKey: LOGGED_USER)
-                        self.updateUserInformation()
+                        self.loadUserInformation()
+                    }
+                }
+                else {
+                    if let messageString = responseDict?["message"]{
+                          let alertMessage : String = messageString as! String
+                          self.showAlert(title: "", message: alertMessage)
                     }
                 }
                 }
-                
                 break
                 
             case .failure(let error):
@@ -566,3 +604,4 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
 
     }
 }
+

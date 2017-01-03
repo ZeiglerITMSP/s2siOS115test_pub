@@ -62,7 +62,7 @@ class AccountTVC: UITableViewController {
     }
 
     func reloadContent(){
-        
+        self.title = "Account".localized()
         autoLoginLabel.text = "Auto Log In".localized()
         personalInfoLabel.text = "Personal Information".localized()
         preferencesLabel.text = "Preferences".localized()

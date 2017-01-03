@@ -415,7 +415,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cku-hZ-H0W" customClass="AIPlaceHolderTextField" customModule="Snap2Save" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="EMAIL"/>
                                                     </userDefinedRuntimeAttributes>
@@ -439,7 +439,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NmZ-da-U4L" customClass="AIPlaceHolderTextField" customModule="Snap2Save" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="10-DIGIT CELL PHONE NUMBER"/>
                                                     </userDefinedRuntimeAttributes>
@@ -463,7 +463,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="byz-q5-Qcn" customClass="AIPlaceHolderTextField" customModule="Snap2Save" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="RE-ENTER 10-DIGIT CELL PHONE NUMBER"/>
                                                     </userDefinedRuntimeAttributes>
@@ -574,7 +574,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bM-Aq-qzZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="852" y="3134"/>
+            <point key="canvasLocation" x="1044" y="3125"/>
         </scene>
         <!--Change PasswordTVC-->
         <scene sceneID="YWu-ja-TJZ">
@@ -583,7 +583,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ovY-b9-jmK">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94117647059999998" green="0.96078431369999995" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="jg4-NK-CZE">
                                 <cells>
@@ -596,7 +596,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tgN-YO-mgY" customClass="AIPlaceHolderTextField" customModule="Snap2Save" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="10" width="375" height="80"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="CURRENT PASSWORD"/>
                                                     </userDefinedRuntimeAttributes>
@@ -620,7 +620,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tgF-3x-7ed" customClass="AIPlaceHolderTextField" customModule="Snap2Save" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)"/>
                                                     </userDefinedRuntimeAttributes>
@@ -633,6 +633,7 @@
                                                 <constraint firstItem="tgF-3x-7ed" firstAttribute="top" secondItem="jrG-DM-0CL" secondAttribute="top" id="ygV-Tl-BaT"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="80" id="6F4-lD-2Be">
                                         <rect key="frame" x="0.0" y="205" width="375" height="80"/>
@@ -643,7 +644,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ws-86-Gwn" customClass="AIPlaceHolderTextField" customModule="Snap2Save" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="RE-ENTER NEW PASSWORD"/>
                                                     </userDefinedRuntimeAttributes>
@@ -656,6 +657,7 @@
                                                 <constraint firstItem="9Ws-86-Gwn" firstAttribute="top" secondItem="bP8-Ar-u2I" secondAttribute="top" id="zng-n0-lmm"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="20" id="zZ5-GM-R4G">
                                         <rect key="frame" x="0.0" y="285" width="375" height="20"/>
@@ -697,6 +699,7 @@
                                                 <constraint firstItem="bok-qj-sPU" firstAttribute="centerY" secondItem="BeR-v5-c8N" secondAttribute="centerY" id="pyH-to-xUi"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>

@@ -14,10 +14,13 @@
 "English" = "English";
 "Spanish" = "Spanish";
 "Cancel" = "Cancel";
-
-"language.button.title" = "ENGLISH";
 "selectedLanguageTitle" = "English";
 
+
+// LANGUAGE
+"language.button.title" = "ENGLISH";
+"language.alert.english" = "English";
+"language.alert.spanish" = "Spanish";
 "Back" = "Back";
 
 
@@ -30,6 +33,8 @@
 "Congratulations!" = "Congratulations!";
 "WelcomeText" = "Welcome to Snap2Save.Your registration is now complete.";
 "Get Started!" = "Get Started!";
+
+
 
 //LoginVC
 "Log In" = "Log In";
@@ -47,6 +52,11 @@
 "Close" = "Close";
 
 //signUpTVC
+"Register" = "Register";
+"EARN 100 POINTS!" = "EARN 100 POINTS!";
+"RegisterMessage" = "Join us on Snap2Save and you will earn 100 points for registering!  Points can be redeemed for gift cards or health care rebates through our Reward Program.";
+"Register with Facebook" = "Register with Facebook";
+"*Required information" = "*Required information";
 "10-DIGIT CELL PHONE NUMBER" = "10-DIGIT CELL PHONE NUMBER";
 "RE-ENTER 10-DIGIT CELL PHONE NUMBER" = "RE-ENTER 10-DIGIT CELL PHONE NUMBER";
 "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)" = "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)";
@@ -82,6 +92,28 @@
 "REFERRAL CODE (IF APPLICABLE)" = "REFERRAL CODE (IF APPLICABLE)";
 "REGISTER" = "REGISTER";
 
+"Please select" = "Please select";
+"Unit, Building, etc." = "Unit, Building, etc.";
+"Street address or PO box" = "Street address or PO box";
+
+
+"Male" = "Male";
+"Female" = "Female";
+
+"21 and under" = "21 and under";
+"22 to 34" = "22 to 34";
+"35 to 44" = "35 to 44";
+"45 to 54" = "45 to 54";
+"55 to 64" = "55 to 64";
+"65 and older" = "65 and older";
+
+"American Indian or Alaska Native" = "American Indian or Alaska Native";
+"Asian or Pacific Islander" = "Asian or Pacific Islander";
+"Black or African American" = "Black or African American";
+"Hispanic or Latino" = "Hispanic or Latino";
+"White/Caucasian" = "White/Caucasian";
+"Other" = "Other";
+
 //ForgotPassword
 "Forgot Password" = "Forgot Password";
 "forgotPasswordMessage" = "Please enter the 10-digit cell phone number associated with your account.";
@@ -96,6 +128,7 @@
 "RESET PASSWORD" = "RESET PASSWORD";
 
 // AccountVc
+"Account" = "Account";
 "Auto Log In" = "Auto Log In";
 "Personal Information" = "Personal Information";
 "Preferences" = "Preferences";
@@ -105,12 +138,13 @@
 // PREFERENCE VC
 "Preferences" = "Preferences";
 
+
 // CHANGEPASSWORD VC
+"Change Password" = "Change Password";
 "RE-ENTER NEW PASSWORD" = "RE-ENTER NEW PASSWORD";
 "NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)" = "NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)";
 "CURRENT PASSWORD" = "CURRENT PASSWORD";
 "SAVE" = "SAVE";
-"Change Password" = "Change Password";
 
 
 

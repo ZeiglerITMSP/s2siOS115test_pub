@@ -151,6 +151,11 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
+            self.title = "Register".localized()
+            self.earn100PointsLabel.text = "EARN 100 POINTS!".localized()
+            self.messageLabel.text = "RegisterMessage".localized()
+            self.loginWithFBButton.setTitle("Register with Facebook".localized(), for: .normal);
+            self.requiredInfoLabel.text = "*Required information".localized()
             self.mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized()
             self.reEnterMobileNumLabel.text = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
             self.passwordLabel.text = "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)".localized()
@@ -164,22 +169,9 @@ class SignUpTVC: UITableViewController,UITextFieldDelegate,AITextFieldProtocol {
             
             self.updateTermsText()
             
-            
-//            let msgStr = "Terms Of Service".localized()
-//            let string = msgStr
-//            let rangeMsgStr = (string as NSString).range(of: "Terms of Service")
-//            let attributedString = NSMutableAttributedString(string: string)
-//            
-////            attributedString.addAttribute(NSLinkAttributeName, value:("https://appitventures.teamwork.com/dashboard"), range: rangeMsgStr)
-////            attributedString.addAttribute(NSUnderlineStyleAttributeName, value: NSNumber(value: 1), range: rangeMsgStr)
-////            attributedString.addAttribute(NSUnderlineColorAttributeName, value: APP_GRREN_COLOR, range: rangeMsgStr)
-//            attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red , range: rangeMsgStr)
-//            
-//            
-//            self.terms_serviceLabel.attributedText = attributedString
-
-            
             self.continueButton.setTitle("CONTINUE".localized(), for: .normal)
+            
+            self.tableView.reloadData()
         }
     }
 

@@ -21,8 +21,8 @@ class User: NSObject, NSCoding {
     
     var signup_type = ""
     var is_verified = ""
-    
-    var userInfo = [String : Any]()
+    var zipcode = ""
+    var additionalInformation: AdditionalInformation?
     
     override init() {
         
@@ -42,7 +42,8 @@ class User: NSObject, NSCoding {
         
         self.signup_type = aDecoder.decodeObject(forKey: "signup_type") as? String ?? ""
         self.is_verified = aDecoder.decodeObject(forKey: "is_verified") as? String ?? ""
-        self.userInfo = (aDecoder.decodeObject(forKey: "userInfo") as? [String : Any])!
+        self.zipcode = aDecoder.decodeObject(forKey: "zipcode") as? String ?? ""
+        self.additionalInformation = aDecoder.decodeObject(forKey: "additional_info") as? AdditionalInformation
         
     }
     
@@ -58,7 +59,9 @@ class User: NSObject, NSCoding {
         
         aCoder.encode(self.signup_type, forKey: "signup_type")
         aCoder.encode(self.is_verified, forKey: "is_verified")
-        aCoder.encode(self.userInfo, forKey: "userInfo")
+        aCoder.encode(self.zipcode, forKey: "zipcode")
+
+        aCoder.encode(self.additionalInformation, forKey: "additional_info")
     }
     
     // MARK: -
@@ -71,7 +74,7 @@ class User: NSObject, NSCoding {
             user.auth_token = authtoken
         }
         if let id = dictionary["id"] {
-            user.id = id as! String
+            user.id = "\(id)"
         }
         
         if let email = dictionary["email"] as? String {
@@ -96,8 +99,12 @@ class User: NSObject, NSCoding {
         if let is_verified = dictionary["is_verified"] as? String {
             user.is_verified = is_verified
         }
-        if let userInfo = dictionary["additional_info"] as? [String : Any] {
-            user.userInfo = userInfo
+        if let zip_code = dictionary["zipcode"]{
+            user.zipcode = "\(zip_code)"
+
+        }
+        if let additionalInformation = dictionary["additional_info"] as? [String:Any] {
+            user.additionalInformation = AdditionalInformation.prepareAdditionalInfo(dictionary: additionalInformation)
         }
 
         return user

@@ -59,13 +59,13 @@ extension UIViewController {
         
         let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let englishBtn = UIAlertAction.init(title: "English", style: .default, handler:{
+        let englishBtn = UIAlertAction.init(title: "language.alert.english".localized(), style: .default, handler: {
             (action) in
             print("Selected English")
             Localize.setCurrentLanguage("en")
             
         })
-        let spanishBtn = UIAlertAction.init(title: "Spanish", style: .default, handler:{ (action) in
+        let spanishBtn = UIAlertAction.init(title: "language.alert.spanish".localized() , style: .default, handler:{ (action) in
             print("Selected Spanish")
             Localize.setCurrentLanguage("es")
         })
