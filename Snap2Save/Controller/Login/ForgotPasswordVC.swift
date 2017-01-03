@@ -136,14 +136,15 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         
         let mobileNumber = mobileNumberTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
-        
+        let currentLanguage = Localize.currentLanguage()
+
         let parameters = ["phone_number": mobileNumber,
                           "platform":"1",
                           "version_code": "1",
                           "version_name": "1",
                           "device_id": device_id,
                           "push_token":"123123",
-                          "language":"en"
+                          "language": currentLanguage
                         ] as [String : Any]
         
         
@@ -203,6 +204,23 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         }
 
     }
+    
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == mobileNumberTextField {
+            
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 10
+            
+        }
+        
+        return true
+    }
+
     /*
      // MARK: - Navigation
      

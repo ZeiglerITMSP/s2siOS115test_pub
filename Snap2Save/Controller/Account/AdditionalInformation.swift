@@ -11,17 +11,17 @@ import UIKit
 
 class AdditionalInformation: NSObject, NSCoding {
     
-    var gender = "0"
-    var city = ""
-    var address_line1 = ""
-    var age_group = ""
-    var ethnicity = ""
-    var address_line2 = ""
-    var referral_code = ""
-    var group_code = ""
-    var state = ""
-    var first_name = ""
-    var last_name = ""
+    var gender: String?
+    var city: String?
+    var address_line1: String?
+    var age_group: String?
+    var ethnicity: String?
+    var address_line2: String?
+    var referral_code: String?
+    var group_code: String?
+    var state: String?
+    var first_name: String?
+    var last_name: String?
 
     override init() {
         
@@ -30,22 +30,22 @@ class AdditionalInformation: NSObject, NSCoding {
     // MARK: - NSCoding
     required init?(coder aDecoder: NSCoder) {
         
-        self.gender = aDecoder.decodeObject(forKey: "gender") as? String ?? ""
-        self.city = aDecoder.decodeObject(forKey: "city") as? String ?? ""
+        self.gender = aDecoder.decodeObject(forKey: "gender") as? String
+        self.city = aDecoder.decodeObject(forKey: "city") as? String
         
-        self.address_line1 = aDecoder.decodeObject(forKey: "address_line1") as? String ?? ""
-        self.age_group = aDecoder.decodeObject(forKey: "age_group") as? String ?? ""
+        self.address_line1 = aDecoder.decodeObject(forKey: "address_line1") as? String
+        self.age_group = aDecoder.decodeObject(forKey: "age_group") as? String
         
-        self.ethnicity = aDecoder.decodeObject(forKey: "ethnicity") as? String ?? ""
-        self.address_line2 = aDecoder.decodeObject(forKey: "address_line2") as? String ?? ""
+        self.ethnicity = aDecoder.decodeObject(forKey: "ethnicity") as? String
+        self.address_line2 = aDecoder.decodeObject(forKey: "address_line2") as? String
         
-        self.referral_code = aDecoder.decodeObject(forKey: "referral_code") as? String ?? ""
-        self.group_code = aDecoder.decodeObject(forKey: "group_code") as? String ?? ""
+        self.referral_code = aDecoder.decodeObject(forKey: "referral_code") as? String
+        self.group_code = aDecoder.decodeObject(forKey: "group_code") as? String
         
-        self.state = aDecoder.decodeObject(forKey: "state") as? String ?? ""
+        self.state = aDecoder.decodeObject(forKey: "state") as? String
         
-        self.first_name = aDecoder.decodeObject(forKey: "first_name") as? String ?? ""
-        self.last_name = aDecoder.decodeObject(forKey: "last_name") as? String ?? ""
+        self.first_name = aDecoder.decodeObject(forKey: "first_name") as? String
+        self.last_name = aDecoder.decodeObject(forKey: "last_name") as? String
 
     }
     
@@ -86,10 +86,14 @@ class AdditionalInformation: NSObject, NSCoding {
         }
         
         if let age_group = dictionary["age_group"] as? String {
-            userInfo.age_group = age_group
+            if age_group != "" {
+                userInfo.age_group = age_group
+            }
         }
         if let ethnicity = dictionary["ethnicity"] as? String {
-            userInfo.ethnicity = ethnicity
+            if ethnicity != "" {
+                userInfo.ethnicity = ethnicity
+            }
         }
         
         if let address_line2 = dictionary["address_line2"] as? String {

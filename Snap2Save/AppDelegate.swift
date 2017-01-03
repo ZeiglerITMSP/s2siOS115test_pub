@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Localize_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -117,14 +118,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     let device_id = UIDevice.current.identifierForVendor!.uuidString
                     let user_id = mutableDict.object(forKey: "userid") ?? ""
-                    
+                    let currentLanguage = Localize.currentLanguage()
+
                     let parameters = ["user_id": user_id,
                                       "platform":"1",
                                       "version_code": "1",
                                       "version_name": "1",
                                       "device_id": device_id,
                                       "push_token":"123123",
-                                      "language":"en"
+                                      "language":currentLanguage
                         ] as [String : Any]
                     
                     

@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-var hostUrl = "http://35.163.6.45/snap2save-api"
-
+//var hostUrl = "http://35.163.6.45/snap2save-api"
+var hostUrl = "http://dev.snap2save-a-lot.com/api/";
 
 var SCREEN_WIDTH = UIScreen.main.bounds.size.width
 
@@ -24,3 +24,5 @@ var APP_LINE_COLOR = UIColor.init(colorLiteralRed: 104.0/255.0, green: 128.0/255
 var USER_ID = "user_id"
 var AUTH_TOKEN = "auth_token"
 var LOGGED_USER = "Logged_user"
+var EMAIL = "email"
+var MOBILE_NUMBER = "mobileNumber"
