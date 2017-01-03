@@ -33,20 +33,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UITabBar.appearance().tintColor = UIColor.green
 //        
         
-       
+        let isAutoLoginKeyExists = UserDefaults.standard.dictionaryRepresentation().keys.contains(USER_AUTOLOGIN)
         
-        let user_id = UserDefaults.standard.object(forKey: USER_ID)
-        let auth_token = UserDefaults.standard.object(forKey: AUTH_TOKEN)
+        if isAutoLoginKeyExists == false {
+            UserDefaults.standard.set(true, forKey: USER_AUTOLOGIN)
+            UserDefaults.standard.synchronize()
+        }
+
+        let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
+        
         let storyBoard:UIStoryboard?
 
-        if user_id != nil && auth_token != nil {
-            // user exists
-            storyBoard = UIStoryboard(name: "Home", bundle: nil);
-        }
-        else{
+        if isAutoLogin == true {
+            let user_id = UserDefaults.standard.object(forKey: USER_ID)
+            let auth_token = UserDefaults.standard.object(forKey: AUTH_TOKEN)
+           
+             if user_id != nil && auth_token != nil {
+                    // user exists
+                    storyBoard = UIStoryboard(name: "Home", bundle: nil);
+            }
+            else {
+                storyBoard = UIStoryboard(name: "Main", bundle: nil);
+            }
+            
+        } else {
             storyBoard = UIStoryboard(name: "Main", bundle: nil);
         }
-        
+            
         let initialViewController: UIViewController = storyBoard!.instantiateInitialViewController()!
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()

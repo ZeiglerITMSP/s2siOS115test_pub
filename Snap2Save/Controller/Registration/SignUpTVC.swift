@@ -361,41 +361,44 @@ class SignUpTVC: UITableViewController {
             showAlert(title: "", message: "Please enter 10 digit Phone Number")
             return false
         }
-        else if reEnterMobileNumTextField.text != mobileNumTextField.text {
+        
+        if reEnterMobileNumTextField.text != mobileNumTextField.text {
             showAlert(title: "", message: "PhoneNumbers doesn't match")
             return false
         }
            
-        else if (passwordTextField.text?.characters.count)! < 6 {
+        if (passwordTextField.text?.characters.count)! < 6 {
             showAlert(title: "", message: "Please enter Password")
             return false
         }
-        else if reEnterPasswordTextField.text != passwordTextField.text{
+        
+        if reEnterPasswordTextField.text != passwordTextField.text{
             showAlert(title: "", message: "Password doesn't match")
             return false
         }
-        else if zipCodeTextField.text?.characters.count == 0 {
+        
+        if zipCodeTextField.text?.characters.count == 0 {
             showAlert(title: "", message: "Please enter ZipCode")
             return false
         }
-       // else if (emailTextField.text?.characters.count)! > 0 {
-           else if  validEmail == false {
+       
+         if (emailTextField.text?.characters.count)! > 0 {
+            if  validEmail == false {
                 showAlert(title: "", message: "Enter a valid email")
                 return false
             }
-    //}
+        }
             
             
-        else if reEnterEmailTextField.text != emailTextField.text {
+        if reEnterEmailTextField.text != emailTextField.text {
             showAlert(title: "", message: "Emails doesn't match")
             return false
         }
 
-        else if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
+        if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
             if (emailTextField.text?.characters.count)! == 0 {
                     showAlert(title: "", message: "Enter a valid email")
                     return false
-        
             }
         }
         return true

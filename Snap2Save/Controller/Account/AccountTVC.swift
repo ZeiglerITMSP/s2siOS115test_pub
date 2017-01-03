@@ -28,7 +28,7 @@ class AccountTVC: UITableViewController {
     @IBOutlet var loginSwitch: UISwitch!
     
     @IBAction func autoLoginSwitchAction(_ sender: UISwitch) {
-        
+            UserDefaults.standard.set(sender.isOn, forKey: USER_AUTOLOGIN)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,9 @@ class AccountTVC: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
+        loginSwitch.isOn = isAutoLogin
         
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -103,7 +106,7 @@ class AccountTVC: UITableViewController {
         
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                
+            
             }
             else if indexPath.row == 1 {
                 self.performSegue(withIdentifier: "PersonalInformationTVC", sender: self)

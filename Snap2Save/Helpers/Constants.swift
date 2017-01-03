@@ -26,3 +26,5 @@ var AUTH_TOKEN = "auth_token"
 var LOGGED_USER = "Logged_user"
 var EMAIL = "email"
 var MOBILE_NUMBER = "mobileNumber"
+let USER_AUTOLOGIN = "userAutoLogin"
+
