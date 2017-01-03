@@ -23,8 +23,21 @@ class WelcomePageVC: UIViewController {
     
     @IBAction func getStartedButtonAction(_ sender: UIButton) {
         
-        let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
-        self.navigationController?.show(loginVc, sender: self)
+//        let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+//        self.navigationController?.show(loginVc, sender: self)
+//        
+//        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil);
+        let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
+        
+        let loginVc:LoginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+
+        initialViewController.pushViewController(loginVc, animated: false)
+        
+        UIApplication.shared.keyWindow?.rootViewController = initialViewController
+        UIApplication.shared.keyWindow?.makeKeyAndVisible()
+        
+        
 
     }
     override func viewDidLoad() {

@@ -122,11 +122,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
                 
-                let storyBoard = UIStoryboard(name: "Main", bundle: nil);
-                let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
-                self.window?.rootViewController = initialViewController
-                self.window?.makeKeyAndVisible()
-                
+//                let storyBoard = UIStoryboard(name: "Main", bundle: nil);
+//                let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
+//                self.window?.rootViewController = initialViewController
+//                self.window?.makeKeyAndVisible()
+//                
                 if urlScheme == "s2sregistrationconfirm"{
                     
                     let device_id = UIDevice.current.identifierForVendor!.uuidString
@@ -156,13 +156,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             print("json response\(json)")
                             let responseDict = json.dictionaryObject
                             let code = responseDict?["code"] as! NSNumber
-                            if code.intValue == 200{
-                                let appDomain = Bundle.main.bundleIdentifier
-                                UserDefaults.standard.removePersistentDomain(forName: appDomain!)
+                            if code.intValue == 200 {
+                                
+                            //    let storyBoard = UIStoryboard(name: "Main", bundle: nil);
+                            //    let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
                                 
                                 let loginVc:WelcomePageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC") as! WelcomePageVC
-                                initialViewController.pushViewController(loginVc, animated: true)
-
+//                                initialViewController.viewControllers.append(loginVc)
+                          //      initialViewController.pushViewController(loginVc, animated: false)
+                                
+                                self.window?.rootViewController = loginVc
+                                self.window?.makeKeyAndVisible()
+                                
                             }
 
                             else {
@@ -201,10 +206,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                 else if urlScheme == "s2sresetpassword"{
                     
+                    let storyBoard = UIStoryboard(name: "Main", bundle: nil);
+                    let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
+                    
                     let resetPasswordVc:ResetPasswordVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordVC
                     let userId : String = mutableDict.object(forKey: "userid") as! String;
                     resetPasswordVc.user_id = userId
-                    initialViewController.pushViewController(resetPasswordVc, animated: true)
+                    initialViewController.pushViewController(resetPasswordVc, animated: false)
+                 
+                    self.window?.rootViewController = initialViewController
+                    self.window?.makeKeyAndVisible()
+                    
                     
                 }
                 
