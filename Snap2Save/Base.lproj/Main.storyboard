@@ -1554,21 +1554,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="bcn-al-yDG">
-                                <rect key="frame" x="50" y="154.5" width="275" height="80"/>
+                                <rect key="frame" x="50" y="155" width="275" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="Hnl-ny-tcM"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tuo-aQ-dTz">
-                                <rect key="frame" x="30" y="359.5" width="315" height="38.5"/>
-                                <string key="text">Welcome to Snap2Save. 
-Your registration is now complete.</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Snap2Save. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tuo-aQ-dTz">
+                                <rect key="frame" x="30" y="360" width="315" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="QDk-LV-sa0"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="htn-0U-ugK">
-                                <rect key="frame" x="170" y="332.5" width="35" height="2"/>
+                                <rect key="frame" x="170" y="333" width="35" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="A8f-0k-Mco"/>
@@ -1576,10 +1577,10 @@ Your registration is now complete.</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hmy-M4-f2L">
-                                <rect key="frame" x="40" y="453" width="295" height="40"/>
+                                <rect key="frame" x="40" y="440" width="295" height="44"/>
                                 <color key="backgroundColor" red="0.90980392156862744" green="0.49411764705882355" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="dPr-qY-LLV"/>
+                                    <constraint firstAttribute="height" constant="44" id="dPr-qY-LLV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <state key="normal" title="Get Started!">
@@ -1590,8 +1591,14 @@ Your registration is now complete.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmB-wQ-DYA">
-                                <rect key="frame" x="30" y="284.5" width="315" height="30"/>
+                                <rect key="frame" x="30" y="285" width="315" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Your registration is now complete." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwG-HX-VKf">
+                                <rect key="frame" x="30" y="385" width="315" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1602,18 +1609,21 @@ Your registration is now complete.</string>
                             <constraint firstItem="htn-0U-ugK" firstAttribute="centerY" secondItem="27t-Wu-do9" secondAttribute="centerY" id="4oJ-ds-of4"/>
                             <constraint firstItem="Hmy-M4-f2L" firstAttribute="leading" secondItem="27t-Wu-do9" secondAttribute="leading" constant="40" id="5Dm-Sh-Pxz"/>
                             <constraint firstAttribute="trailing" secondItem="Hmy-M4-f2L" secondAttribute="trailing" constant="40" id="7YP-eD-tlT"/>
-                            <constraint firstAttribute="trailing" secondItem="Tuo-aQ-dTz" secondAttribute="trailing" constant="30" id="7cT-qD-jGh"/>
                             <constraint firstItem="htn-0U-ugK" firstAttribute="top" secondItem="YmB-wQ-DYA" secondAttribute="bottom" constant="18" id="FFU-B5-PiG"/>
                             <constraint firstItem="htn-0U-ugK" firstAttribute="centerX" secondItem="27t-Wu-do9" secondAttribute="centerX" id="IiJ-40-ipX"/>
-                            <constraint firstItem="Hmy-M4-f2L" firstAttribute="top" secondItem="Tuo-aQ-dTz" secondAttribute="bottom" constant="55" id="MaO-of-MqI"/>
                             <constraint firstItem="bcn-al-yDG" firstAttribute="leading" secondItem="27t-Wu-do9" secondAttribute="leading" constant="50" id="Ngn-T7-Ucq"/>
+                            <constraint firstItem="Hmy-M4-f2L" firstAttribute="top" secondItem="fwG-HX-VKf" secondAttribute="bottom" constant="35.5" id="Ptj-06-EAz"/>
                             <constraint firstItem="AJn-yK-HC9" firstAttribute="leading" secondItem="27t-Wu-do9" secondAttribute="leading" id="Sra-Xz-WA7"/>
                             <constraint firstItem="YmB-wQ-DYA" firstAttribute="leading" secondItem="27t-Wu-do9" secondAttribute="leading" constant="30" id="U5h-HX-VYv"/>
                             <constraint firstItem="mKj-0K-Aqt" firstAttribute="top" secondItem="AJn-yK-HC9" secondAttribute="bottom" id="VGu-1D-NQ1"/>
-                            <constraint firstItem="Tuo-aQ-dTz" firstAttribute="top" secondItem="htn-0U-ugK" secondAttribute="bottom" constant="25" id="W1c-m6-uEh"/>
-                            <constraint firstItem="Tuo-aQ-dTz" firstAttribute="leading" secondItem="27t-Wu-do9" secondAttribute="leading" constant="30" id="hmC-HC-wtg"/>
+                            <constraint firstAttribute="trailing" secondItem="fwG-HX-VKf" secondAttribute="trailing" constant="30" id="aNl-TZ-DS5"/>
+                            <constraint firstItem="Tuo-aQ-dTz" firstAttribute="trailing" secondItem="fwG-HX-VKf" secondAttribute="trailing" id="coz-2Y-tBw"/>
+                            <constraint firstItem="Tuo-aQ-dTz" firstAttribute="top" secondItem="htn-0U-ugK" secondAttribute="bottom" constant="25" id="kkQ-gw-Liw"/>
                             <constraint firstAttribute="trailing" secondItem="AJn-yK-HC9" secondAttribute="trailing" id="nfx-Ia-i0J"/>
+                            <constraint firstItem="fwG-HX-VKf" firstAttribute="leading" secondItem="27t-Wu-do9" secondAttribute="leading" constant="30" id="nsK-lB-N7j"/>
                             <constraint firstItem="YmB-wQ-DYA" firstAttribute="top" secondItem="bcn-al-yDG" secondAttribute="bottom" constant="50" id="ppN-zJ-KRK"/>
+                            <constraint firstItem="fwG-HX-VKf" firstAttribute="top" secondItem="Tuo-aQ-dTz" secondAttribute="bottom" id="tud-Fx-Jj4"/>
+                            <constraint firstItem="Tuo-aQ-dTz" firstAttribute="leading" secondItem="fwG-HX-VKf" secondAttribute="leading" id="xbr-dP-Foy"/>
                             <constraint firstAttribute="trailing" secondItem="bcn-al-yDG" secondAttribute="trailing" constant="50" id="yBh-3q-aYW"/>
                             <constraint firstAttribute="trailing" secondItem="YmB-wQ-DYA" secondAttribute="trailing" constant="30" id="zla-83-VHf"/>
                         </constraints>
@@ -1893,7 +1903,7 @@ Your registration is now complete.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rzA-3S-2Ke" customClass="AITextField" customModule="Snap2Save" customModuleProvider="target">
-                                <rect key="frame" x="25" y="210.5" width="325" height="35"/>
+                                <rect key="frame" x="25" y="212" width="325" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="hYQ-Ed-d18"/>
@@ -1907,18 +1917,15 @@ Your registration is now complete.</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-DIGIT CELL PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIa-Po-7qK">
-                                <rect key="frame" x="25" y="192.5" width="325" height="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-DIGIT CELL PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIa-Po-7qK">
+                                <rect key="frame" x="25" y="192.5" width="325" height="14.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="13" id="qmv-iC-JrC"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNx-RB-Het">
-                                <rect key="frame" x="30" y="345.5" width="315" height="44"/>
+                                <rect key="frame" x="30" y="347" width="315" height="44"/>
                                 <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="imT-4p-NJQ"/>
@@ -1932,7 +1939,7 @@ Your registration is now complete.</string>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="rRS-Dj-5Ft">
-                                <rect key="frame" x="310" y="357" width="20" height="20"/>
+                                <rect key="frame" x="310" y="358.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.96078431369999995" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1985,7 +1992,7 @@ Your registration is now complete.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CzK-L1-oD1" customClass="AITextField" customModule="Snap2Save" customModuleProvider="target">
-                                <rect key="frame" x="25" y="157.5" width="325" height="35"/>
+                                <rect key="frame" x="25" y="152" width="325" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="nzW-2b-NkR"/>
@@ -1999,18 +2006,15 @@ Your registration is now complete.</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZL-77-qtv">
-                                <rect key="frame" x="25" y="132.5" width="325" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZL-77-qtv">
+                                <rect key="frame" x="25" y="132.5" width="325" height="14.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="8BT-fG-b3W"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y94-ly-yFp" customClass="AITextField" customModule="Snap2Save" customModuleProvider="target">
-                                <rect key="frame" x="25" y="237.5" width="325" height="35"/>
+                                <rect key="frame" x="25" y="226.5" width="325" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="KPL-1O-3Ed"/>
@@ -2024,18 +2028,15 @@ Your registration is now complete.</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RE-ENTER NEW PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7az-Kn-XkN">
-                                <rect key="frame" x="25" y="212.5" width="325" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RE-ENTER NEW PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7az-Kn-XkN">
+                                <rect key="frame" x="25" y="207" width="325" height="14.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="aRQ-P6-pqh"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSf-I6-GQm">
-                                <rect key="frame" x="25" y="362.5" width="325" height="44"/>
+                                <rect key="frame" x="25" y="351.5" width="325" height="44"/>
                                 <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="p6s-L1-doe"/>
@@ -2050,7 +2051,7 @@ Your registration is now complete.</string>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="xqN-sA-UCg">
-                                <rect key="frame" x="316" y="374.5" width="20" height="20"/>
+                                <rect key="frame" x="316" y="363.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.96078431369999995" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>

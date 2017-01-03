@@ -64,7 +64,7 @@ class User: NSObject, NSCoding {
         aCoder.encode(self.signup_type, forKey: "signup_type")
         aCoder.encode(self.is_verified, forKey: "is_verified")
         aCoder.encode(self.zipcode, forKey: "zipcode")
-        aCoder.encode(self.zipcode, forKey: "contact_preference")
+        aCoder.encode(self.contact_preference, forKey: "contact_preference")
         aCoder.encode(self.additionalInformation, forKey: "additional_info")
     }
     

@@ -489,8 +489,8 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let user:User = userInfo as! User
         
        // let userAdditionalInfo : AdditionalInformation = self.user.additionalInformation!
-        firstNameTextField.text = user.first_name
-        lastNameTextField.text = user.last_name
+        firstNameTextField.text = user.additionalInformation?.first_name
+        lastNameTextField.text = user.additionalInformation?.last_name
         addressLine1TextField.text = user.additionalInformation?.address_line1
         addressLine2TextField.text = user.additionalInformation?.address_line2
         cityTextField.text = user.additionalInformation?.city

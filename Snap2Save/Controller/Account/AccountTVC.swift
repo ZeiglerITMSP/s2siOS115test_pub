@@ -74,7 +74,7 @@ class AccountTVC: UITableViewController {
     func reloadContent(){
         
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-        self.title = "Account".localized()
+        self.title = "ACCOUNT".localized()
         autoLoginLabel.text = "Auto Log In".localized()
         personalInfoLabel.text = "Personal Information".localized()
         preferencesLabel.text = "Preferences".localized()
