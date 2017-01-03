@@ -111,7 +111,9 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
         
-        
+        // Tap Gesuture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -123,6 +125,15 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         LanguageUtility.removeObserverForLanguageChange(self)
         super.viewDidDisappear(animated)
     }
+    
+    
+    // MARK: -
+    
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+    
     
     func languageButtonClicked() {
         
@@ -185,6 +196,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        
+        // clear password field
+        self.passwordTextField.text = nil
+        
         reloadContent()
         self.navigationController?.navigationBar.isHidden = false;
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)

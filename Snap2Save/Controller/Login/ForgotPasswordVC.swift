@@ -86,6 +86,10 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
+        
+        // Tap Gesuture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     
@@ -107,6 +111,13 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
     }
     
     // MARK: -
+    
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+    
+    
     
     func reloadContent() {
         

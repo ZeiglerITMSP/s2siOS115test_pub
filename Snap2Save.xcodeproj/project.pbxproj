@@ -47,6 +47,7 @@
 		E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */; };
 		E84AE9E31E0821B900C5E7F3 /* AITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9E21E0821B900C5E7F3 /* AITextField.swift */; };
 		E85D89C01E1A8815009CCABB /* Lorem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D89BF1E1A8815009CCABB /* Lorem.swift */; };
+		E863CEBC1E1BE72E00049F28 /* OffersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E863CEBB1E1BE72E00049F28 /* OffersVC.swift */; };
 		E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA54A1DF53C1300714C65 /* AppDelegate.swift */; };
 		E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA54E1DF53C1300714C65 /* Main.storyboard */; };
 		E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E88BA5511DF53C1300714C65 /* Assets.xcassets */; };
@@ -131,6 +132,7 @@
 		E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTVC.swift; sourceTree = "<group>"; };
 		E84AE9E21E0821B900C5E7F3 /* AITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AITextField.swift; sourceTree = "<group>"; };
 		E85D89BF1E1A8815009CCABB /* Lorem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lorem.swift; sourceTree = "<group>"; };
+		E863CEBB1E1BE72E00049F28 /* OffersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersVC.swift; sourceTree = "<group>"; };
 		E88BA5471DF53C1300714C65 /* Snap2Save.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap2Save.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA54A1DF53C1300714C65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E88BA54F1DF53C1300714C65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -305,6 +307,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		E863CEBA1E1BE70200049F28 /* Offers */ = {
+			isa = PBXGroup;
+			children = (
+				E863CEBB1E1BE72E00049F28 /* OffersVC.swift */,
+			);
+			path = Offers;
+			sourceTree = "<group>";
+		};
 		E88BA53E1DF53C1200714C65 = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +381,7 @@
 				E84AE9CA1E07F2B300C5E7F3 /* Login */,
 				E84AE9C91E07F2A000C5E7F3 /* Registration */,
 				E826FBD01E09408D0089AEA6 /* Services */,
+				E863CEBA1E1BE70200049F28 /* Offers */,
 				E84AE9D81E07F50600C5E7F3 /* Account */,
 			);
 			path = Controller;
@@ -722,6 +733,7 @@
 				E81B74AC1E1105EA00D5EC61 /* LanguageUtility.swift in Sources */,
 				E8BAE2AF1E0BEF8000A85AAB /* EBTUserInformationTVC.swift in Sources */,
 				E8BAE2B11E0BF52E00A85AAB /* EBTConfirmationTVC.swift in Sources */,
+				E863CEBC1E1BE72E00049F28 /* OffersVC.swift in Sources */,
 				E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */,
 				E82283AA1E0A72BC008FE084 /* EBTWebView.swift in Sources */,
 				E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */,

@@ -70,6 +70,10 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
+        
+        // Tap Gesuture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
 
     }
     
@@ -101,6 +105,15 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: -
+    
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+    
+    
     
     func languageButtonClicked() {
         self.showLanguageSelectionAlert()

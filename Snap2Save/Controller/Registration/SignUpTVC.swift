@@ -73,7 +73,10 @@ class SignUpTVC: UITableViewController {
         additionalSignUpVc.userDetailsDict = userDetails
         self.navigationController?.show(additionalSignUpVc, sender: self)
         
+       
+        
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,7 +117,12 @@ class SignUpTVC: UITableViewController {
         
         reloadContent()
         
+        // Tap Gesuture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
+        
     }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -140,6 +148,13 @@ class SignUpTVC: UITableViewController {
     }
     
 
+    // MARK: - 
+    
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+    
     func languageButtonClicked() {
         
         self.showLanguageSelectionAlert()
@@ -204,7 +219,9 @@ class SignUpTVC: UITableViewController {
         // textView is a UITextView
         self.termsTextView.linkTextAttributes = linkAttributes
         self.termsTextView.attributedText = attributedString
+     
         
+        self.termsTextView.contentSize = self.termsTextView.bounds.size
     }
     
     func backButtonAction(){
@@ -363,7 +380,7 @@ class SignUpTVC: UITableViewController {
         }
         
         if reEnterMobileNumTextField.text != mobileNumTextField.text {
-            showAlert(title: "", message: "PhoneNumbers doesn't match")
+            showAlert(title: "", message: "Phone Numbers doesn't match")
             return false
         }
            
@@ -373,7 +390,7 @@ class SignUpTVC: UITableViewController {
         }
         
         if reEnterPasswordTextField.text != passwordTextField.text{
-            showAlert(title: "", message: "Password doesn't match")
+            showAlert(title: "", message: "Passwords doesn't match")
             return false
         }
         
