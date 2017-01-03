@@ -33,6 +33,10 @@
 		E83155FE1E1A37E5001D30D2 /* pincode.html in Resources */ = {isa = PBXBuildFile; fileRef = E83155F51E1A37E5001D30D2 /* pincode.html */; };
 		E83155FF1E1A37E5001D30D2 /* securityQuestion.html in Resources */ = {isa = PBXBuildFile; fileRef = E83155F61E1A37E5001D30D2 /* securityQuestion.html */; };
 		E83156001E1A37E5001D30D2 /* userInformation.html in Resources */ = {isa = PBXBuildFile; fileRef = E83155F71E1A37E5001D30D2 /* userInformation.html */; };
+		E83156021E1A561E001D30D2 /* EBTDashboardTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83156011E1A561E001D30D2 /* EBTDashboardTVC.swift */; };
+		E83156041E1A5689001D30D2 /* EBTLoginSecurityQuestionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83156031E1A5689001D30D2 /* EBTLoginSecurityQuestionTVC.swift */; };
+		E83156061E1A7EA3001D30D2 /* DetailedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83156051E1A7EA3001D30D2 /* DetailedCell.swift */; };
+		E83156081E1A7EB8001D30D2 /* DetailedSubtitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83156071E1A7EB8001D30D2 /* DetailedSubtitleCell.swift */; };
 		E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */; };
 		E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */; };
 		E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */; };
@@ -42,6 +46,7 @@
 		E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */; };
 		E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */; };
 		E84AE9E31E0821B900C5E7F3 /* AITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9E21E0821B900C5E7F3 /* AITextField.swift */; };
+		E85D89C01E1A8815009CCABB /* Lorem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D89BF1E1A8815009CCABB /* Lorem.swift */; };
 		E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA54A1DF53C1300714C65 /* AppDelegate.swift */; };
 		E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA54E1DF53C1300714C65 /* Main.storyboard */; };
 		E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E88BA5511DF53C1300714C65 /* Assets.xcassets */; };
@@ -112,6 +117,10 @@
 		E83155F51E1A37E5001D30D2 /* pincode.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = pincode.html; sourceTree = "<group>"; };
 		E83155F61E1A37E5001D30D2 /* securityQuestion.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = securityQuestion.html; sourceTree = "<group>"; };
 		E83155F71E1A37E5001D30D2 /* userInformation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = userInformation.html; sourceTree = "<group>"; };
+		E83156011E1A561E001D30D2 /* EBTDashboardTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTDashboardTVC.swift; sourceTree = "<group>"; };
+		E83156031E1A5689001D30D2 /* EBTLoginSecurityQuestionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTLoginSecurityQuestionTVC.swift; sourceTree = "<group>"; };
+		E83156051E1A7EA3001D30D2 /* DetailedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedCell.swift; sourceTree = "<group>"; };
+		E83156071E1A7EB8001D30D2 /* DetailedSubtitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedSubtitleCell.swift; sourceTree = "<group>"; };
 		E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupAdditionalFieldsTVC.swift; sourceTree = "<group>"; };
 		E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePageVC.swift; sourceTree = "<group>"; };
@@ -121,6 +130,7 @@
 		E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalInformationTVC.swift; sourceTree = "<group>"; };
 		E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTVC.swift; sourceTree = "<group>"; };
 		E84AE9E21E0821B900C5E7F3 /* AITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AITextField.swift; sourceTree = "<group>"; };
+		E85D89BF1E1A8815009CCABB /* Lorem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lorem.swift; sourceTree = "<group>"; };
 		E88BA5471DF53C1300714C65 /* Snap2Save.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap2Save.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA54A1DF53C1300714C65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E88BA54F1DF53C1300714C65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -217,6 +227,9 @@
 				E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */,
 				E8BAE2A41E0BDDFB00A85AAB /* EBTLogin */,
 				E8BAE2A31E0BDDE200A85AAB /* EBTRegistration */,
+				E83156011E1A561E001D30D2 /* EBTDashboardTVC.swift */,
+				E83156051E1A7EA3001D30D2 /* DetailedCell.swift */,
+				E83156071E1A7EB8001D30D2 /* DetailedSubtitleCell.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -280,6 +293,7 @@
 		E84AE9E11E0821AB00C5E7F3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E85D89BF1E1A8815009CCABB /* Lorem.swift */,
 				E826FBCC1E0917BD0089AEA6 /* AppHelper.swift */,
 				E81B74AB1E1105EA00D5EC61 /* LanguageUtility.swift */,
 				E84AE9E21E0821B900C5E7F3 /* AITextField.swift */,
@@ -387,6 +401,7 @@
 			children = (
 				E826FBD51E0946970089AEA6 /* EBTLoginTVC.swift */,
 				E8BAE2A11E0BABEF00A85AAB /* EBTAuthenticationTVC.swift */,
+				E83156031E1A5689001D30D2 /* EBTLoginSecurityQuestionTVC.swift */,
 			);
 			name = EBTLogin;
 			sourceTree = "<group>";
@@ -687,6 +702,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E83156021E1A561E001D30D2 /* EBTDashboardTVC.swift in Sources */,
 				E8BAE2A81E0BDEFD00A85AAB /* EBTCardNumberTVC.swift in Sources */,
 				E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */,
 				977B64F71E16407A00AA802D /* UserAdditionalInformation.swift in Sources */,
@@ -696,10 +712,13 @@
 				E84AE9E31E0821B900C5E7F3 /* AITextField.swift in Sources */,
 				9759BE781E0A65AA00A5C76A /* SignUpTVC.swift in Sources */,
 				E84AE9D51E07F4B100C5E7F3 /* ForgotPasswordVC.swift in Sources */,
+				E83156041E1A5689001D30D2 /* EBTLoginSecurityQuestionTVC.swift in Sources */,
 				977B64F51E163B5600AA802D /* User.swift in Sources */,
+				E83156081E1A7EB8001D30D2 /* DetailedSubtitleCell.swift in Sources */,
 				E826FBD61E0946970089AEA6 /* EBTLoginTVC.swift in Sources */,
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
 				E8BAE2AA1E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift in Sources */,
+				E83156061E1A7EA3001D30D2 /* DetailedCell.swift in Sources */,
 				E81B74AC1E1105EA00D5EC61 /* LanguageUtility.swift in Sources */,
 				E8BAE2AF1E0BEF8000A85AAB /* EBTUserInformationTVC.swift in Sources */,
 				E8BAE2B11E0BF52E00A85AAB /* EBTConfirmationTVC.swift in Sources */,
@@ -708,6 +727,7 @@
 				E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */,
 				E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */,
 				E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */,
+				E85D89C01E1A8815009CCABB /* Lorem.swift in Sources */,
 				E82283AC1E0A72D3008FE084 /* BrowserVC.swift in Sources */,
 				9737ED0C1E14042400120B54 /* ChangePasswordTVC.swift in Sources */,
 				E8BAE2A21E0BABEF00A85AAB /* EBTAuthenticationTVC.swift in Sources */,

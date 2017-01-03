@@ -33,14 +33,11 @@ class EBTLoginTVC: UITableViewController {
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
     @IBOutlet weak var passwordField: AIPlaceHolderTextField!
+    @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
-    
-    
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registrationButton: UIButton!
-    
     @IBOutlet weak var remmeberMyUserNameLabel: UILabel!
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // Action
@@ -85,6 +82,8 @@ class EBTLoginTVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        errorMessageLabel.text = nil
         
         updateBackButtonText()
         
@@ -244,8 +243,8 @@ class EBTLoginTVC: UITableViewController {
     func loadLoginPage() {
         
 //        let loginUrl_en = "https://ucard.chase.com/chp"
-        let loginUrl_en = "https://www.gmail.com"
-        
+//        let loginUrl_en = "https://www.gmail.com"
+        let loginUrl_en = "http://internal.appit.ventures/s2s/ebt_login.html"
         //let loginUrl_es = "https://ucard.chase.com/locale?request_locale=es"
         let url = NSURL(string: loginUrl_en)
         let request = NSURLRequest(url: url! as URL)
@@ -265,7 +264,13 @@ class EBTLoginTVC: UITableViewController {
             } else {
                 print(result ?? "result nil")
                 let pageUrl = result as! String
-                if pageUrl == "https://ucard.chase.com/chp" {
+                
+                let validUrl = "http://internal.appit.ventures/s2s/ebt_login.html"
+                
+                // http://internal.appit.ventures/s2s/ebt_login.html
+                // https://ucard.chase.com/chp
+                
+                if pageUrl == validUrl {
                     self.autoFill(withUserId: self.userIdField.contentTextField.text!,
                                   password: self.passwordField.contentTextField.text!)
                 } else {

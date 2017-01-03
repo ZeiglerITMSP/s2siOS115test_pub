@@ -12,9 +12,7 @@ class EBTSecurityQuestionTVC: UITableViewController {
 
     // Ouetles
     @IBOutlet weak var messageLabel: UILabel!
-    
     @IBOutlet weak var securityQuestionField: AIPlaceHolderTextField!
-    
     @IBOutlet weak var securityAnswerField: AIPlaceHolderTextField!
     
     // Actions

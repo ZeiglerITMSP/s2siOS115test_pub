@@ -27,6 +27,9 @@ class EBTAuthenticationTVC: UITableViewController {
     
     
     // Outlets
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var authenticationCodeField: AIPlaceHolderTextField!
     @IBOutlet weak var confirmActivityIndicator: UIActivityIndicatorView!
@@ -50,6 +53,8 @@ class EBTAuthenticationTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        errorMessageLabel.text = nil
+        
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
@@ -75,7 +80,7 @@ class EBTAuthenticationTVC: UITableViewController {
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 0 {
+        if indexPath.row == 2 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
@@ -140,6 +145,7 @@ class EBTAuthenticationTVC: UITableViewController {
         // autofill
         actionType = ActionType.generate
         
+        self.confirmActivityIndicator.startAnimating()
         let jsAuthenticationCode = "$('#txtAuthenticationCode').val('\(authenticationCode)');"
         let jsSubmit = "$('#okButton').click();"
         let javaScript = jsAuthenticationCode + jsSubmit
@@ -186,11 +192,14 @@ class EBTAuthenticationTVC: UITableViewController {
                 
                 if trimmedErrorMessage.characters.count > 0 {
                     
+                    self.confirmActivityIndicator.stopAnimating()
                     self.errorMessageLabel.text = trimmedErrorMessage
                     self.tableView.reloadData()
                     
                 } else {
-                
+                    
+                    self.confirmActivityIndicator.stopAnimating()
+                    self.performSegue(withIdentifier: "EBTLoginSecurityQuestionTVC", sender: nil)
                 }
             }
         }
