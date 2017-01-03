@@ -360,7 +360,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let validNum = AppHelper.validate(value: mobileNumTextField.text!)
         
         if ((mobileNumTextField.text?.characters.count)! == 0 || validNum == false ){
-            showAlert(title: "", message: "Please enter 10 digit Phone Number")
+            showAlert(title: "", message: "Please enter valid 10 digit Phone Number")
             return false
         }
         else if (passwordTextField.text?.characters.count)! < 6{
