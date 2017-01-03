@@ -509,7 +509,8 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let platform = "1"
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let push_token = "123213"
-        let language = "en"
+        let currentLanguage = Localize.currentLanguage()
+
         
         let additionalInfoDict : Dictionary = ["first_name": first_name,
                                   "last_name": last_name,
@@ -535,7 +536,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                           "version_name":"1",
                           "device_id": device_id,
                           "push_token": push_token,
-                          "language": language,
+                          "language": currentLanguage,
                           "signup_type": "1"
             ] as [String : Any]
         

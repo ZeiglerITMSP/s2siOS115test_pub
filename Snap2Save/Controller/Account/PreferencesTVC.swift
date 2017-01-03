@@ -9,11 +9,12 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Localize_Swift
 
 class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
     var languageSelectionButton: UIButton!
-    
+    var user : User = User()
     // Outlets
     @IBOutlet var contactPreferenceLabel: UILabel!
     @IBOutlet var contactPreferenceSegmentControl: UISegmentedControl!
@@ -75,8 +76,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
-        
-        
+        getProfile()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -108,6 +108,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     }
 
     func reloadContent() {
+        
         self.updateBackButtonText()
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
         self.title = "Preferences".localized()
@@ -122,6 +123,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
     }
     func keyBoardHidden(textField: UITextField) {
+        
         if textField == emailPlaceHolderTextField.contentTextField {
             mobileNumberTextField.contentTextField.becomeFirstResponder()
             
@@ -132,6 +134,22 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             textField.resignFirstResponder()
             
         }
+    }
+
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == mobileNumberTextField.contentTextField || textField == reEnterMobileNumberTextField.contentTextField {
+            
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 10
+            
+        }
+        
+        return true
     }
 
     // MARK: - Table view data source
@@ -208,19 +226,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
      }
      */
     
-    func updatePreferences(){
-        /*{
-            "user_id": "1",
-            "phone_number": "8179968861",
-            "email": "test@gmail.com",
-            "contact_preference": "1",
-            "platform": "1",
-            "version": "1",
-            "device_id": "23423423werwerwerwe23",
-            "push_token": "123123dwfwwe234234",
-            "auth_token": "2322wwerwer324234",
-            "language": "en"
-        }*/
+    func updatePreferences()  {
         
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
@@ -228,14 +234,15 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let mobileNumber = mobileNumberTextField.contentTextField.text ?? ""
         var contact_preference = "1"
         let contactPreference = contactPreferenceSegmentControl.selectedSegmentIndex
-        if contactPreference == 0{
+        if contactPreference == 0 {
             contact_preference = "2"
         }
         else if contactPreference == 1{
             contact_preference = "1"
         }
         let email = emailPlaceHolderTextField.contentTextField.text ?? ""
-        
+        let currentLanguage = Localize.currentLanguage()
+
         let parameters = ["user_id": user_id,
                           "phone_number": mobileNumber,
                           "email": email,
@@ -246,7 +253,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                           "device_id": device_id,
                           "push_token":"123123",
                           "auth_token": auth_token,
-                          "language":"en"
+                          "language":currentLanguage
             ] as [String : Any]
         saveActivityIndicator.startAnimating()
         print(parameters)
@@ -296,7 +303,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
     }
     
-    func isValid() -> Bool{
+    func isValid() -> Bool  {
+        
         let validEmail = AppHelper.isValidEmail(testStr: emailPlaceHolderTextField.contentTextField.text!)
         let validPhoneNumber = AppHelper.validate(value: mobileNumberTextField.contentTextField.text!)
         
@@ -314,4 +322,102 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         }
         return true
     }
+    
+    func loadData() {
+        let userData = UserDefaults.standard.object(forKey: LOGGED_USER)
+        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
+        
+        print("user info \(userInfo)")
+        
+        let user:User = userInfo as! User
+
+       // let mobileNumber = UserDefaults.standard.object(forKey: MOBILE_NUMBER) ?? ""
+       // let email = UserDefaults.standard.object(forKey: EMAIL) ?? ""
+        mobileNumberTextField.contentTextField.text = user.phone_number
+        reEnterMobileNumberTextField.contentTextField.text = user.phone_number
+        
+        emailPlaceHolderTextField.contentTextField.text = user.email
+        if user.contact_preference == "1" {
+            contactPreferenceSegmentControl.selectedSegmentIndex = 1
+        }
+        else if user.contact_preference == "2"{
+            contactPreferenceSegmentControl.selectedSegmentIndex = 0
+        }
+    }
+    
+    func getProfile(){
+        
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
+        let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
+        let currentLanguage = Localize.currentLanguage()
+
+        let parameters = ["user_id": user_id,
+                          "platform":"1",
+                          "version_code": "1",
+                          "version_name": "1",
+                          "device_id": device_id,
+                          "push_token":"123123",
+                          "auth_token": auth_token,
+                          "language": currentLanguage
+            ] as [String : Any]
+        
+        print(parameters)
+        let url = String(format: "%@/getProfile", hostUrl)
+        print(url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            switch response.result {
+                
+            case .success:
+                DispatchQueue.main.async {
+                    
+                }
+                
+                let json = JSON(data: response.data!)
+                print("json response\(json)")
+                let responseDict = json.dictionaryObject
+                if let code = responseDict?["code"] {
+                    let code = code as! NSNumber
+                    if code.intValue == 200 {
+                        
+                        
+                            if let userDict = responseDict?["user"] as? [String:Any] {
+                                
+                                 self.user = User.prepareUser(dictionary: userDict )
+                                let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
+                                UserDefaults.standard.set(userData, forKey: LOGGED_USER)
+
+                                let phoneNumber = userDict["phone_number"]
+                                UserDefaults.standard.set(phoneNumber, forKey: MOBILE_NUMBER)
+                                print("phoneNumber \(phoneNumber)")
+                                let email = userDict["email"]
+                                UserDefaults.standard.set(email, forKey: EMAIL)
+                                print("email \(email)")
+                                self.loadData()
+
+                        }
+                            else {
+                                if let messageString = responseDict?["message"]{
+                                    let alertMessage : String = messageString as! String
+                                    self.showAlert(title: "", message: alertMessage)
+                                }
+                        }
+
+                    }
+                }
+                break
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    
+                }
+                print(error)
+                break
+            }
+            
+        }
+        
+    }
+
 }

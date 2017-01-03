@@ -193,7 +193,8 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
         let newPassword = newPasswordTextField.contentTextField.text ?? ""
         let password = currentPasswordTextField.contentTextField.text ?? ""
-        
+        let currentLanguage = Localize.currentLanguage()
+
         let parameters = ["password": password,
                           "new_password": newPassword,
                           "user_id": user_id,
@@ -203,7 +204,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
                           "device_id": device_id,
                           "push_token":"123123",
                           "auth_token": auth_token,
-                          "language":"en"
+                          "language": currentLanguage
             ] as [String : Any]
         
         saveActivityIndicator.startAnimating()

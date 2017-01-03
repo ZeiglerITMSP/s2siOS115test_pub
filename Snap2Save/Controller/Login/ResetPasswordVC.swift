@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import  Localize_Swift
 
 class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     
@@ -143,7 +144,8 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id = self.user_id ?? ""
         //let auth_token = UserDefaults.standard.string(forKey: "auth_token") ?? ""
-        
+        let currentLanguage = Localize.currentLanguage()
+
         let parameters = ["password":password,
                           "user_id":user_id,
                           "platform":"1",
@@ -151,7 +153,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
                           "version_name": "1",
                           "device_id": device_id,
                           "push_token":"123123",
-                          "language":"en"
+                          "language": currentLanguage
             ] as [String : Any]
         
         

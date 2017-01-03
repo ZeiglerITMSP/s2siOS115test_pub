@@ -149,6 +149,32 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         self.ethnicityLabel.text = "ETHNICITY / RACE".localized()
         self.ageGroupLabel.text = "AGE GROUP".localized()
         self.saveButton.setTitle("SAVE".localized(), for: .normal)
+        self.genderTextField.placeholder = "Please select".localized()
+        // self.genderTextField.placeHolderLabel?.text = "Please select".localized()
+        self.ageGroupTextField.placeholder = "Please select".localized()
+        self.ethnicityTextField.placeholder = "Please select".localized()
+        self.addressLine1TextField.placeholder = "Street address or PO box".localized()
+        self.addressLine2TextField.placeholder = "Unit, Building, etc.".localized()
+        self.genderArray = ["Male".localized(),"Female".localized()];
+        self.ageGroupArray = ["21 and under".localized(),
+                              "22 to 34".localized(),
+                              "35 to 44".localized(),
+                              "45 to 54".localized(),
+                              "55 to 64".localized(),
+                              "65 and older".localized()]
+        
+        self.ethnicityArray = ["American Indian or Alaska Native".localized(),
+                               "Asian or Pacific Islander".localized(),
+                               "Black or African American".localized(),
+                               "Hispanic or Latino".localized(),
+                               "White/Caucasian".localized(),
+                               "Other".localized()]
+        
+        self.genderTextField.pickerViewArray = self.genderArray
+        self.ageGroupTextField.pickerViewArray = self.ageGroupArray
+        self.ethnicityTextField.pickerViewArray = self.ethnicityArray
+        
+        self.tableView.reloadData()
 
         
     }
@@ -165,51 +191,6 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         // #warning Incomplete implementation, return the number of rows
         return 11
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation
@@ -333,13 +314,13 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         cityTextField.aiDelegate = self
         zipCodeTextField.aiDelegate = self
         
-        genderArray = ["Male","Female"];
-        ageGroupArray = ["16-25","26-35","36-45","46-55","56+"]
-        ethnicityArray = ["1","2"]
-        
-        genderTextField.pickerViewArray = genderArray
-        ageGroupTextField.pickerViewArray = ageGroupArray
-        ethnicityTextField.pickerViewArray = ethnicityArray
+//        genderArray = ["Male","Female"];
+//        ageGroupArray = ["16-25","26-35","36-45","46-55","56+"]
+//        ethnicityArray = ["1","2"]
+//        
+//        genderTextField.pickerViewArray = genderArray
+//        ageGroupTextField.pickerViewArray = ageGroupArray
+//        ethnicityTextField.pickerViewArray = ethnicityArray
         
         
         var statesDict: NSDictionary?
@@ -423,6 +404,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         var gender = ""
         var age_group = ""
         var ethnicity = ""
+        let currentLanguage = Localize.currentLanguage()
 
         if selectedGenderIndex != nil{
             gender =  String.init(format: "%d", selectedGenderIndex)
@@ -451,7 +433,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                           "device_id": device_id,
                           "push_token":"123123",
                           "auth_token": auth_token,
-                          "language":"en"
+                          "language":currentLanguage
             ] as [String : Any]
         
         saveActivityIndicator.startAnimating()
@@ -499,35 +481,12 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
 
     func loadUserInformation(){
        // print("user id\(self.user.id)")
-        print("user info \(self.user.additionalInformation)")
         let userData = UserDefaults.standard.object(forKey: LOGGED_USER)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
         
         print("user info \(userInfo)")
         
         let user:User = userInfo as! User
-        print("user id \(user.id)")
-        print("user info \(user.email)")
-        print("user add info \(user.additionalInformation)")
-       // print("user add info \(user.userInfo.fir)")
-
-        if user.additionalInformation != nil {
-            
-            additionalInfo = user.additionalInformation!
-            print("user info \(user.first_name)")
-            print("user info \(user.last_name)")
-            print("user zipcode \(user.zipcode)")
-            
-            print("user info \(user.additionalInformation?.address_line1)")
-            print("user info \(additionalInfo.address_line2)")
-            print("user info \(additionalInfo.city)")
-            print("user info \(user.additionalInformation?.state)")
-            print("user info \(additionalInfo.gender)")
-            print("user info \(additionalInfo.age_group)")
-            print("user info \(additionalInfo.ethnicity)")
-            
-        }
-        
         
        // let userAdditionalInfo : AdditionalInformation = self.user.additionalInformation!
         firstNameTextField.text = user.first_name
@@ -536,10 +495,42 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         addressLine2TextField.text = user.additionalInformation?.address_line2
         cityTextField.text = user.additionalInformation?.city
         stateTextField.text = user.additionalInformation?.state
-        zipCodeTextField.text = self.user.zipcode
-        genderTextField.text = user.additionalInformation?.gender
-        ageGroupTextField.text = user.additionalInformation?.age_group
-        ethnicityTextField.text = user.additionalInformation?.ethnicity
+        zipCodeTextField.text = user.zipcode
+        
+       if (user.additionalInformation?.gender) != nil {
+        
+        let index = Int((user.additionalInformation?.gender)!)!
+        if index == 0 {
+            genderTextField.text = ""
+        }
+        else{
+        genderTextField.text = genderArray.object(at: index - 1) as? String
+        }
+        }
+        if (user.additionalInformation?.age_group) != nil {
+            
+            let index = Int((user.additionalInformation?.age_group)!)!
+            if index == 0{
+                ageGroupTextField.text = ""
+            }
+            else{
+                ageGroupTextField.text = ageGroupArray.object(at: index - 1) as? String
+            }
+        }
+
+        if (user.additionalInformation?.ethnicity) != nil {
+            
+            let index = Int((user.additionalInformation?.ethnicity)!)!
+            if index == 0 {
+                ethnicityTextField.text = ""
+            }
+            else{
+                ethnicityTextField.text = ethnicityArray.object(at: index - 1) as? String
+
+            }
+        }
+
+        
         
     }
     
@@ -548,7 +539,8 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
-        
+        let currentLanguage = Localize.currentLanguage()
+
         let parameters = ["user_id": user_id,
                           "platform":"1",
                           "version_code": "1",
@@ -556,7 +548,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                           "device_id": device_id,
                           "push_token":"123123",
                           "auth_token": auth_token,
-                          "language":"en"
+                          "language": currentLanguage
             ] as [String : Any]
         
         print(parameters)

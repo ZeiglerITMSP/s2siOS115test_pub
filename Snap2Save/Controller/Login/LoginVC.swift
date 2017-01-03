@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import  Localize_Swift
 
 class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScrollViewDelegate {
     
@@ -216,7 +217,22 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         }
     }
     
-    
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == mobileNumTextField {
+            
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 10
+            
+        }
+        
+        return true
+    }
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         ////print("scrollViewDidScroll \(scrollView.contentOffset)")
         if scrollView.contentOffset.y > 0.0
@@ -242,11 +258,12 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     }
     
     
-    func userLogin(){
+    func userLogin() {
         
         let password = passwordTextField.text ?? ""
         let mobileNumber = mobileNumTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let currentLanguage = Localize.currentLanguage()
         
         let parameters = ["username": mobileNumber,
                           "password": password,
@@ -256,7 +273,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                           "version_name": "1",
                           "device_id": device_id,
                           "push_token":"123123",
-                          "language":"en"
+                          "language": currentLanguage
             ] as [String : Any]
         
         print(parameters)
@@ -273,9 +290,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                 
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
-                
                 let responseDict = json.dictionaryObject
-                
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
                     if code.intValue == 200 {
@@ -291,23 +306,23 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             if let userDict = responseDict?["user"] as? [String:Any] {
                                 let user_id = userDict["id"]
                                 UserDefaults.standard.set(user_id, forKey: USER_ID)
-                            }
-                            
+                                
+                        }
                             
                             self.presentHome()
-                            
                         }
                     }
+                    else {
+                        
+                        if let responseDict = json.dictionaryObject {
+                            let alertMessage = responseDict["message"] as! String
+                            self.showAlert(title: "", message: alertMessage)
+                        }
                     print("user id\(self.user.id)")
                     print("user info \(self.user.additionalInformation)")
                     
                 }
-                else {
-                    
-                    if let responseDict = json.dictionaryObject {
-                        let alertMessage = responseDict["message"] as! String
-                        self.showAlert(title: "", message: alertMessage)
-                    }
+                
                 }
                 
                 break

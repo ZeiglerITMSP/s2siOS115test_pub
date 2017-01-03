@@ -22,6 +22,8 @@ class User: NSObject, NSCoding {
     var signup_type = ""
     var is_verified = ""
     var zipcode = ""
+    var contact_preference = ""
+    
     var additionalInformation: AdditionalInformation?
     
     override init() {
@@ -43,6 +45,8 @@ class User: NSObject, NSCoding {
         self.signup_type = aDecoder.decodeObject(forKey: "signup_type") as? String ?? ""
         self.is_verified = aDecoder.decodeObject(forKey: "is_verified") as? String ?? ""
         self.zipcode = aDecoder.decodeObject(forKey: "zipcode") as? String ?? ""
+        self.contact_preference = aDecoder.decodeObject(forKey: "contact_preference") as? String ?? ""
+
         self.additionalInformation = aDecoder.decodeObject(forKey: "additional_info") as? AdditionalInformation
         
     }
@@ -60,7 +64,7 @@ class User: NSObject, NSCoding {
         aCoder.encode(self.signup_type, forKey: "signup_type")
         aCoder.encode(self.is_verified, forKey: "is_verified")
         aCoder.encode(self.zipcode, forKey: "zipcode")
-
+        aCoder.encode(self.zipcode, forKey: "contact_preference")
         aCoder.encode(self.additionalInformation, forKey: "additional_info")
     }
     
@@ -88,20 +92,22 @@ class User: NSObject, NSCoding {
             user.last_name = last_name
         }
         
-        if let phone_number = dictionary["phone_number"] as? String {
-            user.phone_number =  phone_number
+        if let phone_number = dictionary["phone_number"]  {
+            user.phone_number =  "\(phone_number)"
         }
         
-        if let signup_type = dictionary["signup_type"] as? String {
-            user.signup_type = signup_type
+        if let signup_type = dictionary["signup_type"] {
+            user.signup_type = "\(signup_type)"
         }
         
         if let is_verified = dictionary["is_verified"] as? String {
             user.is_verified = is_verified
         }
+        if let contact_preference = dictionary["contact_preference"]{
+            user.contact_preference = "\(contact_preference)"
+        }
         if let zip_code = dictionary["zipcode"]{
             user.zipcode = "\(zip_code)"
-
         }
         if let additionalInformation = dictionary["additional_info"] as? [String:Any] {
             user.additionalInformation = AdditionalInformation.prepareAdditionalInfo(dictionary: additionalInformation)

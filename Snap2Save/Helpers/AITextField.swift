@@ -14,6 +14,7 @@ import UIKit
     @objc optional func keyBoardHidden(textField:UITextField)
     @objc optional func textFieldShouldReturn(_ textField: UITextField) -> Bool
     @objc optional func getSelectedIndexFromPicker(selectedIndex : NSInteger,textField:AITextField)
+    @objc optional func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
 }
 
 
@@ -366,20 +367,25 @@ extension AITextField: UITextFieldDelegate {
     
      func textFieldShouldReturn(_ textField: UITextField) -> Bool {
      
-     // ..
-     //  self.aiDelegate?.keyBoardHidden?(textField: self)
-        
         let status = self.aiDelegate?.textFieldShouldReturn?(textField)
         if let status = status {
             return status
         } else {
-            
             self.aiDelegate?.keyBoardHidden?(textField: self)
             return true
         }
         
-     //    return  (self.aiDelegate?.textFieldShouldReturn!(textField))!
      }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let status = self.aiDelegate?.aiTextField?(textField, shouldChangeCharactersIn: range, replacementString: string)
+        if let status = status {
+            return status
+        } else {
+            return true
+        }
+    }
     
 }
 

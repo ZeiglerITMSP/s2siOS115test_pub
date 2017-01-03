@@ -706,7 +706,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="By becoming a registered user, you agree to our Terms of Service." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RcD-IK-HO0">
-                                                    <rect key="frame" x="40" y="10" width="295" height="50"/>
+                                                    <rect key="frame" x="30" y="10" width="315" height="50"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="jES-tl-coH"/>
@@ -717,10 +717,10 @@
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="RcD-IK-HO0" secondAttribute="trailing" constant="40" id="RLE-HA-Ffv"/>
+                                                <constraint firstAttribute="trailing" secondItem="RcD-IK-HO0" secondAttribute="trailing" constant="30" id="RLE-HA-Ffv"/>
                                                 <constraint firstItem="RcD-IK-HO0" firstAttribute="top" secondItem="EHv-GF-3rh" secondAttribute="top" constant="10" id="SyN-rr-yym"/>
                                                 <constraint firstAttribute="bottom" secondItem="RcD-IK-HO0" secondAttribute="bottom" constant="10" id="vnR-Y1-gzd"/>
-                                                <constraint firstItem="RcD-IK-HO0" firstAttribute="leading" secondItem="EHv-GF-3rh" secondAttribute="leading" constant="40" id="ykT-Fb-a4B"/>
+                                                <constraint firstItem="RcD-IK-HO0" firstAttribute="leading" secondItem="EHv-GF-3rh" secondAttribute="leading" constant="30" id="ykT-Fb-a4B"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
