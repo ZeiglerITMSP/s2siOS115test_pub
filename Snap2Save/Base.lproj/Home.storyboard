@@ -3365,6 +3365,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="contentText" value="What was your first concert?"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isRequredField" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="showUnderline" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -3427,9 +3428,14 @@
                                                         <action selector="confirmAction:" destination="XgF-qW-s6Z" eventType="touchUpInside" id="Afj-tY-N8o"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="GSf-zi-3Nw">
+                                                    <rect key="frame" x="315" y="28" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="GSf-zi-3Nw" firstAttribute="leading" secondItem="c9q-pT-yXJ" secondAttribute="trailing" constant="-40" id="2Oz-ca-6Np"/>
                                                 <constraint firstItem="c9q-pT-yXJ" firstAttribute="leading" secondItem="BFP-EE-LCc" secondAttribute="leading" constant="20" id="EUv-QK-K2F"/>
+                                                <constraint firstItem="GSf-zi-3Nw" firstAttribute="centerY" secondItem="c9q-pT-yXJ" secondAttribute="centerY" id="GnJ-6Y-nWI"/>
                                                 <constraint firstItem="c9q-pT-yXJ" firstAttribute="top" secondItem="BFP-EE-LCc" secondAttribute="top" constant="18" id="PRi-ik-Map"/>
                                                 <constraint firstAttribute="trailing" secondItem="c9q-pT-yXJ" secondAttribute="trailing" constant="20" id="VUv-pU-uUe"/>
                                                 <constraint firstAttribute="bottom" secondItem="c9q-pT-yXJ" secondAttribute="bottom" constant="2" id="y6K-o0-XhL"/>
@@ -3455,6 +3461,8 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="confirmActivityIndicator" destination="GSf-zi-3Nw" id="Moo-B8-5HA"/>
+                        <outlet property="confirmButton" destination="c9q-pT-yXJ" id="HIR-qp-z9j"/>
                         <outlet property="errorMessageLabel" destination="kHo-YE-vEO" id="4ty-VB-rfK"/>
                         <outlet property="errorTitleLabel" destination="oor-rH-XCM" id="djK-JZ-u1Y"/>
                         <outlet property="messageLabel" destination="YoR-Bb-piX" id="eQg-jE-La0"/>

@@ -64,8 +64,25 @@ class EBTWebView: NSObject {
         
     }
     
-    
-    
+    func getPageHeader(completion: @escaping (String?) -> ()) {
+        
+        let jsPageTitle = "$('.PageHeader').text();"
+        webView.evaluateJavaScript(jsPageTitle) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+                
+                completion(nil)
+                
+            } else {
+                
+                let stringResult = result as! String
+                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(pageTitle)
+                
+                completion(pageTitle)
+            }
+        }
+    }
     
     
 }

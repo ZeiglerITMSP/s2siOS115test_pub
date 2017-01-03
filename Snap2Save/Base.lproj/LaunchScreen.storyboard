@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,12 +20,37 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="Bgh-Fa-kbI">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Snap2Save Logo" translatesAutoresizingMaskIntoConstraints="NO" id="qZL-Hg-AG5">
+                                <rect key="frame" x="40" y="269.5" width="295" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="gHJ-Dx-NuK"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Bgh-Fa-kbI" secondAttribute="bottom" id="5lN-Bo-C7p"/>
+                            <constraint firstAttribute="trailing" secondItem="Bgh-Fa-kbI" secondAttribute="trailing" id="6go-zr-3bf"/>
+                            <constraint firstItem="Bgh-Fa-kbI" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Pj3-s8-AUU"/>
+                            <constraint firstItem="Bgh-Fa-kbI" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="QYI-il-OuC"/>
+                            <constraint firstAttribute="trailing" secondItem="qZL-Hg-AG5" secondAttribute="trailing" constant="40" id="S3a-h2-6aA"/>
+                            <constraint firstItem="qZL-Hg-AG5" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="diM-hz-Qpy"/>
+                            <constraint firstItem="qZL-Hg-AG5" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="lxx-ne-aeu"/>
+                            <constraint firstItem="qZL-Hg-AG5" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="40" id="pv9-bI-peH"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Snap2Save Logo" width="241" height="44"/>
+        <image name="bg" width="375" height="667"/>
+    </resources>
 </document>

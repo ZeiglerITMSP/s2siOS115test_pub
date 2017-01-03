@@ -46,9 +46,9 @@ class AITextField: UITextField {
     weak var aiDelegate: AITextFieldProtocol?
     var selectedCountryRegion:String? = nil
     
+    var showUnderline: Bool = true
     var underlineLayer: CALayer!
     var placeHolderLabel: UILabel?
-    
     
     var selectedColor: UIColor = UIColor(red: 84/255, green: 190/255, blue: 56/255, alpha: 1.0)
     var normalColor: UIColor = UIColor(red: 104/255, green: 128/255, blue: 94/255, alpha: 0.5)
@@ -146,6 +146,24 @@ class AITextField: UITextField {
         self.layer.addSublayer(underlineLayer)
         self.layer.masksToBounds = true
         
+    }
+    
+    func updateUnderline() {
+        
+        if showUnderline {
+            
+            if isEditing {
+                createUnderline(withColor: selectedColor, padding: 0, height: 1)
+            } else {
+                createUnderline(withColor: normalColor, padding: 0, height: 1)
+            }
+            
+        } else {
+            
+            if (underlineLayer != nil) {
+                underlineLayer.removeFromSuperlayer()
+            }
+        }
         
     }
     
@@ -351,13 +369,14 @@ extension AITextField: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        createUnderline(withColor: selectedColor, padding: 0, height: 1)
+        updateUnderline()
+//        createUnderline(withColor: selectedColor, padding: 0, height: 1)
         updatePlaceHolderTextColor(color: selectedColor)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        createUnderline(withColor: normalColor, padding: 0, height: 1)
+        updateUnderline()
+//        createUnderline(withColor: normalColor, padding: 0, height: 1)
         updatePlaceHolderTextColor(color: normalColor)
         
 //        self.aiDelegate?.keyBoardHidden?(textField: self)

@@ -71,6 +71,16 @@ protocol AIPlaceHolderTextFieldDelegate {
         }
     }
     
+    @IBInspectable var showUnderline:Bool = true {
+        
+        didSet {
+            
+            contentTextField.showUnderline = showUnderline
+            contentTextField.updateUnderline()
+        }
+    }
+    
+    
     @IBOutlet weak var infoButton: UIButton!
     
     @IBAction func infoButtonAction(_ sender: UIButton) {

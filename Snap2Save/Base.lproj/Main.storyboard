@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xtN-bV-2Yz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xtN-bV-2Yz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1660,7 +1660,7 @@ Your registration is now complete.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4JJ-sg-926">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="699"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="704"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="iaJ-f6-FEI">
                                                 <rect key="frame" x="35" y="134" width="305" height="58"/>
@@ -1740,17 +1740,14 @@ Your registration is now complete.</string>
                                                     <constraint firstAttribute="width" constant="32" id="dhP-wM-AxT"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-DIGIT CELL PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKO-wY-TWK">
-                                                <rect key="frame" x="26" y="402" width="202" height="13"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="13" id="X4S-gX-SeB"/>
-                                                </constraints>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-DIGIT CELL PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKO-wY-TWK">
+                                                <rect key="frame" x="26" y="402" width="323" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                 <color key="textColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7as-cn-auN" customClass="AITextField" customModule="Snap2Save" customModuleProvider="target">
-                                                <rect key="frame" x="26" y="423" width="323" height="40"/>
+                                                <rect key="frame" x="26" y="426" width="323" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="ZHE-sO-zyP"/>
                                                 </constraints>
@@ -1759,7 +1756,7 @@ Your registration is now complete.</string>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Dq-aG-HNn" customClass="AITextField" customModule="Snap2Save" customModuleProvider="target">
-                                                <rect key="frame" x="26" y="505" width="323" height="40"/>
+                                                <rect key="frame" x="26" y="510" width="323" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="YV7-JH-s25"/>
                                                 </constraints>
@@ -1768,16 +1765,13 @@ Your registration is now complete.</string>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfQ-OI-Z8f">
-                                                <rect key="frame" x="26" y="483" width="75" height="14"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="14" id="zX0-Ct-dZp"/>
-                                                </constraints>
+                                                <rect key="frame" x="26" y="486" width="323" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZW-JY-VpG">
-                                                <rect key="frame" x="212" y="565" width="137" height="25"/>
+                                                <rect key="frame" x="212" y="570" width="137" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="MWf-i0-yf4"/>
                                                 </constraints>
@@ -1790,7 +1784,7 @@ Your registration is now complete.</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKV-XA-LTN">
-                                                <rect key="frame" x="20" y="615" width="335" height="44"/>
+                                                <rect key="frame" x="20" y="620" width="335" height="44"/>
                                                 <color key="backgroundColor" red="0.92549019610000005" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="Byq-Bu-jj4"/>
@@ -1804,7 +1798,7 @@ Your registration is now complete.</string>
                                                 </connections>
                                             </button>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="dAC-CS-MJy">
-                                                <rect key="frame" x="315" y="627" width="20" height="20"/>
+                                                <rect key="frame" x="315" y="632" width="20" height="20"/>
                                             </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1819,6 +1813,7 @@ Your registration is now complete.</string>
                                             <constraint firstItem="lfQ-OI-Z8f" firstAttribute="leading" secondItem="4JJ-sg-926" secondAttribute="leading" constant="26" id="EHn-of-phU"/>
                                             <constraint firstItem="UKO-wY-TWK" firstAttribute="leading" secondItem="4JJ-sg-926" secondAttribute="leading" constant="26" id="GYM-NI-Oe4"/>
                                             <constraint firstItem="7as-cn-auN" firstAttribute="leading" secondItem="4JJ-sg-926" secondAttribute="leading" constant="26" id="Kfl-Hm-QJE"/>
+                                            <constraint firstAttribute="trailing" secondItem="lfQ-OI-Z8f" secondAttribute="trailing" constant="26" id="QRx-w6-dnn"/>
                                             <constraint firstItem="8Dq-aG-HNn" firstAttribute="top" secondItem="lfQ-OI-Z8f" secondAttribute="bottom" constant="8" id="TQH-T2-mxs"/>
                                             <constraint firstItem="IpM-lX-9CI" firstAttribute="top" secondItem="5cw-Ll-YbS" secondAttribute="bottom" constant="58" id="Vhv-3u-aZt"/>
                                             <constraint firstItem="UKO-wY-TWK" firstAttribute="top" secondItem="IpM-lX-9CI" secondAttribute="bottom" constant="47" id="XZ7-gW-ZaV"/>
@@ -1838,6 +1833,7 @@ Your registration is now complete.</string>
                                             <constraint firstItem="lfQ-OI-Z8f" firstAttribute="top" secondItem="7as-cn-auN" secondAttribute="bottom" constant="20" id="tmZ-6Z-qNn"/>
                                             <constraint firstAttribute="trailing" secondItem="8Dq-aG-HNn" secondAttribute="trailing" constant="26" id="vo9-pK-QDy"/>
                                             <constraint firstItem="iZW-JY-VpG" firstAttribute="top" secondItem="8Dq-aG-HNn" secondAttribute="bottom" constant="20" id="vsi-9w-agy"/>
+                                            <constraint firstAttribute="trailing" secondItem="UKO-wY-TWK" secondAttribute="trailing" constant="26" id="zh8-lY-E96"/>
                                             <constraint firstItem="jKV-XA-LTN" firstAttribute="leading" secondItem="4JJ-sg-926" secondAttribute="leading" constant="20" id="zuf-fp-jiJ"/>
                                         </constraints>
                                     </view>

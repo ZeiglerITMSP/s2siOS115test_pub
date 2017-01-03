@@ -10,16 +10,19 @@ import Foundation
 import UIKit
 import Localize_Swift
 
-class AppHelper
-{
-class func setRoundCornersToView(borderColor:UIColor,view:UIView,radius:CGFloat,width:CGFloat)
-{
-    view.layer.cornerRadius = radius
-    view.layer.borderColor = borderColor.cgColor
-    view.layer.borderWidth = width
-    view.layer.masksToBounds = true
-    ////print("border created")
-}
+class AppHelper {
+    
+    
+    
+    class func setRoundCornersToView(borderColor:UIColor,view:UIView,radius:CGFloat,width:CGFloat)
+    {
+        view.layer.cornerRadius = radius
+        view.layer.borderColor = borderColor.cgColor
+        view.layer.borderWidth = width
+        view.layer.masksToBounds = true
+        ////print("border created")
+    }
+    
     class func imageWithColor( color:UIColor) -> UIImage
     {
         
@@ -41,11 +44,11 @@ class func setRoundCornersToView(borderColor:UIColor,view:UIView,radius:CGFloat,
         return false
     }
     
-   class  func validate(value: String) -> Bool {
-    let PHONE_REGEX = "^\\d{3}\\d{3}\\d{4}$"
-    let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
-    let result =  phoneTest.evaluate(with: value)
-    return result
+    class  func validate(value: String) -> Bool {
+        let PHONE_REGEX = "^\\d{3}\\d{3}\\d{4}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result =  phoneTest.evaluate(with: value)
+        return result
     }
     
     class func isValidEmail(testStr:String) -> Bool {
@@ -122,7 +125,7 @@ extension UIViewController {
             self.present(alertController, animated: true, completion: nil)
         }
     }
-
+    
     
 }
 
