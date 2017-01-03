@@ -114,17 +114,6 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         leftBarButton.customView = backButton
         self.navigationItem.leftBarButtonItem = leftBarButton
         
-        let languageButton = UIButton.init(type: .system)
-        languageButton.frame = CGRect(x:0,y:0,width:60,height:25)
-        languageButton.setTitle("ENGLISH".localized, for: .normal)
-        languageButton.setTitleColor(UIColor.white, for: .normal)
-        languageButton.backgroundColor = UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0)
-        languageButton.addTarget(self, action: #selector(languageButtonClicked), for: .touchUpInside)
-        languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 11.0)
-        AppHelper.setRoundCornersToView(borderColor: UIColor.init(red: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0), view:languageButton , radius:2.0, width: 1.0)
-        let rightBarButton = UIBarButtonItem()
-        rightBarButton.customView = languageButton
-        self.navigationItem.rightBarButtonItem = rightBarButton
         
         let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         // super.setNavigationBarImage(image: navBarBGImg)
@@ -185,6 +174,32 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             self.groupCodeLabel.text = "GROUP CODE (IF APPLICABLE)".localized()
             self.referralCodeLabel.text = "REFERRAL CODE (IF APPLICABLE)".localized()
             self.registerButton.setTitle("REGISTER".localized(), for: .normal)
+            self.genderTextField.placeholder = "Please select".localized()
+           // self.genderTextField.placeHolderLabel?.text = "Please select".localized()
+            self.ageGroupTextField.placeholder = "Please select".localized()
+             self.ethnicityTextField.placeholder = "Please select".localized()
+            self.addressLine1TextField.placeholder = "Street address or PO box".localized()
+            self.addressLine2TextField.placeholder = "Unit, Building, etc.".localized()
+            self.genderArray = ["Male".localized(),"Female".localized()];
+            self.ageGroupArray = ["21 and under".localized(),
+                                  "22 to 34".localized(),
+                                  "35 to 44".localized(),
+                                  "45 to 54".localized(),
+                                  "55 to 64".localized(),
+                                  "65 and older".localized()]
+            
+            self.ethnicityArray = ["American Indian or Alaska Native".localized(),
+                                   "Asian or Pacific Islander".localized(),
+                                   "Black or African American".localized(),
+                                   "Hispanic or Latino".localized(),
+                                   "White/Caucasian".localized(),
+                                   "Other".localized()]
+            
+            self.genderTextField.pickerViewArray = self.genderArray
+            self.ageGroupTextField.pickerViewArray = self.ageGroupArray
+            self.ethnicityTextField.pickerViewArray = self.ethnicityArray
+
+            self.tableView.reloadData()
 
         }
     }
@@ -326,13 +341,8 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         cityTextField.aiDelegate = self
         zipCodeTextField.aiDelegate = self
         
-        genderArray = ["Male","Female"];
-        ageGroupArray = ["16-25","26-35","36-45","46-55","56+"]
-        ethnicityArray = ["1","2"]
+       // genderArray = ["Male","Female"];
         
-        genderTextField.pickerViewArray = genderArray
-        ageGroupTextField.pickerViewArray = ageGroupArray
-        ethnicityTextField.pickerViewArray = ethnicityArray
         
         
         var statesDict: NSDictionary?

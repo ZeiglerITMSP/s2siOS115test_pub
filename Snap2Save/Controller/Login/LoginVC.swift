@@ -133,12 +133,12 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         DispatchQueue.main.async {
             
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-            self.loginWithFacebookButton.setTitle("Log In with Facebook".localized, for: .normal)
-            self.orLabel.text = "or".localized
-            self.mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized
-            self.passwordLabel.text = "PASSWORD".localized
-            self.forgotPasswordButton.setTitle("Forgot Password?".localized, for: .normal)
-            self.loginButton.setTitle("LOG IN".localized, for: .normal)
+            self.loginWithFacebookButton.setTitle("Log In with Facebook".localized(), for: .normal)
+            self.orLabel.text = "or".localized()
+            self.mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized()
+            self.passwordLabel.text = "PASSWORD".localized()
+            self.forgotPasswordButton.setTitle("Forgot Password?".localized(), for: .normal)
+            self.loginButton.setTitle("LOG IN".localized(), for: .normal)
             self.title = "Log In".localized()
             self.updateBackButtonText()
             
@@ -184,6 +184,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        reloadContent()
         self.navigationController?.navigationBar.isHidden = false;
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         // Sets shadow (line below the bar) to a blank image
@@ -298,7 +299,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                         }
                     }
                     print("user id\(self.user.id)")
-                    print("user info \(self.user.userInfo)")
+                    print("user info \(self.user.additionalInformation)")
                     
                 }
                 else {

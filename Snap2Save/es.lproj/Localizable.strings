@@ -6,30 +6,145 @@
   Copyright © 2016 Appit. All rights reserved.
 */
 
-
-"SELECT LANGUAGE" = "SELECCIONE EL IDIOMA";
+// LandingVC
+"SELECT LANGUAGE" = "SELECCIONAR IDIOMA";
 "WELCOME" = "Bienvenido";
 "LOG IN" = "INICIAR SESIÓN";
-"REGISTER" = "REGISTRO";
-"English" = "Inglés";
+"REGISTER" = "REGISTRARME";
+"English" = "Ingles";
 "Spanish" = "Español";
 "Cancel" = "Cancelar";
-"Back" = "Espalda";
-"language.button.title" = "ESPAÑOL";
 "selectedLanguageTitle" = "Español";
+
+// LANGUAGE
+"language.button.title" = "ESPAÑOL";
+"language.alert.english" = "Ingles";
+"language.alert.spanish" = "Español";
+"Back" = "Volver";
 
 // TabBar Titles
 "OFFERS" = "OFERTAS";
 "SERVICES" = "SERVICIOS";
 "ACCOUNT" = "CUENTA";
 
-// signUpTVC
-"TermsMessage" = "Al convertirse en un usuario registrado, acepta nuestros Términos de servicio.";
+
+
+// LoginVC
+"Log In" = "Iniciar sesión";
+"Log In with Facebook" = "Iniciar sesión con Facebook";
+"or" = "o";
+"10-DIGIT CELL PHONE NUMBER" = "NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
+"PASSWORD" = "CONTRASEÑA";
+"Forgot Password?" = "¿Olvidó su contraseña?";
+"LOG IN" = "INICIAR SESIÓN";
+
+// WelcomePageVc
+"Congratulations!" = "¡Felicitaciones!";
+"WelcomeText" = "Bienvenido a Snap2Save.Su registro ahora está completo.";
+"Get Started!" = "¡COMENCEMOS!";
+
+//signUpAlert
+"SignUpAlertTitle" = "¡Gracias por unirse a Snap2Save!";
+"SignUpAlertMessage" = "Antes de que pueda iniciar sesión, debemos verificar su número de teléfono celular.  Debe recibir un mensaje de texto de confirmación en breve.  Cuando llegue, simplemente haga clic sobre el enlace en el mensaje de texto y así completará su proceso de registro.";
+"Close" = "Cerrar";
+
+
+//signUpTVC
+"Register" = "Registrarme";
+"EARN 100 POINTS!" = "¡GANE 100 PUNTOS!";
+"RegisterMessage" = "¡Únase a nosotros en Snap2Save y ganará 100 puntos por registrarse!  Los puntos pueden canjearse para tarjetas de regalo o descuentos en atención médica a través de nuestro Programa de recompensas. ";
+"Register with Facebook" = "Registrarse con Facebook";
+"*Required information" = "*Información obligatoria";
+"10-DIGIT CELL PHONE NUMBER" = "NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
+"RE-ENTER 10-DIGIT CELL PHONE NUMBER" = "VOLVER A INTRODUCIR NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
+"PASSWORD (MUST BE AT LEAST 6 CHARACTERS)" = "CONTRASEÑA (DEBE TENER AL MENOS 6 CARACTERES)";
+"RE-ENTER PASSWORD" = "VOLVER A INTRODUCIR CONTRASEÑA";
+"ZIP CODE" = "CÓDIGO POSTAL";
+"CONTACT PREFERENCE"= "PREFERENCIA DE CONTACTO";
+"Text Message" = "Mensaje de texto";
+"Email" = "Email";
+"EMAIL" = "EMAIL";
+"RE-ENTER EMAIL" = "VOLVER A INTRODUCIR DIRECCIÓN DE EMAIL";
+"TermsMessage" = "Al convertirse en usuario registrado, usted acepta nuestros Términos de servicio.";
 "TermsLink" = "Términos de servicio";
-"CONTINUE" = "CONTINUE";
+"CONTINUE" = "CONTINUAR";
 
 
+//AddtionalSignUpTVC
+"EARN 200 POINTS!" = "¡GANE 200 PUNTOS!";
+"AdditionalSignUpMsg" = "¡Suministre la siguiente información adicional y gane 200 puntos extra!";
+"USER INFORMATION" = "INFORMACIÓN DEL USUARIO";
+"FIRST NAME" = "NOMBRE";
+"LAST NAME" = "APELLIDO";
+"ADDRESS" = "DIRECCIÓN";
+"AddressMsg" = "Las tarjetas de regalo ganadas según el Programa de recompensas serán enviadas por correo a esta dirección.";
+"ADDRESS LINE 1" = "DIRECCIÓN LÍNEA 1";
+"ADDRESS LINE 2" = "DIRECCIÓN LÍNEA 2";
+"CITY" = "CIUDAD";
+"ADDITIONAL INFORMATION" = "INFORMACIÓN ADICIONAL";
+"STATE" = "ESTADO";
+"ZIP CODE" = "CÓDIGO POSTAL";
+"GENDER" = "SEXO";
+"ETHNICITY / RACE" = "ETNIA / RAZA";
+"AGE GROUP" = "GRUPO DE EDAD";
+"GROUP CODE (IF APPLICABLE)" = "CÓDIGO DE GRUPO (SI CORRESPONDE)";
+"REFERRAL CODE (IF APPLICABLE)" = "CÓDIGO DE REFERENCIA (SI CORRESPONDE)";
+"REGISTER" = "REGISTRARME";
 
+
+"Please select" = "Seleccione";
+"Unit, Building, etc." = "Dirección o casilla de correo";
+"Street address or PO box" = "Unidad, edificio, etc.";
+
+"Male" = "Masculino";
+"Female" = "Femenino";
+
+"21 and under" = "21 o menor";
+"22 to 34" = "22 a 34";
+"35 to 44" = "35 a 44";
+"45 to 54" = "45 a 54";
+"55 to 64" = "55 a 64";
+"65 and older" = "65 y mayor";
+
+"American Indian or Alaska Native" = "Indio Americano o Nativo de Alaska";
+"Asian or Pacific Islander" = "Asiático o de Islas del Pacífico";
+"Black or African American" = "Afroamericano o de color";
+"Hispanic or Latino" = "Hispano o latino";
+"White/Caucasian" = "Blanco/caucásico";
+"Other" = "Otro";
+
+//ForgotPassword
+"Forgot Password" = "Olvidé mi contraseña";
+"forgotPasswordMessage" = "Introduzca el número de teléfono celular de 10 dígitos vinculado a su cuenta.";
+"10-DIGIT CELL PHONE NUMBER" = "NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
+"SUBMIT" = "ENVIAR";
+
+//Reset Password
+"Reset Password" = "Restablecer contraseña";
+"resetPasswordMessage" = "Su nueva contraseña debe tener 6 caracteres como mínimo.";
+"NEW PASSWORD" = "CONTRASEÑA NUEVA";
+"RE-ENTER NEW PASSWORD" = "VOLVER A INTRODUCIR CONTRASEÑA NUEVA";
+"RESET PASSWORD" = "RESTABLECER CONTRASEÑA";
+
+
+// AccountVc
+"Account" = "Cuenta";
+"Auto Log In" = "Inicio de sesión automático";
+"Personal Information" = "Información personal";
+"Preferences" = "Preferencias";
+"Change Password" = "Cambiar contraseña";
+"Log Out" = "Cerrar sesión";
+
+// PREFERENCE VC
+"Preferences" = "Preferencias";
+
+
+// CHANGEPASSWORD VC
+"Change Password" = "Cambiar contraseña";
+"RE-ENTER NEW PASSWORD" = "VOLVER A INTRODUCIR CONTRASEÑA NUEVA";
+"NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)" = "CONTRASEÑA NUEVA (DEBE TENER AL MENOS 6 CARACTERES)";
+"CURRENT PASSWORD" = "CONTRASEÑA ACTUAL";
+"SAVE" = "GUARDAR";
 
 
 

@@ -1,5 +1,5 @@
 //
-//  UserAdditionalInformation.swift
+//  AdditionalInformation.swift
 //  Snap2Save
 //
 //  Created by Malathi on 30/12/16.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UserAdditionalInformation: NSObject, NSCoding {
+class AdditionalInformation: NSObject, NSCoding {
     
     var gender = "0"
     var city = ""
@@ -20,7 +20,9 @@ class UserAdditionalInformation: NSObject, NSCoding {
     var referral_code = ""
     var group_code = ""
     var state = ""
-    
+    var first_name = ""
+    var last_name = ""
+
     override init() {
         
     }
@@ -42,6 +44,9 @@ class UserAdditionalInformation: NSObject, NSCoding {
         
         self.state = aDecoder.decodeObject(forKey: "state") as? String ?? ""
         
+        self.first_name = aDecoder.decodeObject(forKey: "first_name") as? String ?? ""
+        self.last_name = aDecoder.decodeObject(forKey: "last_name") as? String ?? ""
+
     }
     
     func encode(with aCoder: NSCoder) {
@@ -59,16 +64,18 @@ class UserAdditionalInformation: NSObject, NSCoding {
         aCoder.encode(self.group_code, forKey: "group_code")
         aCoder.encode(self.state, forKey: "state")
         
-        
+        aCoder.encode(self.first_name, forKey: "first_name")
+        aCoder.encode(self.last_name, forKey: "last_name")
+
     }
     
     // MARK: -
     
-    class func prepareAdditionalInfo(dictionary: [String:Any]) -> UserAdditionalInformation {
+    class func prepareAdditionalInfo(dictionary: [String:Any]) -> AdditionalInformation {
         
-        let userInfo = UserAdditionalInformation()
-        if dictionary["gender"] != nil{
-        userInfo.gender = "\("gender")"
+        let userInfo = AdditionalInformation()
+        if let gender = dictionary["gender"]{
+        userInfo.gender = "\(gender)"
         }
         if let city = dictionary["city"] as? String {
             userInfo.city = city
@@ -98,6 +105,13 @@ class UserAdditionalInformation: NSObject, NSCoding {
         if let group_code = dictionary["group_code"] {
             userInfo.group_code = "\(group_code)"
         }
+        if let first_name = dictionary["first_name"] as? String {
+            userInfo.first_name = first_name
+        }
+        if let last_name = dictionary["last_name"] as? String {
+            userInfo.last_name = last_name
+        }
+        
 
         return userInfo
 }
