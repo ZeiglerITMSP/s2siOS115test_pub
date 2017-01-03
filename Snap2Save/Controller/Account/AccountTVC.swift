@@ -46,10 +46,17 @@ class AccountTVC: UITableViewController {
         
         reloadContent()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadContent()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
-        reloadContent()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
