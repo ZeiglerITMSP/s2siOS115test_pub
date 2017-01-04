@@ -87,7 +87,7 @@ class ServicesTVC: UITableViewController {
             
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             
-            self.navigationController?.navigationItem.title = "Services".localized()
+            self.navigationItem.title = "Services".localized()
             
             self.ebtLabel.text = "EBT".localized()
             self.aboutLabel.text = "About Snap2Save".localized()

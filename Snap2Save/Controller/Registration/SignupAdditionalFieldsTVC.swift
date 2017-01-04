@@ -357,8 +357,11 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         }
         
         let states = statesDict?.allKeys as! [String]
+        let sortedStates = states.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+        
+        
         statesArray = NSMutableArray()
-        for state in states {
+        for state in sortedStates {
             statesArray.add(state)
         }
         
@@ -467,6 +470,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         if SelectedEthnicityIndex != nil{
             ethnicity  = String.init(format: "%d", SelectedEthnicityIndex)
         }
+        
         let referral_code = referralCodeTextField.text ?? ""
         let group_code = groupCodeTextField.text ?? ""
         let platform = "1"
@@ -541,7 +545,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                 
                 DispatchQueue.main.async {
                     self.registerActivityIndicator.stopAnimating()
-                }
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
                 print(error)
                 break
             }

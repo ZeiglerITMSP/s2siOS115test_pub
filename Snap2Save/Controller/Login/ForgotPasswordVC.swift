@@ -34,7 +34,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         let validMobileNum = AppHelper.validate(value: mobileNumberTextField.text!)
         
         if mobileNumberTextField.text?.characters.count == 0 || validMobileNum == false{
-            self.showAlert(title: "", message: "Please enter 10 digit Phone Number")
+            self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
             return
         }
         

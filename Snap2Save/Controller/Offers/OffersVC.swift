@@ -13,9 +13,15 @@ class OffersVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationItem.title = "Offers".localized()
+        self.navigationItem.title = "Offers".localized()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationItem.title = "Offers".localized()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

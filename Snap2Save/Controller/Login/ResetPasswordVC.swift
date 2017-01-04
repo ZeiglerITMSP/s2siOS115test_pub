@@ -217,7 +217,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
                 
                 DispatchQueue.main.async {
                     self.resetPasswordActivityIndicator.stopAnimating()
-                }
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
                 print(error)
                 break
             }

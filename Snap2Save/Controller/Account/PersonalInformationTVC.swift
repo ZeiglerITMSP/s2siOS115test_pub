@@ -340,8 +340,10 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         }
         
         let states = statesDict?.allKeys as! [String]
+        let sortedStates = states.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+        
         statesArray = NSMutableArray()
-        for state in states {
+        for state in sortedStates {
             statesArray.add(state)
         }
         
@@ -412,6 +414,12 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             return
         }
         
+        let userData = UserDefaults.standard.object(forKey: LOGGED_USER)
+        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
+        
+        print("user info \(userInfo)")
+        
+        let user:User = userInfo as! User
 
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
@@ -422,6 +430,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let address_line2 = addressLine2TextField.text ?? ""
         let city = cityTextField.text ?? ""
         let state = stateTextField.text ?? ""
+        let zipCode = zipCodeTextField.text ?? ""
         var gender = ""
         var age_group = ""
         var ethnicity = ""
@@ -430,12 +439,24 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         if selectedGenderIndex != nil{
             gender =  String.init(format: "%d", selectedGenderIndex)
         }
+        else{
+            gender = user.additionalInformation?.gender ?? ""
+        }
         if selectedAgeGroupIndex != nil{
             age_group  = String.init(format: "%d", selectedAgeGroupIndex)
         }
+        else{
+            age_group = user.additionalInformation?.age_group ?? ""
+        }
+
         if SelectedEthnicityIndex != nil{
             ethnicity  = String.init(format: "%d", SelectedEthnicityIndex)
         }
+        else{
+            ethnicity = user.additionalInformation?.ethnicity ?? ""
+        }
+
+        
 
         let parameters = ["first_name" : first_name,
                           "last_name" : last_name,
@@ -449,6 +470,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                           "ethnicity": ethnicity,
                           "user_id": user_id,
                           "platform":"1",
+                          "zipcode" : zipCode,
                           "version_code": "1",
                           "version_name": "1",
                           "device_id": device_id,
@@ -492,7 +514,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
-                }
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
                 print(error)
                 break
             }
@@ -624,6 +646,8 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 
                 DispatchQueue.main.async {
                     HUD.hide()
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+
                 }
                 print(error)
                 break

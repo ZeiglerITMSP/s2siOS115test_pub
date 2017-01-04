@@ -33,11 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        UITabBar.appearance().tintColor = UIColor.green
         //
         
-        let isAutoLoginKeyExists = UserDefaults.standard.dictionaryRepresentation().keys.contains(USER_AUTOLOGIN)
         
-        if isAutoLoginKeyExists == false {
-            UserDefaults.standard.set(true, forKey: USER_AUTOLOGIN)
+        
+        let isOnLaunch = UserDefaults.standard.dictionaryRepresentation().keys.contains(ON_LAUNCH)
+        
+        if isOnLaunch == false {
+            
+            setDetaultValues()
+            UserDefaults.standard.set(true, forKey: ON_LAUNCH)
             UserDefaults.standard.synchronize()
+            
         }
         
         let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
@@ -256,6 +261,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    class func getDelegate() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func setDetaultValues() {
+        
+        // ..
+        UserDefaults.standard.set(false, forKey: USER_AUTOLOGIN)
+        UserDefaults.standard.synchronize()
+        // ..
+        Localize.setCurrentLanguage("en")
+        
+    }
     
     
 }

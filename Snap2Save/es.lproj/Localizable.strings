@@ -40,7 +40,8 @@
 
 // WelcomePageVc
 "Congratulations!" = "¡Felicitaciones!";
-"WelcomeText" = "Bienvenido a Snap2Save.Su registro ahora está completo.";
+"WelcomeText" = "Bienvenido a Snap2Save.\nSu registro ahora está completo.";
+"WelcomeSecondLabelText" = "Su registro ahora está completo.";
 "Get Started!" = "¡COMENCEMOS!";
 
 //signUpAlert

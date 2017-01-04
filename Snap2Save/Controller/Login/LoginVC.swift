@@ -332,7 +332,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                                 UserDefaults.standard.set(user_id, forKey: USER_ID)
                                 
                         }
-                            
+                        
                             self.presentHome()
                         }
                     }
@@ -355,6 +355,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                 
                 DispatchQueue.main.async {
                     self.loginActivityIndicator.stopAnimating()
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
                 print(error)
                 break
