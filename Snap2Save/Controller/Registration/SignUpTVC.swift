@@ -220,8 +220,9 @@ class SignUpTVC: UITableViewController {
         self.termsTextView.linkTextAttributes = linkAttributes
         self.termsTextView.attributedText = attributedString
      
+        self.termsTextView.isScrollEnabled = false
         
-        self.termsTextView.contentSize = self.termsTextView.bounds.size
+       // self.termsTextView.contentSize = self.termsTextView.bounds.size
     }
     
     func backButtonAction(){

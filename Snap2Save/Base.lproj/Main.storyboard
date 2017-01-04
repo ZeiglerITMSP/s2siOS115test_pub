@@ -696,9 +696,6 @@
                                                 <textView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="By becoming a registered user, you agree to our Terms of Service." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RcD-IK-HO0">
                                                     <rect key="frame" x="30" y="0.0" width="315" height="70"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="jES-tl-coH"/>
-                                                    </constraints>
                                                     <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
