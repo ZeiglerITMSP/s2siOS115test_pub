@@ -13,7 +13,7 @@ class OffersVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Offers".localized()
+        self.navigationController?.navigationItem.title = "Offers".localized()
     }
 
     override func didReceiveMemoryWarning() {

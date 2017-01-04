@@ -275,6 +275,15 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     func userLogin() {
         
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        print("isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+        
         let password = passwordTextField.text ?? ""
         let mobileNumber = mobileNumTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
@@ -374,12 +383,12 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     func isValid() -> Bool{
         let validNum = AppHelper.validate(value: mobileNumTextField.text!)
         
-        if ((mobileNumTextField.text?.characters.count)! == 0 || validNum == false ){
-            showAlert(title: "", message: "Please enter valid 10 digit Phone Number")
+        if ((mobileNumTextField.text?.characters.count)! == 0 || validNum == false ) {
+            showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
             return false
         }
-        else if (passwordTextField.text?.characters.count)! < 6{
-            self.showAlert(title: "", message: "Please enter Password")
+        else if (passwordTextField.text?.characters.count)! < 6 {
+            self.showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
             return false
         }
         return true

@@ -147,6 +147,23 @@
 "SAVE" = "GUARDAR";
 
 
+// Reachability
+
+"Please check your internet connection" = "Please check your internet connection";
+
+// Alert Messages
+
+"Please enter a 10-digit cell phone number." = "Introduzca un número de teléfono celular de 10 dígitos.";
+"Password must be at least 6 characters in length." = "La contraseña debe tener al menos 6 caracteres.";
+
+"Please enter a valid zip code." = "Introduzca un código postal válido.";
+"Please enter a valid email address." = "Introduzca una dirección de email válida.";
+
+"Entries must match to proceed." = "Los valores deben coincidir para continuar.";
+"Please enter current password" = "Please enter current password";
+"Your password must be at least 6 characters in length." = "Su contraseña debe tener 6 caracteres como mínimo.";
+
+
 
 
 

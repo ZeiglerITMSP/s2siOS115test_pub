@@ -74,7 +74,9 @@ class AccountTVC: UITableViewController {
     func reloadContent(){
         
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-        self.title = "ACCOUNT".localized()
+        
+        self.navigationController?.navigationItem.title = "Account".localized()
+        
         autoLoginLabel.text = "Auto Log In".localized()
         personalInfoLabel.text = "Personal Information".localized()
         preferencesLabel.text = "Preferences".localized()
@@ -156,6 +158,16 @@ class AccountTVC: UITableViewController {
     
     func userLogout() {
         
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        print("isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+        
+
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String

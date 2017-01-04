@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Localize_Swift
+import PKHUD
 
 class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
@@ -77,6 +78,11 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
         getProfile()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -106,6 +112,12 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         _ = self.navigationController?.popViewController(animated: true)
         
     }
+
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+    
 
     func reloadContent() {
         
@@ -228,6 +240,16 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
     func updatePreferences()  {
         
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        print("isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+        
+
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -308,17 +330,32 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let validEmail = AppHelper.isValidEmail(testStr: emailPlaceHolderTextField.contentTextField.text!)
         let validPhoneNumber = AppHelper.validate(value: mobileNumberTextField.contentTextField.text!)
         
-        if emailPlaceHolderTextField.contentTextField.text?.characters.count == 0 || validEmail == false{
-            self.showAlert(title: "", message: "Please enter valid Email")
-            return false
+//        if emailPlaceHolderTextField.contentTextField.text?.characters.count == 0 || validEmail == false{
+//            self.showAlert(title: "", message: "Please enter valid Email")
+//            return false
+//        }
+//        else if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
+//            self.showAlert(title: "", message: "Please enter 10 digit Phone Number")
+//            return false
+//        }
+//        else if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
+//            self.showAlert(title: "", message: "Phone Numbers doesn't match")
+//            return false
+//        }
+        
+        if contactPreferenceSegmentControl.selectedSegmentIndex == 0{
+            if validPhoneNumber == false   {
+                self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
+                return false
+
         }
-        else if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
-            self.showAlert(title: "", message: "Please enter 10 digit Phone Number")
-            return false
         }
-        else if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
-            self.showAlert(title: "", message: "Phone Numbers doesn't match")
-            return false
+            if contactPreferenceSegmentControl.selectedSegmentIndex == 1{
+               if  validEmail == false {
+                    self.showAlert(title: "", message: "Please enter a valid email address.".localized())
+                    return false
+ 
+            }
         }
         return true
     }
@@ -347,6 +384,19 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
     func getProfile(){
         
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        print("isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+        
+        HUD.allowsInteraction = false
+        HUD.dimsBackground = false
+        HUD.show(.progress)
+
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -370,7 +420,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 DispatchQueue.main.async {
-                    
+                    HUD.hide()
                 }
                 
                 let json = JSON(data: response.data!)
@@ -410,7 +460,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    
+                    HUD.hide()
                 }
                 print(error)
                 break

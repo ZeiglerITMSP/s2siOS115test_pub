@@ -152,6 +152,16 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     }
     */
     func resetPassword(){
+        
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        print("isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+
         self.view.endEditing(true)
         let password = passwordTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString

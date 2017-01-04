@@ -147,9 +147,21 @@
 "SAVE" = "SAVE";
 
 
+// Reachability
 
+"Please check your internet connection" = "Please check your internet connection";
 
+// Alert Messages
 
+"Please enter a 10-digit cell phone number." = "Please enter a 10-digit cell phone number.";
+"Password must be at least 6 characters in length." = "Password must be at least 6 characters in length.";
+
+"Please enter a valid zip code." = "Please enter a valid zip code.";
+"Please enter a valid email address." = "Please enter a valid email address.";
+
+"Entries must match to proceed." = "Entries must match to proceed.";
+"Please enter current password" = "Please enter current password";
+"Your password must be at least 6 characters in length." = "Your password must be at least 6 characters in length.";
 
 
 

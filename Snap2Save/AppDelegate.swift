@@ -23,15 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Status
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
-//        selectedTabBackground()
+        //        selectedTabBackground()
         
         
-//        let tabIndicator = UIImage(named: "tabbarbg")?.withRenderingMode(.alwaysTemplate)
-//        let tabResizableIndicator = tabIndicator?.resizableImage(
-//            withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
-//        UITabBar.appearance().selectionIndicatorImage = tabResizableIndicator
-//        UITabBar.appearance().tintColor = UIColor.green
-//        
+        //        let tabIndicator = UIImage(named: "tabbarbg")?.withRenderingMode(.alwaysTemplate)
+        //        let tabResizableIndicator = tabIndicator?.resizableImage(
+        //            withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
+        //        UITabBar.appearance().selectionIndicatorImage = tabResizableIndicator
+        //        UITabBar.appearance().tintColor = UIColor.green
+        //
         
         let isAutoLoginKeyExists = UserDefaults.standard.dictionaryRepresentation().keys.contains(USER_AUTOLOGIN)
         
@@ -39,18 +39,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(true, forKey: USER_AUTOLOGIN)
             UserDefaults.standard.synchronize()
         }
-
+        
         let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
         
         let storyBoard:UIStoryboard?
-
+        
         if isAutoLogin == true {
             let user_id = UserDefaults.standard.object(forKey: USER_ID)
             let auth_token = UserDefaults.standard.object(forKey: AUTH_TOKEN)
-           
-             if user_id != nil && auth_token != nil {
-                    // user exists
-                    storyBoard = UIStoryboard(name: "Home", bundle: nil);
+            
+            if user_id != nil && auth_token != nil {
+                // user exists
+                storyBoard = UIStoryboard(name: "Home", bundle: nil);
             }
             else {
                 storyBoard = UIStoryboard(name: "Main", bundle: nil);
@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             storyBoard = UIStoryboard(name: "Main", bundle: nil);
         }
-            
+        
         let initialViewController: UIViewController = storyBoard!.instantiateInitialViewController()!
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
@@ -98,128 +98,141 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else {
             // user not exists
-            let urlString = url.absoluteString
-            print("url string is\(urlString)")
-            let urlScheme = url.scheme
-            print("url scheme is\(urlScheme)")
-            
-            if urlString.characters.count > 0{
-                let query = url.query
-                let components = query?.components(separatedBy: "?")
-                let mutableDict = NSMutableDictionary()
-                for component:String in components!
-                {
-                    let bits = component.components(separatedBy: "userid=")
-                    print("bits\(bits)")
-                    if bits.count == 2
-                    {
-                        
-                        let key_string = "userid"
-                        let value = bits[1] as String
-                        
-                        mutableDict.setObject(value, forKey: key_string as NSCopying)
-                        print("mutableDict is\(mutableDict)")
-                    }
+            let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+            let isReachable = reachbility.isReachable
+            // Reachability
+            print("isreachable \(isReachable)")
+            if isReachable == false {
+                let alertController = UIAlertController(title: "", message: "Please check your internet connection".localized(), preferredStyle: .alert)
+                
+                
+                let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+                })
+                
+                alertController.addAction(okAction)
+                
+                DispatchQueue.main.async {
+                    
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
                 }
                 
-//                let storyBoard = UIStoryboard(name: "Main", bundle: nil);
-//                let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
-//                self.window?.rootViewController = initialViewController
-//                self.window?.makeKeyAndVisible()
-//                
-                if urlScheme == "s2sregistrationconfirm"{
-                    
-                    let device_id = UIDevice.current.identifierForVendor!.uuidString
-                    let user_id = mutableDict.object(forKey: "userid") ?? ""
-                    let currentLanguage = Localize.currentLanguage()
-
-                    let parameters = ["user_id": user_id,
-                                      "platform":"1",
-                                      "version_code": "1",
-                                      "version_name": "1",
-                                      "device_id": device_id,
-                                      "push_token":"123123",
-                                      "language":currentLanguage
-                        ] as [String : Any]
-                    
-                    
-                    print(parameters)
-                    
-                    let url = String(format: "%@/confirmRegistration", hostUrl)
-                    print(url)
-                    Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
-                        
-                        switch response.result {
-                        case .success:
+            }
+                
+            else {
+                
+                let urlString = url.absoluteString
+                print("url string is\(urlString)")
+                let urlScheme = url.scheme
+                print("url scheme is\(urlScheme)")
+                
+                if urlString.characters.count > 0 {
+                    let query = url.query
+                    let components = query?.components(separatedBy: "?")
+                    let mutableDict = NSMutableDictionary()
+                    for component:String in components!
+                    {
+                        let bits = component.components(separatedBy: "userid=")
+                        print("bits\(bits)")
+                        if bits.count == 2
+                        {
                             
-                            let json = JSON(data: response.data!)
-                            print("json response\(json)")
-                            let responseDict = json.dictionaryObject
-                            let code = responseDict?["code"] as! NSNumber
-                            if code.intValue == 200 {
+                            let key_string = "userid"
+                            let value = bits[1] as String
+                            
+                            mutableDict.setObject(value, forKey: key_string as NSCopying)
+                            print("mutableDict is\(mutableDict)")
+                        }
+                    }
+                    
+                    
+                    if urlScheme == "s2sregistrationconfirm"{
+                        
+                        let device_id = UIDevice.current.identifierForVendor!.uuidString
+                        let user_id = mutableDict.object(forKey: "userid") ?? ""
+                        let currentLanguage = Localize.currentLanguage()
+                        
+                        let parameters = ["user_id": user_id,
+                                          "platform":"1",
+                                          "version_code": "1",
+                                          "version_name": "1",
+                                          "device_id": device_id,
+                                          "push_token":"123123",
+                                          "language":currentLanguage
+                            ] as [String : Any]
+                        
+                        
+                        print(parameters)
+                        
+                        let url = String(format: "%@/confirmRegistration", hostUrl)
+                        print(url)
+                        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+                            
+                            switch response.result {
+                            case .success:
                                 
-                            //    let storyBoard = UIStoryboard(name: "Main", bundle: nil);
-                            //    let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
-                                
-                                let loginVc:WelcomePageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC") as! WelcomePageVC
-//                                initialViewController.viewControllers.append(loginVc)
-                          //      initialViewController.pushViewController(loginVc, animated: false)
-                                
-                                self.window?.rootViewController = loginVc
-                                self.window?.makeKeyAndVisible()
-                                
-                            }
+                                let json = JSON(data: response.data!)
+                                print("json response\(json)")
+                                let responseDict = json.dictionaryObject
+                                let code = responseDict?["code"] as! NSNumber
+                                if code.intValue == 200 {
+                                    
+                                    let loginVc:WelcomePageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC") as! WelcomePageVC
+                                    self.window?.rootViewController = loginVc
+                                    self.window?.makeKeyAndVisible()
 
-                            else {
-                                if let responseDict = json.dictionaryObject {
-                                    let alertMessage = responseDict["message"] as! String
-                                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                                }
                                     
-                                    
-                                    let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
-                                    })
-                                    
-                                    alertController.addAction(okAction)
-                                    
-                                    DispatchQueue.main.async {
+                                else {
+                                    if let responseDict = json.dictionaryObject {
+                                        let alertMessage = responseDict["message"] as! String
+                                        let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
                                         
-                                        UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+                                        
+                                        let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+                                        })
+                                        
+                                        alertController.addAction(okAction)
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+                                        }
                                     }
                                 }
+                                break
+                                
+                            case .failure(let error):
+                                
+                                DispatchQueue.main.async {
+                                    //  _ = EZLoadingActivity.hide()
+                                }
+                                print(error)
+                                break
                             }
-                            break
                             
-                        case .failure(let error):
-                            
-                            DispatchQueue.main.async {
-                                //  _ = EZLoadingActivity.hide()
-                            }
-                            print(error)
-                            break
                         }
                         
+                        //let storyBoard = getStoryBoard(name: "Main") // Change the storyboard name based on the device, you may need to write a condition here for that
                     }
-                    
-                    //let storyBoard = getStoryBoard(name: "Main") // Change the storyboard name based on the device, you may need to write a condition here for that
-                    
+                        
+                        
+                        
+                    else if urlScheme == "s2sresetpassword"{
+                        
+                        let storyBoard = UIStoryboard(name: "Main", bundle: nil);
+                        let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
+                        
+                        let resetPasswordVc:ResetPasswordVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordVC
+                        let userId : String = mutableDict.object(forKey: "userid") as! String;
+                        resetPasswordVc.user_id = userId
+                        initialViewController.pushViewController(resetPasswordVc, animated: false)
+                        
+                        self.window?.rootViewController = initialViewController
+                        self.window?.makeKeyAndVisible()
+                        
+                        
+                    }
                 }
-                    
-                else if urlScheme == "s2sresetpassword"{
-                    
-                    let storyBoard = UIStoryboard(name: "Main", bundle: nil);
-                    let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
-                    
-                    let resetPasswordVc:ResetPasswordVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordVC
-                    let userId : String = mutableDict.object(forKey: "userid") as! String;
-                    resetPasswordVc.user_id = userId
-                    initialViewController.pushViewController(resetPasswordVc, animated: false)
-                 
-                    self.window?.rootViewController = initialViewController
-                    self.window?.makeKeyAndVisible()
-                    
-                    
-                }
-                
             }
         }
         return true
@@ -236,13 +249,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let size = CGSize(width: imageWidht, height: 49)
         
         let tabIndicator = UIImage(color: UIColor.green, size: size)
-//        let tabResizableIndicator = tabIndicator?.resizableImage(
-//            withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
+        //        let tabResizableIndicator = tabIndicator?.resizableImage(
+        //            withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
         
         UITabBar.appearance().selectionIndicatorImage = tabIndicator
         
     }
     
-
+    
     
 }

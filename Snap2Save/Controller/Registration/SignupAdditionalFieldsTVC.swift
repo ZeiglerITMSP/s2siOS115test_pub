@@ -425,6 +425,16 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     func userSignUp(){
         
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        print("isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+        
+
         let password = userDetailsDict["password"] as! String
         let phone_number = userDetailsDict["phone_number"] as! String
         let email = userDetailsDict["email"] as! String
