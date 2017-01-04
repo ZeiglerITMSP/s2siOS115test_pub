@@ -184,6 +184,16 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
      */
     func changePassword(){
         
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        print("isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+        
+
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -252,11 +262,11 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
             return false
         }
         else if (newPasswordTextField.contentTextField.text?.characters.count)! < 6 {
-            self.showAlert(title: "", message: "Please enter new password")
+            self.showAlert(title: "", message: "Your password must be at least 6 characters in length.")
             return false
         }
         else if reEnterNewPasswordTextField.contentTextField.text != newPasswordTextField.contentTextField.text {
-            self.showAlert(title: "", message: "Passwords doesn't match")
+            self.showAlert(title: "", message: "Entries must match to proceed.")
             return false
         }
         return true

@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 import Alamofire
 import Localize_Swift
+import PKHUD
 
 class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
 
@@ -99,9 +100,12 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
         loadTextFields()
-        //loadUserInformation()
         getProfile()
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -121,6 +125,13 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
     }
 
     // MARK: -
+    
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+    
+
     func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
@@ -392,6 +403,16 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
 
     func updateUserInformation(){
         
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        print("isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+        
+
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -536,6 +557,16 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
     
     func getProfile(){
         
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        print("isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+        
+
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -552,6 +583,11 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             ] as [String : Any]
         
         print(parameters)
+        
+        HUD.allowsInteraction = false
+        HUD.dimsBackground = false
+        HUD.show(.progress)
+        
         let url = String(format: "%@/getProfile", hostUrl)
         print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -559,7 +595,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 DispatchQueue.main.async {
-                    
+                    HUD.hide()
                 }
                 
                 let json = JSON(data: response.data!)
@@ -587,6 +623,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
+                    HUD.hide()
                 }
                 print(error)
                 break

@@ -22,7 +22,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.gp.snap2save</string>
+			<string>com.s2s.snap2save</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>s2sregistrationconfirm</string>
@@ -32,7 +32,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.gp.snap2save</string>
+			<string>com.s2s.snap2save</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>s2sresetpassword</string>

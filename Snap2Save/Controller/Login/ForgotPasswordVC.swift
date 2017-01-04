@@ -145,6 +145,15 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
     
     func forgotPassword(){
         
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        print("isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+
         let mobileNumber = mobileNumberTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()

@@ -376,7 +376,7 @@ class SignUpTVC: UITableViewController {
         let validEmail = AppHelper.isValidEmail(testStr: emailTextField.text!)
 
         if mobileNumTextField.text?.characters.count == 0 || validMobileNum == false {
-            showAlert(title: "", message: "Please enter 10 digit Phone Number")
+            showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
             return false
         }
         
@@ -386,7 +386,7 @@ class SignUpTVC: UITableViewController {
         }
            
         if (passwordTextField.text?.characters.count)! < 6 {
-            showAlert(title: "", message: "Please enter Password")
+            showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
             return false
         }
         
@@ -396,13 +396,13 @@ class SignUpTVC: UITableViewController {
         }
         
         if zipCodeTextField.text?.characters.count == 0 {
-            showAlert(title: "", message: "Please enter ZipCode")
+            showAlert(title: "", message: "Please enter a valid zip code.".localized())
             return false
         }
        
          if (emailTextField.text?.characters.count)! > 0 {
             if  validEmail == false {
-                showAlert(title: "", message: "Enter a valid email")
+                showAlert(title: "", message: "Please enter a valid email address.".localized())
                 return false
             }
         }
@@ -415,7 +415,7 @@ class SignUpTVC: UITableViewController {
 
         if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
             if (emailTextField.text?.characters.count)! == 0 {
-                    showAlert(title: "", message: "Enter a valid email")
+                    showAlert(title: "", message: "Please enter a valid email address.".localized())
                     return false
             }
         }

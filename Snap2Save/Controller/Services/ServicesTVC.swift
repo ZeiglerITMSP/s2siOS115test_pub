@@ -86,8 +86,8 @@ class ServicesTVC: UITableViewController {
         DispatchQueue.main.async {
             
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-            self.title = "Services".localized()
             
+            self.navigationController?.navigationItem.title = "Services".localized()
             
             self.ebtLabel.text = "EBT".localized()
             self.aboutLabel.text = "About Snap2Save".localized()
