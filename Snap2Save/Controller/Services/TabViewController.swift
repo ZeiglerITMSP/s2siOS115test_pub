@@ -20,6 +20,7 @@ class TabViewController: UITabBarController {
 
         self.delegate = self
         
+        self.tabBar.tintColor = UIColor.white
         
         updateTabBarItemsTitle()
         
@@ -36,6 +37,7 @@ class TabViewController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        updateSelectedItemBackground()
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(updateTabBarItemsTitle))
     }
     
@@ -51,23 +53,35 @@ class TabViewController: UITabBarController {
     
     func updateSelectedItemBackground() {
         
-        if bgView != nil {
-            bgView.removeFromSuperview()
+         DispatchQueue.main.async {
+            
+            
+            if self.bgView != nil {
+                self.bgView.removeFromSuperview()
+            }
+            
+            
+            
+            // Add background color to middle tabBarItem
+            let itemIndex = self.selectedIndex
+            
+            let bgColor = UIColor(red: 84/255, green: 190/255, blue: 56/255, alpha: 1.0)
+            
+            let itemWidth = self.tabBar.frame.width / CGFloat(self.tabBar.items!.count)
+            
+            let positionX = itemWidth * CGFloat(itemIndex)
+            
+            self.bgView = UIView(frame: CGRect(x: positionX, y: 0, width: itemWidth, height: self.tabBar.frame.height))
+            
+            self.bgView.backgroundColor = bgColor
+            
+            
+            
+            self.tabBar.insertSubview(self.bgView, at: 1)
+            
         }
         
-        // Add background color to middle tabBarItem
-        let itemIndex = selectedIndex
         
-        let bgColor = UIColor(red: 84/255, green: 190/255, blue: 56/255, alpha: 1.0)
-        
-        let itemWidth = tabBar.frame.width / CGFloat(tabBar.items!.count)
-        
-        let positionX = itemWidth * CGFloat(itemIndex)
-        
-        bgView = UIView(frame: CGRect(x: positionX, y: 0, width: itemWidth, height: tabBar.frame.height))
-            
-        bgView.backgroundColor = bgColor
-        tabBar.insertSubview(bgView, at: 0)
         
     }
     

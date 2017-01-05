@@ -18,6 +18,7 @@ class EBTAuthenticationTVC: UITableViewController {
         
         case generate
         case regenerate
+        case securityQuestion
     }
     
     
@@ -198,8 +199,10 @@ class EBTAuthenticationTVC: UITableViewController {
                     
                 } else {
                     
-                    self.confirmActivityIndicator.stopAnimating()
-                    self.performSegue(withIdentifier: "EBTLoginSecurityQuestionTVC", sender: nil)
+                    
+                  //  self.actionType =
+//                    self.confirmActivityIndicator.stopAnimating()
+//                    self.performSegue(withIdentifier: "EBTLoginSecurityQuestionTVC", sender: nil)
                 }
             }
         }

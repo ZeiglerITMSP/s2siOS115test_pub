@@ -61,16 +61,16 @@ class ServicesTVC: UITableViewController {
 
     // MARK: - Table view data source
 
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        
-//        if indexPath.section == 0 {
-//            if indexPath.row == 0 {
-//                performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
-//            }
-//        }
-//        
-//    }
-//    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
+            }
+        }
+        
+    }
+    
     // MARK: -
     
     
