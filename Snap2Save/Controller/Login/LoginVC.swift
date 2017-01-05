@@ -99,6 +99,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         passwordTextField.normalColor = UIColor(white: 1, alpha: 0.7)
         passwordTextField.updateUIAsPerTextFieldType()
         
+        
         mobileNumTextField.aiDelegate = self
         passwordTextField.aiDelegate = self
         
@@ -115,18 +116,24 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
         self.view.addGestureRecognizer(tapGesture)
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
         reloadContent()
     }
     
+    
     override func viewDidDisappear(_ animated: Bool) {
         LanguageUtility.removeObserverForLanguageChange(self)
         super.viewDidDisappear(animated)
     }
     
-    
+    func updateTextFieldUi() {
+        
+        mobileNumTextField.updateUIAsPerTextFieldType()
+
+    }
     // MARK: -
     
     func tapOnTableView(recognizer: UITapGestureRecognizer) {
@@ -147,6 +154,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.loginWithFacebookButton.setTitle("Log In with Facebook".localized(), for: .normal)
             self.orLabel.text = "or".localized()
+            self.updateTextFieldUi()
             self.mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized()
             self.passwordLabel.text = "PASSWORD".localized()
             self.forgotPasswordButton.setTitle("Forgot Password?".localized(), for: .normal)

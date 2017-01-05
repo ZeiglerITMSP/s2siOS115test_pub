@@ -131,10 +131,15 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
             self.mobileNumberLabel.text = "10-DIGIT CELL PHONE NUMBER".localized()
             self.submitButton.setTitle("SUBMIT".localized(), for: .normal)
             self.updateBackButtonText()
+            self.updateTextFieldsUi()
         }
     }
     
-    
+    func updateTextFieldsUi(){
+        
+        mobileNumberTextField.updateUIAsPerTextFieldType();
+    }
+
     func languageButtonClicked(){
         
         self.showLanguageSelectionAlert()

@@ -168,6 +168,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
+            self.title = "Register".localized()
             self.earn200PointsLabel.text = "EARN 200 POINTS!".localized()
             self.msgLabel.text = "AdditionalSignUpMsg".localized()
             self.userInfoLabel.text = "USER INFORMATION".localized()
@@ -193,6 +194,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
              self.ethnicityTextField.placeholder = "Please select".localized()
             self.addressLine1TextField.placeholder = "Street address or PO box".localized()
             self.addressLine2TextField.placeholder = "Unit, Building, etc.".localized()
+            
             self.genderArray = ["Male".localized(),"Female".localized()];
             self.ageGroupArray = ["21 and under".localized(),
                                   "22 to 34".localized(),
@@ -211,6 +213,19 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             self.genderTextField.pickerViewArray = self.genderArray
             self.ageGroupTextField.pickerViewArray = self.ageGroupArray
             self.ethnicityTextField.pickerViewArray = self.ethnicityArray
+            self.updateTextFieldsUi()
+            
+                if self.selectedGenderIndex != nil {
+                    self.genderTextField.text = self.genderArray.object(at: self.selectedGenderIndex - 1) as? String
+                }
+            
+                if self.selectedAgeGroupIndex != nil {
+                    self.ageGroupTextField.text = self.ageGroupArray.object(at: self.selectedAgeGroupIndex - 1) as? String
+                }
+                
+                if self.SelectedEthnicityIndex != nil {
+                    self.ethnicityTextField.text = self.ethnicityArray.object(at: self.SelectedEthnicityIndex - 1) as? String
+                }
 
             self.tableView.reloadData()
 
@@ -374,6 +389,29 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         
         stateTextField.pickerViewArray = statesArray
     }
+    
+    func updateTextFieldsUi(){
+        
+        firstNameTextField.updateUIAsPerTextFieldType()
+        lastNameTextField.updateUIAsPerTextFieldType()
+        addressLine1TextField.updateUIAsPerTextFieldType()
+        addressLine2TextField.updateUIAsPerTextFieldType()
+        zipCodeTextField.updateUIAsPerTextFieldType()
+        genderTextField.updateUIAsPerTextFieldType()
+        ageGroupTextField.updateUIAsPerTextFieldType()
+        
+            ethnicityTextField.updateUIAsPerTextFieldType()
+            groupCodeTextField.updateUIAsPerTextFieldType()
+            referralCodeTextField.updateUIAsPerTextFieldType()
+            stateTextField.updateUIAsPerTextFieldType()
+            zipCodeTextField.updateUIAsPerTextFieldType()
+            cityTextField.updateUIAsPerTextFieldType()
+            zipCodeTextField.updateUIAsPerTextFieldType()
+            
+    
+
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -149,6 +149,8 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         self.updateBackButtonText()
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
         self.title = "Personal Information".localized()
+        self.updateTextFieldsUi()
+
         self.userInformationLabel.text = "USER INFORMATION".localized()
         self.firstNameLabel.text = "FIRST NAME".localized()
         self.lastNamelabel.text = "LAST NAME".localized()
@@ -188,6 +190,18 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         self.ageGroupTextField.pickerViewArray = self.ageGroupArray
         self.ethnicityTextField.pickerViewArray = self.ethnicityArray
         
+        if self.selectedGenderIndex != nil {
+            self.genderTextField.text = self.genderArray.object(at: self.selectedGenderIndex - 1) as? String
+        }
+        
+        if self.selectedAgeGroupIndex != nil {
+            self.ageGroupTextField.text = self.ageGroupArray.object(at: self.selectedAgeGroupIndex - 1) as? String
+        }
+        
+        if self.SelectedEthnicityIndex != nil {
+            self.ethnicityTextField.text = self.ethnicityArray.object(at: self.SelectedEthnicityIndex - 1) as? String
+        }
+
         self.tableView.reloadData()
 
         
@@ -351,6 +365,25 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         }
         
         stateTextField.pickerViewArray = statesArray
+    }
+
+    
+    func updateTextFieldsUi(){
+        
+        firstNameTextField.updateUIAsPerTextFieldType()
+        lastNameTextField.updateUIAsPerTextFieldType()
+        addressLine1TextField.updateUIAsPerTextFieldType()
+        addressLine2TextField.updateUIAsPerTextFieldType()
+        zipCodeTextField.updateUIAsPerTextFieldType()
+        genderTextField.updateUIAsPerTextFieldType()
+        ageGroupTextField.updateUIAsPerTextFieldType()
+        
+        ethnicityTextField.updateUIAsPerTextFieldType()
+        stateTextField.updateUIAsPerTextFieldType()
+        zipCodeTextField.updateUIAsPerTextFieldType()
+        cityTextField.updateUIAsPerTextFieldType()
+        zipCodeTextField.updateUIAsPerTextFieldType()
+        
     }
 
     // MARK: - AITextField Delegate
@@ -550,6 +583,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             genderTextField.text = ""
         }
         else{
+            selectedGenderIndex = index
         genderTextField.text = genderArray.object(at: index - 1) as? String
         }
         }
@@ -560,6 +594,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 ageGroupTextField.text = ""
             }
             else{
+                selectedAgeGroupIndex = index
                 ageGroupTextField.text = ageGroupArray.object(at: index - 1) as? String
             }
         }
@@ -571,6 +606,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 ethnicityTextField.text = ""
             }
             else{
+                SelectedEthnicityIndex = index
                 ethnicityTextField.text = ethnicityArray.object(at: index - 1) as? String
 
             }

@@ -119,7 +119,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         
     }
     
-    func reloadContent(){
+    func reloadContent() {
         DispatchQueue.main.async {
             self.title = "Reset Password".localized()
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
@@ -128,10 +128,15 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
             self.reEnterPasswordLabel.text = "RE-ENTER NEW PASSWORD".localized()
             self.resetPasswordButton.setTitle("RESET PASSWORD".localized(), for: .normal)
             self.updateBackButtonText()
-
+            self.updateTextFieldsUi()
         }
     }
     
+    func updateTextFieldsUi(){
+        
+        passwordTextField.updateUIAsPerTextFieldType();
+        reEnterPasswordTextField.updateUIAsPerTextFieldType();
+    }
 
     func keyBoardHidden(textField: UITextField) {
         if textField == passwordTextField {

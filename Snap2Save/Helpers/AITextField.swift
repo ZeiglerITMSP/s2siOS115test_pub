@@ -127,6 +127,11 @@ class AITextField: UITextField {
     
     // MARK: - Style
     
+    override func draw(_ rect: CGRect) {
+        
+        updateUnderline()
+    }
+    
     func createBorder(borderColor:UIColor, xpos:CGFloat) {
         
         let border = CALayer()
@@ -177,6 +182,7 @@ class AITextField: UITextField {
         
         // placeholder text update
         placeHolderLabel?.textColor = color
+        placeHolderLabel?.attributedText = placeHolderLabel?.text?.makeAstrikRequired()
     }
     
     

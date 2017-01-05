@@ -75,6 +75,8 @@
 
 
 //AddtionalSignUpTVC
+"Register" = "Registrarme";
+
 "EARN 200 POINTS!" = "¡GANE 200 PUNTOS!";
 "AdditionalSignUpMsg" = "¡Suministre la siguiente información adicional y gane 200 puntos extra!";
 "USER INFORMATION" = "INFORMACIÓN DEL USUARIO";

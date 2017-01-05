@@ -849,8 +849,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Cathy Maglione (2APHA8Y955)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cathy Maglione (2APHA8Y955)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = PGJV67G4NG;
@@ -933,16 +933,16 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Cathy Maglione (2APHA8Y955)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cathy Maglione (2APHA8Y955)";
 				DEVELOPMENT_TEAM = PGJV67G4NG;
 				INFOPLIST_FILE = Snap2Save/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.s2s.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "abc5a334-387b-4c94-932c-9a7c2d516f1f";
-				PROVISIONING_PROFILE_SPECIFIER = s2s_distribution;
+				PROVISIONING_PROFILE = "1de9e0a2-43d8-49f6-a1f9-25f4932b16c5";
+				PROVISIONING_PROFILE_SPECIFIER = s2s_development;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

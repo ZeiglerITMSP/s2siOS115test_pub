@@ -88,10 +88,7 @@ class AccountTVC: UITableViewController {
             self.logOutLabel.text = "Log Out".localized()
             
             }
-        
-        
-        
-        
+   
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

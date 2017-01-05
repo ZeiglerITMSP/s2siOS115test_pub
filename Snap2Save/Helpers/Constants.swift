@@ -30,6 +30,9 @@ var APP_GRREN_COLOR = UIColor.init(colorLiteralRed: 84.0/255.0, green: 190.0/255
 var APP_ORANGE_COLOR = UIColor.init(colorLiteralRed: 232.0/255.0, green: 126.0/255.0, blue: 51.0/255.0, alpha: 1.0)
 
 var APP_LINE_COLOR = UIColor.init(colorLiteralRed: 104.0/255.0, green: 128.0/255.0, blue: 94.0/255.0, alpha: 0.5)
+
+var MandatoryColor = UIColor.init(colorLiteralRed: 236.0/255.0, green: 80.0/255.0, blue: 30.0/255.0, alpha: 0.5)
+
 var USER_ID = "user_id"
 var AUTH_TOKEN = "auth_token"
 var LOGGED_USER = "Logged_user"

@@ -133,8 +133,8 @@ class SignUpTVC: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
-        reloadContent()
         if contactPreferenceSegmentControl.selectedSegmentIndex == 1{
             emailManditoryLabel.isHidden = false
             reEnterEmailMandatoryLabel.isHidden = false
@@ -143,11 +143,11 @@ class SignUpTVC: UITableViewController {
             emailManditoryLabel.isHidden = true
             reEnterEmailMandatoryLabel.isHidden = true
         }
-
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        reloadContent()
     }
     
 
@@ -191,12 +191,8 @@ class SignUpTVC: UITableViewController {
             self.messageLabel.text = "RegisterMessage".localized()
             self.loginWithFBButton.setTitle("Register with Facebook".localized(), for: .normal);
             self.requiredInfoLabel.text = "*Required information".localized()
-            self.mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized()
-            self.reEnterMobileNumLabel.text = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
-            self.passwordLabel.text = "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)".localized()
-            self.reEnterPasswordLabel.text = "RE-ENTER PASSWORD".localized()
-            self.zipCodeLabel.text = "ZIP CODE".localized()
-            self.contactPreferenceLabel.text = "CONTACT PREFERENCE".localized()
+            
+            
             self.emailLabel.text = "EMAIL".localized()
             self.reEnterEmailLabel.text = "RE-ENTER EMAIL".localized()
             self.contactPreferenceSegmentControl.setTitle("Text Message".localized(), forSegmentAt: 0)
@@ -206,9 +202,21 @@ class SignUpTVC: UITableViewController {
             
             self.continueButton.setTitle("CONTINUE".localized(), for: .normal)
             
+            self.updateTextFieldsUi()
+            
+            self.mobileNumLabel.attributedText = "10-DIGIT CELL PHONE NUMBER".localized().makeAsRequired()
+            self.reEnterMobileNumLabel.attributedText = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized().makeAsRequired()
+            self.passwordLabel.attributedText = "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)".localized().makeAsRequired()
+            self.reEnterPasswordLabel.attributedText = "RE-ENTER PASSWORD".localized().makeAsRequired()
+            self.zipCodeLabel.attributedText = "ZIP CODE".localized().makeAsRequired()
+            self.contactPreferenceLabel.attributedText = "CONTACT PREFERENCE".localized().makeAsRequired()
+            
+            
             self.tableView.reloadData()
         }
     }
+    
+    
 
     func updateTermsText() {
         
@@ -253,6 +261,8 @@ class SignUpTVC: UITableViewController {
     }
     
     func loadTextFields(){
+        
+        
         
              //
         //        let contactStr = "Contact Preference *".localized
@@ -368,6 +378,17 @@ class SignUpTVC: UITableViewController {
  
     }
     
+    func updateTextFieldsUi(){
+        
+        mobileNumTextField.updateUIAsPerTextFieldType()
+        reEnterMobileNumTextField.updateUIAsPerTextFieldType()
+        passwordTextField.updateUIAsPerTextFieldType()
+        reEnterPasswordTextField.updateUIAsPerTextFieldType()
+        zipCodeTextField.updateUIAsPerTextFieldType()
+        emailTextField.updateUIAsPerTextFieldType()
+        reEnterEmailTextField.updateUIAsPerTextFieldType()
+
+    }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return UITableViewAutomaticDimension

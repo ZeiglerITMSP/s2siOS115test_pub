@@ -19,7 +19,9 @@ class TabViewController: UITabBarController {
         super.viewDidLoad()
 
         self.delegate = self
+        self.tabBar.tintColor = UIColor.white
         
+
         
         updateTabBarItemsTitle()
         
@@ -35,7 +37,7 @@ class TabViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        updateSelectedItemBackground()
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(updateTabBarItemsTitle))
     }
     
@@ -67,7 +69,7 @@ class TabViewController: UITabBarController {
         bgView = UIView(frame: CGRect(x: positionX, y: 0, width: itemWidth, height: tabBar.frame.height))
             
         bgView.backgroundColor = bgColor
-        tabBar.insertSubview(bgView, at: 0)
+        tabBar.insertSubview(bgView, at: 1)
         
     }
     

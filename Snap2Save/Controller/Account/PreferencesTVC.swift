@@ -14,6 +14,8 @@ import PKHUD
 
 class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
+    @IBOutlet var reEnterEmailTextField: AIPlaceHolderTextField!
+    
     var languageSelectionButton: UIButton!
     var user : User = User()
     // Outlets
@@ -62,14 +64,20 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         self.navigationItem.leftBarButtonItem = leftBarButton
         
         emailPlaceHolderTextField.contentTextField.textFieldType = AITextField.AITextFieldType.EmailTextField
+      //  reEnterEmailTextField.contentTextField.textFieldType = AITextField.AITextFieldType.EmailTextField
+
         mobileNumberTextField.contentTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         reEnterMobileNumberTextField.contentTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         
         emailPlaceHolderTextField.contentTextField.updateUIAsPerTextFieldType()
+        //reEnterEmailTextField.contentTextField.updateUIAsPerTextFieldType()
+
         mobileNumberTextField.contentTextField.updateUIAsPerTextFieldType()
         reEnterMobileNumberTextField.contentTextField.updateUIAsPerTextFieldType()
         
         emailPlaceHolderTextField.contentTextField.aiDelegate = self
+       // reEnterEmailTextField.contentTextField.aiDelegate = self
+
         mobileNumberTextField.contentTextField.aiDelegate = self
         reEnterMobileNumberTextField.contentTextField.aiDelegate = self
         
@@ -84,6 +92,16 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         
     }
+    
+    
+    func updateTextFieldsUi(){
+        
+        mobileNumberTextField.contentTextField.updateUIAsPerTextFieldType()
+        reEnterMobileNumberTextField.contentTextField.updateUIAsPerTextFieldType()
+        
+    }
+    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
@@ -123,26 +141,34 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
     
     func reloadContent() {
-        
+        DispatchQueue.main.async {
         self.updateBackButtonText()
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
         self.title = "Preferences".localized()
-        saveButton.setTitle("SAVE".localized(), for: .normal)
-        contactPreferenceLabel.text = "CONTACT PREFERENCE".localized()
-        contactPreferenceSegmentControl.setTitle("Text Message".localized(), forSegmentAt: 0)
-        contactPreferenceSegmentControl.setTitle("Email".localized(), forSegmentAt: 1)
-        emailPlaceHolderTextField.placeholderText = "EMAIL".localized()
-        mobileNumberTextField.placeholderText = "10-DIGIT CELL PHONE NUMBER".localized()
-        reEnterMobileNumberTextField.placeholderText = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
-        
-        
+        self.updateTextFieldsUi()
+
+        self.saveButton.setTitle("SAVE".localized(), for: .normal)
+        self.contactPreferenceLabel.text = "CONTACT PREFERENCE".localized()
+        self.contactPreferenceSegmentControl.setTitle("Text Message".localized(), forSegmentAt: 0)
+        self.contactPreferenceSegmentControl.setTitle("Email".localized(), forSegmentAt: 1)
+        self.emailPlaceHolderTextField.placeholderText = "EMAIL".localized()
+        self.mobileNumberTextField.placeholderText = "10-DIGIT CELL PHONE NUMBER".localized()
+       self.reEnterMobileNumberTextField.placeholderText = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
+        //reEnterEmailTextField.placeholderText = "RE-ENTER EMAIL".localized()
+        }
     }
+    
+  
     func keyBoardHidden(textField: UITextField) {
         
         if textField == emailPlaceHolderTextField.contentTextField {
+            //reEnterEmailTextField.contentTextField.becomeFirstResponder()
             mobileNumberTextField.contentTextField.becomeFirstResponder()
-            
-        } else if textField == mobileNumberTextField.contentTextField {
+        }
+      //  else if textField == reEnterEmailTextField.contentTextField{
+       //     mobileNumberTextField.contentTextField.becomeFirstResponder()
+       // }
+        else if textField == mobileNumberTextField.contentTextField {
             reEnterMobileNumberTextField.contentTextField.becomeFirstResponder()
             
         } else {
@@ -288,10 +314,6 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let validEmail = AppHelper.isValidEmail(testStr: emailPlaceHolderTextField.contentTextField.text!)
         let validPhoneNumber = AppHelper.validate(value: mobileNumberTextField.contentTextField.text!)
         
-        //        if emailPlaceHolderTextField.contentTextField.text?.characters.count == 0 || validEmail == false{
-        //            self.showAlert(title: "", message: "Please enter valid Email")
-        //            return false
-        //        }
         if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
             self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
             return false
@@ -309,8 +331,12 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                     return false
                 }
             }
+           /* if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
+                self.showAlert(title: "", message: "Emails don't match".localized())
+                return false
+            }
+        }*/
         }
-        
         
         if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
             if  validEmail == false {
@@ -318,8 +344,15 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 return false
                 
             }
+           /* if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
+                self.showAlert(title: "", message: "Emails don't match".localized())
+                return false
+            }
+        }*/
         }
         return true
+    
+        
     }
     
     func loadData() {
@@ -332,10 +365,12 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         // let mobileNumber = UserDefaults.standard.object(forKey: MOBILE_NUMBER) ?? ""
         // let email = UserDefaults.standard.object(forKey: EMAIL) ?? ""
+        
         mobileNumberTextField.contentTextField.text = user.phone_number
-        reEnterMobileNumberTextField.contentTextField.text = user.phone_number
+        //reEnterMobileNumberTextField.contentTextField.text = user.phone_number
         
         emailPlaceHolderTextField.contentTextField.text = user.email
+        //reEnterEmailTextField.contentTextField.text = user.email
         if user.contact_preference == "1" {
             contactPreferenceSegmentControl.selectedSegmentIndex = 1
         }
@@ -423,7 +458,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
                 DispatchQueue.main.async {
                     HUD.hide()
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                }
                 print(error)
                 break
             }
@@ -431,5 +467,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         }
         
     }
+    
+    
     
 }
