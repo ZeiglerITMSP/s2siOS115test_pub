@@ -78,7 +78,6 @@ class AITextField: UITextField {
         case AITextFieldType.NormalTextField:
             break;
             
-            
         case AITextFieldType.UIPickerTextField:
             setToolBar()
             break;
@@ -242,9 +241,14 @@ class AITextField: UITextField {
         let toolBar = UIToolbar()
         toolBar.frame = CGRect(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 44)
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(AITextField.doneButtonClicked))
         
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(AITextField.cancelButtonClicked))
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(AITextField.doneButtonClicked))
+        
+//        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(AITextField.doneButtonClicked))
+        
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action:  #selector(AITextField.cancelButtonClicked))
+        
+//        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(AITextField.cancelButtonClicked))
         
         let flixibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
         
