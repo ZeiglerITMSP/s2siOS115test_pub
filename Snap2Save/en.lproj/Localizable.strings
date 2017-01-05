@@ -16,13 +16,15 @@
 "Cancel" = "Cancel";
 "selectedLanguageTitle" = "English";
 
+"DONE" = "DONE";
+"CANCEL" = "CANCEL";
+
 
 // LANGUAGE
 "language.button.title" = "ENGLISH";
 "language.alert.english" = "English";
 "language.alert.spanish" = "Spanish";
 "Back" = "Back";
-
 
 // TabBar Titles
 "OFFERS" = "OFFERS";
