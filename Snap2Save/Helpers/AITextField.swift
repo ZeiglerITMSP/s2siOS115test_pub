@@ -247,11 +247,11 @@ class AITextField: UITextField {
         toolBar.frame = CGRect(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 44)
         
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(AITextField.doneButtonClicked))
+        let doneButton = UIBarButtonItem(title: "Done".localized(), style: .done, target: self, action: #selector(AITextField.doneButtonClicked))
         
 //        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(AITextField.doneButtonClicked))
         
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action:  #selector(AITextField.cancelButtonClicked))
+        let cancelButton = UIBarButtonItem(title: "Cancel".localized(), style: .done, target: self, action:  #selector(AITextField.cancelButtonClicked))
         
 //        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(AITextField.cancelButtonClicked))
         
