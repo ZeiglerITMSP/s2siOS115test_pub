@@ -16,8 +16,8 @@
 "Cancel" = "Cancelar";
 "selectedLanguageTitle" = "Español";
 
-"DONE" = "OK";
-"CANCEL" = "CANCELAR";
+"Done" = "OK";
+
 
 // LANGUAGE
 "language.button.title" = "ESPAÑOL";
