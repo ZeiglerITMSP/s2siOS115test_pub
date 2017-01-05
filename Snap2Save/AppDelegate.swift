@@ -209,8 +209,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             case .failure(let error):
                                 
                                 DispatchQueue.main.async {
-                                    //  _ = EZLoadingActivity.hide()
+                                    let alertController = UIAlertController(title: "", message: "Sorry, Please try again later", preferredStyle: .alert)
+                                    
+                                    
+                                    let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+                                    })
+                                    
+                                    alertController.addAction(okAction)
+                                    
+                                    UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+                                
                                 }
+                                
                                 print(error)
                                 break
                             }

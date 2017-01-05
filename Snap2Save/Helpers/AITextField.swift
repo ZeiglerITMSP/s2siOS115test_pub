@@ -31,7 +31,7 @@ class AITextField: UITextField {
         case PasswordTextField
         case EmailTextField
         case PhoneNumberTextField
-        
+        case NumberTextField
     }
     
     @IBInspectable var text_Color: UIColor? = UIColor.white
@@ -110,6 +110,11 @@ class AITextField: UITextField {
             
         case AITextFieldType.PhoneNumberTextField:
             self.keyboardType = UIKeyboardType.phonePad
+            setToolBar()
+            break;
+            
+        case AITextFieldType.NumberTextField:
+            self.keyboardType = UIKeyboardType.numberPad
             setToolBar()
             break;
         }

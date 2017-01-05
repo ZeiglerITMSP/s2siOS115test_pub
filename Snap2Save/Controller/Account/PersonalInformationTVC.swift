@@ -107,11 +107,14 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         self.view.addGestureRecognizer(tapGesture)
 
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadContent()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
-        reloadContent()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -304,7 +307,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         stateTextField.setRightGap(width: 10, placeHolderImage:UIImage.init(named: "ic_downarrow_input")!)
         stateTextField.text_Color =  UIColor.black
         
-        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
+        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NumberTextField
         zipCodeTextField.updateUIAsPerTextFieldType()
         zipCodeTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         zipCodeTextField.placeHolderLabel = zipcodeLabel
@@ -656,5 +659,21 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         }
 
     }
+    
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == zipCodeTextField  {
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 5
+            
+        }
+        
+        return true
+    }
+
 }
 

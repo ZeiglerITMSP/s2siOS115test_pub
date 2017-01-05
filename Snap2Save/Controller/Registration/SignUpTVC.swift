@@ -13,6 +13,8 @@ class SignUpTVC: UITableViewController {
     
     var languageSelectionButton: UIButton!
 
+    @IBOutlet var reEnterEmailMandatoryLabel: UILabel!
+    @IBOutlet var emailManditoryLabel: UILabel!
     @IBOutlet var loginWithFBButton: UIButton!
     @IBOutlet var facebookBtnBgView: UIView!
     @IBOutlet var messageLabel: UILabel!
@@ -54,7 +56,14 @@ class SignUpTVC: UITableViewController {
     }
     
     @IBAction func contactPreferenceSegmentControl(_ sender: UISegmentedControl) {
-        
+        if sender.selectedSegmentIndex == 1{
+            emailManditoryLabel.isHidden = false
+            reEnterEmailMandatoryLabel.isHidden = false
+        }
+        else if sender.selectedSegmentIndex == 0{
+            emailManditoryLabel.isHidden = true
+            reEnterEmailMandatoryLabel.isHidden = true
+        }
     }
     
     @IBAction func continueButtonClicked(_ sender: UIButton) {
@@ -123,11 +132,22 @@ class SignUpTVC: UITableViewController {
         
     }
 
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadContent()
+        if contactPreferenceSegmentControl.selectedSegmentIndex == 1{
+            emailManditoryLabel.isHidden = false
+            reEnterEmailMandatoryLabel.isHidden = false
+        }
+        else if contactPreferenceSegmentControl.selectedSegmentIndex == 0{
+            emailManditoryLabel.isHidden = true
+            reEnterEmailMandatoryLabel.isHidden = true
+        }
+
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
-        reloadContent()
     }
     
 
@@ -195,7 +215,7 @@ class SignUpTVC: UITableViewController {
         // Terms of Service
         let fullMessage = "TermsMessage".localized()
         let rangeMessage = "TermsLink".localized()
-        let link = "https://appitventures.teamwork.com/dashboard"
+        let link = "http://www.snap2save.com/app/about_comingsoon.php"
         
         let attributedString = NSMutableAttributedString(string: fullMessage)
         
@@ -296,7 +316,7 @@ class SignUpTVC: UITableViewController {
         reEnterPasswordTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         reEnterPasswordTextField.text_Color =  UIColor.black
         
-        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
+        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NumberTextField
         zipCodeTextField.updateUIAsPerTextFieldType()
         zipCodeTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         zipCodeTextField.placeHolderLabel = zipCodeLabel
@@ -381,7 +401,7 @@ class SignUpTVC: UITableViewController {
         }
         
         if reEnterMobileNumTextField.text != mobileNumTextField.text {
-            showAlert(title: "", message: "Phone Numbers doesn't match")
+            showAlert(title: "", message: "Phone Numbers don't match".localized())
             return false
         }
            
@@ -391,7 +411,7 @@ class SignUpTVC: UITableViewController {
         }
         
         if reEnterPasswordTextField.text != passwordTextField.text{
-            showAlert(title: "", message: "Passwords doesn't match")
+            showAlert(title: "", message: "Passwords don't match".localized())
             return false
         }
         
@@ -409,7 +429,7 @@ class SignUpTVC: UITableViewController {
             
             
         if reEnterEmailTextField.text != emailTextField.text {
-            showAlert(title: "", message: "Emails doesn't match")
+            showAlert(title: "", message: "Emails don't match".localized())
             return false
         }
 
@@ -464,6 +484,16 @@ extension SignUpTVC: AITextFieldProtocol {
             let newLength = currentCharacterCount + string.characters.count - range.length
             return newLength <= 10
             
+        }
+        
+        if textField == zipCodeTextField{
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 5
+
         }
         
         return true

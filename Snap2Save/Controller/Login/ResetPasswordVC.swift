@@ -30,12 +30,12 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     @IBAction func resetPasswordButtonAction(_ sender: UIButton) {
         
         if (passwordTextField.text?.characters.count)! == 0 || (passwordTextField.text?.characters.count)! < 6{
-            self.showAlert(title: "", message: "Please enter Password")
+            self.showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
             return
         }
             
         else if reEnterPasswordTextField.text != passwordTextField.text{
-            self.showAlert(title: "", message: "Passwords doesn't match")
+            self.showAlert(title: "", message: "Passwords don't match".localized())
             return
         }
         resetPassword()
@@ -80,7 +80,6 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
-        reloadContent()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -98,7 +97,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: navigationController, action: nil)
         self.navigationItem.leftBarButtonItem = backButton
-
+        reloadContent()
     }
 
     override func didReceiveMemoryWarning() {

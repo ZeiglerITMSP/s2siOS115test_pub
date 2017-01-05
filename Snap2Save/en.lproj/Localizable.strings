@@ -167,7 +167,10 @@
 "Please enter current password" = "Please enter current password";
 "Your password must be at least 6 characters in length." = "Your password must be at least 6 characters in length.";
 
-
+"Are you sure you want to log out?" = "Are you sure you want to log out?";
+"Passwords don't match" = "Passwords don't match";
+"Phone Numbers don't match" = "Phone Numbers don't match";
+"Emails don't match" = "Emails don't match";
 
 
 

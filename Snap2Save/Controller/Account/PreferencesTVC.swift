@@ -84,11 +84,14 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadContent()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
-        reloadContent()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -294,7 +297,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             return false
         }
         if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
-            self.showAlert(title: "", message: "Phone Numbers doesn't match".localized())
+            self.showAlert(title: "", message: "Phone Numbers don't match".localized())
             return false
         }
         

@@ -148,7 +148,7 @@ class AccountTVC: UITableViewController {
     }
     func showAlert() {
         
-        let logOutAlert = UIAlertController.init(title: nil, message: "Are you sure \nDo you want to Logout", preferredStyle: .alert)
+        let logOutAlert = UIAlertController.init(title: nil, message: "Are you sure you want to log out?".localized(), preferredStyle: .alert)
         let englishBtn = UIAlertAction.init(title: "Ok", style: .default, handler:{
             (action) in
             self.userLogout()
