@@ -73,15 +73,23 @@ class AccountTVC: UITableViewController {
     
     func reloadContent(){
         
-        self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+        DispatchQueue.main.async {
+     
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            
+            self.navigationItem.title = "Account".localized()
+            
+//            self.navigationController?.navigationItem.title = "Acc"
+            
+            self.autoLoginLabel.text = "Auto Log In".localized()
+            self.personalInfoLabel.text = "Personal Information".localized()
+            self.preferencesLabel.text = "Preferences".localized()
+            self.changePasswordLabel.text = "Change Password".localized()
+            self.logOutLabel.text = "Log Out".localized()
+            
+            }
         
-        self.navigationController?.navigationItem.title = "Account".localized()
         
-        autoLoginLabel.text = "Auto Log In".localized()
-        personalInfoLabel.text = "Personal Information".localized()
-        preferencesLabel.text = "Preferences".localized()
-        changePasswordLabel.text = "Change Password".localized()
-        logOutLabel.text = "Log Out".localized()
         
         
     }
@@ -211,7 +219,7 @@ class AccountTVC: UITableViewController {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
                 print(error)
                 break
@@ -221,11 +229,20 @@ class AccountTVC: UITableViewController {
         }
     }
     
+    
+    
     func clearUserData() {
-        
+        // clear user data
         UserDefaults.standard.removeObject(forKey: USER_ID)
         UserDefaults.standard.removeObject(forKey: AUTH_TOKEN)
         UserDefaults.standard.removeObject(forKey: LOGGED_USER)
+        
+        AppDelegate.getDelegate().setDetaultValues()
+        
+//        // reset language
+//        Localize.resetCurrentLanguageToDefault()
+//       // Localize.defaultLanguage()
+        
     }
     
 }

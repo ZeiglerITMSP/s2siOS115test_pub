@@ -470,6 +470,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         if SelectedEthnicityIndex != nil{
             ethnicity  = String.init(format: "%d", SelectedEthnicityIndex)
         }
+        
         let referral_code = referralCodeTextField.text ?? ""
         let group_code = groupCodeTextField.text ?? ""
         let platform = "1"
@@ -544,7 +545,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                 
                 DispatchQueue.main.async {
                     self.registerActivityIndicator.stopAnimating()
-                }
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
                 print(error)
                 break
             }

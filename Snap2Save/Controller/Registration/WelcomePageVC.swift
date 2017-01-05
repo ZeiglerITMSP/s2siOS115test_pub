@@ -17,6 +17,7 @@ class WelcomePageVC: UIViewController {
     
     @IBOutlet var congratulationsLabel: UILabel!
     
+    @IBOutlet var welcomeSecondLabel: UILabel!
     @IBOutlet var welcomeToLabel: UILabel!
     
     @IBOutlet var getStartedButton: UIButton!
@@ -103,7 +104,6 @@ class WelcomePageVC: UIViewController {
             self.congratulationsLabel.text = "Congratulations!".localized()
             self.welcomeToLabel.text = "WelcomeText".localized()
             self.getStartedButton.setTitle("Get Started!".localized(), for: .normal)
-
             
         }
         

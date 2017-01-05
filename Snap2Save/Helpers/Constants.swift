@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 //var hostUrl = "http://35.163.6.45/snap2save-api"
-var hostUrl = "http://dev.snap2save-a-lot.com/api/";
+//var hostUrl = "http://dev.snap2save-a-lot.com/api/";
+
+var hostUrl = "http://dev.snap2save-a-lot.com/test/api/"
 
 var SCREEN_WIDTH = UIScreen.main.bounds.size.width
 
@@ -27,4 +29,7 @@ var LOGGED_USER = "Logged_user"
 var EMAIL = "email"
 var MOBILE_NUMBER = "mobileNumber"
 let USER_AUTOLOGIN = "userAutoLogin"
+let ON_LAUNCH = "onLaunch"
+
+
 
