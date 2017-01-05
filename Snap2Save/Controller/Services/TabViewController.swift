@@ -10,16 +10,21 @@ import UIKit
 
 class TabViewController: UITabBarController {
 
-    
+    // Properties
     let titles = ["OFFERS", "SERVICES", "ACCOUNT", "WebView"]
+    var bgView:UIView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.delegate = self
         
-        selectedTabBackground()
+        
         updateTabBarItemsTitle()
+        
+        self.selectedIndex = 0
+        updateSelectedItemBackground()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,19 +48,27 @@ class TabViewController: UITabBarController {
     
     // MARK: -
     
-    func selectedTabBackground() {
+    
+    func updateSelectedItemBackground() {
         
-        self.tabBar.tintColor = UIColor.white
+        if bgView != nil {
+            bgView.removeFromSuperview()
+        }
         
-        let imageWidht = Int(UIScreen.main.bounds.size.width) / (self.tabBar.items?.count)!
-        let imageHeight = self.tabBar.frame.height / 2
+        // Add background color to middle tabBarItem
+        let itemIndex = selectedIndex
         
-        let size = CGSize(width: CGFloat(imageWidht / 2) + 2, height: imageHeight)
-        // create image
-        let color = UIColor(red: 84/255, green: 190/255, blue: 56/255, alpha: 1.0)
-        let tabIndicatorImage = UIImage(color: color , size: size)
+        let bgColor = UIColor(red: 84/255, green: 190/255, blue: 56/255, alpha: 1.0)
         
-        self.tabBar.selectionIndicatorImage = tabIndicatorImage
+        let itemWidth = tabBar.frame.width / CGFloat(tabBar.items!.count)
+        
+        let positionX = itemWidth * CGFloat(itemIndex)
+        
+        bgView = UIView(frame: CGRect(x: positionX, y: 0, width: itemWidth, height: tabBar.frame.height))
+            
+        bgView.backgroundColor = bgColor
+        tabBar.insertSubview(bgView, at: 0)
+        
     }
     
     func updateTabBarItemsTitle() {
@@ -72,3 +85,14 @@ class TabViewController: UITabBarController {
 
     
 }
+
+extension TabViewController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        updateSelectedItemBackground()
+    }
+    
+}
+
+
