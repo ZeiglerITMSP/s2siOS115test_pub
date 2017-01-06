@@ -13,11 +13,11 @@ import UIKit
 
 
 // development url
-//var hostUrl = "http://dev.snap2save-a-lot.com/api";
+var hostUrl = "http://dev.snap2save-a-lot.com/api";
 
 
 // test url
-var hostUrl = "http://dev.snap2save-a-lot.com/test/api"
+//var hostUrl = "http://dev.snap2save-a-lot.com/test/api"
 
 
 
@@ -36,6 +36,7 @@ var MandatoryColor = UIColor.init(colorLiteralRed: 236.0/255.0, green: 80.0/255.
 var USER_ID = "user_id"
 var AUTH_TOKEN = "auth_token"
 var LOGGED_USER = "Logged_user"
+var USER_DATA = "user_data"
 var EMAIL = "email"
 var MOBILE_NUMBER = "mobileNumber"
 let USER_AUTOLOGIN = "userAutoLogin"

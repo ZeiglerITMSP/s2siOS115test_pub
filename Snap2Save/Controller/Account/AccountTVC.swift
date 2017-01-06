@@ -206,8 +206,6 @@ class AccountTVC: UITableViewController {
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil);
                 let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
                 
-                //  let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LandingVC")
-                //  initialViewController.pushViewController(loginVc, animated: true)
                 
                 UIApplication.shared.keyWindow?.rootViewController = initialViewController
                 
@@ -236,9 +234,6 @@ class AccountTVC: UITableViewController {
         
         AppDelegate.getDelegate().setDetaultValues()
         
-//        // reset language
-//        Localize.resetCurrentLanguageToDefault()
-//       // Localize.defaultLanguage()
         
     }
     

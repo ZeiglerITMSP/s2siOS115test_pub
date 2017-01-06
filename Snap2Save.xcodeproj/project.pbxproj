@@ -430,6 +430,7 @@
 				E88BA5451DF53C1300714C65 /* Resources */,
 				8FED331991A43E97A3A505BD /* [CP] Embed Pods Frameworks */,
 				A2188C599B0232C370C6CDD2 /* [CP] Copy Pods Resources */,
+				97B0F7F51E1FB6BF00E4C00A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -647,6 +648,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Snap2Save/Pods-Snap2Save-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		97B0F7F51E1FB6BF00E4C00A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 6f5d2d9b0edbdc32b6304b86193f69478abc289a 01d20dfa79d0fbdb018a1d385866c00915523293bb80546a658d36cc7cddec7e";
 		};
 		9F20FF093878DD71F3BB0FC5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

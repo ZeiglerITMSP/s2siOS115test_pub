@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Localize_Swift
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -38,7 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isOnLaunch = UserDefaults.standard.dictionaryRepresentation().keys.contains(ON_LAUNCH)
         
         if isOnLaunch == false {
-            
             setDetaultValues()
             UserDefaults.standard.set(true, forKey: ON_LAUNCH)
             UserDefaults.standard.synchronize()
@@ -68,7 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let initialViewController: UIViewController = storyBoard!.instantiateInitialViewController()!
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
-        
+       
+        Fabric.with([Crashlytics.self])
+
         return true
     }
     
@@ -98,11 +101,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
+        let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
+
         if UserDefaults.standard.object(forKey: "user_id") != nil {
             // user exists
+            if isAutoLogin == false{
+                // user not exists
+                self.deepLinking(url : url)
+            }
             
         } else {
             // user not exists
+            self.deepLinking(url : url)
+           
+        }
+        return true
+        
+    }
+    
+    
+    func selectedTabBackground() {
+        
+        let imageWidht = Int(SCREEN_WIDTH) / 4
+        
+        let size = CGSize(width: imageWidht, height: 49)
+        
+        let tabIndicator = UIImage(color: UIColor.green, size: size)
+        //        let tabResizableIndicator = tabIndicator?.resizableImage(
+        //            withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
+        
+        UITabBar.appearance().selectionIndicatorImage = tabIndicator
+        
+    }
+    
+    class func getDelegate() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func setDetaultValues() {
+        
+        // ..
+        UserDefaults.standard.set(false, forKey: USER_AUTOLOGIN)
+        UserDefaults.standard.synchronize()
+        // ..
+        Localize.setCurrentLanguage("en")
+        
+    }
+    
+    func deepLinking( url : URL){
+        
             let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
             let isReachable = reachbility.isReachable
             // Reachability
@@ -125,7 +172,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             else {
                 
-                let urlString = url.absoluteString
+                let urlString : String = url.absoluteString
                 print("url string is\(urlString)")
                 let urlScheme = url.scheme
                 print("url scheme is\(urlScheme)")
@@ -184,7 +231,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     let loginVc:WelcomePageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC") as! WelcomePageVC
                                     self.window?.rootViewController = loginVc
                                     self.window?.makeKeyAndVisible()
-
+                                    
                                 }
                                     
                                 else {
@@ -211,14 +258,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 DispatchQueue.main.async {
                                     let alertController = UIAlertController(title: "", message: "Sorry, Please try again later", preferredStyle: .alert)
                                     
-                                    
                                     let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
                                     })
                                     
                                     alertController.addAction(okAction)
                                     
                                     UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
-                                
+                                    
                                 }
                                 
                                 print(error)
@@ -249,41 +295,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
+            
         }
-        return true
-        
-    }
-    
-    
-    func selectedTabBackground() {
-        
-        
-        
-        let imageWidht = Int(SCREEN_WIDTH) / 4
-        
-        let size = CGSize(width: imageWidht, height: 49)
-        
-        let tabIndicator = UIImage(color: UIColor.green, size: size)
-        //        let tabResizableIndicator = tabIndicator?.resizableImage(
-        //            withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
-        
-        UITabBar.appearance().selectionIndicatorImage = tabIndicator
-        
-    }
-    
-    class func getDelegate() -> AppDelegate {
-        return UIApplication.shared.delegate as! AppDelegate
-    }
-    
-    func setDetaultValues() {
-        
-        // ..
-        UserDefaults.standard.set(false, forKey: USER_AUTOLOGIN)
-        UserDefaults.standard.synchronize()
-        // ..
-        Localize.setCurrentLanguage("en")
-        
-    }
     
     
 }

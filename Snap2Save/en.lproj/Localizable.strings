@@ -96,7 +96,7 @@
 "REFERRAL CODE (IF APPLICABLE)" = "REFERRAL CODE (IF APPLICABLE)";
 "REGISTER" = "REGISTER";
 
-"Please select" = "Please select";
+"Please Select" = "Please Select";
 "Unit, Building, etc." = "Unit, Building, etc.";
 "Street address or PO box" = "Street address or PO box";
 
@@ -168,12 +168,7 @@
 "Your password must be at least 6 characters in length." = "Your password must be at least 6 characters in length.";
 
 "Are you sure you want to log out?" = "Are you sure you want to log out?";
-"Passwords don't match" = "Passwords don't match";
-"Phone Numbers don't match" = "Phone Numbers don't match";
-"Emails don't match" = "Emails don't match";
-
-
-
+"Entries must match to proceed" = "Entries must match to proceed";
 
 
 

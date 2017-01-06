@@ -329,9 +329,12 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                         
                         if let userDict = responseDict?["user"] {
                             self.user = User.prepareUser(dictionary: userDict as! [String : Any])
+                           self.user.auth_token = responseDict?["auth_token"] as! String
+                            
                             let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
                             UserDefaults.standard.set(userData, forKey: LOGGED_USER)
                         }
+                        
                         if let auth_token = responseDict?["auth_token"] as? String {
                             UserDefaults.standard.set(auth_token, forKey: AUTH_TOKEN)
                             
