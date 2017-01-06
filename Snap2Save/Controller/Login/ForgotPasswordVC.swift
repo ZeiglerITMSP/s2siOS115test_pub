@@ -92,11 +92,14 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadContent()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
-        reloadContent()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -128,10 +131,15 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
             self.mobileNumberLabel.text = "10-DIGIT CELL PHONE NUMBER".localized()
             self.submitButton.setTitle("SUBMIT".localized(), for: .normal)
             self.updateBackButtonText()
+            self.updateTextFieldsUi()
         }
     }
     
-    
+    func updateTextFieldsUi(){
+        
+        mobileNumberTextField.updateUIAsPerTextFieldType();
+    }
+
     func languageButtonClicked(){
         
         self.showLanguageSelectionAlert()
@@ -206,6 +214,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                 
                 DispatchQueue.main.async {
                     self.submitActivityIndicator.stopAnimating()
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
                 print(error)
                 break

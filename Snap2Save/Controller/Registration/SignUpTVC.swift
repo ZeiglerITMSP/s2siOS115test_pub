@@ -13,6 +13,8 @@ class SignUpTVC: UITableViewController {
     
     var languageSelectionButton: UIButton!
 
+    @IBOutlet var reEnterEmailMandatoryLabel: UILabel!
+    @IBOutlet var emailManditoryLabel: UILabel!
     @IBOutlet var loginWithFBButton: UIButton!
     @IBOutlet var facebookBtnBgView: UIView!
     @IBOutlet var messageLabel: UILabel!
@@ -54,7 +56,14 @@ class SignUpTVC: UITableViewController {
     }
     
     @IBAction func contactPreferenceSegmentControl(_ sender: UISegmentedControl) {
-        
+        if sender.selectedSegmentIndex == 1{
+            emailManditoryLabel.isHidden = false
+            reEnterEmailMandatoryLabel.isHidden = false
+        }
+        else if sender.selectedSegmentIndex == 0{
+            emailManditoryLabel.isHidden = true
+            reEnterEmailMandatoryLabel.isHidden = true
+        }
     }
     
     @IBAction func continueButtonClicked(_ sender: UIButton) {
@@ -123,7 +132,18 @@ class SignUpTVC: UITableViewController {
         
     }
 
-    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        if contactPreferenceSegmentControl.selectedSegmentIndex == 1{
+            emailManditoryLabel.isHidden = false
+            reEnterEmailMandatoryLabel.isHidden = false
+        }
+        else if contactPreferenceSegmentControl.selectedSegmentIndex == 0{
+            emailManditoryLabel.isHidden = true
+            reEnterEmailMandatoryLabel.isHidden = true
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
@@ -171,12 +191,8 @@ class SignUpTVC: UITableViewController {
             self.messageLabel.text = "RegisterMessage".localized()
             self.loginWithFBButton.setTitle("Register with Facebook".localized(), for: .normal);
             self.requiredInfoLabel.text = "*Required information".localized()
-            self.mobileNumLabel.text = "10-DIGIT CELL PHONE NUMBER".localized()
-            self.reEnterMobileNumLabel.text = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
-            self.passwordLabel.text = "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)".localized()
-            self.reEnterPasswordLabel.text = "RE-ENTER PASSWORD".localized()
-            self.zipCodeLabel.text = "ZIP CODE".localized()
-            self.contactPreferenceLabel.text = "CONTACT PREFERENCE".localized()
+            
+            
             self.emailLabel.text = "EMAIL".localized()
             self.reEnterEmailLabel.text = "RE-ENTER EMAIL".localized()
             self.contactPreferenceSegmentControl.setTitle("Text Message".localized(), forSegmentAt: 0)
@@ -186,16 +202,28 @@ class SignUpTVC: UITableViewController {
             
             self.continueButton.setTitle("CONTINUE".localized(), for: .normal)
             
+            self.updateTextFieldsUi()
+            
+            self.mobileNumLabel.attributedText = "10-DIGIT CELL PHONE NUMBER".localized().makeAsRequired()
+            self.reEnterMobileNumLabel.attributedText = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized().makeAsRequired()
+            self.passwordLabel.attributedText = "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)".localized().makeAsRequired()
+            self.reEnterPasswordLabel.attributedText = "RE-ENTER PASSWORD".localized().makeAsRequired()
+            self.zipCodeLabel.attributedText = "ZIP CODE".localized().makeAsRequired()
+            self.contactPreferenceLabel.attributedText = "CONTACT PREFERENCE".localized().makeAsRequired()
+            
+            
             self.tableView.reloadData()
         }
     }
+    
+    
 
     func updateTermsText() {
         
         // Terms of Service
         let fullMessage = "TermsMessage".localized()
         let rangeMessage = "TermsLink".localized()
-        let link = "https://appitventures.teamwork.com/dashboard"
+        let link = "http://www.snap2save.com/app/about_comingsoon.php"
         
         let attributedString = NSMutableAttributedString(string: fullMessage)
         
@@ -233,6 +261,8 @@ class SignUpTVC: UITableViewController {
     }
     
     func loadTextFields(){
+        
+        
         
              //
         //        let contactStr = "Contact Preference *".localized
@@ -296,7 +326,7 @@ class SignUpTVC: UITableViewController {
         reEnterPasswordTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         reEnterPasswordTextField.text_Color =  UIColor.black
         
-        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
+        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NumberTextField
         zipCodeTextField.updateUIAsPerTextFieldType()
         zipCodeTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         zipCodeTextField.placeHolderLabel = zipCodeLabel
@@ -348,6 +378,17 @@ class SignUpTVC: UITableViewController {
  
     }
     
+    func updateTextFieldsUi(){
+        
+        mobileNumTextField.updateUIAsPerTextFieldType()
+        reEnterMobileNumTextField.updateUIAsPerTextFieldType()
+        passwordTextField.updateUIAsPerTextFieldType()
+        reEnterPasswordTextField.updateUIAsPerTextFieldType()
+        zipCodeTextField.updateUIAsPerTextFieldType()
+        emailTextField.updateUIAsPerTextFieldType()
+        reEnterEmailTextField.updateUIAsPerTextFieldType()
+
+    }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return UITableViewAutomaticDimension
@@ -381,7 +422,7 @@ class SignUpTVC: UITableViewController {
         }
         
         if reEnterMobileNumTextField.text != mobileNumTextField.text {
-            showAlert(title: "", message: "Phone Numbers doesn't match")
+            showAlert(title: "", message: "Phone Numbers don't match".localized())
             return false
         }
            
@@ -391,7 +432,7 @@ class SignUpTVC: UITableViewController {
         }
         
         if reEnterPasswordTextField.text != passwordTextField.text{
-            showAlert(title: "", message: "Passwords doesn't match")
+            showAlert(title: "", message: "Passwords don't match".localized())
             return false
         }
         
@@ -409,7 +450,7 @@ class SignUpTVC: UITableViewController {
             
             
         if reEnterEmailTextField.text != emailTextField.text {
-            showAlert(title: "", message: "Emails doesn't match")
+            showAlert(title: "", message: "Emails don't match".localized())
             return false
         }
 
@@ -464,6 +505,16 @@ extension SignUpTVC: AITextFieldProtocol {
             let newLength = currentCharacterCount + string.characters.count - range.length
             return newLength <= 10
             
+        }
+        
+        if textField == zipCodeTextField{
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 5
+
         }
         
         return true

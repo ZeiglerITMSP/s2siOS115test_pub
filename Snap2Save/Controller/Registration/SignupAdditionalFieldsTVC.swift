@@ -127,12 +127,19 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
         self.view.addGestureRecognizer(tapGesture)
         
+        let zipcode = userDetailsDict["zipcode"] as! String
+        zipCodeTextField.text = zipcode
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadContent()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
-        reloadContent()
     }
     
     
@@ -161,6 +168,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
+            self.title = "Register".localized()
             self.earn200PointsLabel.text = "EARN 200 POINTS!".localized()
             self.msgLabel.text = "AdditionalSignUpMsg".localized()
             self.userInfoLabel.text = "USER INFORMATION".localized()
@@ -186,6 +194,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
              self.ethnicityTextField.placeholder = "Please select".localized()
             self.addressLine1TextField.placeholder = "Street address or PO box".localized()
             self.addressLine2TextField.placeholder = "Unit, Building, etc.".localized()
+            
             self.genderArray = ["Male".localized(),"Female".localized()];
             self.ageGroupArray = ["21 and under".localized(),
                                   "22 to 34".localized(),
@@ -204,6 +213,19 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             self.genderTextField.pickerViewArray = self.genderArray
             self.ageGroupTextField.pickerViewArray = self.ageGroupArray
             self.ethnicityTextField.pickerViewArray = self.ethnicityArray
+            self.updateTextFieldsUi()
+            
+                if self.selectedGenderIndex != nil {
+                    self.genderTextField.text = self.genderArray.object(at: self.selectedGenderIndex - 1) as? String
+                }
+            
+                if self.selectedAgeGroupIndex != nil {
+                    self.ageGroupTextField.text = self.ageGroupArray.object(at: self.selectedAgeGroupIndex - 1) as? String
+                }
+                
+                if self.SelectedEthnicityIndex != nil {
+                    self.ethnicityTextField.text = self.ethnicityArray.object(at: self.SelectedEthnicityIndex - 1) as? String
+                }
 
             self.tableView.reloadData()
 
@@ -324,7 +346,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         stateTextField.setRightGap(width: 10, placeHolderImage:UIImage.init(named: "ic_downarrow_input")!)
         stateTextField.text_Color =  UIColor.black
         
-        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
+        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NumberTextField
         zipCodeTextField.updateUIAsPerTextFieldType()
         zipCodeTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         zipCodeTextField.placeHolderLabel = zipCodeLabel
@@ -367,6 +389,29 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         
         stateTextField.pickerViewArray = statesArray
     }
+    
+    func updateTextFieldsUi(){
+        
+        firstNameTextField.updateUIAsPerTextFieldType()
+        lastNameTextField.updateUIAsPerTextFieldType()
+        addressLine1TextField.updateUIAsPerTextFieldType()
+        addressLine2TextField.updateUIAsPerTextFieldType()
+        zipCodeTextField.updateUIAsPerTextFieldType()
+        genderTextField.updateUIAsPerTextFieldType()
+        ageGroupTextField.updateUIAsPerTextFieldType()
+        
+            ethnicityTextField.updateUIAsPerTextFieldType()
+            groupCodeTextField.updateUIAsPerTextFieldType()
+            referralCodeTextField.updateUIAsPerTextFieldType()
+            stateTextField.updateUIAsPerTextFieldType()
+            zipCodeTextField.updateUIAsPerTextFieldType()
+            cityTextField.updateUIAsPerTextFieldType()
+            zipCodeTextField.updateUIAsPerTextFieldType()
+            
+    
+
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -441,7 +486,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let password = userDetailsDict["password"] as! String
         let phone_number = userDetailsDict["phone_number"] as! String
         let email = userDetailsDict["email"] as! String
-        let zipcode = userDetailsDict["zipcode"] as! String
+        let zipcode = zipCodeTextField.text ?? ""
         let social_id = userDetailsDict["social_id"] as! String
         let contactPrefernce: Int = userDetailsDict["contact_preference"] as! Int
         var contact_preference = "1"
@@ -545,7 +590,8 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                 
                 DispatchQueue.main.async {
                     self.registerActivityIndicator.stopAnimating()
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                }
                 print(error)
                 break
             }
@@ -602,4 +648,19 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         
     }
     
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == zipCodeTextField{
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 5
+            
+        }
+        
+        return true
+    }
+
 }

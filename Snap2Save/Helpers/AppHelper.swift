@@ -59,6 +59,48 @@ class AppHelper {
         return emailTest.evaluate(with: testStr)
     }
     
+    class func makeAsRequired(text:String) -> NSAttributedString {
+        
+        let mobileNumTxt = text + " *"
+        let mobileNumTxtAttribute = NSMutableAttributedString.init(string: mobileNumTxt)
+        
+        let string_to_color = "*"
+        let contactStrRange = (mobileNumTxt as NSString).range(of: string_to_color)
+        
+        mobileNumTxtAttribute.addAttribute(NSForegroundColorAttributeName, value: APP_ORANGE_COLOR , range: contactStrRange)
+        
+        return mobileNumTxtAttribute
+    }
+    
+}
+
+
+extension String {
+    
+    public func makeAsRequired() -> NSAttributedString {
+        
+        let mobileNumTxt = self + " *"
+        let mobileNumTxtAttribute = NSMutableAttributedString.init(string: mobileNumTxt)
+        
+        let string_to_color = "*"
+        let contactStrRange = (mobileNumTxt as NSString).range(of: string_to_color)
+        
+        mobileNumTxtAttribute.addAttribute(NSForegroundColorAttributeName, value: MandatoryColor , range: contactStrRange)
+        
+        return mobileNumTxtAttribute
+    }
+    
+    public func makeAstrikRequired() -> NSAttributedString {
+        
+        let mobileNumTxtAttribute = NSMutableAttributedString.init(string: self)
+        
+        let string_to_color = "*"
+        let contactStrRange = (self as NSString).range(of: string_to_color)
+        
+        mobileNumTxtAttribute.addAttribute(NSForegroundColorAttributeName, value: MandatoryColor , range: contactStrRange)
+        
+        return mobileNumTxtAttribute
+    }
     
 }
 

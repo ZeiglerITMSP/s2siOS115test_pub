@@ -107,11 +107,14 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         self.view.addGestureRecognizer(tapGesture)
 
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadContent()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
-        reloadContent()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -146,6 +149,8 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         self.updateBackButtonText()
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
         self.title = "Personal Information".localized()
+        self.updateTextFieldsUi()
+
         self.userInformationLabel.text = "USER INFORMATION".localized()
         self.firstNameLabel.text = "FIRST NAME".localized()
         self.lastNamelabel.text = "LAST NAME".localized()
@@ -185,6 +190,18 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         self.ageGroupTextField.pickerViewArray = self.ageGroupArray
         self.ethnicityTextField.pickerViewArray = self.ethnicityArray
         
+        if self.selectedGenderIndex != nil {
+            self.genderTextField.text = self.genderArray.object(at: self.selectedGenderIndex - 1) as? String
+        }
+        
+        if self.selectedAgeGroupIndex != nil {
+            self.ageGroupTextField.text = self.ageGroupArray.object(at: self.selectedAgeGroupIndex - 1) as? String
+        }
+        
+        if self.SelectedEthnicityIndex != nil {
+            self.ethnicityTextField.text = self.ethnicityArray.object(at: self.SelectedEthnicityIndex - 1) as? String
+        }
+
         self.tableView.reloadData()
 
         
@@ -304,7 +321,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         stateTextField.setRightGap(width: 10, placeHolderImage:UIImage.init(named: "ic_downarrow_input")!)
         stateTextField.text_Color =  UIColor.black
         
-        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
+        zipCodeTextField.textFieldType = AITextField.AITextFieldType.NumberTextField
         zipCodeTextField.updateUIAsPerTextFieldType()
         zipCodeTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         zipCodeTextField.placeHolderLabel = zipcodeLabel
@@ -348,6 +365,25 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         }
         
         stateTextField.pickerViewArray = statesArray
+    }
+
+    
+    func updateTextFieldsUi(){
+        
+        firstNameTextField.updateUIAsPerTextFieldType()
+        lastNameTextField.updateUIAsPerTextFieldType()
+        addressLine1TextField.updateUIAsPerTextFieldType()
+        addressLine2TextField.updateUIAsPerTextFieldType()
+        zipCodeTextField.updateUIAsPerTextFieldType()
+        genderTextField.updateUIAsPerTextFieldType()
+        ageGroupTextField.updateUIAsPerTextFieldType()
+        
+        ethnicityTextField.updateUIAsPerTextFieldType()
+        stateTextField.updateUIAsPerTextFieldType()
+        zipCodeTextField.updateUIAsPerTextFieldType()
+        cityTextField.updateUIAsPerTextFieldType()
+        zipCodeTextField.updateUIAsPerTextFieldType()
+        
     }
 
     // MARK: - AITextField Delegate
@@ -547,6 +583,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             genderTextField.text = ""
         }
         else{
+            selectedGenderIndex = index
         genderTextField.text = genderArray.object(at: index - 1) as? String
         }
         }
@@ -557,6 +594,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 ageGroupTextField.text = ""
             }
             else{
+                selectedAgeGroupIndex = index
                 ageGroupTextField.text = ageGroupArray.object(at: index - 1) as? String
             }
         }
@@ -568,6 +606,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 ethnicityTextField.text = ""
             }
             else{
+                SelectedEthnicityIndex = index
                 ethnicityTextField.text = ethnicityArray.object(at: index - 1) as? String
 
             }
@@ -656,5 +695,21 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         }
 
     }
+    
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == zipCodeTextField  {
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 5
+            
+        }
+        
+        return true
+    }
+
 }
 

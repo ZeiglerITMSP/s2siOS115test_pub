@@ -59,11 +59,14 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: saveButton, radius: 2.0, width: 1.0)
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadContent()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
-        reloadContent()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -76,8 +79,8 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: -
     
+    // MARK: -
     func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
@@ -89,15 +92,15 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
     }
     
     func reloadContent() {
-        
+        DispatchQueue.main.async {
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
         self.updateBackButtonText()
         self.title = "Change Password".localized()
-        saveButton.setTitle("SAVE".localized(), for: .normal)
-        currentPasswordTextField.placeholderText = "CURRENT PASSWORD".localized()
-        newPasswordTextField.placeholderText = "NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)".localized()
-        reEnterNewPasswordTextField.placeholderText = "RE-ENTER NEW PASSWORD".localized()
-        
+        self.saveButton.setTitle("SAVE".localized(), for: .normal)
+        self.currentPasswordTextField.placeholderText = "CURRENT PASSWORD".localized()
+        self.newPasswordTextField.placeholderText = "NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)".localized()
+        self.reEnterNewPasswordTextField.placeholderText = "RE-ENTER NEW PASSWORD".localized()
+        }
     }
     
     func keyBoardHidden(textField: UITextField) {
@@ -259,15 +262,15 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
     
     func isValid() -> Bool{
         if currentPasswordTextField.contentTextField.text?.characters.count == 0 {
-            self.showAlert(title: "", message: "Please enter current password")
+            self.showAlert(title: "", message: "Please enter current password".localized())
             return false
         }
         else if (newPasswordTextField.contentTextField.text?.characters.count)! < 6 {
-            self.showAlert(title: "", message: "Your password must be at least 6 characters in length.")
+            self.showAlert(title: "", message: "Your password must be at least 6 characters in length.".localized())
             return false
         }
         else if reEnterNewPasswordTextField.contentTextField.text != newPasswordTextField.contentTextField.text {
-            self.showAlert(title: "", message: "Entries must match to proceed.")
+            self.showAlert(title: "", message: "Passwords don't match".localized())
             return false
         }
         return true

@@ -31,7 +31,7 @@ class AITextField: UITextField {
         case PasswordTextField
         case EmailTextField
         case PhoneNumberTextField
-        
+        case NumberTextField
     }
     
     @IBInspectable var text_Color: UIColor? = UIColor.white
@@ -112,6 +112,11 @@ class AITextField: UITextField {
             self.keyboardType = UIKeyboardType.phonePad
             setToolBar()
             break;
+            
+        case AITextFieldType.NumberTextField:
+            self.keyboardType = UIKeyboardType.numberPad
+            setToolBar()
+            break;
         }
         self.textColor = text_Color
         // self.font = UIFont.systemFont(ofSize: 16)
@@ -121,6 +126,11 @@ class AITextField: UITextField {
     }
     
     // MARK: - Style
+    
+    override func draw(_ rect: CGRect) {
+        
+        updateUnderline()
+    }
     
     func createBorder(borderColor:UIColor, xpos:CGFloat) {
         
@@ -172,6 +182,7 @@ class AITextField: UITextField {
         
         // placeholder text update
         placeHolderLabel?.textColor = color
+        placeHolderLabel?.attributedText = placeHolderLabel?.text?.makeAstrikRequired()
     }
     
     
