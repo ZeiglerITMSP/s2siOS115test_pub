@@ -17,6 +17,7 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var user : User = User()
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -66,6 +67,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             storyBoard = UIStoryboard(name: "Main", bundle: nil);
         }
         
+//        if let user_id = user?.id {
+//            
+//        }
+//                    if user_id.isEmpty  {
+//                        // user exists
+//                        storyBoard = UIStoryboard(name: "Main", bundle: nil);
+//                    }
+//                    else {
+//                        storyBoard = UIStoryboard(name: "Home", bundle: nil);
+//
+//                    }
+        
+        
         let initialViewController: UIViewController = storyBoard!.instantiateInitialViewController()!
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
@@ -83,10 +97,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+//        let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
+//        if isAutoLogin == false{
+//            let storyBoard:UIStoryboard?
+//            storyBoard = UIStoryboard(name: "Main", bundle: nil);
+//            let initialViewController: UIViewController = storyBoard!.instantiateInitialViewController()!
+//            self.window?.rootViewController = initialViewController
+//            self.window?.makeKeyAndVisible()
+//            
+//        }
+
+        
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -102,17 +128,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
+        let user_id = UserDefaults.standard.object(forKey: USER_ID)
 
-        if UserDefaults.standard.object(forKey: "user_id") != nil {
-            // user exists
-            if isAutoLogin == false{
-                // user not exists
+        if user.id.isEmpty {
+            // user not exists
+            if user_id != nil{
+                if isAutoLogin == false{
+                    self.deepLinking(url : url)
+                }
+                else{
+                }
+            }
+            else{
                 self.deepLinking(url : url)
             }
-            
         } else {
-            // user not exists
-            self.deepLinking(url : url)
            
         }
         return true
@@ -141,7 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setDetaultValues() {
         
         // ..
-        UserDefaults.standard.set(false, forKey: USER_AUTOLOGIN)
+        //UserDefaults.standard.set(true, forKey: USER_AUTOLOGIN)
         UserDefaults.standard.synchronize()
         // ..
         Localize.setCurrentLanguage("en")
