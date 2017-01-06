@@ -199,7 +199,7 @@ class EBTAuthenticationTVC: UITableViewController {
                     
                 } else {
                     
-                    
+                    self.validateNextPage()
                   //  self.actionType =
 //                    self.confirmActivityIndicator.stopAnimating()
 //                    self.performSegue(withIdentifier: "EBTLoginSecurityQuestionTVC", sender: nil)
@@ -210,7 +210,8 @@ class EBTAuthenticationTVC: UITableViewController {
 
     func backAction() {
         
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        self.navigationController?.popViewController(animated: true)
+//        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -221,6 +222,26 @@ class EBTAuthenticationTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
 
+    
+    // Security Question
+    
+    func validateNextPage() {
+        
+        ebtWebView.getPageHeader(completion: { pageTitle in
+            
+            if pageTitle == "Verify Security Question" {
+                
+                self.confirmActivityIndicator.stopAnimating()
+                self.performSegue(withIdentifier: "EBTLoginSecurityQuestionTVC", sender: nil)
+                
+            } else {
+                
+            }
+        })
+        
+    }
+    
+    
     
 }
 
@@ -234,7 +255,8 @@ extension EBTAuthenticationTVC: EBTWebViewDelegate {
         
         if actionType == .generate {
             
-            //validateSubmitAction()
+            checkForErrorMessage()
+            
         } else if actionType == .regenerate {
             
             actionType = nil

@@ -17,7 +17,6 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
-    
     fileprivate var actionType: ActionType?
     
     // Ouetles
@@ -95,7 +94,9 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     func backAction() {
         
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        self.navigationController?.popViewController(animated: true)
+        
+//        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -157,12 +158,11 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
         actionType = ActionType.confirm
         
-//        actionType = ActionType.sumbit
         let jsSecurityAnswer = "$('#securityAnswer').val('\(self.securityAnswerField.contentTextField.text!)');"
-        let jsCheckbox = "$('#registerDeviceFlag').attr('checked');"
-        let jsSubmit = "$('#submit').click();"
+//        let jsCheckbox = "$('#registerDeviceFlag').attr('checked');"
+        let jsSubmit = "$('#okButton').click();"
         
-        let javaScript = jsSecurityAnswer + jsCheckbox + jsSubmit
+        let javaScript = jsSecurityAnswer + jsSubmit
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
             self.checkForErrorMessage()
@@ -185,18 +185,35 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
                 if trimmedErrorMessage.characters.count > 0 {
                     
                     self.confirmActivityIndicator.stopAnimating()
+                    self.confirmButton.isEnabled = true
                     self.errorMessageLabel.text = trimmedErrorMessage
                     self.tableView.reloadData()
                     
                 } else {
                     
-                    self.confirmActivityIndicator.stopAnimating()
-                    self.performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
+//                    self.confirmActivityIndicator.stopAnimating()
+                   //  self.performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
+                    self.validateNextPage()
                 }
             }
         }
     }
 
+    func validateNextPage() {
+        
+        ebtWebView.getPageTitle(completion: { pageTitle in
+            
+            if pageTitle == "Account Summary" {
+                
+                self.confirmActivityIndicator.stopAnimating()
+                self.performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
+                
+            } else {
+                
+            }
+        })
+        
+    }
     
 
 
@@ -213,15 +230,8 @@ extension EBTLoginSecurityQuestionTVC: EBTWebViewDelegate {
             checkForErrorMessage()
         } else {
             
-            
-            
         }
         
-//        else if actionType == .regenerate {
-//
-//            actionType = nil
-//            checkForStatusMessage()
-//        }
     }
     
 }

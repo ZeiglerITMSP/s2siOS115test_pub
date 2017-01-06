@@ -17,6 +17,8 @@ class DetailedCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.separatorInset = UIEdgeInsets(top: 0, left: 10000, bottom: 0, right: 0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
