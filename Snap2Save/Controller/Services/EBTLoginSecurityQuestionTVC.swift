@@ -25,15 +25,9 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
-    
-    
     @IBOutlet weak var securityQuestionTitleLabel: UILabel!
     @IBOutlet weak var securityQuestionLabel: UILabel!
     
-    
-    
-    
-    @IBOutlet weak var securityQuestionField: AIPlaceHolderTextField!
     @IBOutlet weak var securityAnswerField: AIPlaceHolderTextField!
     
     @IBOutlet weak var confirmButton: UIButton!

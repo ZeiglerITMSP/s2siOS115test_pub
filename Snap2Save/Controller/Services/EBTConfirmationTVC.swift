@@ -10,12 +10,28 @@ import UIKit
 
 class EBTConfirmationTVC: UITableViewController {
 
+    
+    fileprivate enum ActionType {
+        
+        case waitingForPageLoad
+        case cardNumber
+        case accept
+    }
+    
+    // Properties
+    let ebtWebView: EBTWebView = EBTWebView.shared
+    fileprivate var actionType: ActionType?
+    
+    
     // Outlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var errorTitleLabel: UILabel!
+    @IBOutlet weak var errorMessageLabel: UILabel!
     
     @IBOutlet weak var validationCodeField: AIPlaceHolderTextField!
     
+    @IBOutlet weak var validateActivityIndicator: UIActivityIndicatorView!
     // Actions
     
     @IBAction func validateAction(_ sender: UIButton) {
@@ -43,16 +59,48 @@ class EBTConfirmationTVC: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
         
+        errorMessageLabel.text = nil
+        
+        ebtWebView.responder = self
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ebtWebView.responder = self
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        ebtWebView.responder = nil
+        
+        super.viewDidDisappear(animated)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Table view
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 1 {
+            if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
+                return 0
+            }
+        }
+        
+        return UITableViewAutomaticDimension
+    }
+    
+    // MARK: -
 
     func backAction() {
         
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        self.navigationController?.popViewController(animated: true)
+//        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -65,4 +113,14 @@ class EBTConfirmationTVC: UITableViewController {
 
     
 
+}
+
+
+extension EBTConfirmationTVC: EBTWebViewDelegate {
+    
+    func didFinishLoadingWebView() {
+        
+       // checkForErrorMessage()
+    }
+    
 }

@@ -12,6 +12,7 @@ class EBTCardNumberTVC: UITableViewController {
 
     fileprivate enum ActionType {
         
+        case waitingForPageLoad
         case cardNumber
         case accept
     }
@@ -31,15 +32,13 @@ class EBTCardNumberTVC: UITableViewController {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var nextActivityIndicator: UIActivityIndicatorView!
     
-    // Actions
-    
+    // MARK: - Actions
     @IBAction func nextAction(_ sender: UIButton) {
         
         self.view.endEditing(true)
         
-//        self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
-        
-        autoFill(cardNumber: cardNumberField.contentTextField.text!)
+        nextActivityIndicator.startAnimating()
+        validatePage()
     }
     
     @IBAction func cancelAction(_ sender: UIButton) {
@@ -92,7 +91,8 @@ class EBTCardNumberTVC: UITableViewController {
     
     func backAction() {
         
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        self.navigationController?.popViewController(animated: true)
+//        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -108,7 +108,6 @@ class EBTCardNumberTVC: UITableViewController {
     // load webpage
     func loadSignupPage() {
 
-        
         let signupUrl_en = kEBTSignupUrl
         
         let url = NSURL(string: signupUrl_en)
@@ -117,39 +116,44 @@ class EBTCardNumberTVC: UITableViewController {
         ebtWebView.webView.load(request as URLRequest)
     }
     
-    // validate  url
-    func validatePageUrl() {
+    func validatePage() {
         
-        let jsGetPageUrl = "window.location.href;"
-        ebtWebView.webView.evaluateJavaScript(jsGetPageUrl) { (result, error) in
+        let jsLoginValidation = "$('.PageHeader').text();"
+        
+        let javaScript = jsLoginValidation
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
-            if error != nil {
-                print(error ?? "error nil")
-            } else {
-                print(result ?? "result nil")
-                let pageUrl = result as! String
-                if pageUrl == kEBTSignupUrl {
+            if let result = result {
+                
+                let resultString = result as! String
+                
+                if resultString == "Identify Your Card and Accounts" {
                     
-//                    self.autoFill(cardNumber: self.cardNumberField.contentTextField.text!)
-                    
+                    self.autoFill(cardNumber: self.cardNumberField.contentTextField.text!)
                 } else {
-                    print("page not loaded")
+                    print("page not loaded..")
+                    self.actionType = ActionType.waitingForPageLoad
                 }
+            } else {
+                print(error ?? "")
+                self.actionType = ActionType.waitingForPageLoad
             }
         }
     }
+
     
     // MARK:- Card Number Filling
     func autoFill(cardNumber:String) {
         
-        nextActivityIndicator.startAnimating()
         
         actionType = ActionType.cardNumber
         
         
         
         let jsCardNumber = "$('#txtCardNumber').val('\(cardNumber)');"
-        let jsSubmit = "void($('form')[1].submit());"
+//        let jsSubmit = "void($('form')[1].submit());"
+        let jsSubmit = "void($('#btnValidateCardNumber').click());"
         
         let javaScript =  jsCardNumber + jsSubmit
         
@@ -158,14 +162,14 @@ class EBTCardNumberTVC: UITableViewController {
                 print(error ?? "error nil")
             } else {
                 print(result ?? "result nil")
-//                self.checkForErrorMessage()
+                self.checkForErrorMessage()
             }
         }
     }
 
     func checkForErrorMessage() {
         
-        let jsStatusMessage = "$('.errorInvalidField').text();"
+        let jsStatusMessage = "$('#VallidationExcpMsg').text();"
         
         ebtWebView.webView.evaluateJavaScript(jsStatusMessage) { (result, error) in
             if error != nil {
@@ -220,19 +224,48 @@ class EBTCardNumberTVC: UITableViewController {
         
         // "$('#btnAcceptTandC).click();"
         let jsAcceptClick = "void($('form')[1].submit());"
+//        let jsAcceptClick = "$('#btnAcceptTandC).click();"
+        
         ebtWebView.webView.evaluateJavaScript(jsAcceptClick) { (result, error) in
             if error != nil {
                 print(error ?? "error nil")
             } else {
                 print(result ?? "result nil")
-//                let stringResult = result as! String
-//                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-//                print(pageTitle)
-                
             }
         }
     }
     
+    
+    func validateNextPage() {
+        
+        let jsLoginValidation = "$('.PageHeader').text();"
+        
+        let javaScript = jsLoginValidation
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let result = result {
+                
+                let resultString = result as! String
+                
+                if resultString == "Validate Identity" {
+                    
+                    self.actionType = nil
+                    self.nextActivityIndicator.stopAnimating()
+                    // move to view controller
+                    self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
+
+                } else {
+                    print("page not loaded..")
+                    self.actionType = ActionType.waitingForPageLoad
+                }
+            } else {
+                print(error ?? "")
+                self.actionType = ActionType.waitingForPageLoad
+            }
+        }
+    }
+
 
 }
 
@@ -241,13 +274,14 @@ extension EBTCardNumberTVC: EBTWebViewDelegate {
     func didFinishLoadingWebView() {
         
         if actionType == ActionType.accept {
-            actionType = nil
-            nextActivityIndicator.stopAnimating()
-            // move to view controller
-            self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
+            
+            validateNextPage()
         } else if actionType == ActionType.cardNumber {
             actionType = nil
             checkForErrorMessage()
+        } else if actionType == ActionType.waitingForPageLoad {
+            
+            validatePage()
         }
     }
     

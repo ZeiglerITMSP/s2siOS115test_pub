@@ -84,7 +84,7 @@ class EBTAuthenticationTVC: UITableViewController {
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 2 {
+        if indexPath.row == 1 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }

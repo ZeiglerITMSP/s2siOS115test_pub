@@ -118,9 +118,11 @@ class EBTWebView: NSObject {
                 
             } else {
                 
-                let stringResult = result as! String
-                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(pageTitle)
+                if let result = result {
+                    let stringResult = result as! String
+                    let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                    print(pageTitle)
+                }
                 
             }
         }
