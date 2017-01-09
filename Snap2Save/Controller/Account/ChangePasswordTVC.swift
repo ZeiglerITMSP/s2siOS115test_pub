@@ -60,7 +60,9 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         reloadContent()
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: saveButton, radius: 2.0, width: 1.0)
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
+
         
     }
     
@@ -94,7 +96,13 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+
     func reloadContent() {
+        
         DispatchQueue.main.async {
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
         self.updateBackButtonText()
@@ -104,6 +112,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         self.newPasswordTextField.placeholderText = "NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)".localized()
         self.reEnterNewPasswordTextField.placeholderText = "RE-ENTER NEW PASSWORD".localized()
         }
+        
     }
     
     func keyBoardHidden(textField: UITextField) {
@@ -178,21 +187,38 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
                     self.saveActivityIndicator.stopAnimating()
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
-                let responseDict = json.dictionaryObject
-                //let code : NSNumber = responseDict?["code"] as! NSNumber
-                if let messageString = responseDict?["message"] {
+                    let responseDict = json.dictionaryObject
                     
-                    let alertMessage = messageString as! String
-                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                        (action) in
-                        self.view.endEditing(true)
-                        _ = self.navigationController?.popViewController(animated: true)
-                    })
-                    
-                    alertController.addAction(defaultAction)
-                    self.present(alertController, animated: true, completion: nil)
-                }
+                    if let code = responseDict?["code"] {
+                        let code = code as! NSNumber
+                        if code.intValue == 200 {
+                            
+                            let alertMessage = responseDict?["message"] as! String
+                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                                (action) in
+                                
+                                self.view.endEditing(true)
+                                _ = self.navigationController?.popViewController(animated: true)
+                                
+                            })
+                            alertController.addAction(defaultAction)
+                            DispatchQueue.main.async {
+                                
+                                self.present(alertController, animated: true, completion: nil)
+                            }
+                            
+                            
+                        }
+                        else {
+                            if let responseDict = json.dictionaryObject {
+                                let alertMessage = responseDict["message"] as! String
+                                self.showAlert(title: "", message: alertMessage)
+                            }
+                            
+                            
+                        }
+                    }
                 
             }
                 break
@@ -212,8 +238,8 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
     
     func isValid() -> Bool {
         
-        if currentPasswordTextField.contentTextField.text?.characters.count == 0 {
-            self.showAlert(title: "", message: "Please enter current password".localized())
+        if (currentPasswordTextField.contentTextField.text?.characters.count)! < 6 {
+            self.showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
             return false
         }
         else if (newPasswordTextField.contentTextField.text?.characters.count)! < 6 {

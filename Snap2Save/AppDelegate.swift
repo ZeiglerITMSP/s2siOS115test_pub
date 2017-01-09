@@ -67,19 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             storyBoard = UIStoryboard(name: "Main", bundle: nil);
         }
         
-//        if let user_id = user?.id {
-//            
-//        }
-//                    if user_id.isEmpty  {
-//                        // user exists
-//                        storyBoard = UIStoryboard(name: "Main", bundle: nil);
-//                    }
-//                    else {
-//                        storyBoard = UIStoryboard(name: "Home", bundle: nil);
-//
-//                    }
-        
-        
         let initialViewController: UIViewController = storyBoard!.instantiateInitialViewController()!
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
@@ -194,7 +181,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 alertController.addAction(okAction)
                 
                 DispatchQueue.main.async {
-                    
                     UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
                 }
                 
@@ -227,7 +213,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     
                     
-                    if urlScheme == "s2sregistrationconfirm"{
+                    if urlScheme == "s2sregistrationconfirm" {
                         
                         let device_id = UIDevice.current.identifierForVendor!.uuidString
                         let user_id = mutableDict.object(forKey: "userid") ?? ""
@@ -255,7 +241,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 let json = JSON(data: response.data!)
                                 print("json response\(json)")
                                 let responseDict = json.dictionaryObject
-                                let code = responseDict?["code"] as! NSNumber
+                                
+                                if let code = responseDict?["code"] {
+                                    let code = code as! NSNumber
+
                                 if code.intValue == 200 {
                                     
                                     let loginVc:WelcomePageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC") as! WelcomePageVC
@@ -281,6 +270,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         }
                                     }
                                 }
+                                }
                                 break
                                 
                             case .failure(let error):
@@ -303,7 +293,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
                         }
                         
-                        //let storyBoard = getStoryBoard(name: "Main") // Change the storyboard name based on the device, you may need to write a condition here for that
                     }
                         
                         

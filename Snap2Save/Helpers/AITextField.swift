@@ -322,6 +322,7 @@ class AITextField: UITextField {
             break
         }
         self.resignFirstResponder()
+        self.text = self.text
     }
     
     // MARK: -

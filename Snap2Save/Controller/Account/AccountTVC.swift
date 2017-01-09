@@ -50,16 +50,8 @@ class AccountTVC: UITableViewController {
         
         let data = UserDefaults.standard.object(forKey: LOGGED_USER)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)
-        
         let user = userInfo as! User
         
-        print("userInfo\(user.auto_login)")
-        print("userInfo\(user.id)")
-        print("userInfo\(user.zipcode)")
-        print("userInfo\(user.phone_number)")
-        print("userInfo\(user.additionalInformation?.city)")
-        
-
         let isAutoLogin : Bool = user.auto_login ?? true
         loginSwitch.isOn = isAutoLogin
         UserDefaults.standard.set(self.loginSwitch.isOn, forKey: USER_AUTOLOGIN)
@@ -168,11 +160,12 @@ class AccountTVC: UITableViewController {
         
         let cancelBtn = UIAlertAction.init(title: "Cancel".localized(), style: .cancel, handler:nil)
         
-        logOutAlert.view.tintColor = APP_GRREN_COLOR
         logOutAlert .addAction(englishBtn)
         logOutAlert.addAction(cancelBtn)
         
         self.present(logOutAlert, animated: true, completion:nil)
+        logOutAlert.view.tintColor = APP_GRREN_COLOR
+
         
     }
     
@@ -246,6 +239,7 @@ class AccountTVC: UITableViewController {
         UserDefaults.standard.removeObject(forKey: USER_ID)
         UserDefaults.standard.removeObject(forKey: AUTH_TOKEN)
         UserDefaults.standard.removeObject(forKey: LOGGED_USER)
+        UserDefaults.standard.removeObject(forKey: USER_DATA)
         
         AppDelegate.getDelegate().setDetaultValues()
         
@@ -293,7 +287,6 @@ class AccountTVC: UITableViewController {
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
                 HUD.hide()
-                print("json response\(json)")
                 let responseDict = json.dictionaryObject
                 
                 if let code = responseDict?["code"] {

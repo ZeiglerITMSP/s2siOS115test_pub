@@ -72,12 +72,14 @@ extension UIViewController {
         
         let cancelBtn = UIAlertAction.init(title: "Cancel".localized(), style: .cancel, handler:nil)
         
-        languageAlert.view.tintColor = APP_GRREN_COLOR
         languageAlert .addAction(englishBtn)
         languageAlert.addAction(spanishBtn)
         languageAlert.addAction(cancelBtn)
         
         self.present(languageAlert, animated: true, completion:nil)
+        
+        languageAlert.view.tintColor = APP_GRREN_COLOR
+
     }
 
 }

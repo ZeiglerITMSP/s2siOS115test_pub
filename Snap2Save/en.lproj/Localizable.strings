@@ -51,7 +51,7 @@
 //"ENGLISH" = "ENGLISH";
 
 //signUpAlert
-"SignUpAlertTitle" = "Thank you for joining Snap2Save!";
+"SignUpAlertTitle" = "Thank you for joining Snap2Save!\n\n";
 "SignUpAlertMessage" = "Before you are able to log in we need to verify your [cell phone number/email address]. You should receive a confirmation [text/email] soon. When it arrives, simply click on the link in the [text/email] and that will complete your registration process.";
 "Close" = "Close";
 
@@ -96,7 +96,7 @@
 "REFERRAL CODE (IF APPLICABLE)" = "REFERRAL CODE (IF APPLICABLE)";
 "REGISTER" = "REGISTER";
 
-"Please Select" = "Please Select";
+"Please select" = "Please Select";
 "Unit, Building, etc." = "Unit, Building, etc.";
 "Street address or PO box" = "Street address or PO box";
 
@@ -141,7 +141,7 @@
 
 // PREFERENCE VC
 "Preferences" = "Preferences";
-
+"You have chosen to be contacted by email, but have not provided a valid email address." = "You have chosen to be contacted by email, but have not provided a valid email address.";
 
 // CHANGEPASSWORD VC
 "Change Password" = "Change Password";

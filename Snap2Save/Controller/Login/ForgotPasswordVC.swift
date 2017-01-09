@@ -193,7 +193,37 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                 }
 
                 if let responseDict = json.dictionaryObject {
-                    let alertMessage = responseDict["message"] as! String
+                    if let code = responseDict["code"] {
+                    let code = code as! NSNumber
+                    if code.intValue == 200 {
+                        
+                        let alertMessage = responseDict["message"] as! String
+                        let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                            (action) in
+                            let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+                            self.navigationController?.show(loginVc, sender: self)
+                            
+
+                        })
+                        alertController.addAction(defaultAction)
+                        DispatchQueue.main.async {
+                            
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+
+                        
+                        }
+                    else {
+                        if let responseDict = json.dictionaryObject {
+                            let alertMessage = responseDict["message"] as! String
+                            self.showAlert(title: "", message: alertMessage)
+                        }
+
+
+                        }
+                    }
+                  /*  let alertMessage = responseDict["message"] as! String
                     let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
                     let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
                         (action) in
@@ -205,7 +235,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                     DispatchQueue.main.async {
                         
                         self.present(alertController, animated: true, completion: nil)
-                    }
+                    }*/
                 }
                 
                 break
