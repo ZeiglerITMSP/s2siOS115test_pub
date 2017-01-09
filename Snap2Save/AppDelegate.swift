@@ -10,11 +10,14 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Localize_Swift
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var user : User = User()
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -38,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isOnLaunch = UserDefaults.standard.dictionaryRepresentation().keys.contains(ON_LAUNCH)
         
         if isOnLaunch == false {
-            
             setDetaultValues()
             UserDefaults.standard.set(true, forKey: ON_LAUNCH)
             UserDefaults.standard.synchronize()
@@ -65,10 +67,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             storyBoard = UIStoryboard(name: "Main", bundle: nil);
         }
         
+//        if let user_id = user?.id {
+//            
+//        }
+//                    if user_id.isEmpty  {
+//                        // user exists
+//                        storyBoard = UIStoryboard(name: "Main", bundle: nil);
+//                    }
+//                    else {
+//                        storyBoard = UIStoryboard(name: "Home", bundle: nil);
+//
+//                    }
+        
+        
         let initialViewController: UIViewController = storyBoard!.instantiateInitialViewController()!
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
-        
+       
+        Fabric.with([Crashlytics.self])
+
         return true
     }
     
@@ -80,10 +97,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+//        let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
+//        if isAutoLogin == false{
+//            let storyBoard:UIStoryboard?
+//            storyBoard = UIStoryboard(name: "Main", bundle: nil);
+//            let initialViewController: UIViewController = storyBoard!.instantiateInitialViewController()!
+//            self.window?.rootViewController = initialViewController
+//            self.window?.makeKeyAndVisible()
+//            
+//        }
+
+        
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -98,11 +127,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if UserDefaults.standard.object(forKey: "user_id") != nil {
-            // user exists
-            
-        } else {
+        let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
+        let user_id = UserDefaults.standard.object(forKey: USER_ID)
+
+        if user.id.isEmpty {
             // user not exists
+            if user_id != nil{
+                if isAutoLogin == false{
+                    self.deepLinking(url : url)
+                }
+                else{
+                }
+            }
+            else{
+                self.deepLinking(url : url)
+            }
+        } else {
+           
+        }
+        return true
+        
+    }
+    
+    
+    func selectedTabBackground() {
+        
+        let imageWidht = Int(SCREEN_WIDTH) / 4
+        
+        let size = CGSize(width: imageWidht, height: 49)
+        
+        let tabIndicator = UIImage(color: UIColor.green, size: size)
+        //        let tabResizableIndicator = tabIndicator?.resizableImage(
+        //            withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
+        
+        UITabBar.appearance().selectionIndicatorImage = tabIndicator
+        
+    }
+    
+    class func getDelegate() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func setDetaultValues() {
+        
+        // ..
+        //UserDefaults.standard.set(true, forKey: USER_AUTOLOGIN)
+        UserDefaults.standard.synchronize()
+        // ..
+        Localize.setCurrentLanguage("en")
+        
+    }
+    
+    func deepLinking( url : URL){
+        
             let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
             let isReachable = reachbility.isReachable
             // Reachability
@@ -125,7 +202,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             else {
                 
-                let urlString = url.absoluteString
+                let urlString : String = url.absoluteString
                 print("url string is\(urlString)")
                 let urlScheme = url.scheme
                 print("url scheme is\(urlScheme)")
@@ -184,7 +261,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     let loginVc:WelcomePageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC") as! WelcomePageVC
                                     self.window?.rootViewController = loginVc
                                     self.window?.makeKeyAndVisible()
-
+                                    
                                 }
                                     
                                 else {
@@ -211,14 +288,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 DispatchQueue.main.async {
                                     let alertController = UIAlertController(title: "", message: "Sorry, Please try again later", preferredStyle: .alert)
                                     
-                                    
                                     let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
                                     })
                                     
                                     alertController.addAction(okAction)
                                     
                                     UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
-                                
+                                    
                                 }
                                 
                                 print(error)
@@ -249,41 +325,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
+            
         }
-        return true
-        
-    }
-    
-    
-    func selectedTabBackground() {
-        
-        
-        
-        let imageWidht = Int(SCREEN_WIDTH) / 4
-        
-        let size = CGSize(width: imageWidht, height: 49)
-        
-        let tabIndicator = UIImage(color: UIColor.green, size: size)
-        //        let tabResizableIndicator = tabIndicator?.resizableImage(
-        //            withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
-        
-        UITabBar.appearance().selectionIndicatorImage = tabIndicator
-        
-    }
-    
-    class func getDelegate() -> AppDelegate {
-        return UIApplication.shared.delegate as! AppDelegate
-    }
-    
-    func setDetaultValues() {
-        
-        // ..
-        UserDefaults.standard.set(false, forKey: USER_AUTOLOGIN)
-        UserDefaults.standard.synchronize()
-        // ..
-        Localize.setCurrentLanguage("en")
-        
-    }
     
     
 }

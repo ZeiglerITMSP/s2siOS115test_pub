@@ -323,15 +323,22 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
                 let responseDict = json.dictionaryObject
+                
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
                     if code.intValue == 200 {
                         
                         if let userDict = responseDict?["user"] {
                             self.user = User.prepareUser(dictionary: userDict as! [String : Any])
+                           self.user.auth_token = responseDict?["auth_token"] as! String
+                            AppDelegate.getDelegate().user = self.user
+                            
                             let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
                             UserDefaults.standard.set(userData, forKey: LOGGED_USER)
+                            
+                            
                         }
+                        
                         if let auth_token = responseDict?["auth_token"] as? String {
                             UserDefaults.standard.set(auth_token, forKey: AUTH_TOKEN)
                             

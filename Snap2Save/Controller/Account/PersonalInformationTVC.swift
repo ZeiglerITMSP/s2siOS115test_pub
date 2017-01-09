@@ -450,7 +450,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             return
         }
         
-        let userData = UserDefaults.standard.object(forKey: LOGGED_USER)
+        let userData = UserDefaults.standard.object(forKey: USER_DATA)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
         
         print("user info \(userInfo)")
@@ -560,7 +560,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
 
     func loadUserInformation(){
        // print("user id\(self.user.id)")
-        let userData = UserDefaults.standard.object(forKey: LOGGED_USER)
+        let userData = UserDefaults.standard.object(forKey: USER_DATA)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
         
         print("user info \(userInfo)")
@@ -605,7 +605,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             if index == 0 {
                 ethnicityTextField.text = ""
             }
-            else{
+            else {
                 SelectedEthnicityIndex = index
                 ethnicityTextField.text = ethnicityArray.object(at: index - 1) as? String
 
@@ -667,8 +667,9 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 if code.intValue == 200 {
                     if let userDict = responseDict?["user"] {
                         self.user = User.prepareUser(dictionary: userDict as! [String : Any])
+                       // self.user.auth_token = responseDict?["auth_token"] as! String
                         let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
-                        UserDefaults.standard.set(userData, forKey: LOGGED_USER)
+                        UserDefaults.standard.set(userData, forKey: USER_DATA)
                         self.loadUserInformation()
                     }
                 }

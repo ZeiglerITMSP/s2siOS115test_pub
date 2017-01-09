@@ -10,7 +10,10 @@ target 'Snap2Save' do
   pod 'PKHUD', '~> 4.0'
   pod 'Alamofire', '~> 4.0'
   pod 'SwiftyJSON'
-
+  
+  pod 'Fabric'
+  pod 'Crashlytics'
+  
 target 'Snap2SaveTests' do
     inherit! :search_paths
     # Pods for testing

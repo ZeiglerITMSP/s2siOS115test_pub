@@ -35,10 +35,9 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         }
         changePassword()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
         
         currentPasswordTextField.contentTextField.textFieldType = AITextField.AITextFieldType.PasswordTextField
         newPasswordTextField.contentTextField.textFieldType = AITextField.AITextFieldType.PasswordTextField
@@ -52,13 +51,19 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         newPasswordTextField.contentTextField.aiDelegate = self
         reEnterNewPasswordTextField.contentTextField.aiDelegate = self
         
-        
+        currentPasswordTextField.contentTextField.returnKeyType = .next
+        newPasswordTextField.contentTextField.returnKeyType = .next
+        reEnterNewPasswordTextField.contentTextField.returnKeyType = .done
+
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: saveButton, radius: 2.0, width: 1.0)
+        
+        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
@@ -85,10 +90,8 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         self.showLanguageSelectionAlert()
     }
     
-    func backAction(){
-        
+    func backAction() {
         _ = self.navigationController?.popViewController(animated: true)
-        
     }
     
     func reloadContent() {
@@ -104,6 +107,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
     }
     
     func keyBoardHidden(textField: UITextField) {
+        
         if textField == currentPasswordTextField.contentTextField{
             newPasswordTextField.contentTextField.becomeFirstResponder()
         }
@@ -123,7 +127,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // #warning Inc omplete implementation, return the number of rows
         return 5
     }
     
@@ -131,60 +135,6 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         return 0.1
     }
     
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     func changePassword(){
         
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
@@ -260,7 +210,8 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         }
     }
     
-    func isValid() -> Bool{
+    func isValid() -> Bool {
+        
         if currentPasswordTextField.contentTextField.text?.characters.count == 0 {
             self.showAlert(title: "", message: "Please enter current password".localized())
             return false
@@ -270,7 +221,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
             return false
         }
         else if reEnterNewPasswordTextField.contentTextField.text != newPasswordTextField.contentTextField.text {
-            self.showAlert(title: "", message: "Passwords don't match".localized())
+            self.showAlert(title: "", message: "Entries must match to proceed".localized())
             return false
         }
         return true

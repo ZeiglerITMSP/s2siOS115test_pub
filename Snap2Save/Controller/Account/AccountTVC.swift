@@ -10,12 +10,14 @@ import UIKit
 import Localize_Swift
 import Alamofire
 import SwiftyJSON
+import PKHUD
 
 
 class AccountTVC: UITableViewController {
     
     var languageSelectionButton: UIButton!
     var infoArray : NSMutableArray!
+    var user:User = User()
     
     @IBOutlet var autoLoginLabel: UILabel!
     
@@ -28,7 +30,7 @@ class AccountTVC: UITableViewController {
     @IBOutlet var loginSwitch: UISwitch!
     
     @IBAction func autoLoginSwitchAction(_ sender: UISwitch) {
-            UserDefaults.standard.set(sender.isOn, forKey: USER_AUTOLOGIN)
+        self.updateSettings()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,20 +41,33 @@ class AccountTVC: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
-        loginSwitch.isOn = isAutoLogin
         
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
         infoArray = ["Auto Log In","Personal Information","Preferences","Change Password"];
         
+        
+        let data = UserDefaults.standard.object(forKey: LOGGED_USER)
+        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)
+        
+        let user = userInfo as! User
+        
+        print("userInfo\(user.auto_login)")
+        print("userInfo\(user.id)")
+        print("userInfo\(user.zipcode)")
+        print("userInfo\(user.phone_number)")
+        print("userInfo\(user.additionalInformation?.city)")
+        
+
+        let isAutoLogin : Bool = user.auto_login ?? true
+        loginSwitch.isOn = isAutoLogin
+        UserDefaults.standard.set(self.loginSwitch.isOn, forKey: USER_AUTOLOGIN)
         reloadContent()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         reloadContent()
     }
     
@@ -205,9 +220,7 @@ class AccountTVC: UITableViewController {
                 
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil);
                 let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
-                
-                //  let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LandingVC")
-                //  initialViewController.pushViewController(loginVc, animated: true)
+                //AppDelegate.getDelegate().user = nil
                 
                 UIApplication.shared.keyWindow?.rootViewController = initialViewController
                 
@@ -236,10 +249,96 @@ class AccountTVC: UITableViewController {
         
         AppDelegate.getDelegate().setDetaultValues()
         
-//        // reset language
-//        Localize.resetCurrentLanguageToDefault()
-//       // Localize.defaultLanguage()
         
     }
     
+    func updateSettings() {
+        
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        print("isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+        HUD.allowsInteraction = false
+        HUD.dimsBackground = false
+        HUD.show(.progress)
+
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
+        let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
+        let currentLanguage = Localize.currentLanguage()
+        
+        
+        let parameters = ["user_id": user_id,
+                          "auto_login": loginSwitch.isOn,
+                          "auth_token": auth_token,
+                          "platform":"1",
+                          "version_code": "1",
+                          "version_name": "1",
+                          "device_id": device_id,
+                          "language":currentLanguage
+            ] as [String : Any]
+        
+        print(parameters)
+        
+        let url = String(format: "%@/updateSettings", hostUrl)
+        print(url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            switch response.result {
+                
+            case .success:
+                let json = JSON(data: response.data!)
+                print("json response\(json)")
+                HUD.hide()
+                print("json response\(json)")
+                let responseDict = json.dictionaryObject
+                
+                if let code = responseDict?["code"] {
+                    let code = code as! NSNumber
+                    if code.intValue == 200 {
+                        
+                        if let userDict = responseDict?["user"] {
+                            self.user = User.prepareUser(dictionary: userDict as! [String : Any])
+                            AppDelegate.getDelegate().user = self.user
+                            let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
+                            UserDefaults.standard.set(userData, forKey: LOGGED_USER)
+                            UserDefaults.standard.set(self.loginSwitch.isOn, forKey: USER_AUTOLOGIN)
+
+                        }
+                        
+                    }
+                    else {
+                        
+                        if let responseDict = json.dictionaryObject {
+                            let alertMessage = responseDict["message"] as! String
+                            self.showAlert(title: "", message: alertMessage)
+                        }
+                        print("user id\(self.user.id)")
+                        print("user info \(self.user.additionalInformation)")
+                        
+                    }
+                    
+                }
+                
+                
+                break
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    HUD.hide()
+
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                }
+                print(error)
+                break
+            }
+            
+            
+        }
+        
+    }
 }

@@ -98,7 +98,7 @@
 "REGISTER" = "REGISTRARME";
 
 
-"Please select" = "Seleccione";
+"Please Select" = "Seleccione";
 "Unit, Building, etc." = "Dirección o casilla de correo";
 "Street address or PO box" = "Unidad, edificio, etc.";
 
@@ -171,6 +171,7 @@
 
 
 "Are you sure you want to log out?" = "Are you sure you want to log out?";
+"Entries must match to proceed" = "Los valores deben coincidir para continuar";
 
 
 

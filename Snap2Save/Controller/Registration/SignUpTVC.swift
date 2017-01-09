@@ -315,7 +315,6 @@ class SignUpTVC: UITableViewController {
         passwordTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         passwordTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         passwordTextField.text_Color =  UIColor.black
-        
         reEnterPasswordTextField.textFieldType = AITextField.AITextFieldType.PasswordTextField
         reEnterPasswordTextField.updateUIAsPerTextFieldType()
         reEnterPasswordTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
@@ -422,7 +421,7 @@ class SignUpTVC: UITableViewController {
         }
         
         if reEnterMobileNumTextField.text != mobileNumTextField.text {
-            showAlert(title: "", message: "Phone Numbers don't match".localized())
+            showAlert(title: "", message: "Entries must match to proceed".localized())
             return false
         }
            
@@ -432,7 +431,7 @@ class SignUpTVC: UITableViewController {
         }
         
         if reEnterPasswordTextField.text != passwordTextField.text{
-            showAlert(title: "", message: "Passwords don't match".localized())
+            showAlert(title: "", message: "Entries must match to proceed".localized())
             return false
         }
         
@@ -450,7 +449,7 @@ class SignUpTVC: UITableViewController {
             
             
         if reEnterEmailTextField.text != emailTextField.text {
-            showAlert(title: "", message: "Emails don't match".localized())
+            showAlert(title: "", message: "Entries must match to proceed".localized())
             return false
         }
 
@@ -507,14 +506,13 @@ extension SignUpTVC: AITextFieldProtocol {
             
         }
         
-        if textField == zipCodeTextField{
+        if textField == zipCodeTextField {
             let currentCharacterCount = textField.text?.characters.count ?? 0
             if (range.length + range.location > currentCharacterCount){
                 return false
             }
             let newLength = currentCharacterCount + string.characters.count - range.length
             return newLength <= 5
-
         }
         
         return true

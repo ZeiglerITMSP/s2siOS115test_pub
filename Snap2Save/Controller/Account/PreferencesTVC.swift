@@ -81,6 +81,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         mobileNumberTextField.contentTextField.aiDelegate = self
         reEnterMobileNumberTextField.contentTextField.aiDelegate = self
         
+        emailPlaceHolderTextField.contentTextField.returnKeyType = UIReturnKeyType.next
+        
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: saveButton, radius: 2.0, width: 1.0)
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -319,7 +321,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             return false
         }
         if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
-            self.showAlert(title: "", message: "Phone Numbers don't match".localized())
+            self.showAlert(title: "", message: "Entries must match to proceed".localized())
             return false
         }
         
@@ -356,7 +358,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     }
     
     func loadData() {
-        let userData = UserDefaults.standard.object(forKey: LOGGED_USER)
+        let userData = UserDefaults.standard.object(forKey: USER_DATA)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
         
         print("user info \(userInfo)")
@@ -432,7 +434,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                             
                             self.user = User.prepareUser(dictionary: userDict )
                             let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
-                            UserDefaults.standard.set(userData, forKey: LOGGED_USER)
+                            UserDefaults.standard.set(userData, forKey: USER_DATA)
                             
                             let phoneNumber = userDict["phone_number"]
                             UserDefaults.standard.set(phoneNumber, forKey: MOBILE_NUMBER)

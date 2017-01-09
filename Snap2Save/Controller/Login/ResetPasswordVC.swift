@@ -35,7 +35,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         }
             
         else if reEnterPasswordTextField.text != passwordTextField.text{
-            self.showAlert(title: "", message: "Passwords don't match".localized())
+            self.showAlert(title: "", message: "Entries must match to proceed".localized())
             return
         }
         resetPassword()

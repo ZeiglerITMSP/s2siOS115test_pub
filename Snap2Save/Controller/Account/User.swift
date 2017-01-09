@@ -23,6 +23,7 @@ class User: NSObject, NSCoding {
     var is_verified = ""
     var zipcode = ""
     var contact_preference = ""
+    var auto_login : Bool?
     
     var additionalInformation: AdditionalInformation?
     
@@ -34,7 +35,7 @@ class User: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         
         self.auth_token = aDecoder.decodeObject(forKey: "auth_token") as? String ?? ""
-        self.id = aDecoder.decodeObject(forKey: "user_id") as? String ?? ""
+        self.id = aDecoder.decodeObject(forKey: "id") as? String ?? ""
         
         self.first_name = aDecoder.decodeObject(forKey: "first_name") as? String ?? ""
         self.last_name = aDecoder.decodeObject(forKey: "last_name") as? String ?? ""
@@ -46,7 +47,8 @@ class User: NSObject, NSCoding {
         self.is_verified = aDecoder.decodeObject(forKey: "is_verified") as? String ?? ""
         self.zipcode = aDecoder.decodeObject(forKey: "zipcode") as? String ?? ""
         self.contact_preference = aDecoder.decodeObject(forKey: "contact_preference") as? String ?? ""
-
+        self.auto_login = aDecoder.decodeObject(forKey: "auto_login") as? Bool ?? true
+        
         self.additionalInformation = aDecoder.decodeObject(forKey: "additional_info") as? AdditionalInformation
         
     }
@@ -58,13 +60,13 @@ class User: NSObject, NSCoding {
         aCoder.encode(self.email, forKey: "email")
         aCoder.encode(self.first_name, forKey: "first_name")
         aCoder.encode(self.last_name, forKey: "last_name")
-        
         aCoder.encode(self.phone_number, forKey: "phone_number")
-        
         aCoder.encode(self.signup_type, forKey: "signup_type")
         aCoder.encode(self.is_verified, forKey: "is_verified")
         aCoder.encode(self.zipcode, forKey: "zipcode")
         aCoder.encode(self.contact_preference, forKey: "contact_preference")
+        aCoder.encode(self.auto_login, forKey: "auto_login")
+
         aCoder.encode(self.additionalInformation, forKey: "additional_info")
     }
     
@@ -103,11 +105,14 @@ class User: NSObject, NSCoding {
         if let is_verified = dictionary["is_verified"] as? String {
             user.is_verified = is_verified
         }
-        if let contact_preference = dictionary["contact_preference"]{
+        if let contact_preference = dictionary["contact_preference"] {
             user.contact_preference = "\(contact_preference)"
         }
-        if let zip_code = dictionary["zipcode"]{
+        if let zip_code = dictionary["zipcode"] {
             user.zipcode = "\(zip_code)"
+        }
+        if let auto_login = dictionary["auto_login"] {
+            user.auto_login = auto_login as? Bool
         }
         if let additionalInformation = dictionary["additional_info"] as? [String:Any] {
             user.additionalInformation = AdditionalInformation.prepareAdditionalInfo(dictionary: additionalInformation)

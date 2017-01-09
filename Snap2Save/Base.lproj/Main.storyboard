@@ -388,7 +388,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -428,7 +428,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -558,7 +558,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -607,7 +607,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -839,7 +839,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -881,7 +881,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -958,7 +958,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1001,7 +1001,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1038,7 +1038,7 @@
                                                             </constraints>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                                     <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1333,7 +1333,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1376,7 +1376,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1654,25 +1654,25 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpM-lX-9CI">
-                                                <rect key="frame" x="185.66666666666666" y="334" width="42" height="21"/>
+                                                <rect key="frame" x="189.33333333333334" y="334" width="35" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="6lg-bI-a6E"/>
-                                                    <constraint firstAttribute="width" constant="42" id="aAI-no-lzU"/>
+                                                    <constraint firstAttribute="width" constant="35" id="aAI-no-lzU"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jCy-qL-jWB">
-                                                <rect key="frame" x="130.66666666666666" y="345.66666666666669" width="32" height="2"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="137.33333333333334" y="345.66666666666669" width="32" height="2"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="TBv-Sj-ZVP"/>
                                                     <constraint firstAttribute="width" constant="32" id="usR-in-O6r"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWJ-ie-0ir">
-                                                <rect key="frame" x="250.66666666666669" y="345.66666666666669" width="32.000000000000057" height="2"/>
+                                                <rect key="frame" x="244.33333333333331" y="345.66666666666669" width="31.999999999999943" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="Smp-bw-t6U"/>
@@ -1682,7 +1682,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-DIGIT CELL PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKO-wY-TWK">
                                                 <rect key="frame" x="26" y="402" width="362" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
-                                                <color key="textColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7as-cn-auN" customClass="AITextField" customModule="Snap2Save" customModuleProvider="target">
@@ -1701,7 +1701,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfQ-OI-Z8f">
                                                 <rect key="frame" x="26" y="486" width="362" height="16"/>
@@ -1716,7 +1716,7 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="Forgot Password?">
-                                                    <color key="titleColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="forgotPasswordButtonAction:" destination="BI6-1v-Spj" eventType="touchUpInside" id="Acg-Uy-o4t"/>
@@ -1757,14 +1757,14 @@
                                             <constraint firstItem="IpM-lX-9CI" firstAttribute="top" secondItem="5cw-Ll-YbS" secondAttribute="bottom" constant="58" id="Vhv-3u-aZt"/>
                                             <constraint firstItem="UKO-wY-TWK" firstAttribute="top" secondItem="IpM-lX-9CI" secondAttribute="bottom" constant="47" id="XZ7-gW-ZaV"/>
                                             <constraint firstItem="dAC-CS-MJy" firstAttribute="leading" secondItem="jKV-XA-LTN" secondAttribute="trailing" constant="-40" id="XtF-qJ-Vpi"/>
-                                            <constraint firstItem="cWJ-ie-0ir" firstAttribute="leading" secondItem="IpM-lX-9CI" secondAttribute="trailing" constant="23" id="bdJ-Zz-qdn"/>
+                                            <constraint firstItem="cWJ-ie-0ir" firstAttribute="leading" secondItem="IpM-lX-9CI" secondAttribute="trailing" constant="20" id="bdJ-Zz-qdn"/>
                                             <constraint firstAttribute="trailing" secondItem="7as-cn-auN" secondAttribute="trailing" constant="26" id="c8t-5O-twv"/>
                                             <constraint firstItem="7as-cn-auN" firstAttribute="top" secondItem="UKO-wY-TWK" secondAttribute="bottom" constant="8" id="ekL-b7-Q2I"/>
                                             <constraint firstItem="8Dq-aG-HNn" firstAttribute="leading" secondItem="4JJ-sg-926" secondAttribute="leading" constant="26" id="htl-5T-pXi"/>
                                             <constraint firstItem="iaJ-f6-FEI" firstAttribute="leading" secondItem="4JJ-sg-926" secondAttribute="leading" constant="35" id="ijE-18-Cvd"/>
                                             <constraint firstAttribute="trailing" secondItem="jKV-XA-LTN" secondAttribute="trailing" constant="20" id="k9a-jE-QCh"/>
                                             <constraint firstItem="jKV-XA-LTN" firstAttribute="centerY" secondItem="dAC-CS-MJy" secondAttribute="centerY" id="nYj-bc-C0s"/>
-                                            <constraint firstItem="IpM-lX-9CI" firstAttribute="leading" secondItem="jCy-qL-jWB" secondAttribute="trailing" constant="23" id="oAt-NJ-E07"/>
+                                            <constraint firstItem="IpM-lX-9CI" firstAttribute="leading" secondItem="jCy-qL-jWB" secondAttribute="trailing" constant="20" id="oAt-NJ-E07"/>
                                             <constraint firstItem="jCy-qL-jWB" firstAttribute="centerY" secondItem="IpM-lX-9CI" secondAttribute="centerY" constant="2" id="poZ-8u-dTd"/>
                                             <constraint firstItem="IpM-lX-9CI" firstAttribute="centerY" secondItem="cWJ-ie-0ir" secondAttribute="centerY" constant="-2" id="qBr-Wy-AKG"/>
                                             <constraint firstItem="5cw-Ll-YbS" firstAttribute="top" secondItem="iaJ-f6-FEI" secondAttribute="bottom" constant="40" id="rFr-Y5-UH0"/>
@@ -1944,7 +1944,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                         <color key="value" cocoaTouchSystemColor="darkTextColor"/>
@@ -1966,7 +1966,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="text_Color">
                                         <color key="value" cocoaTouchSystemColor="darkTextColor"/>
