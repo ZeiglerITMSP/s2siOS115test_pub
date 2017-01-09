@@ -116,7 +116,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
         loadTextFields();
-        print(userDetailsDict)
+        //print("userDetailsDict)
         
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -458,7 +458,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -533,11 +533,11 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                           "signup_type": "1"
             ] as [String : Any]
         
-        print(parameters)
+        //print("parameters)
         
         registerActivityIndicator.startAnimating()
         let url = String(format: "%@/signUp", hostUrl)
-        print(url)
+        //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             switch response.result {
@@ -547,7 +547,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                 }
                 
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print(""json response\(json)")
                 
                 if (json.dictionary != nil) {
                     // let jsonDict = json
@@ -575,7 +575,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                     self.registerActivityIndicator.stopAnimating()
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
-                print(error)
+                //print("error)
                 break
             }
             
@@ -587,7 +587,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     func getSelectedIndexFromPicker(selectedIndex: NSInteger, textField: AITextField) {
         let index = selectedIndex
-        print("Index\(index)")
+        //print(""Index\(index)")
         if (textField.tag == DropDownTags.states.rawValue) {
             selectedStateIndex = index
         }

@@ -170,7 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
             let isReachable = reachbility.isReachable
             // Reachability
-            print("isreachable \(isReachable)")
+            ////print(""isreachable \(isReachable)")
             if isReachable == false {
                 let alertController = UIAlertController(title: "", message: "Please check your internet connection".localized(), preferredStyle: .alert)
                 
@@ -189,9 +189,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             else {
                 
                 let urlString : String = url.absoluteString
-                print("url string is\(urlString)")
+                ////print(""url string is\(urlString)")
                 let urlScheme = url.scheme
-                print("url scheme is\(urlScheme)")
+                ////print(""url scheme is\(urlScheme)")
                 
                 if urlString.characters.count > 0 {
                     let query = url.query
@@ -200,7 +200,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     for component:String in components!
                     {
                         let bits = component.components(separatedBy: "userid=")
-                        print("bits\(bits)")
+                        ////print(""bits\(bits)")
                         if bits.count == 2
                         {
                             
@@ -208,7 +208,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let value = bits[1] as String
                             
                             mutableDict.setObject(value, forKey: key_string as NSCopying)
-                            print("mutableDict is\(mutableDict)")
+                            ////print(""mutableDict is\(mutableDict)")
                         }
                     }
                     
@@ -229,17 +229,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             ] as [String : Any]
                         
                         
-                        print(parameters)
+                        ////print("parameters)
                         
                         let url = String(format: "%@/confirmRegistration", hostUrl)
-                        print(url)
+                        ////print("url)
                         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
                             
                             switch response.result {
                             case .success:
                                 
                                 let json = JSON(data: response.data!)
-                                print("json response\(json)")
+                                ////print(""json response\(json)")
                                 let responseDict = json.dictionaryObject
                                 
                                 if let code = responseDict?["code"] {
@@ -287,7 +287,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     
                                 }
                                 
-                                print(error)
+                                ////print("error)
                                 break
                             }
                             

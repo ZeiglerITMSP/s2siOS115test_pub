@@ -144,12 +144,12 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         return 0.1
     }
     
-    func changePassword(){
+    func changePassword() {
         
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        ////print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -176,9 +176,9 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
             ] as [String : Any]
         
         saveActivityIndicator.startAnimating()
-        print(parameters)
+        ////print("parameters)
         let url = String(format: "%@/changePassword", hostUrl)
-        print(url)
+        ////print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
@@ -186,7 +186,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                ////print(""json response\(json)")
                     let responseDict = json.dictionaryObject
                     
                     if let code = responseDict?["code"] {
@@ -229,7 +229,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
                     self.saveActivityIndicator.stopAnimating()
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
-                print(error)
+                //print("error)
                 break
             }
     

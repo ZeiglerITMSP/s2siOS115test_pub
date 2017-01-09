@@ -156,7 +156,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -176,18 +176,18 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                         ] as [String : Any]
         
         
-        print(parameters)
+        //print("parameters)
         submitActivityIndicator.startAnimating()
         
         let url = String(format: "%@/forgotPassword", hostUrl)
-        print(url)
+        //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             switch response.result {
             case .success:
                 
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print(""json response\(json)")
                 DispatchQueue.main.async {
                     self.submitActivityIndicator.stopAnimating()
                 }
@@ -246,7 +246,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                     self.submitActivityIndicator.stopAnimating()
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
-                print(error)
+                //print("error)
                 break
             }
             

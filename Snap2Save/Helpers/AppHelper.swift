@@ -20,7 +20,7 @@ class AppHelper {
         view.layer.borderColor = borderColor.cgColor
         view.layer.borderWidth = width
         view.layer.masksToBounds = true
-        ////print("border created")
+        //////print(""border created")
     }
     
     class func imageWithColor( color:UIColor) -> UIImage
@@ -52,7 +52,7 @@ class AppHelper {
     }
     
     class func isValidEmail(testStr:String) -> Bool {
-        // //print("validate calendar: \(testStr)")
+        // ////print(""validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)

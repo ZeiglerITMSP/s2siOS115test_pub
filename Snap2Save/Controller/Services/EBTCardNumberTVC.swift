@@ -124,16 +124,16 @@ class EBTCardNumberTVC: UITableViewController {
         ebtWebView.webView.evaluateJavaScript(jsGetPageUrl) { (result, error) in
             
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print("result ?? "result nil")
                 let pageUrl = result as! String
                 if pageUrl == "https://ucard.chase.com/cardValidation_setup.action?screenName=register&page=logon" {
                     
 //                    self.autoFill(cardNumber: self.cardNumberField.contentTextField.text!)
                     
                 } else {
-                    print("page not loaded")
+                    //print(""page not loaded")
                 }
             }
         }
@@ -155,9 +155,9 @@ class EBTCardNumberTVC: UITableViewController {
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print("result ?? "result nil")
 //                self.checkForErrorMessage()
             }
         }
@@ -169,9 +169,9 @@ class EBTCardNumberTVC: UITableViewController {
         
         ebtWebView.webView.evaluateJavaScript(jsStatusMessage) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print("result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 
@@ -198,13 +198,13 @@ class EBTCardNumberTVC: UITableViewController {
         let jsPageTitle = "$('.PageHeader').text();"
         ebtWebView.webView.evaluateJavaScript(jsPageTitle) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result!)
+                //print("result!)
                 
                 let stringResult = result as! String
                 let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(pageTitle)
+                //print("pageTitle)
                 
                 if pageTitle == "Online Terms and Conditions" {
                     
@@ -222,12 +222,12 @@ class EBTCardNumberTVC: UITableViewController {
         let jsAcceptClick = "void($('form')[1].submit());"
         ebtWebView.webView.evaluateJavaScript(jsAcceptClick) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print("result ?? "result nil")
 //                let stringResult = result as! String
 //                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-//                print(pageTitle)
+//                //print("pageTitle)
                 
             }
         }

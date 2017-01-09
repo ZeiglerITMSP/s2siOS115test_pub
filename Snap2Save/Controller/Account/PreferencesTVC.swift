@@ -231,7 +231,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -266,15 +266,15 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                           "language":currentLanguage
             ] as [String : Any]
         saveActivityIndicator.startAnimating()
-        print(parameters)
+        //print("parameters)
         let url = String(format: "%@/updatePreferences", hostUrl)
-        print(url)
+        //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print(""json response\(json)")
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
                     
@@ -334,7 +334,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
-                print(error)
+                //print("error)
                 break
             }
             
@@ -423,7 +423,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let userData = UserDefaults.standard.object(forKey: USER_DATA)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
         
-        print("user info \(userInfo)")
+        //print(""user info \(userInfo)")
         
         let user:User = userInfo as! User
         
@@ -448,7 +448,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -473,9 +473,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                           "language": currentLanguage
             ] as [String : Any]
         
-        print(parameters)
+        //print("parameters)
         let url = String(format: "%@/getProfile", hostUrl)
-        print(url)
+        //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
@@ -484,7 +484,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                     HUD.hide()
                 }
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print(""json response\(json)")
                 let responseDict = json.dictionaryObject
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
@@ -497,10 +497,10 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                             UserDefaults.standard.set(userData, forKey: USER_DATA)
                             let phoneNumber = userDict["phone_number"]
                             UserDefaults.standard.set(phoneNumber, forKey: MOBILE_NUMBER)
-                            print("phoneNumber \(phoneNumber)")
+                            //print(""phoneNumber \(phoneNumber)")
                             let email = userDict["email"]
                             UserDefaults.standard.set(email, forKey: EMAIL)
-                            print("email \(email)")
+                            //print(""email \(email)")
                             self.loadData()
                             
                         }
@@ -521,7 +521,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                     HUD.hide()
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
-                print(error)
+                //print("error)
                 break
             }
             

@@ -69,7 +69,7 @@ class EBTWebView: NSObject {
         let jsPageTitle = "$('.PageHeader').text();"
         webView.evaluateJavaScript(jsPageTitle) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
                 
                 completion(nil)
                 
@@ -77,7 +77,7 @@ class EBTWebView: NSObject {
                 
                 let stringResult = result as! String
                 let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(pageTitle)
+                //print("pageTitle)
                 
                 completion(pageTitle)
             }
@@ -93,45 +93,45 @@ extension EBTWebView: WKNavigationDelegate {
     //MARK:- WKNavigationDelegate
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print("\n -- didFail -- \n")
-        print(error.localizedDescription)
+        //print(""\n -- didFail -- \n")
+        //print("error.localizedDescription)
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        print("\n -- navigationAction -- \n")
+        //print(""\n -- navigationAction -- \n")
         
-        print(navigationAction.request)
+        //print("navigationAction.request)
         
         decisionHandler(.allow)
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         
-        print("\n -- navigationResponse -- \n")
+        //print(""\n -- navigationResponse -- \n")
         
-        print(navigationResponse.response)
+        //print("navigationResponse.response)
         
         decisionHandler(.allow)
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        print("\n -- didStartProvisional -- \n")
+        //print(""\n -- didStartProvisional -- \n")
         
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("\n -- didFinish -- \n")
+        //print(""\n -- didFinish -- \n")
 
         self.responder?.didFinishLoadingWebView()
     }
     
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
         
-        print("\n -- didReceiveServerRedirectForProvisional -- \n")
+        //print(""\n -- didReceiveServerRedirectForProvisional -- \n")
     }
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        print("\n -- didCommit -- \n")
+        //print(""\n -- didCommit -- \n")
         
     }
     

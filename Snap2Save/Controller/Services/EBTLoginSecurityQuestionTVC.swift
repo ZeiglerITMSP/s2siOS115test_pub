@@ -119,12 +119,12 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print("result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedErrorMessage)
+                //print("trimmedErrorMessage)
                 
                 if trimmedErrorMessage.characters.count > 0 {
                     
@@ -167,12 +167,12 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
         ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print("result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedErrorMessage)
+                //print("trimmedErrorMessage)
                 
                 if trimmedErrorMessage.characters.count > 0 {
                     

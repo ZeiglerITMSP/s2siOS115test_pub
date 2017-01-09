@@ -118,13 +118,13 @@ class EBTAuthenticationTVC: UITableViewController {
         
         ebtWebView.webView.evaluateJavaScript(jsStatusMessage) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print("status mesage ========")
-                print(result ?? "result nil")
+                //print(""status mesage ========")
+                //print("result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedErrorMessage)
+                //print("trimmedErrorMessage)
                 
                 if trimmedErrorMessage.characters.count > 0 {
                     
@@ -161,14 +161,14 @@ class EBTAuthenticationTVC: UITableViewController {
         let jsPageTitle = "$('.PageHeader').text();"
         ebtWebView.webView.evaluateJavaScript(jsPageTitle) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
                 
-                print(result!)
+                //print("result!)
                 
                 let stringResult = result as! String
                 let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(pageTitle)
+                //print("pageTitle)
                 
                 self.errorMessageLabel.text = pageTitle
                 self.tableView.reloadData()
@@ -183,12 +183,12 @@ class EBTAuthenticationTVC: UITableViewController {
         
         ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print("result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedErrorMessage)
+                //print("trimmedErrorMessage)
                 
                 if trimmedErrorMessage.characters.count > 0 {
                     

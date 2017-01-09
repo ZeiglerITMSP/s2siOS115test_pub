@@ -248,7 +248,7 @@ class EBTLoginTVC: UITableViewController {
         //let loginUrl_es = "https://ucard.chase.com/locale?request_locale=es"
         let url = NSURL(string: loginUrl_en)
         let request = NSURLRequest(url: url! as URL)
-        print("asdfasdf")
+        //print(""asdfasdf")
         actionType = .loadPage
         ebtWebView.webView.load(request as URLRequest)
     }
@@ -260,9 +260,9 @@ class EBTLoginTVC: UITableViewController {
         ebtWebView.webView.evaluateJavaScript(jsGetPageUrl) { (result, error) in
             
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print("result ?? "result nil")
                 let pageUrl = result as! String
                 
                 let validUrl = "http://internal.appit.ventures/s2s/ebt_login.html"
@@ -274,7 +274,7 @@ class EBTLoginTVC: UITableViewController {
                     self.autoFill(withUserId: self.userIdField.contentTextField.text!,
                                   password: self.passwordField.contentTextField.text!)
                 } else {
-                    print("page not loaded")
+                    //print(""page not loaded")
                 }
             }
         }
@@ -304,15 +304,15 @@ class EBTLoginTVC: UITableViewController {
         
         ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print("result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedErrorMessage)
+                //print("trimmedErrorMessage)
                 
                 if trimmedErrorMessage.characters.count > 0 {
-                    print("got error message")
+                    //print(""got error message")
                     
                     self.loginButton.isEnabled = true
                     self.activityIndicator.stopAnimating()
@@ -322,7 +322,7 @@ class EBTLoginTVC: UITableViewController {
                     
                 } else {
                     
-                    print("form is submitting..")
+                    //print(""form is submitting..")
                 }
             }
         }
@@ -335,12 +335,12 @@ class EBTLoginTVC: UITableViewController {
         let jsPageTitle = "$('.PageHeader').text();"
         ebtWebView.webView.evaluateJavaScript(jsPageTitle) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result!)
+                //print("result!)
                 let stringResult = result as! String
                 let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(pageTitle)
+                //print("pageTitle)
                 
                 if pageTitle == "We don’t recognize the computer you’re using." {
                     

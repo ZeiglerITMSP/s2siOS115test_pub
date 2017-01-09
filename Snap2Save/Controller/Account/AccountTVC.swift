@@ -174,7 +174,7 @@ class AccountTVC: UITableViewController {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+       // //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -197,15 +197,15 @@ class AccountTVC: UITableViewController {
                           "language":currentLanguage
             ] as [String : Any]
         
-        print(parameters)
+        ////print("parameters)
         let url = String(format: "%@/logOut", hostUrl)
-        print(url)
+        ////print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+               // //print(""json response\(json)")
                 
                 //let appDomain = Bundle.main.bundleIdentifier
                 //UserDefaults.standard.removePersistentDomain(forName: appDomain!)
@@ -224,7 +224,7 @@ class AccountTVC: UITableViewController {
                 DispatchQueue.main.async {
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
-                print(error)
+                ////print("error)
                 break
             }
             
@@ -251,7 +251,7 @@ class AccountTVC: UITableViewController {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        ////print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -276,16 +276,16 @@ class AccountTVC: UITableViewController {
                           "language":currentLanguage
             ] as [String : Any]
         
-        print(parameters)
+        ////print("parameters)
         
         let url = String(format: "%@/updateSettings", hostUrl)
-        print(url)
+        ////print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                ////print(""json response\(json)")
                 HUD.hide()
                 let responseDict = json.dictionaryObject
                 
@@ -309,8 +309,8 @@ class AccountTVC: UITableViewController {
                             let alertMessage = responseDict["message"] as! String
                             self.showAlert(title: "", message: alertMessage)
                         }
-                        print("user id\(self.user.id)")
-                        print("user info \(self.user.additionalInformation)")
+                        ////print(""user id\(self.user.id)")
+                        ////print(""user info \(self.user.additionalInformation)")
                         
                     }
                     
@@ -326,7 +326,7 @@ class AccountTVC: UITableViewController {
 
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
-                print(error)
+                ////print("error)
                 break
             }
             
