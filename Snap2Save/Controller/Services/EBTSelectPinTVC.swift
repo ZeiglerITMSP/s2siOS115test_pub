@@ -24,7 +24,9 @@ class EBTSelectPinTVC: UITableViewController {
     // Actions
     @IBAction func nextAction(_ sender: UIButton) {
         
-        performSegue(withIdentifier: "EBTUserInformationTVC", sender: nil)
+        
+        
+//        performSegue(withIdentifier: "EBTUserInformationTVC", sender: nil)
     }
     
     @IBAction func useCurrentPinAction(_ sender: UIButton) {

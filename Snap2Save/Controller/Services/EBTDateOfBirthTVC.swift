@@ -27,9 +27,9 @@ class EBTDateOfBirthTVC: UITableViewController {
         
         self.view.endEditing(true)
         
-        self.performSegue(withIdentifier: "EBTSelectPinTVC", sender: nil)
+//        self.performSegue(withIdentifier: "EBTSelectPinTVC", sender: nil)
         
-//        autoFill(dob: dobField.contentTextField.text!)
+        autoFill(dob: dobField.contentTextField.text!)
         
     }
     

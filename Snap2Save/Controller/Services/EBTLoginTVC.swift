@@ -15,14 +15,11 @@ class EBTLoginTVC: UITableViewController {
     
     fileprivate enum ActionType {
         
-        case loadPage
+        case waitingForPageLoad
         case sumbit
     }
     
-    let kRememberMeEBT = "kRememberMeEBT"
-    let kUserIdEBT = "kUserIdEBT"
-    
-    // Properties
+        // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
@@ -52,7 +49,9 @@ class EBTLoginTVC: UITableViewController {
                 saveUserID()
             }
             
-            validateLoginpageUrl()
+            loginButton.isEnabled = false
+            activityIndicator.startAnimating()
+            validatePage()
         }
         
     }
@@ -242,49 +241,42 @@ class EBTLoginTVC: UITableViewController {
     // load webpage
     func loadLoginPage() {
         
-//        let loginUrl_en = "https://ucard.chase.com/chp"
-//        let loginUrl_en = "https://www.gmail.com"
-        let loginUrl_en = "http://internal.appit.ventures/s2s/ebt_login.html"
-        //let loginUrl_es = "https://ucard.chase.com/locale?request_locale=es"
+        let loginUrl_en = kEBTLoginUrl
+        
         let url = NSURL(string: loginUrl_en)
         let request = NSURLRequest(url: url! as URL)
         print("asdfasdf")
-        actionType = .loadPage
         ebtWebView.webView.load(request as URLRequest)
     }
     
-    // validate loginpage url
-    func validateLoginpageUrl() {
+    func validatePage() {
         
-        let jsGetPageUrl = "window.location.href;"
-        ebtWebView.webView.evaluateJavaScript(jsGetPageUrl) { (result, error) in
+        let jsLoginValidation = "$('#button_logon').text();"
+        
+        let javaScript = jsLoginValidation
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
-            if error != nil {
-                print(error ?? "error nil")
-            } else {
-                print(result ?? "result nil")
-                let pageUrl = result as! String
+            if let result = result {
                 
-                let validUrl = "http://internal.appit.ventures/s2s/ebt_login.html"
+                let resultString = result as! String
                 
-                // http://internal.appit.ventures/s2s/ebt_login.html
-                // https://ucard.chase.com/chp
-                
-                if pageUrl == validUrl {
+                if resultString == "Logon" {
                     self.autoFill(withUserId: self.userIdField.contentTextField.text!,
                                   password: self.passwordField.contentTextField.text!)
                 } else {
-                    print("page not loaded")
+                    print("page not loaded..")
+                    self.actionType = ActionType.waitingForPageLoad
                 }
+            } else {
+                print(error ?? "")
+                self.actionType = ActionType.waitingForPageLoad
             }
         }
     }
     
     // autofill fields
     func autoFill(withUserId userid:String, password:String) {
-        
-        loginButton.isEnabled = false
-        activityIndicator.startAnimating()
         
         actionType = ActionType.sumbit
         let jsUserID = "$('#userId').val('\(userid)');"
@@ -407,6 +399,8 @@ extension EBTLoginTVC: EBTWebViewDelegate {
         
         if actionType == .sumbit {
             validateSubmitAction()
+        } else if actionType == .waitingForPageLoad {
+            validatePage()
         }
     }
     
