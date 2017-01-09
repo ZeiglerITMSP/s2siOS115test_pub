@@ -11,6 +11,8 @@ import UIKit
 class EBTUserInformationTVC: UITableViewController {
 
     // Outlets
+    @IBOutlet weak var titleLabel: UILabel!
+    
     @IBOutlet weak var messageLabel: UILabel!
     
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!

@@ -10,7 +10,8 @@ import UIKit
 
 class EBTConfirmationTVC: UITableViewController {
 
-    
+    // Outlets
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     
     @IBOutlet weak var validationCodeField: AIPlaceHolderTextField!

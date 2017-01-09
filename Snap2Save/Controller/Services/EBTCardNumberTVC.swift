@@ -24,6 +24,7 @@ class EBTCardNumberTVC: UITableViewController {
     
     
     // Outlets
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var cardNumberField: AIPlaceHolderTextField!
     @IBOutlet weak var errorTitleLabel: UILabel!

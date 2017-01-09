@@ -15,6 +15,7 @@ class EBTDateOfBirthTVC: UITableViewController {
     
     
     // Outles
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var dobField: AIPlaceHolderTextField!
     @IBOutlet weak var socialSecurityNumberField: AIPlaceHolderTextField!

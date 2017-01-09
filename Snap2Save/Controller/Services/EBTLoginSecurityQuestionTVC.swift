@@ -20,6 +20,8 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     fileprivate var actionType: ActionType?
     
     // Ouetles
+    
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!

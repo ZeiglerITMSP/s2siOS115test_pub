@@ -12,6 +12,7 @@ class EBTSelectPinTVC: UITableViewController {
 
     
     // Outlets
+    @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var pinField: AIPlaceHolderTextField!
