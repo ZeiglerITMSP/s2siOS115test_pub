@@ -212,6 +212,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E81E61651E2365A30016FE74 /* EBT */ = {
+			isa = PBXGroup;
+			children = (
+				E8BAE2A41E0BDDFB00A85AAB /* EBTLogin */,
+				E8BAE2A31E0BDDE200A85AAB /* EBTRegistration */,
+				E83C8AA01E1E4C2200BEA4A6 /* EBTDashboard */,
+				E82283A81E0A72A6008FE084 /* EBTTracking */,
+			);
+			name = EBT;
+			path = View;
+			sourceTree = "<group>";
+		};
 		E82283A81E0A72A6008FE084 /* EBTTracking */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,7 +231,8 @@
 				E82283AB1E0A72D3008FE084 /* BrowserVC.swift */,
 				E83155EE1E1A37E5001D30D2 /* EBTHTMLS */,
 			);
-			path = EBTTracking;
+			name = EBTTracking;
+			path = ../EBTTracking;
 			sourceTree = "<group>";
 		};
 		E826FBD01E09408D0089AEA6 /* Services */ = {
@@ -227,9 +240,6 @@
 			children = (
 				E88C262C1E1539C900F4056F /* TabViewController.swift */,
 				E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */,
-				E8BAE2A41E0BDDFB00A85AAB /* EBTLogin */,
-				E8BAE2A31E0BDDE200A85AAB /* EBTRegistration */,
-				E83C8AA01E1E4C2200BEA4A6 /* EBTDashboard */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -258,6 +268,7 @@
 				E83156071E1A7EB8001D30D2 /* DetailedSubtitleCell.swift */,
 			);
 			name = EBTDashboard;
+			path = ../Controller/Services;
 			sourceTree = "<group>";
 		};
 		E84AE9C81E07F28300C5E7F3 /* View */ = {
@@ -352,7 +363,7 @@
 				E84AE9E11E0821AB00C5E7F3 /* Helpers */,
 				E88BA5791DF53CF500714C65 /* Model */,
 				E84AE9C81E07F28300C5E7F3 /* View */,
-				E82283A81E0A72A6008FE084 /* EBTTracking */,
+				E81E61651E2365A30016FE74 /* EBT */,
 				E88BA5781DF53CD600714C65 /* Controller */,
 				E88BA54E1DF53C1300714C65 /* Main.storyboard */,
 				E82283A01E0A61F4008FE084 /* Home.storyboard */,
@@ -413,6 +424,7 @@
 				E8BAE2B21E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift */,
 			);
 			name = EBTRegistration;
+			path = ../Controller/Services;
 			sourceTree = "<group>";
 		};
 		E8BAE2A41E0BDDFB00A85AAB /* EBTLogin */ = {
@@ -423,6 +435,7 @@
 				E83156031E1A5689001D30D2 /* EBTLoginSecurityQuestionTVC.swift */,
 			);
 			name = EBTLogin;
+			path = ../Controller/Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
