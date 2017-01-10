@@ -64,25 +64,26 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         self.navigationItem.leftBarButtonItem = leftBarButton
         
         emailPlaceHolderTextField.contentTextField.textFieldType = AITextField.AITextFieldType.EmailTextField
-      //  reEnterEmailTextField.contentTextField.textFieldType = AITextField.AITextFieldType.EmailTextField
+        reEnterEmailTextField.contentTextField.textFieldType = AITextField.AITextFieldType.EmailTextField
 
         mobileNumberTextField.contentTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         reEnterMobileNumberTextField.contentTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         
         emailPlaceHolderTextField.contentTextField.updateUIAsPerTextFieldType()
-        //reEnterEmailTextField.contentTextField.updateUIAsPerTextFieldType()
+        reEnterEmailTextField.contentTextField.updateUIAsPerTextFieldType()
 
         mobileNumberTextField.contentTextField.updateUIAsPerTextFieldType()
         reEnterMobileNumberTextField.contentTextField.updateUIAsPerTextFieldType()
         
         emailPlaceHolderTextField.contentTextField.aiDelegate = self
-       // reEnterEmailTextField.contentTextField.aiDelegate = self
+        reEnterEmailTextField.contentTextField.aiDelegate = self
 
         mobileNumberTextField.contentTextField.aiDelegate = self
         reEnterMobileNumberTextField.contentTextField.aiDelegate = self
         
         emailPlaceHolderTextField.contentTextField.returnKeyType = UIReturnKeyType.next
-        
+        reEnterEmailTextField.contentTextField.returnKeyType = UIReturnKeyType.next
+
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: saveButton, radius: 2.0, width: 1.0)
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -137,12 +138,12 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     }
     
     func tapOnTableView(recognizer: UITapGestureRecognizer) {
-        
         self.view.endEditing(true)
     }
     
     
     func reloadContent() {
+        
         DispatchQueue.main.async {
         self.updateBackButtonText()
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
@@ -156,7 +157,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         self.emailPlaceHolderTextField.placeholderText = "EMAIL".localized()
         self.mobileNumberTextField.placeholderText = "10-DIGIT CELL PHONE NUMBER".localized()
        self.reEnterMobileNumberTextField.placeholderText = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
-        //reEnterEmailTextField.placeholderText = "RE-ENTER EMAIL".localized()
+        self.reEnterEmailTextField.placeholderText = "RE-ENTER EMAIL".localized()
         }
     }
     
@@ -164,12 +165,12 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     func keyBoardHidden(textField: UITextField) {
         
         if textField == emailPlaceHolderTextField.contentTextField {
-            //reEnterEmailTextField.contentTextField.becomeFirstResponder()
+            reEnterEmailTextField.contentTextField.becomeFirstResponder()
+            //mobileNumberTextField.contentTextField.becomeFirstResponder()
+        }
+        else if textField == reEnterEmailTextField.contentTextField{
             mobileNumberTextField.contentTextField.becomeFirstResponder()
         }
-      //  else if textField == reEnterEmailTextField.contentTextField{
-       //     mobileNumberTextField.contentTextField.becomeFirstResponder()
-       // }
         else if textField == mobileNumberTextField.contentTextField {
             reEnterMobileNumberTextField.contentTextField.becomeFirstResponder()
             
@@ -204,7 +205,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return 6
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -230,7 +231,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -265,21 +266,53 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                           "language":currentLanguage
             ] as [String : Any]
         saveActivityIndicator.startAnimating()
-        print(parameters)
+        //print("parameters)
         let url = String(format: "%@/updatePreferences", hostUrl)
-        print(url)
+        //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print(""json response\(json)")
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
                     
                     let responseDict = json.dictionaryObject
+                    
+                    if let code = responseDict?["code"] {
+                        let code = code as! NSNumber
+                        if code.intValue == 200 {
+                            
+                            let alertMessage = responseDict?["message"] as! String
+                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                                (action) in
+                                
+                                self.view.endEditing(true)
+                                _ = self.navigationController?.popViewController(animated: true)
+                                
+                            })
+                            alertController.addAction(defaultAction)
+                            DispatchQueue.main.async {
+                                
+                                self.present(alertController, animated: true, completion: nil)
+                            }
+                            
+                            
+                        }
+                        else {
+                            if let responseDict = json.dictionaryObject {
+                                let alertMessage = responseDict["message"] as! String
+                                self.showAlert(title: "", message: alertMessage)
+                            }
+                            
+                            
+                        }
+                    }
+
                     //let code : NSNumber = responseDict?["code"] as! NSNumber
-                    if let messageString = responseDict?["message"] {
+                   /* if let messageString = responseDict?["message"] {
                         
                         let alertMessage = messageString as! String
                         let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
@@ -291,7 +324,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                         
                         alertController.addAction(defaultAction)
                         self.present(alertController, animated: true, completion: nil)
-                    }
+                    }*/
                     
                 }
                 break
@@ -301,7 +334,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
-                print(error)
+                //print("error)
                 break
             }
             
@@ -313,55 +346,84 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
     func isValid() -> Bool  {
         
+        let userData = UserDefaults.standard.object(forKey: USER_DATA)
+        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
+        
+        let user = userInfo as! User
+        let currentEmail = user.email
+        
+        //let reEnterEmail = reEnterEmailTextField.contentTextField.text
+        let email = emailPlaceHolderTextField.contentTextField.text
+        
         let validEmail = AppHelper.isValidEmail(testStr: emailPlaceHolderTextField.contentTextField.text!)
         let validPhoneNumber = AppHelper.validate(value: mobileNumberTextField.contentTextField.text!)
         
-        if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
-            self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
-            return false
-        }
-        if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
-            self.showAlert(title: "", message: "Entries must match to proceed".localized())
-            return false
-        }
         
-        if let email = emailPlaceHolderTextField.contentTextField.text {
+        if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
+            if  validEmail == false {
+                self.showAlert(title: "", message: "You have chosen to be contacted by email, but have not provided a valid email address.".localized())
+                return false
+                
+            }
+//             if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
+//             self.showAlert(title: "", message: "Entries must match to proceed".localized())
+//             return false
+//             }
             
+        }
+
+        if currentEmail != email {
+        if let email = emailPlaceHolderTextField.contentTextField.text {
             if email.characters.count > 0 {
                 if validEmail == false {
                     self.showAlert(title: "", message: "Please enter a valid email address.".localized())
                     return false
                 }
             }
-           /* if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
-                self.showAlert(title: "", message: "Emails don't match".localized())
-                return false
+            
+            if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
+                
+            if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
+                self.showAlert(title: "", message: "Entries must match to proceed".localized())
+                    return false
+                }
             }
-        }*/
+
+        
+        }
+        }
+        else {
+            if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
+                
+                if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
+                    self.showAlert(title: "", message: "Entries must match to proceed".localized())
+                    return false
+                }
+            }
+  
+        }
+       
+        if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
+            self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
+            return false
         }
         
-        if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
-            if  validEmail == false {
-                self.showAlert(title: "", message: "Please enter a valid email address.".localized())
-                return false
-                
-            }
-           /* if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
-                self.showAlert(title: "", message: "Emails don't match".localized())
-                return false
-            }
-        }*/
+        if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
+            self.showAlert(title: "", message: "Entries must match to proceed".localized())
+            return false
         }
+
         return true
     
         
     }
     
     func loadData() {
+        
         let userData = UserDefaults.standard.object(forKey: USER_DATA)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
         
-        print("user info \(userInfo)")
+        //print(""user info \(userInfo)")
         
         let user:User = userInfo as! User
         
@@ -381,12 +443,12 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         }
     }
     
-    func getProfile(){
+    func getProfile() {
         
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -411,9 +473,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                           "language": currentLanguage
             ] as [String : Any]
         
-        print(parameters)
+        //print("parameters)
         let url = String(format: "%@/getProfile", hostUrl)
-        print(url)
+        //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
@@ -421,30 +483,28 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 DispatchQueue.main.async {
                     HUD.hide()
                 }
-                
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print(""json response\(json)")
                 let responseDict = json.dictionaryObject
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
                     if code.intValue == 200 {
-                        
                         
                         if let userDict = responseDict?["user"] as? [String:Any] {
                             
                             self.user = User.prepareUser(dictionary: userDict )
                             let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
                             UserDefaults.standard.set(userData, forKey: USER_DATA)
-                            
                             let phoneNumber = userDict["phone_number"]
                             UserDefaults.standard.set(phoneNumber, forKey: MOBILE_NUMBER)
-                            print("phoneNumber \(phoneNumber)")
+                            //print(""phoneNumber \(phoneNumber)")
                             let email = userDict["email"]
                             UserDefaults.standard.set(email, forKey: EMAIL)
-                            print("email \(email)")
+                            //print(""email \(email)")
                             self.loadData()
                             
                         }
+                    }
                         else {
                             if let messageString = responseDict?["message"]{
                                 let alertMessage : String = messageString as! String
@@ -453,23 +513,19 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                         }
                         
                     }
-                }
+                
                 break
                 
             case .failure(let error):
-                
                 DispatchQueue.main.async {
                     HUD.hide()
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
-                print(error)
+                //print("error)
                 break
             }
             
         }
         
     }
-    
-    
-    
-}
+ }

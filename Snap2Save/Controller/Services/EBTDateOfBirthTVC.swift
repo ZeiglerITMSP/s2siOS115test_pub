@@ -119,12 +119,12 @@ class EBTDateOfBirthTVC: UITableViewController {
         let jsPageTitle = "$('.PageHeader').text();"
         ebtWebView.webView.evaluateJavaScript(jsPageTitle) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
             } else {
-                print(result!)
+                //print("result!)
                 let stringResult = result as! String
                 let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(pageTitle)
+                //print("pageTitle)
                 
                 if pageTitle == "We don’t recognize the computer you’re using." {
                     
@@ -150,10 +150,10 @@ class EBTDateOfBirthTVC: UITableViewController {
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
                 
             } else {
-                print(result ?? "result nil")
+                //print("result ?? "result nil")
             }
         }
     }
@@ -165,13 +165,13 @@ class EBTDateOfBirthTVC: UITableViewController {
         ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
             if error != nil {
                 
-                print(error ?? "error nil")
+                //print("error ?? "error nil")
                 
             } else {
-                print(result ?? "result nil")
+                //print("result ?? "result nil")
                 let stringResult = result as! String
                 let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmed)
+                //print("trimmed)
                 if trimmed.characters.count > 0 {
                     // got error
                     self.nextActivityIndicator.stopAnimating()

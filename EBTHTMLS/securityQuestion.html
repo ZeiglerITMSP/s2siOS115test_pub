@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0068)https://ucard.chase.com/authenticate_checkEmailValidationCode.action -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="./Chase - UCARD Center Page 8_files/dtagent628_bexjpt_1019.js.download" data-dtconfig="rid=RID_1695760722|rpid=-1101511824|domain=chase.com|tp=500,50,10|bandwidth=300_m|reportUrl=dynaTraceMonitor"></script><link rel="shortcut icon" href="https://ucard.chase.com/img/favicon.ico">
+<link href="./Chase - UCARD Center Page 8_files/screen.css" rel="stylesheet" type="text/css" media="all">
+
+
+
+
+
+	<script type="text/javascript" src="./Chase - UCARD Center Page 8_files/jquery-1.10.0.min.js.download"></script>
+	<script type="text/javascript" src="./Chase - UCARD Center Page 8_files/jquery.ui.core.min.js.download"></script>
+  <script type="text/javascript" src="./Chase - UCARD Center Page 8_files/jquery.subscribe.min.js.download"></script>
+
+  <script type="text/javascript" src="./Chase - UCARD Center Page 8_files/jquery.struts2.min.js.download"></script>
+
+<script type="text/javascript">
+$(function() {
+	jQuery.struts2_jquery.version="3.6.0";
+  	jQuery.scriptPath = "/struts/";
+	jQuery.ajaxSettings.traditional = true;
+
+	jQuery.ajaxSetup ({
+		cache: false
+	});
+	
+	jQuery.struts2_jquery.require("js/struts2/jquery.ui.struts2.min.js");
+	
+});
+</script>
+
+        	<link id="jquery_theme_link" rel="stylesheet" href="./Chase - UCARD Center Page 8_files/jquery-ui.css" type="text/css">
+
+<title>Chase - UCARD Center</title>
+<script src="./Chase - UCARD Center Page 8_files/common.js.download" type="text/javascript"></script>
+<script type="text/javascript">
+
+function validateSecurityAnswer(){
+	 $("#VallidationExcpMsg").html("");
+     $("#errorTable").hide();
+     $("#actionErr").hide();
+     $("#actionMsg").hide();
+     var hasError = false;
+     
+     var securityAnswer = $("#securityAnswer").val();
+   
+     if(securityAnswer==""){ 
+			$("#VallidationExcpMsg").html("Enter valid security information.");
+			$("#errorTable").show();
+			$('#errorMsgDiv').focus();
+			hasError = true;
+     } else if(!isAlphanumeric(securityAnswer)) {
+			$("#VallidationExcpMsg").html("Enter a valid response to the security validation question. ");
+			$("#securityAnswer").val('');
+			$("#errorTable").show();
+			$('#errorMsgDiv').focus();
+			hasError = true;
+		}
+     if(hasError==true) {
+         return false; 
+     }
+     $("#okButton").focus();
+     disableButtons();
+     //$("#okButton").attr('disabled', 'disabled').css('opacity',0.5);
+         return true;
+}
+
+function openHelpWindow(pageURL, title,w,h) {
+  	var left = (screen.width/2)-(w/2);
+  	var top = (screen.height/2)-(h/2);
+	window.open (pageURL, title, 'toolbar=no, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+}
+</script>
+</head>
+<body>
+
+ 
+
+<div id="prelogon-main-container">
+
+	<table class="prelogonBody1" summary="layout">
+		<tbody><tr>
+			<td align="left">
+				<img alt="JP Morgan Chase Logo" title="JP Morgan Chase Logo" src="./Chase - UCARD Center Page 8_files/chaseLogo.gif" height="25">
+			</td>
+			<td width="30%"></td>
+			<td align="right">
+				<img src="./Chase - UCARD Center Page 8_files/logoUcard.png" alt="UCard Center Logo" title="UCard Center Logo" height="25">
+			</td>
+		
+		</tr>
+	</tbody></table>
+	
+</div>
+<h3 class="css-warning">Your browser does not support CSS. This site needs CSS enabled browser to run properly. Please enable CSS for your browser.</h3>
+<div id="prelogon-mid-container" style="margin-top: -85px;">
+			
+			<table align="center" class="prelogonBody" width="755" summary="layout">
+				<tbody><tr><td width="35px"></td>
+				<td id="pgTtl" class="PageTitle"><h1 class="PageHeader">Verify Security Question</h1></td>
+			  	<td align="right" width="8%">
+				<img alt=" " src="./Chase - UCARD Center Page 8_files/bulletUpArrow.gif">&nbsp;&nbsp;<a href="javascript:window.//print(");" class="textLink" title="Print current page">Print</a>
+			</td>
+			<td width="1%"></td>
+			<td align="left" width="10%">		  	
+			    
+			   
+			   <img alt=" " src="./Chase - UCARD Center Page 8_files/bulletUpArrow.gif">&nbsp;&nbsp;<a href="javascript:void(0);" onclick="openHelpWindow(&#39;/showHelp.action?pageId=chp_secQuestion&#39;,&#39;&#39;,&#39;1000&#39;,&#39;600&#39;);" class="textLink" title="Help">Help</a>
+			   		  	
+			 </td>
+			  	</tr>
+		  	</tbody></table>
+<span class="text_hidden">Validate Security Question Page</span>			
+<span class="text_hidden">All fields marked with asterisk are required.</span>	
+<table class="prelogonBody1" style="margin-top: 20px;" summary="layout"> 
+		<tbody><tr>
+			<td>
+
+	<!--<table style="margin-left: auto; margin-right: auto; margin-top: auto;" width="755" cellspacing="4" cellpadding="4" >
+			<tr>
+				<td colspan="2">
+					
+
+
+ 
+	<div id="errorMsgDiv" tabindex="-1">
+	<table id="errorTable" class="tableWide errorTextArea" style="display:none" cellpadding="8px">
+		 <tr>
+   			<td colspan="2" >
+   			<p class="errorText">Please correct the following items:</p>
+   				
+   				<ul class="errorInvalidField">
+			     <li class="errorInvalidField" id="VallidationExcpMsg"></li>
+		        </ul>
+   				
+   			</td>
+  		</tr>
+       </table>
+    </div>   
+       <table id="messageTable" class="tableWide errorTextArea" style="display:none" cellpadding="8px">
+		 <tr>
+   			<td colspan="2">
+   							
+   				<ul class="errorInvalidField">
+			     <li class="errorInvalidField" id="infoMsg"></li>
+		        </ul>
+   				
+   			</td>
+  		</tr>
+       </table>
+       
+    
+    
+    
+    
+    
+     <table id="successMsgTable" class="tableWide completionTextArea" cellpadding="7px" style="display:none;">
+	 <tr>
+		<td>
+		<p class="completionText" id="successMessageDisp">com.jpm.ts.efsdist.ui.chp.beans.AuthUsr@26137b3</p>
+		</td>
+	</tr>
+    </table>
+    
+     <table id="errMsgTable" class="tableWide errorTextArea" cellpadding="8px" style="display:none;">
+		 <tr>
+   			<td>
+   			<p class="errorText" id="errMsgDisp">com.jpm.ts.efsdist.ui.chp.beans.AuthUsr@26137b3</p>				
+   			</td>
+  		</tr>
+       </table>
+       
+       <table id="warnMsgTable" class="tableWide warningTextArea" cellpadding="7px" style="display:none;">
+			 <tr>
+   				<td>
+   					<p class="warningText" id="warnMsgDisp">com.jpm.ts.efsdist.ui.chp.beans.AuthUsr@26137b3</p>
+   				</td>
+  			 </tr>
+       </table>
+       
+       <table id="errorSummaryTable" class="tableWide errorTextArea" style="display:none" cellpadding="8px">
+		 <tr>
+   			<td colspan="2">
+   			<p class="errorText">Please correct the following items:</p>
+   				<div id="errorSummDiv"></div>
+   				
+   			</td>
+  		</tr>
+       </table>
+				</td>
+			</tr>
+		</table>-->
+		<table style="margin-top: auto; margin-left: auto; margin-right: auto;" width="752" summary="layout">
+			
+			<tbody><tr>
+				<td>
+					<table class="tableWide" summary="layout">
+						<tbody><tr>
+							<td colspan="2">
+								
+
+
+ 
+	<div id="errorMsgDiv" tabindex="-1">
+	<table id="errorTable" class="tableWide errorTextArea" style="display:none" cellpadding="8px">
+		 <tbody><tr>
+   			<td colspan="2">
+   			<p class="errorText">Please correct the following items:</p>
+   				
+   				<ul class="errorInvalidField">
+			     <li class="errorInvalidField" id="VallidationExcpMsg"></li>
+		        </ul>
+   				
+   			</td>
+  		</tr>
+       </tbody></table>
+    </div>   
+       <table id="messageTable" class="tableWide errorTextArea" style="display:none" cellpadding="8px">
+		 <tbody><tr>
+   			<td colspan="2">
+   							
+   				<ul class="errorInvalidField">
+			     <li class="errorInvalidField" id="infoMsg"></li>
+		        </ul>
+   				
+   			</td>
+  		</tr>
+       </tbody></table>
+       
+    
+    
+    
+    
+    
+     <table id="successMsgTable" class="tableWide completionTextArea" cellpadding="7px" style="display:none;">
+	 <tbody><tr>
+		<td>
+		<p class="completionText" id="successMessageDisp">com.jpm.ts.efsdist.ui.chp.beans.AuthUsr@26137b3</p>
+		</td>
+	</tr>
+    </tbody></table>
+    
+     <table id="errMsgTable" class="tableWide errorTextArea" cellpadding="8px" style="display:none;">
+		 <tbody><tr>
+   			<td>
+   			<p class="errorText" id="errMsgDisp">com.jpm.ts.efsdist.ui.chp.beans.AuthUsr@26137b3</p>				
+   			</td>
+  		</tr>
+       </tbody></table>
+       
+       <table id="warnMsgTable" class="tableWide warningTextArea" cellpadding="7px" style="display:none;">
+			 <tbody><tr>
+   				<td>
+   					<p class="warningText" id="warnMsgDisp">com.jpm.ts.efsdist.ui.chp.beans.AuthUsr@26137b3</p>
+   				</td>
+  			 </tr>
+       </tbody></table>
+       
+       <table id="errorSummaryTable" class="tableWide errorTextArea" style="display:none" cellpadding="8px">
+		 <tbody><tr>
+   			<td colspan="2">
+   			<p class="errorText">Please correct the following items:</p>
+   				<div id="errorSummDiv"></div>
+   				
+   			</td>
+  		</tr>
+       </tbody></table>
+							</td>
+						</tr>
+					</tbody></table>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<table class="tableWide instrTextArea" summary="layout">
+						<tbody><tr>
+							<td>
+								Please enter a valid response to the security question.
+							</td>
+						</tr>
+					</tbody></table>
+				</td>
+			</tr>
+		</tbody></table>
+	
+<form action="https://ucard.chase.com/authenticate_isSecurityAnswerValid.action" onsubmit="return validateSecurityAnswer();" method="post">
+		<table cellspacing="4" cellpadding="4" style="width: 80%; margin-top: 25px;" summary="Security Question and Answer Section" datatable="true">
+			<tbody><tr>
+				<td width="40px"></td>
+				<td class="cdpRightAlignedTdLabel cdpFormLabel">
+					<label id="securityQusetion_question">Security Question</label>
+				</td>
+				<td class="cdpLeftAlignedTdLabel"> 
+				What was your first concert?<label></label>
+				
+				</td>
+			</tr>
+			<tr>
+				<td width="40px"></td>
+				<td class="cdpRightAlignedTdLabel cdpFormLabel cdpMandatoryField"><span class="cdpMandatoryFieldMark">*</span>
+					<label id="securityQusetion_answer" for="securityAnswer">Security Answer</label>
+				</td>
+				<td align="left"><input type="password" id="securityAnswer" name="securityAnswer" maxlength="50" title=" Enter your security answer" class="text_field navText">
+				</td>
+			</tr>
+			<tr>
+				<td width="40px"></td>
+				<td align="right">					
+					<input type="checkbox" name="registerDeviceFlag" value="true" id="registerDeviceFlag" title="I am using a public computer. Continue without registering this device."><input type="hidden" id="__checkbox_registerDeviceFlag" name="__checkbox_registerDeviceFlag" value="true"> 					
+				</td>
+				<td class="cdpLeftAlignedTdLabel">
+				   <label id="message_deviceRegistration" for="registerDeviceFlag">This is a public computer, continue without registering this device.</label>
+					
+				</td>
+			</tr>
+		</tbody></table>
+		<table style="width: 80%; margin-top: 25px;" cellspacing="4" cellpadding="4" summary="layout">
+			<tbody><tr>
+				<td width="40px"></td>
+				<td style="text-align:center;" colspan="2">
+					<label id="uCard_confirm" class="text_hidden" for="okButton">Confirm</label>				
+					<input id="okButton" class="primaryBtn button buttonSpacing" value=" Confirm " type="submit" title=" Confirm ">
+<!--					<input type="submit" value="button.cancel" id="cancelBtn" name="button.cancel" class="normalBtn button"/>
+-->
+					<label id="uCard_cancel" class="text_hidden" for="cancelBtn">Cancel</label>				
+					<input id="cancelBtn" class="normalBtn button buttonSpacing" value="Cancel" title="Cancel" type="button" theme="simple" onclick="javascript:window.location=&#39;/authenticate_cancelSecurityAnswer.action&#39;;">
+					</td>
+			</tr>		
+		</tbody></table>
+<input type="hidden" name="cdpuniquetokenname" value="cdpuniquetoken">
+<input type="hidden" name="cdpuniquetoken" value="4BHI9IQIRA4OXE926VTV8ZG4H11OGTYQ"> </form>
+	
+			</td>
+		</tr>
+	</tbody></table>
+	</div>
+<!--Footer-->
+
+
+	
+	<div id="prelogon-botttom-container">
+	
+  </div>	
+  <table style="margin-left: auto;margin-right: auto;" align="center" width="70%" summary="layout">
+		<tbody><tr>
+		<td width="50%"></td>
+			<td align="right">
+				© <script>document.write(getYear());</script>2016  <label id="footer_name" for="JP Morgan Chase">JPMorgan Chase &amp; Co. All rights reserved</label>
+			</td>
+		</tr>
+		
+	</tbody></table>	
+
+	
+	
+</body></html>

@@ -61,23 +61,25 @@ extension UIViewController {
         
         let englishBtn = UIAlertAction.init(title: "language.alert.english".localized(), style: .default, handler: {
             (action) in
-            print("Selected English")
+            //print(""Selected English")
             Localize.setCurrentLanguage("en")
             
         })
         let spanishBtn = UIAlertAction.init(title: "language.alert.spanish".localized() , style: .default, handler:{ (action) in
-            print("Selected Spanish")
+            //print(""Selected Spanish")
             Localize.setCurrentLanguage("es")
         })
         
         let cancelBtn = UIAlertAction.init(title: "Cancel".localized(), style: .cancel, handler:nil)
         
-        languageAlert.view.tintColor = APP_GRREN_COLOR
         languageAlert .addAction(englishBtn)
         languageAlert.addAction(spanishBtn)
         languageAlert.addAction(cancelBtn)
         
         self.present(languageAlert, animated: true, completion:nil)
+        
+        languageAlert.view.tintColor = APP_GRREN_COLOR
+
     }
 
 }

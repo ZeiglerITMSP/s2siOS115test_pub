@@ -67,19 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             storyBoard = UIStoryboard(name: "Main", bundle: nil);
         }
         
-//        if let user_id = user?.id {
-//            
-//        }
-//                    if user_id.isEmpty  {
-//                        // user exists
-//                        storyBoard = UIStoryboard(name: "Main", bundle: nil);
-//                    }
-//                    else {
-//                        storyBoard = UIStoryboard(name: "Home", bundle: nil);
-//
-//                    }
-        
-        
         let initialViewController: UIViewController = storyBoard!.instantiateInitialViewController()!
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
@@ -183,7 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
             let isReachable = reachbility.isReachable
             // Reachability
-            print("isreachable \(isReachable)")
+            ////print(""isreachable \(isReachable)")
             if isReachable == false {
                 let alertController = UIAlertController(title: "", message: "Please check your internet connection".localized(), preferredStyle: .alert)
                 
@@ -194,7 +181,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 alertController.addAction(okAction)
                 
                 DispatchQueue.main.async {
-                    
                     UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
                 }
                 
@@ -203,9 +189,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             else {
                 
                 let urlString : String = url.absoluteString
-                print("url string is\(urlString)")
+                ////print(""url string is\(urlString)")
                 let urlScheme = url.scheme
-                print("url scheme is\(urlScheme)")
+                ////print(""url scheme is\(urlScheme)")
                 
                 if urlString.characters.count > 0 {
                     let query = url.query
@@ -214,7 +200,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     for component:String in components!
                     {
                         let bits = component.components(separatedBy: "userid=")
-                        print("bits\(bits)")
+                        ////print(""bits\(bits)")
                         if bits.count == 2
                         {
                             
@@ -222,12 +208,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let value = bits[1] as String
                             
                             mutableDict.setObject(value, forKey: key_string as NSCopying)
-                            print("mutableDict is\(mutableDict)")
+                            ////print(""mutableDict is\(mutableDict)")
                         }
                     }
                     
                     
-                    if urlScheme == "s2sregistrationconfirm"{
+                    if urlScheme == "s2sregistrationconfirm" {
                         
                         let device_id = UIDevice.current.identifierForVendor!.uuidString
                         let user_id = mutableDict.object(forKey: "userid") ?? ""
@@ -243,19 +229,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             ] as [String : Any]
                         
                         
-                        print(parameters)
+                        ////print("parameters)
                         
                         let url = String(format: "%@/confirmRegistration", hostUrl)
-                        print(url)
+                        ////print("url)
                         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
                             
                             switch response.result {
                             case .success:
                                 
                                 let json = JSON(data: response.data!)
-                                print("json response\(json)")
+                                ////print(""json response\(json)")
                                 let responseDict = json.dictionaryObject
-                                let code = responseDict?["code"] as! NSNumber
+                                
+                                if let code = responseDict?["code"] {
+                                    let code = code as! NSNumber
+
                                 if code.intValue == 200 {
                                     
                                     let loginVc:WelcomePageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC") as! WelcomePageVC
@@ -281,6 +270,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         }
                                     }
                                 }
+                                }
                                 break
                                 
                             case .failure(let error):
@@ -297,13 +287,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     
                                 }
                                 
-                                print(error)
+                                ////print("error)
                                 break
                             }
                             
                         }
                         
-                        //let storyBoard = getStoryBoard(name: "Main") // Change the storyboard name based on the device, you may need to write a condition here for that
                     }
                         
                         

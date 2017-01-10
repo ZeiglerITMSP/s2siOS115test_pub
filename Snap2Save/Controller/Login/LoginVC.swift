@@ -184,14 +184,14 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             contentInset.bottom = keyboardFrame.size.height
             // contentInset.top = 0
             bgScrollView.contentInset = contentInset
-            print("scrollView content inset in loop \(bgScrollView.contentInset)")
+            //print(""scrollView content inset in loop \(bgScrollView.contentInset)")
         }
         else
         {
             var contentInset:UIEdgeInsets = UIEdgeInsets.zero
             contentInset.top = 0;
             bgScrollView.contentInset = contentInset
-            print("scrollView content inset out of loop \(bgScrollView.contentInset)")
+            //print(""scrollView content inset out of loop \(bgScrollView.contentInset)")
         }
         
     }
@@ -257,7 +257,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        ////print("scrollViewDidScroll \(scrollView.contentOffset)")
+        //////print(""scrollViewDidScroll \(scrollView.contentOffset)")
         if scrollView.contentOffset.y > 0.0
         {
             self.setNavigationBarImage(image: blueNavBarImg)
@@ -286,7 +286,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -308,10 +308,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                           "language": currentLanguage
             ] as [String : Any]
         
-        print(parameters)
+        //print("parameters)
         loginActivityIndicator.startAnimating()
         let url = String(format: "%@/logIn", hostUrl)
-        print(url)
+        //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             switch response.result {
@@ -321,7 +321,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                 }
                 
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print(""json response\(json)")
                 let responseDict = json.dictionaryObject
                 
                 if let code = responseDict?["code"] {
@@ -357,8 +357,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             let alertMessage = responseDict["message"] as! String
                             self.showAlert(title: "", message: alertMessage)
                         }
-                    print("user id\(self.user.id)")
-                    print("user info \(self.user.additionalInformation)")
+                    //print(""user id\(self.user.id)")
+                    //print(""user info \(self.user.additionalInformation)")
                     
                 }
                 
@@ -372,7 +372,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                     self.loginActivityIndicator.stopAnimating()
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
-                print(error)
+                //print("error)
                 break
             }
             

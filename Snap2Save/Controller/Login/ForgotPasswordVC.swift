@@ -156,7 +156,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -176,24 +176,54 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                         ] as [String : Any]
         
         
-        print(parameters)
+        //print("parameters)
         submitActivityIndicator.startAnimating()
         
         let url = String(format: "%@/forgotPassword", hostUrl)
-        print(url)
+        //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             switch response.result {
             case .success:
                 
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print(""json response\(json)")
                 DispatchQueue.main.async {
                     self.submitActivityIndicator.stopAnimating()
                 }
 
                 if let responseDict = json.dictionaryObject {
-                    let alertMessage = responseDict["message"] as! String
+                    if let code = responseDict["code"] {
+                    let code = code as! NSNumber
+                    if code.intValue == 200 {
+                        
+                        let alertMessage = responseDict["message"] as! String
+                        let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                            (action) in
+                            let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+                            self.navigationController?.show(loginVc, sender: self)
+                            
+
+                        })
+                        alertController.addAction(defaultAction)
+                        DispatchQueue.main.async {
+                            
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+
+                        
+                        }
+                    else {
+                        if let responseDict = json.dictionaryObject {
+                            let alertMessage = responseDict["message"] as! String
+                            self.showAlert(title: "", message: alertMessage)
+                        }
+
+
+                        }
+                    }
+                  /*  let alertMessage = responseDict["message"] as! String
                     let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
                     let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
                         (action) in
@@ -205,7 +235,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                     DispatchQueue.main.async {
                         
                         self.present(alertController, animated: true, completion: nil)
-                    }
+                    }*/
                 }
                 
                 break
@@ -216,7 +246,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                     self.submitActivityIndicator.stopAnimating()
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
-                print(error)
+                //print("error)
                 break
             }
             

@@ -1,0 +1,671 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0058)https://ucard.chase.com/securityKey_loadSecurityKey.action -->
+<html style="display: block;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="./Page 4_files/dtagent628_bexjpt_1019.js.download" data-dtconfig="rid=RID_1982261703|rpid=782317171|domain=chase.com|tp=500,50,10|bandwidth=300_m|reportUrl=dynaTraceMonitor"></script><link rel="shortcut icon" href="https://ucard.chase.com/img/favicon.ico">
+<title>Chase - UCARD Center</title>
+<link href="./Page 4_files/screen.css" rel="stylesheet" type="text/css" media="all">
+<link href="./Page 4_files/cdpCommon.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+	<script type="text/javascript" src="./Page 4_files/jquery-1.10.0.min.js.download"></script>
+	<script type="text/javascript" src="./Page 4_files/jquery.ui.core.min.js.download"></script>
+  <script type="text/javascript" src="./Page 4_files/jquery.subscribe.min.js.download"></script>
+
+  <script type="text/javascript" src="./Page 4_files/jquery.struts2.min.js.download"></script>
+
+<script type="text/javascript">
+$(function() {
+	jQuery.struts2_jquery.version="3.6.0";
+  	jQuery.scriptPath = "/struts/";
+	jQuery.ajaxSettings.traditional = true;
+
+	jQuery.ajaxSetup ({
+		cache: false
+	});
+	
+	jQuery.struts2_jquery.require("js/struts2/jquery.ui.struts2.min.js");
+	
+});
+</script>
+
+        	<link id="jquery_theme_link" rel="stylesheet" href="./Page 4_files/jquery-ui.css" type="text/css">
+
+<script src="./Page 4_files/common.js.download" type="text/javascript"></script>
+<script type="text/javascript">
+
+function openHelpWindow(pageURL, title,w,h) {
+	var left = (screen.width/2)-(w/2);
+	var top = (screen.height/2)-(h/2);
+	var targetWin = window.open (pageURL, title, 'toolbar=no, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+
+	}
+
+$(document).ready(function() {
+	 $(window).load(function () { 
+		 $("#cancelAlert").hide();
+	 });
+	 
+	$("#cancelButton").click(function() {
+		
+		$("#cancelAlert").hide();
+	});
+	$("#btnCancelRegistration").click(function() {
+		$("#actionMsg").hide();
+		$("#errorTable").hide();
+		$('#cancelAlert').show();
+		$('#cancelAlert').focus();
+		
+	});
+});
+
+function cancelRegistration(){
+	document.forms[0].action="/register_cancelRegistration.action";
+	document.forms[0].submit(); 
+}
+
+function checkUseridAvailability(){
+	document.forms["userinfoForm"].action="/register_checkUserIDAvailability.action";
+	document.forms["userinfoForm"].submit();
+}
+
+function useCurrentPin(){
+	
+	document.forms[0].action="/pinSetUp_useCurrentPin.action";
+	document.forms[0].submit(); 
+}
+
+function regenerateEmailValidationCode(){
+	document.forms[0].action="/register_regenerateEmailValidationCode.action";
+	document.forms[0].submit(); 
+}
+</script>
+
+<style> html { display:none; } </style> <script> if (self == top) { document.documentElement.style.display = 'block'; } else { top.location = self.location; } </script>
+
+</head>
+
+<body>
+<noscript>Your browser does not support javascript. This site needs javascript enabled browser to run properly. Please enable javascript for your browser.</noscript>
+<!-- 508 change- Css warning when styles are turned off  -->
+<style type="text/css">
+@-moz-document url-prefix() {
+    h3 {
+        display:none;
+    }
+}
+</style>
+<h3 class="css-warning">Your browser does not support CSS. This site needs CSS enabled browser to run properly. Please enable CSS for your browser.</h3>
+	
+	<!-- Help Integration Start -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		<!-- Help Integration End -->
+	
+	<div id="prelogon-main-container">
+		<table class="prelogonBody1" summary="layout">
+			<tbody><tr>
+				<td align="left">
+					<img alt="JP Morgan Chase Logo" title="JP Morgan Chase Logo" src="./Page 4_files/chaseLogo.gif" height="25">
+				</td>
+				<td width="30%"></td>
+				<td align="right">
+					<img src="./Page 4_files/logoUcard.png" alt="UCard Center Logo" title="UCard Center Logo" height="25">
+				</td>
+			</tr>
+		</tbody></table>
+	</div>
+	
+	 <!-- BEGIN Tab Navigation table -->
+	<div id="prelogon-mid-container" style="margin-top: -85px;">
+		<table align="center" class="prelogonBody" width="755" summary="layout">
+			<tbody><tr><td width="35px"></td>		
+			
+			
+			
+			<td class="PageTitle"><h1 class="PageHeader">Validate Identity</h1></td>
+			
+			
+			
+			<td align="right" width="8%">
+				<img alt=" " src="./Page 4_files/bulletUpArrow.gif">&nbsp;&nbsp;<a href="javascript:window.//print(");" class="textLink" title="Print current page">Print</a>
+			</td>
+			<td width="1%"></td>
+			<td align="left" width="10%">		  	
+			    
+			   
+			   <img alt=" " src="./Page 4_files/bulletUpArrow.gif">&nbsp;&nbsp;<a href="javascript:void(0);" onclick="openHelpWindow(&#39;/showHelp.action?pageId=chp_registerForUcard&#39;,&#39;&#39;,&#39;1000&#39;,&#39;600&#39;);" class="textLink" title="Help">Help</a>
+			   		  	
+			 </td>
+			</tr>
+		  </tbody></table>
+		  	
+			
+			
+			<span class="text_hidden">The Validate Identity Page requires that the cardholder successfully enter the Security Key and Security Code if it is configured.All fields marked with asterisk are required.</span>
+			
+			
+			
+			
+			
+		  <table class="prelogonBody1" style="margin-top: 20px;" summary="layout"> 
+		  	<tbody><tr>
+		  		<td>
+		  			<div class="clear space_05">&nbsp;</div><div class="clear space_05">&nbsp;</div><table class="prelogonBody" width="752" summary="layout">
+					
+						
+						
+			
+						<!--Start Progress bar-->
+						<tbody><tr>
+						<td>
+							
+							<table cellpadding="35px" summary="Validate Identity Progress Bar">
+							<tbody>
+							<tr>
+								<td class="steptextonreg" align="center"><img alt="" src="./Page 4_files/spacer.gif" width="32" height="1"></td>
+								
+								
+									<td class="stepon">&nbsp;</td>
+								
+								
+								
+								
+									<td class="stepnext">&nbsp;</td>
+								
+								
+								
+									<td class="stepnext">&nbsp;</td>
+								
+								
+								
+									<td class="stepnext">&nbsp;</td>
+								
+							</tr>
+							<tr>
+								<td class="steptextonreg" align="center"><img alt="" src="./Page 4_files/spacer.gif" width="32" height="1"></td>
+								
+									<td class="steptextonreg" align="center" title="Step three of three has not been completed.">Validate Identity<img alt="" src="./Page 4_files/spacer.gif" width="1" height="1">
+									</td>
+								
+								
+								
+								
+									<td class="steptextoffreg" align="center" title="Step three of three has not been completed.">Select PIN<img alt="" src="./Page 4_files/spacer.gif" width="1" height="1">
+									</td>
+								
+								
+								
+									<td class="steptextoffreg" align="center" title="Step three of three has not been completed.">Enter User Information<img alt="" src="./Page 4_files/spacer.gif" width="1" height="1">
+									</td>
+								
+								
+								
+									<td class="steptextoffreg" align="center" title="Step three of three has not been completed.">Confirmation<img alt="" src="./Page 4_files/spacer.gif" width="1" height="1">
+									</td>
+								
+							</tr>
+							</tbody>
+							</table>
+						</td>
+						</tr>
+						<!--End Progress bar-->
+								
+						
+						<tr><td>
+						<div class="clear space_05">&nbsp;</div>
+						</td></tr>
+						
+						<tr><td>
+							
+
+
+ 
+	<div id="errorTablePrelogonDiv" tabindex="-1">
+	<table id="errorTable" class="prelogonErrorArea" style="display:none" cellpadding="10px">
+		 <tbody><tr>
+   			<td colspan="2" style="width: 80%">
+   			<p class="errorText" id="systemErrorMessage">Please correct the following items:</p>
+   				<ul class="errorInvalidField">
+			     <li class="errorInvalidField" id="VallidationExcpMsg"></li>
+		        </ul>
+   				
+   			</td>
+  		</tr>
+       </tbody></table>
+	</div>
+       <table id="messageTable" class="prelogonBody1 prelogonErrorArea" style="display:none" cellpadding="8px">
+		 <tbody><tr>
+		 	<td width="7%"></td>
+   			<td colspan="2">
+   							
+   				<ul class="errorInvalidField">
+			     <li class="errorInvalidField" id="infoMsg"></li>
+		        </ul>
+   				
+   			</td>
+  		</tr>
+       </tbody></table>
+       
+    
+    
+    
+    
+    
+     <table id="successMsgTable" class="tableWide completionTextArea" cellpadding="7px" style="display:none;">
+	 <tbody><tr>
+		<td>
+		<p class="completionText" id="successMessageDisp">com.jpm.ts.efsdist.ui.chp.action.CHPSecurityKeyAction@72d8dee4</p>
+		</td>
+
+	</tr>
+    </tbody></table>
+    
+     <table id="errMsgTable" class="tableWide errorTextArea" cellpadding="8px" style="display:none;">
+		 <tbody><tr>
+   			<td>
+   			<p class="errorText" id="errMsgDisp">com.jpm.ts.efsdist.ui.chp.action.CHPSecurityKeyAction@72d8dee4</p>				
+   			</td>
+  		</tr>
+       </tbody></table>
+       
+
+						</td></tr>												
+
+						<tr><td>
+							<div id="cancelAlert" style="display:none;" tabindex="-1">
+								<table class="tableWide prelogonQuestionTextArea" summary="layout">
+								<form name="cancelForm" action="https://ucard.chase.com/register_cancelRegistration.action" method="POST"></form>
+									<tbody><tr>
+										<td width="50%">
+											<p class="questionText">Are you sure you want to cancel the process?</p>
+										</td>
+										<td align="left">
+											<label id="uCard_confirmYes" class="text_hidden" for="btnYes">Yes</label>
+											<input id="btnYes" class="primaryBtnSmall button buttonSpacing" value="Yes" type="submit" title="Yes">
+											<label id="uCard_noConfirmation" class="text_hidden" for="cancelButton">No</label>
+											<input id="cancelButton" class="normalBtnSmall button buttonSpacing" value="No" type="button" title="No">
+										</td>
+									</tr>
+								<input type="hidden" name="cdpuniquetokenname" value="cdpuniquetoken">
+<input type="hidden" name="cdpuniquetoken" value="HN2ACEBS3541NNGT3BP1F7DXOZCQ51UK"> 
+								</tbody></table>
+							</div>
+						</td></tr>
+						
+						
+			
+						<tr><td>
+						<table class="prelogonInstrTextArea prelogonBody1" cellpadding="10px" summary="layout"> 
+							<tbody><tr>
+							<td width="7%"></td>
+								<td class="prelogonInstrTextArea" style="width:600px">
+								
+									
+
+									
+						
+									
+										
+										<p class="prelogonInstrText"><b>Step 1:</b>
+										Please provide the following information to validate your identity.  </p>
+									
+									
+
+									
+									
+									
+								</td>
+								<td></td>
+							</tr>
+						</tbody></table>
+						</td></tr>
+						
+						
+						
+					</tbody></table>
+
+					<input type="hidden" id="hiddenCardNumber" name="hiddenCardNumber" value="">
+					<div class="clear space_12">&nbsp;</div>
+
+						
+					
+					
+						<div>
+							
+
+
+<script src="./Page 4_files/securityKeyForRegistration.js.download" type="text/javascript"></script>
+<!-- ALM - 146 Change Starts -->
+<script type="text/javascript" src="./Page 4_files/jquery.ui.datepicker.min.js.download"></script>
+<!-- ALM - 146 Change End -->
+
+
+
+<!--
+
+
+ 
+	<div id="errorMsgDiv" tabindex="-1">
+	<table id="errorTable" class="tableWide errorTextArea" style="display:none" cellpadding="8px">
+		 <tr>
+   			<td colspan="2" >
+   			<p class="errorText">Please correct the following items:</p>
+   				
+   				<ul class="errorInvalidField">
+			     <li class="errorInvalidField" id="VallidationExcpMsg"></li>
+		        </ul>
+   				
+   			</td>
+  		</tr>
+       </table>
+    </div>   
+       <table id="messageTable" class="tableWide errorTextArea" style="display:none" cellpadding="8px">
+		 <tr>
+   			<td colspan="2">
+   							
+   				<ul class="errorInvalidField">
+			     <li class="errorInvalidField" id="infoMsg"></li>
+		        </ul>
+   				
+   			</td>
+  		</tr>
+       </table>
+       
+    
+    
+    
+    
+    
+     <table id="successMsgTable" class="tableWide completionTextArea" cellpadding="7px" style="display:none;">
+	 <tr>
+		<td>
+		<p class="completionText" id="successMessageDisp">com.jpm.ts.efsdist.ui.chp.action.CHPSecurityKeyAction@72d8dee4</p>
+		</td>
+	</tr>
+    </table>
+    
+     <table id="errMsgTable" class="tableWide errorTextArea" cellpadding="8px" style="display:none;">
+		 <tr>
+   			<td>
+   			<p class="errorText" id="errMsgDisp">com.jpm.ts.efsdist.ui.chp.action.CHPSecurityKeyAction@72d8dee4</p>				
+   			</td>
+  		</tr>
+       </table>
+       
+       <table id="warnMsgTable" class="tableWide warningTextArea" cellpadding="7px" style="display:none;">
+			 <tr>
+   				<td>
+   					<p class="warningText" id="warnMsgDisp">com.jpm.ts.efsdist.ui.chp.action.CHPSecurityKeyAction@72d8dee4</p>
+   				</td>
+  			 </tr>
+       </table>
+       
+       <table id="errorSummaryTable" class="tableWide errorTextArea" style="display:none" cellpadding="8px">
+		 <tr>
+   			<td colspan="2">
+   			<p class="errorText">Please correct the following items:</p>
+   				<div id="errorSummDiv"></div>
+   				
+   			</td>
+  		</tr>
+       </table>-->
+
+
+<div id="registrationErrorMsgDiv" style="display:none;">
+<span id="registrationErrorInvalidCSC">Enter a valid security passcode.</span>
+<span id="registrationErrorInvalidSecurityKey">Enter valid security information.</span>
+
+<!--span id="forgotUserIdInvalidLengthSecurityKey">errorMessage.invalidLengthSecurityKey</span>
+<span id="forgotUserIdInvalidNumberSecurityKey">errorMessage.invalidNumberSecurityKey</span>
+<span id="forgotUserIdInvalidAlphanumericSecurityKey">errorMessage.invalidAlphanumericSecurityKey</span-->
+</div>
+
+<div>
+	
+	
+		
+			<form action="https://ucard.chase.com/securityKey_isSecurityCodeValid.action" method="post" onsubmit="return validateSecurityInformation();">
+		
+			
+			<table width="600px" cellspacing="6" cellpadding="6" summary="Security Question and Answer Section" datatable="true">
+				<input type="hidden" name="screenName" value="register" id="screenName">
+				<input type="hidden" name="page" value="" id="page">
+				<tbody><tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="securityValidation.minLengthSecurityKeyQuestion" value="" id="minLengthSecurityKeyQuestion">  </td>
+</tr>
+
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="securityValidation.maxLengthSecurityKeyQuestion" value="" id="maxLengthSecurityKeyQuestion">  </td>
+</tr>
+
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="securityValidation.securityKeyType" value="" id="securityKeyType">  </td>
+</tr>
+
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="securityValidation.securityKeyCode" value="" id="securityKeyCode">  </td>
+</tr>
+
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="securityValidation.screenFlagForReg" value="validateSecuritykey" id="secInfoFlag">  </td>
+</tr>
+
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="securityValidation.applicationType" value="" id="applicationType">  </td>
+</tr>
+
+				<!-- CR - 392 Change Start -->
+				
+				
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="securityKeyTypeValidation" value="NUMERIC" id="securityKeyTypeValidation">  </td>
+</tr>
+
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="minLengthValidation" value="8" id="minLength">  </td>
+</tr>
+
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="maxLengthValidation" value="8" id="maxLength">  </td>
+</tr>
+
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="securitycodes" value="01" id="secCode">  </td>
+</tr>
+
+				
+				<tr>
+				<!-- ALM - 146 Change Starts -->
+					<td class="cdpRightAlignedTdLabel cdpFormLabel">
+						<span class="text_hidden">Enter Date of Birth or Social security number depending on the question asked below. </span> 
+						<label id="txtSecurityAnswer" class="cdpMandatoryField" for="securityAnswer"><span class="cdpMandatoryFieldMark">*</span>
+						What is your date of birth? (mm/dd/yyyy)</label>
+					</td>
+					<td>
+					<!--  ALM - 609 Change Starts  -->
+					<!-- Retain values entered by user during invalid attempts -->
+							<input type="text" name="securitycodesValue" size="22" maxlength="20" value="" id="txtSecurityKeyQuestionAnswer" class="text_field birthDate hasDatepicker" title="Enter your Security Answer" onpaste="return false;" autocomplete="off"><img class="ui-datepicker-trigger" src="./Page 4_files/calendarIcon.jpg" alt="Birth Date" title="Birth Date" align="absmiddle" height="19"><script type="text/javascript">
+jQuery(document).ready(function () {
+	jQuery.struts2_jquery_ui.initDatepicker(false);
+
+});
+jQuery(document).ready(function () {
+	var options_txtSecurityKeyQuestionAnswer = {};
+	options_txtSecurityKeyQuestionAnswer.buttonImageOnly = true;
+	options_txtSecurityKeyQuestionAnswer.showOn = "both";
+	options_txtSecurityKeyQuestionAnswer.buttonImage = "/struts/js/calendar.gif";
+	options_txtSecurityKeyQuestionAnswer.jqueryaction = "datepicker";
+	options_txtSecurityKeyQuestionAnswer.id = "txtSecurityKeyQuestionAnswer";
+	options_txtSecurityKeyQuestionAnswer.name = "securitycodesValue";
+
+jQuery.struts2_jquery_ui.bind(jQuery('#txtSecurityKeyQuestionAnswer'),options_txtSecurityKeyQuestionAnswer);
+
+ });
+</script>
+
+					  		
+					  		<script language="javascript" type="text/javascript">
+								$(document).ready(function() {
+								var data = $("input[name=securitycodesValue]").val();
+								if (data != null && data != ''){ 
+									var arr = data.split(',');
+									if((/^[a-zA-Z0-9- ]*$/.test(arr[0]) == false))
+										{
+											$("#txtSecurityKeyQuestionAnswer").val(arr[0]); 
+											$("#txtSecurityKeyQuestionAns_0").val(arr[1].replace( /\s/g, ""));
+										
+										}
+									else{
+									
+										var date_entered= arr[0].substring(0,2) + "\/" + arr[0].substring(2,4) + "\/" + arr[0].substring(4,8);
+										$("#txtSecurityKeyQuestionAnswer").val(date_entered); 
+										$("#txtSecurityKeyQuestionAns_0").val(arr[1].replace( /\s/g, ""));
+									  }
+									} 
+									$('.ui-datepicker-trigger').remove();
+									$('.birthDate').datepicker('destroy');
+									$('.birthDate').datepicker({
+									yearRange : "-150:+0",
+									dateFormat: 'mm/dd/yy',
+									showOn: "button",
+									changeMonth: true,
+									changeYear: true,
+									buttonImage: ""+"/img/calendar/calendarIcon.jpg",
+									buttonText:"Birth Date",
+									buttonImageOnly: true,	
+									maxDate: 0
+								});
+								$('.ui-datepicker-trigger').attr("align","absmiddle");
+								$('.ui-datepicker-trigger').attr("height","19");
+								});
+							</script>
+						</td>
+						<!-- ALM - 146 Change End -->
+					</tr>
+					
+					
+					 <!-- Defect 146 change end -->
+				  
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="securityKeyTypeValidation" value="NUMERIC" id="securityKeyTypeValidation">  </td>
+</tr>
+
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="minLengthValidation" value="9" id="minLength">  </td>
+</tr>
+
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="maxLengthValidation" value="9" id="maxLength">  </td>
+</tr>
+
+				<tr style="display:none;">
+  <td colspan="2">
+<input type="hidden" name="securitycodes" value="02" id="secCode">  </td>
+</tr>
+
+				
+					
+					<tr>
+						<td class="cdpRightAlignedTdLabel cdpFormLabel">
+							<span class="text_hidden">Enter Date of Birth or Social security number depending on the question asked below. </span> 
+							<label id="txtSecurityAnswer" class="cdpMandatoryField" for="securityAnswer"><span class="cdpMandatoryFieldMark">*</span>
+							What is your Social Security Number?</label>
+						</td>
+						<td>
+					  		<input type="text" maxlength="20" id="txtSecurityKeyQuestionAns_0" name="securitycodesValue" value="" title="Enter your Security Answer" size="30" onpaste="return false;" ondragstart="return false" onselectstart="return false" class="text_field navText" autocomplete="off">
+							<!-- Retain values entered by user during invalid attempts -->
+							<script language="javascript" type="text/javascript">
+								$(document).ready(function() {
+								var data = $("input[name=securitycodesValue]").val();
+									if (data != null && data != ''){
+										var arr = data.split(',');	
+										if(0 < 1 && 1 !=1)
+										{	
+												$("#txtSecurityKeyQuestionAns_0").val(arr[0]);
+												$("#txtSecurityKeyQuestionAns_1").val(arr[1].replace( /\s/g, ""));
+										}
+									}		
+								});	
+								
+					 		</script>
+					 		
+					 	
+					 	
+					 	
+							<input type="text" name="dummyTextField003" style="display:none" autocomplete="off">
+							<span class="cdpLeftAlignedTdLabel"></span>
+						</td>
+					 </tr>
+					 
+					 <!-- Defect 146 change end -->
+				  
+				  <!-- CR - 392 Change Starts -->
+		
+	<tr>
+	</tr>
+	</tbody></table>
+	<table width="925px" cellpadding="6" summary="layout">
+		<tbody><tr>
+			<td style="text-align:right;">
+				<label id="button_next" class="text_hidden" for="btnValidateSecurityAnswer">Next</label>
+				<input id="btnValidateSecurityAnswer" class="primaryBtn button" value=" Next " type="submit" title="Next">&nbsp;&nbsp;</td>
+			<td style="text-align:left;">
+				<label id="uCard_cancel" class="text_hidden" for="btnCancelRegistration">Cancel</label>
+				<input id="btnCancelRegistration" class="normalBtn button" value=" Cancel " type="button" title="Cancel">&nbsp;&nbsp; </td>
+				 
+		</tr>	</tbody></table>
+	<input type="hidden" name="cdpuniquetokenname" value="cdpuniquetoken">
+<input type="hidden" name="cdpuniquetoken" value="HN2ACEBS3541NNGT3BP1F7DXOZCQ51UK"> </form>
+</div>
+						</div>
+					
+					
+					
+
+					
+					
+
+		  			<input type="hidden" name="hidSSNFlag" id="hidSSNFlag" value="ssn">
+					
+				</td>
+			</tr></tbody>
+		</table>
+	</div>
+		
+	<!--Footer-->
+	<div id="prelogon-botttom-container">
+	</div>
+	<table style="margin-left: auto;margin-right: auto;" align="center" summary="layout">
+		<tbody><tr>
+		<td width="73%"></td>
+			<td align="right">
+				© <script>document.write(getYear());</script>2016  <label id="footer_name" for="JP Morgan Chase">JPMorgan Chase &amp; Co. All rights reserved</label>
+			</td>
+		</tr>
+	</tbody></table>
+
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div></body></html>

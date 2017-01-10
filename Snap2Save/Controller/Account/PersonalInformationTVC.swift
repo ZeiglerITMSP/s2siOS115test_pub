@@ -390,7 +390,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
     
     func getSelectedIndexFromPicker(selectedIndex: NSInteger, textField: AITextField) {
         let index = selectedIndex
-        print("Index\(index)")
+        //print(""Index\(index)")
         if (textField.tag == DropDownTags.states.rawValue) {
             selectedStateIndex = index
         }
@@ -444,7 +444,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -453,7 +453,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let userData = UserDefaults.standard.object(forKey: USER_DATA)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
         
-        print("user info \(userInfo)")
+        //print(""user info \(userInfo)")
         
         let user:User = userInfo as! User
 
@@ -516,9 +516,9 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             ] as [String : Any]
         
         saveActivityIndicator.startAnimating()
-        print(parameters)
+        //print("parameters)
         let url = String(format: "%@/updatePersonalInformation", hostUrl)
-        print(url)
+        //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
@@ -526,7 +526,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
                     let json = JSON(data: response.data!)
-                    print("json response\(json)")
+                    //print(""json response\(json)")
                     let responseDict = json.dictionaryObject
                     //let code : NSNumber = responseDict?["code"] as! NSNumber
                     if let messageString = responseDict?["message"] {
@@ -551,7 +551,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
-                print(error)
+                //print("error)
                 break
             }
             
@@ -559,11 +559,11 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
     }
 
     func loadUserInformation(){
-       // print("user id\(self.user.id)")
+       // //print(""user id\(self.user.id)")
         let userData = UserDefaults.standard.object(forKey: USER_DATA)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
         
-        print("user info \(userInfo)")
+        //print(""user info \(userInfo)")
         
         let user:User = userInfo as! User
         
@@ -621,7 +621,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -643,14 +643,14 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                           "language": currentLanguage
             ] as [String : Any]
         
-        print(parameters)
+        //print("parameters)
         
         HUD.allowsInteraction = false
         HUD.dimsBackground = false
         HUD.show(.progress)
         
         let url = String(format: "%@/getProfile", hostUrl)
-        print(url)
+        //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
@@ -660,7 +660,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 }
                 
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print(""json response\(json)")
                 let responseDict = json.dictionaryObject
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
@@ -689,7 +689,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
 
                 }
-                print(error)
+                //print("error)
                 break
             }
             

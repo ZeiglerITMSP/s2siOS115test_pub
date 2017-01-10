@@ -160,7 +160,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        print("isreachable \(isReachable)")
+        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -184,10 +184,10 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
             ] as [String : Any]
         
         
-        print(parameters)
+        //print("parameters)
         resetPasswordActivityIndicator.startAnimating()
         let url = String(format: "%@/resetPassword", hostUrl)
-        print(url)
+        //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             switch response.result {
@@ -197,7 +197,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
                 }
 
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print(""json response\(json)")
                 
                 if let responseDict = json.dictionaryObject {
                     let alertMessage = responseDict["message"] as! String
@@ -222,7 +222,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
                 DispatchQueue.main.async {
                     self.resetPasswordActivityIndicator.stopAnimating()
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
-                print(error)
+                //print("error)
                 break
             }
             

@@ -48,7 +48,7 @@
 "Get Started!" = "¡COMENCEMOS!";
 
 //signUpAlert
-"SignUpAlertTitle" = "¡Gracias por unirse a Snap2Save!";
+"SignUpAlertTitle" = "¡Gracias por unirse a Snap2Save!\n\n";
 "SignUpAlertMessage" = "Antes de que pueda iniciar sesión, debemos verificar su número de teléfono celular.  Debe recibir un mensaje de texto de confirmación en breve.  Cuando llegue, simplemente haga clic sobre el enlace en el mensaje de texto y así completará su proceso de registro.";
 "Close" = "Cerrar";
 
@@ -98,7 +98,7 @@
 "REGISTER" = "REGISTRARME";
 
 
-"Please Select" = "Seleccione";
+"Please select" = "Seleccione";
 "Unit, Building, etc." = "Dirección o casilla de correo";
 "Street address or PO box" = "Unidad, edificio, etc.";
 
@@ -143,7 +143,7 @@
 
 // PREFERENCE VC
 "Preferences" = "Preferencias";
-
+"You have chosen to be contacted by email, but have not provided a valid email address." = "Usted ha escogido que lo contactemos por email, pero no ha suministrado una dirección de correo válida.";
 
 // CHANGEPASSWORD VC
 "Change Password" = "Cambiar contraseña";
