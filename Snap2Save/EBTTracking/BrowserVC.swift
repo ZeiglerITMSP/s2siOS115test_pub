@@ -14,6 +14,51 @@ class BrowserVC: UIViewController {
     
     @IBOutlet weak var broswerView: UIView!
     
+    @IBOutlet weak var queryTextView: UITextView!
+    
+    @IBAction func executeQueryAction(_ sender: Any) {
+        
+        webViewMaster.execute(javascript: queryTextView.text)
+       
+    }
+    
+    
+    
+    @IBAction func backAction(_ sender: Any) {
+        
+        if webViewMaster.webView.canGoBack {
+            webViewMaster.webView.goBack()
+        }
+    }
+    
+    @IBAction func frontAction(_ sender: Any) {
+        
+        if webViewMaster.webView.canGoForward {
+            webViewMaster.webView.goForward()
+        }
+
+        
+        
+    }
+    
+    
+    @IBAction func reloadAction(_ sender: Any) {
+        
+        webViewMaster.webView.reload()
+        
+    }
+    
+    @IBAction func printAction(_ sender: Any) {
+        
+        
+        webViewMaster.webView.evaluateJavaScript("document.documentElement.outerHTML") { (result, error) in
+            
+            print(result ?? "")
+            print(error ?? "")
+        }
+        
+    }
+    
     let webViewMaster: EBTWebView = EBTWebView.shared
     
     // MARK:-
@@ -45,6 +90,8 @@ class BrowserVC: UIViewController {
     }
     
 
+   
+    
     /*
     // MARK: - Navigation
 

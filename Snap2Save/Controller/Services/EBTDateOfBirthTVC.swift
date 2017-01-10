@@ -10,11 +10,20 @@ import UIKit
 
 class EBTDateOfBirthTVC: UITableViewController {
 
+    
+    fileprivate enum ActionType {
+        
+        case waitingForPageLoad
+        case cardNumber
+        case accept
+    }
+    
     // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
-    
+    fileprivate var actionType: ActionType?
     
     // Outles
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var dobField: AIPlaceHolderTextField!
     @IBOutlet weak var socialSecurityNumberField: AIPlaceHolderTextField!
@@ -27,9 +36,9 @@ class EBTDateOfBirthTVC: UITableViewController {
         
         self.view.endEditing(true)
         
-        self.performSegue(withIdentifier: "EBTSelectPinTVC", sender: nil)
+//        self.performSegue(withIdentifier: "EBTSelectPinTVC", sender: nil)
         
-//        autoFill(dob: dobField.contentTextField.text!)
+        autoFill(dob: dobField.contentTextField.text!)
         
     }
     
@@ -90,8 +99,8 @@ class EBTDateOfBirthTVC: UITableViewController {
     
     // MARK: -
     func backAction() {
-
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        self.navigationController?.popViewController(animated: true)
+      //  showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -103,7 +112,6 @@ class EBTDateOfBirthTVC: UITableViewController {
     }
     
     // MARK: - Web View
-    
     
     // check status
     func validateSubmitAction() {
@@ -179,7 +187,37 @@ class EBTDateOfBirthTVC: UITableViewController {
         }
     }
     
+    func validateNextPage() {
+        
+        let jsLoginValidation = "$('.PageHeader').text();"
+        
+        let javaScript = jsLoginValidation
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let result = result {
+                
+                let resultString = result as! String
+                
+                if resultString == "Select PIN" {
+                    
+                    self.actionType = nil
+                    self.nextActivityIndicator.stopAnimating()
+                    // move to view controller
+                    self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
+                    
+                } else {
+                    print("page not loaded..")
+                    self.actionType = ActionType.waitingForPageLoad
+                }
+            } else {
+                print(error ?? "")
+                self.actionType = ActionType.waitingForPageLoad
+            }
+        }
+    }
     
+
 
 }
 

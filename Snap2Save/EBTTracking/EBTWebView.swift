@@ -9,6 +9,11 @@
 import UIKit
 import WebKit
 
+// Ctrl + U
+// class -> .
+// id -> #
+
+
 protocol EBTWebViewDelegate {
     
     func didFinishLoadingWebView()
@@ -83,6 +88,46 @@ class EBTWebView: NSObject {
             }
         }
     }
+    
+    func getPageTitle(completion: @escaping (String?) -> ()) {
+        
+        let jsPageTitle = "$('.PageTitle').first().text();"
+        webView.evaluateJavaScript(jsPageTitle) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+                
+                completion(nil)
+                
+            } else {
+                
+                let stringResult = result as! String
+                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(pageTitle)
+                
+                completion(pageTitle)
+            }
+        }
+    }
+    
+    func execute(javascript:String) {
+        
+
+        webView.evaluateJavaScript(javascript) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+                
+            } else {
+                
+                if let result = result {
+                    let stringResult = result as! String
+                    let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                    print(pageTitle)
+                }
+                
+            }
+        }
+    }
+    
     
     
 }

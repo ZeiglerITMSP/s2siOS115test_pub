@@ -17,14 +17,17 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
-    
     fileprivate var actionType: ActionType?
     
     // Ouetles
+    
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
-    @IBOutlet weak var securityQuestionField: AIPlaceHolderTextField!
+    @IBOutlet weak var securityQuestionTitleLabel: UILabel!
+    @IBOutlet weak var securityQuestionLabel: UILabel!
+    
     @IBOutlet weak var securityAnswerField: AIPlaceHolderTextField!
     
     @IBOutlet weak var confirmButton: UIButton!
@@ -36,7 +39,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     @IBAction func confirmAction(_ sender: UIButton) {
         
-        validatePage()
+        autoFill()
         
 //         performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
     }
@@ -56,7 +59,8 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         self.tableView.estimatedRowHeight = 44
         
         ebtWebView.responder = self
-    
+        
+        validatePage()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -86,7 +90,9 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     func backAction() {
         
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        self.navigationController?.popViewController(animated: true)
+        
+//        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -115,21 +121,20 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     func getSecurityQuestion() {
         
-        let js = "$('.cdpLeftAlignedTdLabel').text();"
+        let js = "$('.cdpLeftAlignedTdLabel').first().text();"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
-                //print("error ?? "error nil")
+                print(error ?? "error nil")
             } else {
-                //print("result ?? "result nil")
+                print(result ?? "result nil")
                 let stringResult = result as! String
-                let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                //print("trimmedErrorMessage)
+                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmedText)
                 
-                if trimmedErrorMessage.characters.count > 0 {
+                if trimmedText.characters.count > 0 {
                     
-                    self.confirmActivityIndicator.stopAnimating()
-                    self.errorMessageLabel.text = trimmedErrorMessage
+                    self.securityQuestionLabel.text = trimmedText
                     self.tableView.reloadData()
                     
                 } else {
@@ -149,12 +154,11 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
         actionType = ActionType.confirm
         
-//        actionType = ActionType.sumbit
         let jsSecurityAnswer = "$('#securityAnswer').val('\(self.securityAnswerField.contentTextField.text!)');"
-        let jsCheckbox = "$('#registerDeviceFlag').attr('checked');"
-        let jsSubmit = "$('#submit').click();"
+//        let jsCheckbox = "$('#registerDeviceFlag').attr('checked');"
+        let jsSubmit = "$('#okButton').click();"
         
-        let javaScript = jsSecurityAnswer + jsCheckbox + jsSubmit
+        let javaScript = jsSecurityAnswer + jsSubmit
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
             self.checkForErrorMessage()
@@ -167,28 +171,45 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
         ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
             if error != nil {
-                //print("error ?? "error nil")
+                print(error ?? "error nil")
             } else {
-                //print("result ?? "result nil")
+                print(result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                //print("trimmedErrorMessage)
+                print(trimmedErrorMessage)
                 
                 if trimmedErrorMessage.characters.count > 0 {
                     
                     self.confirmActivityIndicator.stopAnimating()
+                    self.confirmButton.isEnabled = true
                     self.errorMessageLabel.text = trimmedErrorMessage
                     self.tableView.reloadData()
                     
                 } else {
                     
-                    self.confirmActivityIndicator.stopAnimating()
-                    self.performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
+//                    self.confirmActivityIndicator.stopAnimating()
+                   //  self.performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
+                    self.validateNextPage()
                 }
             }
         }
     }
 
+    func validateNextPage() {
+        
+        ebtWebView.getPageTitle(completion: { pageTitle in
+            
+            if pageTitle == "Account Summary" {
+                
+                self.confirmActivityIndicator.stopAnimating()
+                self.performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
+                
+            } else {
+                
+            }
+        })
+        
+    }
     
 
 
@@ -203,13 +224,10 @@ extension EBTLoginSecurityQuestionTVC: EBTWebViewDelegate {
             
             actionType = nil
             checkForErrorMessage()
+        } else {
+            
         }
         
-//        else if actionType == .regenerate {
-//
-//            actionType = nil
-//            checkForStatusMessage()
-//        }
     }
     
 }

@@ -18,6 +18,7 @@ class EBTAuthenticationTVC: UITableViewController {
         
         case generate
         case regenerate
+        case securityQuestion
     }
     
     
@@ -27,6 +28,9 @@ class EBTAuthenticationTVC: UITableViewController {
     
     
     // Outlets
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var errorTitleLabel: UILabel!
@@ -80,7 +84,7 @@ class EBTAuthenticationTVC: UITableViewController {
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 2 {
+        if indexPath.row == 1 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
@@ -198,8 +202,10 @@ class EBTAuthenticationTVC: UITableViewController {
                     
                 } else {
                     
-                    self.confirmActivityIndicator.stopAnimating()
-                    self.performSegue(withIdentifier: "EBTLoginSecurityQuestionTVC", sender: nil)
+                    self.validateNextPage()
+                  //  self.actionType =
+//                    self.confirmActivityIndicator.stopAnimating()
+//                    self.performSegue(withIdentifier: "EBTLoginSecurityQuestionTVC", sender: nil)
                 }
             }
         }
@@ -207,7 +213,8 @@ class EBTAuthenticationTVC: UITableViewController {
 
     func backAction() {
         
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        self.navigationController?.popViewController(animated: true)
+//        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -218,6 +225,26 @@ class EBTAuthenticationTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
 
+    
+    // Security Question
+    
+    func validateNextPage() {
+        
+        ebtWebView.getPageHeader(completion: { pageTitle in
+            
+            if pageTitle == "Verify Security Question" {
+                
+                self.confirmActivityIndicator.stopAnimating()
+                self.performSegue(withIdentifier: "EBTLoginSecurityQuestionTVC", sender: nil)
+                
+            } else {
+                
+            }
+        })
+        
+    }
+    
+    
     
 }
 
@@ -231,7 +258,8 @@ extension EBTAuthenticationTVC: EBTWebViewDelegate {
         
         if actionType == .generate {
             
-            //validateSubmitAction()
+            checkForErrorMessage()
+            
         } else if actionType == .regenerate {
             
             actionType = nil
