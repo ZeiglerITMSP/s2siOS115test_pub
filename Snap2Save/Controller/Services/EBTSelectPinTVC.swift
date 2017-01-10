@@ -22,21 +22,24 @@ class EBTSelectPinTVC: UITableViewController {
     
     // Outlets
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var messageLabel: UILabel!
-    
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
-    
     @IBOutlet weak var pinField: AIPlaceHolderTextField!
     @IBOutlet weak var confirmPinField: AIPlaceHolderTextField!
-    
     @IBOutlet weak var nextActivityIndicator: UIActivityIndicatorView!
-   
     @IBOutlet weak var currentPinActivityIndicator: UIActivityIndicatorView!
+    
+    
+    @IBOutlet weak var nextButton: UIButton!
+    
+    @IBOutlet weak var useCurrentPinButton: UIButton!
     
     // Actions
     @IBAction func nextAction(_ sender: UIButton) {
+        
+        self.nextButton.isEnabled = false
+        self.nextActivityIndicator.startAnimating()
         
         autoFill()
         
@@ -65,17 +68,10 @@ class EBTSelectPinTVC: UITableViewController {
         ebtWebView.responder = self
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         ebtWebView.responder = self
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        ebtWebView.responder = nil
-        
-        super.viewDidDisappear(animated)
     }
     
     
@@ -134,6 +130,9 @@ class EBTSelectPinTVC: UITableViewController {
             if error != nil {
                 print(error ?? "error nil")
                 
+                self.nextButton.isEnabled = true
+                self.nextActivityIndicator.stopAnimating()
+                
             } else {
                 print(result ?? "result nil")
                 self.checkForErrorMessage()
@@ -143,7 +142,7 @@ class EBTSelectPinTVC: UITableViewController {
     
     func checkForErrorMessage() {
         
-        let dobErrorCode = "$('.errorInvalidField').text();"
+        let dobErrorCode = "$('.errorInvalidField').first().text();"
         
         ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
             if error != nil {
@@ -157,6 +156,8 @@ class EBTSelectPinTVC: UITableViewController {
                 print(trimmed)
                 if trimmed.characters.count > 0 {
                     // got error
+                    
+                    self.nextButton.isEnabled = true
                     self.nextActivityIndicator.stopAnimating()
                     
                     self.errorMessageLabel.text = trimmed
@@ -191,7 +192,6 @@ class EBTSelectPinTVC: UITableViewController {
                     
                 } else {
                     print("page not loaded..")
-                    
                 }
             } else {
                 print(error ?? "")

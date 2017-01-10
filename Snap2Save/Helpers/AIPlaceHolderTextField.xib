@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,7 +48,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSS-fa-fMx">
-                    <rect key="frame" x="327" y="53" width="22" height="28"/>
+                    <rect key="frame" x="327" y="50" width="22" height="28"/>
                     <color key="tintColor" red="0.3294117647" green="0.74509803919999995" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal">
                         <color key="titleColor" red="0.3294117647" green="0.74509803919999995" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -71,7 +70,7 @@
                 <constraint firstItem="Oq9-Hg-QjO" firstAttribute="top" secondItem="8F8-dU-10h" secondAttribute="bottom" constant="8" id="UEC-nu-zpX"/>
                 <constraint firstAttribute="bottom" secondItem="Oq9-Hg-QjO" secondAttribute="bottom" constant="4" id="ZNd-1H-OMX"/>
                 <constraint firstItem="8F8-dU-10h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="26" id="ZSS-cm-Pln"/>
-                <constraint firstItem="QSS-fa-fMx" firstAttribute="centerY" secondItem="Oq9-Hg-QjO" secondAttribute="centerY" id="ib1-aD-3dZ"/>
+                <constraint firstItem="QSS-fa-fMx" firstAttribute="centerY" secondItem="Oq9-Hg-QjO" secondAttribute="centerY" constant="-3" id="ib1-aD-3dZ"/>
                 <constraint firstItem="QSS-fa-fMx" firstAttribute="leading" secondItem="Oq9-Hg-QjO" secondAttribute="trailing" constant="-22" id="xll-ab-Lla"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

@@ -104,6 +104,13 @@ extension String {
     
 }
 
+extension Dictionary where Value: Equatable {
+    
+    func getKey(forValue val: Value) -> Key? {
+        return first(where: { $1 == val })?.0
+    }
+}
+
 extension UIColor {
     public convenience init?(hexString: String) {
         let r, g, b, a: CGFloat

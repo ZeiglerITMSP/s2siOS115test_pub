@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class EBTUserInformationTVC: UITableViewController {
 
@@ -21,12 +22,18 @@ class EBTUserInformationTVC: UITableViewController {
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
-    var questionOneIndex = 0
-    var questionTwoIndex = 0
-    var questionThreeIndex = 0
+    var questionOneDictionary = [String:String]()
+    var questionTwoDictionary = [String:String]()
+    var questionThreeDictionary = [String:String]()
     
+    var userIdRules = ""
+    var passwordRules = ""
     
     // Outlets
+    
+    @IBOutlet weak var nextButton: UIButton!
+    
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var errorTitleLabel: UILabel!
@@ -52,7 +59,11 @@ class EBTUserInformationTVC: UITableViewController {
     
     @IBAction func nextAction(_ sender: UIButton) {
         
-        performSegue(withIdentifier: "EBTConfirmationTVC", sender: nil)
+        self.nextActivityIndicator.startAnimating()
+        self.nextButton.isEnabled = false
+        
+        autoFill()
+
     }
     @IBAction func cancelAction(_ sender: UIButton) {
         
@@ -60,6 +71,7 @@ class EBTUserInformationTVC: UITableViewController {
     }
     
     
+    // MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -76,20 +88,12 @@ class EBTUserInformationTVC: UITableViewController {
         // fill questions
         questionOneField.contentTextField.setRightGap(width: 10, placeHolderImage: UIImage(named:"ic_downarrow_input")!)
         questionOneField.contentTextField.textFieldType = .TextPickerTextField
-        questionOneField.contentTextField.pickerViewArray = ["Curabitur blandit tempus porttitor.", "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.", "Etiam porta sem malesuada magna mollis euismod."]
-        questionOneField.contentTextField.updateUIAsPerTextFieldType()
-        
-        
+
         questionTwoField.contentTextField.setRightGap(width: 10, placeHolderImage: UIImage(named:"ic_downarrow_input")!)
         questionTwoField.contentTextField.textFieldType = .TextPickerTextField
-        questionTwoField.contentTextField.pickerViewArray = ["Curabitur blandit tempus porttitor.", "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.", "Etiam porta sem malesuada magna mollis euismod."]
-        questionTwoField.contentTextField.updateUIAsPerTextFieldType()
-        
         
         questionThreeField.contentTextField.setRightGap(width: 10, placeHolderImage: UIImage(named:"ic_downarrow_input")!)
         questionThreeField.contentTextField.textFieldType = .TextPickerTextField
-        questionThreeField.contentTextField.pickerViewArray = ["Curabitur blandit tempus porttitor.", "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.", "Etiam porta sem malesuada magna mollis euismod."]
-        questionThreeField.contentTextField.updateUIAsPerTextFieldType()
         
         // Automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -98,20 +102,21 @@ class EBTUserInformationTVC: UITableViewController {
         errorMessageLabel.text = nil
         
         ebtWebView.responder = self
+        
+        getQuestionOneList()
+        getQuestionTwoList()
+        getQuestionThreeList()
+        
+        getUserIdRules()
+        getPasswordRules()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         ebtWebView.responder = self
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        ebtWebView.responder = nil
-        
-        super.viewDidDisappear(animated)
-    }
     
     
     override func didReceiveMemoryWarning() {
@@ -148,7 +153,147 @@ class EBTUserInformationTVC: UITableViewController {
     }
 
     // MARK: -
+    
+    func getQuestionOneList() {
+        
+        let js = "function getQuestion1Options() { " +
+            "var object = {}; " +
+            
+            " +$('#question1 option').each(function () {    " +
+            "    object[$(this).val()] = $(this).text();    " +
+            "});                                            " +
+            "var jsonSerialized = JSON.stringify(object);   " +
+            "return jsonSerialized                          " +
+        "}                                                  " +
+        "getQuestion1Options();                             "
+    
+        ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmedText)
+                
+                if trimmedText.characters.count > 0 {
+                    
+                    let json = JSON.parse(trimmedText)
+                    print("json response \(json)")
+                    
+                    if let responseDict = json.dictionaryObject {
+                        
+                        self.questionOneDictionary = responseDict as! [String:String]
+                        self.questionOneDictionary.removeValue(forKey: "-1")
+                        let values = Array(self.questionOneDictionary.values)
+                        let list = NSMutableArray(array: values)
+                        self.questionOneField.contentTextField.pickerViewArray = list
+                        self.questionOneField.contentTextField.updateUIAsPerTextFieldType()
+                    }
 
+                } else {
+                    
+                    
+                }
+            }
+        }
+        
+    }
+    
+    func getQuestionTwoList() {
+        
+        let js = "function getQuestion2Options() { " +
+            "var object = {}; " +
+            
+            " +$('#question2 option').each(function () {    " +
+            "    object[$(this).val()] = $(this).text();    " +
+            "});                                            " +
+            "var jsonSerialized = JSON.stringify(object);   " +
+            "return jsonSerialized                          " +
+            "}                                                  " +
+        "getQuestion2Options();                             "
+        
+        ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmedText)
+                
+                if trimmedText.characters.count > 0 {
+                    
+                    let json = JSON.parse(trimmedText)
+                    print("json response \(json)")
+                    
+                    if let responseDict = json.dictionaryObject {
+                        
+                        self.questionTwoDictionary = responseDict as! [String:String]
+                        self.questionTwoDictionary.removeValue(forKey: "-1")
+                        let values = Array(self.questionTwoDictionary.values)
+                        let list = NSMutableArray(array: values)
+                        self.questionTwoField.contentTextField.pickerViewArray = list
+                        self.questionTwoField.contentTextField.updateUIAsPerTextFieldType()
+                    }
+                    
+                } else {
+                    
+                    
+                }
+            }
+        }
+        
+    }
+    
+    func getQuestionThreeList() {
+        
+        let js = "function getQuestion3Options() { " +
+            "var object = {}; " +
+            
+            " +$('#question3 option').each(function () {    " +
+            "    object[$(this).val()] = $(this).text();    " +
+            "});                                            " +
+            "var jsonSerialized = JSON.stringify(object);   " +
+            "return jsonSerialized                          " +
+            "}                                                  " +
+        "getQuestion3Options();                             "
+        
+        ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmedText)
+                
+                if trimmedText.characters.count > 0 {
+                    
+                    let json = JSON.parse(trimmedText)
+                    print("json response \(json)")
+                    
+                    if let responseDict = json.dictionaryObject {
+                        
+                        self.questionThreeDictionary = responseDict as! [String:String]
+                        self.questionThreeDictionary.removeValue(forKey: "-1")
+                        let values = Array(self.questionThreeDictionary.values)
+                        let list = NSMutableArray(array: values)
+                        self.questionThreeField.contentTextField.pickerViewArray = list
+                        self.questionThreeField.contentTextField.updateUIAsPerTextFieldType()
+                    }
+                    
+                } else {
+                    
+                    
+                }
+            }
+        }
+        
+    }
+    
+
+    
     func autoFill() {
         
         let userId = self.userIdField.contentTextField.text!
@@ -165,23 +310,28 @@ class EBTUserInformationTVC: UITableViewController {
         let answerTwo = self.answerTwoField.contentTextField.text!
         let answerThree = self.answerThreeField.contentTextField.text!
         
+        
+        let questionOneIndex = questionOneDictionary.getKey(forValue: self.questionOneField.contentTextField.text!)
+        let questionTwoIndex = questionTwoDictionary.getKey(forValue: self.questionTwoField.contentTextField.text!)
+        let questionThreeIndex = questionThreeDictionary.getKey(forValue: self.questionThreeField.contentTextField.text!)
+        
+        
         let jsUserId = "$('#txtUserid').val('\(userId)');"
-        let jsPassword = "$('#txtUserid').val('\(password)');"
-        let jsConfirmPassword = "$('#txtUserid').val('\(confirmPassword)');"
-        let jsEmailAddress = "$('#txtUserid').val('\(emailAddress)');"
-        let jsConfirmEmail = "$('#txtUserid').val('\(confirmEmail)');"
-        let jsPhoneNumber = "$('#txtUserid').val('\(phoneNumber)');"
+        let jsPassword = "$('#txtPassword').val('\(password)');"
+        let jsConfirmPassword = "$('#txtConfirmPassword').val('\(confirmPassword)');"
+        let jsEmailAddress = "$('#txtEmail').val('\(emailAddress)');"
+        let jsConfirmEmail = "$('#txtConfirmEmail').val('\(confirmEmail)');"
+        let jsPhoneNumber = "$('#txtPhoneNumber').val('\(phoneNumber)');"
         
-        let jsQuestionOne = "$('#question1').val('\(questionOneIndex)');"
-        let jsQuestionTwo = "$('#question1').val('\(questionTwoField)');"
-        let jsQuestionThree = "$('#question1').val('\(questionThreeField)');"
+        let jsQuestionOne = "$('#question1').val('\(questionOneIndex ?? "-1")');"
+        let jsQuestionTwo = "$('#question2').val('\(questionTwoIndex  ?? "-1")');"
+        let jsQuestionThree = "$('#question3').val('\(questionThreeIndex ?? "-1")');"
         
-        let jsAnswerOne = "$('#txtUserid').val('\(answerOne)');"
-        let jsAnswerTwo = "$('#txtUserid').val('\(answerTwo)');"
-        let jsAnswerThree = "$('#txtUserid').val('\(answerThree)');"
+        let jsAnswerOne = "$('#response1TextField1').val('\(answerOne)');"
+        let jsAnswerTwo = "$('#response1TextField2').val('\(answerTwo)');"
+        let jsAnswerThree = "$('#response1TextField3').val('\(answerThree)');"
         
-//                let jsForm = "void($('form')[1].submit());"
-        let jsCheckbox = "$('#chkElecCommsOpt').attr('checked');"
+        let jsCheckbox = "$('#chkElecCommsOpt').prop('checked', true);"
         
         let jsForm = "void($('#btnValidateUserInfo').click());"
         
@@ -200,7 +350,7 @@ class EBTUserInformationTVC: UITableViewController {
     
     func checkForErrorMessage() {
         
-        let dobErrorCode = "$('.errorInvalidField').text();"
+        let dobErrorCode = "$('.errorInvalidField').first().text();"
         
         ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
             if error != nil {
@@ -215,6 +365,7 @@ class EBTUserInformationTVC: UITableViewController {
                 if trimmed.characters.count > 0 {
                     // got error
                     self.nextActivityIndicator.stopAnimating()
+                    self.nextButton.isEnabled = true
                     
                     self.errorMessageLabel.text = trimmed
                     self.tableView.reloadData()
@@ -239,12 +390,13 @@ class EBTUserInformationTVC: UITableViewController {
                 
                 let resultString = result as! String
                 
-                if resultString == "Enter User Information" {
+                if resultString == "Confirmation" {
                     
                     self.actionType = nil
                     self.nextActivityIndicator.stopAnimating()
+                    self.nextButton.isEnabled = true
                     // move to view controller
-                    self.performSegue(withIdentifier: "EBTUserInformationTVC", sender: self)
+                    self.performSegue(withIdentifier: "EBTConfirmationTVC", sender: self)
                     
                 } else {
                     print("page not loaded..")
@@ -258,8 +410,56 @@ class EBTUserInformationTVC: UITableViewController {
     }
     
     
-    
-    
+    func getUserIdRules() {
+        
+        let dobErrorCode = "$('.prelogonInstrText:eq(2)').text();"
+        
+        ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
+            if error != nil {
+                
+                print(error ?? "error nil")
+                
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmed)
+                if trimmed.characters.count > 0 {
+                    
+                    self.userIdRules = trimmed
+                    
+                } else {
+                    
+                }
+            }
+        }
+    }
+
+    func getPasswordRules() {
+        
+        let dobErrorCode = "$('.prelogonInstrText:eq(3)').text();"
+        
+        ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
+            if error != nil {
+                
+                print(error ?? "error nil")
+                
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmed)
+                if trimmed.characters.count > 0 {
+                    
+                    self.passwordRules = trimmed
+                    
+                } else {
+                    
+                }
+            }
+        }
+    }
+
     
 }
 
@@ -270,7 +470,7 @@ extension EBTUserInformationTVC: AIPlaceHolderTextFieldDelegate {
     
         if textfield.tag == 100 {
             // User ID
-            showMyAlert(title: "User ID Rules:", message: "* Minimum of 6 and maximum of 15 long \n* Alphanumeric \n* Must include at least 1 number \n* Case insensitive * No special characters like @#$%^&*() \n* No spaces")
+            showMyAlert(title: "User ID Rules:", message: userIdRules)
             
         } else if textfield.tag == 101 {
             // Password
@@ -314,7 +514,9 @@ extension EBTUserInformationTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
-        //checkForErrorMessage()
+        checkForErrorMessage()
     }
     
 }
+
+

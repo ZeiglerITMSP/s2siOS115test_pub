@@ -65,18 +65,12 @@ class EBTDateOfBirthTVC: UITableViewController {
         
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         ebtWebView.responder = self
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        ebtWebView.responder = nil
-        
-        super.viewDidDisappear(animated)
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
