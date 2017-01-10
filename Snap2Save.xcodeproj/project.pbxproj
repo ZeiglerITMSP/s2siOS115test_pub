@@ -11,6 +11,11 @@
 		6FB268A6557A795CAD814A61 /* Pods_Snap2SaveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */; };
 		9737ED0C1E14042400120B54 /* ChangePasswordTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */; };
 		9759BE781E0A65AA00A5C76A /* SignUpTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */; };
+		976A99711E24EA9700F82105 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976A996D1E24EA9700F82105 /* Bolts.framework */; };
+		976A99721E24EA9700F82105 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976A996E1E24EA9700F82105 /* FBSDKCoreKit.framework */; };
+		976A99731E24EA9700F82105 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976A996F1E24EA9700F82105 /* FBSDKLoginKit.framework */; };
+		976A99741E24EA9700F82105 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976A99701E24EA9700F82105 /* FBSDKShareKit.framework */; };
+		976A99771E251A6400F82105 /* FacebookLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A99761E251A6400F82105 /* FacebookLogin.swift */; };
 		977B64F51E163B5600AA802D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F41E163B5600AA802D /* User.swift */; };
 		977B64F71E16407A00AA802D /* AdditionalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F61E16407A00AA802D /* AdditionalInformation.swift */; };
 		978729DD1E0937B000908301 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978729DC1E0937B000908301 /* Constants.swift */; };
@@ -85,6 +90,11 @@
 		95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordTVC.swift; sourceTree = "<group>"; };
 		9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTVC.swift; sourceTree = "<group>"; };
+		976A996D1E24EA9700F82105 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		976A996E1E24EA9700F82105 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		976A996F1E24EA9700F82105 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		976A99701E24EA9700F82105 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		976A99761E251A6400F82105 /* FacebookLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLogin.swift; sourceTree = "<group>"; };
 		977B64F41E163B5600AA802D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Snap2Save/Controller/Account/User.swift; sourceTree = SOURCE_ROOT; };
 		977B64F61E16407A00AA802D /* AdditionalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdditionalInformation.swift; path = Snap2Save/Controller/Account/AdditionalInformation.swift; sourceTree = SOURCE_ROOT; };
 		978729DC1E0937B000908301 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -106,7 +116,7 @@
 		E83156031E1A5689001D30D2 /* EBTLoginSecurityQuestionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTLoginSecurityQuestionTVC.swift; sourceTree = "<group>"; };
 		E83156051E1A7EA3001D30D2 /* DetailedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedCell.swift; sourceTree = "<group>"; };
 		E83156071E1A7EB8001D30D2 /* DetailedSubtitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedSubtitleCell.swift; sourceTree = "<group>"; };
-		E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; usesTabs = 0; };
 		E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupAdditionalFieldsTVC.swift; sourceTree = "<group>"; };
 		E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePageVC.swift; sourceTree = "<group>"; };
 		E84AE9D41E07F4B100C5E7F3 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
@@ -151,6 +161,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				52949BC23A183914DF6D1992 /* Pods_Snap2Save.framework in Frameworks */,
+				976A99721E24EA9700F82105 /* FBSDKCoreKit.framework in Frameworks */,
+				976A99741E24EA9700F82105 /* FBSDKShareKit.framework in Frameworks */,
+				976A99731E24EA9700F82105 /* FBSDKLoginKit.framework in Frameworks */,
+				976A99711E24EA9700F82105 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +195,18 @@
 				95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		976A99751E24EAB600F82105 /* FacebookFrameWorks */ = {
+			isa = PBXGroup;
+			children = (
+				976A996D1E24EA9700F82105 /* Bolts.framework */,
+				976A996E1E24EA9700F82105 /* FBSDKCoreKit.framework */,
+				976A996F1E24EA9700F82105 /* FBSDKLoginKit.framework */,
+				976A99701E24EA9700F82105 /* FBSDKShareKit.framework */,
+			);
+			name = FacebookFrameWorks;
+			path = Controller/Services;
 			sourceTree = "<group>";
 		};
 		A5AC032866C285AFF18A5452 /* Pods */ = {
@@ -244,6 +270,7 @@
 			children = (
 				977B64F41E163B5600AA802D /* User.swift */,
 				977B64F61E16407A00AA802D /* AdditionalInformation.swift */,
+				976A99761E251A6400F82105 /* FacebookLogin.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -329,6 +356,7 @@
 			children = (
 				E88BA54A1DF53C1300714C65 /* AppDelegate.swift */,
 				E84AE9E11E0821AB00C5E7F3 /* Helpers */,
+				976A99751E24EAB600F82105 /* FacebookFrameWorks */,
 				E88BA5791DF53CF500714C65 /* Model */,
 				E84AE9C81E07F28300C5E7F3 /* View */,
 				E81E61651E2365A30016FE74 /* EBT */,
@@ -725,6 +753,7 @@
 				E83156081E1A7EB8001D30D2 /* DetailedSubtitleCell.swift in Sources */,
 				E826FBD61E0946970089AEA6 /* EBTLoginTVC.swift in Sources */,
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
+				976A99771E251A6400F82105 /* FacebookLogin.swift in Sources */,
 				E8BAE2AA1E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift in Sources */,
 				E83156061E1A7EA3001D30D2 /* DetailedCell.swift in Sources */,
 				E81B74AC1E1105EA00D5EC61 /* LanguageUtility.swift in Sources */,
@@ -931,6 +960,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Cathy Maglione (2APHA8Y955)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cathy Maglione (2APHA8Y955)";
 				DEVELOPMENT_TEAM = PGJV67G4NG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Snap2Save/Controller/Services",
+				);
 				INFOPLIST_FILE = Snap2Save/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -952,6 +985,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
 				DEVELOPMENT_TEAM = PGJV67G4NG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Snap2Save/Controller/Services",
+				);
 				INFOPLIST_FILE = Snap2Save/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

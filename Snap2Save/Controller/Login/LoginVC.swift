@@ -10,13 +10,15 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import  Localize_Swift
+import FBSDKLoginKit
 
-class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScrollViewDelegate {
+class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScrollViewDelegate,FacebookLoginDelegate,FacebookDataDelegate {
     
     var languageSelectionButton: UIButton!
     var user:User = User()
     var blueNavBarImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
-    
+    let faceBookLogin : FacebookLogin  = FacebookLogin()
+
     @IBOutlet var bgContainerView: UIView!
     @IBOutlet var bgScrollView: UIScrollView!
     @IBOutlet var FbLoginBgView: UIView!
@@ -33,7 +35,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     @IBOutlet var loginActivityIndicator: UIActivityIndicatorView!
     
     @IBAction func loginButtonAction(_ sender: UIButton) {
-        if !isValid(){
+        if !isValid() {
             return
         }
         userLogin()
@@ -43,6 +45,15 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         self.view.endEditing(true)
         let forgotPasswordVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ForgotPasswordVC")
         self.navigationController?.show(forgotPasswordVC, sender: self)
+        
+    }
+    
+    
+    @IBAction func loginWithFacebookButtonAction(_ sender: UIButton) {
+
+        faceBookLogin.delegate = self
+        faceBookLogin.dataSource = self
+        faceBookLogin.loginWithFacebook()
         
     }
     
@@ -410,4 +421,19 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         return true
     }
     
-}
+    // MARK: - faceBookLogin
+    
+    func didFacebookLoginFail() {
+            self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+    }
+    
+    func didFacebookLoginSuccess() {
+        print("SUCESS")
+        faceBookLogin.getBasicInformation()
+    }
+    
+    func didReceiveUser(information: [String : Any]) {
+        print("information is\(information)")
+    }
+    
+    }

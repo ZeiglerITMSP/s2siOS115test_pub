@@ -41,6 +41,7 @@
 "Forgot Password?" = "¿Olvidó su contraseña?";
 "LOG IN" = "INICIAR SESIÓN";
 
+
 // WelcomePageVc
 "Congratulations!" = "¡Felicitaciones!";
 "WelcomeText" = "Bienvenido a Snap2Save.\nSu registro ahora está completo.";
@@ -48,7 +49,7 @@
 "Get Started!" = "¡COMENCEMOS!";
 
 //signUpAlert
-"SignUpAlertTitle" = "¡Gracias por unirse a Snap2Save!\n\n";
+"SignUpAlertTitle" = "¡Gracias por unirse a Snap2Save!\n";
 "SignUpAlertMessage" = "Antes de que pueda iniciar sesión, debemos verificar su número de teléfono celular.  Debe recibir un mensaje de texto de confirmación en breve.  Cuando llegue, simplemente haga clic sobre el enlace en el mensaje de texto y así completará su proceso de registro.";
 "Close" = "Cerrar";
 

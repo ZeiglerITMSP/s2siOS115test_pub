@@ -51,7 +51,7 @@
 //"ENGLISH" = "ENGLISH";
 
 //signUpAlert
-"SignUpAlertTitle" = "Thank you for joining Snap2Save!\n\n";
+"SignUpAlertTitle" = "Thank you for joining Snap2Save!\n";
 "SignUpAlertMessage" = "Before you are able to log in we need to verify your [cell phone number/email address]. You should receive a confirmation [text/email] soon. When it arrives, simply click on the link in the [text/email] and that will complete your registration process.";
 "Close" = "Close";
 
