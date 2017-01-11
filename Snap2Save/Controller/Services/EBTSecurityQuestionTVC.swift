@@ -50,6 +50,8 @@ class EBTSecurityQuestionTVC: UITableViewController {
         
     }
     
+    // MARK: -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,6 +67,8 @@ class EBTSecurityQuestionTVC: UITableViewController {
         ebtWebView.responder = self
         
         validatePage()
+        
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: confirmButton, radius: 2.0, width: 1.0)
     }
 
     

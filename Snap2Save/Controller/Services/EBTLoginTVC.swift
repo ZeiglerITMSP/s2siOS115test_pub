@@ -102,7 +102,6 @@ class EBTLoginTVC: UITableViewController {
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
         reloadContent()
-        
         loadLoginPage()
         
         
@@ -122,6 +121,10 @@ class EBTLoginTVC: UITableViewController {
         
         userIdField.contentTextField.aiDelegate = self
         passwordField.contentTextField.aiDelegate = self
+        
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: loginButton, radius: 2.0, width: 1.0)
+        AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: registrationButton, radius: 2.0, width: 1.0)
+        
         
     }
     

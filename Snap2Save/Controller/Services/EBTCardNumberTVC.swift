@@ -32,6 +32,9 @@ class EBTCardNumberTVC: UITableViewController {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var nextActivityIndicator: UIActivityIndicatorView!
     
+    
+    @IBOutlet weak var nextButton: UIButton!
+    
     // MARK: - Actions
     @IBAction func nextAction(_ sender: UIButton) {
         
@@ -61,6 +64,8 @@ class EBTCardNumberTVC: UITableViewController {
         ebtWebView.responder = self
         
         loadSignupPage()
+        
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: nextButton, radius: 2.0, width: 1.0)
     }
 
     override func viewDidAppear(_ animated: Bool) {

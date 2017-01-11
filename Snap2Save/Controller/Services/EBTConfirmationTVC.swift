@@ -62,6 +62,7 @@ class EBTConfirmationTVC: UITableViewController {
         
     }
     
+    // MARK: -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,8 +75,12 @@ class EBTConfirmationTVC: UITableViewController {
         self.tableView.estimatedRowHeight = 44
         
         errorMessageLabel.text = nil
-        
         ebtWebView.responder = self
+        
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: validateButton, radius: 2.0, width: 1.0)
+        AppHelper.setRoundCornersToView(borderColor: nil, view: resendButton, radius: 2.0, width: 1.0)
+        AppHelper.setRoundCornersToView(borderColor: nil, view: changeEmailButton, radius: 2.0, width: 1.0)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

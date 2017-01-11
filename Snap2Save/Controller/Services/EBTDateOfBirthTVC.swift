@@ -31,6 +31,7 @@ class EBTDateOfBirthTVC: UITableViewController {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var nextActivityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var nextButton: UIButton!
     // Actions
     @IBAction func nextAction(_ sender: UIButton) {
         
@@ -42,7 +43,7 @@ class EBTDateOfBirthTVC: UITableViewController {
         
     }
     
-    
+    // MARK: -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +63,8 @@ class EBTDateOfBirthTVC: UITableViewController {
         ebtWebView.responder = self
         
         errorMessageLabel.text = nil
-        
+     
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: nextButton, radius: 2.0, width: 1.0)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -138,7 +140,8 @@ class EBTDateOfBirthTVC: UITableViewController {
     func autoFill(dob:String) {
         
         let jsDOB = "void($('#txtSecurityKeyQuestionAnswer').val('\(dob)'));"
-        let jsForm = "void($('form')[1].submit());"
+//        let jsForm = "void($('form')[1].submit());"
+        let jsForm = "void($('#btnValidateSecurityAnswer').click());"
         
         let javaScript = jsDOB + jsForm
         

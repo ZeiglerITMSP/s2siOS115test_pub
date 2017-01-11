@@ -10,8 +10,6 @@ import UIKit
 import PKHUD
 
 
-
-
 class EBTAuthenticationTVC: UITableViewController {
     
     fileprivate enum ActionType {
@@ -28,6 +26,10 @@ class EBTAuthenticationTVC: UITableViewController {
     
     
     // Outlets
+    
+    @IBOutlet weak var confirmButton: UIButton!
+    
+    @IBOutlet weak var regenerateButton: UIButton!
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -68,6 +70,10 @@ class EBTAuthenticationTVC: UITableViewController {
         
         ebtWebView.responder = self
 
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: confirmButton, radius: 2.0, width: 1.0)
+        AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: regenerateButton, radius: 2.0, width: 1.0)
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -1507,7 +1507,7 @@
                                         <rect key="frame" x="0.0" y="35" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4m1-8R-yyk" id="tob-cz-KfX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Log In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fc-v7-qCH">
@@ -1540,7 +1540,7 @@
                                         <rect key="frame" x="0.0" y="85" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hc3-Bg-eub" id="q6o-3m-gbT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personal Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eB1-Oc-J6s">
@@ -1571,7 +1571,7 @@
                                         <rect key="frame" x="0.0" y="135" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JJS-UZ-Sia" id="vGm-4d-Yof">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preferences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fl4-Iv-e6b">
@@ -1602,7 +1602,7 @@
                                         <rect key="frame" x="0.0" y="185" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hzO-Lz-An5" id="OHG-bz-gMW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmt-fU-PJW">
@@ -1637,7 +1637,7 @@
                                         <rect key="frame" x="0.0" y="271" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UUk-uY-4JK" id="S68-nD-ZQr">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmd-OW-phB">
@@ -1898,10 +1898,12 @@
                     <connections>
                         <outlet property="authenticationCodeField" destination="vrd-PJ-sw5" id="IAb-bl-udz"/>
                         <outlet property="confirmActivityIndicator" destination="xds-yh-Pjz" id="g8E-82-ZhD"/>
+                        <outlet property="confirmButton" destination="Yaw-8A-6I3" id="fuR-9C-Mkf"/>
                         <outlet property="errorMessageLabel" destination="XBe-M2-xFI" id="PPT-EN-iP8"/>
                         <outlet property="errorTitleLabel" destination="0dd-cz-MZi" id="OdP-LK-ykG"/>
                         <outlet property="messageLabel" destination="Tl8-U3-bXL" id="yrj-zU-9d8"/>
                         <outlet property="regenerateActivityIndicator" destination="cf8-xr-bCZ" id="YSD-4T-o4V"/>
+                        <outlet property="regenerateButton" destination="GZA-nc-lir" id="4Gt-1b-TLG"/>
                         <outlet property="titleLabel" destination="aBy-VA-jR6" id="3af-3v-WK9"/>
                         <segue destination="XgF-qW-s6Z" kind="show" identifier="EBTLoginSecurityQuestionTVC" id="RgU-2I-7lw"/>
                     </connections>
@@ -2072,6 +2074,7 @@
                         <outlet property="errorTitleLabel" destination="hT9-WJ-cjS" id="KVd-bv-7vA"/>
                         <outlet property="messageLabel" destination="ifI-Vn-uDn" id="ghT-OX-jcS"/>
                         <outlet property="nextActivityIndicator" destination="gVs-Rk-btd" id="hG1-Cz-bKo"/>
+                        <outlet property="nextButton" destination="gXV-64-xDy" id="CW3-4U-cvc"/>
                         <outlet property="titleLabel" destination="J0D-PR-12k" id="kd8-CR-1rn"/>
                         <segue destination="MJg-Gu-TKy" kind="show" identifier="EBTDateOfBirthTVC" id="SgZ-yD-kId"/>
                     </connections>
@@ -2272,6 +2275,7 @@
                         <outlet property="errorTitleLabel" destination="nnS-EX-Dlu" id="xpi-ke-BQ2"/>
                         <outlet property="messageLabel" destination="v9D-a6-oID" id="aRR-nE-4z1"/>
                         <outlet property="nextActivityIndicator" destination="8fd-Yx-chO" id="ZLT-CI-l7b"/>
+                        <outlet property="nextButton" destination="Fjc-dc-ydz" id="fTP-Hw-9O0"/>
                         <outlet property="socialSecurityNumberField" destination="RRJ-Zz-zMc" id="tQZ-wA-byt"/>
                         <outlet property="titleLabel" destination="lJ7-la-LFX" id="dse-3D-S2L"/>
                         <segue destination="TOt-xF-XbE" kind="show" identifier="EBTSelectPinTVC" id="hIx-bI-bpi"/>

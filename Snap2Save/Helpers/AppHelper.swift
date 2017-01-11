@@ -14,13 +14,14 @@ class AppHelper {
     
     
     
-    class func setRoundCornersToView(borderColor:UIColor,view:UIView,radius:CGFloat,width:CGFloat)
-    {
+    class func setRoundCornersToView(borderColor:UIColor?,view:UIView,radius:CGFloat,width:CGFloat) {
+        
         view.layer.cornerRadius = radius
-        view.layer.borderColor = borderColor.cgColor
+        if let borderColor = borderColor {
+            view.layer.borderColor = borderColor.cgColor
+        }
         view.layer.borderWidth = width
         view.layer.masksToBounds = true
-        //////print(""border created")
     }
     
     class func imageWithColor( color:UIColor) -> UIImage

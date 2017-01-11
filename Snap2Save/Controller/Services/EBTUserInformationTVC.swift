@@ -109,6 +109,8 @@ class EBTUserInformationTVC: UITableViewController {
         
         getUserIdRules()
         getPasswordRules()
+        
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: nextButton, radius: 2.0, width: 1.0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -437,7 +439,7 @@ class EBTUserInformationTVC: UITableViewController {
 
     func getPasswordRules() {
         
-        let dobErrorCode = "$('.prelogonInstrText:eq(3)').text();"
+        let dobErrorCode = "$('.prelogonInstrText:eq(4)').text();"
         
         ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
             if error != nil {

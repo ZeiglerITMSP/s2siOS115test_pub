@@ -61,6 +61,8 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         ebtWebView.responder = self
         
         validatePage()
+        
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: confirmButton, radius: 2.0, width: 1.0)
     }
 
     override func viewDidAppear(_ animated: Bool) {

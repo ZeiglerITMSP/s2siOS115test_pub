@@ -51,7 +51,7 @@ class EBTSelectPinTVC: UITableViewController {
         
     }
     
-    
+    // MARK: -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +66,9 @@ class EBTSelectPinTVC: UITableViewController {
         errorMessageLabel.text = nil
         
         ebtWebView.responder = self
+        
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: nextButton, radius: 2.0, width: 1.0)
+        AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: useCurrentPinButton, radius: 2.0, width: 1.0)
     }
 
     override func viewDidAppear(_ animated: Bool) {
