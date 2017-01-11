@@ -428,7 +428,22 @@ class EBTUserInformationTVC: UITableViewController {
                 print(trimmed)
                 if trimmed.characters.count > 0 {
                     
-                    self.userIdRules = trimmed
+                    
+                    let components = trimmed.components(separatedBy: "* ")
+                    
+                    var list = [String]()
+                    for comp in components {
+                        
+                        let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
+                        if trimmedNew.characters.count > 0 {
+                            
+                            list.append(trimmedNew)
+                        }
+                        
+                        self.userIdRules = list.joined(separator: "* \n")
+                        
+                    }
+                    
                     
                 } else {
                     
@@ -453,7 +468,21 @@ class EBTUserInformationTVC: UITableViewController {
                 print(trimmed)
                 if trimmed.characters.count > 0 {
                     
-                    self.passwordRules = trimmed
+                    let components = trimmed.components(separatedBy: "* ")
+                    
+                    var list = [String]()
+                    for comp in components {
+                        
+                        let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
+                        if trimmedNew.characters.count > 0 {
+                            
+                            list.append(trimmedNew)
+                        }
+                        
+                        self.passwordRules = list.joined(separator: "* \n")
+                        
+                    }
+
                     
                 } else {
                     
@@ -472,7 +501,7 @@ extension EBTUserInformationTVC: AIPlaceHolderTextFieldDelegate {
     
         if textfield.tag == 100 {
             // User ID
-            showMyAlert(title: "User ID Rules:", message: userIdRules)
+            showMyAlert(title: "User ID Rules:\n", message: userIdRules)
             
         } else if textfield.tag == 101 {
             // Password

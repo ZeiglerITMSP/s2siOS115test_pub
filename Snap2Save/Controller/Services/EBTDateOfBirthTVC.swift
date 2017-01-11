@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftyJSON
+
 
 class EBTDateOfBirthTVC: UITableViewController {
 
@@ -21,6 +23,8 @@ class EBTDateOfBirthTVC: UITableViewController {
     // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
+    
+    var questions = [String]()
     
     // Outles
     @IBOutlet weak var titleLabel: UILabel!
@@ -39,6 +43,8 @@ class EBTDateOfBirthTVC: UITableViewController {
         
 //        self.performSegue(withIdentifier: "EBTSelectPinTVC", sender: nil)
         
+        nextButton.isEnabled = false
+        nextActivityIndicator.startAnimating()
         autoFill(dob: dobField.contentTextField.text!)
         
     }
@@ -65,6 +71,8 @@ class EBTDateOfBirthTVC: UITableViewController {
         errorMessageLabel.text = nil
      
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: nextButton, radius: 2.0, width: 1.0)
+        
+        getQuestions()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -87,6 +95,23 @@ class EBTDateOfBirthTVC: UITableViewController {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
+        }
+        
+        if indexPath.row == 2 {
+            
+            if questions.contains("What is your date of birth? (mm/dd/yyyy)") == false {
+                return 0
+            }
+        }
+        
+        if indexPath.row == 3 {
+            
+            if questions.contains("What is your Social Security Number?") == false {
+                return 0
+            }
+
+            
+            
         }
         
         return UITableViewAutomaticDimension
@@ -117,14 +142,13 @@ class EBTDateOfBirthTVC: UITableViewController {
             if error != nil {
                 //print("error ?? "error nil")
             } else {
-                //print("result!)
+            
                 let stringResult = result as! String
                 let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                //print("pageTitle)
                 
                 if pageTitle == "We don’t recognize the computer you’re using." {
                     
-                    //self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
+            
                 } else {
                     
                 }
@@ -134,12 +158,94 @@ class EBTDateOfBirthTVC: UITableViewController {
         
     }
     
-    
+    func getQuestions() {
+        
+        let js =
+            
+            "function questions() {    " +
+                    "var my = $(\"label[for='securityAnswer']\").text(); " +
+                    "return my;  " +
+            "}  " +
+        
+            "questions();              "
+            
+            /*
+            "function securityQuestions() {            " +
+            "var list = [];                                 " +
+            "var questionCount = $('.cdpMandatoryField').length;    " +
+            "for (var i = 0; i < questionCount; i++) {              " +
+            "    var d= $(\"label[for='securityAnswer']:eq(\"+i+\")').text().trim();   " +
+            "    d = d.replace('**','');                                            " +
+            "    d = d.replace('\n','');                            " +
+            "    list.push(d);                                      " +
+            "}                                              " +
+            "var jsonSerialized = JSON.stringify(list);     " +
+            
+            "return jsonSerialized;                         " +
+        "}                                                  " +
+        "securityQuestions();                               "
+            
+        */
+        
+        /*
+ 
+ function securityQuestions(){
+             var list = [];
+        var questionCount = $('.cdpMandatoryField').length;
+          for (var i = 0; i < questionCount; i++) {
+                 var d= $("label[for='securityAnswer']:eq("+i+")").text().trim();
+                 d = d.replace('**','');
+                 d = d.replace('\n',''); 
+                 alert(d);
+                 list.push(d);
+            }
+             var jsonSerialized = JSON.stringify(list);
+             
+       return jsonSerialized;
+        }
+
+securityQuestions();
+ */
+        
+        
+        ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmedText)
+                
+                if trimmedText.characters.count > 0 {
+                    
+                    let components = trimmedText.components(separatedBy: "**")
+                    
+                    for component in components {
+                        
+                        let trimmedText = component.trimmingCharacters(in: .whitespacesAndNewlines)
+                        if trimmedText.characters.count > 0 {
+                            self.questions.append(trimmedText)
+                        }
+                        
+                    }
+                    
+                    self.tableView.reloadData()
+                    
+                } else {
+                    
+                    
+                }
+            }
+        }
+        
+    }
+
     
     
     func autoFill(dob:String) {
         
-        let jsDOB = "void($('#txtSecurityKeyQuestionAnswer').val('\(dob)'));"
+        let jsDOB = "$('#txtSecurityKeyQuestionAnswer').val('\(dob)');"
 //        let jsForm = "void($('form')[1].submit());"
         let jsForm = "void($('#btnValidateSecurityAnswer').click());"
         
@@ -171,8 +277,9 @@ class EBTDateOfBirthTVC: UITableViewController {
                 //print("trimmed)
                 if trimmed.characters.count > 0 {
                     // got error
-                    self.nextActivityIndicator.stopAnimating()
                     
+                    self.nextButton.isEnabled = true
+                    self.nextActivityIndicator.stopAnimating()
                     self.errorMessageLabel.text = trimmed
                     self.tableView.reloadData()
                     
@@ -199,6 +306,8 @@ class EBTDateOfBirthTVC: UITableViewController {
                 if resultString == "Select PIN" {
                     
                     self.actionType = nil
+                    
+                    self.nextButton.isEnabled = true
                     self.nextActivityIndicator.stopAnimating()
                     // move to view controller
                     self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)

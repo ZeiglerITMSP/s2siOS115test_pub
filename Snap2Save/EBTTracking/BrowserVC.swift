@@ -13,7 +13,6 @@ class BrowserVC: UIViewController {
     // Outles
     
     @IBOutlet weak var broswerView: UIView!
-    
     @IBOutlet weak var queryTextView: UITextView!
     
     @IBAction func executeQueryAction(_ sender: Any) {

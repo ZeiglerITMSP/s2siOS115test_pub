@@ -138,7 +138,7 @@ class EBTLoginTVC: UITableViewController {
         super.viewDidAppear(animated)
         
         ebtWebView.responder = self
-        //        loadLoginPage()
+        loadLoginPage()
         // Stop listening notification
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
         
@@ -248,7 +248,7 @@ class EBTLoginTVC: UITableViewController {
         
         let url = NSURL(string: loginUrl_en)
         let request = NSURLRequest(url: url! as URL)
-        print("asdfasdf")
+        
         ebtWebView.webView.load(request as URLRequest)
     }
     
@@ -285,6 +285,7 @@ class EBTLoginTVC: UITableViewController {
         let jsUserID = "$('#userId').val('\(userid)');"
         let jspassword = "$('#password').val('\(password)');"
         let jsSubmit = "$('#submit').click();"
+//        let jsSubmit = "$(\"form[name='form1']\").submit();"
         
         let javaScript = jsUserID + jspassword + jsSubmit
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
