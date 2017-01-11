@@ -9,9 +9,10 @@
 import UIKit
 import Localize_Swift
 
-class SignUpTVC: UITableViewController {
+class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegate {
     
     var languageSelectionButton: UIButton!
+    let faceBookLogin : FacebookLogin = FacebookLogin()
 
     @IBOutlet var reEnterEmailMandatoryLabel: UILabel!
     @IBOutlet var emailManditoryLabel: UILabel!
@@ -53,6 +54,12 @@ class SignUpTVC: UITableViewController {
     
     
     @IBAction func loginWithFbButtonAction(_ sender: Any) {
+        
+        faceBookLogin.delegate = self
+        faceBookLogin.dataSource = self
+        faceBookLogin.loginWithFacebook()
+
+        
     }
     
     @IBAction func contactPreferenceSegmentControl(_ sender: UISegmentedControl) {
@@ -518,5 +525,19 @@ extension SignUpTVC: AITextFieldProtocol {
         return true
     }
     
+    // MARK: - faceBookLogin
     
+    func didFacebookLoginFail() {
+        self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+    }
+    
+    func didFacebookLoginSuccess() {
+        print("SUCCESS")
+        faceBookLogin.getBasicInformation()
+    }
+    
+    func didReceiveUser(information: [String : Any]) {
+        print("information is\(information)")
+    }
+ 
 }

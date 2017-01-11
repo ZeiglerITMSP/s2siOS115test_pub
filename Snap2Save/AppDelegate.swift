@@ -12,6 +12,7 @@ import SwiftyJSON
 import Localize_Swift
 import Fabric
 import Crashlytics
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         // Status
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
@@ -89,21 +91,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-//        let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
-//        if isAutoLogin == false{
-//            let storyBoard:UIStoryboard?
-//            storyBoard = UIStoryboard(name: "Main", bundle: nil);
-//            let initialViewController: UIViewController = storyBoard!.instantiateInitialViewController()!
-//            self.window?.rootViewController = initialViewController
-//            self.window?.makeKeyAndVisible()
-//            
-//        }
-
         
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        FBSDKAppEvents .activateApp()
+        
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -114,26 +108,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
-        let user_id = UserDefaults.standard.object(forKey: USER_ID)
-
-        if user.id.isEmpty {
-            // user not exists
-            if user_id != nil{
-                if isAutoLogin == false{
-                    self.deepLinking(url : url)
+        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
+        let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
+        
+        // Facebook Signin
+        if (url.scheme?.hasPrefix("fb"))!  {
+            
+            let facebookHandler = FBSDKApplicationDelegate.sharedInstance().application(app,
+                                                                                        open: url,
+                                                                                        sourceApplication:  sourceApplication,
+                                                                                        annotation: annotation)
+            return facebookHandler
+        } else {
+            
+            let isAutoLogin = UserDefaults.standard.bool(forKey: USER_AUTOLOGIN)
+            let user_id = UserDefaults.standard.object(forKey: USER_ID)
+            
+            if user.id.isEmpty {
+                // user not exists
+                if user_id != nil{
+                    if isAutoLogin == false{
+                        self.deepLinking(url : url)
+                    }
+                    else{
+                    }
                 }
                 else{
+                    self.deepLinking(url : url)
                 }
+            } else {
+                
             }
-            else{
-                self.deepLinking(url : url)
-            }
-        } else {
-           
+            
+            
         }
-        return true
         
+        return true
     }
     
     
@@ -312,10 +322,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         
                     }
+                    
+                    
                 }
             }
             
         }
-    
     
 }
