@@ -1507,7 +1507,7 @@
                                         <rect key="frame" x="0.0" y="35" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4m1-8R-yyk" id="tob-cz-KfX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Log In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fc-v7-qCH">
@@ -1540,7 +1540,7 @@
                                         <rect key="frame" x="0.0" y="85" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hc3-Bg-eub" id="q6o-3m-gbT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personal Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eB1-Oc-J6s">
@@ -1571,7 +1571,7 @@
                                         <rect key="frame" x="0.0" y="135" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JJS-UZ-Sia" id="vGm-4d-Yof">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preferences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fl4-Iv-e6b">
@@ -1602,7 +1602,7 @@
                                         <rect key="frame" x="0.0" y="185" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hzO-Lz-An5" id="OHG-bz-gMW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmt-fU-PJW">
@@ -1637,7 +1637,7 @@
                                         <rect key="frame" x="0.0" y="271" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UUk-uY-4JK" id="S68-nD-ZQr">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmd-OW-phB">
@@ -3223,11 +3223,14 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="changeEmailButton" destination="bss-6O-Ym1" id="Obe-Tz-XXG"/>
                         <outlet property="errorMessageLabel" destination="S2o-CP-yrh" id="yrJ-OW-OEv"/>
                         <outlet property="errorTitleLabel" destination="O0s-bK-gLl" id="fXv-Kh-ZXp"/>
                         <outlet property="messageLabel" destination="FKi-Gu-zIQ" id="6Xj-IQ-UxD"/>
+                        <outlet property="resendButton" destination="fhQ-09-jxC" id="lXB-rJ-a67"/>
                         <outlet property="titleLabel" destination="Olq-Yf-Cjv" id="4zg-Qa-h5m"/>
                         <outlet property="validateActivityIndicator" destination="9Rj-Rw-wsv" id="654-KO-GRD"/>
+                        <outlet property="validateButton" destination="s38-RL-DYZ" id="0TS-GK-33S"/>
                         <outlet property="validationCodeField" destination="scF-NE-hb3" id="zl1-iP-Dls"/>
                         <segue destination="UmL-OF-hMj" kind="show" identifier="EBTSecurityQuestionTVC" id="eCQ-EA-Y8B"/>
                     </connections>
@@ -3324,7 +3327,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6e-Za-xsi">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6e-Za-xsi">
                                                     <rect key="frame" x="26" y="40" width="323" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -3392,7 +3395,7 @@
                                                         <action selector="confirmAction:" destination="UmL-OF-hMj" eventType="touchUpInside" id="tdO-Lc-xgh"/>
                                                     </connections>
                                                 </button>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="YSd-Lr-oxC">
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="YSd-Lr-oxC">
                                                     <rect key="frame" x="325" y="28" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </activityIndicatorView>
@@ -3425,6 +3428,7 @@
                     </tableView>
                     <connections>
                         <outlet property="confirmActivityIndicator" destination="YSd-Lr-oxC" id="j8i-do-gIH"/>
+                        <outlet property="confirmButton" destination="hxe-hD-nnk" id="9Md-Cu-8FS"/>
                         <outlet property="errorMessageLabel" destination="TgG-Mt-xHg" id="uSs-x6-O6o"/>
                         <outlet property="errorTitleLabel" destination="DJO-25-SNh" id="eBl-vP-bQ5"/>
                         <outlet property="messageLabel" destination="nLK-8D-HfJ" id="1EJ-wS-b1B"/>
@@ -3432,6 +3436,7 @@
                         <outlet property="securityQuestionLabel" destination="k6e-Za-xsi" id="lXU-T9-TgX"/>
                         <outlet property="securityQuestionTitleLabel" destination="uOS-8d-4d1" id="CjA-Gs-1ys"/>
                         <outlet property="titleLabel" destination="Odm-EH-eKD" id="BXc-X5-p3U"/>
+                        <segue destination="GLc-j6-uVW" kind="show" identifier="EBTDashboardTVC" id="OZA-sR-JxA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wg-m7-dHT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3555,7 +3560,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i4N-tD-Ra1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3535" y="-21"/>
+            <point key="canvasLocation" x="6692" y="666"/>
         </scene>
         <!--LOGIN-->
         <scene sceneID="DRd-2q-44Q">
@@ -3645,7 +3650,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sh8-Ma-zx3">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sh8-Ma-zx3">
                                                     <rect key="frame" x="26" y="40" width="323" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -3797,4 +3802,7 @@
         <image name="tabbarServicesActive" width="30" height="30"/>
         <image name="tabbarServicesInactive" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="OZA-sR-JxA"/>
+    </inferredMetricsTieBreakers>
 </document>

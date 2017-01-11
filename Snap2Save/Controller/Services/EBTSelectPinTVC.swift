@@ -187,6 +187,7 @@ class EBTSelectPinTVC: UITableViewController {
                     
                     self.actionType = nil
                     self.nextActivityIndicator.stopAnimating()
+                    self.nextButton.isEnabled = true
                     // move to view controller
                     self.performSegue(withIdentifier: "EBTUserInformationTVC", sender: self)
                     

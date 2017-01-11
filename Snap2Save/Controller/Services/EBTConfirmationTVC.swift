@@ -14,8 +14,9 @@ class EBTConfirmationTVC: UITableViewController {
     fileprivate enum ActionType {
         
         case waitingForPageLoad
-        case cardNumber
-        case accept
+        case validate
+        case resend
+        case changeEmail
     }
     
     // Properties
@@ -28,19 +29,32 @@ class EBTConfirmationTVC: UITableViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
-    
     @IBOutlet weak var validationCodeField: AIPlaceHolderTextField!
-    
     @IBOutlet weak var validateActivityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var validateButton: UIButton!
+    @IBOutlet weak var resendButton: UIButton!
+    @IBOutlet weak var changeEmailButton: UIButton!
+    
+    
+    
+    
+    
     // Actions
     
     @IBAction func validateAction(_ sender: UIButton) {
         
-        performSegue(withIdentifier: "EBTSecurityQuestionTVC", sender: nil)
+        actionType = ActionType.validate
+        validateActivityIndicator.startAnimating()
+        validateButton.isEnabled = false
+    
+        autoFill(valdationCode: self.validationCodeField.contentTextField.text!)
     }
     
     
     @IBAction func resendAction(_ sender: Any) {
+        
+        
     }
     
     @IBAction func changeEmailAction(_ sender: UIButton) {
@@ -105,7 +119,75 @@ class EBTConfirmationTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
 
+    // MARK: - WebView
     
+    // MARK:- Card Number Filling
+    func autoFill(valdationCode:String) {
+        
+        actionType = ActionType.validate
+        
+        let jsCardNumber = "$('#txtEmailValidationCode').val('\(valdationCode)');"
+        let jsSubmit = "void($('#btnValidateUserInfo').click());"
+        
+        let javaScript =  jsCardNumber + jsSubmit
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                self.checkForErrorMessage()
+            }
+        }
+    }
+    
+    func checkForErrorMessage() {
+        
+        let jsStatusMessage = "$('.errorInvalidField').text();"
+        
+        ebtWebView.webView.evaluateJavaScript(jsStatusMessage) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if trimmedErrorMessage.characters.count > 0 {
+                    
+                    self.validateButton.isEnabled = false
+                    self.validateActivityIndicator.stopAnimating()
+                    // handle error message
+                    self.errorMessageLabel.text = trimmedErrorMessage
+                    self.tableView.reloadData()
+                    
+                } else {
+                    // no error message
+                    self.validateNextPage()
+                }
+            }
+        }
+    }
+    
+    
+    
+    func validateNextPage() {
+        
+        ebtWebView.getPageHeader(completion: { pageTitle in
+            
+            if pageTitle == "Verify Security Question" {
+                
+                self.validateButton.isEnabled = true
+                self.validateActivityIndicator.stopAnimating()
+                self.performSegue(withIdentifier: "EBTSecurityQuestionTVC", sender: nil)
+                
+            } else {
+                
+            }
+        })
+        
+    }
+
 
 }
 
@@ -114,7 +196,7 @@ extension EBTConfirmationTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
-       // checkForErrorMessage()
+        checkForErrorMessage()
     }
     
 }

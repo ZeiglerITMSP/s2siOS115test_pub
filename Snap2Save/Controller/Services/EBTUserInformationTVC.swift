@@ -475,7 +475,7 @@ extension EBTUserInformationTVC: AIPlaceHolderTextFieldDelegate {
         } else if textfield.tag == 101 {
             // Password
             
-            showMyAlert(title: "Password Rules:", message: "* Minimum of 8 and maximum of 10 long \n* Alphanumeric \n* Numeric Character (0-9): One character must be a number \n* Lower Case Character (a-z): One character must be lower case \n* Upper Case Character (A-Z): One character must be UPPER case \n* Case sensitive\n* No special characters like @#$%&()\n* No spaces\n* Cannot be same as any of last 6 passwords you have used\n* Maximum of 2 consecutive identical characters")
+            showMyAlert(title: "Password Rules:", message: passwordRules)
             
         }
         
