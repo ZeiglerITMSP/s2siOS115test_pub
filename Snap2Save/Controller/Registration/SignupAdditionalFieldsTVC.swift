@@ -99,7 +99,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         backButton.frame = CGRect(x:0,y:0,width:80,height:25)
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
         backButton.setTitle("Back", for: .normal)
-        backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.7), for: .normal)
+        backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0), for: .normal)
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
@@ -129,6 +129,13 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         
         let zipcode = userDetailsDict["zipcode"] as! String
         zipCodeTextField.text = zipcode
+        
+        let firstname = userDetailsDict["first_name"] as! String
+        firstNameTextField.text = firstname
+        
+        let lastName = userDetailsDict["last_name"] as! String
+        lastNameTextField.text = lastName
+        
         
     }
     
@@ -504,6 +511,10 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let push_token = "123213"
         let currentLanguage = Localize.currentLanguage()
         
+        var signup_type = "1"
+        if !social_id.isEmpty {
+            signup_type = "2"
+        }
         
         let additionalInfoDict : Dictionary = ["first_name": first_name,
                                                "last_name": last_name,
@@ -530,7 +541,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                           "device_id": device_id,
                           "push_token": push_token,
                           "language": currentLanguage,
-                          "signup_type": "1"
+                          "signup_type": signup_type
             ] as [String : Any]
         
         //print("parameters)
@@ -647,4 +658,6 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         return true
     }
     
+    
+
 }

@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         // Status
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
@@ -38,11 +37,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        UITabBar.appearance().tintColor = UIColor.green
         //
         
+        let isLogged = UserDefaults.standard.dictionaryRepresentation().keys.contains(LOGGED_USER)
         
+        if isLogged == true {
+            
+            let data = UserDefaults.standard.object(forKey: LOGGED_USER)
+            let userInfo = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)
+            user = userInfo as! User
+        }
+
         
         let isOnLaunch = UserDefaults.standard.dictionaryRepresentation().keys.contains(ON_LAUNCH)
         
         if isOnLaunch == false {
+            
             setDetaultValues()
             UserDefaults.standard.set(true, forKey: ON_LAUNCH)
             UserDefaults.standard.synchronize()
@@ -74,6 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
        
         Fabric.with([Crashlytics.self])
+        
+        FBSDKProfile.enableUpdates(onAccessTokenChange: true)
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
         return true
     }
@@ -110,7 +121,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
         let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
-        
+        let urlString : String = url.absoluteString
+        var typeValue = ""
+        var codeValue = ""
+
+        if urlString.characters.count > 0 {
+            let query = url.query
+            let components = query?.components(separatedBy: "&")
+            
+            
+            for component:String in components!
+            {
+                
+                let bits = component.components(separatedBy: "=")
+                ////print(""bits\(bits)")
+                if bits.count == 2  {
+                    let key = bits[0]
+                    if key == "type" {
+                        typeValue = bits[1]
+                    } else if key == "code" {
+                        codeValue = bits[1]
+                    }
+                    
+                }
+                
+                
+            }
+        }
         // Facebook Signin
         if (url.scheme?.hasPrefix("fb"))!  {
             
@@ -126,18 +163,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if user.id.isEmpty {
                 // user not exists
-                if user_id != nil{
-                    if isAutoLogin == false{
+                if user_id != nil {
+                    if isAutoLogin == false {
                         self.deepLinking(url : url)
                     }
-                    else{
+                    else {
+                        
                     }
                 }
-                else{
-                    self.deepLinking(url : url)
+                else {
+                        self.deepLinking(url : url)
                 }
             } else {
                 
+                if typeValue == "3" {
+                    
+                    self.deepLinking(url : url)
+                }
             }
             
             
@@ -200,36 +242,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 let urlString : String = url.absoluteString
                 ////print(""url string is\(urlString)")
-                let urlScheme = url.scheme
+                //let urlScheme = url.scheme
                 ////print(""url scheme is\(urlScheme)")
                 
                 if urlString.characters.count > 0 {
                     let query = url.query
-                    let components = query?.components(separatedBy: "?")
-                    let mutableDict = NSMutableDictionary()
+                    let components = query?.components(separatedBy: "&")
+                    
+                    var typeValue = ""
+                    var codeValue = ""
+                    
                     for component:String in components!
                     {
-                        let bits = component.components(separatedBy: "userid=")
+                    
+                        let bits = component.components(separatedBy: "=")
                         ////print(""bits\(bits)")
-                        if bits.count == 2
-                        {
+                        if bits.count == 2  {
+                            let key = bits[0]
+                            if key == "type" {
+                                typeValue = bits[1]
+                            } else if key == "code" {
+                                codeValue = bits[1]
+                            }
                             
-                            let key_string = "userid"
-                            let value = bits[1] as String
-                            
-                            mutableDict.setObject(value, forKey: key_string as NSCopying)
-                            ////print(""mutableDict is\(mutableDict)")
                         }
+                        
+                        
                     }
                     
                     
-                    if urlScheme == "s2sregistrationconfirm" {
+                    if typeValue == "1" {
                         
                         let device_id = UIDevice.current.identifierForVendor!.uuidString
-                        let user_id = mutableDict.object(forKey: "userid") ?? ""
                         let currentLanguage = Localize.currentLanguage()
+                        let code = codeValue 
                         
-                        let parameters = ["user_id": user_id,
+                        let parameters = ["code": code ,
                                           "platform":"1",
                                           "version_code": "1",
                                           "version_name": "1",
@@ -307,13 +355,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         
                         
-                    else if urlScheme == "s2sresetpassword"{
+                    else if typeValue == "2"{
                         
                         let storyBoard = UIStoryboard(name: "Main", bundle: nil);
                         let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
                         
                         let resetPasswordVc:ResetPasswordVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordVC
-                        let userId : String = mutableDict.object(forKey: "userid") as! String;
+                        let userId : String =  codeValue;
                         resetPasswordVc.user_id = userId
                         initialViewController.pushViewController(resetPasswordVc, animated: false)
                         
@@ -323,10 +371,93 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                     }
                     
+                    else if typeValue == "3" {
+                        
+                        let device_id = UIDevice.current.identifierForVendor!.uuidString
+                        let currentLanguage = Localize.currentLanguage()
+                        let code = codeValue
+                        
+                        let parameters = ["code": code ,
+                                          "platform":"1",
+                                          "version_code": "1",
+                                          "version_name": "1",
+                                          "device_id": device_id,
+                                          "push_token":"123123",
+                                          "language":currentLanguage
+                            ] as [String : Any]
+                        
+                        
+                        ////print("parameters)
+                        
+                        let url = String(format: "%@/confirmPreferenceChange", hostUrl)
+                        ////print("url)
+                        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+                            
+                            switch response.result {
+                            case .success:
+                                
+                                let json = JSON(data: response.data!)
+                                ////print(""json response\(json)")
+                                let responseDict = json.dictionaryObject
+                                
+                               // if let code = responseDict?["code"] {
+                                //    let code = code as! NSNumber
+                                    
+//                                    if code.intValue == 200 {
+//                                        
+////                                        let loginVc:WelcomePageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC") as! WelcomePageVC
+////                                        self.window?.rootViewController = loginVc
+////                                        self.window?.makeKeyAndVisible()
+//                                        
+//                                    }
+                                    
+                                    //else {
+//                                        if let responseDict = json.dictionaryObject {
+//                                            let alertMessage = responseDict["message"] as! String
+//                                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//                                            
+//                                            
+//                                            let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+//                                            })
+//                                            
+//                                            alertController.addAction(okAction)
+//                                            
+//                                            DispatchQueue.main.async {
+//                                                
+//                                                UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+//                                            }
+//                                        }
+                                  //  }
+                                //}
+                                break
+                                
+                            case .failure(let error):
+                                
+//                                DispatchQueue.main.async {
+//                                    let alertController = UIAlertController(title: "", message: "Sorry, Please try again later", preferredStyle: .alert)
+//                                    
+//                                    let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+//                                    })
+//                                    
+//                                    alertController.addAction(okAction)
+//                                    
+//                                    UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+//                                    
+//                                }
+                                
+                                ////print("error)
+                                break
+                            }
+                            
+                        }
+
+                        }
+                        
+                    }
+                    
                     
                 }
             }
-            
-        }
-    
 }
+    
+

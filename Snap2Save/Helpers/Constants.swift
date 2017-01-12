@@ -13,11 +13,11 @@ import UIKit
 
 
 // development url
-var hostUrl = "http://dev.snap2save-a-lot.com/api";
+//var hostUrl = "http://dev.snap2save-a-lot.com/api";
 
 
 // test url
-//var hostUrl = "http://dev.snap2save-a-lot.com/test/api"
+var hostUrl = "http://dev.snap2save-a-lot.com/test/api"
 
 
 
@@ -41,6 +41,6 @@ var EMAIL = "email"
 var MOBILE_NUMBER = "mobileNumber"
 let USER_AUTOLOGIN = "userAutoLogin"
 let ON_LAUNCH = "onLaunch"
-
+let INFO_SCREENS = "info_screens"
 
 

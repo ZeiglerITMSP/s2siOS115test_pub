@@ -11,10 +11,7 @@
 		6FB268A6557A795CAD814A61 /* Pods_Snap2SaveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */; };
 		9737ED0C1E14042400120B54 /* ChangePasswordTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */; };
 		9759BE781E0A65AA00A5C76A /* SignUpTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */; };
-		976A99711E24EA9700F82105 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976A996D1E24EA9700F82105 /* Bolts.framework */; };
-		976A99721E24EA9700F82105 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976A996E1E24EA9700F82105 /* FBSDKCoreKit.framework */; };
-		976A99731E24EA9700F82105 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976A996F1E24EA9700F82105 /* FBSDKLoginKit.framework */; };
-		976A99741E24EA9700F82105 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976A99701E24EA9700F82105 /* FBSDKShareKit.framework */; };
+		9769997E1E2643A200D05AE8 /* ServicesWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9769997D1E2643A200D05AE8 /* ServicesWebViewVC.swift */; };
 		976A99771E251A6400F82105 /* FacebookLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A99761E251A6400F82105 /* FacebookLogin.swift */; };
 		977B64F51E163B5600AA802D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F41E163B5600AA802D /* User.swift */; };
 		977B64F71E16407A00AA802D /* AdditionalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F61E16407A00AA802D /* AdditionalInformation.swift */; };
@@ -90,10 +87,7 @@
 		95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordTVC.swift; sourceTree = "<group>"; };
 		9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTVC.swift; sourceTree = "<group>"; };
-		976A996D1E24EA9700F82105 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		976A996E1E24EA9700F82105 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		976A996F1E24EA9700F82105 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		976A99701E24EA9700F82105 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		9769997D1E2643A200D05AE8 /* ServicesWebViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesWebViewVC.swift; sourceTree = "<group>"; };
 		976A99761E251A6400F82105 /* FacebookLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLogin.swift; sourceTree = "<group>"; };
 		977B64F41E163B5600AA802D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Snap2Save/Controller/Account/User.swift; sourceTree = SOURCE_ROOT; };
 		977B64F61E16407A00AA802D /* AdditionalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdditionalInformation.swift; path = Snap2Save/Controller/Account/AdditionalInformation.swift; sourceTree = SOURCE_ROOT; };
@@ -161,10 +155,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				52949BC23A183914DF6D1992 /* Pods_Snap2Save.framework in Frameworks */,
-				976A99721E24EA9700F82105 /* FBSDKCoreKit.framework in Frameworks */,
-				976A99741E24EA9700F82105 /* FBSDKShareKit.framework in Frameworks */,
-				976A99731E24EA9700F82105 /* FBSDKLoginKit.framework in Frameworks */,
-				976A99711E24EA9700F82105 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,18 +185,6 @@
 				95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		976A99751E24EAB600F82105 /* FacebookFrameWorks */ = {
-			isa = PBXGroup;
-			children = (
-				976A996D1E24EA9700F82105 /* Bolts.framework */,
-				976A996E1E24EA9700F82105 /* FBSDKCoreKit.framework */,
-				976A996F1E24EA9700F82105 /* FBSDKLoginKit.framework */,
-				976A99701E24EA9700F82105 /* FBSDKShareKit.framework */,
-			);
-			name = FacebookFrameWorks;
-			path = Controller/Services;
 			sourceTree = "<group>";
 		};
 		A5AC032866C285AFF18A5452 /* Pods */ = {
@@ -250,6 +228,7 @@
 			children = (
 				E88C262C1E1539C900F4056F /* TabViewController.swift */,
 				E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */,
+				9769997D1E2643A200D05AE8 /* ServicesWebViewVC.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -356,7 +335,6 @@
 			children = (
 				E88BA54A1DF53C1300714C65 /* AppDelegate.swift */,
 				E84AE9E11E0821AB00C5E7F3 /* Helpers */,
-				976A99751E24EAB600F82105 /* FacebookFrameWorks */,
 				E88BA5791DF53CF500714C65 /* Model */,
 				E84AE9C81E07F28300C5E7F3 /* View */,
 				E81E61651E2365A30016FE74 /* EBT */,
@@ -737,6 +715,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9769997E1E2643A200D05AE8 /* ServicesWebViewVC.swift in Sources */,
 				E83156021E1A561E001D30D2 /* EBTDashboardTVC.swift in Sources */,
 				E8BAE2A81E0BDEFD00A85AAB /* EBTCardNumberTVC.swift in Sources */,
 				E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */,
@@ -994,8 +973,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.s2s.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d39ef5c1-1bed-4ac3-998f-f1572c384de2";
-				PROVISIONING_PROFILE_SPECIFIER = s2s_appstore;
+				PROVISIONING_PROFILE = "be455c9e-6e66-479a-9a7d-52fcbed1f860";
+				PROVISIONING_PROFILE_SPECIFIER = s2s_distribution;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
