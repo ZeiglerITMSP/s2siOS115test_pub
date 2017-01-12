@@ -41,7 +41,7 @@ class EBTUserInformationTVC: UITableViewController {
     
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
     @IBOutlet weak var passwordField: AIPlaceHolderTextField!
-    @IBOutlet weak var ConfirmPasswordField: AIPlaceHolderTextField!
+    @IBOutlet weak var confirmPasswordField: AIPlaceHolderTextField!
     @IBOutlet weak var emailAddressField: AIPlaceHolderTextField!
     @IBOutlet weak var confirmEmailField: AIPlaceHolderTextField!
     @IBOutlet weak var phoneNumberField: AIPlaceHolderTextField!
@@ -59,22 +59,54 @@ class EBTUserInformationTVC: UITableViewController {
     
     @IBAction func nextAction(_ sender: UIButton) {
         
+        self.view.endEditing(true)
+        
         self.nextActivityIndicator.startAnimating()
         self.nextButton.isEnabled = false
         
         autoFill()
 
     }
-    @IBAction func cancelAction(_ sender: UIButton) {
-        
-        
-    }
+    
+
     
     
     // MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        emailAddressField.contentTextField.keyboardType = .emailAddress
+        confirmEmailField.contentTextField.keyboardType = .emailAddress
+        passwordField.contentTextField.isSecureTextEntry = true
+        confirmPasswordField.contentTextField.isSecureTextEntry = true
+        
+        userIdField.contentTextField.returnKeyType = .next
+        passwordField.contentTextField.returnKeyType = .next
+        confirmPasswordField.contentTextField.returnKeyType = .next
+        emailAddressField.contentTextField.returnKeyType = .next
+        confirmEmailField.contentTextField.returnKeyType = .next
+        phoneNumberField.contentTextField.returnKeyType = .next
+        answerOneField.contentTextField.returnKeyType = .next
+        answerTwoField.contentTextField.returnKeyType = .next
+        answerThreeField.contentTextField.returnKeyType = .done
+        
+        
+        userIdField.contentTextField.aiDelegate = self
+        passwordField.contentTextField.aiDelegate = self
+        confirmPasswordField.contentTextField.aiDelegate = self
+        emailAddressField.contentTextField.aiDelegate = self
+        confirmEmailField.contentTextField.aiDelegate = self
+        phoneNumberField.contentTextField.aiDelegate = self
+        
+        questionOneField.contentTextField.aiDelegate = self
+        questionTwoField.contentTextField.aiDelegate = self
+        questionThreeField.contentTextField.aiDelegate = self
+        
+        answerOneField.contentTextField.aiDelegate = self
+        answerTwoField.contentTextField.aiDelegate = self
+        answerThreeField.contentTextField.aiDelegate = self
+        
+        
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
@@ -111,6 +143,8 @@ class EBTUserInformationTVC: UITableViewController {
         getPasswordRules()
         
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: nextButton, radius: 2.0, width: 1.0)
+        
+        addTapGesture()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -125,6 +159,21 @@ class EBTUserInformationTVC: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - To Hide Keyboard
+    
+    func addTapGesture() {
+        
+        // Tap Gesuture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+
 
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -142,8 +191,8 @@ class EBTUserInformationTVC: UITableViewController {
     
     func backAction() {
         
-        self.navigationController?.popViewController(animated: true)
-//        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+//        self.navigationController?.popViewController(animated: true)
+        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -301,7 +350,7 @@ class EBTUserInformationTVC: UITableViewController {
         let userId = self.userIdField.contentTextField.text!
         
         let password = self.passwordField.contentTextField.text!
-        let confirmPassword = self.ConfirmPasswordField.contentTextField.text!
+        let confirmPassword = self.confirmPasswordField.contentTextField.text!
         
         let emailAddress = self.emailAddressField.contentTextField.text!
         let confirmEmail = self.confirmEmailField.contentTextField.text!
@@ -371,6 +420,7 @@ class EBTUserInformationTVC: UITableViewController {
                     
                     self.errorMessageLabel.text = trimmed
                     self.tableView.reloadData()
+                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0 ), at: .top, animated: true)
                     
                 } else {
                     // success
@@ -437,13 +487,12 @@ class EBTUserInformationTVC: UITableViewController {
                         let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
                         if trimmedNew.characters.count > 0 {
                             
-                            list.append(trimmedNew)
+                            let final = "* " + trimmedNew
+                            list.append(final)
                         }
-                        
-                        self.userIdRules = list.joined(separator: "* \n")
-                        
                     }
                     
+                    self.userIdRules = list.joined(separator: "\n")
                     
                 } else {
                     
@@ -476,13 +525,13 @@ class EBTUserInformationTVC: UITableViewController {
                         let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
                         if trimmedNew.characters.count > 0 {
                             
-                            list.append(trimmedNew)
+                            let final = "* " + trimmedNew
+                            list.append(final)
                         }
-                        
-                        self.passwordRules = list.joined(separator: "* \n")
-                        
+                       
                     }
 
+                    self.passwordRules = list.joined(separator: "\n")
                     
                 } else {
                     
@@ -506,7 +555,7 @@ extension EBTUserInformationTVC: AIPlaceHolderTextFieldDelegate {
         } else if textfield.tag == 101 {
             // Password
             
-            showMyAlert(title: "Password Rules:", message: passwordRules)
+            showMyAlert(title: "Password Rules:\n", message: passwordRules)
             
         }
         
@@ -522,7 +571,7 @@ extension EBTUserInformationTVC: AIPlaceHolderTextFieldDelegate {
             string: message,
             attributes: [
                 NSParagraphStyleAttributeName: paragraphStyle,
-                NSFontAttributeName : UIFont.preferredFont(forTextStyle: UIFontTextStyle.body),
+                NSFontAttributeName : UIFont(name: "System-Light", size: 12) ?? UIFont.systemFont(ofSize: 12),
                 NSForegroundColorAttributeName : UIColor.gray
             ]
         )
@@ -535,7 +584,9 @@ extension EBTUserInformationTVC: AIPlaceHolderTextFieldDelegate {
         DispatchQueue.main.async {
             
             self.present(alertController, animated: true, completion: nil)
+            alertController.view.tintColor = APP_GRREN_COLOR
         }
+        
         
     }
     
@@ -546,6 +597,50 @@ extension EBTUserInformationTVC: EBTWebViewDelegate {
     func didFinishLoadingWebView() {
         
         checkForErrorMessage()
+    }
+    
+}
+
+extension EBTUserInformationTVC: AITextFieldProtocol {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == userIdField.contentTextField {
+            passwordField.contentTextField.becomeFirstResponder()
+        } else if textField == passwordField.contentTextField {
+            confirmPasswordField.contentTextField.becomeFirstResponder()
+        } else if textField == confirmPasswordField.contentTextField {
+            emailAddressField.contentTextField.becomeFirstResponder()
+        } else if textField == emailAddressField.contentTextField {
+            confirmEmailField.contentTextField.becomeFirstResponder()
+        } else if textField == confirmEmailField.contentTextField {
+            phoneNumberField.contentTextField.becomeFirstResponder()
+        } else if textField == phoneNumberField.contentTextField {
+            questionOneField.contentTextField.becomeFirstResponder()
+        } else if textField == answerOneField.contentTextField {
+            questionTwoField.contentTextField.becomeFirstResponder()
+        } else if textField == answerTwoField.contentTextField {
+            questionThreeField.contentTextField.becomeFirstResponder()
+        } else if textField == answerThreeField.contentTextField {
+            textField.resignFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
+        
+        return true
+    }
+    
+    func getSelectedIndexFromPicker(selectedIndex: NSInteger, textField: AITextField) {
+        
+        if textField == questionOneField.contentTextField {
+            answerOneField.contentTextField.becomeFirstResponder()
+        } else if textField ==  questionTwoField.contentTextField {
+            answerTwoField.contentTextField.becomeFirstResponder()
+        } else if textField == questionThreeField.contentTextField {
+            answerThreeField.contentTextField.becomeFirstResponder()
+        }
+        
     }
     
 }

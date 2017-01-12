@@ -89,7 +89,11 @@ class EBTLoginTVC: UITableViewController {
         userIdField.contentTextField.textFieldType = .PhoneNumberTextField
         userIdField.contentTextField.textFieldType = .NormalTextField
         
+        userIdField.contentTextField.autocorrectionType = UITextAutocorrectionType.no
+        userIdField.contentTextField.returnKeyType = .next
+        
         passwordField.contentTextField.isSecureTextEntry = true
+        passwordField.contentTextField.returnKeyType = .done
         
         // Automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -125,7 +129,7 @@ class EBTLoginTVC: UITableViewController {
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: loginButton, radius: 2.0, width: 1.0)
         AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: registrationButton, radius: 2.0, width: 1.0)
         
-        
+        addTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,6 +161,21 @@ class EBTLoginTVC: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - To Hide Keyboard
+    
+    func addTapGesture() {
+        
+        // Tap Gesuture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+    
     
     // MARK: -
     
@@ -296,7 +315,7 @@ class EBTLoginTVC: UITableViewController {
     
     func checkForErrorMessage() {
         
-        let jsErrorMessage = "$('.errorTextLogin').text();"
+        let jsErrorMessage = "$('..errorTextLogin').text();"
         
         ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
             if error != nil {
@@ -344,9 +363,7 @@ class EBTLoginTVC: UITableViewController {
                     self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
                 } else {
                     
-                    
                 }
-                
             }
         }
         

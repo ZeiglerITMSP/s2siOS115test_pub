@@ -994,8 +994,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.s2s.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d39ef5c1-1bed-4ac3-998f-f1572c384de2";
-				PROVISIONING_PROFILE_SPECIFIER = s2s_appstore;
+				PROVISIONING_PROFILE = "ee8f720a-3734-4126-9ee0-38199da40d40";
+				PROVISIONING_PROFILE_SPECIFIER = s2s_distribution;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

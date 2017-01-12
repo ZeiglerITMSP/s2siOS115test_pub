@@ -38,6 +38,8 @@ class EBTSelectPinTVC: UITableViewController {
     // Actions
     @IBAction func nextAction(_ sender: UIButton) {
         
+        self.view.endEditing(true)
+        
         self.nextButton.isEnabled = false
         self.nextActivityIndicator.startAnimating()
         
@@ -56,6 +58,13 @@ class EBTSelectPinTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        pinField.contentTextField.aiDelegate = self
+        confirmPinField.contentTextField.aiDelegate = self
+        
+        pinField.contentTextField.returnKeyType = .next
+        confirmPinField.contentTextField.returnKeyType = .done
+        
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
@@ -69,6 +78,8 @@ class EBTSelectPinTVC: UITableViewController {
         
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: nextButton, radius: 2.0, width: 1.0)
         AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: useCurrentPinButton, radius: 2.0, width: 1.0)
+        
+        addTapGesture()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -82,6 +93,21 @@ class EBTSelectPinTVC: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - To Hide Keyboard
+    
+    func addTapGesture() {
+        
+        // Tap Gesuture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+
     
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -99,8 +125,8 @@ class EBTSelectPinTVC: UITableViewController {
 
     func backAction() {
         
-        self.navigationController?.popViewController(animated: true)
-//        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+//        self.navigationController?.popViewController(animated: true)
+        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -215,3 +241,19 @@ extension EBTSelectPinTVC: EBTWebViewDelegate {
     
 }
 
+extension EBTSelectPinTVC: AITextFieldProtocol {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == pinField.contentTextField {
+            
+             confirmPinField.contentTextField.becomeFirstResponder()
+        } else if textField == confirmPinField.contentTextField {
+            
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+    
+}

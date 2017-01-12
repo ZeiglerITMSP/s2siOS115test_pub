@@ -17,8 +17,8 @@ class BrowserVC: UIViewController {
     
     @IBAction func executeQueryAction(_ sender: Any) {
         
+        self.view.endEditing(true)
         webViewMaster.execute(javascript: queryTextView.text)
-       
     }
     
     

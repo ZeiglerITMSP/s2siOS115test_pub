@@ -49,7 +49,7 @@ class EBTAuthenticationTVC: UITableViewController {
     }
     
     @IBAction func regenerateAction(_ sender: UIButton) {
-        self.view.endEditing(true)
+        
         
         self.view.endEditing(true)
         regenerate()
@@ -60,6 +60,8 @@ class EBTAuthenticationTVC: UITableViewController {
         super.viewDidLoad()
 
         errorMessageLabel.text = nil
+        authenticationCodeField.contentTextField.returnKeyType = .done
+        authenticationCodeField.contentTextField.aiDelegate = self
         
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
@@ -69,11 +71,11 @@ class EBTAuthenticationTVC: UITableViewController {
         self.tableView.estimatedRowHeight = 44
         
         ebtWebView.responder = self
-
+        
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: confirmButton, radius: 2.0, width: 1.0)
         AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: regenerateButton, radius: 2.0, width: 1.0)
         
-        
+        addTapGesture()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,6 +89,21 @@ class EBTAuthenticationTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - To Hide Keyboard
+    
+    func addTapGesture() {
+        
+        // Tap Gesuture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+
+    
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -219,8 +236,8 @@ class EBTAuthenticationTVC: UITableViewController {
 
     func backAction() {
         
-        self.navigationController?.popViewController(animated: true)
-//        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+//        self.navigationController?.popViewController(animated: true)
+        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -271,6 +288,18 @@ extension EBTAuthenticationTVC: EBTWebViewDelegate {
             actionType = nil
             checkForStatusMessage()
         }
+    }
+    
+}
+
+
+extension EBTAuthenticationTVC: AITextFieldProtocol {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
     }
     
 }

@@ -143,7 +143,7 @@ extension EBTWebView: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        //print("\n -- navigationAction -- \n")
+        print("\n -- navigationAction -- \n")
         
         print(navigationAction.request)
         
@@ -152,7 +152,7 @@ extension EBTWebView: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         
-        //print(""\n -- navigationResponse -- \n")
+        print("\n -- navigationResponse -- \n")
         
         print(navigationResponse.response)
         

@@ -19,8 +19,9 @@ class AppHelper {
         view.layer.cornerRadius = radius
         if let borderColor = borderColor {
             view.layer.borderColor = borderColor.cgColor
+            view.layer.borderWidth = width
         }
-        view.layer.borderWidth = width
+        
         view.layer.masksToBounds = true
     }
     

@@ -40,20 +40,20 @@ class EBTSecurityQuestionTVC: UITableViewController {
     
     @IBAction func confirmAction(_ sender: UIButton) {
         
+        self.view.endEditing(true)
         
         autoFill()
        // performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: nil)
     }
     
-    @IBAction func cancelAction(_ sender: UIButton) {
-        
-        
-    }
     
     // MARK: -
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        securityAnswerField.contentTextField.aiDelegate = self
+        securityAnswerField.contentTextField.returnKeyType = .done
         
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
@@ -69,6 +69,8 @@ class EBTSecurityQuestionTVC: UITableViewController {
         validatePage()
         
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: confirmButton, radius: 2.0, width: 1.0)
+        
+        addTapGesture()
     }
 
     
@@ -83,6 +85,21 @@ class EBTSecurityQuestionTVC: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - To Hide Keyboard
+    
+    func addTapGesture() {
+        
+        // Tap Gesuture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+    }
+
 
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -100,8 +117,8 @@ class EBTSecurityQuestionTVC: UITableViewController {
     
     func backAction() {
         
-        self.navigationController?.popViewController(animated: true)
-//        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+//        self.navigationController?.popViewController(animated: true)
+        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -235,5 +252,15 @@ extension EBTSecurityQuestionTVC: EBTWebViewDelegate {
             
         }
         
+    }
+}
+
+extension EBTSecurityQuestionTVC: AITextFieldProtocol {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
     }
 }
