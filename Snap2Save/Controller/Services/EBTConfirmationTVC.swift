@@ -48,7 +48,7 @@ class EBTConfirmationTVC: UITableViewController {
         
         actionType = ActionType.validate
         validateActivityIndicator.startAnimating()
-        validateButton.isEnabled = false
+//        validateButton.isEnabled = false
     
         autoFill(valdationCode: self.validationCodeField.contentTextField.text!)
     }
@@ -94,6 +94,9 @@ class EBTConfirmationTVC: UITableViewController {
         super.viewDidAppear(animated)
         
         ebtWebView.responder = self
+        
+        let webView = ebtWebView.webView!
+        self.view.addSubview(webView)
     }
     
     
@@ -154,23 +157,26 @@ class EBTConfirmationTVC: UITableViewController {
         actionType = ActionType.validate
         
         let jsCardNumber = "$('#txtEmailValidationCode').val('\(valdationCode)');"
-        let jsSubmit = "void($('#btnValidateUserInfo').click());"
+        let jsSubmit = "$('#validateEmailBtn').click();"
         
         let javaScript =  jsCardNumber + jsSubmit
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            if error != nil {
-                print(error ?? "error nil")
-            } else {
-                print(result ?? "result nil")
-                self.checkForErrorMessage()
-            }
+            
+            self.checkForErrorMessage()
+//
+//            if error != nil {
+//                print(error ?? "error nil")
+//            } else {
+//                print(result ?? "result nil")
+//                self.checkForErrorMessage()
+//            }
         }
     }
     
     func checkForErrorMessage() {
         
-        let jsStatusMessage = "$('.errorInvalidField').text();"
+        let jsStatusMessage = "$('#VallidationExcpMsg').text();"
         
         ebtWebView.webView.evaluateJavaScript(jsStatusMessage) { (result, error) in
             if error != nil {
@@ -182,7 +188,7 @@ class EBTConfirmationTVC: UITableViewController {
                 
                 if trimmedErrorMessage.characters.count > 0 {
                     
-                    self.validateButton.isEnabled = false
+                    self.validateButton.isEnabled = true
                     self.validateActivityIndicator.stopAnimating()
                     // handle error message
                     self.errorMessageLabel.text = trimmedErrorMessage

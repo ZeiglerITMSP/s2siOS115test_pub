@@ -14,9 +14,10 @@ import WebKit
 // id -> #
 
 
-protocol EBTWebViewDelegate {
+@objc protocol EBTWebViewDelegate {
     
-    func didFinishLoadingWebView()
+    @objc optional func didFinishLoadingWebView()
+    @objc optional func navigationAction() -> Bool
     
 }
 
@@ -64,9 +65,18 @@ class EBTWebView: NSObject {
     func loadWebView() {
        
         // init and load request in webview.
-        webView = WKWebView()
-        webView.navigationDelegate = self
         
+        
+        let configuration = WKWebViewConfiguration()
+        let preferences = WKPreferences()
+        preferences.javaScriptCanOpenWindowsAutomatically = true
+        configuration.preferences = preferences
+        
+        webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        
+//        webView = WKWebView()
+        webView.navigationDelegate = self
+//        webView.uiDelegate = self
     }
     
     func getPageHeader(completion: @escaping (String?) -> ()) {
@@ -128,7 +138,10 @@ class EBTWebView: NSObject {
         }
     }
     
-    
+    func shouldStartDecidePolicy() -> WKNavigationActionPolicy {
+        
+        return WKNavigationActionPolicy.allow
+    }
     
 }
 
@@ -142,52 +155,95 @@ extension EBTWebView: WKNavigationDelegate {
         print(error.localizedDescription)
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        print("\n -- navigationAction -- \n")
-        
-        print(navigationAction.request)
-        
-        decisionHandler(.allow)
-    }
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//        print("\n -- navigationAction -- \n")
+//        
+////        print(navigationAction.request)
+//        
+//        print(navigationAction.navigationType)
+//        print(navigationAction.targetFrame ?? "nil")
+//        
+//        print(navigationAction.request.url?.absoluteString ?? "no url")
+//        print(navigationAction.sourceFrame.isMainFrame)
+//        
+//        decisionHandler(self.shouldStartDecidePolicy())
+//        
+//        
+////        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
+////            
+////            decisionHandler(.cancel)
+////            return
+////        }
+////        
+////        let status = self.responder?.navigationAction?()
+////        if status != nil {
+////            return decisionHandler(.allow)
+////        }
+//        
+////        decisionHandler(.allow)
+//    }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        
-        print("\n -- navigationResponse -- \n")
-        
-        print(navigationResponse.response)
-        
-        decisionHandler(.allow)
-    }
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+//        
+//        print("\n -- navigationResponse -- \n")
+//        
+////        print(navigationResponse.response)
+//        
+//        print(navigationResponse.isForMainFrame)
+//        
+////        decisionHandler(self.shouldStartDecidePolicy())
+//        
+////        
+////        if navigationResponse.isForMainFrame {
+////            decisionHandler(.allow)
+////        } else {
+////            decisionHandler(.cancel)
+////        }
+//        decisionHandler(.allow)
+//        
+//    }
     
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        print("\n -- didStartProvisional -- \n")
-        
-    }
+//    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+//        print("\n -- didStartProvisional -- \n")
+//        
+//    }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("\n -- didFinish -- \n")
 
-        self.responder?.didFinishLoadingWebView()
+        self.responder?.didFinishLoadingWebView?()
     }
     
-    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-        
-        print("\n -- didReceiveServerRedirectForProvisional -- \n")
-    }
-    
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        print("\n -- didCommit -- \n")
-        
-    }
-    
+//    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+//        
+//        print("\n -- didReceiveServerRedirectForProvisional -- \n")
+//    }
+//    
+//    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+//        print("\n -- didCommit -- \n")
+//        
+//    }
+//    
     
     
 }
 
 
-
-
-
+//
+//extension EBTWebView: WKUIDelegate {
+//    
+//    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+//        
+//        if navigationAction.targetFrame == nil {
+//            webView.load(navigationAction.request)
+//        }
+//        return nil
+//        
+//    }
+//    
+//
+//}
+//
 
 
 

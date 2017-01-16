@@ -67,6 +67,21 @@ class BrowserVC: UIViewController {
         
         self.title = "Web View"
         
+        addWebView()
+        
+    }
+
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    
+    func addWebView() {
+        
+        
         let webView = webViewMaster.webView!
         self.broswerView.addSubview(webView)
         // constraints
@@ -81,15 +96,14 @@ class BrowserVC: UIViewController {
         webView.superview?.addConstraint(bottom)
         
     }
-
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
    
+    
+    override func viewDidAppear(_ animated: Bool) {
+    
+        super.viewDidAppear(animated)
+    
+        addWebView()
+    }
     
     /*
     // MARK: - Navigation

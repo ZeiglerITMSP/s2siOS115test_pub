@@ -142,6 +142,10 @@ class EBTLoginTVC: UITableViewController {
         super.viewDidAppear(animated)
         
         ebtWebView.responder = self
+        
+        let webView = ebtWebView.webView!
+        self.view.addSubview(webView)
+        
         loadLoginPage()
         // Stop listening notification
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)

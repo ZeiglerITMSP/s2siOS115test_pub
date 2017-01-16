@@ -86,6 +86,9 @@ class EBTSelectPinTVC: UITableViewController {
         super.viewDidAppear(animated)
         
         ebtWebView.responder = self
+        
+        let webView = ebtWebView.webView!
+        self.view.addSubview(webView)
     }
     
     
