@@ -61,7 +61,7 @@ class ServicesTVC: UITableViewController {
     
     // MARK: - Table view data source
     
-    /*
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
@@ -79,8 +79,8 @@ class ServicesTVC: UITableViewController {
             let servicesWebVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "ServicesWebViewVC") as! ServicesWebViewVC
             
             if indexPath.row == 0 {
-                //let url = "https://developers.facebook.com/docs/ios/getting-started"
-                let url = infoScreens["about"] ?? ""
+                let url = "https://developers.facebook.com/docs/ios/getting-started"
+               // let url = infoScreens["about"] ?? ""
                 servicesWebVc.loadUrl = url as! String
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.aboutSnap2Save
                 
@@ -136,12 +136,9 @@ class ServicesTVC: UITableViewController {
         }
     }
     
-    */
+
     
     // MARK: -
-    
-    
-    
     
     func languageButtonClicked() {
         
@@ -153,9 +150,7 @@ class ServicesTVC: UITableViewController {
         DispatchQueue.main.async {
             
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-            
             self.navigationItem.title = "Services".localized()
-            
             self.ebtLabel.text = "EBT".localized()
             self.aboutLabel.text = "About Snap2Save".localized()
             self.faqLabel.text = "FAQ".localized()
@@ -165,7 +160,5 @@ class ServicesTVC: UITableViewController {
         }
     }
     
-    
-    
-    
+
 }

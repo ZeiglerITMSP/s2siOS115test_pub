@@ -18,6 +18,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
     
     var facebookDict:[String : Any]? = nil
     
+    @IBOutlet var facebookActivityIndicator: UIActivityIndicatorView!
     @IBOutlet var reEnterEmailMandatoryLabel: UILabel!
     @IBOutlet var emailManditoryLabel: UILabel!
     @IBOutlet var loginWithFBButton: UIButton!
@@ -58,11 +59,11 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
     
     
     @IBAction func loginWithFbButtonAction(_ sender: Any) {
+        facebookActivityIndicator.startAnimating()
+        faceBookLogin.delegate = self
+        faceBookLogin.dataSource = self
+        faceBookLogin.loginWithFacebook()
         
-//        faceBookLogin.delegate = self
-//        faceBookLogin.dataSource = self
-//        faceBookLogin.loginWithFacebook()
-
     }
     
     @IBAction func contactPreferenceSegmentControl(_ sender: UISegmentedControl) {
@@ -542,6 +543,7 @@ extension SignUpTVC: AITextFieldProtocol {
     // MARK: - faceBookLogin
     
     func didFacebookLoginFail() {
+        facebookActivityIndicator.stopAnimating()
         self.showAlert(title: "", message: "Sorry, Please try again later".localized());
     }
     
@@ -557,6 +559,9 @@ extension SignUpTVC: AITextFieldProtocol {
         facebookDict = information
         let email =  facebookDict?["email"] ?? ""
         emailTextField.text = email as? String
+        
+        facebookActivityIndicator.stopAnimating()
+        
         //self.checkFacebookUser()
     }
  

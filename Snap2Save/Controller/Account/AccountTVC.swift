@@ -242,7 +242,7 @@ class AccountTVC: UITableViewController {
         UserDefaults.standard.removeObject(forKey: LOGGED_USER)
         UserDefaults.standard.removeObject(forKey: USER_DATA)
         
-        AppDelegate.getDelegate().setDetaultValues()
+       // AppDelegate.getDelegate().setDetaultValues()
         
         
     }

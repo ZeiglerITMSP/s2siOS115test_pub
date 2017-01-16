@@ -10,23 +10,56 @@ import UIKit
 
 class OffersVC: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var languageSelectionButton: UIButton!
 
-        self.navigationItem.title = "Offers".localized()
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        reloadContent()
+
     }
 
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.navigationItem.title = "Offers".localized()
+        reloadContent()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        LanguageUtility.removeObserverForLanguageChange(self)
+        super.viewDidDisappear(animated)
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+
+    
+    func languageButtonClicked() {
+        self.showLanguageSelectionAlert()
+    }
+
+    
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.updateBackButtonText()
+            self.navigationItem.title = "Offers".localized()
+
+        }
+        
+    }
 
     /*
     // MARK: - Navigation

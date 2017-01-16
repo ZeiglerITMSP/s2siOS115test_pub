@@ -19,8 +19,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     var blueNavBarImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
     let faceBookLogin : FacebookLogin  = FacebookLogin()
     var faceBookDict : [String : Any]? = nil
-    var isFaceBookLogin : Bool = false
     
+    @IBOutlet var facebookActivityIndicator: UIActivityIndicatorView!
     @IBOutlet var bgContainerView: UIView!
     @IBOutlet var bgScrollView: UIScrollView!
     @IBOutlet var FbLoginBgView: UIView!
@@ -53,11 +53,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     @IBAction func loginWithFacebookButtonAction(_ sender: UIButton) {
 
-        
-//        faceBookLogin.delegate = self
-//        faceBookLogin.dataSource = self
-//        faceBookLogin.loginWithFacebook()
-        
+        facebookActivityIndicator.startAnimating()
+        faceBookLogin.delegate = self
+        faceBookLogin.dataSource = self
+        faceBookLogin.loginWithFacebook()
     }
     
     override func viewDidLoad() {
@@ -310,12 +309,12 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let mobileNumber = mobileNumTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()
-        var socialId = ""
-        if isFaceBookLogin == true {
-           // mobileNumber = faceBookDict?["email"] as! String? ?? ""
-            socialId = faceBookDict?["id"] as! String
-            
-        }
+        let socialId = ""
+//        if isFaceBookLogin == true {
+//           // mobileNumber = faceBookDict?["email"] as! String? ?? ""
+//            socialId = faceBookDict?["id"] as! String
+//            
+//        }
         let parameters = ["username": mobileNumber,
                           "password": password,
                           "social_id": socialId,
@@ -342,7 +341,6 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
                 let responseDict = json.dictionaryObject
-                self.isFaceBookLogin = false
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
                     if code.intValue == 200 {
@@ -440,6 +438,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     // MARK: - faceBookLogin
     
     func didFacebookLoginFail() {
+            facebookActivityIndicator.stopAnimating()
             self.showAlert(title: "", message: "Sorry, Please try again later".localized());
     }
     
@@ -451,7 +450,6 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     func didReceiveUser(information: [String : Any]) {
         print("information is\(information)")
         faceBookDict = information
-        isFaceBookLogin = true
         
         self.checkFacebookUser()
     }
@@ -489,13 +487,12 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             switch response.result {
             case .success:
                 DispatchQueue.main.async {
-                   // self.loginActivityIndicator.stopAnimating()
+                    self.facebookActivityIndicator.stopAnimating()
                 }
                 
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
                 let responseDict = json.dictionaryObject
-                self.isFaceBookLogin = false
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
                     if code.intValue == 200 {
@@ -510,7 +507,13 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             
                             
                         }
-                        
+                        if let info_screens = responseDict?["info_screens"]{
+                            let infoScreen  = info_screens
+                            
+                            UserDefaults.standard.set(infoScreen, forKey:INFO_SCREENS)
+                            
+                        }
+
                         if let auth_token = responseDict?["auth_token"] as? String {
                             UserDefaults.standard.set(auth_token, forKey: AUTH_TOKEN)
                             
