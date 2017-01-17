@@ -1,8 +1,20 @@
 PODS:
   - Alamofire (4.2.0)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
+  - FBSDKCoreKit (4.18.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.18.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.18.0):
+    - FBSDKCoreKit
   - Localize-Swift (1.6)
   - PKHUD (4.0.0)
   - SwiftyJSON (3.1.3)
@@ -11,18 +23,25 @@ DEPENDENCIES:
   - Alamofire (~> 4.0)
   - Crashlytics
   - Fabric
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
   - Localize-Swift
   - PKHUD (~> 4.0)
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
+  FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
+  FBSDKShareKit: 0b8d6cc3f103c75297eb3c62caec284a2ccf1b9e
   Localize-Swift: d34c70b34ffb1468b2942c3f0b5c1dfd9119877e
   PKHUD: 2bb45c936bb8afa39f3cd33ec14e8cc89f624255
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: f3190c3104da750c788b965990860cbf857bdb86
+PODFILE CHECKSUM: 63a6a8611b2da4ee19bc4781134c530d4f082e7b
 
 COCOAPODS: 1.1.1

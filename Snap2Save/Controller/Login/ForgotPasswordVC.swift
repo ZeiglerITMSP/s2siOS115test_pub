@@ -55,7 +55,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         backButton.frame = CGRect(x:0,y:0,width:80,height:25)
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
         backButton.setTitle("Back", for: .normal)
-        backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.7), for: .normal)
+        backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0), for: .normal)
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)

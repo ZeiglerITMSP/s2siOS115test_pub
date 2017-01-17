@@ -42,7 +42,7 @@
 
 //LoginVC
 "Log In" = "Log In";
-"Log In with Facebook" = "Log In with Facebook";
+"Log In with Facebook" = "LOG IN WITH FACEBOOK";
 "or" = "or";
 "10-DIGIT CELL PHONE NUMBER" = "10-DIGIT CELL PHONE NUMBER";
 "PASSWORD" = "PASSWORD";
@@ -59,7 +59,7 @@
 "Register" = "Register";
 "EARN 100 POINTS!" = "EARN 100 POINTS!";
 "RegisterMessage" = "Join us on Snap2Save and you will earn 100 points for registering!  Points can be redeemed for gift cards or health care rebates through our Reward Program.";
-"Register with Facebook" = "Register with Facebook";
+"Register with Facebook" = "REGISTER WITH FACEBOOK";
 "*Required information" = "*Required information";
 "10-DIGIT CELL PHONE NUMBER" = "10-DIGIT CELL PHONE NUMBER";
 "RE-ENTER 10-DIGIT CELL PHONE NUMBER" = "RE-ENTER 10-DIGIT CELL PHONE NUMBER";

@@ -13,6 +13,9 @@ target 'Snap2Save' do
   
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKShareKit'
+  pod 'FBSDKLoginKit'
   
 target 'Snap2SaveTests' do
     inherit! :search_paths

@@ -8,12 +8,17 @@
 
 import UIKit
 import Localize_Swift
+import Alamofire
+import SwiftyJSON
 
 class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegate {
     
     var languageSelectionButton: UIButton!
     let faceBookLogin : FacebookLogin = FacebookLogin()
-
+    
+    var facebookDict:[String : Any]? = nil
+    
+    @IBOutlet var facebookActivityIndicator: UIActivityIndicatorView!
     @IBOutlet var reEnterEmailMandatoryLabel: UILabel!
     @IBOutlet var emailManditoryLabel: UILabel!
     @IBOutlet var loginWithFBButton: UIButton!
@@ -54,20 +59,19 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
     
     
     @IBAction func loginWithFbButtonAction(_ sender: Any) {
-        
+        facebookActivityIndicator.startAnimating()
         faceBookLogin.delegate = self
         faceBookLogin.dataSource = self
         faceBookLogin.loginWithFacebook()
-
         
     }
     
     @IBAction func contactPreferenceSegmentControl(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 1{
+        if sender.selectedSegmentIndex == 1 {
             emailManditoryLabel.isHidden = false
             reEnterEmailMandatoryLabel.isHidden = false
         }
-        else if sender.selectedSegmentIndex == 0{
+        else if sender.selectedSegmentIndex == 0 {
             emailManditoryLabel.isHidden = true
             reEnterEmailMandatoryLabel.isHidden = true
         }
@@ -78,12 +82,23 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         if !isValidData(){
             return
         }
+        
+        let socialId = facebookDict?["id"] ?? ""
+       // let email = facebookDict?["email"] ?? ""
+        let firstName = facebookDict?["first_name"] ?? ""
+        let lastName = facebookDict?["last_name"] ?? ""
+        let gender = facebookDict?["gender"] ?? "";
+        
         let userDetails:[String:Any] = ["phone_number":mobileNumTextField.text ?? "",
                                         "password":passwordTextField.text ?? "",
                                         "zipcode":zipCodeTextField.text ?? "",
                                         "contact_preference":contactPreferenceSegmentControl.selectedSegmentIndex,
                                         "email":emailTextField.text ?? "",
-                                        "social_id":""];
+                                        "social_id": socialId,
+                                        "first_name": firstName,
+                                        "last_name" : lastName,
+                                        "gender" : gender
+                                        ];
         
         let additionalSignUpVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignupAdditionalFieldsTVC") as! SignupAdditionalFieldsTVC
         additionalSignUpVc.userDetailsDict = userDetails
@@ -113,7 +128,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         backButton.frame = CGRect(x:0,y:0,width:80,height:25)
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
         backButton.setTitle("Back", for: .normal)
-        backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.7), for: .normal)
+        backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0), for: .normal)
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
@@ -528,6 +543,7 @@ extension SignUpTVC: AITextFieldProtocol {
     // MARK: - faceBookLogin
     
     func didFacebookLoginFail() {
+        facebookActivityIndicator.stopAnimating()
         self.showAlert(title: "", message: "Sorry, Please try again later".localized());
     }
     
@@ -537,7 +553,90 @@ extension SignUpTVC: AITextFieldProtocol {
     }
     
     func didReceiveUser(information: [String : Any]) {
+        
         print("information is\(information)")
+        
+        facebookDict = information
+        let email =  facebookDict?["email"] ?? ""
+        emailTextField.text = email as? String
+        
+        facebookActivityIndicator.stopAnimating()
+        
+        //self.checkFacebookUser()
     }
  
+    func checkFacebookUser() {
+        
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        //print(""isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+        
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let currentLanguage = Localize.currentLanguage()
+        let socialId = facebookDict?["id"] as? String ?? ""
+        
+        let parameters = ["social_id": socialId,
+                          "platform":"1",
+                          "version_code": "1",
+                          "version_name": "1",
+                          "device_id": device_id,
+                          "push_token":"123123",
+                          "language": currentLanguage
+            ] as [String : Any]
+        
+        //print("parameters)
+        //loginActivityIndicator.startAnimating()
+        let url = String(format: "%@/checkFbUser", hostUrl)
+        //print("url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            
+            switch response.result {
+            case .success:
+                DispatchQueue.main.async {
+                   // self.registerActivityIndicator.stopAnimating()
+                }
+                
+                let json = JSON(data: response.data!)
+                print("json response\(json)")
+                
+                if (json.dictionary != nil) {
+                    // let jsonDict = json
+                    let responseDict = json.dictionaryObject
+                    if  let code = responseDict?["code"] {
+                        let code = code as! NSNumber
+                        if code.intValue == 200 {
+                           // self.showSignUpAlert();
+                            self.view.endEditing(true)
+                        }
+                        else {
+                            
+                            if let responseDict = json.dictionaryObject {
+                                let alertMessage = responseDict["message"] as! String
+                                self.showAlert(title: "", message: alertMessage)
+                            }
+                            
+                        }
+                    }
+                }
+                break
+                
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    //self.loginActivityIndicator.stopAnimating()
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                }
+                //print("error)
+                break
+            }
+            
+        }
+    }
+
 }

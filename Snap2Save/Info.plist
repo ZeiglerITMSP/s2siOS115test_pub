@@ -39,18 +39,24 @@
 			</array>
 		</dict>
 		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb247412342354583</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
 			<string>com.s2s.snap2save</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb247412342354583</string>
+				<string>snap2savealot</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>5</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -83,6 +89,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App wants to use photos library</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

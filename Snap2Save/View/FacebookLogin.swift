@@ -42,8 +42,6 @@ class FacebookLogin: NSObject {
                     print("Cancelled")
                      self.delegate?.didFacebookLoginFail()
                 } else {
-                    
-          
                     print("Logged in")
                 self.delegate?.didFacebookLoginSuccess()
                     

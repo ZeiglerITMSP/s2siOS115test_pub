@@ -115,7 +115,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     func backAction() {
         
-//        self.navigationController?.popViewController(animated: true)
+       _ = self.navigationController?.popViewController(animated: true)
         
         showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }

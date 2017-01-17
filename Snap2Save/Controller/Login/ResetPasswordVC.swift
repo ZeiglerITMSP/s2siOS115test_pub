@@ -174,7 +174,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         let currentLanguage = Localize.currentLanguage()
 
         let parameters = ["password":password,
-                          "user_id":user_id,
+                          "code":user_id,
                           "platform":"1",
                           "version_code": "1",
                           "version_name": "1",

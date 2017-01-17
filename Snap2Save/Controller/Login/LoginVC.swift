@@ -18,7 +18,9 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     var user:User = User()
     var blueNavBarImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
     let faceBookLogin : FacebookLogin  = FacebookLogin()
-
+    var faceBookDict : [String : Any]? = nil
+    
+    @IBOutlet var facebookActivityIndicator: UIActivityIndicatorView!
     @IBOutlet var bgContainerView: UIView!
     @IBOutlet var bgScrollView: UIScrollView!
     @IBOutlet var FbLoginBgView: UIView!
@@ -51,10 +53,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     @IBAction func loginWithFacebookButtonAction(_ sender: UIButton) {
 
+        facebookActivityIndicator.startAnimating()
         faceBookLogin.delegate = self
         faceBookLogin.dataSource = self
         faceBookLogin.loginWithFacebook()
-        
     }
     
     override func viewDidLoad() {
@@ -69,7 +71,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         backButton.frame = CGRect(x:0,y:0,width:80,height:25)
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
         backButton.setTitle("Back", for: .normal)
-        backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.7), for: .normal)
+        backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0), for: .normal)
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
@@ -307,10 +309,15 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let mobileNumber = mobileNumTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()
-        
+        let socialId = ""
+//        if isFaceBookLogin == true {
+//           // mobileNumber = faceBookDict?["email"] as! String? ?? ""
+//            socialId = faceBookDict?["id"] as! String
+//            
+//        }
         let parameters = ["username": mobileNumber,
                           "password": password,
-                          "social_id":"",
+                          "social_id": socialId,
                           "platform":"1",
                           "version_code": "1",
                           "version_name": "1",
@@ -332,9 +339,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                 }
                 
                 let json = JSON(data: response.data!)
-                //print(""json response\(json)")
+                print("json response\(json)")
                 let responseDict = json.dictionaryObject
-                
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
                     if code.intValue == 200 {
@@ -350,6 +356,13 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             
                         }
                         
+                        if let info_screens = responseDict?["info_screens"]{
+                            let infoScreen  = info_screens
+                            
+                            UserDefaults.standard.set(infoScreen, forKey:INFO_SCREENS)
+                            
+                        }
+                        
                         if let auth_token = responseDict?["auth_token"] as? String {
                             UserDefaults.standard.set(auth_token, forKey: AUTH_TOKEN)
                             
@@ -360,6 +373,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                         }
                         
                             self.presentHome()
+                            UserDefaults.standard.synchronize()
                         }
                     }
                     else {
@@ -424,6 +438,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     // MARK: - faceBookLogin
     
     func didFacebookLoginFail() {
+            facebookActivityIndicator.stopAnimating()
             self.showAlert(title: "", message: "Sorry, Please try again later".localized());
     }
     
@@ -434,6 +449,107 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     func didReceiveUser(information: [String : Any]) {
         print("information is\(information)")
+        faceBookDict = information
+        
+        self.checkFacebookUser()
     }
     
+    func checkFacebookUser() {
+        
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        //print(""isreachable \(isReachable)")
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+        
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let currentLanguage = Localize.currentLanguage()
+        let socialId = faceBookDict?["id"] as? String ?? ""
+
+        let parameters = ["social_id": socialId,
+                          "platform":"1",
+                          "version_code": "1",
+                          "version_name": "1",
+                          "device_id": device_id,
+                          "push_token":"123123",
+                          "language": currentLanguage
+            ] as [String : Any]
+        
+        //print("parameters)
+        //loginActivityIndicator.startAnimating()
+        let url = String(format: "%@/checkFbUser", hostUrl)
+        //print("url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            
+            switch response.result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.facebookActivityIndicator.stopAnimating()
+                }
+                
+                let json = JSON(data: response.data!)
+                print("json response\(json)")
+                let responseDict = json.dictionaryObject
+                if let code = responseDict?["code"] {
+                    let code = code as! NSNumber
+                    if code.intValue == 200 {
+                        
+                        if let userDict = responseDict?["user"] {
+                            self.user = User.prepareUser(dictionary: userDict as! [String : Any])
+                            self.user.auth_token = responseDict?["auth_token"] as! String
+                            AppDelegate.getDelegate().user = self.user
+                            
+                            let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
+                            UserDefaults.standard.set(userData, forKey: LOGGED_USER)
+                            
+                            
+                        }
+                        if let info_screens = responseDict?["info_screens"]{
+                            let infoScreen  = info_screens
+                            
+                            UserDefaults.standard.set(infoScreen, forKey:INFO_SCREENS)
+                            
+                        }
+
+                        if let auth_token = responseDict?["auth_token"] as? String {
+                            UserDefaults.standard.set(auth_token, forKey: AUTH_TOKEN)
+                            
+                            if let userDict = responseDict?["user"] as? [String:Any] {
+                                let user_id = userDict["id"]
+                                UserDefaults.standard.set(user_id, forKey: USER_ID)
+                                
+                            }
+                            
+                            self.presentHome()
+                        }
+                    }
+                    else {
+                        let signUpVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignupTVC")
+                        self.navigationController?.show(signUpVc, sender: self)
+//                        if let responseDict = json.dictionaryObject {
+//                            let alertMessage = responseDict["message"] as! String
+//                            self.showAlert(title: "", message: alertMessage)
+//                        }
+                    }
+                    
+                }
+                
+                break
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    //self.loginActivityIndicator.stopAnimating()
+                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                }
+                //print("error)
+                break
+            }
+            
+        }
     }
+
+}

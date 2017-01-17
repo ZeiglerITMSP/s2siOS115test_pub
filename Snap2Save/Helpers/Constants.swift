@@ -41,6 +41,6 @@ var EMAIL = "email"
 var MOBILE_NUMBER = "mobileNumber"
 let USER_AUTOLOGIN = "userAutoLogin"
 let ON_LAUNCH = "onLaunch"
-
+let INFO_SCREENS = "info_screens"
 
 

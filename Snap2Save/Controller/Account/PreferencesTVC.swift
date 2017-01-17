@@ -53,7 +53,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         backButton.frame = CGRect(x:0,y:0,width:80,height:25)
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
         backButton.setTitle("Back", for: .normal)
-        backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.7), for: .normal)
+        backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0), for: .normal)
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
@@ -266,7 +266,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                           "language":currentLanguage
             ] as [String : Any]
         saveActivityIndicator.startAnimating()
-        //print("parameters)
+        print(parameters)
         let url = String(format: "%@/updatePreferences", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -274,7 +274,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                //print(""json response\(json)")
+                print("json response\(json)")
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
                     
@@ -381,13 +381,13 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 }
             }
             
-            if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
+           // if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
                 
             if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
                 self.showAlert(title: "", message: "Entries must match to proceed".localized())
                     return false
                 }
-            }
+           // }
 
         
         }

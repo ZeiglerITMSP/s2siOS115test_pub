@@ -34,7 +34,8 @@
 
 // LoginVC
 "Log In" = "Iniciar sesión";
-"Log In with Facebook" = "Iniciar sesión con Facebook";
+"Log In with Facebook" = "INICAIAR SESIÓN CON FACEBOOK";
+
 "or" = "o";
 "10-DIGIT CELL PHONE NUMBER" = "NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
 "PASSWORD" = "CONTRASEÑA";
@@ -58,7 +59,7 @@
 "Register" = "Registrarme";
 "EARN 100 POINTS!" = "¡GANE 100 PUNTOS!";
 "RegisterMessage" = "¡Únase a nosotros en Snap2Save y ganará 100 puntos por registrarse!  Los puntos pueden canjearse para tarjetas de regalo o descuentos en atención médica a través de nuestro Programa de recompensas. ";
-"Register with Facebook" = "Registrarse con Facebook";
+"Register with Facebook" = "REGISTRARSE CON FACEBOOK";
 "*Required information" = "*Información obligatoria";
 "10-DIGIT CELL PHONE NUMBER" = "NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
 "RE-ENTER 10-DIGIT CELL PHONE NUMBER" = "VOLVER A INTRODUCIR NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";

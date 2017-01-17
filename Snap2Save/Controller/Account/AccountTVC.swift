@@ -204,7 +204,7 @@ class AccountTVC: UITableViewController {
             switch response.result {
                 
             case .success:
-                let json = JSON(data: response.data!)
+                //let json = JSON(data: response.data!)
                // //print(""json response\(json)")
                 
                 //let appDomain = Bundle.main.bundleIdentifier
@@ -213,7 +213,8 @@ class AccountTVC: UITableViewController {
                 
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil);
                 let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
-                //AppDelegate.getDelegate().user = nil
+                let user: User = User()
+                AppDelegate.getDelegate().user = user
                 
                 UIApplication.shared.keyWindow?.rootViewController = initialViewController
                 
@@ -241,7 +242,7 @@ class AccountTVC: UITableViewController {
         UserDefaults.standard.removeObject(forKey: LOGGED_USER)
         UserDefaults.standard.removeObject(forKey: USER_DATA)
         
-        AppDelegate.getDelegate().setDetaultValues()
+       // AppDelegate.getDelegate().setDetaultValues()
         
         
     }
