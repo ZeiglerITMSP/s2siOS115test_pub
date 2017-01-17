@@ -30,8 +30,8 @@ class EBTDashboardTVC: UITableViewController {
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
-    var accountDetailTitles = ["Account Type", "Account Status", "Available Balance"]
-    var accountDetails = [String:String?]()
+//    var accountDetailTitles = ["Account Type", "Account Status", "Available Balance"]
+    var accountDetails = [[String:String?]]()
     var recentTransactions: [Transaction]?
     
     var accountType: String?
@@ -73,6 +73,9 @@ class EBTDashboardTVC: UITableViewController {
     
     // MARK: -
     
+    
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -88,10 +91,12 @@ class EBTDashboardTVC: UITableViewController {
         
         if section == 0 {
             
-            return accountDetailTitles.count
+            if accountDetails.count == 0 {
+                return 1
+            }
             
+            return accountDetails.count
         } else if section == 1 {
-            
             return (trasactions?.count)!
         }
         
@@ -107,35 +112,49 @@ class EBTDashboardTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        
+        if accountDetails.count == 0 {
             
-            let detailedCell = tableView.dequeueReusableCell(withIdentifier: "DetailedCell", for: indexPath) as! DetailedCell
-            
-            let key = accountDetailTitles[indexPath.row]
-            let value = accountDetails[key]
-            detailedCell.titleLabel.text = key
-            detailedCell.detailLabel.text = value ?? ""
-           
-            
-            return detailedCell
-            
-        } else if indexPath.section == 1 {
-            
-            let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
-            
-            let record = trasactions?[indexPath.row] as? [String:String]
-            
-            detailedSubtitleCell.titleLabel.text = record?["location"]
-            detailedSubtitleCell.detailLabel.text = record?["available_balance"]
-            detailedSubtitleCell.subtitleLabel.text = record?["date"]
-            
-            
-            return detailedSubtitleCell
+            let loadingCell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath)
+            return loadingCell
         } else {
             
-            return UITableViewCell()
+            
+            
+            if indexPath.section == 0 {
+                
+                let detailedCell = tableView.dequeueReusableCell(withIdentifier: "DetailedCell", for: indexPath) as! DetailedCell
+                
+                let detail = accountDetails[indexPath.row]
+                
+                let value = detail["value"]
+                detailedCell.titleLabel.text = detail["title"]!
+                detailedCell.detailLabel.text = value ?? ""
+                
+                return detailedCell
+                
+            } else if indexPath.section == 1 {
+                
+                let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
+                
+                let record = trasactions?[indexPath.row] as? [String:String]
+                
+                detailedSubtitleCell.titleLabel.text = record?["location"]
+                detailedSubtitleCell.detailLabel.text = record?["available_balance"]
+                detailedSubtitleCell.subtitleLabel.text = record?["date"]
+                
+                
+                return detailedSubtitleCell
+            } else {
+                
+                return UITableViewCell()
+            }
+            
+            
         }
         
+        
+       
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -187,22 +206,24 @@ class EBTDashboardTVC: UITableViewController {
 //        let jsAccountStatusText = "$('.widgetLabel:eq(1)').text()"
 //        let jsAvailableBalanceText = "$('.widgetLabel:eq(2)').text()"
         
-        let jsAccountTypeValue = "$('.widgetValue:eq(0)').text()"
-        let jsAccountStatusValue = "$('.widgetValue:eq(1)').text()"
-        let jsAvailableBalanceValue = "$('.widgetValue:eq(2)').text()"
+//        let jsAccountTypeValue = "$('.widgetValue:eq(0)').text()"
+//        let jsAccountStatusValue = "$('.widgetValue:eq(1)').text()"
+//        let jsAvailableBalanceValue = "$('.widgetValue:eq(2)').text()"
+
+        let jsEBTBalance = "$($(\"td.widgetValue:contains('SNAP')\").parent().parent().find('td.widgetValue')[2]).html().trim()"
+        let jsCashBalance = "$($(\"td.widgetValue:contains('CASH')\").parent().parent().find('td.widgetValue')[2]).html().trim()"
         
-        execute(javaScript: jsAccountTypeValue, completion: { result in
-            self.accountDetails["Account Type"] = result
+        execute(javaScript: jsEBTBalance, completion: { result in
             
-            self.execute(javaScript: jsAccountStatusValue, completion: { result in
-                self.accountDetails["Account Status"] = result
+            let detail = ["title" : "EBT Balance", "value": result]
+            self.accountDetails.append(detail)
+            
+            self.execute(javaScript: jsCashBalance, completion: { result in
                 
-                self.execute(javaScript: jsAvailableBalanceValue, completion: { result in
-                    self.accountDetails["Available Balance"] = result
-                    
-                    self.getTransactionActivityUlr()
-                    
-                })
+                let detail = ["title" : "CASH Balance", "value": result]
+                self.accountDetails.append(detail)
+                
+                self.getTransactionActivityUlr()
             })
         })
     }
@@ -366,7 +387,7 @@ class EBTDashboardTVC: UITableViewController {
                     
                 } else {
                     
-                    
+                    self.tableView.reloadData()
                 }
             }
         }

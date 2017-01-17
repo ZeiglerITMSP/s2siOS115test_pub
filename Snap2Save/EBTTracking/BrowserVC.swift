@@ -15,10 +15,11 @@ class BrowserVC: UIViewController {
     @IBOutlet weak var broswerView: UIView!
     @IBOutlet weak var queryTextView: UITextView!
     
+    @IBOutlet weak var resultTextView: UITextView!
     @IBAction func executeQueryAction(_ sender: Any) {
         
         self.view.endEditing(true)
-        webViewMaster.execute(javascript: queryTextView.text)
+        webViewMaster.execute(javascript: queryTextView.text, showResultIn: resultTextView)
     }
     
     
@@ -54,6 +55,8 @@ class BrowserVC: UIViewController {
             
             print(result ?? "")
             print(error ?? "")
+            
+            self.resultTextView.text = result as? String ?? "--"
         }
         
     }

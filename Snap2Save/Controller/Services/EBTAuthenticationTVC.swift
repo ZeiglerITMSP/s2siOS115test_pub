@@ -85,6 +85,7 @@ class EBTAuthenticationTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
+        webView.sendSubview(toBack: self.view)
     }
     
     override func didReceiveMemoryWarning() {
@@ -134,7 +135,7 @@ class EBTAuthenticationTVC: UITableViewController {
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
-//            self.checkForStatusMessage()
+            self.checkForStatusMessage()
         }
         
     }

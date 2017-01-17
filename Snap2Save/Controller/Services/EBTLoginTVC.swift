@@ -42,16 +42,15 @@ class EBTLoginTVC: UITableViewController {
         
         self.view.endEditing(true)
         
-        if isValid(userId: userIdField.contentTextField.text) &&
-            isValid(password: passwordField.contentTextField.text) {
+        loginButton.isEnabled = false
+        activityIndicator.startAnimating()
+        validatePage()
+        
+        if isValid(userId: userIdField.contentTextField.text) {
             
             if rememberMeButton.isSelected {
                 saveUserID()
             }
-            
-            loginButton.isEnabled = false
-            activityIndicator.startAnimating()
-            validatePage()
         }
         
     }
@@ -145,6 +144,7 @@ class EBTLoginTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
+        webView.sendSubview(toBack: self.view)
         
         loadLoginPage()
         // Stop listening notification
@@ -319,7 +319,7 @@ class EBTLoginTVC: UITableViewController {
     
     func checkForErrorMessage() {
         
-        let jsErrorMessage = "$('..errorTextLogin').text();"
+        let jsErrorMessage = "$('.errorTextLogin').text();"
         
         ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
             if error != nil {
@@ -365,7 +365,10 @@ class EBTLoginTVC: UITableViewController {
                     
                     self.activityIndicator.stopAnimating()
                     self.performSegue(withIdentifier: "EBTAuthenticationTVC", sender: nil)
-                } else {
+                } else if pageTitle == "Verify Security Question" {
+                    
+                    self.activityIndicator.stopAnimating()
+                    self.performSegue(withIdentifier: "EBTLoginSecurityQuestionTVC", sender: nil)
                     
                 }
             }

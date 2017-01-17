@@ -12,7 +12,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
 
     fileprivate enum ActionType {
         
-        case confirm
+        case confirmv
     }
     
     // Properties
@@ -77,6 +77,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
+        webView.sendSubview(toBack: self.view)
     }
     
     override func didReceiveMemoryWarning() {
@@ -115,7 +116,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     func backAction() {
         
-       _ = self.navigationController?.popViewController(animated: true)
+//       _ = self.navigationController?.popViewController(animated: true)
         
         showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
@@ -133,9 +134,18 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
         ebtWebView.getPageHeader(completion: { pageTitle in
 
-            if pageTitle == "Verify Security Question" {
+            if pageTitle == "" {
+                
+                self.validateNextPage()
+            } else if pageTitle == "Verify Security Question" {
                 
                 self.getSecurityQuestion()
+                self.checkForErrorMessage()
+                
+            } else if pageTitle == "Account Summary" {
+                
+                self.confirmActivityIndicator.stopAnimating()
+                self.performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
                 
             } else {
                 
@@ -177,7 +187,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         confirmButton.isEnabled = false
         confirmActivityIndicator.startAnimating()
         
-        actionType = ActionType.confirm
+      //  actionType = ActionType.confirm
         
         let jsSecurityAnswer = "$('#securityAnswer').val('\(self.securityAnswerField.contentTextField.text!)');"
 //        let jsCheckbox = "$('#registerDeviceFlag').attr('checked');"
@@ -192,11 +202,14 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     func checkForErrorMessage() {
         
-        let jsErrorMessage = "$('#VallidationExcpMsg').text();"
+        let jsErrorMessage = "$('.errorInvalidField').first().text();"
         
         ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
             if error != nil {
                 print(error ?? "error nil")
+                self.confirmActivityIndicator.stopAnimating()
+                self.confirmButton.isEnabled = true
+                
             } else {
                 print(result ?? "result nil")
                 let stringResult = result as! String
@@ -245,13 +258,16 @@ extension EBTLoginSecurityQuestionTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
-        if actionType == .confirm {
-            
-            actionType = nil
-            checkForErrorMessage()
-        } else {
-            
-        }
+        
+        validatePage()
+//        
+//        if actionType == .confirm {
+//            
+//            actionType = nil
+//            checkForErrorMessage()
+//        } else {
+//            
+//        }
         
     }
     

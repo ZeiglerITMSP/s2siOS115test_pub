@@ -131,9 +131,31 @@ class EBTWebView: NSObject {
                 if let result = result {
                     let stringResult = result as? String
                     let pageTitle = stringResult?.trimmingCharacters(in: .whitespacesAndNewlines)
-                    print(pageTitle)
+                    print(pageTitle ?? "nil")
                 }
                 
+            }
+        }
+    }
+    
+    func execute(javascript:String, showResultIn textView: UITextView) {
+        
+        
+        webView.evaluateJavaScript(javascript) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+                
+            } else {
+                
+                if let result = result {
+                    let stringResult = result as? String
+                    let pageTitle = stringResult?.trimmingCharacters(in: .whitespacesAndNewlines)
+                    print(pageTitle ?? "nil")
+                    
+                    DispatchQueue.main.async {
+                        textView.text = pageTitle
+                    }
+                }
             }
         }
     }

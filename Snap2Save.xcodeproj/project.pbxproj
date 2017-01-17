@@ -203,11 +203,11 @@
 		E81E61651E2365A30016FE74 /* EBT */ = {
 			isa = PBXGroup;
 			children = (
+				E81E61661E2366E90016FE74 /* EBTConstants.swift */,
 				E8BAE2A41E0BDDFB00A85AAB /* EBTLogin */,
 				E8BAE2A31E0BDDE200A85AAB /* EBTRegistration */,
 				E83C8AA01E1E4C2200BEA4A6 /* EBTDashboard */,
 				E82283A81E0A72A6008FE084 /* EBTTracking */,
-				E81E61661E2366E90016FE74 /* EBTConstants.swift */,
 			);
 			name = EBT;
 			path = View;
