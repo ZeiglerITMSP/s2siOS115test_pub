@@ -222,7 +222,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        ////print(""isreachable \(isReachable)")
         if isReachable == false {
             let alertController = UIAlertController(title: "", message: "Please check your internet connection".localized(), preferredStyle: .alert)
             

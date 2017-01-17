@@ -79,8 +79,8 @@ class ServicesTVC: UITableViewController {
             let servicesWebVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "ServicesWebViewVC") as! ServicesWebViewVC
             
             if indexPath.row == 0 {
-                let url = "https://developers.facebook.com/docs/ios/getting-started"
-               // let url = infoScreens["about"] ?? ""
+                //let url = "https://developers.facebook.com/docs/ios/getting-started"
+                let url = infoScreens["about"] ?? ""
                 servicesWebVc.loadUrl = url as! String
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.aboutSnap2Save
                 

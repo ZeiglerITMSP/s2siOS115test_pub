@@ -299,7 +299,6 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -371,9 +370,12 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                                 UserDefaults.standard.set(user_id, forKey: USER_ID)
                                 
                         }
-                        
-                            self.presentHome()
+                        if let autoLogin = responseDict?["auto_login"] {
+                                UserDefaults.standard.set(autoLogin, forKey: USER_AUTOLOGIN)
+                            }
+
                             UserDefaults.standard.synchronize()
+                            self.presentHome()
                         }
                     }
                     else {
@@ -382,8 +384,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             let alertMessage = responseDict["message"] as! String
                             self.showAlert(title: "", message: alertMessage)
                         }
-                    //print(""user id\(self.user.id)")
-                    //print(""user info \(self.user.additionalInformation)")
+                
                     
                 }
                 
@@ -459,7 +460,6 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -479,7 +479,6 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             ] as [String : Any]
         
         //print("parameters)
-        //loginActivityIndicator.startAnimating()
         let url = String(format: "%@/checkFbUser", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -523,6 +522,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                                 
                             }
                             
+                            if let autoLogin = responseDict?["auto_login"] {
+                                UserDefaults.standard.set(autoLogin, forKey: USER_AUTOLOGIN)
+                            }
+                            UserDefaults.standard.synchronize()
                             self.presentHome()
                         }
                     }
@@ -542,7 +545,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    //self.loginActivityIndicator.stopAnimating()
+                    self.facebookActivityIndicator.stopAnimating()
+
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
                 //print("error)

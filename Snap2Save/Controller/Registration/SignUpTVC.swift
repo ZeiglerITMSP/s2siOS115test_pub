@@ -560,9 +560,8 @@ extension SignUpTVC: AITextFieldProtocol {
         let email =  facebookDict?["email"] ?? ""
         emailTextField.text = email as? String
         
-        facebookActivityIndicator.stopAnimating()
         
-        //self.checkFacebookUser()
+        self.checkFacebookUser()
     }
  
     func checkFacebookUser() {
@@ -570,7 +569,6 @@ extension SignUpTVC: AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -590,7 +588,6 @@ extension SignUpTVC: AITextFieldProtocol {
             ] as [String : Any]
         
         //print("parameters)
-        //loginActivityIndicator.startAnimating()
         let url = String(format: "%@/checkFbUser", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -598,7 +595,8 @@ extension SignUpTVC: AITextFieldProtocol {
             switch response.result {
             case .success:
                 DispatchQueue.main.async {
-                   // self.registerActivityIndicator.stopAnimating()
+                    self.facebookActivityIndicator.stopAnimating()
+
                 }
                 
                 let json = JSON(data: response.data!)
@@ -630,6 +628,8 @@ extension SignUpTVC: AITextFieldProtocol {
                 
                 DispatchQueue.main.async {
                     //self.loginActivityIndicator.stopAnimating()
+                    self.facebookActivityIndicator.stopAnimating()
+
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
                 //print("error)

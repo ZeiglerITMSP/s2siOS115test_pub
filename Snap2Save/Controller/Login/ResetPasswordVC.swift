@@ -143,7 +143,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
             reEnterPasswordTextField.becomeFirstResponder()
         }
         else {
-       textField.resignFirstResponder()
+            textField.resignFirstResponder()
         }
     }
     /*
@@ -160,7 +160,6 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
