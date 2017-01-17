@@ -113,6 +113,23 @@ extension String {
         return self.trimmingCharacters(in: .whitespaces)
     }
     
+    
+//    func heightWith(constrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+//        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+//        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+//        
+//        return boundingBox.height
+//    }
+    
+    func height(constraintedWidth width: CGFloat, font: UIFont) -> CGFloat {
+        
+        let label =  UILabel(frame: CGRect(x: 0, y: 0, width: width, height: .greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.text = self
+        label.sizeToFit()
+        
+        return label.frame.height
+    }
 }
 
 extension Dictionary where Value: Equatable {

@@ -127,6 +127,12 @@ class EBTUserInformationTVC: UITableViewController {
         questionThreeField.contentTextField.setRightGap(width: 10, placeHolderImage: UIImage(named:"ic_downarrow_input")!)
         questionThreeField.contentTextField.textFieldType = .TextPickerTextField
         
+        
+        questionOneField.contentTextField.numberOfLinesForPicker = 2
+        questionTwoField.contentTextField.numberOfLinesForPicker = 2
+        questionThreeField.contentTextField.numberOfLinesForPicker = 2
+        
+        
         // Automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
@@ -213,7 +219,7 @@ class EBTUserInformationTVC: UITableViewController {
         let js = "function getQuestion1Options() { " +
             "var object = {}; " +
             
-            " +$('#question1 option').each(function () {    " +
+            "$('#question1 option').each(function () {    " +
             "    object[$(this).val()] = $(this).text();    " +
             "});                                            " +
             "var jsonSerialized = JSON.stringify(object);   " +
@@ -259,7 +265,7 @@ class EBTUserInformationTVC: UITableViewController {
         let js = "function getQuestion2Options() { " +
             "var object = {}; " +
             
-            " +$('#question2 option').each(function () {    " +
+            "$('#question2 option').each(function () {    " +
             "    object[$(this).val()] = $(this).text();    " +
             "});                                            " +
             "var jsonSerialized = JSON.stringify(object);   " +
@@ -305,7 +311,7 @@ class EBTUserInformationTVC: UITableViewController {
         let js = "function getQuestion3Options() { " +
             "var object = {}; " +
             
-            " +$('#question3 option').each(function () {    " +
+            "$('#question3 option').each(function () {    " +
             "    object[$(this).val()] = $(this).text();    " +
             "});                                            " +
             "var jsonSerialized = JSON.stringify(object);   " +

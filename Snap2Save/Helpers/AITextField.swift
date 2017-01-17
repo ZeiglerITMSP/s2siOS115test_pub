@@ -54,6 +54,8 @@ class AITextField: UITextField {
     var selectedColor: UIColor = UIColor(red: 84/255, green: 190/255, blue: 56/255, alpha: 1.0)
     var normalColor: UIColor = UIColor(red: 104/255, green: 128/255, blue: 94/255, alpha: 0.5)
     
+    var numberOfLinesForPicker = 1
+    
     // MARK: -
     
     required init(coder aDecoder: NSCoder)
@@ -442,6 +444,29 @@ extension AITextField: UIPickerViewDelegate, UIPickerViewDataSource {
         }
         let selectedOption:NSString = self.pickerViewArray?.object(at: row) as! NSString
         return NSAttributedString(string: selectedOption as String, attributes: nil)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        let height = UIFont.systemFont(ofSize: UIFont.systemFontSize).lineHeight * CGFloat(numberOfLinesForPicker) * UIScreen.main.scale
+        
+        let label = UILabel(frame: CGRect(x:0,y: 0, width:pickerView.frame.width - 14, height: height));
+        
+        if numberOfLinesForPicker != 1 {
+            label.lineBreakMode = .byWordWrapping;
+        }
+        
+        label.numberOfLines = 0;
+        label.text = self.pickerViewArray?.object(at: row) as! String?
+        label.font = UIFont.systemFont(ofSize: 24.0)
+        label.textAlignment = .center
+//        label.sizeToFit()
+        return label;
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+
+        return UIFont.systemFont(ofSize: UIFont.systemFontSize).lineHeight * CGFloat(numberOfLinesForPicker) * UIScreen.main.scale
     }
     
     
