@@ -350,25 +350,26 @@ class EBTUserInformationTVC: UITableViewController {
     
     func autoFill() {
         
-        let userId = self.userIdField.contentTextField.text!
+        let userId = self.userIdField.contentTextField.text!.removeWhiteSpaces()
         
-        let password = self.passwordField.contentTextField.text!
-        let confirmPassword = self.confirmPasswordField.contentTextField.text!
+        let password = self.passwordField.contentTextField.text!.removeWhiteSpaces()
+        let confirmPassword = self.confirmPasswordField.contentTextField.text!.removeWhiteSpaces()
         
-        let emailAddress = self.emailAddressField.contentTextField.text!
-        let confirmEmail = self.confirmEmailField.contentTextField.text!
+        let emailAddress = self.emailAddressField.contentTextField.text!.removeWhiteSpaces()
+        let confirmEmail = self.confirmEmailField.contentTextField.text!.removeWhiteSpaces()
         
-        let phoneNumber = self.phoneNumberField.contentTextField.text!
+        let phoneNumber = self.phoneNumberField.contentTextField.text!.removeWhiteSpaces()
         
-        let answerOne = self.answerOneField.contentTextField.text!
-        let answerTwo = self.answerTwoField.contentTextField.text!
-        let answerThree = self.answerThreeField.contentTextField.text!
+        let answerOne = self.answerOneField.contentTextField.text!.removeWhiteSpaces()
+        let answerTwo = self.answerTwoField.contentTextField.text!.removeWhiteSpaces()
+        let answerThree = self.answerThreeField.contentTextField.text!.removeWhiteSpaces()
         
         
         let questionOneIndex = questionOneDictionary.getKey(forValue: self.questionOneField.contentTextField.text!)
         let questionTwoIndex = questionTwoDictionary.getKey(forValue: self.questionTwoField.contentTextField.text!)
         let questionThreeIndex = questionThreeDictionary.getKey(forValue: self.questionThreeField.contentTextField.text!)
         
+        print("q1 = \(questionOneIndex) q2 = \(questionTwoIndex) q3 = \(questionThreeIndex)")
         
         let jsUserId = "$('#txtUserid').val('\(userId)');"
         let jsPassword = "$('#txtPassword').val('\(password)');"
@@ -553,13 +554,12 @@ extension EBTUserInformationTVC: AIPlaceHolderTextFieldDelegate {
     
         if textfield.tag == 100 {
             // User ID
-            showMyAlert(title: "User ID Rules:\n", message: userIdRules)
+            showMyAlert(title: "User ID Rules:", message: "\n" + userIdRules)
             
         } else if textfield.tag == 101 {
             // Password
             
-            showMyAlert(title: "Password Rules:\n", message: passwordRules)
-            
+            showMyAlert(title: "Password Rules:", message: "\n" + passwordRules)
         }
         
     }

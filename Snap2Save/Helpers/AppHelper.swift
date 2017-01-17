@@ -106,6 +106,15 @@ extension String {
     
 }
 
+extension String {
+    
+    func removeWhiteSpaces() -> String {
+        
+        return self.trimmingCharacters(in: .whitespaces)
+    }
+    
+}
+
 extension Dictionary where Value: Equatable {
     
     func getKey(forValue val: Value) -> Key? {
