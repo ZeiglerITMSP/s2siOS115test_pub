@@ -23,7 +23,7 @@ import WebKit
 
 
 class EBTWebView: NSObject {
-
+    
     
     
     static let shared: EBTWebView = {
@@ -46,14 +46,12 @@ class EBTWebView: NSObject {
     
     
     let jsSubmit = "void($('form')[1].submit())"
-    
     let jsGetAllElements = "document.documentElement.outerHTML"
-    
     let jsGetErrorCode = "$(\".errorInvalidField\").text();"
     
     // ..
     
-
+    
     
     
     override init() {
@@ -63,7 +61,7 @@ class EBTWebView: NSObject {
     }
     
     func loadWebView() {
-       
+        
         // init and load request in webview.
         
         
@@ -74,14 +72,82 @@ class EBTWebView: NSObject {
         
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
         
-//        webView = WKWebView()
+        //        webView = WKWebView()
         webView.navigationDelegate = self
-//        webView.uiDelegate = self
+        //        webView.uiDelegate = self
     }
+    
+    // Get page headline
+    func getPageHeading(completion: @escaping (String?) -> ()) {
+        
+        let jsHeading = "function getPageHeader() {" +
+            "var pageTitleHeader = $('.PageTitle .PageHeader').first().text();" +
+            "   if (pageTitleHeader.length == 0) {" +
+            "       var pageTitle = $('.PageTitle').first().text();" +
+            "       if (pageTitle.length == 0) {" +
+            "           var pageHeading = $('.PageHeader').first().text();" +
+            "           return pageHeading;" +
+            "       } else {" +
+            "           return pageTitle;" +
+            "       }" +
+            "   } else {" +
+            "       return pageTitleHeader" +
+            "   }" +
+            "}" +
+            
+        "getPageHeader();"
+        
+        let javaScript = jsHeading
+        
+        webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                completion(resultTrimmed)
+                
+            } else {
+                print(error ?? "")
+                completion(nil)
+            }
+            
+        }
+    }
+    
+    func getErrorMessage(completion: @escaping (String?) -> ()) {
+        
+        let jsErrorMessage = "function getErrorMessage() {" +
+            "var errorInvalidField = $('.errorInvalidField').first().text();" +
+            "if (errorInvalidField.length == 0) {" +
+                "var vallidationExcpMsg = $('#VallidationExcpMsg').first().text();" +
+                "return vallidationExcpMsg" +
+            "} else {" +
+                "return errorInvalidField" +
+            "}" +
+        "}" +
+        
+        "getErrorMessage();"
+        
+        let javaScript = jsErrorMessage
+        
+        webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                completion(resultTrimmed)
+                
+            } else {
+                print(error ?? "")
+                completion(nil)
+            }
+        }
+    }
+    
+    
+    
     
     func getPageHeader(completion: @escaping (String?) -> ()) {
         
-        let jsPageTitle = "$('.PageHeader').text();"
+        let jsPageTitle = "$('.PageHeader').first().text();"
         webView.evaluateJavaScript(jsPageTitle) { (result, error) in
             if error != nil {
                 //print("error ?? "error nil")
@@ -101,27 +167,27 @@ class EBTWebView: NSObject {
     
     func getPageTitle(completion: @escaping (String?) -> ()) {
         
-        let jsPageTitle = "$('.PageTitle').first().text();"
-        webView.evaluateJavaScript(jsPageTitle) { (result, error) in
-            if error != nil {
-                print(error ?? "error nil")
-                
-                completion(nil)
+        let javaScript = "$('.PageTitle').first().text();"
+        webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                completion(resultTrimmed)
                 
             } else {
-                
-                let stringResult = result as! String
-                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(pageTitle)
-                
-                completion(pageTitle)
+                print(error ?? "")
+                completion(nil)
             }
+            
         }
+        
     }
+    
+    
     
     func execute(javascript:String) {
         
-
+        
         webView.evaluateJavaScript(javascript) { (result, error) in
             if error != nil {
                 print(error ?? "error nil")
@@ -177,75 +243,75 @@ extension EBTWebView: WKNavigationDelegate {
         print(error.localizedDescription)
     }
     
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//        print("\n -- navigationAction -- \n")
-//        
-////        print(navigationAction.request)
-//        
-//        print(navigationAction.navigationType)
-//        print(navigationAction.targetFrame ?? "nil")
-//        
-//        print(navigationAction.request.url?.absoluteString ?? "no url")
-//        print(navigationAction.sourceFrame.isMainFrame)
-//        
-//        decisionHandler(self.shouldStartDecidePolicy())
-//        
-//        
-////        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
-////            
-////            decisionHandler(.cancel)
-////            return
-////        }
-////        
-////        let status = self.responder?.navigationAction?()
-////        if status != nil {
-////            return decisionHandler(.allow)
-////        }
-//        
-////        decisionHandler(.allow)
-//    }
+    //    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    //        print("\n -- navigationAction -- \n")
+    //
+    ////        print(navigationAction.request)
+    //
+    //        print(navigationAction.navigationType)
+    //        print(navigationAction.targetFrame ?? "nil")
+    //
+    //        print(navigationAction.request.url?.absoluteString ?? "no url")
+    //        print(navigationAction.sourceFrame.isMainFrame)
+    //
+    //        decisionHandler(self.shouldStartDecidePolicy())
+    //
+    //
+    ////        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
+    ////
+    ////            decisionHandler(.cancel)
+    ////            return
+    ////        }
+    ////
+    ////        let status = self.responder?.navigationAction?()
+    ////        if status != nil {
+    ////            return decisionHandler(.allow)
+    ////        }
+    //
+    ////        decisionHandler(.allow)
+    //    }
     
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-//        
-//        print("\n -- navigationResponse -- \n")
-//        
-////        print(navigationResponse.response)
-//        
-//        print(navigationResponse.isForMainFrame)
-//        
-////        decisionHandler(self.shouldStartDecidePolicy())
-//        
-////        
-////        if navigationResponse.isForMainFrame {
-////            decisionHandler(.allow)
-////        } else {
-////            decisionHandler(.cancel)
-////        }
-//        decisionHandler(.allow)
-//        
-//    }
+    //    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+    //
+    //        print("\n -- navigationResponse -- \n")
+    //
+    ////        print(navigationResponse.response)
+    //
+    //        print(navigationResponse.isForMainFrame)
+    //
+    ////        decisionHandler(self.shouldStartDecidePolicy())
+    //
+    ////
+    ////        if navigationResponse.isForMainFrame {
+    ////            decisionHandler(.allow)
+    ////        } else {
+    ////            decisionHandler(.cancel)
+    ////        }
+    //        decisionHandler(.allow)
+    //
+    //    }
     
-//    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-//        print("\n -- didStartProvisional -- \n")
-//        
-//    }
+    //    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    //        print("\n -- didStartProvisional -- \n")
+    //
+    //    }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("\n -- didFinish -- \n")
-
+        
         self.responder?.didFinishLoadingWebView?()
     }
     
-//    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-//        
-//        print("\n -- didReceiveServerRedirectForProvisional -- \n")
-//    }
-//    
-//    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-//        print("\n -- didCommit -- \n")
-//        
-//    }
-//    
+    //    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+    //
+    //        print("\n -- didReceiveServerRedirectForProvisional -- \n")
+    //    }
+    //
+    //    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+    //        print("\n -- didCommit -- \n")
+    //
+    //    }
+    //
     
     
 }
@@ -253,7 +319,7 @@ extension EBTWebView: WKNavigationDelegate {
 
 //
 //extension EBTWebView: WKUIDelegate {
-//    
+//
 //    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
 //        
 //        if navigationAction.targetFrame == nil {

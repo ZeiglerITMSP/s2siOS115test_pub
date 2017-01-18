@@ -416,7 +416,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 let alertMessage = responseDict["message"] as! String
                                 let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
                                 
-                                self.window?.tintColor = UIColor.green
+                               // self.window?.tintColor = UIColor.green
                                 let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
                                 })
                                 

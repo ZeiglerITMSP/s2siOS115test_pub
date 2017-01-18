@@ -37,8 +37,9 @@ class EBTDashboardTVC: UITableViewController {
     var accountType: String?
     var accountStatus: String?
     var availableBalance: String?
-    var trasactions:[Any]?
+    var trasactions = [Any]()
     
+    @IBOutlet weak var loaderView: UIView!
     
     // MARK: -
     override func viewDidLoad() {
@@ -80,11 +81,15 @@ class EBTDashboardTVC: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        if (trasactions != nil) && (trasactions!.count > 0) {
-            return 2
+        let sections = accountDetails.count + trasactions.count
+        
+        if sections == 0 {
+            loaderView.isHidden = false
+        } else {
+            loaderView.isHidden = true
         }
         
-        return 1
+        return sections
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,7 +102,7 @@ class EBTDashboardTVC: UITableViewController {
             
             return accountDetails.count
         } else if section == 1 {
-            return (trasactions?.count)!
+            return trasactions.count
         }
         
         return 0
@@ -112,15 +117,6 @@ class EBTDashboardTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        if accountDetails.count == 0 {
-            
-            let loadingCell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath)
-            return loadingCell
-        } else {
-            
-            
-            
             if indexPath.section == 0 {
                 
                 let detailedCell = tableView.dequeueReusableCell(withIdentifier: "DetailedCell", for: indexPath) as! DetailedCell
@@ -137,10 +133,10 @@ class EBTDashboardTVC: UITableViewController {
                 
                 let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
                 
-                let record = trasactions?[indexPath.row] as? [String:String]
+                let record = trasactions[indexPath.row] as? [String:String]
                 
                 detailedSubtitleCell.titleLabel.text = record?["location"]
-                detailedSubtitleCell.detailLabel.text = record?["available_balance"]
+                detailedSubtitleCell.detailLabel.text = record?["debit_amount"]
                 detailedSubtitleCell.subtitleLabel.text = record?["date"]
                 
                 
@@ -149,11 +145,6 @@ class EBTDashboardTVC: UITableViewController {
                 
                 return UITableViewCell()
             }
-            
-            
-        }
-        
-        
        
     }
     
@@ -223,7 +214,8 @@ class EBTDashboardTVC: UITableViewController {
                 let detail = ["title" : "CASH Balance", "value": result]
                 self.accountDetails.append(detail)
                 
-                self.getTransactionActivityUlr()
+                self.perform(#selector(self.getTransactionActivityUlr), with: self, afterDelay: 3)
+//                self.getTransactionActivityUlr()
             })
         })
     }
@@ -345,7 +337,7 @@ class EBTDashboardTVC: UITableViewController {
             "var jsonSerialized = JSON.stringify(arr);" +
             "return jsonSerialized;" +
         "}" +
-        "transactionActivity()"
+        "transactionActivity();"
         
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in

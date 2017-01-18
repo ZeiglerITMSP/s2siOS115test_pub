@@ -12,12 +12,14 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
 
     fileprivate enum ActionType {
         
-        case confirmv
+        case securityQuestion
     }
     
     // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
+    
+    let pageTitle = "ebt.securityQuestion".localized()
     
     // Ouetles
     
@@ -38,10 +40,14 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     // Actions
     
     @IBAction func confirmAction(_ sender: UIButton) {
-        
         self.view.endEditing(true)
-        autoFill()
         
+        confirmButton.isEnabled = false
+        confirmActivityIndicator.startAnimating()
+        
+        actionType = ActionType.securityQuestion
+        
+        validatePage()
     }
     
     
@@ -129,27 +135,89 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
-    // MARK: - WebView
+    
+    func moveToNextController(identifier:String) {
+        
+        let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+}
+
+extension EBTLoginSecurityQuestionTVC {
+    
+    // MARK: Scrapping
+    
     func validatePage() {
         
-        ebtWebView.getPageHeader(completion: { pageTitle in
-
-            if pageTitle == "" {
-                
-                self.validateNextPage()
-            } else if pageTitle == "Verify Security Question" {
-                
-                self.getSecurityQuestion()
-                self.checkForErrorMessage()
-                
-            } else if pageTitle == "Account Summary" {
-                
-                self.confirmActivityIndicator.stopAnimating()
-                self.performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
+        ebtWebView.getPageHeading(completion: { result in
+            
+            if let pageTitle = result {
+                // isCurrentPage
+                if pageTitle == self.pageTitle {
+                    // current page
+                    if self.actionType == ActionType.securityQuestion {
+                        self.actionType = nil
+                        self.autoFill()
+                    } else {
+                        self.getSecurityQuestion()
+                        self.checkForErrorMessage()
+                    }
+                    
+                } else {
+                    self.validateNextPage()
+                }
                 
             } else {
                 
             }
+            
+        })
+        
+    }
+    
+    func validateNextPage() {
+        
+        ebtWebView.getPageHeading(completion: { result in
+            
+            if let pageTitle = result {
+                
+                if let nextVCIdentifier = EBTConstants.getLoginViewControllerName(forPageTitle: pageTitle) {
+                    self.moveToNextController(identifier: nextVCIdentifier)
+                } else {
+                    // unknown page
+                    print("UNKNOWN PAGE")
+                }
+                
+            } else {
+                // is page not loaded
+                print("PAGE NOT LOADED YET..")
+            }
+            
+        })
+        
+    }
+    
+    func validateNextPageWithPageTitle() {
+        
+        ebtWebView.getPageTitle(completion: { result in
+            
+            if let pageTitle = result {
+                
+                if let nextVCIdentifier = EBTConstants.getLoginViewControllerName(forPageTitle: pageTitle) {
+                    self.moveToNextController(identifier: nextVCIdentifier)
+                } else {
+                    // unknown page
+                    print("UNKNOWN PAGE")
+                    
+                }
+                
+            } else {
+                // is page not loaded
+                print("PAGE NOT LOADED YET..")
+            }
+            
         })
         
     }
@@ -174,8 +242,6 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
                     
                 } else {
                     
-//                    self.confirmActivityIndicator.stopAnimating()
-//                    self.performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
                 }
             }
         }
@@ -186,8 +252,6 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
         confirmButton.isEnabled = false
         confirmActivityIndicator.startAnimating()
-        
-      //  actionType = ActionType.confirm
         
         let jsSecurityAnswer = "$('#securityAnswer').val('\(self.securityAnswerField.contentTextField.text!)');"
 //        let jsCheckbox = "$('#registerDeviceFlag').attr('checked');"
@@ -202,53 +266,27 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     func checkForErrorMessage() {
         
-        let jsErrorMessage = "$('.errorInvalidField').first().text();"
-        
-        ebtWebView.webView.evaluateJavaScript(jsErrorMessage) { (result, error) in
-            if error != nil {
-                print(error ?? "error nil")
-                self.confirmActivityIndicator.stopAnimating()
-                self.confirmButton.isEnabled = true
-                
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! String
-                let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedErrorMessage)
-                
-                if trimmedErrorMessage.characters.count > 0 {
+        ebtWebView.getPageHeading(completion: { result in
+            
+            if let errorMessage = result {
+                if errorMessage.characters.count > 0 {
+                    // error message
                     
-                    self.confirmActivityIndicator.stopAnimating()
+                    // update view
                     self.confirmButton.isEnabled = true
-                    self.errorMessageLabel.text = trimmedErrorMessage
+                    self.confirmActivityIndicator.stopAnimating()
+                    
+                    self.errorMessageLabel.text = errorMessage
                     self.tableView.reloadData()
                     
                 } else {
-                    
-//                    self.confirmActivityIndicator.stopAnimating()
-                   //  self.performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
-                    self.validateNextPage()
+                    // no error message
                 }
-            }
-        }
-    }
-
-    func validateNextPage() {
-        
-        ebtWebView.getPageTitle(completion: { pageTitle in
-            
-            if pageTitle == "Account Summary" {
-                
-                self.confirmActivityIndicator.stopAnimating()
-                self.performSegue(withIdentifier: "EBTDashboardTVC", sender: nil)
-                
             } else {
                 
             }
         })
-        
     }
-    
 
 
 }
@@ -258,17 +296,7 @@ extension EBTLoginSecurityQuestionTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
-        
         validatePage()
-//        
-//        if actionType == .confirm {
-//            
-//            actionType = nil
-//            checkForErrorMessage()
-//        } else {
-//            
-//        }
-        
     }
     
 }

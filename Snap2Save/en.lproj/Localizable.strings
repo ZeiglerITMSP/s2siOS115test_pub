@@ -273,7 +273,13 @@
 "Offers" = "Offers";
 
 
+// Scrapping
 
+"ebt.logon" = "Logon";
+"ebt.authentication" = "We don’t recognize the computer you’re using.";
+"ebt.securityQuestion" = "Verify Security Question";
+
+"ebt.accountSummary" = "Account Summary";
 
 
 
