@@ -434,7 +434,10 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
 
     func isValidData() -> Bool{
         
-        let validMobileNum = AppHelper.validMobileNumber(mobileNumber: mobileNumTextField.text!)
+        //let validMobileNum = AppHelper.validMobileNumber(mobileNumber: mobileNumTextField.text!)
+        
+        let validMobileNum = AppHelper.validate(value: mobileNumTextField.text!)
+
         let validEmail = AppHelper.isValidEmail(testStr: emailTextField.text!)
 
         if mobileNumTextField.text?.characters.count == 0 || validMobileNum == false {

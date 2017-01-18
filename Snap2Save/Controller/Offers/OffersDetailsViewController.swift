@@ -71,14 +71,12 @@ class OffersDetailsViewController: UIViewController {
     
     
     func reloadContent() {
-        
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
             self.navigationItem.title = "Offers".localized()
             
         }
-        
     }
 
     func backAction() {

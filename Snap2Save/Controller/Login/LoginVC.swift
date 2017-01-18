@@ -52,7 +52,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     
     @IBAction func loginWithFacebookButtonAction(_ sender: UIButton) {
-
+        
         facebookActivityIndicator.startAnimating()
         faceBookLogin.delegate = self
         faceBookLogin.dataSource = self
@@ -145,7 +145,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     func updateTextFieldUi() {
         
         mobileNumTextField.updateUIAsPerTextFieldType()
-
+        
     }
     // MARK: -
     
@@ -268,9 +268,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
         return true
     }
-
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //////print(""scrollViewDidScroll \(scrollView.contentOffset)")
         if scrollView.contentOffset.y > 0.0
         {
             self.setNavigationBarImage(image: blueNavBarImg)
@@ -283,7 +282,6 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     func setNavigationBarImage(image:UIImage)
     {
         self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
-        //self.navigationController?.navigationBar.backgroundColor = UIColor.clear
         
     }
     func setTransparentNavigationBar()
@@ -309,11 +307,11 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()
         let socialId = ""
-//        if isFaceBookLogin == true {
-//           // mobileNumber = faceBookDict?["email"] as! String? ?? ""
-//            socialId = faceBookDict?["id"] as! String
-//            
-//        }
+        //        if isFaceBookLogin == true {
+        //           // mobileNumber = faceBookDict?["email"] as! String? ?? ""
+        //            socialId = faceBookDict?["id"] as! String
+        //
+        //        }
         let parameters = ["username": mobileNumber,
                           "password": password,
                           "social_id": socialId,
@@ -346,7 +344,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                         
                         if let userDict = responseDict?["user"] {
                             self.user = User.prepareUser(dictionary: userDict as! [String : Any])
-                           self.user.auth_token = responseDict?["auth_token"] as! String
+                            self.user.auth_token = responseDict?["auth_token"] as! String
                             AppDelegate.getDelegate().user = self.user
                             
                             let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
@@ -369,11 +367,11 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                                 let user_id = userDict["id"]
                                 UserDefaults.standard.set(user_id, forKey: USER_ID)
                                 
-                        }
-                        if let autoLogin = responseDict?["auto_login"] {
+                            }
+                            if let autoLogin = responseDict?["auto_login"] {
                                 UserDefaults.standard.set(autoLogin, forKey: USER_AUTOLOGIN)
                             }
-
+                            
                             UserDefaults.standard.synchronize()
                             self.presentHome()
                         }
@@ -384,10 +382,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             let alertMessage = responseDict["message"] as! String
                             self.showAlert(title: "", message: alertMessage)
                         }
-                
+                        
+                        
+                    }
                     
-                }
-                
                 }
                 
                 break
@@ -408,15 +406,6 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     func presentHome() {
         self.performSegue(withIdentifier: "HomeStoryboard", sender: self)
@@ -439,8 +428,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     // MARK: - faceBookLogin
     
     func didFacebookLoginFail() {
-            facebookActivityIndicator.stopAnimating()
-            self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+        facebookActivityIndicator.stopAnimating()
+        self.showAlert(title: "", message: "Sorry, Please try again later".localized());
     }
     
     func didFacebookLoginSuccess() {
@@ -468,7 +457,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()
         let socialId = faceBookDict?["id"] as? String ?? ""
-
+        
         let parameters = ["social_id": socialId,
                           "platform":"1",
                           "version_code": "1",
@@ -512,7 +501,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             UserDefaults.standard.set(infoScreen, forKey:INFO_SCREENS)
                             
                         }
-
+                        
                         if let auth_token = responseDict?["auth_token"] as? String {
                             UserDefaults.standard.set(auth_token, forKey: AUTH_TOKEN)
                             
@@ -532,10 +521,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                     else {
                         let signUpVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignupTVC")
                         self.navigationController?.show(signUpVc, sender: self)
-//                        if let responseDict = json.dictionaryObject {
-//                            let alertMessage = responseDict["message"] as! String
-//                            self.showAlert(title: "", message: alertMessage)
-//                        }
+                        //                        if let responseDict = json.dictionaryObject {
+                        //                            let alertMessage = responseDict["message"] as! String
+                        //                            self.showAlert(title: "", message: alertMessage)
+                        //                        }
                     }
                     
                 }
@@ -546,7 +535,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                 
                 DispatchQueue.main.async {
                     self.facebookActivityIndicator.stopAnimating()
-
+                    
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
                 //print("error)
@@ -555,5 +544,5 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             
         }
     }
-
+    
 }

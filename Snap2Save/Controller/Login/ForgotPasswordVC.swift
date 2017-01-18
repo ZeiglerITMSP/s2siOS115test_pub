@@ -29,18 +29,13 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
     
     // Actions
     @IBAction func submitButtonAction(_ sender: UIButton) {
-        /*let ResetPasswordVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResetPasswordVC")
-        self.navigationController?.show(ResetPasswordVC, sender: self)*/
-        let validMobileNum = AppHelper.validate(value: mobileNumberTextField.text!)
         
+        let validMobileNum = AppHelper.validate(value: mobileNumberTextField.text!)
         if mobileNumberTextField.text?.characters.count == 0 || validMobileNum == false{
             self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
             return
         }
-        
         forgotPassword()
-        
-        
     }
     
     // MARK: -
@@ -75,11 +70,11 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         mobileNumberTextField.updateUIAsPerTextFieldType()
         mobileNumberTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         mobileNumberTextField.placeHolderLabel = mobileNumberLabel
-        //        mobileNumTextField.createBorder(borderColor: UIColor.red,xpos: 0)
         mobileNumberTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         mobileNumberTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         mobileNumberTextField.text_Color =  UIColor.black
         mobileNumberTextField.aiDelegate = self
+        
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: submitButton, radius: 2.0, width: 1.0)
         
         // LANGUAGE BUTTON
@@ -96,7 +91,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         super.viewWillAppear(animated)
         reloadContent()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
@@ -106,7 +101,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         LanguageUtility.removeObserverForLanguageChange(self)
         super.viewDidDisappear(animated)
     }
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -139,7 +134,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         
         mobileNumberTextField.updateUIAsPerTextFieldType();
     }
-
+    
     func languageButtonClicked(){
         
         self.showLanguageSelectionAlert()
@@ -149,7 +144,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         _ = self.navigationController?.popViewController(animated: true)
         
     }
-
+    
     
     func forgotPassword(){
         
@@ -160,11 +155,11 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
         }
-
+        
         let mobileNumber = mobileNumberTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()
-
+        
         let parameters = ["phone_number": mobileNumber,
                           "platform":"1",
                           "version_code": "1",
@@ -172,7 +167,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                           "device_id": device_id,
                           "push_token":"123123",
                           "language": currentLanguage
-                        ] as [String : Any]
+            ] as [String : Any]
         
         
         //print("parameters)
@@ -190,51 +185,38 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                 DispatchQueue.main.async {
                     self.submitActivityIndicator.stopAnimating()
                 }
-
+                
                 if let responseDict = json.dictionaryObject {
                     if let code = responseDict["code"] {
-                    let code = code as! NSNumber
-                    if code.intValue == 200 {
-                        
-                        let alertMessage = responseDict["message"] as! String
-                        let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                        let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                            (action) in
-                            let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
-                            self.navigationController?.show(loginVc, sender: self)
+                        let code = code as! NSNumber
+                        if code.intValue == 200 {
                             
-
-                        })
-                        alertController.addAction(defaultAction)
-                        DispatchQueue.main.async {
-                            
-                            self.present(alertController, animated: true, completion: nil)
-                        }
-
-                        
-                        }
-                    else {
-                        if let responseDict = json.dictionaryObject {
                             let alertMessage = responseDict["message"] as! String
-                            self.showAlert(title: "", message: alertMessage)
+                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                                (action) in
+                                let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+                                self.navigationController?.show(loginVc, sender: self)
+                                
+                                
+                            })
+                            alertController.addAction(defaultAction)
+                            DispatchQueue.main.async {
+                                
+                                self.present(alertController, animated: true, completion: nil)
+                            }
+                            
+                            
                         }
-
-
+                        else {
+                            if let responseDict = json.dictionaryObject {
+                                let alertMessage = responseDict["message"] as! String
+                                self.showAlert(title: "", message: alertMessage)
+                            }
+                            
+                            
                         }
                     }
-                  /*  let alertMessage = responseDict["message"] as! String
-                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                        (action) in
-                        let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
-                        self.navigationController?.show(loginVc, sender: self)
-                    })
-
-                    alertController.addAction(defaultAction)
-                    DispatchQueue.main.async {
-                        
-                        self.present(alertController, animated: true, completion: nil)
-                    }*/
                 }
                 
                 break
@@ -260,7 +242,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         else {
             textField.resignFirstResponder()
         }
-
+        
     }
     
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -278,7 +260,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         
         return true
     }
-
+    
     /*
      // MARK: - Navigation
      

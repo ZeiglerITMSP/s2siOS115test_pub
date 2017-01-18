@@ -49,6 +49,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        AppHelper.configSwiftLoader()
+        
         let backButton = UIButton.init(type: .custom)
         backButton.frame = CGRect(x:0,y:0,width:80,height:25)
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
@@ -88,12 +90,11 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
-        getProfile()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
         self.view.addGestureRecognizer(tapGesture)
         
-        
+        getProfile()
     }
     
     
@@ -452,10 +453,10 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             return
         }
         
-        HUD.allowsInteraction = false
-        HUD.dimsBackground = false
-        HUD.show(.progress)
-        
+       // HUD.allowsInteraction = false
+       // HUD.dimsBackground = false
+       // HUD.show(.progress)
+        SwiftLoader.show(title: "Loading...", animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -479,7 +480,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 DispatchQueue.main.async {
-                    HUD.hide()
+                   // HUD.hide()
+                    SwiftLoader.hide()
+
                 }
                 let json = JSON(data: response.data!)
                 //print(""json response\(json)")
@@ -495,10 +498,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                             UserDefaults.standard.set(userData, forKey: USER_DATA)
                             let phoneNumber = userDict["phone_number"]
                             UserDefaults.standard.set(phoneNumber, forKey: MOBILE_NUMBER)
-                            //print(""phoneNumber \(phoneNumber)")
                             let email = userDict["email"]
                             UserDefaults.standard.set(email, forKey: EMAIL)
-                            //print(""email \(email)")
                             self.loadData()
                             
                         }
@@ -516,7 +517,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
             case .failure(let error):
                 DispatchQueue.main.async {
-                    HUD.hide()
+                    //HUD.hide()
+                    SwiftLoader.hide()
+
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
                 //print("error)
