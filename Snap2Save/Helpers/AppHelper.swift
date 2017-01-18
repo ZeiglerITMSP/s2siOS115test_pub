@@ -54,6 +54,12 @@ class AppHelper {
         return emailTest.evaluate(with: testStr)
     }
     
+    class func removeSpecialCharacters(fromNumber inputString:String) -> String {
+        let validCharacters : Set<Character> = Set("1234567890".characters)
+        return String(inputString.characters.filter {validCharacters.contains($0) })
+    }
+    
+
     class func makeAsRequired(text:String) -> NSAttributedString {
         
         let mobileNumTxt = text + " *"
@@ -112,6 +118,15 @@ extension String {
         return mobileNumTxtAttribute
     }
     
+}
+
+extension String {
+    
+    public func toPhoneNumber() -> String {
+        return self.replacingOccurrences(of: "(\\d{3})(\\d{3})(\\d+)", with: "($1) $2-$3", options: .regularExpression, range: nil)
+    }
+    
+
 }
 
 extension Dictionary where Value: Equatable {

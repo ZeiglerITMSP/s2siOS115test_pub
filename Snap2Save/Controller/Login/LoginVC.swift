@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import  Localize_Swift
 import FBSDKLoginKit
+import PhoneNumberKit
 
 class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScrollViewDelegate,FacebookLoginDelegate,FacebookDataDelegate {
     
@@ -28,7 +29,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     @IBOutlet var forgotPasswordButton: UIButton!
     @IBOutlet var passwordTextField: AITextField!
     @IBOutlet var passwordLabel: UILabel!
-    @IBOutlet var mobileNumTextField: AITextField!
+    @IBOutlet var mobileNumTextField:AITextField!
     @IBOutlet var mobileNumLabel: UILabel!
     @IBOutlet var orLabel: UILabel!
     
@@ -112,7 +113,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         passwordTextField.normalColor = UIColor(white: 1, alpha: 0.7)
         passwordTextField.updateUIAsPerTextFieldType()
         
-        
+        //mobileNumTextField.defaultRegion = "+1"
         mobileNumTextField.aiDelegate = self
         passwordTextField.aiDelegate = self
         
@@ -144,7 +145,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     func updateTextFieldUi() {
         
-        mobileNumTextField.updateUIAsPerTextFieldType()
+       // mobileNumTextField.updateUIAsPerTextFieldType()
         
     }
     // MARK: -
@@ -253,22 +254,54 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         }
     }
     
+    
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        if textField == mobileNumTextField {
+        if (textField == mobileNumTextField)
+        {
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            let compo = newString.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+            let decimalString = compo.joined(separator: "") as NSString
+            let length = decimalString.length
+            let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
             
-            let currentCharacterCount = textField.text?.characters.count ?? 0
-            if (range.length + range.location > currentCharacterCount){
-                return false
+            if length == 0 || (length > 10 && !hasLeadingOne) || length > 11
+            {
+                let newLength = (textField.text! as NSString).length + (string as NSString).length - range.length as Int
+                
+                return (newLength > 10) ? false : true
             }
-            let newLength = currentCharacterCount + string.characters.count - range.length
-            return newLength <= 10
+            var index = 0 as Int
+            let formattedString = NSMutableString()
             
+            if hasLeadingOne
+            {
+                formattedString.append("1 ")
+                index += 1
+            }
+            if (length - index) > 3
+            {
+                let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat("(%@)", areaCode)
+                index += 3
+            }
+            if length - index > 3
+            {
+                let prefix = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat(" %@-", prefix)
+                index += 3
+            }
+            
+            let remainder = decimalString.substring(from: index)
+            formattedString.append(remainder)
+            textField.text = formattedString as String
+            return false
+        }
+        else
+        {
+            return true
         }
         
-        return true
     }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0.0
         {
@@ -303,7 +336,9 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         }
         
         let password = passwordTextField.text ?? ""
-        let mobileNumber = mobileNumTextField.text ?? ""
+        let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumTextField.text!)
+
+        let mobileNumber = phoneNumber
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()
         let socialId = ""
@@ -411,8 +446,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         self.performSegue(withIdentifier: "HomeStoryboard", sender: self)
     }
     
-    func isValid() -> Bool{
-        let validNum = AppHelper.validate(value: mobileNumTextField.text!)
+    func isValid() -> Bool {
+       // let phoneNumber = mobileNumTextField.text?.replacingOccurrences(of: "-", with: "")
+        let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumTextField.text!)
+        let validNum = AppHelper.validate(value: phoneNumber)
         
         if ((mobileNumTextField.text?.characters.count)! == 0 || validNum == false ) {
             showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
@@ -429,7 +466,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     func didFacebookLoginFail() {
         facebookActivityIndicator.stopAnimating()
-        self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+       // self.showAlert(title: "", message: "Sorry, Please try again later".localized());
     }
     
     func didFacebookLoginSuccess() {
@@ -544,5 +581,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             
         }
     }
+    
+    
     
 }

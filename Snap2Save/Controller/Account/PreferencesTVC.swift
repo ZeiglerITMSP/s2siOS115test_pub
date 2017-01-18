@@ -183,17 +183,48 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if textField == mobileNumberTextField.contentTextField || textField == reEnterMobileNumberTextField.contentTextField {
-            
-            let currentCharacterCount = textField.text?.characters.count ?? 0
-            if (range.length + range.location > currentCharacterCount){
-                return false
-            }
-            let newLength = currentCharacterCount + string.characters.count - range.length
-            return newLength <= 10
-            
-        }
         
+        if textField == mobileNumberTextField.contentTextField || textField == reEnterMobileNumberTextField.contentTextField {
+        
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            let compo = newString.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+            let decimalString = compo.joined(separator: "") as NSString
+            let length = decimalString.length
+            let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
+            
+            if length == 0 || (length > 10 && !hasLeadingOne) || length > 11
+            {
+                let newLength = (textField.text! as NSString).length + (string as NSString).length - range.length as Int
+                
+                return (newLength > 10) ? false : true
+            }
+            var index = 0 as Int
+            let formattedString = NSMutableString()
+            
+            if hasLeadingOne
+            {
+                formattedString.append("1 ")
+                index += 1
+            }
+            if (length - index) > 3
+            {
+                let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat("(%@)", areaCode)
+                index += 3
+            }
+            if length - index > 3
+            {
+                let prefix = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat(" %@-", prefix)
+                index += 3
+            }
+            
+            let remainder = decimalString.substring(from: index)
+            formattedString.append(remainder)
+            textField.text = formattedString as String
+            return false
+        }
+
         return true
     }
     
@@ -241,7 +272,10 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
-        let mobileNumber = mobileNumberTextField.contentTextField.text ?? ""
+        
+        
+        let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumberTextField.contentTextField.text!)
+        let mobileNumber = phoneNumber
         var contact_preference = "1"
         let contactPreference = contactPreferenceSegmentControl.selectedSegmentIndex
         if contactPreference == 0 {
@@ -356,7 +390,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let email = emailPlaceHolderTextField.contentTextField.text
         
         let validEmail = AppHelper.isValidEmail(testStr: emailPlaceHolderTextField.contentTextField.text!)
-        let validPhoneNumber = AppHelper.validate(value: mobileNumberTextField.contentTextField.text!)
+        
+        let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumberTextField.contentTextField.text!)
+        let validPhoneNumber = AppHelper.validate(value: phoneNumber)
         
         
         if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
@@ -429,8 +465,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         // let mobileNumber = UserDefaults.standard.object(forKey: MOBILE_NUMBER) ?? ""
         // let email = UserDefaults.standard.object(forKey: EMAIL) ?? ""
+        let number = user.phone_number;
         
-        mobileNumberTextField.contentTextField.text = user.phone_number
+        mobileNumberTextField.contentTextField.text = number.toPhoneNumber()
         //reEnterMobileNumberTextField.contentTextField.text = user.phone_number
         
         emailPlaceHolderTextField.contentTextField.text = user.email

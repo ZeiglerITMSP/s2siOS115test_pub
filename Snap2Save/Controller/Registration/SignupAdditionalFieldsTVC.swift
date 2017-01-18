@@ -597,7 +597,6 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     func getSelectedIndexFromPicker(selectedIndex: NSInteger, textField: AITextField) {
         let index = selectedIndex
-        //print(""Index\(index)")
         if (textField.tag == DropDownTags.states.rawValue) {
             selectedStateIndex = index
         }
