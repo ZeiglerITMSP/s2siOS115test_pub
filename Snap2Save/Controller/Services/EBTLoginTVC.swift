@@ -382,14 +382,18 @@ extension EBTLoginTVC {
                     // error message
                     
                     // update view
-                    self.loginButton.isEnabled = true
-                    self.activityIndicator.stopAnimating()
+                    if self.ebtWebView.isPageLoading == false {
+                        self.loginButton.isEnabled = true
+                        self.activityIndicator.stopAnimating()
+                    }
                     
                     self.errorMessageLabel.text = resultTrimmed
                     self.tableView.reloadData()
                     
                 } else {
-                    // no error message
+//                    // no error message
+//                    self.errorMessageLabel.text = nil
+//                    self.tableView.reloadData()
                 }
                 
             } else {

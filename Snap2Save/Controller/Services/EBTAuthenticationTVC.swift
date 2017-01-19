@@ -230,24 +230,26 @@ extension EBTAuthenticationTVC {
     
     func checkForErrorMessage() {
         
-        ebtWebView.getPageHeading(completion: { result in
+        ebtWebView.getErrorMessage(completion: { result in
             
             if let errorMessage = result {
                 if errorMessage.characters.count > 0 {
                     // error message
                     
-                    if self.ebtWebView.webView.isLoading == false {
+                    if self.ebtWebView.isPageLoading == false {
                         // update view
                         self.confirmButton.isEnabled = true
                         self.confirmActivityIndicator.stopAnimating()
-                        
+                        print("stop activity")
                     }
                     
                     self.errorMessageLabel.text = errorMessage
                     self.tableView.reloadData()
                     
                 } else {
-                    // no error message
+//                    // no error message
+//                    self.errorMessageLabel.text = nil
+//                    self.tableView.reloadData()
                 }
             } else {
                 
@@ -270,8 +272,11 @@ extension EBTAuthenticationTVC {
                     // error message
                     
                     // update view
-                    self.regenerateButton.isEnabled = true
-                    self.regenerateActivityIndicator.stopAnimating()
+                    if self.ebtWebView.isPageLoading == false {
+                        
+                        self.regenerateButton.isEnabled = true
+                        self.regenerateActivityIndicator.stopAnimating()
+                    }
                     
                     self.errorMessageLabel.text = resultTrimmed
                     self.tableView.reloadData()

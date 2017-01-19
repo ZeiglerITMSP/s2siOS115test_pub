@@ -266,21 +266,25 @@ extension EBTLoginSecurityQuestionTVC {
     
     func checkForErrorMessage() {
         
-        ebtWebView.getPageHeading(completion: { result in
+        ebtWebView.getErrorMessage(completion: { result in
             
             if let errorMessage = result {
                 if errorMessage.characters.count > 0 {
                     // error message
                     
                     // update view
-                    self.confirmButton.isEnabled = true
-                    self.confirmActivityIndicator.stopAnimating()
+                    if self.ebtWebView.isPageLoading == false {
+                        self.confirmButton.isEnabled = true
+                        self.confirmActivityIndicator.stopAnimating()
+                    }
                     
                     self.errorMessageLabel.text = errorMessage
                     self.tableView.reloadData()
                     
                 } else {
-                    // no error message
+//                    // no error message
+//                    self.errorMessageLabel.text = nil
+//                    self.tableView.reloadData()
                 }
             } else {
                 

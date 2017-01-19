@@ -242,36 +242,46 @@ extension EBTWebView: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("\n -- didFail -- \n")
+        self.isPageLoading = false
         print(error.localizedDescription)
     }
     
-    //    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-    //        print("\n -- navigationAction -- \n")
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        print("\n -- navigationAction -- \n")
+    
+        self.isPageLoading = true
+        decisionHandler(.allow)
+    }
+    
+//        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//            print("\n -- navigationAction -- \n")
+//    
+//            
+//            
+//    //        print(navigationAction.request)
+//    
+//            print(navigationAction.navigationType)
+//            print(navigationAction.targetFrame ?? "nil")
+//    
+//            print(navigationAction.request.url?.absoluteString ?? "no url")
+//            print(navigationAction.sourceFrame.isMainFrame)
+//    
+//            decisionHandler(self.shouldStartDecidePolicy())
+//    
+//    
+    //        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
     //
-    ////        print(navigationAction.request)
+    //            decisionHandler(.cancel)
+    //            return
+    //        }
     //
-    //        print(navigationAction.navigationType)
-    //        print(navigationAction.targetFrame ?? "nil")
-    //
-    //        print(navigationAction.request.url?.absoluteString ?? "no url")
-    //        print(navigationAction.sourceFrame.isMainFrame)
-    //
-    //        decisionHandler(self.shouldStartDecidePolicy())
-    //
-    //
-    ////        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
-    ////
-    ////            decisionHandler(.cancel)
-    ////            return
-    ////        }
-    ////
-    ////        let status = self.responder?.navigationAction?()
-    ////        if status != nil {
-    ////            return decisionHandler(.allow)
-    ////        }
-    //
-    ////        decisionHandler(.allow)
-    //    }
+    //        let status = self.responder?.navigationAction?()
+    //        if status != nil {
+    //            return decisionHandler(.allow)
+    //        }
+    
+    //        decisionHandler(.allow)
+//        }
     
     //    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
     //
@@ -293,11 +303,11 @@ extension EBTWebView: WKNavigationDelegate {
     //
     //    }
     
-        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-            print("\n -- didStartProvisional -- \n")
-    
-            self.isPageLoading = true
-        }
+//        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+//            print("\n -- didStartProvisional -- \n")
+//    
+//            self.isPageLoading = true
+//        }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("\n -- didFinish -- \n")
