@@ -56,6 +56,7 @@ class EBTCardNumberTVC: UITableViewController {
         errorMessageLabel.text = nil
         cardNumberField.contentTextField.aiDelegate = self
         cardNumberField.contentTextField.returnKeyType = .done
+        cardNumberField.contentTextField.updateUIAsPerTextFieldType()
         
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
@@ -73,6 +74,12 @@ class EBTCardNumberTVC: UITableViewController {
         addTapGesture()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadContent()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -100,6 +107,21 @@ class EBTCardNumberTVC: UITableViewController {
     func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
+    }
+
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            
+            
+            self.title = "REGISTRATION".localized()
+            
+            self.cardNumberField.placeholderText = "CARD NUMBER".localized()
+            self.errorTitleLabel.text = "ebt.error.title".localized()
+            
+            self.nextButton.setTitle("NEXT".localized(), for: .normal)
+        }
+        
     }
 
 

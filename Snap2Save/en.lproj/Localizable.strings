@@ -227,7 +227,7 @@
 
 "Validate Identity" = "Validate Identity";
 "Step 1: Please provide the following information to validate your identity." = "Step 1: Please provide the following information to validate your identity.";
-"WHAT IS YOUR DATE OF BIRTH?" = "WHAT IS YOUR DATE OF BIRTH?";
+"WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)" = "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)";
 "WHAT IS YOUR SOCIAL SECURITY NUMBER?" = "WHAT IS YOUR SOCIAL SECURITY NUMBER?";
 
 // Select PIN
@@ -235,7 +235,7 @@
 "Step 2: Select PIN" = "Step 2: Select PIN";
 "PIN" = "PIN";
 "CONFIRM PIN" = "CONFIRM PIN";
-"Use Current PIN" = "Use Current PIN";
+"USE CURRENT PIN" = "USE CURRENT PIN";
 
 // User Information
 
@@ -250,8 +250,6 @@
 "QUESTION 1" = "QUESTION 1";
 "QUESTION 2" = "QUESTION 2";
 "QUESTION 3" = "QUESTION 3";
-
-
 "ANSWER 1" = "ANSWER 1";
 "ANSWER 2" = "ANSWER 2";
 "ANSWER 3" = "ANSWER 3";

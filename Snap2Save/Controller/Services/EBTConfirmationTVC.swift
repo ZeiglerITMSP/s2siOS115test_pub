@@ -90,6 +90,12 @@ class EBTConfirmationTVC: UITableViewController {
         addTapGesture()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadContent()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -118,6 +124,24 @@ class EBTConfirmationTVC: UITableViewController {
     func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
+    }
+
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            
+            self.title = "REGISTRATION".localized()
+            
+            self.validationCodeField.placeholderText = "ENTER EMAIL VALIDATION CODE".localized()
+            self.errorTitleLabel.text = "ebt.error.title".localized()
+            
+            self.validateButton.setTitle("VALIDATE".localized(), for: .normal)
+            self.resendButton.setTitle("RESEND".localized(), for: .normal)
+            self.changeEmailButton.setTitle("CHANGE EMAIL".localized(), for: .normal)
+            
+        }
+        
+        
     }
 
     
@@ -212,7 +236,7 @@ class EBTConfirmationTVC: UITableViewController {
                 
                 self.validateButton.isEnabled = true
                 self.validateActivityIndicator.stopAnimating()
-                self.performSegue(withIdentifier: "EBTSecurityQuestionTVC", sender: nil)
+                self.performSegue(withIdentifier: "EBTLoginSecurityQuestionTVC", sender: nil)
                 
             } else {
                 

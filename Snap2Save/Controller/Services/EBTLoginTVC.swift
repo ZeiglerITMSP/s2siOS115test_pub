@@ -92,7 +92,6 @@ class EBTLoginTVC: UITableViewController {
         
         updateBackButtonText()
         
-        userIdField.contentTextField.textFieldType = .PhoneNumberTextField
         userIdField.contentTextField.textFieldType = .NormalTextField
         userIdField.contentTextField.autocorrectionType = UITextAutocorrectionType.no
         userIdField.contentTextField.returnKeyType = .next

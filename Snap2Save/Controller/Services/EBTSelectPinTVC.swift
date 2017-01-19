@@ -63,7 +63,12 @@ class EBTSelectPinTVC: UITableViewController {
         confirmPinField.contentTextField.aiDelegate = self
         
         pinField.contentTextField.returnKeyType = .next
+        pinField.contentTextField.isSecureTextEntry = true
+        pinField.contentTextField.updateUIAsPerTextFieldType()
+        
         confirmPinField.contentTextField.returnKeyType = .done
+        confirmPinField.contentTextField.isSecureTextEntry = true
+        confirmPinField.contentTextField.updateUIAsPerTextFieldType()
         
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
@@ -82,6 +87,12 @@ class EBTSelectPinTVC: UITableViewController {
         addTapGesture()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadContent()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -110,6 +121,25 @@ class EBTSelectPinTVC: UITableViewController {
         
         self.view.endEditing(true)
     }
+    
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            
+            self.title = "REGISTRATION".localized()
+            
+            self.pinField.placeholderText = "PIN".localized()
+            self.confirmPinField.placeholderText = "CONFIRM PIN".localized()
+            self.errorTitleLabel.text = "ebt.error.title".localized()
+            
+            self.nextButton.setTitle("NEXT".localized(), for: .normal)
+            self.useCurrentPinButton.setTitle("USE CURRENT PIN".localized(), for: .normal)
+            
+        }
+        
+        
+    }
+
 
     
     // MARK: - Table view

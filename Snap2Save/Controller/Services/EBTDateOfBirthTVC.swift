@@ -68,6 +68,8 @@ class EBTDateOfBirthTVC: UITableViewController {
         
         self.socialSecurityNumberField.contentTextField.returnKeyType = .done
         self.socialSecurityNumberField.contentTextField.aiDelegate = self
+        self.socialSecurityNumberField.contentTextField.isSecureTextEntry = true
+        self.socialSecurityNumberField.contentTextField.updateUIAsPerTextFieldType()
         
         ebtWebView.responder = self
         
@@ -78,6 +80,12 @@ class EBTDateOfBirthTVC: UITableViewController {
         getQuestions()
         
         addTapGesture()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadContent()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -107,6 +115,20 @@ class EBTDateOfBirthTVC: UITableViewController {
     func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
+    }
+
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            
+            self.title = "REGISTRATION".localized()
+            
+            self.dobField.placeholderText = "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)".localized()
+            self.socialSecurityNumberField.placeholderText = "WHAT IS YOUR SOCIAL SECURITY NUMBER?".localized()
+            self.errorTitleLabel.text = "ebt.error.title".localized()
+            
+            self.nextButton.setTitle("NEXT".localized(), for: .normal)   
+        }
     }
 
     

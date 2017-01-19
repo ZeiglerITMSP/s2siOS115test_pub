@@ -145,7 +145,6 @@ protocol AIPlaceHolderTextFieldDelegate {
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         
         contentTextField.placeHolderLabel = placeholderLabel
-        contentTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         
         contentTextField.selectedColor = selectedColor
         contentTextField.normalColor = normalColor

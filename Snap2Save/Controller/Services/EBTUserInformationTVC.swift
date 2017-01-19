@@ -107,6 +107,16 @@ class EBTUserInformationTVC: UITableViewController {
         answerThreeField.contentTextField.aiDelegate = self
         
         
+        userIdField.contentTextField.updateUIAsPerTextFieldType()
+        passwordField.contentTextField.updateUIAsPerTextFieldType()
+        confirmPasswordField.contentTextField.updateUIAsPerTextFieldType()
+        emailAddressField.contentTextField.updateUIAsPerTextFieldType()
+        confirmEmailField.contentTextField.updateUIAsPerTextFieldType()
+        phoneNumberField.contentTextField.updateUIAsPerTextFieldType()
+        answerOneField.contentTextField.updateUIAsPerTextFieldType()
+        answerTwoField.contentTextField.updateUIAsPerTextFieldType()
+        answerThreeField.contentTextField.updateUIAsPerTextFieldType()
+        
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
@@ -153,6 +163,12 @@ class EBTUserInformationTVC: UITableViewController {
         addTapGesture()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadContent()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -181,6 +197,33 @@ class EBTUserInformationTVC: UITableViewController {
     func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
+    }
+
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            
+
+            self.title = "REGISTRATION".localized()
+            
+            self.userIdField.placeholderText = "USER ID".localized()
+            self.passwordField.placeholderText = "PASSWORD".localized()
+            self.confirmPasswordField.placeholderText = "CONFIRM NEW PASSWORD".localized()
+            self.emailAddressField.placeholderText = "EMAIL ADDRESS".localized()
+            self.confirmEmailField.placeholderText = "CONFIRM EMAIL ADDRESS".localized()
+            self.phoneNumberField.placeholderText = "PHONE NUMBER".localized()
+            self.questionOneField.placeholderText = "QUESTION 1".localized()
+            self.answerOneField.placeholderText = "ANSWER 1".localized()
+            self.questionTwoField.placeholderText = "QUESTION 2".localized()
+            self.answerTwoField.placeholderText = "ANSWER 2".localized()
+            self.questionThreeField.placeholderText = "QUESTION 3".localized()
+            self.answerThreeField.placeholderText = "ANSWER 3".localized()
+            
+            self.errorTitleLabel.text = "ebt.error.title".localized()
+            
+            self.nextButton.setTitle("NEXT".localized(), for: .normal)
+        }
+        
     }
 
 
