@@ -28,6 +28,8 @@ class FacebookLogin: NSObject {
     func loginWithFacebook() {
         
         let login = FBSDKLoginManager()
+        login.logOut()
+        
         login.logIn(withReadPermissions: ["public_profile","email"], from: requestController, handler: {(result, error) -> Void in
             
             if (error != nil) {

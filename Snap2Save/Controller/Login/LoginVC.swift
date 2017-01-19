@@ -145,7 +145,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     func updateTextFieldUi() {
         
-       // mobileNumTextField.updateUIAsPerTextFieldType()
+        // mobileNumTextField.updateUIAsPerTextFieldType()
         
     }
     // MARK: -
@@ -337,22 +337,21 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
         let password = passwordTextField.text ?? ""
         let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumTextField.text!)
-
+        
         let mobileNumber = phoneNumber
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()
         let socialId = ""
-        //        if isFaceBookLogin == true {
-        //           // mobileNumber = faceBookDict?["email"] as! String? ?? ""
-        //            socialId = faceBookDict?["id"] as! String
-        //
-        //        }
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
+        
+        
         let parameters = ["username": mobileNumber,
                           "password": password,
                           "social_id": socialId,
                           "platform":"1",
-                          "version_code": "1",
-                          "version_name": "1",
+                          "version_code":  version_code,
+                          "version_name": version_name,
                           "device_id": device_id,
                           "push_token":"123123",
                           "language": currentLanguage
@@ -429,7 +428,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                 
                 DispatchQueue.main.async {
                     self.loginActivityIndicator.stopAnimating()
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                    self.showAlert(title: "", message:error.localizedDescription);
                 }
                 //print("error)
                 break
@@ -447,7 +446,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     }
     
     func isValid() -> Bool {
-       // let phoneNumber = mobileNumTextField.text?.replacingOccurrences(of: "-", with: "")
+        // let phoneNumber = mobileNumTextField.text?.replacingOccurrences(of: "-", with: "")
         let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumTextField.text!)
         let validNum = AppHelper.validate(value: phoneNumber)
         
@@ -466,18 +465,15 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     func didFacebookLoginFail() {
         facebookActivityIndicator.stopAnimating()
-       // self.showAlert(title: "", message: "Sorry, Please try again later".localized());
     }
     
     func didFacebookLoginSuccess() {
-        print("SUCESS")
         faceBookLogin.getBasicInformation()
     }
     
     func didReceiveUser(information: [String : Any]) {
         print("information is\(information)")
         faceBookDict = information
-        
         self.checkFacebookUser()
     }
     
@@ -494,11 +490,13 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()
         let socialId = faceBookDict?["id"] as? String ?? ""
-        
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
+
         let parameters = ["social_id": socialId,
                           "platform":"1",
-                          "version_code": "1",
-                          "version_name": "1",
+                          "version_code": version_code,
+                          "version_name": version_name,
                           "device_id": device_id,
                           "push_token":"123123",
                           "language": currentLanguage
@@ -555,13 +553,20 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             self.presentHome()
                         }
                     }
+                        
+                    else if code.intValue == 400 {
+                        if let responseDict = json.dictionaryObject {
+                            let alertMessage = responseDict["message"] as! String
+                            self.showAlert(title: "", message: alertMessage)
+                        }
+                    }
+                        
+                        
                     else {
-                        let signUpVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignupTVC")
+                        
+                        let signUpVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignupTVC") as! SignUpTVC
+                        signUpVc.facebookDict = self.faceBookDict
                         self.navigationController?.show(signUpVc, sender: self)
-                        //                        if let responseDict = json.dictionaryObject {
-                        //                            let alertMessage = responseDict["message"] as! String
-                        //                            self.showAlert(title: "", message: alertMessage)
-                        //                        }
                     }
                     
                 }
@@ -572,8 +577,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                 
                 DispatchQueue.main.async {
                     self.facebookActivityIndicator.stopAnimating()
-                    
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                    self.showAlert(title: "", message:error.localizedDescription);
                 }
                 //print("error)
                 break

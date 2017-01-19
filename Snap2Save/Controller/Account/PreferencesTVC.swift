@@ -286,14 +286,16 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         }
         let email = emailPlaceHolderTextField.contentTextField.text ?? ""
         let currentLanguage = Localize.currentLanguage()
-        
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
+
         let parameters = ["user_id": user_id,
                           "phone_number": mobileNumber,
                           "email": email,
                           "contact_preference": contact_preference,
                           "platform":"1",
-                          "version_code": "1",
-                          "version_name": "1",
+                          "version_code": version_code,
+                          "version_name": version_name,
                           "device_id": device_id,
                           "push_token":"123123",
                           "auth_token": auth_token,
@@ -367,17 +369,16 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
+                    self.showAlert(title: "", message:error.localizedDescription);
                 //print("error)
-                break
             }
-            
+                break
             
         }
         
         
     }
-    
+    }
     func isValid() -> Bool  {
         
         let userData = UserDefaults.standard.object(forKey: USER_DATA)
@@ -498,11 +499,13 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
         let currentLanguage = Localize.currentLanguage()
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
         
         let parameters = ["user_id": user_id,
                           "platform":"1",
-                          "version_code": "1",
-                          "version_name": "1",
+                          "version_code": version_code,
+                          "version_name": version_name,
                           "device_id": device_id,
                           "push_token":"123123",
                           "auth_token": auth_token,
@@ -557,7 +560,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                     //HUD.hide()
                     SwiftLoader.hide()
 
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                    self.showAlert(title: "", message:error.localizedDescription);
+
                 }
                 //print("error)
                 break

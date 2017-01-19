@@ -747,6 +747,7 @@
                         <outlet property="zipCodeLabel" destination="MyE-jH-Q3h" id="xT4-h7-QWI"/>
                         <outlet property="zipCodeTextField" destination="uV1-oi-TG7" id="eac-7r-o8S"/>
                         <segue destination="Zoo-fn-h1G" kind="show" identifier="SignupAdditionalFieldsTVC" id="51K-SZ-Iia"/>
+                        <segue destination="zeL-vU-GYE" kind="presentation" identifier="HomeStoryboard" id="8dX-hS-hVO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rn7-fD-kNW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1843,7 +1844,7 @@
                 <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="TabbarController" id="zeL-vU-GYE" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B81-J5-oDA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2660" y="-299"/>
+            <point key="canvasLocation" x="2920" y="-284"/>
         </scene>
         <!--Forgot PasswordVC-->
         <scene sceneID="46C-Ee-mIV">
@@ -2081,4 +2082,7 @@
         <image name="icFb" width="24" height="24"/>
         <image name="logo" width="280" height="59"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="8dX-hS-hVO"/>
+    </inferredMetricsTieBreakers>
 </document>

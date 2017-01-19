@@ -159,11 +159,13 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         let mobileNumber = mobileNumberTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()
-        
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
+
         let parameters = ["phone_number": mobileNumber,
                           "platform":"1",
-                          "version_code": "1",
-                          "version_name": "1",
+                          "version_code": version_code,
+                          "version_name": version_name,
                           "device_id": device_id,
                           "push_token":"123123",
                           "language": currentLanguage
@@ -225,7 +227,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                 
                 DispatchQueue.main.async {
                     self.submitActivityIndicator.stopAnimating()
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                    self.showAlert(title: "", message:error.localizedDescription);
                 }
                 //print("error)
                 break

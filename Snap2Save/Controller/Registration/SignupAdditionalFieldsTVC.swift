@@ -514,7 +514,10 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         if !social_id.isEmpty {
             signup_type = "2"
         }
-        
+
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
+
         let additionalInfoDict : Dictionary = ["first_name": first_name,
                                                "last_name": last_name,
                                                "address_line1": address_line1,
@@ -535,8 +538,8 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                           "contact_preference": contact_preference,
                           "additional_info" : additionalInfoDict,
                           "platform": platform,
-                          "version_code":"1",
-                          "version_name":"1",
+                          "version_code":version_code,
+                          "version_name":version_name,
                           "device_id": device_id,
                           "push_token": push_token,
                           "language": currentLanguage,
@@ -560,7 +563,6 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                 //print(""json response\(json)")
                 
                 if (json.dictionary != nil) {
-                    // let jsonDict = json
                     let responseDict = json.dictionaryObject
                     if  let code = responseDict?["code"] {
                         let code = code as! NSNumber
@@ -583,7 +585,8 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                 
                 DispatchQueue.main.async {
                     self.registerActivityIndicator.stopAnimating()
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                    self.showAlert(title: "", message:error.localizedDescription);
+
                 }
                 //print("error)
                 break

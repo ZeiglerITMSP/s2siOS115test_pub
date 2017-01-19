@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import  Localize_Swift
 
 class ServicesTVC: UITableViewController {
     
@@ -72,34 +73,51 @@ class ServicesTVC: UITableViewController {
         }
         else if indexPath.section == 1 {
             
-            //UserDefaults.standard.set(infoScreen, forKey:INFO_SCREENS)
+            let currentLanguage = Localize.currentLanguage()
             
             let infoScreens : [String : Any] = UserDefaults.standard.object(forKey: INFO_SCREENS) as! [String : Any]
             
             let servicesWebVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "ServicesWebViewVC") as! ServicesWebViewVC
             
             if indexPath.row == 0 {
-                //let url = "https://developers.facebook.com/docs/ios/getting-started"
-                let url = infoScreens["about"] ?? ""
-                servicesWebVc.loadUrl = url as! String
+                
+                var url = ""
+                if currentLanguage == "es" {
+                    url = infoScreens["about_es"] as! String? ?? ""
+                }
+                else {
+                 url = infoScreens["about"] as! String? ?? ""
+                    
+                }
+                servicesWebVc.loadUrl = url 
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.aboutSnap2Save
                 
             }
                 
             else if indexPath.row == 1 {
-                
-                //let url = "https://projects.invisionapp.com/d/main#/projects/prototypes/9183363"
-                let url = infoScreens["faq"] ?? ""
-                servicesWebVc.loadUrl = url as! String
+                var url = ""
+                if currentLanguage == "es" {
+                    url = infoScreens["faq_es"] as! String? ?? ""
+                }
+                else {
+                    url = infoScreens["faq"] as! String? ?? ""
+                }
+                servicesWebVc.loadUrl = url
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.FAQ
 
             }
                 
             else if indexPath.row == 2 {
-               // let url = "http://docs.snap2saveapi.apiary.io/#reference/0/signup/signup"
                 
-                let url = infoScreens["contactus"] ?? ""
-                servicesWebVc.loadUrl = url as! String
+                var url = ""
+                if currentLanguage == "es" {
+                    url = infoScreens["contactus_es"] as! String? ?? ""
+                }
+                else {
+                    url = infoScreens["contactus"] as! String? ?? ""
+                }
+
+                servicesWebVc.loadUrl = url 
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.contactUs
 
 
@@ -110,13 +128,19 @@ class ServicesTVC: UITableViewController {
             
         else if indexPath.section == 2 {
             
+            let currentLanguage = Localize.currentLanguage()
             let servicesWebVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "ServicesWebViewVC") as! ServicesWebViewVC
             let infoScreens : [String : Any] = UserDefaults.standard.object(forKey: INFO_SCREENS) as! [String : Any]
+            
             if indexPath.row == 0 {
-                
-                //let url = "http://docs.snap2saveapi.apiary.io/#reference/0/signup/signup"
-                let url = infoScreens["terms"] ?? ""
-                servicesWebVc.loadUrl = url as! String
+                var url = ""
+                if currentLanguage == "es" {
+                    url = infoScreens["terms_es"] as! String? ?? ""
+                }
+                else {
+                    url = infoScreens["terms"] as! String? ?? ""
+                }
+                servicesWebVc.loadUrl = url 
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.termsOfService
 
 
@@ -124,9 +148,14 @@ class ServicesTVC: UITableViewController {
                 
             else if indexPath.row == 1 {
                 
-                //let url = "http://docs.snap2saveapi.apiary.io/#reference/0/signup/signup"
-                let url = infoScreens["privacy"] ?? ""
-                servicesWebVc.loadUrl = url as! String
+                var url = ""
+                if currentLanguage == "es" {
+                    url = infoScreens["privacy_es"] as! String? ?? ""
+                }
+                else {
+                    url = infoScreens["privacy"] as! String? ?? ""
+                }
+                servicesWebVc.loadUrl = url 
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.privacyPolicy
 
 

@@ -170,12 +170,14 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         let user_id = self.user_id ?? ""
         //let auth_token = UserDefaults.standard.string(forKey: "auth_token") ?? ""
         let currentLanguage = Localize.currentLanguage()
-        
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
+
         let parameters = ["password":password,
                           "code":user_id,
                           "platform":"1",
-                          "version_code": "1",
-                          "version_name": "1",
+                          "version_code": version_code,
+                          "version_name": version_name,
                           "device_id": device_id,
                           "push_token":"123123",
                           "language": currentLanguage
@@ -221,13 +223,16 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
                 
                 DispatchQueue.main.async {
                     self.resetPasswordActivityIndicator.stopAnimating()
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());                }
+                    self.showAlert(title: "", message:error.localizedDescription);
                 //print("error)
+                }
                 break
-            }
+            
             
             
         }
     }
     
+}
+
 }

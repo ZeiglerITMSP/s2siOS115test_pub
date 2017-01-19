@@ -161,13 +161,15 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         let newPassword = newPasswordTextField.contentTextField.text ?? ""
         let password = currentPasswordTextField.contentTextField.text ?? ""
         let currentLanguage = Localize.currentLanguage()
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
 
         let parameters = ["password": password,
                           "new_password": newPassword,
                           "user_id": user_id,
                           "platform":"1",
-                          "version_code": "1",
-                          "version_name": "1",
+                          "version_code": version_code,
+                          "version_name": version_name,
                           "device_id": device_id,
                           "push_token":"123123",
                           "auth_token": auth_token,
@@ -226,7 +228,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
                 
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                    self.showAlert(title: "", message:error.localizedDescription);
                 }
                 //print("error)
                 break

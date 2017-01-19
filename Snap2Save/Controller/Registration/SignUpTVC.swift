@@ -17,7 +17,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
     let faceBookLogin : FacebookLogin = FacebookLogin()
     
     var facebookDict:[String : Any]? = nil
-    
+    var user:User = User()
     @IBOutlet var facebookActivityIndicator: UIActivityIndicatorView!
     @IBOutlet var reEnterEmailMandatoryLabel: UILabel!
     @IBOutlet var emailManditoryLabel: UILabel!
@@ -152,6 +152,9 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         // Tap Gesuture
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
         self.view.addGestureRecognizer(tapGesture)
+        
+        let email =  facebookDict?["email"] ?? ""
+        emailTextField.text = email as? String
         
     }
 
@@ -578,7 +581,6 @@ extension SignUpTVC: AITextFieldProtocol {
     
     func didFacebookLoginFail() {
         facebookActivityIndicator.stopAnimating()
-        self.showAlert(title: "", message: "Sorry, Please try again later".localized());
     }
     
     func didFacebookLoginSuccess() {
@@ -611,11 +613,13 @@ extension SignUpTVC: AITextFieldProtocol {
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()
         let socialId = facebookDict?["id"] as? String ?? ""
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
         
         let parameters = ["social_id": socialId,
                           "platform":"1",
-                          "version_code": "1",
-                          "version_name": "1",
+                          "version_code": version_code,
+                          "version_name": version_name,
                           "device_id": device_id,
                           "push_token":"123123",
                           "language": currentLanguage
@@ -635,22 +639,49 @@ extension SignUpTVC: AITextFieldProtocol {
                 
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
-                
                 if (json.dictionary != nil) {
                     // let jsonDict = json
                     let responseDict = json.dictionaryObject
                     if  let code = responseDict?["code"] {
                         let code = code as! NSNumber
                         if code.intValue == 200 {
-                           // self.showSignUpAlert();
-                            self.view.endEditing(true)
+                            
+                            if let userDict = responseDict?["user"] {
+                                self.user = User.prepareUser(dictionary: userDict as! [String : Any])
+                                self.user.auth_token = responseDict?["auth_token"] as! String
+                                AppDelegate.getDelegate().user = self.user
+                                
+                                let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
+                                UserDefaults.standard.set(userData, forKey: LOGGED_USER)
+                                
+                                
+                            }
+                            if let info_screens = responseDict?["info_screens"]{
+                                let infoScreen  = info_screens
+                                UserDefaults.standard.set(infoScreen, forKey:INFO_SCREENS)
+                            }
+                            
+                            if let auth_token = responseDict?["auth_token"] as? String {
+                                UserDefaults.standard.set(auth_token, forKey: AUTH_TOKEN)
+                                
+                                if let userDict = responseDict?["user"] as? [String:Any] {
+                                    let user_id = userDict["id"]
+                                    UserDefaults.standard.set(user_id, forKey: USER_ID)
+                                    
+                                }
+                                
+                                if let autoLogin = responseDict?["auto_login"] {
+                                    UserDefaults.standard.set(autoLogin, forKey: USER_AUTOLOGIN)
+                                }
+                                UserDefaults.standard.synchronize()
+                                self.presentHome()
+                            }
                         }
                         else {
-                            
-                            if let responseDict = json.dictionaryObject {
-                                let alertMessage = responseDict["message"] as! String
-                                self.showAlert(title: "", message: alertMessage)
-                            }
+                       /*         if let responseDict = json.dictionaryObject {
+                             let alertMessage = responseDict["message"] as! String
+                             self.showAlert(title: "", message: alertMessage)
+                             }*/
                             
                         }
                     }
@@ -661,10 +692,10 @@ extension SignUpTVC: AITextFieldProtocol {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    //self.loginActivityIndicator.stopAnimating()
                     self.facebookActivityIndicator.stopAnimating()
 
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                    self.showAlert(title: "", message:error.localizedDescription);
+
                 }
                 //print("error)
                 break
@@ -672,5 +703,9 @@ extension SignUpTVC: AITextFieldProtocol {
             
         }
     }
+    func presentHome() {
+        self.performSegue(withIdentifier: "HomeStoryboard", sender: self)
+    }
+    
 
 }
