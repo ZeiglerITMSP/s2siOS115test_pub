@@ -49,6 +49,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        AppHelper.configSwiftLoader()
+        
         let backButton = UIButton.init(type: .custom)
         backButton.frame = CGRect(x:0,y:0,width:80,height:25)
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
@@ -88,12 +90,11 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
-        getProfile()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
         self.view.addGestureRecognizer(tapGesture)
         
-        
+        getProfile()
     }
     
     
@@ -182,17 +183,48 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if textField == mobileNumberTextField.contentTextField || textField == reEnterMobileNumberTextField.contentTextField {
-            
-            let currentCharacterCount = textField.text?.characters.count ?? 0
-            if (range.length + range.location > currentCharacterCount){
-                return false
-            }
-            let newLength = currentCharacterCount + string.characters.count - range.length
-            return newLength <= 10
-            
-        }
         
+        if textField == mobileNumberTextField.contentTextField || textField == reEnterMobileNumberTextField.contentTextField {
+        
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            let compo = newString.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+            let decimalString = compo.joined(separator: "") as NSString
+            let length = decimalString.length
+            let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
+            
+            if length == 0 || (length > 10 && !hasLeadingOne) || length > 11
+            {
+                let newLength = (textField.text! as NSString).length + (string as NSString).length - range.length as Int
+                
+                return (newLength > 10) ? false : true
+            }
+            var index = 0 as Int
+            let formattedString = NSMutableString()
+            
+            if hasLeadingOne
+            {
+                formattedString.append("1 ")
+                index += 1
+            }
+            if (length - index) > 3
+            {
+                let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat("(%@)", areaCode)
+                index += 3
+            }
+            if length - index > 3
+            {
+                let prefix = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat(" %@-", prefix)
+                index += 3
+            }
+            
+            let remainder = decimalString.substring(from: index)
+            formattedString.append(remainder)
+            textField.text = formattedString as String
+            return false
+        }
+
         return true
     }
     
@@ -231,7 +263,6 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -241,7 +272,10 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
-        let mobileNumber = mobileNumberTextField.contentTextField.text ?? ""
+        
+        
+        let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumberTextField.contentTextField.text!)
+        let mobileNumber = phoneNumber
         var contact_preference = "1"
         let contactPreference = contactPreferenceSegmentControl.selectedSegmentIndex
         if contactPreference == 0 {
@@ -356,7 +390,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let email = emailPlaceHolderTextField.contentTextField.text
         
         let validEmail = AppHelper.isValidEmail(testStr: emailPlaceHolderTextField.contentTextField.text!)
-        let validPhoneNumber = AppHelper.validate(value: mobileNumberTextField.contentTextField.text!)
+        
+        let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumberTextField.contentTextField.text!)
+        let validPhoneNumber = AppHelper.validate(value: phoneNumber)
         
         
         if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
@@ -429,8 +465,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         // let mobileNumber = UserDefaults.standard.object(forKey: MOBILE_NUMBER) ?? ""
         // let email = UserDefaults.standard.object(forKey: EMAIL) ?? ""
+        let number = user.phone_number;
         
-        mobileNumberTextField.contentTextField.text = user.phone_number
+        mobileNumberTextField.contentTextField.text = number.toPhoneNumber()
         //reEnterMobileNumberTextField.contentTextField.text = user.phone_number
         
         emailPlaceHolderTextField.contentTextField.text = user.email
@@ -448,16 +485,15 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
         }
         
-        HUD.allowsInteraction = false
-        HUD.dimsBackground = false
-        HUD.show(.progress)
-        
+       // HUD.allowsInteraction = false
+       // HUD.dimsBackground = false
+       // HUD.show(.progress)
+        SwiftLoader.show(title: "Loading...", animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -481,7 +517,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 DispatchQueue.main.async {
-                    HUD.hide()
+                   // HUD.hide()
+                    SwiftLoader.hide()
+
                 }
                 let json = JSON(data: response.data!)
                 //print(""json response\(json)")
@@ -497,10 +535,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                             UserDefaults.standard.set(userData, forKey: USER_DATA)
                             let phoneNumber = userDict["phone_number"]
                             UserDefaults.standard.set(phoneNumber, forKey: MOBILE_NUMBER)
-                            //print(""phoneNumber \(phoneNumber)")
                             let email = userDict["email"]
                             UserDefaults.standard.set(email, forKey: EMAIL)
-                            //print(""email \(email)")
                             self.loadData()
                             
                         }
@@ -518,7 +554,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
             case .failure(let error):
                 DispatchQueue.main.async {
-                    HUD.hide()
+                    //HUD.hide()
+                    SwiftLoader.hide()
+
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
                 //print("error)

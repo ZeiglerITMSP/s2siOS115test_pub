@@ -49,6 +49,8 @@ class EBTWebView: NSObject {
     let jsGetAllElements = "document.documentElement.outerHTML"
     let jsGetErrorCode = "$(\".errorInvalidField\").text();"
     
+    var isPageLoading = false
+    
     // ..
     
     
@@ -291,14 +293,15 @@ extension EBTWebView: WKNavigationDelegate {
     //
     //    }
     
-    //    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-    //        print("\n -- didStartProvisional -- \n")
-    //
-    //    }
+        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+            print("\n -- didStartProvisional -- \n")
+    
+            self.isPageLoading = true
+        }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("\n -- didFinish -- \n")
-        
+        self.isPageLoading = false
         self.responder?.didFinishLoadingWebView?()
     }
     

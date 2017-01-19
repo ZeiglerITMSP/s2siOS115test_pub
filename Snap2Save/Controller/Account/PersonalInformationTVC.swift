@@ -20,6 +20,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         case ageGroup
         case ethnicity
     }
+    
     var user : User = User()
     var additionalInfo : AdditionalInformation = AdditionalInformation()
     var languageSelectionButton: UIButton!
@@ -95,16 +96,20 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        AppHelper.configSwiftLoader()
+
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: saveButton, radius: 2.0, width: 1.0)
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         reloadContent()
         loadTextFields()
-        getProfile()
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
         self.view.addGestureRecognizer(tapGesture)
+        
+        getProfile()
+
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -444,7 +449,6 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -621,7 +625,6 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -644,11 +647,11 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             ] as [String : Any]
         
         //print("parameters)
+       // HUD.allowsInteraction = false
+       // HUD.dimsBackground = false
+       // HUD.show(.progress)
         
-        HUD.allowsInteraction = false
-        HUD.dimsBackground = false
-        HUD.show(.progress)
-        
+        SwiftLoader.show(title: "Loading...", animated: true)
         let url = String(format: "%@/getProfile", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -656,7 +659,8 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 DispatchQueue.main.async {
-                    HUD.hide()
+                   // HUD.hide()
+                    SwiftLoader.hide()
                 }
                 
                 let json = JSON(data: response.data!)
@@ -685,7 +689,9 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    HUD.hide()
+                   // HUD.hide()
+                    SwiftLoader.hide()
+
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
 
                 }

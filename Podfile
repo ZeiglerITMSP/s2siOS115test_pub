@@ -17,6 +17,8 @@ target 'Snap2Save' do
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
   
+  pod 'PhoneNumberKit', '~> 1.0'
+
 target 'Snap2SaveTests' do
     inherit! :search_paths
     # Pods for testing

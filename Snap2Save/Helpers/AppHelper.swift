@@ -38,13 +38,6 @@ class AppHelper {
         return image
     }
     
-    class func validMobileNumber( mobileNumber : String) -> Bool{
-        
-        if  mobileNumber.characters.count == 10{
-            return true
-        }
-        return false
-    }
     
     class  func validate(value: String) -> Bool {
         let PHONE_REGEX = "^\\d{3}\\d{3}\\d{4}$"
@@ -54,13 +47,19 @@ class AppHelper {
     }
     
     class func isValidEmail(testStr:String) -> Bool {
-        // ////print(""validate calendar: \(testStr)")
+        
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: testStr)
     }
     
+    class func removeSpecialCharacters(fromNumber inputString:String) -> String {
+        let validCharacters : Set<Character> = Set("1234567890".characters)
+        return String(inputString.characters.filter {validCharacters.contains($0) })
+    }
+    
+
     class func makeAsRequired(text:String) -> NSAttributedString {
         
         let mobileNumTxt = text + " *"
@@ -73,6 +72,21 @@ class AppHelper {
         
         return mobileNumTxtAttribute
     }
+    
+    class func configSwiftLoader() {
+        
+        var config : SwiftLoader.Config = SwiftLoader.Config()
+        config.size = 110
+        config.spinnerColor = APP_GRREN_COLOR
+        config.foregroundColor = .black
+        config.backgroundColor = .white
+        config.foregroundAlpha = 0.1
+        config.titleTextColor = APP_GRREN_COLOR
+        SwiftLoader.setConfig(config)
+        
+    }
+    
+
     
 }
 
@@ -130,6 +144,12 @@ extension String {
         
         return label.frame.height
     }
+
+    public func toPhoneNumber() -> String {
+        return self.replacingOccurrences(of: "(\\d{3})(\\d{3})(\\d+)", with: "($1) $2-$3", options: .regularExpression, range: nil)
+    }
+    
+
 }
 
 extension Dictionary where Value: Equatable {
@@ -188,7 +208,7 @@ extension UIViewController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         
-        let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: { alert in
             self.perform(action)
         })
         

@@ -16,6 +16,12 @@ PODS:
   - FBSDKShareKit (4.18.0):
     - FBSDKCoreKit
   - Localize-Swift (1.6)
+  - PhoneNumberKit (1.2.1):
+    - PhoneNumberKit/PhoneNumberKitCore (= 1.2.1)
+    - PhoneNumberKit/UIKit (= 1.2.1)
+  - PhoneNumberKit/PhoneNumberKitCore (1.2.1)
+  - PhoneNumberKit/UIKit (1.2.1):
+    - PhoneNumberKit/PhoneNumberKitCore
   - PKHUD (4.0.0)
   - SwiftyJSON (3.1.3)
 
@@ -27,6 +33,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - Localize-Swift
+  - PhoneNumberKit (~> 1.0)
   - PKHUD (~> 4.0)
   - SwiftyJSON
 
@@ -39,9 +46,10 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
   FBSDKShareKit: 0b8d6cc3f103c75297eb3c62caec284a2ccf1b9e
   Localize-Swift: d34c70b34ffb1468b2942c3f0b5c1dfd9119877e
+  PhoneNumberKit: 7917d5f1ca21cacce535e9aa9c6d7a4537f25726
   PKHUD: 2bb45c936bb8afa39f3cd33ec14e8cc89f624255
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: 63a6a8611b2da4ee19bc4781134c530d4f082e7b
+PODFILE CHECKSUM: ec707e7b79221f7f8c765c670b50881539f8bff6
 
 COCOAPODS: 1.1.1

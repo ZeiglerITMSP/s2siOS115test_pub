@@ -1,40 +1,36 @@
 //
-//  OffersVC.swift
+//  OffersDetailsViewController.swift
 //  Snap2Save
 //
-//  Created by Appit on 1/3/17.
+//  Created by Malathi on 17/01/17.
 //  Copyright © 2017 Appit. All rights reserved.
 //
 
 import UIKit
 
-class OffersVC: UIViewController {
+class OffersDetailsViewController: UIViewController {
 
     var languageSelectionButton: UIButton!
+    var urlString : String = ""
 
-    // Outlets
+    @IBOutlet var offersWebView: UIWebView!
     
-    @IBOutlet var offersImageView: UIImageView!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         reloadContent()
         
-        let tapGes : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapGesClicked))
-        tapGes.numberOfTapsRequired = 1
-        tapGes.numberOfTouchesRequired = 1
-        offersImageView.addGestureRecognizer(tapGes)
-        
-        offersImageView.image = UIImage.init(named: "snap2save.jpeg")
-        offersImageView.isUserInteractionEnabled = true
-        offersImageView.contentMode = .scaleAspectFit
-        
+        let url = URL(string : urlString )
+        let request = URLRequest(url: url!)
+        offersWebView.loadRequest(request)
+        offersWebView.scalesPageToFit = true
     }
 
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
@@ -49,8 +45,8 @@ class OffersVC: UIViewController {
         LanguageUtility.removeObserverForLanguageChange(self)
         super.viewDidDisappear(animated)
     }
-
     
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -58,28 +54,6 @@ class OffersVC: UIViewController {
     
 
     
-    func languageButtonClicked() {
-        self.showLanguageSelectionAlert()
-    }
-
-    
-    func reloadContent() {
-        
-        DispatchQueue.main.async {
-            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-            self.navigationItem.title = "Offers".localized()
-
-        }
-        
-    }
-    
-    func tapGesClicked() {
-        
-       let offerDetails = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "OffersDetailsViewController") as! OffersDetailsViewController
-        offerDetails.urlString = "http://www.snap2save.com/app/about_comingsoon.php"
-        self.navigationController?.show(offerDetails, sender: self)
-    }
-
     /*
     // MARK: - Navigation
 
@@ -89,5 +63,25 @@ class OffersVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    
+    func languageButtonClicked() {
+        self.showLanguageSelectionAlert()
+    }
+    
+    
+    func reloadContent() {
+        DispatchQueue.main.async {
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.updateBackButtonText()
+            self.navigationItem.title = "Offers".localized()
+            
+        }
+    }
+
+    func backAction() {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
 
 }

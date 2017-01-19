@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Jb5-Eo-rzl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Jb5-Eo-rzl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1355,13 +1355,61 @@
                     <view key="view" contentMode="scaleToFill" id="L3Z-Gh-cte">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lBI-9s-5ep">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="lBI-9s-5ep" secondAttribute="trailing" id="SxQ-Ys-MDZ"/>
+                            <constraint firstItem="lBI-9s-5ep" firstAttribute="leading" secondItem="L3Z-Gh-cte" secondAttribute="leading" id="Ucz-1O-lF2"/>
+                            <constraint firstItem="kXF-zc-Npu" firstAttribute="top" secondItem="lBI-9s-5ep" secondAttribute="bottom" id="jtt-ym-wWH"/>
+                            <constraint firstItem="lBI-9s-5ep" firstAttribute="top" secondItem="iG6-0z-sfN" secondAttribute="bottom" id="q10-t9-aR1"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2oM-CS-5g3"/>
+                    <connections>
+                        <outlet property="offersImageView" destination="lBI-9s-5ep" id="9PV-7C-olN"/>
+                        <segue destination="ryw-4N-t2f" kind="show" identifier="OffersDetailsViewController" id="rXc-is-4or"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qlu-Wl-qkm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-66" y="-916"/>
+        </scene>
+        <!--Offers Details View Controller-->
+        <scene sceneID="7TM-IK-7BE">
+            <objects>
+                <viewController storyboardIdentifier="OffersDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ryw-4N-t2f" customClass="OffersDetailsViewController" customModule="Snap2Save" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dFC-3u-4gu"/>
+                        <viewControllerLayoutGuide type="bottom" id="63X-8O-O6I"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tCv-gE-5lG">
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wN0-ot-V3B">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="63X-8O-O6I" firstAttribute="top" secondItem="wN0-ot-V3B" secondAttribute="bottom" id="0Nl-Yt-OeX"/>
+                            <constraint firstAttribute="trailing" secondItem="wN0-ot-V3B" secondAttribute="trailing" id="6L1-09-5pg"/>
+                            <constraint firstItem="wN0-ot-V3B" firstAttribute="top" secondItem="dFC-3u-4gu" secondAttribute="bottom" id="hXh-bW-C5V"/>
+                            <constraint firstItem="wN0-ot-V3B" firstAttribute="leading" secondItem="tCv-gE-5lG" secondAttribute="leading" id="jy9-e9-iCg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="offersWebView" destination="wN0-ot-V3B" id="DrY-zF-DCh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZiD-4E-r2h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="676" y="-550"/>
         </scene>
         <!--Services Web ViewVC-->
         <scene sceneID="hm4-oK-PNU">

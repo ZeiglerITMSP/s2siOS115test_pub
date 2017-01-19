@@ -33,7 +33,7 @@ class ServicesWebViewVC: UIViewController {
         let url = URL(string : loadUrl )
         let request = URLRequest(url: url!)
         servicesWebView.loadRequest(request)
-        
+        servicesWebView.scalesPageToFit = true
         reloadContent()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
 

@@ -88,8 +88,9 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         let firstName = facebookDict?["first_name"] ?? ""
         let lastName = facebookDict?["last_name"] ?? ""
         let gender = facebookDict?["gender"] ?? "";
+        let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumTextField.text!)
         
-        let userDetails:[String:Any] = ["phone_number":mobileNumTextField.text ?? "",
+        let userDetails:[String:Any] = ["phone_number":phoneNumber,
                                         "password":passwordTextField.text ?? "",
                                         "zipcode":zipCodeTextField.text ?? "",
                                         "contact_preference":contactPreferenceSegmentControl.selectedSegmentIndex,
@@ -434,7 +435,10 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
 
     func isValidData() -> Bool{
         
-        let validMobileNum = AppHelper.validMobileNumber(mobileNumber: mobileNumTextField.text!)
+        //let validMobileNum = AppHelper.validMobileNumber(mobileNumber: mobileNumTextField.text!)
+        
+        let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumTextField.text!)
+        let validMobileNum = AppHelper.validate(value: phoneNumber)
         let validEmail = AppHelper.isValidEmail(testStr: emailTextField.text!)
 
         if mobileNumTextField.text?.characters.count == 0 || validMobileNum == false {
@@ -519,13 +523,43 @@ extension SignUpTVC: AITextFieldProtocol {
         
         if textField == mobileNumTextField || textField == reEnterMobileNumTextField {
             
-            let currentCharacterCount = textField.text?.characters.count ?? 0
-            if (range.length + range.location > currentCharacterCount){
-                return false
-            }
-            let newLength = currentCharacterCount + string.characters.count - range.length
-            return newLength <= 10
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            let compo = newString.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+            let decimalString = compo.joined(separator: "") as NSString
+            let length = decimalString.length
+            let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
             
+            if length == 0 || (length > 10 && !hasLeadingOne) || length > 11
+            {
+                let newLength = (textField.text! as NSString).length + (string as NSString).length - range.length as Int
+                
+                return (newLength > 10) ? false : true
+            }
+            var index = 0 as Int
+            let formattedString = NSMutableString()
+            
+            if hasLeadingOne
+            {
+                formattedString.append("1 ")
+                index += 1
+            }
+            if (length - index) > 3
+            {
+                let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat("(%@)", areaCode)
+                index += 3
+            }
+            if length - index > 3
+            {
+                let prefix = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat(" %@-", prefix)
+                index += 3
+            }
+            
+            let remainder = decimalString.substring(from: index)
+            formattedString.append(remainder)
+            textField.text = formattedString as String
+            return false
         }
         
         if textField == zipCodeTextField {
@@ -560,9 +594,8 @@ extension SignUpTVC: AITextFieldProtocol {
         let email =  facebookDict?["email"] ?? ""
         emailTextField.text = email as? String
         
-        facebookActivityIndicator.stopAnimating()
         
-        //self.checkFacebookUser()
+        self.checkFacebookUser()
     }
  
     func checkFacebookUser() {
@@ -570,7 +603,6 @@ extension SignUpTVC: AITextFieldProtocol {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
@@ -590,7 +622,6 @@ extension SignUpTVC: AITextFieldProtocol {
             ] as [String : Any]
         
         //print("parameters)
-        //loginActivityIndicator.startAnimating()
         let url = String(format: "%@/checkFbUser", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -598,7 +629,8 @@ extension SignUpTVC: AITextFieldProtocol {
             switch response.result {
             case .success:
                 DispatchQueue.main.async {
-                   // self.registerActivityIndicator.stopAnimating()
+                    self.facebookActivityIndicator.stopAnimating()
+
                 }
                 
                 let json = JSON(data: response.data!)
@@ -630,6 +662,8 @@ extension SignUpTVC: AITextFieldProtocol {
                 
                 DispatchQueue.main.async {
                     //self.loginActivityIndicator.stopAnimating()
+                    self.facebookActivityIndicator.stopAnimating()
+
                     self.showAlert(title: "", message: "Sorry, Please try again later".localized());
                 }
                 //print("error)

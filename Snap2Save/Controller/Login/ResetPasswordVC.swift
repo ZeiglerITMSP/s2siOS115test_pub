@@ -18,7 +18,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     @IBOutlet var msgLabel: UILabel!
     
     @IBOutlet var passwordLabel: UILabel!
-
+    
     @IBOutlet var reEnterPasswordLabel: UILabel!
     @IBOutlet var passwordTextField: AITextField!
     
@@ -42,7 +42,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.title = "Reset Password"
         passwordTextField.textFieldType = AITextField.AITextFieldType.PasswordTextField
@@ -57,7 +57,6 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         reEnterPasswordTextField.updateUIAsPerTextFieldType()
         reEnterPasswordTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         reEnterPasswordTextField.placeHolderLabel = reEnterPasswordLabel
-        //        mobileNumTextField.createBorder(borderColor: UIColor.red,xpos: 0)
         reEnterPasswordTextField.setLeftGap(width: 0, placeHolderImage: UIImage.init())
         reEnterPasswordTextField.setRightGap(width: 0, placeHolderImage: UIImage.init())
         reEnterPasswordTextField.text_Color =  UIColor.black
@@ -74,7 +73,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         // Tap Gesuture
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
         self.view.addGestureRecognizer(tapGesture)
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -90,7 +89,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
-       // self.navigationController?.navigationBar.isTranslucent = false
+        // self.navigationController?.navigationBar.isTranslucent = false
         //let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         //self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
         self.navigationController?.navigationBar.barTintColor = APP_GRREN_COLOR
@@ -99,7 +98,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         self.navigationItem.leftBarButtonItem = backButton
         reloadContent()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -137,42 +136,41 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         passwordTextField.updateUIAsPerTextFieldType();
         reEnterPasswordTextField.updateUIAsPerTextFieldType();
     }
-
+    
     func keyBoardHidden(textField: UITextField) {
         if textField == passwordTextField {
             reEnterPasswordTextField.becomeFirstResponder()
         }
         else {
-       textField.resignFirstResponder()
+            textField.resignFirstResponder()
         }
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     func resetPassword(){
         
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        //print(""isreachable \(isReachable)")
         if isReachable == false {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
         }
-
+        
         self.view.endEditing(true)
         let password = passwordTextField.text ?? ""
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id = self.user_id ?? ""
         //let auth_token = UserDefaults.standard.string(forKey: "auth_token") ?? ""
         let currentLanguage = Localize.currentLanguage()
-
+        
         let parameters = ["password":password,
                           "code":user_id,
                           "platform":"1",
@@ -195,7 +193,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
                 DispatchQueue.main.async {
                     self.resetPasswordActivityIndicator.stopAnimating()
                 }
-
+                
                 let json = JSON(data: response.data!)
                 //print(""json response\(json)")
                 
@@ -210,8 +208,10 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
                     })
                     
                     alertController.addAction(defaultAction)
+                   
                     DispatchQueue.main.async {
                         self.present(alertController, animated: true, completion: nil)
+                        alertController.view.tintColor = APP_GRREN_COLOR
                     }
                 }
                 
@@ -229,5 +229,5 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
             
         }
     }
-
+    
 }

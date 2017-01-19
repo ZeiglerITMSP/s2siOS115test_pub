@@ -222,12 +222,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
-        ////print(""isreachable \(isReachable)")
         if isReachable == false {
             let alertController = UIAlertController(title: "", message: "Please check your internet connection".localized(), preferredStyle: .alert)
             
             
-            let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { alert in
             })
             
             alertController.addAction(okAction)
@@ -317,7 +316,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
                                         
                                         
-                                        let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+                                        let okAction = UIAlertAction(title: "OK", style: .default, handler: { alert in
                                         })
                                         
                                         alertController.addAction(okAction)
@@ -336,7 +335,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             DispatchQueue.main.async {
                                 let alertController = UIAlertController(title: "", message: "Sorry, Please try again later", preferredStyle: .alert)
                                 
-                                let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+                                let okAction = UIAlertAction(title: "OK", style: .default, handler: { alert in
                                 })
                                 
                                 alertController.addAction(okAction)
@@ -416,9 +415,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 let alertMessage = responseDict["message"] as! String
                                 let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
                                 
-                               // self.window?.tintColor = UIColor.green
-                                let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
-                                })
+                                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                                 
                                 alertController.addAction(okAction)
                                 let viewController = UIApplication.topViewController();                                            DispatchQueue.main.async {
@@ -435,7 +432,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             DispatchQueue.main.async {
                                 let alertController = UIAlertController(title: "", message: "Sorry, Please try again later", preferredStyle: .alert)
                                 
-                                let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+                                let okAction = UIAlertAction(title: "OK", style: .default, handler: { alert in
                                 })
                                 
                                 alertController.addAction(okAction)
