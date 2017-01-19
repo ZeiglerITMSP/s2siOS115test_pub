@@ -176,7 +176,16 @@ class EBTDateOfBirthTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
-    // MARK: - Web View
+    func moveToNextController(identifier:String) {
+        
+        let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
+
+extension EBTDateOfBirthTVC {
+    // MARK: Scrapping
     
     // check status
     func validateSubmitAction() {
@@ -337,36 +346,26 @@ securityQuestions();
     
     func validateNextPage() {
         
-        let jsLoginValidation = "$('.PageHeader').text();"
-        
-        let javaScript = jsLoginValidation
-        
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+        ebtWebView.getPageHeading(completion: { result in
             
-            if let result = result {
+            if let pageTitle = result {
                 
-                let resultString = result as! String
-                
-                if resultString == "Select PIN" {
-                    
-                    self.actionType = nil
-                    
-                    self.nextButton.isEnabled = true
-                    self.nextActivityIndicator.stopAnimating()
-                    // move to view controller
-                    self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
-                    
+                if let nextVCIdentifier = EBTConstants.getEBTViewControllerName(forPageTitle: pageTitle) {
+                    self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
-                    print("page not loaded..")
-                    self.actionType = ActionType.waitingForPageLoad
+                    // unknown page
+                    print("UNKNOWN PAGE")
                 }
+                
             } else {
-                print(error ?? "")
-                self.actionType = ActionType.waitingForPageLoad
+                // is page not loaded
+                print("PAGE NOT LOADED YET..")
             }
-        }
+            
+        })
+        
     }
-    
+
 
 
 }

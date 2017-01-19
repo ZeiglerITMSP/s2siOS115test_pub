@@ -188,7 +188,6 @@ extension EBTLoginSecurityQuestionTVC {
                         self.getSecurityQuestion()
                         self.checkForErrorMessage()
                     }
-                    
                 } else {
                     self.validateNextPage()
                 }
@@ -223,28 +222,6 @@ extension EBTLoginSecurityQuestionTVC {
         
     }
     
-    func validateNextPageWithPageTitle() {
-        
-        ebtWebView.getPageTitle(completion: { result in
-            
-            if let pageTitle = result {
-                
-                if let nextVCIdentifier = EBTConstants.getEBTViewControllerName(forPageTitle: pageTitle) {
-                    self.moveToNextController(identifier: nextVCIdentifier)
-                } else {
-                    // unknown page
-                    print("UNKNOWN PAGE")
-                    
-                }
-                
-            } else {
-                // is page not loaded
-                print("PAGE NOT LOADED YET..")
-            }
-            
-        })
-        
-    }
     
     func getSecurityQuestion() {
         

@@ -172,8 +172,17 @@ class EBTConfirmationTVC: UITableViewController {
         // Post notification
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
+    
+    func moveToNextController(identifier:String) {
+        
+        let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
 
-    // MARK: - WebView
+extension EBTConfirmationTVC {
+    // MARK: Scrapping
     
     // MARK:- Card Number Filling
     func autoFill(valdationCode:String) {
@@ -230,20 +239,26 @@ class EBTConfirmationTVC: UITableViewController {
     
     func validateNextPage() {
         
-        ebtWebView.getPageHeader(completion: { pageTitle in
+        ebtWebView.getPageHeading(completion: { result in
             
-            if pageTitle == "Verify Security Question" {
+            if let pageTitle = result {
                 
-                self.validateButton.isEnabled = true
-                self.validateActivityIndicator.stopAnimating()
-                self.performSegue(withIdentifier: "EBTLoginSecurityQuestionTVC", sender: nil)
+                if let nextVCIdentifier = EBTConstants.getEBTViewControllerName(forPageTitle: pageTitle) {
+                    self.moveToNextController(identifier: nextVCIdentifier)
+                } else {
+                    // unknown page
+                    print("UNKNOWN PAGE")
+                }
                 
             } else {
-                
+                // is page not loaded
+                print("PAGE NOT LOADED YET..")
             }
+            
         })
         
     }
+
 
 
 }

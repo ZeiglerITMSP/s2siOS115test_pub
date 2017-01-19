@@ -124,6 +124,12 @@ class EBTCardNumberTVC: UITableViewController {
         
     }
 
+    func moveToNextController(identifier:String) {
+        
+        let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -154,9 +160,12 @@ class EBTCardNumberTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
-    // MARK: - WebView
+}
+
+extension EBTCardNumberTVC {
+ 
+    // MARK: Scrapping
     
-    // load webpage
     func loadSignupPage() {
 
         let signupUrl_en = kEBTSignupUrl
@@ -179,7 +188,7 @@ class EBTCardNumberTVC: UITableViewController {
                 
                 let resultString = result as! String
                 
-                if resultString == "Identify Your Card and Accounts" {
+                if resultString == "Identify Your Card and Accounts".localized() {
                     
                     self.autoFill(cardNumber: self.cardNumberField.contentTextField.text!)
                 } else {
@@ -193,14 +202,10 @@ class EBTCardNumberTVC: UITableViewController {
         }
     }
 
-    
-    // MARK:- Card Number Filling
+
     func autoFill(cardNumber:String) {
         
-        
         actionType = ActionType.cardNumber
-        
-        
         
         let jsCardNumber = "$('#txtCardNumber').val('\(cardNumber)');"
 //        let jsSubmit = "void($('form')[1].submit());"
@@ -286,36 +291,59 @@ class EBTCardNumberTVC: UITableViewController {
         }
     }
     
-    
     func validateNextPage() {
         
-        let jsLoginValidation = "$('.PageHeader').text();"
-        
-        let javaScript = jsLoginValidation
-        
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+        ebtWebView.getPageHeading(completion: { result in
             
-            if let result = result {
+            if let pageTitle = result {
                 
-                let resultString = result as! String
-                
-                if resultString == "Validate Identity" {
-                    
-                    self.actionType = nil
-                    self.nextActivityIndicator.stopAnimating()
-                    // move to view controller
-                    self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
-
+                if let nextVCIdentifier = EBTConstants.getEBTViewControllerName(forPageTitle: pageTitle) {
+                    self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
-                    print("page not loaded..")
-                    self.actionType = ActionType.waitingForPageLoad
+                    // unknown page
+                    print("UNKNOWN PAGE")
                 }
+                
             } else {
-                print(error ?? "")
-                self.actionType = ActionType.waitingForPageLoad
+                // is page not loaded
+                print("PAGE NOT LOADED YET..")
             }
-        }
+            
+        })
+        
     }
+    
+    
+//    
+//    func validateNextPage() {
+//        
+//        let jsLoginValidation = "$('.PageHeader').text();"
+//        
+//        let javaScript = jsLoginValidation
+//        
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            
+//            if let result = result {
+//                
+//                let resultString = result as! String
+//                
+//                if resultString == "Validate Identity" {
+//                    
+//                    self.actionType = nil
+//                    self.nextActivityIndicator.stopAnimating()
+//                    // move to view controller
+//                    self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
+//
+//                } else {
+//                    print("page not loaded..")
+//                    self.actionType = ActionType.waitingForPageLoad
+//                }
+//            } else {
+//                print(error ?? "")
+//                self.actionType = ActionType.waitingForPageLoad
+//            }
+//        }
+//    }
 
 
 }

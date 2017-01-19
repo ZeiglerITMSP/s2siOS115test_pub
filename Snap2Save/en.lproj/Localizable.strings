@@ -286,7 +286,7 @@
 
 // registration
 "ebt.cardnumber" = "Identify Your Card and Accounts";
-"ebt.dob" = "validate identity";
+"ebt.dob" = "Validate Identity";
 "ebt.pin" = "Select PIN";
 "ebt.userInformation" = "Enter User Information";
 "ebt.confirmation" = "Confirmation";

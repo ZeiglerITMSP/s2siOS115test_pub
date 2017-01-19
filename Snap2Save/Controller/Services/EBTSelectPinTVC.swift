@@ -140,7 +140,12 @@ class EBTSelectPinTVC: UITableViewController {
         
     }
 
-
+    func moveToNextController(identifier:String) {
+        
+        let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -170,8 +175,10 @@ class EBTSelectPinTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
 
-    // MARK: - 
-    
+}
+
+extension EBTSelectPinTVC {
+    // MARK: Scrapping
     
     func autoFill() {
         
@@ -235,33 +242,26 @@ class EBTSelectPinTVC: UITableViewController {
     
     func validateNextPage() {
         
-        let jsLoginValidation = "$('.PageHeader').text();"
-        
-        let javaScript = jsLoginValidation
-        
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+        ebtWebView.getPageHeading(completion: { result in
             
-            if let result = result {
+            if let pageTitle = result {
                 
-                let resultString = result as! String
-                
-                if resultString == "Enter User Information" {
-                    
-                    self.actionType = nil
-                    self.nextActivityIndicator.stopAnimating()
-                    self.nextButton.isEnabled = true
-                    // move to view controller
-                    self.performSegue(withIdentifier: "EBTUserInformationTVC", sender: self)
-                    
+                if let nextVCIdentifier = EBTConstants.getEBTViewControllerName(forPageTitle: pageTitle) {
+                    self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
-                    print("page not loaded..")
+                    // unknown page
+                    print("UNKNOWN PAGE")
                 }
-            } else {
-                print(error ?? "")
                 
+            } else {
+                // is page not loaded
+                print("PAGE NOT LOADED YET..")
             }
-        }
+            
+        })
+        
     }
+
     
 }
 
