@@ -207,7 +207,7 @@ extension EBTLoginSecurityQuestionTVC {
             
             if let pageTitle = result {
                 
-                if let nextVCIdentifier = EBTConstants.getLoginViewControllerName(forPageTitle: pageTitle) {
+                if let nextVCIdentifier = EBTConstants.getEBTViewControllerName(forPageTitle: pageTitle) {
                     self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
                     // unknown page
@@ -229,7 +229,7 @@ extension EBTLoginSecurityQuestionTVC {
             
             if let pageTitle = result {
                 
-                if let nextVCIdentifier = EBTConstants.getLoginViewControllerName(forPageTitle: pageTitle) {
+                if let nextVCIdentifier = EBTConstants.getEBTViewControllerName(forPageTitle: pageTitle) {
                     self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
                     // unknown page

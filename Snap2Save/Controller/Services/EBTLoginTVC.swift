@@ -7,11 +7,7 @@
 //
 
 import UIKit
-import PKHUD
-
 import Localize_Swift
-
-
 import LocalAuthentication
 
 class EBTLoginTVC: UITableViewController {
@@ -19,18 +15,19 @@ class EBTLoginTVC: UITableViewController {
     fileprivate enum ActionType {
         
         case autofill
-        case sumbit
+        case registration
     }
     
-        // Properties
+    // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
-    let pageTitle = "ebt.logon".localized()
+    var pageTitle = "ebt.logon".localized()
     
     let notificationName = Notification.Name("POPTOLOGIN")
-    
     var languageSelectionButton: UIButton!
+    
+    var isTouchIdAvailable = false
     
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
@@ -41,6 +38,10 @@ class EBTLoginTVC: UITableViewController {
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var remmeberMyUserNameLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var registrationActivityIndicator: UIActivityIndicatorView!
+    
+    
     
     // Action
     @IBAction func loginAction(_ sender: UIButton) {
@@ -53,8 +54,8 @@ class EBTLoginTVC: UITableViewController {
         actionType = ActionType.autofill
         validatePage()
         
+        // save user name
         if isValid(userId: userIdField.contentTextField.text) {
-            
             if rememberMeButton.isSelected {
                 saveUserID()
             }
@@ -63,10 +64,15 @@ class EBTLoginTVC: UITableViewController {
     }
     
     @IBAction func registrationAction(_ sender: UIButton) {
-        
         self.view.endEditing(true)
         
-        performSegue(withIdentifier: "EBTCardNumberTVC", sender: nil)
+        registrationButton.isEnabled = false
+        registrationActivityIndicator.startAnimating()
+        
+        actionType = ActionType.registration
+        validatePage()
+        
+       // performSegue(withIdentifier: "EBTCardNumberTVC", sender: nil)
     }
     
     
@@ -111,23 +117,13 @@ class EBTLoginTVC: UITableViewController {
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
-        reloadContent()
-        loadLoginPage()
+//        reloadContent()
+//        loadLoginPage()
         
         
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         
-        // remember userID
-        let rememberUser = UserDefaults.standard.bool(forKey: kRememberMeEBT)
-        rememberMeButton.isSelected = rememberUser
-        
-        if rememberUser {
-            let userId = UserDefaults.standard.value(forKey: kUserIdEBT) as? String
-            if userId != nil {
-                authenticateUserWithTouchID()
-            }
-        }
         
         userIdField.contentTextField.aiDelegate = self
         passwordField.contentTextField.aiDelegate = self
@@ -136,12 +132,20 @@ class EBTLoginTVC: UITableViewController {
         AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: registrationButton, radius: 2.0, width: 1.0)
         
         addTapGesture()
+        
+        isTouchIdAvailable = AppHelper.isTouchIDAvailable()
+        
+        if isTouchIdAvailable == false {
+            self.rememberMeButton.isEnabled = false
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         reloadContent()
+        autofillUserName()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -209,6 +213,7 @@ class EBTLoginTVC: UITableViewController {
             self.updateBackButtonText()
             self.title = "EBT".localized()
             
+            self.pageTitle = "ebt.logon".localized()
             self.userIdField.placeholderText = "USER ID".localized()
             self.passwordField.placeholderText = "PASSWORD".localized()
             self.remmeberMyUserNameLabel.text = "Remember my user ID".localized()
@@ -218,9 +223,8 @@ class EBTLoginTVC: UITableViewController {
             self.loginButton.setTitle("LOGIN".localized(), for: .normal)
             self.registrationButton.setTitle("REGISTRATION".localized(), for: .normal)
             
+            self.validateLoginPage()
         }
-        
-        
     }
     
     func popToLoginVC() {
@@ -232,6 +236,8 @@ class EBTLoginTVC: UITableViewController {
         errorMessageLabel.text = ""
         loginButton.isEnabled = true
         activityIndicator.stopAnimating()
+        registrationButton.isEnabled = true
+        registrationActivityIndicator.stopAnimating()
         self.tableView.reloadData()
     }
     
@@ -286,6 +292,25 @@ extension EBTLoginTVC {
     
     // MARK: Scrapping
     
+    func validateLoginPage() {
+        
+        // isCurrentPage
+        let jsLoginValidation = "$('#button_logon').text();"
+        let javaScript = jsLoginValidation
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                if resultTrimmed != self.pageTitle {
+                    self.loadLoginPage()
+                }
+            } else {
+                print(error ?? "")
+            }
+        }
+    }
+    
     func loadLoginPage() {
         
         let loginUrl = kEBTLoginUrl
@@ -318,7 +343,11 @@ extension EBTLoginTVC {
                     if self.actionType == ActionType.autofill {
                         self.actionType = nil
                         self.autoFill()
-                    } else {
+                    } else if self.actionType == ActionType.registration {
+                        self.actionType = nil
+                        self.registrationClick()
+                    }
+                    else {
                         self.checkForErrorMessage()
                     }
                     
@@ -341,7 +370,7 @@ extension EBTLoginTVC {
          
             if let pageTitle = result {
                 
-                if let nextVCIdentifier = EBTConstants.getLoginViewControllerName(forPageTitle: pageTitle) {
+                if let nextVCIdentifier = EBTConstants.getEBTViewControllerName(forPageTitle: pageTitle) {
                     self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
                     // unknown page
@@ -357,11 +386,10 @@ extension EBTLoginTVC {
         
     }
     
-    // autofill fields
     func autoFill() {
         
-        loginButton.isEnabled = false
-        activityIndicator.startAnimating()
+//        loginButton.isEnabled = false
+//        activityIndicator.startAnimating()
         
         let userid = self.userIdField.contentTextField.text!
         let password = self.passwordField.contentTextField.text!
@@ -372,6 +400,17 @@ extension EBTLoginTVC {
         //        let jsSubmit = "$(\"form[name='form1']\").submit();"
         
         let javaScript = jsUserID + jspassword + jsSubmit
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            self.checkForErrorMessage()
+        }
+    }
+    
+    func registrationClick() {
+        
+        
+        let jsRegistration = "javascript:void(window.location.href =$('.prelogonActRegBtns').find(\"a[title='Register for UCARD center']\").attr('href'));"
+        let javaScript = jsRegistration
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
             self.checkForErrorMessage()
@@ -394,7 +433,9 @@ extension EBTLoginTVC {
                     // update view
                     if self.ebtWebView.isPageLoading == false {
                         self.loginButton.isEnabled = true
+                        self.registrationButton.isEnabled = true
                         self.activityIndicator.stopAnimating()
+                        self.registrationActivityIndicator.stopAnimating()
                     }
                     
                     self.errorMessageLabel.text = resultTrimmed
@@ -413,11 +454,30 @@ extension EBTLoginTVC {
     }
     
     
+    
+    
 }
 
 extension EBTLoginTVC {
     
     // MARK: Touch ID
+    
+    func autofillUserName() {
+        
+        if isTouchIdAvailable {
+            // remember userID
+            let rememberUserEnabled = UserDefaults.standard.bool(forKey: kRememberMeEBT)
+            rememberMeButton.isSelected = rememberUserEnabled
+            
+            if rememberUserEnabled {
+                let userId = UserDefaults.standard.value(forKey: kUserIdEBT) as? String
+                if userId != nil {
+                    authenticateUserWithTouchID()
+                }
+            }
+        }
+        
+    }
     
     func authenticateUserWithTouchID() {
         let context = LAContext()
@@ -440,9 +500,11 @@ extension EBTLoginTVC {
                 }
             }
         } else {
-            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
+            
+            self.rememberMeButton.isEnabled = false
+//            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
+//            ac.addAction(UIAlertAction(title: "OK", style: .default))
+//            present(ac, animated: true)
         }
     }
     
@@ -453,11 +515,9 @@ extension EBTLoginTVC {
     }
     
     func saveUserID() {
-        
         if let userId = userIdField.contentTextField.text {
             UserDefaults.standard.set(userId, forKey: kUserIdEBT)
         }
-        
     }
 
     

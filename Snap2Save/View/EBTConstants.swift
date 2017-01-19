@@ -32,14 +32,26 @@ class EBTConstants: NSObject {
     
     
     
-   class func getLoginViewControllerName(forPageTitle title:String) -> String? {
-        
+   class func getEBTViewControllerName(forPageTitle title:String) -> String? {
+        // login
         if title == "ebt.securityQuestion".localized() {
             return "EBTLoginSecurityQuestionTVC"
         } else if title == "ebt.authentication".localized() {
             return "EBTAuthenticationTVC"
         } else if title == "ebt.accountSummary".localized() {
             return "EBTDashboardTVC"
+        }
+        // registration
+        else if title == "ebt.cardnumber".localized() {
+            return "EBTCardNumberTVC"
+        } else if title == "ebt.dob".localized() {
+            return "EBTDateOfBirthTVC"
+        } else if title == "ebt.pin".localized() {
+            return "EBTSelectPinTVC"
+        } else if title == "ebt.userInformation".localized() {
+            return "EBTUserInformationTVC"
+        } else if title == "ebt.confirmation".localized() {
+            return "EBTConfirmationTVC"
         }
         
         return nil

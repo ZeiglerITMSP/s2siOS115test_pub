@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Localize_Swift
+import LocalAuthentication
 
 class AppHelper {
     
@@ -87,7 +88,13 @@ class AppHelper {
     }
     
 
-    
+    class func isTouchIDAvailable() -> Bool {
+        
+        let context = LAContext()
+        var error: NSError?
+        let status = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+        return status
+    }
 }
 
 

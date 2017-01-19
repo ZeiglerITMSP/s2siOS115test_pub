@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import Localize_Swift
+
 
 class ServicesTVC: UITableViewController {
+    
+    // Properties
+    let ebtWebView: EBTWebView = EBTWebView.shared
+    
     
     
     // Outlets
@@ -18,6 +24,9 @@ class ServicesTVC: UITableViewController {
     @IBOutlet weak var contactUsLabel: UILabel!
     @IBOutlet weak var termsLabel: UILabel!
     @IBOutlet weak var privacyPolicyLabel: UILabel!
+    
+    @IBOutlet weak var ebtActivityIndicator: UIActivityIndicatorView!
+    
     
     
     var languageSelectionButton: UIButton!
@@ -67,7 +76,7 @@ class ServicesTVC: UITableViewController {
         if indexPath.section == 0 {
             
             if indexPath.row == 0 {
-                performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
+                loadLoginPage()
             }
         }
         else if indexPath.section == 1 {
@@ -134,6 +143,8 @@ class ServicesTVC: UITableViewController {
             self.navigationController?.show(servicesWebVc, sender: self)
             
         }
+        
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
 
@@ -162,3 +173,71 @@ class ServicesTVC: UITableViewController {
     
 
 }
+
+
+
+extension ServicesTVC {
+    
+    func loadLoginPage() {
+        
+        self.ebtActivityIndicator.startAnimating()
+        // config..
+        ebtWebView.responder = self
+        let webView = ebtWebView.webView!
+        self.view.addSubview(webView)
+        webView.sendSubview(toBack: self.view)
+        
+        let loginUrl = kEBTLoginUrl
+        
+        if Localize.currentLanguage() == "ES" {
+            // .. es url
+            //loginUrl = kEBTLoginUrl
+        }
+        
+        let url = NSURL(string: loginUrl)
+        let request = NSURLRequest(url: url! as URL)
+        
+        
+        ebtWebView.webView.load(request as URLRequest)
+    }
+    
+    func validatePage() {
+        
+        // isCurrentPage
+        let jsLoginValidation = "$('#button_logon').text();"
+        let javaScript = jsLoginValidation
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                if resultTrimmed == "ebt.logon".localized() {
+                    
+                    self.ebtActivityIndicator.stopAnimating()
+                    self.performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
+                    
+                } else {
+                    self.ebtActivityIndicator.stopAnimating()
+                    
+                }
+                
+            } else {
+                print(error ?? "")
+            }
+            
+        }
+    }
+
+    
+}
+
+extension ServicesTVC: EBTWebViewDelegate {
+    
+    func didFinishLoadingWebView() {
+        
+        validatePage()
+    }
+}
+
+
+

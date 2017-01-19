@@ -277,13 +277,24 @@
 "CASH Balance" = "CASH Balance";
 
 
-// Scrapping
+// ==== Scrapping ===
 
+// PAGE TITLES
+// login
 "ebt.logon" = "Logon";
 "ebt.authentication" = "We don’t recognize the computer you’re using.";
-"ebt.securityQuestion" = "Verify Security Question";
 
+// registration
+"ebt.cardnumber" = "Identify Your Card and Accounts";
+"ebt.dob" = "validate identity";
+"ebt.pin" = "Select PIN";
+"ebt.userInformation" = "Enter User Information";
+"ebt.confirmation" = "Confirmation";
+
+// dashboard
+"ebt.securityQuestion" = "Verify Security Question";
 "ebt.accountSummary" = "Account Summary";
+
 
 
 
