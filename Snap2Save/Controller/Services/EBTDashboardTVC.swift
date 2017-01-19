@@ -173,10 +173,12 @@ class EBTDashboardTVC: UITableViewController {
     
     func cancelProcess() {
         
-        // Define identifier
-        let notificationName = Notification.Name("POPTOLOGIN")
-        // Post notification
-        NotificationCenter.default.post(name: notificationName, object: nil)
+        _ = self.navigationController?.popToRootViewController(animated: true)
+        
+//        // Define identifier
+//        let notificationName = Notification.Name("POPTOLOGIN")
+//        // Post notification
+//        NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
     // JavaScript

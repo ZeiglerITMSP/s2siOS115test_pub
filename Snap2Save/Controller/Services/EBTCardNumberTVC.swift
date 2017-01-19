@@ -23,6 +23,7 @@ class EBTCardNumberTVC: UITableViewController {
     
     fileprivate var actionType: ActionType?
     
+    var pageTitle = "ebt.cardnumber".localized()
     
     // Outlets
     @IBOutlet weak var titleLabel: UILabel!
@@ -40,8 +41,13 @@ class EBTCardNumberTVC: UITableViewController {
         
         self.view.endEditing(true)
         
+        nextButton.isEnabled = false
         nextActivityIndicator.startAnimating()
+        
+        actionType = ActionType.cardNumber
+        
         validatePage()
+
     }
     
     @IBAction func cancelAction(_ sender: UIButton) {
@@ -67,7 +73,7 @@ class EBTCardNumberTVC: UITableViewController {
         
         ebtWebView.responder = self
         
-        loadSignupPage()
+//        loadSignupPage()
         
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: nextButton, radius: 2.0, width: 1.0)
         
@@ -116,6 +122,7 @@ class EBTCardNumberTVC: UITableViewController {
             
             self.title = "REGISTRATION".localized()
             
+            self.pageTitle = "ebt.cardnumber".localized()
             self.cardNumberField.placeholderText = "CARD NUMBER".localized()
             self.errorTitleLabel.text = "ebt.error.title".localized()
             
@@ -148,7 +155,6 @@ class EBTCardNumberTVC: UITableViewController {
     
     func backAction() {
         
-//        self.navigationController?.popViewController(animated: true)
         showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
@@ -176,39 +182,42 @@ extension EBTCardNumberTVC {
         ebtWebView.webView.load(request as URLRequest)
     }
     
+    
     func validatePage() {
         
-        let jsLoginValidation = "$('.PageHeader').text();"
-        
-        let javaScript = jsLoginValidation
-        
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+        ebtWebView.getPageHeading(completion: { result in
             
-            if let result = result {
-                
-                let resultString = result as! String
-                
-                if resultString == "Identify Your Card and Accounts".localized() {
-                    
-                    self.autoFill(cardNumber: self.cardNumberField.contentTextField.text!)
+            if let pageTitle = result {
+                // isCurrentPage
+                if pageTitle == self.pageTitle {
+                    // current page
+                    if self.actionType == ActionType.cardNumber {
+                        self.actionType = nil
+                        self.autoFill()
+                    } else {
+                        self.checkForErrorMessage()
+                    }
+                } else if pageTitle == "Online Terms and Conditions".localized() {
+                  
+                    self.acceptSubmit()
                 } else {
-                    print("page not loaded..")
-                    self.actionType = ActionType.waitingForPageLoad
+                    self.validateNextPage()
                 }
+                
             } else {
-                print(error ?? "")
-                self.actionType = ActionType.waitingForPageLoad
+                
             }
-        }
-    }
-
-
-    func autoFill(cardNumber:String) {
+            
+        })
         
-        actionType = ActionType.cardNumber
+    }
+    
+
+    func autoFill() {
+        
+        let cardNumber = self.cardNumberField.contentTextField.text!
         
         let jsCardNumber = "$('#txtCardNumber').val('\(cardNumber)');"
-//        let jsSubmit = "void($('form')[1].submit());"
         let jsSubmit = "void($('#btnValidateCardNumber').click());"
         
         let javaScript =  jsCardNumber + jsSubmit
@@ -223,64 +232,37 @@ extension EBTCardNumberTVC {
         }
     }
 
+    
     func checkForErrorMessage() {
         
-        let jsStatusMessage = "$('#VallidationExcpMsg').text();"
-        
-        ebtWebView.webView.evaluateJavaScript(jsStatusMessage) { (result, error) in
-            if error != nil {
-                print(error ?? "error nil")
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! String
-                let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                
-                if trimmedErrorMessage.characters.count > 0 {
+        ebtWebView.getErrorMessage(completion: { result in
+            
+            if let errorMessage = result {
+                if errorMessage.characters.count > 0 {
+                    // error message
                     
-                    self.nextActivityIndicator.stopAnimating()
-                    // handle error message
-                    self.errorMessageLabel.text = trimmedErrorMessage
+                    // update view
+                    if self.ebtWebView.isPageLoading == false {
+                        self.nextButton.isEnabled = true
+                        self.nextActivityIndicator.stopAnimating()
+                    }
+                    
+                    self.errorMessageLabel.text = errorMessage
                     self.tableView.reloadData()
                     
                 } else {
-                    // no error message
-                    self.checkPageHeader()
-                }
-            }
-        }
-    }
-    
-    
-    // MARK: - Agree
-    
-    func checkPageHeader() {
-        
-        let jsPageTitle = "$('.PageHeader').text();"
-        ebtWebView.webView.evaluateJavaScript(jsPageTitle) { (result, error) in
-            if error != nil {
-                print(error ?? "error nil")
-            } else {
-                print(result!)
-                
-                let stringResult = result as! String
-                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(pageTitle)
-                
-                if pageTitle == "Online Terms and Conditions" {
                     
-                    self.acceptSubmit()
                 }
+            } else {
+                
             }
-        }
+        })
     }
     
+
     func acceptSubmit() {
         
-        actionType = ActionType.accept
-        
-        // "$('#btnAcceptTandC).click();"
         let jsAcceptClick = "void($('form')[1].submit());"
-//        let jsAcceptClick = "$('#btnAcceptTandC).click();"
         
         ebtWebView.webView.evaluateJavaScript(jsAcceptClick) { (result, error) in
             if error != nil {
@@ -312,38 +294,6 @@ extension EBTCardNumberTVC {
         })
         
     }
-    
-    
-//    
-//    func validateNextPage() {
-//        
-//        let jsLoginValidation = "$('.PageHeader').text();"
-//        
-//        let javaScript = jsLoginValidation
-//        
-//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-//            
-//            if let result = result {
-//                
-//                let resultString = result as! String
-//                
-//                if resultString == "Validate Identity" {
-//                    
-//                    self.actionType = nil
-//                    self.nextActivityIndicator.stopAnimating()
-//                    // move to view controller
-//                    self.performSegue(withIdentifier: "EBTDateOfBirthTVC", sender: self)
-//
-//                } else {
-//                    print("page not loaded..")
-//                    self.actionType = ActionType.waitingForPageLoad
-//                }
-//            } else {
-//                print(error ?? "")
-//                self.actionType = ActionType.waitingForPageLoad
-//            }
-//        }
-//    }
 
 
 }
@@ -352,16 +302,7 @@ extension EBTCardNumberTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
-        if actionType == ActionType.accept {
-            
-            validateNextPage()
-        } else if actionType == ActionType.cardNumber {
-            actionType = nil
-            checkForErrorMessage()
-        } else if actionType == ActionType.waitingForPageLoad {
-            
-            validatePage()
-        }
+        validatePage()
     }
     
 }

@@ -13,14 +13,14 @@ class EBTUserInformationTVC: UITableViewController {
 
     fileprivate enum ActionType {
         
-        case waitingForPageLoad
-        case cardNumber
-        case accept
+        case userInformation
     }
     
     // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
+    
+    var pageTitle = "ebt.userInformation".localized()
     
     var questionOneDictionary = [String:String]()
     var questionTwoDictionary = [String:String]()
@@ -58,17 +58,15 @@ class EBTUserInformationTVC: UITableViewController {
     // Actions
     
     @IBAction func nextAction(_ sender: UIButton) {
-        
         self.view.endEditing(true)
         
-        self.nextActivityIndicator.startAnimating()
-        self.nextButton.isEnabled = false
+        nextButton.isEnabled = false
+        nextActivityIndicator.startAnimating()
         
-        autoFill()
-
+        actionType = ActionType.userInformation
+        
+        validatePage()
     }
-    
-
     
     
     // MARK: -
@@ -205,7 +203,7 @@ class EBTUserInformationTVC: UITableViewController {
             
 
             self.title = "REGISTRATION".localized()
-            
+            self.pageTitle = "ebt.userInformation".localized()
             self.userIdField.placeholderText = "USER ID".localized()
             self.passwordField.placeholderText = "PASSWORD".localized()
             self.confirmPasswordField.placeholderText = "CONFIRM NEW PASSWORD".localized()
@@ -265,6 +263,85 @@ class EBTUserInformationTVC: UITableViewController {
 
 extension EBTUserInformationTVC {
     // MARK: Scrapping
+    
+    func getUserIdRules() {
+        
+        let dobErrorCode = "$('.prelogonInstrText:eq(2)').text();"
+        
+        ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
+            if error != nil {
+                
+                print(error ?? "error nil")
+                
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmed)
+                if trimmed.characters.count > 0 {
+                    
+                    
+                    let components = trimmed.components(separatedBy: "* ")
+                    
+                    var list = [String]()
+                    for comp in components {
+                        
+                        let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
+                        if trimmedNew.characters.count > 0 {
+                            
+                            let final = "* " + trimmedNew
+                            list.append(final)
+                        }
+                    }
+                    
+                    self.userIdRules = list.joined(separator: "\n")
+                    
+                } else {
+                    
+                }
+            }
+        }
+    }
+    
+    func getPasswordRules() {
+        
+        let dobErrorCode = "$('.prelogonInstrText:eq(4)').text();"
+        
+        ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
+            if error != nil {
+                
+                print(error ?? "error nil")
+                
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print(trimmed)
+                if trimmed.characters.count > 0 {
+                    
+                    let components = trimmed.components(separatedBy: "* ")
+                    
+                    var list = [String]()
+                    for comp in components {
+                        
+                        let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
+                        if trimmedNew.characters.count > 0 {
+                            
+                            let final = "* " + trimmedNew
+                            list.append(final)
+                        }
+                        
+                    }
+                    
+                    self.passwordRules = list.joined(separator: "\n")
+                    
+                } else {
+                    
+                }
+            }
+        }
+    }
+    
     
     func getQuestionOneList() {
         
@@ -404,6 +481,30 @@ extension EBTUserInformationTVC {
         
     }
     
+    func validatePage() {
+        
+        ebtWebView.getPageHeading(completion: { result in
+            
+            if let pageTitle = result {
+                // isCurrentPage
+                if pageTitle == self.pageTitle {
+                    // current page
+                    if self.actionType == ActionType.userInformation {
+                        self.actionType = nil
+                        self.autoFill()
+                    } else {
+                        self.checkForErrorMessage()
+                    }
+                } else {
+                    self.validateNextPage()
+                }
+            } else {
+                
+            }
+            
+        })
+        
+    }
 
     
     func autoFill() {
@@ -463,34 +564,34 @@ extension EBTUserInformationTVC {
     
     func checkForErrorMessage() {
         
-        let dobErrorCode = "$('.errorInvalidField').first().text();"
-        
-        ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
-            if error != nil {
-                
-                print(error ?? "error nil")
-                
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! String
-                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmed)
-                if trimmed.characters.count > 0 {
-                    // got error
-                    self.nextActivityIndicator.stopAnimating()
-                    self.nextButton.isEnabled = true
+        ebtWebView.getErrorMessage(completion: { result in
+            
+            if let errorMessage = result {
+                if errorMessage.characters.count > 0 {
+                    // error message
                     
-                    self.errorMessageLabel.text = trimmed
+                    // update view
+                    if self.ebtWebView.isPageLoading == false {
+                        self.nextButton.isEnabled = true
+                        self.nextActivityIndicator.stopAnimating()
+                    }
+                    
+                    self.errorMessageLabel.text = errorMessage
                     self.tableView.reloadData()
-                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0 ), at: .top, animated: true)
+                    // scroll to top..
+                    if self.ebtWebView.isPageLoading == false {
+                        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0 ), at: .top, animated: true)
+                    }
                     
                 } else {
-                    // success
-                    self.validateNextPage()
+                    
                 }
+            } else {
+                
             }
-        }
+        })
     }
+    
     
     func validateNextPage() {
         
@@ -515,84 +616,6 @@ extension EBTUserInformationTVC {
     }
     
     
-    func getUserIdRules() {
-        
-        let dobErrorCode = "$('.prelogonInstrText:eq(2)').text();"
-        
-        ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
-            if error != nil {
-                
-                print(error ?? "error nil")
-                
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! String
-                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmed)
-                if trimmed.characters.count > 0 {
-                    
-                    
-                    let components = trimmed.components(separatedBy: "* ")
-                    
-                    var list = [String]()
-                    for comp in components {
-                        
-                        let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
-                        if trimmedNew.characters.count > 0 {
-                            
-                            let final = "* " + trimmedNew
-                            list.append(final)
-                        }
-                    }
-                    
-                    self.userIdRules = list.joined(separator: "\n")
-                    
-                } else {
-                    
-                }
-            }
-        }
-    }
-
-    func getPasswordRules() {
-        
-        let dobErrorCode = "$('.prelogonInstrText:eq(4)').text();"
-        
-        ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
-            if error != nil {
-                
-                print(error ?? "error nil")
-                
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! String
-                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmed)
-                if trimmed.characters.count > 0 {
-                    
-                    let components = trimmed.components(separatedBy: "* ")
-                    
-                    var list = [String]()
-                    for comp in components {
-                        
-                        let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
-                        if trimmedNew.characters.count > 0 {
-                            
-                            let final = "* " + trimmedNew
-                            list.append(final)
-                        }
-                       
-                    }
-
-                    self.passwordRules = list.joined(separator: "\n")
-                    
-                } else {
-                    
-                }
-            }
-        }
-    }
-
     
 }
 
@@ -648,7 +671,7 @@ extension EBTUserInformationTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
-        checkForErrorMessage()
+        validatePage()
     }
     
 }

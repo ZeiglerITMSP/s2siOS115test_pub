@@ -23,7 +23,7 @@ class EBTAuthenticationTVC: UITableViewController {
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
-    let pageTitle = "ebt.authentication".localized()
+    var pageTitle = "ebt.authentication".localized()
     
     // Outlets
     
@@ -153,6 +153,7 @@ class EBTAuthenticationTVC: UITableViewController {
             self.authenticationCodeField.placeholderText = "AUTHENTICATION CODE".localized()
             self.errorTitleLabel.text = "ebt.error.title".localized()
             
+            self.pageTitle = "ebt.authentication".localized()
             self.confirmButton.setTitle("CONFIRM".localized(), for: .normal)
             self.regenerateButton.setTitle("REGENERATE".localized(), for: .normal)
             

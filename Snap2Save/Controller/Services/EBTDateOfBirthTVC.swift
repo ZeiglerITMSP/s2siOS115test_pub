@@ -24,6 +24,7 @@ class EBTDateOfBirthTVC: UITableViewController {
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
+    var pageTitle = "ebt.dob".localized()
     var questions = [String]()
     
     // Outles
@@ -36,17 +37,18 @@ class EBTDateOfBirthTVC: UITableViewController {
     @IBOutlet weak var nextActivityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var nextButton: UIButton!
+    
+    
     // Actions
     @IBAction func nextAction(_ sender: UIButton) {
-        
         self.view.endEditing(true)
-        
-//        self.performSegue(withIdentifier: "EBTSelectPinTVC", sender: nil)
         
         nextButton.isEnabled = false
         nextActivityIndicator.startAnimating()
-        autoFill(dob: dobField.contentTextField.text!)
         
+        actionType = ActionType.cardNumber
+        
+        validatePage()
     }
     
     // MARK: -
@@ -122,7 +124,7 @@ class EBTDateOfBirthTVC: UITableViewController {
         DispatchQueue.main.async {
             
             self.title = "REGISTRATION".localized()
-            
+            self.pageTitle = "ebt.dob".localized()
             self.dobField.placeholderText = "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)".localized()
             self.socialSecurityNumberField.placeholderText = "WHAT IS YOUR SOCIAL SECURITY NUMBER?".localized()
             self.errorTitleLabel.text = "ebt.error.title".localized()
@@ -187,29 +189,6 @@ class EBTDateOfBirthTVC: UITableViewController {
 extension EBTDateOfBirthTVC {
     // MARK: Scrapping
     
-    // check status
-    func validateSubmitAction() {
-        
-        let jsPageTitle = "$('.PageHeader').text();"
-        ebtWebView.webView.evaluateJavaScript(jsPageTitle) { (result, error) in
-            if error != nil {
-                //print("error ?? "error nil")
-            } else {
-            
-                let stringResult = result as! String
-                let pageTitle = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                
-                if pageTitle == "We don’t recognize the computer you’re using." {
-                    
-            
-                } else {
-                    
-                }
-                
-            }
-        }
-        
-    }
     
     func getQuestions() {
         
@@ -294,55 +273,73 @@ securityQuestions();
         
     }
 
+    func validatePage() {
+        
+        ebtWebView.getPageHeading(completion: { result in
+            
+            if let pageTitle = result {
+                // isCurrentPage
+                if pageTitle == self.pageTitle {
+                    // current page
+                    if self.actionType == ActionType.cardNumber {
+                        self.actionType = nil
+                        self.autoFill()
+                    } else {
+                        self.checkForErrorMessage()
+                    }
+                } else {
+                    self.validateNextPage()
+                }
+            } else {
+                
+            }
+            
+        })
+        
+    }
+
     
-    
-    func autoFill(dob:String) {
+    func autoFill() {
+        
+        let dob = dobField.contentTextField.text!
         
         let jsDOB = "$('#txtSecurityKeyQuestionAnswer').val('\(dob)');"
-//        let jsForm = "void($('form')[1].submit());"
         let jsForm = "void($('#btnValidateSecurityAnswer').click());"
         
         let javaScript = jsDOB + jsForm
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            if error != nil {
-                //print("error ?? "error nil")
-                
-            } else {
-                //print("result ?? "result nil")
-            }
+            self.checkForErrorMessage()
         }
     }
     
-    func validateDOBError() {
+
+    func checkForErrorMessage() {
         
-        let dobErrorCode = "$('.errorInvalidField').text();"
-        
-        ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
-            if error != nil {
-                
-                //print("error ?? "error nil")
-                
-            } else {
-                //print("result ?? "result nil")
-                let stringResult = result as! String
-                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                //print("trimmed)
-                if trimmed.characters.count > 0 {
-                    // got error
+        ebtWebView.getErrorMessage(completion: { result in
+            
+            if let errorMessage = result {
+                if errorMessage.characters.count > 0 {
+                    // error message
                     
-                    self.nextButton.isEnabled = true
-                    self.nextActivityIndicator.stopAnimating()
-                    self.errorMessageLabel.text = trimmed
+                    // update view
+                    if self.ebtWebView.isPageLoading == false {
+                        self.nextButton.isEnabled = true
+                        self.nextActivityIndicator.stopAnimating()
+                    }
+                    
+                    self.errorMessageLabel.text = errorMessage
                     self.tableView.reloadData()
                     
                 } else {
-                    // success
-                    self.performSegue(withIdentifier: "EBTSelectPinTVC", sender: nil)
+                    
                 }
+            } else {
+                
             }
-        }
+        })
     }
+    
     
     func validateNextPage() {
         
@@ -375,7 +372,7 @@ extension EBTDateOfBirthTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
-        validateDOBError()
+        validatePage()
     }
     
 }

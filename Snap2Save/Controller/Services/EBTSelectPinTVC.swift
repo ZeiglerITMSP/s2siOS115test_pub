@@ -12,13 +12,13 @@ class EBTSelectPinTVC: UITableViewController {
 
     fileprivate enum ActionType {
         
-        case submit
+        case pin
     }
     
     // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
-    
+    var pageTitle = "ebt.pin".localized()
     
     // Outlets
     @IBOutlet weak var titleLabel: UILabel!
@@ -40,12 +40,13 @@ class EBTSelectPinTVC: UITableViewController {
         
         self.view.endEditing(true)
         
-        self.nextButton.isEnabled = false
-        self.nextActivityIndicator.startAnimating()
+        nextButton.isEnabled = false
+        nextActivityIndicator.startAnimating()
         
-        autoFill()
+        actionType = ActionType.pin
         
-//        performSegue(withIdentifier: "EBTUserInformationTVC", sender: nil)
+        validatePage()
+        
     }
     
     @IBAction func useCurrentPinAction(_ sender: UIButton) {
@@ -127,7 +128,7 @@ class EBTSelectPinTVC: UITableViewController {
         DispatchQueue.main.async {
             
             self.title = "REGISTRATION".localized()
-            
+            self.pageTitle = "ebt.pin".localized()
             self.pinField.placeholderText = "PIN".localized()
             self.confirmPinField.placeholderText = "CONFIRM PIN".localized()
             self.errorTitleLabel.text = "ebt.error.title".localized()
@@ -180,6 +181,32 @@ class EBTSelectPinTVC: UITableViewController {
 extension EBTSelectPinTVC {
     // MARK: Scrapping
     
+    func validatePage() {
+        
+        ebtWebView.getPageHeading(completion: { result in
+            
+            if let pageTitle = result {
+                // isCurrentPage
+                if pageTitle == self.pageTitle {
+                    // current page
+                    if self.actionType == ActionType.pin {
+                        self.actionType = nil
+                        self.autoFill()
+                    } else {
+                        self.checkForErrorMessage()
+                    }
+                } else {
+                    self.validateNextPage()
+                }
+            } else {
+                
+            }
+            
+        })
+        
+    }
+
+    
     func autoFill() {
         
         let newPin = self.pinField.contentTextField.text!
@@ -190,8 +217,6 @@ extension EBTSelectPinTVC {
         
 //        let jsForm = "void($('form')[1].submit());"
         let jsForm = "void($('#btnPinSetup').click());"
-        
-    
         
         let javaScript = jsNewPin + jsConfirmPin + jsForm
         
@@ -211,34 +236,30 @@ extension EBTSelectPinTVC {
     
     func checkForErrorMessage() {
         
-        let dobErrorCode = "$('.errorInvalidField').first().text();"
-        
-        ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
-            if error != nil {
-                
-                print(error ?? "error nil")
-                
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! String
-                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmed)
-                if trimmed.characters.count > 0 {
-                    // got error
+        ebtWebView.getErrorMessage(completion: { result in
+            
+            if let errorMessage = result {
+                if errorMessage.characters.count > 0 {
+                    // error message
                     
-                    self.nextButton.isEnabled = true
-                    self.nextActivityIndicator.stopAnimating()
+                    // update view
+                    if self.ebtWebView.isPageLoading == false {
+                        self.nextButton.isEnabled = true
+                        self.nextActivityIndicator.stopAnimating()
+                    }
                     
-                    self.errorMessageLabel.text = trimmed
+                    self.errorMessageLabel.text = errorMessage
                     self.tableView.reloadData()
                     
                 } else {
-                    // success
-                    self.validateNextPage()
+                    
                 }
+            } else {
+                
             }
-        }
+        })
     }
+    
     
     func validateNextPage() {
         
@@ -269,7 +290,7 @@ extension EBTSelectPinTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
-        checkForErrorMessage()
+        validatePage()
     }
     
 }

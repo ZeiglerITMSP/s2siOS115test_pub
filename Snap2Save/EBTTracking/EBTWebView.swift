@@ -83,11 +83,11 @@ class EBTWebView: NSObject {
     func getPageHeading(completion: @escaping (String?) -> ()) {
         
         let jsHeading = "function getPageHeader() {" +
-            "var pageTitleHeader = $('.PageTitle .PageHeader').first().text();" +
+            "var pageTitleHeader = $('.PageTitle .PageHeader').first().text().trim();" +
             "   if (pageTitleHeader.length == 0) {" +
-            "       var pageTitle = $('.PageTitle').first().text();" +
+            "       var pageTitle = $('.PageTitle').first().text().trim();" +
             "       if (pageTitle.length == 0) {" +
-            "           var pageHeading = $('.PageHeader').first().text();" +
+            "           var pageHeading = $('.PageHeader').first().text().trim();" +
             "           return pageHeading;" +
             "       } else {" +
             "           return pageTitle;" +
@@ -118,9 +118,9 @@ class EBTWebView: NSObject {
     func getErrorMessage(completion: @escaping (String?) -> ()) {
         
         let jsErrorMessage = "function getErrorMessage() {" +
-            "var errorInvalidField = $('.errorInvalidField').first().text();" +
+            "var errorInvalidField = $('.errorInvalidField').first().text().trim();" +
             "if (errorInvalidField.length == 0) {" +
-                "var vallidationExcpMsg = $('#VallidationExcpMsg').first().text();" +
+                "var vallidationExcpMsg = $('#VallidationExcpMsg').first().text().trim();" +
                 "return vallidationExcpMsg" +
             "} else {" +
                 "return errorInvalidField" +

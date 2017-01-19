@@ -135,9 +135,10 @@ class EBTLoginTVC: UITableViewController {
         
         isTouchIdAvailable = AppHelper.isTouchIDAvailable()
         
-        if isTouchIdAvailable == false {
-            self.rememberMeButton.isEnabled = false
-        }
+//        if isTouchIdAvailable == false {
+//            
+////            self.rememberMeButton.isEnabled = false
+//        }
         
     }
     
@@ -246,6 +247,10 @@ class EBTLoginTVC: UITableViewController {
         
         if indexPath.row == 0 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
+                return 0
+            }
+        } else if indexPath.row == 3 {
+            if isTouchIdAvailable == false {
                 return 0
             }
         }

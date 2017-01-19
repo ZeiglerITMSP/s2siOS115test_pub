@@ -13,7 +13,6 @@ class EBTConfirmationTVC: UITableViewController {
     
     fileprivate enum ActionType {
         
-        case waitingForPageLoad
         case validate
         case resend
         case changeEmail
@@ -23,6 +22,7 @@ class EBTConfirmationTVC: UITableViewController {
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
+    var pageTitle = "ebt.confirmation".localized()
     
     // Outlets
     @IBOutlet weak var titleLabel: UILabel!
@@ -43,14 +43,14 @@ class EBTConfirmationTVC: UITableViewController {
     // Actions
     
     @IBAction func validateAction(_ sender: UIButton) {
-        
         self.view.endEditing(true)
         
+        self.validateButton.isEnabled = false
+        self.validateActivityIndicator.startAnimating()
+        
         actionType = ActionType.validate
-        validateActivityIndicator.startAnimating()
-//        validateButton.isEnabled = false
-    
-        autoFill(valdationCode: self.validationCodeField.contentTextField.text!)
+        
+        validatePage()
     }
     
     
@@ -131,16 +131,14 @@ class EBTConfirmationTVC: UITableViewController {
         DispatchQueue.main.async {
             
             self.title = "REGISTRATION".localized()
-            
+            self.pageTitle = "ebt.confirmation".localized()
             self.validationCodeField.placeholderText = "ENTER EMAIL VALIDATION CODE".localized()
             self.errorTitleLabel.text = "ebt.error.title".localized()
             
             self.validateButton.setTitle("VALIDATE".localized(), for: .normal)
             self.resendButton.setTitle("RESEND".localized(), for: .normal)
             self.changeEmailButton.setTitle("CHANGE EMAIL".localized(), for: .normal)
-            
         }
-        
         
     }
 
@@ -184,8 +182,35 @@ class EBTConfirmationTVC: UITableViewController {
 extension EBTConfirmationTVC {
     // MARK: Scrapping
     
-    // MARK:- Card Number Filling
-    func autoFill(valdationCode:String) {
+    func validatePage() {
+        
+        ebtWebView.getPageHeading(completion: { result in
+            
+            if let pageTitle = result {
+                // isCurrentPage
+                if pageTitle == self.pageTitle {
+                    // current page
+                    if self.actionType == ActionType.validate {
+                        self.actionType = nil
+                        self.autoFill()
+                    } else {
+                        self.checkForErrorMessage()
+                    }
+                } else {
+                    self.validateNextPage()
+                }
+            } else {
+                
+            }
+            
+        })
+        
+    }
+    
+    
+    func autoFill() {
+        
+        let valdationCode = validationCodeField.contentTextField.text!
         
         actionType = ActionType.validate
         
@@ -197,45 +222,35 @@ extension EBTConfirmationTVC {
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
             self.checkForErrorMessage()
-//
-//            if error != nil {
-//                print(error ?? "error nil")
-//            } else {
-//                print(result ?? "result nil")
-//                self.checkForErrorMessage()
-//            }
         }
     }
+    
     
     func checkForErrorMessage() {
         
-        let jsStatusMessage = "$('#VallidationExcpMsg').text();"
-        
-        ebtWebView.webView.evaluateJavaScript(jsStatusMessage) { (result, error) in
-            if error != nil {
-                print(error ?? "error nil")
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! String
-                let trimmedErrorMessage = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                
-                if trimmedErrorMessage.characters.count > 0 {
+        ebtWebView.getErrorMessage(completion: { result in
+            
+            if let errorMessage = result {
+                if errorMessage.characters.count > 0 {
+                    // error message
                     
-                    self.validateButton.isEnabled = true
-                    self.validateActivityIndicator.stopAnimating()
-                    // handle error message
-                    self.errorMessageLabel.text = trimmedErrorMessage
+                    // update view
+                    if self.ebtWebView.isPageLoading == false {
+                        self.validateButton.isEnabled = true
+                        self.validateActivityIndicator.stopAnimating()
+                    }
+                    
+                    self.errorMessageLabel.text = errorMessage
                     self.tableView.reloadData()
                     
                 } else {
-                    // no error message
-                    self.validateNextPage()
+                    
                 }
+            } else {
+                
             }
-        }
+        })
     }
-    
-    
     
     func validateNextPage() {
         
@@ -254,9 +269,7 @@ extension EBTConfirmationTVC {
                 // is page not loaded
                 print("PAGE NOT LOADED YET..")
             }
-            
         })
-        
     }
 
 
@@ -268,7 +281,7 @@ extension EBTConfirmationTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
-        checkForErrorMessage()
+        validatePage()
     }
     
 }

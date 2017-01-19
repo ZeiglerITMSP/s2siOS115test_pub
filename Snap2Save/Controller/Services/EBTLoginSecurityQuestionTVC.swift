@@ -19,7 +19,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     let ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
-    let pageTitle = "ebt.securityQuestion".localized()
+    var pageTitle = "ebt.securityQuestion".localized()
     
     // Ouetles
     
@@ -119,6 +119,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
             self.title = "LOGIN".localized()
             self.updateBackButtonText()
             
+            self.pageTitle = "ebt.securityQuestion".localized()
             self.securityQuestionTitleLabel.text = "SECURITY QUESTION".localized()
             self.securityAnswerField.placeholderText = "SECURITY ANSWER".localized()
             self.errorTitleLabel.text = "ebt.error.title".localized()
