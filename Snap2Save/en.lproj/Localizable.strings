@@ -171,7 +171,9 @@
 "Entries must match to proceed" = "Entries must match to proceed";
 
 
+// Offers
 
+"Offers" = "Offers";
 
 
 
@@ -196,6 +198,10 @@
 "Contact Us" = "Contact Us";
 "Terms of Service" = "Terms of Service";
 "Privacy Policy" = "Privacy Policy";
+
+
+"ebt.error.title" = "Please correct the following items:";
+
 
 // login screen
 "USER ID" = "USER ID";
@@ -267,10 +273,10 @@
 "SECURITY ANSWER" = "SECURITY ANSWER";
 "CONFIRM" = "CONFIRM";
 
-
-// Offers
-
-"Offers" = "Offers";
+// EBT Dashboard
+"RECENT TRANSACTIONS" = "RECENT TRANSACTIONS";
+"EBT Balance" = "EBT Balance";
+"CASH Balance" = "CASH Balance";
 
 
 // Scrapping

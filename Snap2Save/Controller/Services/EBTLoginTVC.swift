@@ -9,6 +9,9 @@
 import UIKit
 import PKHUD
 
+import Localize_Swift
+
+
 import LocalAuthentication
 
 class EBTLoginTVC: UITableViewController {
@@ -91,12 +94,13 @@ class EBTLoginTVC: UITableViewController {
         
         userIdField.contentTextField.textFieldType = .PhoneNumberTextField
         userIdField.contentTextField.textFieldType = .NormalTextField
-        
         userIdField.contentTextField.autocorrectionType = UITextAutocorrectionType.no
         userIdField.contentTextField.returnKeyType = .next
+        userIdField.contentTextField.updateUIAsPerTextFieldType()
         
         passwordField.contentTextField.isSecureTextEntry = true
         passwordField.contentTextField.returnKeyType = .done
+        passwordField.contentTextField.updateUIAsPerTextFieldType()
         
         // Automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -205,10 +209,12 @@ class EBTLoginTVC: UITableViewController {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
             self.title = "EBT".localized()
+            
             self.userIdField.placeholderText = "USER ID".localized()
             self.passwordField.placeholderText = "PASSWORD".localized()
-            
             self.remmeberMyUserNameLabel.text = "Remember my user ID".localized()
+            
+            self.errorTitleLabel.text = "ebt.error.title".localized()
             
             self.loginButton.setTitle("LOGIN".localized(), for: .normal)
             self.registrationButton.setTitle("REGISTRATION".localized(), for: .normal)
@@ -283,9 +289,14 @@ extension EBTLoginTVC {
     
     func loadLoginPage() {
         
-        let loginUrl_en = kEBTLoginUrl
+        let loginUrl = kEBTLoginUrl
         
-        let url = NSURL(string: loginUrl_en)
+        if Localize.currentLanguage() == "ES" {
+            // .. es url
+            //loginUrl = kEBTLoginUrl
+        }
+        
+        let url = NSURL(string: loginUrl)
         let request = NSURLRequest(url: url! as URL)
 
         ebtWebView.webView.load(request as URLRequest)

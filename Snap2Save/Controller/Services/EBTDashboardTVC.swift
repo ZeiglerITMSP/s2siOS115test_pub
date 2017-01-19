@@ -211,12 +211,12 @@ class EBTDashboardTVC: UITableViewController {
         
         execute(javaScript: jsEBTBalance, completion: { result in
             
-            let detail = ["title" : "EBT Balance", "value": result]
+            let detail = ["title" : "EBT Balance".localized(), "value": result]
             self.accountDetails.append(detail)
             
             self.execute(javaScript: jsCashBalance, completion: { result in
                 
-                let detail = ["title" : "CASH Balance", "value": result]
+                let detail = ["title" : "CASH Balance".localized() , "value": result]
                 self.accountDetails.append(detail)
                 
                 self.perform(#selector(self.getTransactionActivityUlr), with: self, afterDelay: 3)

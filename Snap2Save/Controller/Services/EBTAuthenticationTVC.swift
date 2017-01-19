@@ -52,11 +52,11 @@ class EBTAuthenticationTVC: UITableViewController {
     @IBAction func regenerateAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        regenerateButton.isEnabled = false
-        regenerateActivityIndicator.startAnimating()
-        
-        actionType = ActionType.regenerate
-        validatePage()
+//        regenerateButton.isEnabled = false
+//        regenerateActivityIndicator.startAnimating()
+//        
+//        actionType = ActionType.regenerate
+//        validatePage()
     }
     
     
@@ -66,6 +66,7 @@ class EBTAuthenticationTVC: UITableViewController {
         errorMessageLabel.text = nil
         authenticationCodeField.contentTextField.returnKeyType = .done
         authenticationCodeField.contentTextField.aiDelegate = self
+        authenticationCodeField.contentTextField.updateUIAsPerTextFieldType()
         
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
@@ -81,6 +82,13 @@ class EBTAuthenticationTVC: UITableViewController {
         
         addTapGesture()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadContent()
+    }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -134,6 +142,24 @@ class EBTAuthenticationTVC: UITableViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            
+            self.title = "LOGIN".localized()
+            self.updateBackButtonText()
+            
+            self.authenticationCodeField.placeholderText = "AUTHENTICATION CODE".localized()
+            self.errorTitleLabel.text = "ebt.error.title".localized()
+            
+            self.confirmButton.setTitle("CONFIRM".localized(), for: .normal)
+            self.regenerateButton.setTitle("REGENERATE".localized(), for: .normal)
+            
+        }
+        
+    }
+
     
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

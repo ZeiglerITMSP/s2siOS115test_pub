@@ -59,6 +59,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
         securityAnswerField.contentTextField.returnKeyType = .done
         securityAnswerField.contentTextField.aiDelegate = self
+        securityAnswerField.contentTextField.updateUIAsPerTextFieldType()
         
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
@@ -76,6 +77,12 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         addTapGesture()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadContent()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -103,6 +110,23 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
+    }
+
+    func reloadContent() {
+        
+        DispatchQueue.main.async {
+            
+            self.title = "LOGIN".localized()
+            self.updateBackButtonText()
+            
+            self.securityQuestionTitleLabel.text = "SECURITY QUESTION".localized()
+            self.securityAnswerField.placeholderText = "SECURITY ANSWER".localized()
+            self.errorTitleLabel.text = "ebt.error.title".localized()
+            
+            self.confirmButton.setTitle("CONFIRM".localized(), for: .normal)
+            
+        }
+        
     }
 
     
