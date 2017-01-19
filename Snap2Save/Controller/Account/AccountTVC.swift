@@ -47,7 +47,7 @@ class AccountTVC: UITableViewController {
         
         infoArray = ["Auto Log In","Personal Information","Preferences","Change Password"];
         
-        
+        AppHelper.configSwiftLoader()
         let data = UserDefaults.standard.object(forKey: LOGGED_USER)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)
         let user = userInfo as! User
@@ -184,13 +184,14 @@ class AccountTVC: UITableViewController {
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
         let currentLanguage = Localize.currentLanguage()
-        
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
         
         let parameters = ["user_id": user_id,
                           "auth_token": auth_token,
                           "platform":"1",
-                          "version_code": "1",
-                          "version_name": "1",
+                          "version_code": version_code,
+                          "version_name": version_name,
                           "device_id": device_id,
                           "push_token":"123123",
                           "language":currentLanguage
@@ -222,7 +223,7 @@ class AccountTVC: UITableViewController {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                    self.showAlert(title: "", message:error.localizedDescription);
                 }
                 ////print("error)
                 break
@@ -240,6 +241,7 @@ class AccountTVC: UITableViewController {
         UserDefaults.standard.removeObject(forKey: AUTH_TOKEN)
         UserDefaults.standard.removeObject(forKey: LOGGED_USER)
         UserDefaults.standard.removeObject(forKey: USER_DATA)
+        UserDefaults.standard.removeObject(forKey: INFO_SCREENS)
         
        // AppDelegate.getDelegate().setDetaultValues()
         
@@ -255,22 +257,24 @@ class AccountTVC: UITableViewController {
             self.showAlert(title: "", message: "Please check your internet connection".localized());
             return
         }
-        HUD.allowsInteraction = false
-        HUD.dimsBackground = false
-        HUD.show(.progress)
-
+        //HUD.allowsInteraction = false
+        //HUD.dimsBackground = false
+        //HUD.show(.progress)
+        SwiftLoader.show(title: "Loading...", animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
         let currentLanguage = Localize.currentLanguage()
         
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
         
         let parameters = ["user_id": user_id,
                           "auto_login": loginSwitch.isOn,
                           "auth_token": auth_token,
                           "platform":"1",
-                          "version_code": "1",
-                          "version_name": "1",
+                          "version_code": version_code,
+                          "version_name": version_name,
                           "device_id": device_id,
                           "language":currentLanguage
             ] as [String : Any]
@@ -285,7 +289,7 @@ class AccountTVC: UITableViewController {
             case .success:
                 let json = JSON(data: response.data!)
                 ////print(""json response\(json)")
-                HUD.hide()
+                SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
                 if let code = responseDict?["code"] {
@@ -293,6 +297,7 @@ class AccountTVC: UITableViewController {
                     if code.intValue == 200 {
                         
                         if let userDict = responseDict?["user"] {
+                            
                             self.user = User.prepareUser(dictionary: userDict as! [String : Any])
                             AppDelegate.getDelegate().user = self.user
                             let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
@@ -308,9 +313,6 @@ class AccountTVC: UITableViewController {
                             let alertMessage = responseDict["message"] as! String
                             self.showAlert(title: "", message: alertMessage)
                         }
-                        ////print(""user id\(self.user.id)")
-                        ////print(""user info \(self.user.additionalInformation)")
-                        
                     }
                     
                 }
@@ -321,11 +323,11 @@ class AccountTVC: UITableViewController {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    HUD.hide()
+                    SwiftLoader.hide()
 
-                    self.showAlert(title: "", message: "Sorry, Please try again later".localized());
+                    self.showAlert(title: "", message:error.localizedDescription);
                 }
-                ////print("error)
+                print("error")
                 break
             }
             

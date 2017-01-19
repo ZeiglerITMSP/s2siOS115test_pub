@@ -60,7 +60,7 @@ class AppHelper {
         return String(inputString.characters.filter {validCharacters.contains($0) })
     }
     
-
+    
     class func makeAsRequired(text:String) -> NSAttributedString {
         
         let mobileNumTxt = text + " *"
@@ -95,6 +95,7 @@ class AppHelper {
         let status = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
         return status
     }
+
 }
 
 
@@ -135,12 +136,12 @@ extension String {
     }
     
     
-//    func heightWith(constrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
-//        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-//        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-//        
-//        return boundingBox.height
-//    }
+    //    func heightWith(constrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+    //        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+    //        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+    //
+    //        return boundingBox.height
+    //    }
     
     func height(constraintedWidth width: CGFloat, font: UIFont) -> CGFloat {
         
@@ -151,12 +152,12 @@ extension String {
         
         return label.frame.height
     }
-
+    
     public func toPhoneNumber() -> String {
         return self.replacingOccurrences(of: "(\\d{3})(\\d{3})(\\d+)", with: "($1) $2-$3", options: .regularExpression, range: nil)
     }
     
-
+    
 }
 
 extension Dictionary where Value: Equatable {
@@ -281,7 +282,18 @@ public extension UIImage {
         guard let cgImage = image?.cgImage else { return nil }
         self.init(cgImage: cgImage)
     }
+    
 }
+public extension Bundle {
+    
+   public var releaseVersionNumber: String? {
+        return infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+   public var buildVersionNumber: String? {
+        return infoDictionary?["CFBundleVersion"] as? String
+    }
+}
+
 
 
 

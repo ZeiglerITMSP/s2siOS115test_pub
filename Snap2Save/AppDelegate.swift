@@ -275,11 +275,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let device_id = UIDevice.current.identifierForVendor!.uuidString
                     let currentLanguage = Localize.currentLanguage()
                     let code = codeValue
+                    let version_name = Bundle.main.releaseVersionNumber ?? ""
+                    let version_code = Bundle.main.buildVersionNumber ?? ""
                     
                     let parameters = ["code": code ,
                                       "platform":"1",
-                                      "version_code": "1",
-                                      "version_name": "1",
+                                      "version_code": version_code,
+                                      "version_name": version_name,
                                       "device_id": device_id,
                                       "push_token":"123123",
                                       "language":currentLanguage
@@ -333,7 +335,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         case .failure(let error):
                             
                             DispatchQueue.main.async {
-                                let alertController = UIAlertController(title: "", message: "Sorry, Please try again later", preferredStyle: .alert)
+                                let alertController = UIAlertController(title: "", message: error.localizedDescription, preferredStyle: .alert)
                                 
                                 let okAction = UIAlertAction(title: "OK", style: .default, handler: { alert in
                                 })
@@ -375,11 +377,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let device_id = UIDevice.current.identifierForVendor!.uuidString
                     let currentLanguage = Localize.currentLanguage()
                     let code = codeValue
+                    let version_name = Bundle.main.releaseVersionNumber ?? ""
+                    let version_code = Bundle.main.buildVersionNumber ?? ""
                     
                     let parameters = ["code": code ,
                                       "platform":"1",
-                                      "version_code": "1",
-                                      "version_name": "1",
+                                      "version_code": version_code,
+                                      "version_name": version_name,
                                       "device_id": device_id,
                                       "push_token":"123123",
                                       "language":currentLanguage
@@ -396,21 +400,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         case .success:
                             
                             let json = JSON(data: response.data!)
-                            ////print(""json response\(json)")
-                            let responseDict = json.dictionaryObject
-                            
-                            // if let code = responseDict?["code"] {
-                            //    let code = code as! NSNumber
-                            
-                            //                                    if code.intValue == 200 {
-                            //
-                            ////                                        let loginVc:WelcomePageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomePageVC") as! WelcomePageVC
-                            ////                                        self.window?.rootViewController = loginVc
-                            ////                                        self.window?.makeKeyAndVisible()
-                            //
-                            //                                    }
-                            
-                            //else {
                             if let responseDict = json.dictionaryObject {
                                 let alertMessage = responseDict["message"] as! String
                                 let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
@@ -423,14 +412,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     
                                 }
                             }
-                            //}
-                            // }
                             break
                             
                         case .failure(let error):
                             
                             DispatchQueue.main.async {
-                                let alertController = UIAlertController(title: "", message: "Sorry, Please try again later", preferredStyle: .alert)
+                                let alertController = UIAlertController(title: "", message: error.localizedDescription, preferredStyle: .alert)
                                 
                                 let okAction = UIAlertAction(title: "OK", style: .default, handler: { alert in
                                 })
@@ -442,11 +429,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     alertController.view.tintColor = UIColor.blue
                                     
                                 }
-
-                                
                             }
                             
-                            ////print("error)
                             break
                         }
                         
