@@ -24,6 +24,7 @@ class EBTDashboardTVC: UITableViewController {
         
         case accountDetails
         case transactions
+        case tabClick
     }
     
     // Properties
@@ -45,6 +46,8 @@ class EBTDashboardTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        AppHelper.configSwiftLoader()
+        
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
@@ -84,9 +87,11 @@ class EBTDashboardTVC: UITableViewController {
         let sections = accountDetails.count + trasactions.count
         
         if sections == 0 {
-            loaderView.isHidden = false
+            SwiftLoader.show(title: "Loading...", animated: true)
+//            loaderView.isHidden = false
         } else {
-            loaderView.isHidden = true
+            SwiftLoader.hide()
+//            loaderView.isHidden = true
         }
         
         return sections
@@ -275,23 +280,9 @@ class EBTDashboardTVC: UITableViewController {
         let js = "window.location.href = '\(url)';"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
-            if error != nil {
-                print(error ?? "error nil")
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! String
-                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedText)
-                
-                if trimmedText.characters.count > 0 {
-                    
-                    
-                    
-                } else {
-                    
-                    
-                }
-            }
+            
+            print(error ?? "error nil")
+            print(result ?? "result nil")
         }
     }
 
@@ -301,7 +292,7 @@ class EBTDashboardTVC: UITableViewController {
             
             if pageTitle == "Transaction Activity" {
                 
-                self.getTransactions()
+                self.validateTransactionsTab()
                 
             } else {
                 
@@ -309,6 +300,81 @@ class EBTDashboardTVC: UITableViewController {
         })
         
     }
+    
+    
+    func validateTransactionsTab() {
+        
+        let jsLoginValidation = "$('#transActTabs li.ui-state-active').attr('id');"
+        let javaScript = jsLoginValidation
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if resultTrimmed == "allactTab" {
+                    
+                    self.getTransactions()
+                } else {
+                    self.clickTransactionsTab()
+                }
+            } else {
+                print(error ?? "")
+            }
+        }
+    }
+    
+    
+    func clickTransactionsTab() {
+        
+        actionType = ActionType.tabClick
+        
+        let jsTabClick = "$('#allactTab a').click();"
+        let javaScript = jsTabClick
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if resultTrimmed == "allactTab" {
+                    
+                    self.getTransactions()
+                } else {
+                    
+                }
+            } else {
+                print(error ?? "")
+            }
+        }
+    }
+    
+    func validateTabClick() {
+        
+        let jsLoginValidation = "$('#transActTabs li.ui-state-active').attr('id');"
+        let javaScript = jsLoginValidation
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if resultTrimmed == "allactTab" {
+                    
+                    self.getTransactions()
+                } else {
+                    
+                }
+            } else {
+                print(error ?? "")
+            }
+        }
+    }
+    
+
 
     func getTransactions() {
         
@@ -385,7 +451,6 @@ class EBTDashboardTVC: UITableViewController {
         }
         
     }
-    
 
 }
 
@@ -400,17 +465,12 @@ extension EBTDashboardTVC: EBTWebViewDelegate {
             validateTransactionPage()
             
             
-        } else {
+        } else if actionType == .tabClick {
             
-            
-            
+            actionType = nil
+            validateTabClick()
         }
-        
-        //        else if actionType == .regenerate {
-        //
-        //            actionType = nil
-        //            checkForStatusMessage()
-        //        }
+   
     }
     
 }
