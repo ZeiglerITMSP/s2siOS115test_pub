@@ -8,7 +8,7 @@
 
 import UIKit
 import Localize_Swift
-
+import Alamofire
 
 class ServicesTVC: UITableViewController {
     
@@ -76,7 +76,17 @@ class ServicesTVC: UITableViewController {
         if indexPath.section == 0 {
             
             if indexPath.row == 0 {
-                loadLoginPage()
+                
+                let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+                let isReachable = reachbility.isReachable
+                // Reachability
+                if isReachable == false {
+                    self.showAlert(title: "", message: "Please check your internet connection".localized());
+                    return
+                } else {
+                    loadLoginPage()
+                }
+                
             }
         }
         else if indexPath.section == 1 {

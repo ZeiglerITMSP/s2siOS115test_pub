@@ -7,31 +7,29 @@
 //
 
 import UIKit
+import Localize_Swift
 import SwiftyJSON
+import Alamofire
 
 class EBTDashboardTVC: UITableViewController {
-
     
     struct Transaction {
-        
         var company:String
         var amount:String
         var date:String
     }
-
     
     fileprivate enum ActionType {
-        
         case accountDetails
         case transactions
         case tabClick
     }
     
     // Properties
-    let ebtWebView: EBTWebView = EBTWebView.shared
+    var ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
-//    var accountDetailTitles = ["Account Type", "Account Status", "Available Balance"]
+    
     var accountDetails = [[String:String?]]()
     var recentTransactions: [Transaction]?
     
@@ -40,12 +38,16 @@ class EBTDashboardTVC: UITableViewController {
     var availableBalance: String?
     var trasactions = [Any]()
     
+    var ebtBalance: String?
+    var cashBalance: String?
+    var transactionsString: String?
+    
     @IBOutlet weak var loaderView: UIView!
     
     // MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         AppHelper.configSwiftLoader()
         
         // Back Action
@@ -59,7 +61,7 @@ class EBTDashboardTVC: UITableViewController {
         
         validatePage()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -67,6 +69,7 @@ class EBTDashboardTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
+        webView.sendSubview(toBack: self.view)
     }
     
     override func didReceiveMemoryWarning() {
@@ -81,22 +84,22 @@ class EBTDashboardTVC: UITableViewController {
     
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         let sections = accountDetails.count + trasactions.count
         
         if sections == 0 {
             SwiftLoader.show(title: "Loading...", animated: true)
-//            loaderView.isHidden = false
+            //            loaderView.isHidden = false
         } else {
             SwiftLoader.hide()
-//            loaderView.isHidden = true
+            //            loaderView.isHidden = true
         }
         
         return sections
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
@@ -112,7 +115,7 @@ class EBTDashboardTVC: UITableViewController {
         
         return 0
     }
-
+    
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -122,35 +125,35 @@ class EBTDashboardTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-            if indexPath.section == 0 {
-                
-                let detailedCell = tableView.dequeueReusableCell(withIdentifier: "DetailedCell", for: indexPath) as! DetailedCell
-                
-                let detail = accountDetails[indexPath.row]
-                
-                let value = detail["value"]
-                detailedCell.titleLabel.text = detail["title"]!
-                detailedCell.detailLabel.text = value ?? ""
-                
-                return detailedCell
-                
-            } else if indexPath.section == 1 {
-                
-                let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
-                
-                let record = trasactions[indexPath.row] as? [String:String]
-                
-                detailedSubtitleCell.titleLabel.text = record?["location"]
-                detailedSubtitleCell.detailLabel.text = record?["debit_amount"]
-                detailedSubtitleCell.subtitleLabel.text = record?["date"]
-                
-                
-                return detailedSubtitleCell
-            } else {
-                
-                return UITableViewCell()
-            }
-       
+        if indexPath.section == 0 {
+            
+            let detailedCell = tableView.dequeueReusableCell(withIdentifier: "DetailedCell", for: indexPath) as! DetailedCell
+            
+            let detail = accountDetails[indexPath.row]
+            
+            let value = detail["value"]
+            detailedCell.titleLabel.text = detail["title"]!
+            detailedCell.detailLabel.text = value ?? ""
+            
+            return detailedCell
+            
+        } else if indexPath.section == 1 {
+            
+            let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
+            
+            let record = trasactions[indexPath.row] as? [String:String]
+            
+            detailedSubtitleCell.titleLabel.text = record?["location"]
+            detailedSubtitleCell.detailLabel.text = record?["debit_amount"]
+            detailedSubtitleCell.subtitleLabel.text = record?["date"]
+            
+            
+            return detailedSubtitleCell
+        } else {
+            
+            return UITableViewCell()
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -162,23 +165,24 @@ class EBTDashboardTVC: UITableViewController {
         return nil
     }
     
-
+    
     // MARK: -
     
     func backAction() {
         
-//        self.navigationController?.popViewController(animated: true)
+        //        self.navigationController?.popViewController(animated: true)
         showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
         
+        //        ebtWebView = nil
         _ = self.navigationController?.popToRootViewController(animated: true)
         
-//        // Define identifier
-//        let notificationName = Notification.Name("POPTOLOGIN")
-//        // Post notification
-//        NotificationCenter.default.post(name: notificationName, object: nil)
+        //        // Define identifier
+        //        let notificationName = Notification.Name("POPTOLOGIN")
+        //        // Post notification
+        //        NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
     // JavaScript
@@ -200,14 +204,14 @@ class EBTDashboardTVC: UITableViewController {
     
     func getAccountDetails() {
         
-//        let jsAccountTypeText = "$('.widgetLabel:eq(0)').text()"
-//        let jsAccountStatusText = "$('.widgetLabel:eq(1)').text()"
-//        let jsAvailableBalanceText = "$('.widgetLabel:eq(2)').text()"
+        //        let jsAccountTypeText = "$('.widgetLabel:eq(0)').text()"
+        //        let jsAccountStatusText = "$('.widgetLabel:eq(1)').text()"
+        //        let jsAvailableBalanceText = "$('.widgetLabel:eq(2)').text()"
         
-//        let jsAccountTypeValue = "$('.widgetValue:eq(0)').text()"
-//        let jsAccountStatusValue = "$('.widgetValue:eq(1)').text()"
-//        let jsAvailableBalanceValue = "$('.widgetValue:eq(2)').text()"
-
+        //        let jsAccountTypeValue = "$('.widgetValue:eq(0)').text()"
+        //        let jsAccountStatusValue = "$('.widgetValue:eq(1)').text()"
+        //        let jsAvailableBalanceValue = "$('.widgetValue:eq(2)').text()"
+        
         let jsEBTBalance = "$($(\"td.widgetValue:contains('SNAP')\").parent().parent().find('td.widgetValue')[2]).html().trim()"
         let jsCashBalance = "$($(\"td.widgetValue:contains('CASH')\").parent().parent().find('td.widgetValue')[2]).html().trim()"
         
@@ -215,18 +219,20 @@ class EBTDashboardTVC: UITableViewController {
             
             let detail = ["title" : "EBT Balance".localized(), "value": result]
             self.accountDetails.append(detail)
+            self.ebtBalance = result
             
             self.execute(javaScript: jsCashBalance, completion: { result in
                 
                 let detail = ["title" : "CASH Balance".localized() , "value": result]
                 self.accountDetails.append(detail)
+                self.cashBalance = result
                 
-                self.perform(#selector(self.getTransactionActivityUlr), with: self, afterDelay: 3)
-//                self.getTransactionActivityUlr()
+                self.perform(#selector(self.getTransactionActivityUlr), with: self, afterDelay: 8)
+                //                self.getTransactionActivityUlr()
             })
         })
     }
- 
+    
     
     func execute(javaScript:String, completion: @escaping (String?) -> ()) {
         
@@ -273,7 +279,7 @@ class EBTDashboardTVC: UITableViewController {
             }
         }
     }
-
+    
     
     func loadTransactionActivityPage(url:String) {
         
@@ -287,7 +293,7 @@ class EBTDashboardTVC: UITableViewController {
             print(result ?? "result nil")
         }
     }
-
+    
     func validateTransactionPage() {
         
         ebtWebView.getPageTitle(completion: { pageTitle in
@@ -376,35 +382,35 @@ class EBTDashboardTVC: UITableViewController {
         }
     }
     
-
-
+    
+    
     func getTransactions() {
         
         let js = "function transactionActivity() {" +
-                    "var list = [];" +
-                    "var table = $('#allCompletedTxnGrid tbody');" +
-                    "table.find('tr').each(function (i) {" +
-                    "var $tds = $(this).find('td')," +
-                    "t_date = $tds.eq(2).text();" +
-                    "if (t_date) {" +
-                        "list[i] = {" +
-                        "date: t_date," +
-                        "transaction: $tds.eq(3).text()," +
-                        "location: $tds.eq(4).text()," +
-                        "account: $tds.eq(5).text()," +
-                        "card: $tds.eq(6).text()," +
-                        "debit_amount: $tds.eq(7).text()," +
-                        "credit_amount: $tds.eq(8).text()," +
-                        "available_balance: $tds.eq(9).text()" +
-                        "};" +
-                    "}" +
-                "});" +
-                "arr = $.grep(list, function (n) {" +
-                "return n == 0 || n" +
+            "var list = [];" +
+            "var table = $('#allCompletedTxnGrid tbody');" +
+            "table.find('tr').each(function (i) {" +
+            "var $tds = $(this).find('td')," +
+            "t_date = $tds.eq(2).text();" +
+            "if (t_date) {" +
+            "list[i] = {" +
+            "date: t_date," +
+            "transaction: $tds.eq(3).text()," +
+            "location: $tds.eq(4).text()," +
+            "account: $tds.eq(5).text()," +
+            "card: $tds.eq(6).text()," +
+            "debit_amount: $tds.eq(7).text()," +
+            "credit_amount: $tds.eq(8).text()," +
+            "available_balance: $tds.eq(9).text()" +
+            "};" +
+            "}" +
+            "});" +
+            "arr = $.grep(list, function (n) {" +
+            "return n == 0 || n" +
             "});" +
             "var jsonSerialized = JSON.stringify(arr);" +
             "return jsonSerialized;" +
-        "}" +
+            "}" +
         "transactionActivity();"
         
         
@@ -419,18 +425,20 @@ class EBTDashboardTVC: UITableViewController {
                 
                 if trimmedText.characters.count > 0 {
                     
+                    self.transactionsString = trimmedText
+                    
                     let json = JSON.parse(trimmedText)
                     print("json response\(json)")
                     
                     if let responseArray = json.arrayObject {
-
+                        
                         print(responseArray)
                         
                         self.trasactions =  responseArray
                         
                         self.tableView.reloadData()
                         
-                        
+                        self.sendEBTInformationToServer()
                         /*
                          account = SNAP;
                          "available_balance" = "$ 312.30";
@@ -440,20 +448,20 @@ class EBTDashboardTVC: UITableViewController {
                          "debit_amount" = "$ 89.62";
                          location = "WM SUPERCEWal-Mart Super CenterAURORACO";
                          transaction = "POS Purchase Debit";
- */
+                         */
                         
                     }
-                   // self.loadTransactionActivityPage(url: trimmedText)
+                    // self.loadTransactionActivityPage(url: trimmedText)
                     
                 } else {
-                    
                     self.tableView.reloadData()
+                    self.sendEBTInformationToServer()
                 }
             }
         }
         
     }
-
+    
 }
 
 extension EBTDashboardTVC: EBTWebViewDelegate {
@@ -472,8 +480,91 @@ extension EBTDashboardTVC: EBTWebViewDelegate {
             actionType = nil
             validateTabClick()
         }
-   
+        
     }
+    
+}
+
+extension EBTDashboardTVC {
+    // MAKR: Web Service
+    
+    func sendEBTInformationToServer() {
+        
+        // Reachability
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        if isReachable == false {
+            return
+        }
+        
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
+        
+        let currentLanguage = Localize.currentLanguage()
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
+        let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
+        
+        let ebt_user_id = EBTUser.shared.userID ?? ""
+        let type = EBTUser.shared.loggedType
+        let transactions = transactionsString ?? ""
+        let ebt_balance = ebtBalance ?? ""
+        let cash_balance = cashBalance ?? ""
+        
+        let parameters = ["platform":"1",
+                          "version_code": version_code,
+                          "version_name": version_name,
+                          
+                          "language": currentLanguage,
+                          "auth_token": auth_token,
+                          "device_id": device_id,
+                          
+                          "user_id": user_id,
+                          "ebt_user_id": ebt_user_id,
+                          "type": type,
+                          
+                          "transactions": transactions,
+                          "ebt_balance": ebt_balance,
+                          "cash_balance": cash_balance
+            ] as [String : Any]
+        
+        print(parameters)
+        let url = String(format: "%@/saveEbtInfo", hostUrl)
+        print(url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            switch response.result {
+                
+            case .success:
+                DispatchQueue.main.async {
+                    
+                    let json = JSON(data: response.data!)
+                    print("json response\(json)")
+                    let responseDict = json.dictionaryObject
+                    
+                    if let code = responseDict?["code"] {
+                        let code = code as! NSNumber
+                        if code.intValue == 200 {
+                            
+                        } else {
+                            
+                        }
+                    }
+                }
+                break
+                
+            case .failure(let error):
+                print(error)
+                break
+            }
+            
+        }
+    }
+    
+    
+    
+    
+    
+    
     
 }
 

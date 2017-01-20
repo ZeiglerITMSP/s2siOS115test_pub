@@ -174,6 +174,7 @@ class EBTUserInformationTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
+        webView.sendSubview(toBack: self.view)
     }
     
     
@@ -254,6 +255,9 @@ class EBTUserInformationTVC: UITableViewController {
     }
 
     func moveToNextController(identifier:String) {
+        
+        EBTUser.shared.loggedType = "2" // type 1- login, 2- signup
+        EBTUser.shared.userID = userIdField.contentTextField.text!
         
         let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
         self.navigationController?.pushViewController(vc, animated: true)

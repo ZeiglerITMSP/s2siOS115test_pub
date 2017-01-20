@@ -97,6 +97,7 @@ class EBTDateOfBirthTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
+        webView.sendSubview(toBack: self.view)
     }
     
     
@@ -125,8 +126,8 @@ class EBTDateOfBirthTVC: UITableViewController {
             
             self.title = "REGISTRATION".localized()
             self.pageTitle = "ebt.dob".localized()
-            self.dobField.placeholderText = "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)".localized()
-            self.socialSecurityNumberField.placeholderText = "WHAT IS YOUR SOCIAL SECURITY NUMBER?".localized()
+            self.dobField.placeholderText = "ebt.fieldcheck.dob".localized()
+            self.socialSecurityNumberField.placeholderText = "ebt.fieldcheck.socialsecuritynumber".localized()
             self.errorTitleLabel.text = "ebt.error.title".localized()
             
             self.nextButton.setTitle("NEXT".localized(), for: .normal)   
@@ -256,8 +257,12 @@ securityQuestions();
                     for component in components {
                         
                         let trimmedText = component.trimmingCharacters(in: .whitespacesAndNewlines)
-                        if trimmedText.characters.count > 0 {
-                            self.questions.append(trimmedText)
+                        let removedNewLine = trimmedText.replacingOccurrences(of: "\n", with: "*")
+                        let removedTabs = removedNewLine.replacingOccurrences(of: "\t", with: "*")
+                        let cleanText = removedTabs.replacingOccurrences(of: "*", with: "")
+                        
+                        if cleanText.characters.count > 0 {
+                            self.questions.append(cleanText)
                         }
                         
                     }

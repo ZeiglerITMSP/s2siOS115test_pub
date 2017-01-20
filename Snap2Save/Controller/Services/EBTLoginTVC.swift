@@ -286,6 +286,9 @@ class EBTLoginTVC: UITableViewController {
     
     func moveToNextController(identifier:String) {
         
+        EBTUser.shared.loggedType = "1" // type 1- login, 2- signup
+        EBTUser.shared.userID = userIdField.contentTextField.text!
+        
         let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -421,6 +424,37 @@ extension EBTLoginTVC {
             self.checkForErrorMessage()
         }
     }
+    
+    
+//    func checkForErrorMessage() {
+//        
+//        ebtWebView.getErrorMessage(completion: { result in
+//            
+//            if let errorMessage = result {
+//                if errorMessage.characters.count > 0 {
+//                    // error message
+//                    
+//                    if self.ebtWebView.isPageLoading == false {
+//                        // update view
+//                        self.loginButton.isEnabled = true
+//                        self.registrationButton.isEnabled = true
+//                        self.activityIndicator.stopAnimating()
+//                        self.registrationActivityIndicator.stopAnimating()
+//                    }
+//                    
+//                    self.errorMessageLabel.text = errorMessage
+//                    self.tableView.reloadData()
+//                    
+//                } else {
+//                    //                    // no error message
+//                    //                    self.errorMessageLabel.text = nil
+//                    //                    self.tableView.reloadData()
+//                }
+//            } else {
+//                
+//            }
+//        })
+//    }
     
     func checkForErrorMessage() {
         
