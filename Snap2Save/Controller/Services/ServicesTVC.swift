@@ -28,6 +28,7 @@ class ServicesTVC: UITableViewController {
     @IBOutlet weak var ebtActivityIndicator: UIActivityIndicatorView!
     
     
+    @IBOutlet var rewardLabel: UILabel!
     
     var languageSelectionButton: UIButton!
     
@@ -114,8 +115,52 @@ class ServicesTVC: UITableViewController {
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.FAQ
 
             }
-                
+            
             else if indexPath.row == 2 {
+                var url = ""
+                if currentLanguage == "es" {
+                    url = infoScreens["reward_es"] as! String? ?? ""
+                }
+                else {
+                    url = infoScreens["reward"] as! String? ?? ""
+                }
+                servicesWebVc.loadUrl = url
+                servicesWebVc.type = ServicesWebViewVC.ServiceType.reward
+                
+                
+            }
+                
+
+           else if indexPath.row == 3 {
+                var url = ""
+                if currentLanguage == "es" {
+                    url = infoScreens["terms_es"] as! String? ?? ""
+                }
+                else {
+                    url = infoScreens["terms"] as! String? ?? ""
+                }
+                servicesWebVc.loadUrl = url
+                servicesWebVc.type = ServicesWebViewVC.ServiceType.termsOfService
+                
+                
+            }
+                
+            else if indexPath.row == 4 {
+                
+                var url = ""
+                if currentLanguage == "es" {
+                    url = infoScreens["privacy_es"] as! String? ?? ""
+                }
+                else {
+                    url = infoScreens["privacy"] as! String? ?? ""
+                }
+                servicesWebVc.loadUrl = url
+                servicesWebVc.type = ServicesWebViewVC.ServiceType.privacyPolicy
+                
+                
+            }
+                
+            else if indexPath.row == 5 {
                 
                 var url = ""
                 if currentLanguage == "es" {
@@ -131,10 +176,12 @@ class ServicesTVC: UITableViewController {
 
             }
             
+            
+            
             self.navigationController?.show(servicesWebVc, sender: self)
         }
             
-        else if indexPath.section == 2 {
+      /*  else if indexPath.section == 2 {
             
             let currentLanguage = Localize.currentLanguage()
             let servicesWebVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "ServicesWebViewVC") as! ServicesWebViewVC
@@ -170,7 +217,7 @@ class ServicesTVC: UITableViewController {
             }
             self.navigationController?.show(servicesWebVc, sender: self)
             
-        }
+        }*/
         
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -196,6 +243,7 @@ class ServicesTVC: UITableViewController {
             self.contactUsLabel.text = "Contact Us".localized()
             self.termsLabel.text = "Terms of Service".localized()
             self.privacyPolicyLabel.text = "Privacy Policy".localized()
+            self.rewardLabel.text = "Reward Program".localized()
         }
     }
     

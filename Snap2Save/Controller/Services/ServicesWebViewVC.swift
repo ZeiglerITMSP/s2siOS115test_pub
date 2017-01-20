@@ -18,6 +18,7 @@ class ServicesWebViewVC: UIViewController {
         case contactUs
         case termsOfService
         case privacyPolicy
+        case reward
     }
     var loadUrl : String = ""
     var type : ServiceType? = nil
@@ -83,6 +84,9 @@ class ServicesWebViewVC: UIViewController {
             }
             else if self.type == ServiceType.privacyPolicy{
                 self.title = "Privacy Policy".localized()
+            }
+            else if self.type == ServiceType.reward{
+                self.title = "Reward Program".localized()
             }
             self.updateBackButtonText()
         }

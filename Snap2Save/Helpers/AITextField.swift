@@ -304,7 +304,7 @@ class AITextField: UITextField {
         self.aiDelegate?.keyBoardHidden?(textField: self)
 //        self.resignFirstResponder()
     }
-    /*
+    /*/;
      When user clicked cancel button.
      */
     func cancelButtonClicked()
@@ -324,7 +324,7 @@ class AITextField: UITextField {
             break
         }
         self.resignFirstResponder()
-        self.text = self.text
+        //self.text = self.text
     }
     
     // MARK: -
@@ -334,7 +334,7 @@ class AITextField: UITextField {
         let selectedOption:String = self.pickerViewArray?.object(at: (self.picker?.selectedRow(inComponent: 0))!) as! String
         self.text = selectedOption
         self.selectedTextInPicker = selectedOption
-      //  aiDelegate?.getSelectedIndexFromPicker!(selectedIndex: (self.picker?.selectedRow(inComponent: 0))!)
+      //  aiDelegate?.getSelectedIndexFr©omPicker!(selectedIndex: (self.picker?.selectedRow(inComponent: 0))!)
         
         aiDelegate?.getSelectedIndexFromPicker!(selectedIndex:(self.picker?.selectedRow(inComponent: 0))! , textField: self)
 
@@ -349,7 +349,7 @@ class AITextField: UITextField {
     }
     func setOldTexttoTextField()
     {
-        self.text = self.selectedTextInPicker
+        //self.text = self.selectedTextInPicker
     }
     func setDateTextWithFormatter(string:NSString)
     {

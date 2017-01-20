@@ -101,8 +101,8 @@
 
 
 "Please select" = "Seleccione";
-"Unit, Building, etc." = "Dirección o casilla de correo";
-"Street address or PO box" = "Unidad, edificio, etc.";
+"Unit, Building, etc." = "Unidad, edificio, etc.";
+"Street address or PO box" = "Dirección o casilla de correo";
 
 "Male" = "Masculino";
 "Female" = "Femenino";
@@ -198,6 +198,7 @@
 "Contact Us" = "Contáctenos";
 "Terms of Service" = "Términos de servicio";
 "Privacy Policy" = "Política de privacidad";
+"Reward Program" = "Programa de recompensa";
 
 // login screen
 "USER ID" = "IDENTIDAD DE USUARIO";

@@ -462,6 +462,10 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     func userSignUp(){
         
+        
+        if !isValid(){
+            return
+        }
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
@@ -659,6 +663,16 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         return true
     }
     
-    
+    func isValid() -> Bool {
+        if (zipCodeTextField.text?.characters.count)! > 0 {
+                if (zipCodeTextField.text?.characters.count)! < 5 {
+                    showAlert(title: "", message: "Please enter a valid zip code.".localized())
+                    return false
+            
+            }
+        }
+        
+        return true
+    }
 
 }
