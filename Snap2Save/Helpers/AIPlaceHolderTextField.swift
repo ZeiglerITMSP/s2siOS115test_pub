@@ -19,7 +19,7 @@ protocol AIPlaceHolderTextFieldDelegate {
     // Outlets
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var contentTextField: AITextField!
-    @IBOutlet weak var requiredLabel: UILabel!
+//    @IBOutlet weak var requiredLabel: UILabel!
     
     var delegate:AIPlaceHolderTextFieldDelegate?
     
@@ -28,18 +28,21 @@ protocol AIPlaceHolderTextFieldDelegate {
     // Designable
     @IBInspectable var placeholderText: String = "" {
         didSet {
-            placeholderLabel.text = placeholderText
+            
+            if isRequredField {
+                placeholderLabel.attributedText = placeholderText.localized().makeAsRequired()
+            } else {
+                placeholderLabel.text = placeholderText
+            }
+            
         }
     }
-    
-    
     
     @IBInspectable var placeholderTextField: String = "" {
         didSet {
             contentTextField.placeholder = placeholderTextField
         }
     }
-    
     
     @IBInspectable var contentText: String = "" {
         didSet {
@@ -59,7 +62,7 @@ protocol AIPlaceHolderTextFieldDelegate {
         
         didSet {
             
-           requiredLabel.isHidden = !isRequredField
+//           requiredLabel.isHidden = !isRequredField
         }
     }
     
@@ -152,7 +155,7 @@ protocol AIPlaceHolderTextFieldDelegate {
         contentTextField.createUnderline(withColor: normalColor, padding: 0, height: 1)
         
         self.infoButton.isHidden = !showInfoButton
-        self.requiredLabel.isHidden = !isRequredField
+      //  self.requiredLabel.isHidden = !isRequredField
         
         return view
     }

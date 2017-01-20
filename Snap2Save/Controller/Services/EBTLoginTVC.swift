@@ -224,6 +224,8 @@ class EBTLoginTVC: UITableViewController {
             self.loginButton.setTitle("LOGIN".localized(), for: .normal)
             self.registrationButton.setTitle("REGISTRATION".localized(), for: .normal)
             
+            self.tableView.reloadData()
+            
             self.validateLoginPage()
         }
     }

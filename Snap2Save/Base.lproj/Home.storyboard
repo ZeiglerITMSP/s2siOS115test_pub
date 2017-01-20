@@ -215,9 +215,6 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehI-Dc-bH2" customClass="AIPlaceHolderTextField" customModule="Snap2Save" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="76" id="IOV-S7-rEp"/>
-                                                    </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="User ID"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>

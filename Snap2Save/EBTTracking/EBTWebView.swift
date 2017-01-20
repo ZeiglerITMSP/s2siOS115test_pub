@@ -70,10 +70,10 @@ class EBTWebView: NSObject {
         let configuration = WKWebViewConfiguration()
         let preferences = WKPreferences()
         preferences.javaScriptCanOpenWindowsAutomatically = true
+
         configuration.preferences = preferences
         
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
-        
         //        webView = WKWebView()
         webView.navigationDelegate = self
         //        webView.uiDelegate = self

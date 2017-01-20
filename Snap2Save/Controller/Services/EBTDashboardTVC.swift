@@ -227,7 +227,7 @@ class EBTDashboardTVC: UITableViewController {
                 self.accountDetails.append(detail)
                 self.cashBalance = result
                 
-                self.perform(#selector(self.getTransactionActivityUlr), with: self, afterDelay: 8)
+                self.perform(#selector(self.getTransactionActivityUlr), with: self, afterDelay: 5)
                 //                self.getTransactionActivityUlr()
             })
         })
@@ -256,6 +256,8 @@ class EBTDashboardTVC: UITableViewController {
     // Transaction History
     
     func getTransactionActivityUlr() {
+        
+        print("getTransactionActivityUlr ++++++++++")
         
         let js = "$('.green_bullet:eq(1) a').attr('href');"
         
@@ -322,8 +324,8 @@ class EBTDashboardTVC: UITableViewController {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if resultTrimmed == "allactTab" {
-                    
-                    self.getTransactions()
+                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 5)
+                    //self.getTransactions()
                 } else {
                     self.clickTransactionsTab()
                 }
@@ -348,8 +350,8 @@ class EBTDashboardTVC: UITableViewController {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if resultTrimmed == "allactTab" {
-                    
-                    self.getTransactions()
+                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 5)
+                    //self.getTransactions()
                 } else {
                     
                 }
@@ -372,7 +374,8 @@ class EBTDashboardTVC: UITableViewController {
                 
                 if resultTrimmed == "allactTab" {
                     
-                    self.getTransactions()
+                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 5)
+//                    self.getTransactions()
                 } else {
                     
                 }

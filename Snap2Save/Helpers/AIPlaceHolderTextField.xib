@@ -13,7 +13,6 @@
                 <outlet property="contentTextField" destination="Oq9-Hg-QjO" id="jVq-BG-vWs"/>
                 <outlet property="infoButton" destination="QSS-fa-fMx" id="KhW-fK-NQa"/>
                 <outlet property="placeholderLabel" destination="8F8-dU-10h" id="jdX-6Q-oDx"/>
-                <outlet property="requiredLabel" destination="kjx-Bh-ffU" id="m4A-mk-laG"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -22,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Placeholder" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8F8-dU-10h">
-                    <rect key="frame" x="26" y="30.5" width="67" height="14.5"/>
+                    <rect key="frame" x="26" y="30.5" width="323" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.40784313725490196" green="0.50196078431372548" blue="0.29019607843137252" alpha="0.5" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -41,12 +40,6 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjx-Bh-ffU">
-                    <rect key="frame" x="97" y="30.5" width="7" height="14.5"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
-                    <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSS-fa-fMx">
                     <rect key="frame" x="327" y="50" width="22" height="28"/>
                     <color key="tintColor" red="0.3294117647" green="0.74509803919999995" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -60,17 +53,15 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="kjx-Bh-ffU" firstAttribute="leading" secondItem="8F8-dU-10h" secondAttribute="trailing" constant="4" id="E2s-xZ-ARR"/>
                 <constraint firstAttribute="trailing" secondItem="Oq9-Hg-QjO" secondAttribute="trailing" constant="26" id="J6L-rm-tgg"/>
-                <constraint firstItem="kjx-Bh-ffU" firstAttribute="top" secondItem="8F8-dU-10h" secondAttribute="top" id="OWq-QY-Of0"/>
                 <constraint firstItem="Oq9-Hg-QjO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="26" id="POe-YO-OiF"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kjx-Bh-ffU" secondAttribute="trailing" constant="26" id="Pls-NG-rlB"/>
                 <constraint firstItem="QSS-fa-fMx" firstAttribute="height" secondItem="Oq9-Hg-QjO" secondAttribute="height" id="QCe-2G-kwZ"/>
-                <constraint firstItem="8F8-dU-10h" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" priority="750" constant="2" id="UCl-Na-DaD"/>
+                <constraint firstItem="8F8-dU-10h" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" priority="750" constant="8" id="UCl-Na-DaD"/>
                 <constraint firstItem="Oq9-Hg-QjO" firstAttribute="top" secondItem="8F8-dU-10h" secondAttribute="bottom" constant="8" id="UEC-nu-zpX"/>
                 <constraint firstAttribute="bottom" secondItem="Oq9-Hg-QjO" secondAttribute="bottom" constant="4" id="ZNd-1H-OMX"/>
                 <constraint firstItem="8F8-dU-10h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="26" id="ZSS-cm-Pln"/>
                 <constraint firstItem="QSS-fa-fMx" firstAttribute="centerY" secondItem="Oq9-Hg-QjO" secondAttribute="centerY" constant="-3" id="ib1-aD-3dZ"/>
+                <constraint firstAttribute="trailing" secondItem="8F8-dU-10h" secondAttribute="trailing" constant="26" id="jFE-5z-Ccm"/>
                 <constraint firstItem="QSS-fa-fMx" firstAttribute="leading" secondItem="Oq9-Hg-QjO" secondAttribute="trailing" constant="-22" id="xll-ab-Lla"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
