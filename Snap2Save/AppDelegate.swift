@@ -135,7 +135,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return facebookHandler
         } else {
             
-            
             if urlString.characters.count > 0 {
                 let query = url.query
                 let components = query?.components(separatedBy: "&")

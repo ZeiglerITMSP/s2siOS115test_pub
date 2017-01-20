@@ -150,6 +150,25 @@ class AccountTVC: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
+    
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let data = UserDefaults.standard.object(forKey: LOGGED_USER)
+        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)
+        let user = userInfo as! User
+        
+        let isFaceBookUser = user.signup_type
+        if indexPath.section == 0 {
+        if indexPath.row == 3 {
+            if  isFaceBookUser == "2" {
+                return 0
+            }
+        }
+        }
+        return UITableViewAutomaticDimension
+    }
+
     func showAlert() {
         
         let logOutAlert = UIAlertController.init(title: nil, message: "Are you sure you want to log out?".localized(), preferredStyle: .alert)
@@ -166,7 +185,6 @@ class AccountTVC: UITableViewController {
         self.present(logOutAlert, animated: true, completion:nil)
         logOutAlert.view.tintColor = APP_GRREN_COLOR
 
-        
     }
     
     func userLogout() {

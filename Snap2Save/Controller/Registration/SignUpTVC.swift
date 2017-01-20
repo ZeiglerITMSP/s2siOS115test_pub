@@ -414,10 +414,6 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         reEnterEmailTextField.updateUIAsPerTextFieldType()
 
     }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return UITableViewAutomaticDimension
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -435,6 +431,22 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         return 14
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let socialId : String = facebookDict?["id"] as! String? ?? ""
+        
+        if indexPath.row == 5 {
+            if  !socialId.isEmpty {
+                return 0
+            }
+        } else if indexPath.row == 6 {
+            if  !socialId.isEmpty {
+                return 0
+            }
+    }
+        
+        return UITableViewAutomaticDimension
+    }
 
     func isValidData() -> Bool{
         
@@ -443,7 +455,8 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumTextField.text!)
         let validMobileNum = AppHelper.validate(value: phoneNumber)
         let validEmail = AppHelper.isValidEmail(testStr: emailTextField.text!)
-
+        let socialId : String = facebookDict?["id"] as! String? ?? ""
+        
         if mobileNumTextField.text?.characters.count == 0 || validMobileNum == false {
             showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
             return false
@@ -453,7 +466,8 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
             showAlert(title: "", message: "Entries must match to proceed".localized())
             return false
         }
-           
+        
+        if socialId.isEmpty == true{
         if (passwordTextField.text?.characters.count)! < 6 {
             showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
             return false
@@ -463,8 +477,8 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
             showAlert(title: "", message: "Entries must match to proceed".localized())
             return false
         }
-        
-        if zipCodeTextField.text?.characters.count == 0 {
+        }
+        if (zipCodeTextField.text?.characters.count)! < 5 {
             showAlert(title: "", message: "Please enter a valid zip code.".localized())
             return false
         }
@@ -498,14 +512,18 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
 extension SignUpTVC: AITextFieldProtocol {
     
     func keyBoardHidden(textField: UITextField) {
-        if textField == mobileNumTextField{
+        
+        let socialId : String = facebookDict?["id"] as! String? ?? ""
+        if socialId.isEmpty == true {
+        if textField == mobileNumTextField {
             reEnterMobileNumTextField.becomeFirstResponder()
         }
-        else if textField == reEnterMobileNumTextField{
+            
+        else if textField == reEnterMobileNumTextField {
             passwordTextField.becomeFirstResponder()
         }
             
-        else if textField == passwordTextField{
+        else if textField == passwordTextField {
             reEnterPasswordTextField.becomeFirstResponder()
         }
         else if textField == reEnterPasswordTextField{
@@ -518,6 +536,29 @@ extension SignUpTVC: AITextFieldProtocol {
             reEnterEmailTextField.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
+        }
+            
+        }
+        
+        else {
+            
+            if textField == mobileNumTextField {
+                reEnterMobileNumTextField.becomeFirstResponder()
+            }
+                
+            else if textField == reEnterMobileNumTextField {
+                zipCodeTextField.becomeFirstResponder()
+            }
+                
+            else if textField == zipCodeTextField{
+                emailTextField.becomeFirstResponder()
+            }
+            else if textField == emailTextField {
+                reEnterEmailTextField.becomeFirstResponder()
+            }
+            else {
+                textField.resignFirstResponder()
+            }
         }
     }
     
@@ -596,7 +637,7 @@ extension SignUpTVC: AITextFieldProtocol {
         let email =  facebookDict?["email"] ?? ""
         emailTextField.text = email as? String
         
-        
+        self.tableView.reloadData()
         self.checkFacebookUser()
     }
  
