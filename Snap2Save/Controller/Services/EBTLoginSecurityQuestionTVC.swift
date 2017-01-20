@@ -122,7 +122,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
             self.pageTitle = "ebt.securityQuestion".localized()
             self.securityQuestionTitleLabel.text = "SECURITY QUESTION".localized()
             self.securityAnswerField.placeholderText = "SECURITY ANSWER".localized()
-            self.errorTitleLabel.text = "ebt.error.title".localized()
+            self.errorTitleLabel.text = ""
             
             self.confirmButton.setTitle("CONFIRM".localized(), for: .normal)
             

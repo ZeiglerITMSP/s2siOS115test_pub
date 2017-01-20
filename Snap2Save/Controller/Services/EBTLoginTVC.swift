@@ -80,12 +80,21 @@ class EBTLoginTVC: UITableViewController {
     
     @IBAction func rememberMeAction(_ sender: UIButton) {
         
-        sender.isSelected = !sender.isSelected
+        //sender.isSelected = !sender.isSelected
+        
+        if sender.isSelected == true {
+            // already remember me is clicked, so deselect it
+            UserDefaults.standard.removeObject(forKey: kUserIdEBT)
+            sender.isSelected = false
+            UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
+        } else {
+            // trying to enable remember me..
+            authenticateUserWithTouchID(toAutofill: false)
+        }
+        
+        
         UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
         
-        if sender.isSelected == false {
-            UserDefaults.standard.removeObject(forKey: kUserIdEBT)
-        }
         
     }
     
@@ -219,7 +228,7 @@ class EBTLoginTVC: UITableViewController {
             self.passwordField.placeholderText = "PASSWORD".localized()
             self.remmeberMyUserNameLabel.text = "Remember My User ID".localized()
             
-            self.errorTitleLabel.text = "ebt.error.title".localized()
+            self.errorTitleLabel.text = ""
             
             self.loginButton.setTitle("LOG IN".localized(), for: .normal)
             self.registrationButton.setTitle("REGISTER".localized(), for: .normal)
@@ -428,71 +437,71 @@ extension EBTLoginTVC {
     }
     
     
-//    func checkForErrorMessage() {
-//        
-//        ebtWebView.getErrorMessage(completion: { result in
-//            
-//            if let errorMessage = result {
-//                if errorMessage.characters.count > 0 {
-//                    // error message
-//                    
-//                    if self.ebtWebView.isPageLoading == false {
-//                        // update view
-//                        self.loginButton.isEnabled = true
-//                        self.registrationButton.isEnabled = true
-//                        self.activityIndicator.stopAnimating()
-//                        self.registrationActivityIndicator.stopAnimating()
-//                    }
-//                    
-//                    self.errorMessageLabel.text = errorMessage
-//                    self.tableView.reloadData()
-//                    
-//                } else {
-//                    //                    // no error message
-//                    //                    self.errorMessageLabel.text = nil
-//                    //                    self.tableView.reloadData()
-//                }
-//            } else {
-//                
-//            }
-//        })
-//    }
-    
     func checkForErrorMessage() {
         
-        let javaScript = "$('.errorTextLogin').text();"
-        
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+        ebtWebView.getErrorMessage(completion: { result in
             
-            if let resultString = result as? String {
-                
-                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                
-                if resultTrimmed.characters.count > 0 {
+            if let errorMessage = result {
+                if errorMessage.characters.count > 0 {
                     // error message
                     
-                    // update view
                     if self.ebtWebView.isPageLoading == false {
+                        // update view
                         self.loginButton.isEnabled = true
                         self.registrationButton.isEnabled = true
                         self.activityIndicator.stopAnimating()
                         self.registrationActivityIndicator.stopAnimating()
                     }
                     
-                    self.errorMessageLabel.text = resultTrimmed
+                    self.errorMessageLabel.text = errorMessage
                     self.tableView.reloadData()
                     
                 } else {
-//                    // no error message
-//                    self.errorMessageLabel.text = nil
-//                    self.tableView.reloadData()
+                    //                    // no error message
+                    //                    self.errorMessageLabel.text = nil
+                    //                    self.tableView.reloadData()
                 }
-                
             } else {
-                print(error ?? "")
+                
             }
-        }
+        })
     }
+    
+//    func checkForErrorMessage() {
+//        
+//        let javaScript = "$('.errorTextLogin').text();"
+//        
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            
+//            if let resultString = result as? String {
+//                
+//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+//                
+//                if resultTrimmed.characters.count > 0 {
+//                    // error message
+//                    
+//                    // update view
+//                    if self.ebtWebView.isPageLoading == false {
+//                        self.loginButton.isEnabled = true
+//                        self.registrationButton.isEnabled = true
+//                        self.activityIndicator.stopAnimating()
+//                        self.registrationActivityIndicator.stopAnimating()
+//                    }
+//                    
+//                    self.errorMessageLabel.text = resultTrimmed
+//                    self.tableView.reloadData()
+//                    
+//                } else {
+////                    // no error message
+////                    self.errorMessageLabel.text = nil
+////                    self.tableView.reloadData()
+//                }
+//                
+//            } else {
+//                print(error ?? "")
+//            }
+//        }
+//    }
     
     
     
@@ -513,36 +522,50 @@ extension EBTLoginTVC {
             if rememberUserEnabled {
                 let userId = UserDefaults.standard.value(forKey: kUserIdEBT) as? String
                 if userId != nil {
-                    authenticateUserWithTouchID()
+                    authenticateUserWithTouchID(toAutofill: true)
                 }
             }
         }
         
     }
     
-    func authenticateUserWithTouchID() {
+    func authenticateUserWithTouchID(toAutofill autofill: Bool) {
         let context = LAContext()
         var error: NSError?
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Identify yourself!"
+            let reason = "Identify yourself!".localized()
             
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
                 [unowned self] success, authenticationError in
                 
                 DispatchQueue.main.async {
                     if success {
-                        self.autofillUserID()
+                        if autofill {
+                            self.autofillUserID()
+                        } else {
+                            self.rememberMeButton.isSelected = true
+                            UserDefaults.standard.set(self.rememberMeButton.isSelected, forKey: kRememberMeEBT)
+                        }
+                        
                     } else {
-                        //                        let ac = UIAlertController(title: "Authentication failed", message: "Sorry!", preferredStyle: .alert)
-                        //                        ac.addAction(UIAlertAction(title: "OK", style: .default))
-                        //                        self.present(ac, animated: true)
+                        
+                        UserDefaults.standard.removeObject(forKey: kUserIdEBT)
+                        self.rememberMeButton.isSelected = false
+                        UserDefaults.standard.set(self.rememberMeButton.isSelected, forKey: kRememberMeEBT)
+                        
+                        
+//                        let ac = UIAlertController(title: "Authentication failed", message: "Sorry!", preferredStyle: .alert)
+//                        ac.addAction(UIAlertAction(title: "OK", style: .default))
+//                        self.present(ac, animated: true)
                     }
                 }
             }
         } else {
             
-            self.rememberMeButton.isEnabled = false
+//            UserDefaults.standard.removeObject(forKey: kUserIdEBT)
+//            self.rememberMeButton.isSelected = false
+//            UserDefaults.standard.set(self.rememberMeButton.isSelected, forKey: kRememberMeEBT)
 //            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
 //            ac.addAction(UIAlertAction(title: "OK", style: .default))
 //            present(ac, animated: true)

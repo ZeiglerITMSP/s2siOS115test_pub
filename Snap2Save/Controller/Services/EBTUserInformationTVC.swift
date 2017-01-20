@@ -218,7 +218,7 @@ class EBTUserInformationTVC: UITableViewController {
             self.questionThreeField.placeholderText = "QUESTION 3".localized()
             self.answerThreeField.placeholderText = "ANSWER 3".localized()
             
-            self.errorTitleLabel.text = "ebt.error.title".localized()
+            self.errorTitleLabel.text = ""//"ebt.error.title".localized()
             
             self.nextButton.setTitle("NEXT".localized(), for: .normal)
         }

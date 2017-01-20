@@ -190,6 +190,8 @@
 
 // EBT
 
+
+
 // Services
 "Services" = "Services";
 "EBT" = "EBT";
@@ -210,6 +212,8 @@
 
 "LOG IN" = "LOG IN";
 "REGISTER" = "REGISTER";
+
+"Identify yourself!" = "Identify yourself!";
 
 // Authentication Code
 "AUTHENTICATION CODE" = "AUTHENTICATION CODE";

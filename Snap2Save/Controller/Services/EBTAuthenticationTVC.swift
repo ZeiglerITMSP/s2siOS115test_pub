@@ -151,7 +151,7 @@ class EBTAuthenticationTVC: UITableViewController {
             self.updateBackButtonText()
             
             self.authenticationCodeField.placeholderText = "AUTHENTICATION CODE".localized()
-            self.errorTitleLabel.text = "ebt.error.title".localized()
+            self.errorTitleLabel.text = ""
             
             self.pageTitle = "ebt.authentication".localized()
             self.confirmButton.setTitle("CONFIRM".localized(), for: .normal)

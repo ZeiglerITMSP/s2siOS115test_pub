@@ -203,16 +203,16 @@
 // login screen
 "USER ID" = "IDENTIDAD DE USUARIO";
 "PASSWORD" = "CONTRASEÑA";
-"Remember my user ID" = "Recuerda mi ID de usuario";
-"LOGIN" = "INICIAR SESIÓN";
-"REGISTRATION" = "REGISTRO";
+"Remember My User ID" = "Recuerda Mi ID De Usuario";
+
+"LOG IN" = "INICIAR SESIÓN";
+"REGISTER" = "REGISTRO";
+"Identify yourself!" = "Identify yourself!";
+
 
 "EBT.login.Logon" = "Iniciar Sesión";
 
-
-
 // Offers
-
 "Offers" = "Ofertas";
 
 

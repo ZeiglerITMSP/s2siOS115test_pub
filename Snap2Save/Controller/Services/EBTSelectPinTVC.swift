@@ -132,7 +132,7 @@ class EBTSelectPinTVC: UITableViewController {
             self.pageTitle = "ebt.pin".localized()
             self.pinField.placeholderText = "PIN".localized()
             self.confirmPinField.placeholderText = "CONFIRM PIN".localized()
-            self.errorTitleLabel.text = "ebt.error.title".localized()
+            self.errorTitleLabel.text = ""//"ebt.error.title".localized()
             
             self.nextButton.setTitle("NEXT".localized(), for: .normal)
             self.useCurrentPinButton.setTitle("USE CURRENT PIN".localized(), for: .normal)

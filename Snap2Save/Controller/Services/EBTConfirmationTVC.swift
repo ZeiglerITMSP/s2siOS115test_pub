@@ -134,7 +134,7 @@ class EBTConfirmationTVC: UITableViewController {
             self.title = "REGISTRATION".localized()
             self.pageTitle = "ebt.confirmation".localized()
             self.validationCodeField.placeholderText = "ENTER EMAIL VALIDATION CODE".localized()
-            self.errorTitleLabel.text = "ebt.error.title".localized()
+            self.errorTitleLabel.text = ""
             
             self.validateButton.setTitle("VALIDATE".localized(), for: .normal)
             self.resendButton.setTitle("RESEND".localized(), for: .normal)
