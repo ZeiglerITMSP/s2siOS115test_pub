@@ -217,12 +217,12 @@ class EBTLoginTVC: UITableViewController {
             self.pageTitle = "ebt.logon".localized()
             self.userIdField.placeholderText = "USER ID".localized()
             self.passwordField.placeholderText = "PASSWORD".localized()
-            self.remmeberMyUserNameLabel.text = "Remember my user ID".localized()
+            self.remmeberMyUserNameLabel.text = "Remember My User ID".localized()
             
             self.errorTitleLabel.text = "ebt.error.title".localized()
             
-            self.loginButton.setTitle("LOGIN".localized(), for: .normal)
-            self.registrationButton.setTitle("REGISTRATION".localized(), for: .normal)
+            self.loginButton.setTitle("LOG IN".localized(), for: .normal)
+            self.registrationButton.setTitle("REGISTER".localized(), for: .normal)
             
             self.tableView.reloadData()
             

@@ -206,9 +206,10 @@
 // login screen
 "USER ID" = "USER ID";
 "PASSWORD" = "PASSWORD";
-"Remember my user ID" = "Remember my user ID";
-"LOGIN" = "LOGIN";
-"REGISTRATION" = "REGISTRATION";
+"Remember My User ID" = "Remember My User ID";
+
+"LOG IN" = "LOG IN";
+"REGISTER" = "REGISTER";
 
 // Authentication Code
 "AUTHENTICATION CODE" = "AUTHENTICATION CODE";
