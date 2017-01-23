@@ -60,6 +60,21 @@ class EBTDashboardTVC: UITableViewController {
         ebtWebView.responder = self
         
         validatePage()
+        
+        
+        self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    }
+
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -60, 0)
+        
+        //  yourtableviewname.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,6 +85,8 @@ class EBTDashboardTVC: UITableViewController {
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
         webView.sendSubview(toBack: self.view)
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -165,6 +182,9 @@ class EBTDashboardTVC: UITableViewController {
         return nil
     }
     
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
     
     // MARK: -
     
@@ -227,8 +247,8 @@ class EBTDashboardTVC: UITableViewController {
                 self.accountDetails.append(detail)
                 self.cashBalance = result
                 
-                self.perform(#selector(self.getTransactionActivityUlr), with: self, afterDelay: 5)
-                //                self.getTransactionActivityUlr()
+//                self.perform(#selector(self.getTransactionActivityUlr), with: self, afterDelay: 5)
+                                self.getTransactionActivityUlr()
             })
         })
     }
@@ -324,7 +344,7 @@ class EBTDashboardTVC: UITableViewController {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if resultTrimmed == "allactTab" {
-                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 5)
+                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
                     //self.getTransactions()
                 } else {
                     self.clickTransactionsTab()
@@ -350,7 +370,7 @@ class EBTDashboardTVC: UITableViewController {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if resultTrimmed == "allactTab" {
-                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 5)
+                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
                     //self.getTransactions()
                 } else {
                     
@@ -374,7 +394,7 @@ class EBTDashboardTVC: UITableViewController {
                 
                 if resultTrimmed == "allactTab" {
                     
-                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 5)
+                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
 //                    self.getTransactions()
                 } else {
                     

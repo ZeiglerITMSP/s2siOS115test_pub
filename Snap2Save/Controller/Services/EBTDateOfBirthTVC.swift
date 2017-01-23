@@ -128,7 +128,7 @@ class EBTDateOfBirthTVC: UITableViewController {
             self.pageTitle = "ebt.dob".localized()
             self.dobField.placeholderText = "ebt.fieldcheck.dob".localized()
             self.socialSecurityNumberField.placeholderText = "ebt.fieldcheck.socialsecuritynumber".localized()
-            self.errorTitleLabel.text = "ebt.error.title".localized()
+            self.errorTitleLabel.text = ""
             
             self.nextButton.setTitle("NEXT".localized(), for: .normal)   
         }

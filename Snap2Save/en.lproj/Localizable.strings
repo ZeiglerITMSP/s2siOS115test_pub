@@ -190,6 +190,8 @@
 
 // EBT
 
+
+
 // Services
 "Services" = "Services";
 "EBT" = "EBT";
@@ -206,9 +208,12 @@
 // login screen
 "USER ID" = "USER ID";
 "PASSWORD" = "PASSWORD";
-"Remember my user ID" = "Remember my user ID";
-"LOGIN" = "LOGIN";
-"REGISTRATION" = "REGISTRATION";
+"Remember My User ID" = "Remember My User ID";
+
+"LOG IN" = "LOG IN";
+"REGISTER" = "REGISTER";
+
+"Identify yourself!" = "Identify yourself!";
 
 // Authentication Code
 "AUTHENTICATION CODE" = "AUTHENTICATION CODE";

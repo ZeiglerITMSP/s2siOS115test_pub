@@ -125,7 +125,7 @@ class EBTCardNumberTVC: UITableViewController {
             
             self.pageTitle = "ebt.cardnumber".localized()
             self.cardNumberField.placeholderText = "CARD NUMBER".localized()
-            self.errorTitleLabel.text = "ebt.error.title".localized()
+            self.errorTitleLabel.text = ""
             
             self.nextButton.setTitle("NEXT".localized(), for: .normal)
         }
