@@ -31,6 +31,10 @@ class EBTLoginTVC: UITableViewController {
     
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
+    
     @IBOutlet weak var passwordField: AIPlaceHolderTextField!
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
@@ -221,8 +225,10 @@ class EBTLoginTVC: UITableViewController {
             
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
-            self.title = "EBT".localized()
+            self.title = "ebt.title.login".localized()
             
+            self.titleLabel.text = "ebt.login.titleLabel".localized()
+            self.messageLabel.text = "ebt.login.messageLabel".localized()
             self.pageTitle = "ebt.logon".localized()
             self.userIdField.placeholderText = "USER ID".localized()
             self.passwordField.placeholderText = "PASSWORD".localized()
@@ -256,11 +262,11 @@ class EBTLoginTVC: UITableViewController {
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 0 {
+        if indexPath.row == 1 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 4 {
             if isTouchIdAvailable == false {
                 return 0
             }

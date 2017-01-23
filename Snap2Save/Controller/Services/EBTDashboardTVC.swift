@@ -344,8 +344,8 @@ class EBTDashboardTVC: UITableViewController {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if resultTrimmed == "allactTab" {
-                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
-                    //self.getTransactions()
+//                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
+                    self.getTransactions()
                 } else {
                     self.clickTransactionsTab()
                 }
@@ -370,8 +370,8 @@ class EBTDashboardTVC: UITableViewController {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if resultTrimmed == "allactTab" {
-                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
-                    //self.getTransactions()
+//                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
+                    self.getTransactions()
                 } else {
                     
                 }
@@ -394,8 +394,8 @@ class EBTDashboardTVC: UITableViewController {
                 
                 if resultTrimmed == "allactTab" {
                     
-                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
-//                    self.getTransactions()
+//                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
+                    self.getTransactions()
                 } else {
                     
                 }
@@ -405,38 +405,49 @@ class EBTDashboardTVC: UITableViewController {
         }
     }
     
-    
-    
     func getTransactions() {
         
-        let js = "function transactionActivity() {" +
-            "var list = [];" +
-            "var table = $('#allCompletedTxnGrid tbody');" +
-            "table.find('tr').each(function (i) {" +
-            "var $tds = $(this).find('td')," +
-            "t_date = $tds.eq(2).text();" +
-            "if (t_date) {" +
-            "list[i] = {" +
-            "date: t_date," +
-            "transaction: $tds.eq(3).text()," +
-            "location: $tds.eq(4).text()," +
-            "account: $tds.eq(5).text()," +
-            "card: $tds.eq(6).text()," +
-            "debit_amount: $tds.eq(7).text()," +
-            "credit_amount: $tds.eq(8).text()," +
-            "available_balance: $tds.eq(9).text()" +
-            "};" +
-            "}" +
-            "});" +
-            "arr = $.grep(list, function (n) {" +
-            "return n == 0 || n" +
-            "});" +
-            "var jsonSerialized = JSON.stringify(arr);" +
-            "return jsonSerialized;" +
-            "}" +
-        "transactionActivity();"
+        let jsTransactionActivity = "function transactionActivity() {" +
+        "var list = []; " +
+        "var table = $('#allCompletedTxnGrid tbody'); " +
+        "table.find('tr').each(function (i) { " +
+            "var $tds = $(this).find('td'), " +
+            "t_date = $tds.eq(2).text(); " +
+            "if (t_date) { " +
+                "list[i] = {date: t_date, transaction: $tds.eq(3).text(), " +
+        "location: $tds.eq(4).text(), " +
+            "account: $tds.eq(5).text(),  " +
+        "card: $tds.eq(6).text(), debit_amount: $tds.eq(7).text(),  " +
+            "credit_amount: $tds.eq(8).text(), " +
+        "available_balance: $tds.eq(9).text()}; " +
+                
+            "} " +
+        "}); " +
+        "arr = $.grep(list, function (n) { " +
+            "return n == 0 || n " +
+        "}); " +
+        "var jsonSerialized = JSON.stringify(arr); " +
+        "return jsonSerialized; " +
+    "} "
+    
+        let jsGetTransactions = "function getTransactions(interval){ " +
+            
+            "var currentDate = new Date(); " +
+            "var startTime = currentDate.getTime(); " +
+            "var currentTime = 0; " +
+            "while(currentTime < (startTime + interval)){ " +
+              "  var jsonSerialized = transactionActivity(); " +
+              "  currentDate = new Date(); " +
+              "  currentTime = currentDate.getTime(); " +
+              "  if(jsonSerialized && jsonSerialized.length>2){ " +
+              "      break; " +
+              "  } " +
+            "} " +
+           " return jsonSerialized; " +
+        "} " +
+        "getTransactions(20000); "
         
-        
+        let js = jsTransactionActivity + jsGetTransactions
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
                 print(error ?? "error nil")
@@ -484,6 +495,85 @@ class EBTDashboardTVC: UITableViewController {
         }
         
     }
+
+    
+//    func getTransactions() {
+//        
+//        let js = "function transactionActivity() {" +
+//            "var list = [];" +
+//            "var table = $('#allCompletedTxnGrid tbody');" +
+//            "table.find('tr').each(function (i) {" +
+//            "var $tds = $(this).find('td')," +
+//            "t_date = $tds.eq(2).text();" +
+//            "if (t_date) {" +
+//            "list[i] = {" +
+//            "date: t_date," +
+//            "transaction: $tds.eq(3).text()," +
+//            "location: $tds.eq(4).text()," +
+//            "account: $tds.eq(5).text()," +
+//            "card: $tds.eq(6).text()," +
+//            "debit_amount: $tds.eq(7).text()," +
+//            "credit_amount: $tds.eq(8).text()," +
+//            "available_balance: $tds.eq(9).text()" +
+//            "};" +
+//            "}" +
+//            "});" +
+//            "arr = $.grep(list, function (n) {" +
+//            "return n == 0 || n" +
+//            "});" +
+//            "var jsonSerialized = JSON.stringify(arr);" +
+//            "return jsonSerialized;" +
+//            "}" +
+//        "transactionActivity();"
+//        
+//        
+//        ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
+//            if error != nil {
+//                print(error ?? "error nil")
+//            } else {
+//                print(result ?? "result nil")
+//                let stringResult = result as! String
+//                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+//                print(trimmedText)
+//                
+//                if trimmedText.characters.count > 0 {
+//                    
+//                    self.transactionsString = trimmedText
+//                    
+//                    let json = JSON.parse(trimmedText)
+//                    print("json response\(json)")
+//                    
+//                    if let responseArray = json.arrayObject {
+//                        
+//                        print(responseArray)
+//                        
+//                        self.trasactions =  responseArray
+//                        
+//                        self.tableView.reloadData()
+//                        
+//                        self.sendEBTInformationToServer()
+//                        /*
+//                         account = SNAP;
+//                         "available_balance" = "$ 312.30";
+//                         card = 0339;
+//                         "credit_amount" = "$ 0.00";
+//                         date = "12/10/2016";
+//                         "debit_amount" = "$ 89.62";
+//                         location = "WM SUPERCEWal-Mart Super CenterAURORACO";
+//                         transaction = "POS Purchase Debit";
+//                         */
+//                        
+//                    }
+//                    // self.loadTransactionActivityPage(url: trimmedText)
+//                    
+//                } else {
+//                    self.tableView.reloadData()
+//                    self.sendEBTInformationToServer()
+//                }
+//            }
+//        }
+//        
+//    }
     
 }
 

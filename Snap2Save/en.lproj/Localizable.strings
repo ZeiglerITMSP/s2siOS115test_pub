@@ -188,13 +188,8 @@
 
 
 
-// EBT
-
-
-
 // Services
 "Services" = "Services";
-"EBT" = "EBT";
 "About Snap2Save" = "About Snap2Save";
 "FAQ" = "FAQ";
 "Contact Us" = "Contact Us";
@@ -202,53 +197,69 @@
 "Privacy Policy" = "Privacy Policy";
 "Reward Program" = "Reward Program";
 
+
+// EBT COMMON TEXT
+"EBT" = "EBT";
 "ebt.error.title" = "Please correct the following items:";
+"NEXT" = "NEXT";
+"ebt.title.login" = "Log In";
+"ebt.title.register" = "Register";
+
 
 
 // login screen
 "USER ID" = "USER ID";
 "PASSWORD" = "PASSWORD";
 "Remember My User ID" = "Remember My User ID";
-
 "LOG IN" = "LOG IN";
 "REGISTER" = "REGISTER";
-
 "Identify yourself!" = "Identify yourself!";
+"ebt.login.titleLabel" = "AN EASY, CONVENIENT WAY TO ACCESS YOUR EBT CARD ACCOUNT INFORMATION.";
+"ebt.login.messageLabel" = "Check your balance and review your transaction activity.";
+
 
 // Authentication Code
 "AUTHENTICATION CODE" = "AUTHENTICATION CODE";
 "CONFIRM" = "CONFIRM";
 "REGENERATE" = "REGENERATE";
+"ebt.authentication.titleLabel" = "WE DON’T RECOGNIZE THE DEVICE YOU’RE USING";
+"ebt.authentication.messageLabel" = "We need to verify your identity before you can access your account. A message, with a temporary authorization code, has been sent to the email address shown on your account. Please check your email and enter the code below. The code is valid for 30 minutes in the current session only.";
 
 
-"NEXT" = "NEXT";
-
-// Registration
-"Registration" = "Registration";
-"Please enter your current card number." = "Please enter your current card number.";
+// card number
+"ebt.cardnumber.titleLabel" = "IDENTIFY YOUR CARD AND ACCOUNTS";
+"ebt.cardnumber.messageLabel" = "Please enter your current card number.";
 "CARD NUMBER" = "CARD NUMBER";
 
 // DOB screen
-
-"Validate Identity" = "Validate Identity";
-"Step 1: Please provide the following information to validate your identity." = "Step 1: Please provide the following information to validate your identity.";
+"ebt.dob.titltLabel" = "VALIDATE IDENTITY";
+"ebt.dob.messageLabel" = "Step 1: Please provide the following information to validate your identity.";
 "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)" = "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)";
 "WHAT IS YOUR SOCIAL SECURITY NUMBER?" = "WHAT IS YOUR SOCIAL SECURITY NUMBER?";
 
-// Select PIN
+// Verify Security Question
+"ebt.securityQuestion.titleLabel" = "VERIFY SECURITY QUESTION";
+"ebt.securityQuestion.messageLabel" = "Please enter the Security Answer you provided during registration.";
+"SECURITY QUESTION" = "SECURITY QUESTION";
+"SECURITY ANSWER" = "SECURITY ANSWER";
+"CONFIRM" = "CONFIRM";
 
-"Step 2: Select PIN" = "Step 2: Select PIN";
+
+// Select PIN
+"ebt.pin.titleLabel" = "SELECT PIN";
+"ebt.pin.messageLabel" = "Step 2: Select PIN.";
 "PIN" = "PIN";
 "CONFIRM PIN" = "CONFIRM PIN";
 "USE CURRENT PIN" = "USE CURRENT PIN";
+"ebt.pin.pinDescription" = "Your current PIN has been automatically assigned to this account. If you wish, you may change your PIN below, or select Use Current PIN to continue.";
 
 // User Information
 
-"User Information" = "User Information";
-"Step 3: Please enter the following user information" = "Step 3: Please enter the following user information";
+"ebt.userinformation.titleLabel" = "USER INFORMATION";
+"ebt.userinformation.messageLabel" = "Step 3: Please enter the following information.";
 "USER ID" = "USER ID";
 "PASSWORD" = "PASSWORD";
-"CONFIRM NEW PASSWORD" = "CONFIRM NEW PASSWORD";
+"CONFIRM NEW PASSWORD" = "CONFIRM PASSWORD";
 "EMAIL ADDRESS" = "EMAIL ADDRESS";
 "CONFIRM EMAIL ADDRESS" = "CONFIRM EMAIL ADDRESS";
 "PHONE NUMBER" = "PHONE NUMBER";
@@ -258,23 +269,18 @@
 "ANSWER 1" = "ANSWER 1";
 "ANSWER 2" = "ANSWER 2";
 "ANSWER 3" = "ANSWER 3";
+"ebt.userinformation.terms" = "By registering, you agree to the UCARD CENTER SERVICE AGREEMENT and UCARD ONLINE COMMUNICATIONS DELIVERY DISCLOSURE.";
 
 // Confirmation screen
-"Confirmation" = "Confirmation";
-"Step 5: Registration Complete" = "Step 5: Registration Complete";
+"ebt.confirmation.titleLabel" = "CONFIRMATION";
+"ebt.confirmation.messageLabel" = "Step 5: Registration complete.";
 "ENTER EMAIL VALIDATION CODE" = "ENTER EMAIL VALIDATION CODE";
 "VALIDATE" = "VALIDATE";
 "RESEND" = "RESEND";
 "CHANGE EMAIL" = "CHANGE EMAIL";
 
+"ebt.confirmationMessage" = "An Email Validation Code has been sent to %@. Please check your email and enter the Validation Code below.";
 
-// Verify Security Question
-
-"Verify Security Question" = "Verify Security Question";
-"Please enter a valid response to the security question." = "Please enter a valid response to the security question.";
-"SECURITY QUESTION" = "SECURITY QUESTION";
-"SECURITY ANSWER" = "SECURITY ANSWER";
-"CONFIRM" = "CONFIRM";
 
 // EBT Dashboard
 "RECENT TRANSACTIONS" = "RECENT TRANSACTIONS";
@@ -290,6 +296,7 @@
 
 // registration
 "ebt.cardnumber" = "Identify Your Card and Accounts";
+"ebt.acceptTerms" = "Online Terms and Conditions";
 "ebt.dob" = "Validate Identity";
 "ebt.pin" = "Select PIN";
 "ebt.userInformation" = "Enter User Information";
@@ -301,7 +308,7 @@
 
 //
 "ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
-"ebt.fieldcheck.socialsecuritynumber" = "What is your social security number?";
+"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
 
 
 

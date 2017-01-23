@@ -33,6 +33,7 @@ class EBTCardNumberTVC: UITableViewController {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var nextActivityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var requiredInfoLabel: UILabel!
     
     @IBOutlet weak var nextButton: UIButton!
     
@@ -121,12 +122,17 @@ class EBTCardNumberTVC: UITableViewController {
         DispatchQueue.main.async {
             
             
-            self.title = "REGISTRATION".localized()
+            self.title = "ebt.title.register".localized()
             
             self.pageTitle = "ebt.cardnumber".localized()
             self.cardNumberField.placeholderText = "CARD NUMBER".localized()
             self.errorTitleLabel.text = ""
+            self.requiredInfoLabel.text = "*Required information".localized()
             
+            
+            
+            self.titleLabel.text = "ebt.cardnumber.titleLabel".localized()
+            self.messageLabel.text = "ebt.cardnumber.messageLabel".localized()
             self.nextButton.setTitle("NEXT".localized(), for: .normal)
         }
         
@@ -142,7 +148,7 @@ class EBTCardNumberTVC: UITableViewController {
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 1 {
+        if indexPath.row == 2 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
@@ -198,7 +204,7 @@ extension EBTCardNumberTVC {
                     } else {
                         self.checkForErrorMessage()
                     }
-                } else if pageTitle == "Online Terms and Conditions".localized() {
+                } else if pageTitle == "ebt.acceptTerms".localized() {
                   
                     self.acceptSubmit()
                 } else {

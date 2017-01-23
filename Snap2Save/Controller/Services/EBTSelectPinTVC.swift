@@ -30,6 +30,7 @@ class EBTSelectPinTVC: UITableViewController {
     @IBOutlet weak var nextActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var currentPinActivityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var pinDescriptionLabel: UILabel!
     
     @IBOutlet weak var nextButton: UIButton!
     
@@ -128,12 +129,15 @@ class EBTSelectPinTVC: UITableViewController {
         
         DispatchQueue.main.async {
             
-            self.title = "REGISTRATION".localized()
+            self.title = "ebt.title.register".localized()
             self.pageTitle = "ebt.pin".localized()
             self.pinField.placeholderText = "PIN".localized()
             self.confirmPinField.placeholderText = "CONFIRM PIN".localized()
             self.errorTitleLabel.text = ""//"ebt.error.title".localized()
             
+            self.pinDescriptionLabel.text = "ebt.pin.pinDescription".localized()
+            self.titleLabel.text = "ebt.pin.titleLabel".localized()
+            self.messageLabel.text = "ebt.pin.messageLabel".localized()
             self.nextButton.setTitle("NEXT".localized(), for: .normal)
             self.useCurrentPinButton.setTitle("USE CURRENT PIN".localized(), for: .normal)
             
@@ -152,7 +156,7 @@ class EBTSelectPinTVC: UITableViewController {
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 1 {
+        if indexPath.row == 2 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }

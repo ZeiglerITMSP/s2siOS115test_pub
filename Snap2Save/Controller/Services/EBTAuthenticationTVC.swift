@@ -147,12 +147,14 @@ class EBTAuthenticationTVC: UITableViewController {
         
         DispatchQueue.main.async {
             
-            self.title = "LOGIN".localized()
+            self.title = "ebt.title.login".localized()
             self.updateBackButtonText()
             
             self.authenticationCodeField.placeholderText = "AUTHENTICATION CODE".localized()
             self.errorTitleLabel.text = ""
             
+            self.titleLabel.text = "ebt.authentication.titleLabel".localized()
+            self.messageLabel.text = "ebt.authentication.messageLabel".localized()
             self.pageTitle = "ebt.authentication".localized()
             self.confirmButton.setTitle("CONFIRM".localized(), for: .normal)
             self.regenerateButton.setTitle("REGENERATE".localized(), for: .normal)

@@ -116,16 +116,22 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
         DispatchQueue.main.async {
             
-            self.title = "LOGIN".localized()
+            if EBTUser.shared.loggedType == "1" {
+                self.title = "ebt.title.login".localized()
+            } else {
+                self.title = "ebt.title.register".localized()
+            }
+            
             self.updateBackButtonText()
             
             self.pageTitle = "ebt.securityQuestion".localized()
+            self.titleLabel.text = "ebt.securityQuestion.titleLabel".localized()
+            self.messageLabel.text = "ebt.securityQuestion.messageLabel".localized()
             self.securityQuestionTitleLabel.text = "SECURITY QUESTION".localized()
             self.securityAnswerField.placeholderText = "SECURITY ANSWER".localized()
             self.errorTitleLabel.text = ""
             
             self.confirmButton.setTitle("CONFIRM".localized(), for: .normal)
-            
         }
         
     }

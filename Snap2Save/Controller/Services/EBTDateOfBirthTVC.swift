@@ -124,12 +124,14 @@ class EBTDateOfBirthTVC: UITableViewController {
         
         DispatchQueue.main.async {
             
-            self.title = "REGISTRATION".localized()
+            self.title = "ebt.title.register".localized()
             self.pageTitle = "ebt.dob".localized()
-            self.dobField.placeholderText = "ebt.fieldcheck.dob".localized()
-            self.socialSecurityNumberField.placeholderText = "ebt.fieldcheck.socialsecuritynumber".localized()
+            self.dobField.placeholderText = "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)".localized()
+            self.socialSecurityNumberField.placeholderText = "WHAT IS YOUR SOCIAL SECURITY NUMBER?".localized()
             self.errorTitleLabel.text = ""
             
+            self.titleLabel.text = "ebt.dob.titltLabel".localized()
+            self.messageLabel.text = "ebt.dob.messageLabel".localized()
             self.nextButton.setTitle("NEXT".localized(), for: .normal)   
         }
     }
@@ -143,24 +145,18 @@ class EBTDateOfBirthTVC: UITableViewController {
                 return 0
             }
         }
-        
         if indexPath.row == 2 {
             
-            if questions.contains("What is your date of birth? (mm/dd/yyyy)") == false {
+            if questions.contains("ebt.fieldcheck.dob".localized()) == false {
                 return 0
             }
         }
-        
         if indexPath.row == 3 {
             
-            if questions.contains("What is your Social Security Number?") == false {
+            if questions.contains("ebt.fieldcheck.socialsecuritynumber".localized()) == false {
                 return 0
             }
-
-            
-            
         }
-        
         return UITableViewAutomaticDimension
     }
 

@@ -61,7 +61,6 @@
 		E8BAE2AC1E0BE24400A85AAB /* EBTSelectPinTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2AB1E0BE24400A85AAB /* EBTSelectPinTVC.swift */; };
 		E8BAE2AF1E0BEF8000A85AAB /* EBTUserInformationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2AE1E0BEF8000A85AAB /* EBTUserInformationTVC.swift */; };
 		E8BAE2B11E0BF52E00A85AAB /* EBTConfirmationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2B01E0BF52E00A85AAB /* EBTConfirmationTVC.swift */; };
-		E8BAE2B31E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BAE2B21E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift */; };
 		FA43FE8A82E9C8C5B9DE2160 /* Pods_Snap2SaveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -153,7 +152,6 @@
 		E8BAE2AB1E0BE24400A85AAB /* EBTSelectPinTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTSelectPinTVC.swift; sourceTree = "<group>"; };
 		E8BAE2AE1E0BEF8000A85AAB /* EBTUserInformationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTUserInformationTVC.swift; sourceTree = "<group>"; };
 		E8BAE2B01E0BF52E00A85AAB /* EBTConfirmationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTConfirmationTVC.swift; sourceTree = "<group>"; };
-		E8BAE2B21E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTSecurityQuestionTVC.swift; sourceTree = "<group>"; };
 		EE89FE688344248033784E1E /* Pods-Snap2SaveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -407,7 +405,6 @@
 				E8BAE2AB1E0BE24400A85AAB /* EBTSelectPinTVC.swift */,
 				E8BAE2AE1E0BEF8000A85AAB /* EBTUserInformationTVC.swift */,
 				E8BAE2B01E0BF52E00A85AAB /* EBTConfirmationTVC.swift */,
-				E8BAE2B21E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift */,
 			);
 			name = EBTRegistration;
 			path = ../Controller/Services;
@@ -765,7 +762,6 @@
 				9737ED0C1E14042400120B54 /* ChangePasswordTVC.swift in Sources */,
 				E8BAE2A21E0BABEF00A85AAB /* EBTAuthenticationTVC.swift in Sources */,
 				E826FBDC1E094FF80089AEA6 /* AIPlaceHolderTextField.swift in Sources */,
-				E8BAE2B31E0BF72F00A85AAB /* EBTSecurityQuestionTVC.swift in Sources */,
 				E88C262D1E1539C900F4056F /* TabViewController.swift in Sources */,
 				978729DD1E0937B000908301 /* Constants.swift in Sources */,
 				E8BAE2AC1E0BE24400A85AAB /* EBTSelectPinTVC.swift in Sources */,

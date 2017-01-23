@@ -52,6 +52,7 @@ class EBTUserInformationTVC: UITableViewController {
     @IBOutlet weak var questionThreeField: AIPlaceHolderTextField!
     @IBOutlet weak var answerThreeField: AIPlaceHolderTextField!
     
+    @IBOutlet weak var termsLabel: UILabel!
     
     @IBOutlet weak var nextActivityIndicator: UIActivityIndicatorView!
     
@@ -202,8 +203,10 @@ class EBTUserInformationTVC: UITableViewController {
         
         DispatchQueue.main.async {
             
-
-            self.title = "REGISTRATION".localized()
+            self.titleLabel.text = "ebt.userinformation.titleLabel".localized()
+            self.messageLabel.text = "ebt.userinformation.messageLabel".localized()
+            
+            self.title = "ebt.title.register".localized()
             self.pageTitle = "ebt.userInformation".localized()
             self.userIdField.placeholderText = "USER ID".localized()
             self.passwordField.placeholderText = "PASSWORD".localized()
@@ -217,6 +220,7 @@ class EBTUserInformationTVC: UITableViewController {
             self.answerTwoField.placeholderText = "ANSWER 2".localized()
             self.questionThreeField.placeholderText = "QUESTION 3".localized()
             self.answerThreeField.placeholderText = "ANSWER 3".localized()
+            self.termsLabel.text = "ebt.userinformation.terms".localized()
             
             self.errorTitleLabel.text = ""//"ebt.error.title".localized()
             
@@ -258,6 +262,7 @@ class EBTUserInformationTVC: UITableViewController {
         
         EBTUser.shared.loggedType = "2" // type 1- login, 2- signup
         EBTUser.shared.userID = userIdField.contentTextField.text!
+        EBTUser.shared.email = emailAddressField.contentTextField.text!
         
         let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
         self.navigationController?.pushViewController(vc, animated: true)

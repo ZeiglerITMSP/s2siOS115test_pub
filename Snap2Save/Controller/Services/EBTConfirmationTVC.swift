@@ -36,6 +36,7 @@ class EBTConfirmationTVC: UITableViewController {
     @IBOutlet weak var resendButton: UIButton!
     @IBOutlet weak var changeEmailButton: UIButton!
     
+    @IBOutlet weak var confirmationMessageLabel: UILabel!
     
     
     
@@ -57,8 +58,9 @@ class EBTConfirmationTVC: UITableViewController {
     @IBAction func resendAction(_ sender: Any) {
         
         self.view.endEditing(true)
+        
     }
-    
+       
     @IBAction func changeEmailAction(_ sender: UIButton) {
         
         self.view.endEditing(true)
@@ -131,7 +133,11 @@ class EBTConfirmationTVC: UITableViewController {
         
         DispatchQueue.main.async {
             
-            self.title = "REGISTRATION".localized()
+            self.titleLabel.text = "ebt.confirmation.titleLabel".localized()
+            self.messageLabel.text = "ebt.confirmation.messageLabel".localized()
+            
+            self.confirmationMessageLabel.text = "ebt.confirmationMessage".localizedFormat(EBTUser.shared.email!)
+            self.title = "ebt.title.register".localized()
             self.pageTitle = "ebt.confirmation".localized()
             self.validationCodeField.placeholderText = "ENTER EMAIL VALIDATION CODE".localized()
             self.errorTitleLabel.text = ""
@@ -147,7 +153,7 @@ class EBTConfirmationTVC: UITableViewController {
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 1 {
+        if indexPath.row == 2 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }

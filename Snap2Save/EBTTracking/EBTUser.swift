@@ -14,6 +14,5 @@ class EBTUser: NSObject {
     
     var loggedType = "1" // type 1- login, 2- signup
     var userID:String?
-    
-    
+    var email:String?
 }
