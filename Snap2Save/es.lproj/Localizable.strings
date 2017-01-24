@@ -222,8 +222,8 @@
 "ebt.title.login" = "Iniciar sesión";
 "ebt.title.register" = "Registro";
 
-"Are you sure ?" = "Are you sure ?";
-"The process will be cancelled." = "The process will be cancelled.";
+"Are you sure ?" = "Estás seguro ?";
+"The process will be cancelled." = "El proceso será cancelado.";
 
 // login screen
 "USER ID" = "IDENTIDAD DE USUARIO";
@@ -307,35 +307,33 @@
 "RECENT TRANSACTIONS" = "TRANSACCIONES RECIENTES";
 "EBT Balance" = "EBT Equilibrar";
 "CASH Balance" = "EFECTIVO Equilibrar";
-
-
-
-
-
+"No transactions were found." = "No se encontraron transacciones.";
 
 
 // **** Scrapping ****
 
 // PAGE TITLES
 // login
-"ebt.logon" = "Logon";
-"ebt.authentication" = "We don’t recognize the computer you’re using.";
+"ebt.logon" = "Iniciar Sesión";
+"ebt.authentication" = "No reconocemos la computadora que está utilizando.";
 
 // registration
 "ebt.cardnumber" = "Identify Your Card and Accounts";
 "ebt.acceptTerms" = "Online Terms and Conditions";
 "ebt.dob" = "Validate Identity";
+"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
+"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
+
 "ebt.pin" = "Select PIN";
 "ebt.userInformation" = "Enter User Information";
 "ebt.confirmation" = "Confirmation";
 
 // dashboard
-"ebt.securityQuestion" = "Verify Security Question";
-"ebt.accountSummary" = "Account Summary";
+"ebt.securityQuestion" = "Verificar Pregunta De Seguridad";
+"ebt.accountSummary" = "Resumen De Cuenta";
+"ebt.transactionActivity" = "Actividad De Transacción";
 
-//
-"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
-"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
+
 
 
 

@@ -277,7 +277,7 @@ extension ServicesTVC {
         
         var loginUrl = kEBTLoginUrl
         
-        if Localize.currentLanguage() == "ES" {
+        if Localize.currentLanguage() == "es" {
             // .. es url
             loginUrl = kEBTLoginUrl_es
         }

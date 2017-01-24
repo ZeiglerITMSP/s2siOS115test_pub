@@ -289,7 +289,7 @@
 "RECENT TRANSACTIONS" = "RECENT TRANSACTIONS";
 "EBT Balance" = "EBT Balance";
 "CASH Balance" = "CASH Balance";
-
+"No transactions were found." = "No transactions were found.";
 
 
 
@@ -307,6 +307,8 @@
 "ebt.cardnumber" = "Identify Your Card and Accounts";
 "ebt.acceptTerms" = "Online Terms and Conditions";
 "ebt.dob" = "Validate Identity";
+"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
+"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
 "ebt.pin" = "Select PIN";
 "ebt.userInformation" = "Enter User Information";
 "ebt.confirmation" = "Confirmation";
@@ -314,10 +316,7 @@
 // dashboard
 "ebt.securityQuestion" = "Verify Security Question";
 "ebt.accountSummary" = "Account Summary";
-
-//
-"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
-"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
+"ebt.transactionActivity" = "Transaction Activity";
 
 
 

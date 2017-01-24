@@ -24,6 +24,8 @@ open class SwiftLoader: UIView {
     fileprivate var title: String?
     fileprivate var speed = 1
     
+    var canHideOnTouch = true
+    
     fileprivate var config : Config = Config() {
         didSet {
             self.loadingView?.config = config
@@ -67,6 +69,8 @@ open class SwiftLoader: UIView {
         loader.animated = animated
         loader.title = title
         loader.update()
+        
+        loader.isUserInteractionEnabled = true
         
         NotificationCenter.default.addObserver(loader, selector: #selector(loader.rotated(_:)),
                                                          name: NSNotification.Name.UIDeviceOrientationDidChange,
@@ -349,6 +353,14 @@ open class SwiftLoader: UIView {
         
         public init() {}
         
+    }
+    
+    
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if canHideOnTouch {
+            stop()
+        }
     }
 }
 

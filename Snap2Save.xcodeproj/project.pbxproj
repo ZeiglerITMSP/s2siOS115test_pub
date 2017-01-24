@@ -248,8 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				E83156011E1A561E001D30D2 /* EBTDashboardTVC.swift */,
-				E83156051E1A7EA3001D30D2 /* DetailedCell.swift */,
-				E83156071E1A7EB8001D30D2 /* DetailedSubtitleCell.swift */,
+				E8DA59A21E376CCE006C98D3 /* DashboardCells */,
 			);
 			name = EBTDashboard;
 			path = ../Controller/Services;
@@ -426,6 +425,15 @@
 			);
 			name = EBTLogin;
 			path = ../Controller/Services;
+			sourceTree = "<group>";
+		};
+		E8DA59A21E376CCE006C98D3 /* DashboardCells */ = {
+			isa = PBXGroup;
+			children = (
+				E83156051E1A7EA3001D30D2 /* DetailedCell.swift */,
+				E83156071E1A7EB8001D30D2 /* DetailedSubtitleCell.swift */,
+			);
+			name = DashboardCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

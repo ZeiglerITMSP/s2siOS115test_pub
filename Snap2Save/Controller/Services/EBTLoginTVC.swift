@@ -338,11 +338,11 @@ extension EBTLoginTVC {
     
     func loadLoginPage() {
         
-        let loginUrl = kEBTLoginUrl
+        var loginUrl = kEBTLoginUrl
         
-        if Localize.currentLanguage() == "ES" {
+        if Localize.currentLanguage() == "es" {
             // .. es url
-            //loginUrl = kEBTLoginUrl
+            loginUrl = kEBTLoginUrl_es
         }
         
         let url = NSURL(string: loginUrl)
