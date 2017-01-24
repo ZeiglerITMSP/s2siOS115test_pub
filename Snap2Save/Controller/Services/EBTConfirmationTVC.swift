@@ -145,6 +145,8 @@ class EBTConfirmationTVC: UITableViewController {
             self.validateButton.setTitle("VALIDATE".localized(), for: .normal)
             self.resendButton.setTitle("RESEND".localized(), for: .normal)
             self.changeEmailButton.setTitle("CHANGE EMAIL".localized(), for: .normal)
+            
+            self.tableView.reloadData()
         }
         
     }
@@ -167,7 +169,7 @@ class EBTConfirmationTVC: UITableViewController {
     func backAction() {
         
 //        self.navigationController?.popViewController(animated: true)
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {

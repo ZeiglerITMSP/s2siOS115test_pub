@@ -225,6 +225,8 @@ class EBTUserInformationTVC: UITableViewController {
             self.errorTitleLabel.text = ""//"ebt.error.title".localized()
             
             self.nextButton.setTitle("NEXT".localized(), for: .normal)
+            
+            self.tableView.reloadData()
         }
         
     }
@@ -247,7 +249,7 @@ class EBTUserInformationTVC: UITableViewController {
     func backAction() {
         
 //        self.navigationController?.popViewController(animated: true)
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -275,7 +277,7 @@ extension EBTUserInformationTVC {
     
     func getUserIdRules() {
         
-        let dobErrorCode = "$('.prelogonInstrText:eq(2)').text();"
+        let dobErrorCode = "$('.prelogonInstrText:eq(2)').text().trim();"
         
         ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
             if error != nil {
@@ -314,7 +316,7 @@ extension EBTUserInformationTVC {
     
     func getPasswordRules() {
         
-        let dobErrorCode = "$('.prelogonInstrText:eq(4)').text();"
+        let dobErrorCode = "$('.prelogonInstrText:eq(4)').text().trim();"
         
         ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
             if error != nil {
@@ -358,7 +360,7 @@ extension EBTUserInformationTVC {
             "var object = {}; " +
             
             "$('#question1 option').each(function () {    " +
-            "    object[$(this).val()] = $(this).text();    " +
+            "    object[$(this).val()] = $(this).text().trim();    " +
             "});                                            " +
             "var jsonSerialized = JSON.stringify(object);   " +
             "return jsonSerialized                          " +
@@ -404,7 +406,7 @@ extension EBTUserInformationTVC {
             "var object = {}; " +
             
             "$('#question2 option').each(function () {    " +
-            "    object[$(this).val()] = $(this).text();    " +
+            "    object[$(this).val()] = $(this).text().trim();    " +
             "});                                            " +
             "var jsonSerialized = JSON.stringify(object);   " +
             "return jsonSerialized                          " +
@@ -450,7 +452,7 @@ extension EBTUserInformationTVC {
             "var object = {}; " +
             
             "$('#question3 option').each(function () {    " +
-            "    object[$(this).val()] = $(this).text();    " +
+            "    object[$(this).val()] = $(this).text().trim();    " +
             "});                                            " +
             "var jsonSerialized = JSON.stringify(object);   " +
             "return jsonSerialized                          " +
@@ -635,12 +637,12 @@ extension EBTUserInformationTVC: AIPlaceHolderTextFieldDelegate {
     
         if textfield.tag == 100 {
             // User ID
-            showMyAlert(title: "User ID Rules:", message: "\n" + userIdRules)
+            showMyAlert(title: "User ID Rules:".localized() , message: "\n" + userIdRules)
             
         } else if textfield.tag == 101 {
             // Password
             
-            showMyAlert(title: "Password Rules:", message: "\n" + passwordRules)
+            showMyAlert(title: "Password Rules:".localized() , message: "\n" + passwordRules)
         }
         
     }

@@ -123,7 +123,7 @@ class EBTAuthenticationTVC: UITableViewController {
     func backAction() {
         
         //        self.navigationController?.popViewController(animated: true)
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -159,6 +159,7 @@ class EBTAuthenticationTVC: UITableViewController {
             self.confirmButton.setTitle("CONFIRM".localized(), for: .normal)
             self.regenerateButton.setTitle("REGENERATE".localized(), for: .normal)
             
+            self.tableView.reloadData()
         }
         
     }
@@ -289,7 +290,7 @@ extension EBTAuthenticationTVC {
     
     func checkForStatusMessage() {
         
-        let javaScript = "$('.completionText').first().text();"
+        let javaScript = "$('.completionText').first().text().trim();"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             

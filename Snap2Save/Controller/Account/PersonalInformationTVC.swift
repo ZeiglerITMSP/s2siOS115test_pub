@@ -650,7 +650,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
        // HUD.dimsBackground = false
        // HUD.show(.progress)
         
-        SwiftLoader.show(title: "Loading...", animated: true)
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let url = String(format: "%@/getProfile", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in

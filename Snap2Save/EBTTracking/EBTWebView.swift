@@ -47,7 +47,7 @@ class EBTWebView: NSObject {
     
     let jsSubmit = "void($('form')[1].submit())"
     let jsGetAllElements = "document.documentElement.outerHTML"
-    let jsGetErrorCode = "$(\".errorInvalidField\").text();"
+    let jsGetErrorCode = "$(\".errorInvalidField\").text().trim();"
     
     var isPageLoading = false
     
@@ -160,7 +160,7 @@ class EBTWebView: NSObject {
     
     func getPageHeader(completion: @escaping (String?) -> ()) {
         
-        let jsPageTitle = "$('.PageHeader').first().text();"
+        let jsPageTitle = "$('.PageHeader').first().text().trim();"
         webView.evaluateJavaScript(jsPageTitle) { (result, error) in
             if error != nil {
                 //print("error ?? "error nil")
@@ -180,7 +180,7 @@ class EBTWebView: NSObject {
     
     func getPageTitle(completion: @escaping (String?) -> ()) {
         
-        let javaScript = "$('.PageTitle').first().text();"
+        let javaScript = "$('.PageTitle').first().text().trim();"
         webView.evaluateJavaScript(javaScript) { (result, error) in
             
             if let resultString = result as? String {

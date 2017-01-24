@@ -214,7 +214,7 @@ extension UIViewController {
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let defaultAction = UIAlertAction(title: "OK".localized() , style: .default, handler: nil)
         alertController.addAction(defaultAction)
         DispatchQueue.main.async {
             
@@ -227,11 +227,11 @@ extension UIViewController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: { alert in
+        let okAction = UIAlertAction(title: "OK".localized() , style: .default, handler: { alert in
             self.perform(action)
         })
         
-        let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "CANCEL".localized() , style: .cancel, handler: nil)
         
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)

@@ -127,7 +127,7 @@ class OffersVC: UIViewController {
                           "language": currentLanguage
             ] as [String : Any]
         
-        SwiftLoader.show(title: "Loading...", animated: true)
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
         print("parameters")
         let url = String(format: "%@/getCurrentOffer", hostUrl)
         ////print("url)

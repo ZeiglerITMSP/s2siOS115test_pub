@@ -141,6 +141,7 @@ class EBTSelectPinTVC: UITableViewController {
             self.nextButton.setTitle("NEXT".localized(), for: .normal)
             self.useCurrentPinButton.setTitle("USE CURRENT PIN".localized(), for: .normal)
             
+            self.tableView.reloadData()
         }
         
         
@@ -170,7 +171,7 @@ class EBTSelectPinTVC: UITableViewController {
     func backAction() {
         
 //        self.navigationController?.popViewController(animated: true)
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {

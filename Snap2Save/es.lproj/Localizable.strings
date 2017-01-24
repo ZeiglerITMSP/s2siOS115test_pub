@@ -17,7 +17,8 @@
 "selectedLanguageTitle" = "Español";
 
 "Done" = "OK";
-
+"OK" = "OK";
+"Loading..." = "Cargando...";
 
 // LANGUAGE
 "language.button.title" = "ESPAÑOL";
@@ -157,7 +158,7 @@
 
 // Reachability
 
-"Please check your internet connection" = "Please check your internet connection";
+"Please check your internet connection" = "Por favor revise su conexion a internet";
 
 // Alert Messages
 
@@ -175,24 +176,12 @@
 "Are you sure you want to log out?" = "Are you sure you want to log out?";
 "Entries must match to proceed" = "Los valores deben coincidir para continuar";
 
+// Offers
+"Offers" = "Ofertas";
 
-
-
-
-
-
-
-
-
-
-
-
-
-// EBT
 
 // Services
 "Services" = "Servicios";
-"EBT" = "EBT";
 "About Snap2Save" = "Acerca de Snap2Save";
 "FAQ" = "Preguntas más frecuentes";
 "Contact Us" = "Contáctenos";
@@ -200,26 +189,124 @@
 "Privacy Policy" = "Política de privacidad";
 "Reward Program" = "Programa de recompensa";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// **** EBT *****
+
+// EBT COMMON TEXT
+"EBT" = "EBT";
+"ebt.error.title" = "Please correct the following items:";
+"NEXT" = "SIGUIENTE";
+"ebt.title.login" = "Iniciar sesión";
+"ebt.title.register" = "Registro";
+
+"Are you sure ?" = "Are you sure ?";
+"The process will be cancelled." = "The process will be cancelled.";
+
 // login screen
 "USER ID" = "IDENTIDAD DE USUARIO";
 "PASSWORD" = "CONTRASEÑA";
 "Remember My User ID" = "Recuerda Mi ID De Usuario";
-
 "LOG IN" = "INICIAR SESIÓN";
 "REGISTER" = "REGISTRO";
-"Identify yourself!" = "Identify yourself!";
+"Identify yourself!" = "¡Identifícate!";
+"ebt.login.titleLabel" = "UNA MANERA FÁCIL Y CONVENIENTE PARA ACCEDER A LA INFORMACIÓN DE SU CUENTA DE TARJETA EBT.";
+"ebt.login.messageLabel" = "Compruebe su saldo y revise la actividad de su transacción.";
 
 
-"EBT.login.Logon" = "Iniciar Sesión";
-
-// Offers
-"Offers" = "Ofertas";
-
-
-
-
+// Authentication Code
+"AUTHENTICATION CODE" = "CÓDIGO DE AUTENTICACIÓN";
+"CONFIRM" = "CONFIRMAR";
+"REGENERATE" = "REGENERADO";
+"ebt.authentication.titleLabel" = "NO RECONOCEMOS EL DISPOSITIVO USTED ESTÁ USANDO";
+"ebt.authentication.messageLabel" = "Necesitamos verificar su identidad antes de poder acceder a su cuenta. Se ha enviado un mensaje, con un código de autorización temporal, a la dirección de correo electrónico mostrada en su cuenta. Por favor revise su correo electrónico e ingrese el código abajo. El código es válido sólo 30 minutos en la sesión actual.";
 
 
+// card number
+"ebt.cardnumber.titleLabel" = "IDENTIFIQUE SU TARJETA Y CUENTAS";
+"ebt.cardnumber.messageLabel" = "Introduzca su número de tarjeta actual.";
+"CARD NUMBER" = "NÚMERO DE TARJETA";
+
+// DOB screen
+"ebt.dob.titltLabel" = "VALIDAR IDENTIDAD";
+"ebt.dob.messageLabel" = "Paso 1: Proporcione la siguiente información para validar su identidad.";
+"WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)" = "¿CUÁL ES TU FECHA DE NACIMIENTO? (MM/DD/AAAA)";
+"WHAT IS YOUR SOCIAL SECURITY NUMBER?" = "¿CUÁL ES SU NÚMERO DE SEGURO SOCIAL?";
+
+// Verify Security Question
+"ebt.securityQuestion.titleLabel" = "VERIFIQUE LA PREGUNTA DE SEGURIDAD";
+"ebt.securityQuestion.messageLabel" = "Introduzca la respuesta de seguridad que proporcionó durante el registro.";
+"SECURITY QUESTION" = "PREGUNTA DE SEGURIDAD";
+"SECURITY ANSWER" = "RESPUESTA DE SEGURIDAD";
+"CONFIRM" = "CONFIRMAR";
+
+
+// Select PIN
+"ebt.pin.titleLabel" = "SELECCIONAR PIN";
+"ebt.pin.messageLabel" = "Paso 2: Seleccione PIN.";
+"PIN" = "PIN";
+"CONFIRM PIN" = "CONFIRMAR PIN";
+"USE CURRENT PIN" = "USE EL PIN DE CORRIENTE";
+"ebt.pin.pinDescription" = "Su PIN actual se ha asignado automáticamente a esta cuenta. Si lo desea, puede cambiar su PIN a continuación o seleccionar Usar PIN actual para continuar.";
+
+// User Information
+
+"ebt.userinformation.titleLabel" = "INFORMACION DEL USUARIO";
+"ebt.userinformation.messageLabel" = "Paso 3: Por favor ingrese la siguiente información.";
+"User ID Rules:" = "Reglas de identificación de usuario:";
+"Password Rules:" = "Reglas de la contraseña:";
+
+"USER ID" = "IDENTIDAD DE USUARIO";
+"PASSWORD" = "CONTRASEÑA";
+"CONFIRM NEW PASSWORD" = "CONFIRMAR CONTRASEÑA";
+"EMAIL ADDRESS" = "DIRECCIÓN DE CORREO ELECTRÓNICO";
+"CONFIRM EMAIL ADDRESS" = "CONFIRMAR EL CORREO";
+"PHONE NUMBER" = "NÚMERO DE TELÉFONO";
+"QUESTION 1" = "PREGUNTA 1";
+"QUESTION 2" = "PREGUNTA 2";
+"QUESTION 3" = "PREGUNTA 3";
+"ANSWER 1" = "RESPUESTA 1";
+"ANSWER 2" = "RESPUESTA 2";
+"ANSWER 3" = "RESPUESTA 3";
+"ebt.userinformation.terms" = "Al registrarse, usted acepta el ACUERDO DE SERVICIO DEL CENTRO DE UCARD y la DIVULGACIÓN DE ENTREGA DE COMUNICACIONES DE UCARD EN LÍNEA.";
+
+// Confirmation screen
+"ebt.confirmation.titleLabel" = "CONFIRMACIÓN";
+"ebt.confirmation.messageLabel" = "Paso 5: Registro completo.";
+"ENTER EMAIL VALIDATION CODE" = "ENTER EMAIL VALIDATION CODE";
+"VALIDATE" = "VALIDAR";
+"RESEND" = "REENVIAR";
+"CHANGE EMAIL" = "CAMBIAR E-MAIL";
+
+"ebt.confirmationMessage" = "Se ha enviado un código de validación de correo electrónico a %@. Compruebe su correo electrónico e ingrese el Código de validación a continuación.";
+
+
+// EBT Dashboard
+"RECENT TRANSACTIONS" = "TRANSACCIONES RECIENTES";
+"EBT Balance" = "EBT Equilibrar";
+"CASH Balance" = "EFECTIVO Equilibrar";
 
 
 
@@ -227,7 +314,28 @@
 
 
 
+// **** Scrapping ****
 
+// PAGE TITLES
+// login
+"ebt.logon" = "Logon";
+"ebt.authentication" = "We don’t recognize the computer you’re using.";
+
+// registration
+"ebt.cardnumber" = "Identify Your Card and Accounts";
+"ebt.acceptTerms" = "Online Terms and Conditions";
+"ebt.dob" = "Validate Identity";
+"ebt.pin" = "Select PIN";
+"ebt.userInformation" = "Enter User Information";
+"ebt.confirmation" = "Confirmation";
+
+// dashboard
+"ebt.securityQuestion" = "Verify Security Question";
+"ebt.accountSummary" = "Account Summary";
+
+//
+"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
+"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
 
 
 

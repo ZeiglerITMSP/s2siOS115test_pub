@@ -132,6 +132,8 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
             self.errorTitleLabel.text = ""
             
             self.confirmButton.setTitle("CONFIRM".localized(), for: .normal)
+            
+            self.tableView.reloadData()
         }
         
     }
@@ -155,7 +157,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
 //       _ = self.navigationController?.popViewController(animated: true)
         
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -232,7 +234,7 @@ extension EBTLoginSecurityQuestionTVC {
     
     func getSecurityQuestion() {
         
-        let js = "$('.cdpLeftAlignedTdLabel').first().text();"
+        let js = "$('.cdpLeftAlignedTdLabel').first().text().trim();"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {

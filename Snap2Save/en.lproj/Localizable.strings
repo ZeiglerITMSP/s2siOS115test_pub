@@ -17,8 +17,8 @@
 "selectedLanguageTitle" = "English";
 
 "Done" = "Done";
-
-
+"OK" = "OK";
+"Loading..." = "Loading...";
 
 // LANGUAGE
 "language.button.title" = "ENGLISH";
@@ -176,18 +176,6 @@
 "Offers" = "Offers";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // Services
 "Services" = "Services";
 "About Snap2Save" = "About Snap2Save";
@@ -198,6 +186,17 @@
 "Reward Program" = "Reward Program";
 
 
+
+
+
+
+
+
+
+
+
+// **** EBT *****
+
 // EBT COMMON TEXT
 "EBT" = "EBT";
 "ebt.error.title" = "Please correct the following items:";
@@ -205,7 +204,8 @@
 "ebt.title.login" = "Log In";
 "ebt.title.register" = "Register";
 
-
+"Are you sure ?" = "Are you sure ?";
+"The process will be cancelled." = "The process will be cancelled.";
 
 // login screen
 "USER ID" = "USER ID";
@@ -257,6 +257,9 @@
 
 "ebt.userinformation.titleLabel" = "USER INFORMATION";
 "ebt.userinformation.messageLabel" = "Step 3: Please enter the following information.";
+"User ID Rules:" = "User ID Rules:";
+"Password Rules:" = "Password Rules:";
+
 "USER ID" = "USER ID";
 "PASSWORD" = "PASSWORD";
 "CONFIRM NEW PASSWORD" = "CONFIRM PASSWORD";
@@ -287,7 +290,13 @@
 "EBT Balance" = "EBT Balance";
 "CASH Balance" = "CASH Balance";
 
-// ==== Scrapping ===
+
+
+
+
+
+
+// **** Scrapping ****
 
 // PAGE TITLES
 // login

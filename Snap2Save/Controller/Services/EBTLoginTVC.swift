@@ -320,7 +320,7 @@ extension EBTLoginTVC {
     func validateLoginPage() {
         
         // isCurrentPage
-        let jsLoginValidation = "$('#button_logon').text();"
+        let jsLoginValidation = "$('#button_logon').text().trim();"
         let javaScript = jsLoginValidation
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
@@ -354,7 +354,7 @@ extension EBTLoginTVC {
     func validatePage() {
         
         // isCurrentPage
-        let jsLoginValidation = "$('#button_logon').text();"
+        let jsLoginValidation = "$('#button_logon').text().trim();"
         let javaScript = jsLoginValidation
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in

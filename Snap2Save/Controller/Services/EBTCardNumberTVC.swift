@@ -129,11 +129,11 @@ class EBTCardNumberTVC: UITableViewController {
             self.errorTitleLabel.text = ""
             self.requiredInfoLabel.text = "*Required information".localized()
             
-            
-            
             self.titleLabel.text = "ebt.cardnumber.titleLabel".localized()
             self.messageLabel.text = "ebt.cardnumber.messageLabel".localized()
             self.nextButton.setTitle("NEXT".localized(), for: .normal)
+            
+            self.tableView.reloadData()
         }
         
     }
@@ -162,7 +162,7 @@ class EBTCardNumberTVC: UITableViewController {
     
     func backAction() {
         
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {

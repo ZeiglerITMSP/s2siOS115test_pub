@@ -132,7 +132,9 @@ class EBTDateOfBirthTVC: UITableViewController {
             
             self.titleLabel.text = "ebt.dob.titltLabel".localized()
             self.messageLabel.text = "ebt.dob.messageLabel".localized()
-            self.nextButton.setTitle("NEXT".localized(), for: .normal)   
+            self.nextButton.setTitle("NEXT".localized(), for: .normal)
+            
+            self.tableView.reloadData()
         }
     }
 
@@ -164,7 +166,7 @@ class EBTDateOfBirthTVC: UITableViewController {
     // MARK: -
     func backAction() {
 //        self.navigationController?.popViewController(animated: true)
-        showAlert(title: "Are you sure ?", message: "The process will be cancelled.", action: #selector(cancelProcess))
+        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -192,7 +194,7 @@ extension EBTDateOfBirthTVC {
         let js =
             
             "function questions() {    " +
-                    "var my = $(\"label[for='securityAnswer']\").text(); " +
+                    "var my = $(\"label[for='securityAnswer']\").text().trim(); " +
                     "return my;  " +
             "}  " +
         

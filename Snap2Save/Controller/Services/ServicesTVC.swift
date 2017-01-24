@@ -85,7 +85,7 @@ class ServicesTVC: UITableViewController {
                 // Reachability
                 if isReachable == false {
                     self.showAlert(title: "", message: "Please check your internet connection".localized());
-                    return
+//                    return
                 } else {
                     loadLoginPage()
                 }
@@ -275,11 +275,11 @@ extension ServicesTVC {
         self.view.addSubview(webView)
         webView.sendSubview(toBack: self.view)
         
-        let loginUrl = kEBTLoginUrl
+        var loginUrl = kEBTLoginUrl
         
         if Localize.currentLanguage() == "ES" {
             // .. es url
-            //loginUrl = kEBTLoginUrl
+            loginUrl = kEBTLoginUrl_es
         }
         
         let url = NSURL(string: loginUrl)
@@ -292,7 +292,7 @@ extension ServicesTVC {
     func validatePage() {
         
         // isCurrentPage
-        let jsLoginValidation = "$('#button_logon').text();"
+        let jsLoginValidation = "$('#button_logon').text().trim();"
         let javaScript = jsLoginValidation
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
