@@ -657,14 +657,14 @@ extension SignUpTVC: AITextFieldProtocol {
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
         
-        let parameters = ["social_id": socialId,
+        let parameters : Parameters  = ["social_id": socialId,
                           "platform":"1",
                           "version_code": version_code,
                           "version_name": version_name,
                           "device_id": device_id,
                           "push_token":"123123",
                           "language": currentLanguage
-            ] as [String : Any]
+            ]
         
         //print("parameters)
         let url = String(format: "%@/checkFbUser", hostUrl)
@@ -709,6 +709,8 @@ extension SignUpTVC: AITextFieldProtocol {
                                     let user_id = userDict["id"]
                                     UserDefaults.standard.set(user_id, forKey: USER_ID)
                                     
+                                    let autoLogin = userDict["auto_login"]
+                                    UserDefaults.standard.set(autoLogin, forKey: USER_AUTOLOGIN)
                                 }
                                 
                                 if let autoLogin = responseDict?["auto_login"] {

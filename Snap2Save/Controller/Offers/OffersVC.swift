@@ -118,14 +118,14 @@ class OffersVC: UIViewController {
         let version_code = Bundle.main.buildVersionNumber ?? ""
 
         
-        let parameters = ["user_id": user_id,
+        let parameters : Parameters = ["user_id": user_id,
                           "platform":"1",
                           "version_code": version_code,
                           "version_name": version_name,
                           "device_id": device_id,
                           "auth_token": auth_token,
                           "language": currentLanguage
-            ] as [String : Any]
+            ]
         
         SwiftLoader.show(title: "Loading...", animated: true)
         print("parameters")

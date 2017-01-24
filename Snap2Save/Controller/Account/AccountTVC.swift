@@ -207,7 +207,7 @@ class AccountTVC: UITableViewController {
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
         
-        let parameters = ["user_id": user_id,
+        let parameters : Parameters = ["user_id": user_id,
                           "auth_token": auth_token,
                           "platform":"1",
                           "version_code": version_code,
@@ -215,7 +215,7 @@ class AccountTVC: UITableViewController {
                           "device_id": device_id,
                           "push_token":"123123",
                           "language":currentLanguage
-            ] as [String : Any]
+            ]
         
         ////print("parameters)
         let url = String(format: "%@/logOut", hostUrl)
@@ -289,7 +289,7 @@ class AccountTVC: UITableViewController {
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
         
-        let parameters = ["user_id": user_id,
+        let parameters : Parameters = ["user_id": user_id,
                           "auto_login": loginSwitch.isOn,
                           "auth_token": auth_token,
                           "platform":"1",
@@ -297,7 +297,7 @@ class AccountTVC: UITableViewController {
                           "version_name": version_name,
                           "device_id": device_id,
                           "language":currentLanguage
-            ] as [String : Any]
+            ]
         
         ////print("parameters)
         

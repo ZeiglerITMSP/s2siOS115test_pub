@@ -349,7 +349,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let version_code = Bundle.main.buildVersionNumber ?? ""
         
         
-        let parameters = ["username": mobileNumber,
+        let parameters : Parameters = ["username": mobileNumber,
                           "password": password,
                           "social_id": socialId,
                           "platform":"1",
@@ -358,7 +358,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                           "device_id": device_id,
                           "push_token":"123123",
                           "language": currentLanguage
-            ] as [String : Any]
+            ]
         
         //print("parameters)
         loginActivityIndicator.startAnimating()
@@ -386,15 +386,11 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             
                             let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
                             UserDefaults.standard.set(userData, forKey: LOGGED_USER)
-                            
-                            
                         }
                         
                         if let info_screens = responseDict?["info_screens"]{
                             let infoScreen  = info_screens
-                            
                             UserDefaults.standard.set(infoScreen, forKey:INFO_SCREENS)
-                            
                         }
                         
                         if let auth_token = responseDict?["auth_token"] as? String {
@@ -403,9 +399,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             if let userDict = responseDict?["user"] as? [String:Any] {
                                 let user_id = userDict["id"]
                                 UserDefaults.standard.set(user_id, forKey: USER_ID)
-                                
-                            }
-                            if let autoLogin = responseDict?["auto_login"] {
+                                let autoLogin = userDict["auto_login"]
                                 UserDefaults.standard.set(autoLogin, forKey: USER_AUTOLOGIN)
                             }
                             
@@ -419,10 +413,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             let alertMessage = responseDict["message"] as! String
                             self.showAlert(title: "", message: alertMessage)
                         }
-                        
-                        
                     }
-                    
                 }
                 
                 break
@@ -496,14 +487,14 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
 
-        let parameters = ["social_id": socialId,
+        let parameters : Parameters  = ["social_id": socialId,
                           "platform":"1",
                           "version_code": version_code,
                           "version_name": version_name,
                           "device_id": device_id,
                           "push_token":"123123",
                           "language": currentLanguage
-            ] as [String : Any]
+            ]
         
         //print("parameters)
         let url = String(format: "%@/checkFbUser", hostUrl)
@@ -547,6 +538,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                                 let user_id = userDict["id"]
                                 UserDefaults.standard.set(user_id, forKey: USER_ID)
                                 
+                                let autoLogin = userDict["auto_login"]
+                                UserDefaults.standard.set(autoLogin, forKey: USER_AUTOLOGIN)
                             }
                             
                             if let autoLogin = responseDict?["auto_login"] {

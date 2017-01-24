@@ -285,14 +285,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let version_name = Bundle.main.releaseVersionNumber ?? ""
                     let version_code = Bundle.main.buildVersionNumber ?? ""
                     
-                    let parameters = ["code": code ,
+                    let parameters : Parameters = ["code": code ,
                                       "platform":"1",
                                       "version_code": version_code,
                                       "version_name": version_name,
                                       "device_id": device_id,
                                       "push_token":"123123",
                                       "language":currentLanguage
-                        ] as [String : Any]
+                        ]
                     
                     
                     ////print("parameters)
@@ -387,14 +387,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let version_name = Bundle.main.releaseVersionNumber ?? ""
                     let version_code = Bundle.main.buildVersionNumber ?? ""
                     
-                    let parameters = ["code": code ,
+                    let parameters : Parameters = ["code": code ,
                                       "platform":"1",
                                       "version_code": version_code,
                                       "version_name": version_name,
                                       "device_id": device_id,
                                       "push_token":"123123",
                                       "language":currentLanguage
-                        ] as [String : Any]
+                        ]
                     
                     
                     ////print("parameters)

@@ -549,7 +549,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                                                "group_code": group_code,
                                                "ethnicity": ethnicity]
         
-        let parameters = ["password" : password,
+        let parameters : Parameters = ["password" : password,
                           "phone_number" : phone_number,
                           "email" : email,
                           "zipcode": zipcode,
@@ -563,7 +563,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                           "push_token": push_token,
                           "language": currentLanguage,
                           "signup_type": signup_type
-            ] as [String : Any]
+            ]
         
         //print("parameters)
         
