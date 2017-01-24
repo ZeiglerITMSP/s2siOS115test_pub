@@ -291,7 +291,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
 
-        let parameters = ["user_id": user_id,
+        let parameters : Parameters = ["user_id": user_id,
                           "phone_number": mobileNumber,
                           "email": email,
                           "contact_preference": contact_preference,
@@ -302,7 +302,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                           "push_token":"123123",
                           "auth_token": auth_token,
                           "language":currentLanguage
-            ] as [String : Any]
+            ]
         saveActivityIndicator.startAnimating()
         print(parameters)
         let url = String(format: "%@/updatePreferences", hostUrl)
@@ -504,7 +504,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
         
-        let parameters = ["user_id": user_id,
+        let parameters : Parameters = ["user_id": user_id,
                           "platform":"1",
                           "version_code": version_code,
                           "version_name": version_name,
@@ -512,7 +512,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                           "push_token":"123123",
                           "auth_token": auth_token,
                           "language": currentLanguage
-            ] as [String : Any]
+            ]
         
         //print("parameters)
         let url = String(format: "%@/getProfile", hostUrl)

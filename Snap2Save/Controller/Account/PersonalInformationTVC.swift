@@ -494,7 +494,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let version_code = Bundle.main.buildVersionNumber ?? ""
         
 
-        let parameters = ["first_name" : first_name,
+        let parameters : Parameters = ["first_name" : first_name,
                           "last_name" : last_name,
                           "address_line1" : address_line1,
                           "address_line2" : address_line2,
@@ -513,7 +513,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                           "push_token":"123123",
                           "auth_token": auth_token,
                           "language":currentLanguage
-            ] as [String : Any]
+            ]
         
         saveActivityIndicator.startAnimating()
         //print("parameters)
@@ -635,7 +635,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
 
-        let parameters = ["user_id": user_id,
+        let parameters : Parameters = ["user_id": user_id,
                           "platform":"1",
                           "version_code": version_code,
                           "version_name": version_name,
@@ -643,9 +643,9 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
                           "push_token":"123123",
                           "auth_token": auth_token,
                           "language": currentLanguage
-            ] as [String : Any]
+            ]
         
-        //print("parameters)
+        print(parameters)
        // HUD.allowsInteraction = false
        // HUD.dimsBackground = false
        // HUD.show(.progress)

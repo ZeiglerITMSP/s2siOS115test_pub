@@ -166,7 +166,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
 
-        let parameters = ["password": password,
+        let parameters : Parameters = ["password": password,
                           "new_password": newPassword,
                           "user_id": user_id,
                           "platform":"1",
@@ -176,7 +176,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
                           "push_token":"123123",
                           "auth_token": auth_token,
                           "language": currentLanguage
-            ] as [String : Any]
+            ]
         
         saveActivityIndicator.startAnimating()
         ////print("parameters)

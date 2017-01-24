@@ -714,7 +714,7 @@ extension EBTDashboardTVC {
         let ebt_balance = ebtBalance ?? ""
         let cash_balance = cashBalance ?? ""
         
-        let parameters = ["platform":"1",
+        let parameters : Parameters = ["platform":"1",
                           "version_code": version_code,
                           "version_name": version_name,
                           
@@ -729,7 +729,7 @@ extension EBTDashboardTVC {
                           "transactions": transactions,
                           "ebt_balance": ebt_balance,
                           "cash_balance": cash_balance
-            ] as [String : Any]
+            ]
         
         print(parameters)
         let url = String(format: "%@/saveEbtInfo", hostUrl)

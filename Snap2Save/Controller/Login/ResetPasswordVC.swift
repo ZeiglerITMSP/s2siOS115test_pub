@@ -175,7 +175,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
 
-        let parameters = ["password":password,
+        let parameters : Parameters = ["password":password,
                           "code":user_id,
                           "platform":"1",
                           "version_code": version_code,
@@ -183,7 +183,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
                           "device_id": device_id,
                           "push_token":"123123",
                           "language": currentLanguage
-            ] as [String : Any]
+            ]
         
         
         //print("parameters)
