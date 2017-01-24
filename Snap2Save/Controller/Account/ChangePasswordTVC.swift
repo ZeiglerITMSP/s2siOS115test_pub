@@ -69,6 +69,8 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
+        AppHelper.getScreenName(screenName: "ChangePassword screen")
+
     }
 
     override func viewDidAppear(_ animated: Bool) {

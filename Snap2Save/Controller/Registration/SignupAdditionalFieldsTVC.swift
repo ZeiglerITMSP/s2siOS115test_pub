@@ -143,6 +143,9 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
+        
+        AppHelper.getScreenName(screenName: "SignUp screen")
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

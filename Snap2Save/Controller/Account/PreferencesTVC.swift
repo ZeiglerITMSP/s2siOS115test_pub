@@ -109,6 +109,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
+        AppHelper.getScreenName(screenName: "Preferences screen")
+
     }
 
     override func viewDidAppear(_ animated: Bool) {

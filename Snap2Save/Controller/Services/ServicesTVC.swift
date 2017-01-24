@@ -48,6 +48,8 @@ class ServicesTVC: UITableViewController {
         super.viewWillAppear(animated)
         
         reloadContent()
+        AppHelper.getScreenName(screenName: "Services screen")
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

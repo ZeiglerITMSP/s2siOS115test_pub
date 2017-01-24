@@ -57,6 +57,8 @@ class WelcomePageVC: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true;
         reloadContent()
+        AppHelper.getScreenName(screenName: "Welcome screen")
+
         
     }
     override func viewDidAppear(_ animated: Bool) {

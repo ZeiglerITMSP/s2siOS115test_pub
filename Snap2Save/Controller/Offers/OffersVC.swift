@@ -45,7 +45,7 @@ class OffersVC: UIViewController {
         super.viewWillAppear(animated)
         reloadContent()
         getOffers()
-
+        AppHelper.getScreenName(screenName: "Offers screen")
     }
     
     override func viewDidAppear(_ animated: Bool) {

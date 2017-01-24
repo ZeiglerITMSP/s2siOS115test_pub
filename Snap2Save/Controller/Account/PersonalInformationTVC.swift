@@ -115,6 +115,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
+        AppHelper.getScreenName(screenName: "Personal Information screen")
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -346,15 +347,6 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         stateTextField.aiDelegate = self
         cityTextField.aiDelegate = self
         zipCodeTextField.aiDelegate = self
-        
-//        genderArray = ["Male","Female"];
-//        ageGroupArray = ["16-25","26-35","36-45","46-55","56+"]
-//        ethnicityArray = ["1","2"]
-//        
-//        genderTextField.pickerViewArray = genderArray
-//        ageGroupTextField.pickerViewArray = ageGroupArray
-//        ethnicityTextField.pickerViewArray = ethnicityArray
-        
         
         var statesDict: NSDictionary?
         if let path = Bundle.main.path(forResource: "USStateAbbreviations", ofType: "plist") {

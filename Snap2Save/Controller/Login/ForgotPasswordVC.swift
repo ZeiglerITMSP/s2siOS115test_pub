@@ -90,6 +90,8 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
+        AppHelper.getScreenName(screenName: "ForgotPassword screen")
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
