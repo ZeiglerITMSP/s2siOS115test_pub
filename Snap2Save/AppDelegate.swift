@@ -13,6 +13,7 @@ import Localize_Swift
 import Fabric
 import Crashlytics
 import FBSDKCoreKit
+import Google
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,16 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Status
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
-        
-        //        selectedTabBackground()
-        
-        
-        //        let tabIndicator = UIImage(named: "tabbarbg")?.withRenderingMode(.alwaysTemplate)
-        //        let tabResizableIndicator = tabIndicator?.resizableImage(
-        //            withCapInsets: UIEdgeInsets(top: 0, left: 2.0, bottom: 0, right: 2.0))
-        //        UITabBar.appearance().selectionIndicatorImage = tabResizableIndicator
-        //        UITabBar.appearance().tintColor = UIColor.green
-        //
         
         let isLogged = UserDefaults.standard.dictionaryRepresentation().keys.contains(LOGGED_USER)
         
@@ -83,8 +74,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Crashlytics.self])
         
+        // MARK:- FACEBOOK
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        // MARK:- GOOGLE ANALYTICS
+        // Configure tracker from GoogleService-Info.plist.
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        // Optional: configure GAI options.
+        guard let gai = GAI.sharedInstance() else {
+            assert(false, "Google Analytics not configured correctly")
+        }
+        gai.trackUncaughtExceptions = true  // report uncaught exceptions
+        gai.logger.logLevel = GAILogLevel.verbose  // remove before app release
+        
+        
+        
         
         return true
     }

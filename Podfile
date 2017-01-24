@@ -18,6 +18,8 @@ target 'Snap2Save' do
   pod 'FBSDKLoginKit'
   
   pod 'PhoneNumberKit', '~> 1.0'
+  
+  pod 'Google/Analytics'
 
 target 'Snap2SaveTests' do
     inherit! :search_paths

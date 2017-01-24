@@ -136,12 +136,16 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let lastName = userDetailsDict["last_name"] as! String
         lastNameTextField.text = lastName
         
+    
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
+        
+        AppHelper.getScreenName(screenName: "SignUp screen")
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -233,7 +237,19 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             if self.SelectedEthnicityIndex != nil {
                 self.ethnicityTextField.text = self.ethnicityArray.object(at: self.SelectedEthnicityIndex - 1) as? String
             }
-            
+          /*  let gender = self.userDetailsDict["gender"] as! String
+            if !gender.isEmpty {
+                let gen = gender.capitalized
+                if gen == "Female"{
+                    self.selectedGenderIndex = 2
+                    
+                }
+                else if gen == "Male" {
+                    self.selectedGenderIndex = 1
+                }
+                
+                self.genderTextField.text = self.genderArray.object(at: self.selectedGenderIndex - 1) as? String
+            }*/
             self.tableView.reloadData()
             
         }
@@ -456,7 +472,6 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         }else {
             textField.resignFirstResponder()
         }
-        
         
     }
     

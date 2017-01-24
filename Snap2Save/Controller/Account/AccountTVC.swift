@@ -61,6 +61,8 @@ class AccountTVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
+        AppHelper.getScreenName(screenName: "Account screen")
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

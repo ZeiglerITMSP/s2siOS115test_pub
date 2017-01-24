@@ -95,7 +95,18 @@ class AppHelper {
         let status = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
         return status
     }
-
+    
+    
+    class func getScreenName(screenName : String) {
+        
+        guard let tracker = GAI.sharedInstance().defaultTracker else { return }
+        tracker.set(kGAIScreenName, value: screenName)
+        
+        guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
+        tracker.send(builder.build() as [NSObject : AnyObject])
+ 
+    }
+ 
 }
 
 

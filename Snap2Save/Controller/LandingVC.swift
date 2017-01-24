@@ -51,6 +51,8 @@ class LandingVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadContent), name: NSNotification.Name( LCLLanguageChangeNotification), object: nil)
         
         reloadContent()
+        AppHelper.getScreenName(screenName: "Landing Screen")
+        
     }
     
     

@@ -97,6 +97,8 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: navigationController, action: nil)
         self.navigationItem.leftBarButtonItem = backButton
         reloadContent()
+        AppHelper.getScreenName(screenName: "ResetPassword screen")
+
     }
     
     override func didReceiveMemoryWarning() {

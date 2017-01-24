@@ -238,6 +238,9 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         self.navigationController?.navigationBar.addSubview(lineView)
         // bgScrollView.contentSize = CGSize(width : 0, height:loginButton.frame.maxY+40)
         
+        AppHelper.getScreenName(screenName: "Login screen")
+
+        
     }
     
     override func didReceiveMemoryWarning() {
