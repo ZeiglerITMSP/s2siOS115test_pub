@@ -486,8 +486,11 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let socialId = faceBookDict?["id"] as? String ?? ""
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
+        let email = faceBookDict?["email"] as? String ?? ""
 
         let parameters : Parameters  = ["social_id": socialId,
+                                        "email": email,
+                                        "phone_number": "",
                           "platform":"1",
                           "version_code": version_code,
                           "version_name": version_name,
@@ -556,7 +559,6 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                             self.showAlert(title: "", message: alertMessage)
                         }
                     }
-                        
                         
                     else {
                         

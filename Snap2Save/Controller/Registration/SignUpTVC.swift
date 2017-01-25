@@ -656,8 +656,11 @@ extension SignUpTVC: AITextFieldProtocol {
         let socialId = facebookDict?["id"] as? String ?? ""
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
+        let email = facebookDict?["email"] as? String ?? ""
         
         let parameters : Parameters  = ["social_id": socialId,
+                                        "email": email,
+                                        "phone_number": "",
                           "platform":"1",
                           "version_code": version_code,
                           "version_name": version_name,
@@ -666,7 +669,7 @@ extension SignUpTVC: AITextFieldProtocol {
                           "language": currentLanguage
             ]
         
-        //print("parameters)
+        print(parameters)
         let url = String(format: "%@/checkFbUser", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -720,12 +723,13 @@ extension SignUpTVC: AITextFieldProtocol {
                                 self.presentHome()
                             }
                         }
-                        else {
-                       /*         if let responseDict = json.dictionaryObject {
+                        else if code.intValue == 400 {
+                            
+                            if let responseDict = json.dictionaryObject {
                              let alertMessage = responseDict["message"] as! String
                              self.showAlert(title: "", message: alertMessage)
-                             }*/
-                            
+                                
+                             }
                         }
                     }
                 }

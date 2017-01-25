@@ -91,9 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = GAILogLevel.verbose  // remove before app release
         
-        
-        
-        
         return true
     }
     
@@ -184,7 +181,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 
                 if typeValue == "3" {
-                    
                     self.deepLinking(url : url)
                 }
             }
@@ -350,7 +346,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 alertController.addAction(okAction)
                                 
                                 UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
-                                
                             }
                             
                             ////print("error)
