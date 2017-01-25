@@ -42,6 +42,8 @@ class EBTConstants: NSObject {
             return "EBTAuthenticationTVC"
         } else if title == "ebt.accountSummary".localized() {
             return "EBTDashboardTVC"
+        } else if title == "ebt.logon".localized() {
+            return "EBTLoginTVC"
         }
         // registration
         else if title == "ebt.cardnumber".localized() {
@@ -56,7 +58,7 @@ class EBTConstants: NSObject {
             return "EBTConfirmationTVC"
         } else if title == "ebt.emailChange".localized() {
             return "EBTChangeEmailTVC"
-    }
+        }
     
         return nil
     }

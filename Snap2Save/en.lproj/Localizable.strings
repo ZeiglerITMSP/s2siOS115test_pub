@@ -285,10 +285,18 @@
 "ebt.confirmationMessage" = "An Email Validation Code has been sent to %@. Please check your email and enter the Validation Code below.";
 
 
+// Change Email screen
+"ebt.changeEmail.titleLabel" = "CHANGE EMAIL ADDRESS";
+"ebt.changeEmail.messageLabel" = "Please enter your new email address.";
+"CURRENT E-MAIL ADDRESS" = "CURRENT E-MAIL ADDRESS";
+"E-MAIL ADDRESS" = "E-MAIL ADDRESS";
+"CONFIRM E-MAIL ADDRESS" = "CONFIRM E-MAIL ADDRESS";
+"CHANGE EMAIL" = "CHANGE EMAIL";
+
 // EBT Dashboard
 "RECENT TRANSACTIONS" = "RECENT TRANSACTIONS";
-"EBT Balance" = "EBT Balance";
-"CASH Balance" = "CASH Balance";
+"EBT Balance" = "EBT BALANCE";
+"CASH Balance" = "CASH BALANCE";
 "No transactions were found." = "No transactions were found.";
 
 

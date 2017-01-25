@@ -73,7 +73,7 @@ class EBTConfirmationTVC: UITableViewController {
 
         validationCodeField.contentTextField.returnKeyType = .done
         validationCodeField.contentTextField.aiDelegate = self
-        
+        validationCodeField.contentTextField.updateUIAsPerTextFieldType()
         
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))

@@ -230,7 +230,7 @@
 "PASSWORD" = "CONTRASEÑA";
 "Remember My User ID" = "Recuerda Mi ID De Usuario";
 "LOG IN" = "INICIAR SESIÓN";
-"REGISTER" = "REGISTRO";
+"REGISTER" = "REGISTRARME";
 "Identify yourself!" = "¡Identifícate!";
 "ebt.login.titleLabel" = "UNA MANERA FÁCIL Y CONVENIENTE PARA ACCEDER A LA INFORMACIÓN DE SU CUENTA DE TARJETA EBT.";
 "ebt.login.messageLabel" = "Compruebe su saldo y revise la actividad de su transacción.";
@@ -303,10 +303,19 @@
 "ebt.confirmationMessage" = "Se ha enviado un código de validación de correo electrónico a %@. Compruebe su correo electrónico e ingrese el Código de validación a continuación.";
 
 
+
+// Change Email screen
+"ebt.changeEmail.titleLabel" = "CAMBIAR DIRECCIÓN DE CORREO ELECTRÓNICO";
+"ebt.changeEmail.messageLabel" = "Ingrese su nueva dirección de correo electrónico.";
+"CURRENT E-MAIL ADDRESS" = "DIRECCIÓN DE EMAIL ACTUAL";
+"E-MAIL ADDRESS" = "DIRECCIÓN DE CORREO ELECTRÓNICO";
+"CONFIRM E-MAIL ADDRESS" = "CONFIRMAR EL CORREO";
+"CHANGE EMAIL" = "CAMBIAR E-MAIL";
+
 // EBT Dashboard
 "RECENT TRANSACTIONS" = "TRANSACCIONES RECIENTES";
-"EBT Balance" = "EBT Equilibrar";
-"CASH Balance" = "EFECTIVO Equilibrar";
+"EBT Balance" = "EBT EQUILIBRAR";
+"CASH Balance" = "EFECTIVO EQUILIBRAR";
 "No transactions were found." = "No se encontraron transacciones.";
 
 

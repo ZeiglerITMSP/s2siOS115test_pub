@@ -194,8 +194,9 @@ class EBTDashboardTVC: UITableViewController {
     
     func backAction() {
         
+        _ = self.navigationController?.popToRootViewController(animated: true)
         //        self.navigationController?.popViewController(animated: true)
-        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
+      //  showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
