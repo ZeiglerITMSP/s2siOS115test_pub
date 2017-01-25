@@ -15,7 +15,8 @@ import Localize_Swift
 class OffersVC: UIViewController {
 
     var languageSelectionButton: UIButton!
-
+    var oldLanguage = ""
+    var currentlang = ""
     // Outlets
     
     @IBOutlet var offersImageView: UIImageView!
@@ -46,6 +47,8 @@ class OffersVC: UIViewController {
         reloadContent()
         getOffers()
         AppHelper.getScreenName(screenName: "Offers screen")
+         oldLanguage = Localize.currentLanguage()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,7 +70,9 @@ class OffersVC: UIViewController {
 
     
     func languageButtonClicked() {
+        
         self.showLanguageSelectionAlert()
+   
     }
 
     
@@ -76,9 +81,13 @@ class OffersVC: UIViewController {
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Offers".localized()
+            self.currentlang = Localize.currentLanguage()
+            if self.oldLanguage != self.currentlang {
+                self.getOffers()
+                self.oldLanguage = self.currentlang
+            }
 
         }
-        
     }
     
     func tapGesClicked() {
@@ -158,8 +167,6 @@ class OffersVC: UIViewController {
                                 let alertMessage = responseDict["message"] as! String
                                 self.showAlert(title: "", message: alertMessage)
                             }
-                            
-                            
                         }
                     }
                     
@@ -177,8 +184,6 @@ class OffersVC: UIViewController {
             }
             
         }
-
-        
     }
     
 }

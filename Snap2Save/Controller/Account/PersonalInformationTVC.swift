@@ -353,10 +353,11 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             statesDict = NSDictionary(contentsOfFile: path)
         }
         
-        let states = statesDict?.allKeys as! [String]
+        let states = statesDict?.allValues as! [String]
         let sortedStates = states.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
         
         statesArray = NSMutableArray()
+        
         for state in sortedStates {
             statesArray.add(state)
         }
