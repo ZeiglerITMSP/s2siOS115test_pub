@@ -323,18 +323,14 @@
 "ebt.dob" = "Validate Identity";
 "ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
 "ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
-
 "ebt.pin" = "Select PIN";
 "ebt.userInformation" = "Enter User Information";
 "ebt.confirmation" = "Confirmation";
-
+"ebt.emailChange" = "Change Email Address";
 // dashboard
 "ebt.securityQuestion" = "Verificar Pregunta De Seguridad";
 "ebt.accountSummary" = "Resumen De Cuenta";
 "ebt.transactionActivity" = "Actividad De Transacción";
-
-
-
 
 
 

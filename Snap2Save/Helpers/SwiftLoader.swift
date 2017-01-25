@@ -69,8 +69,8 @@ open class SwiftLoader: UIView {
         loader.animated = animated
         loader.title = title
         loader.update()
-        
-        loader.isUserInteractionEnabled = true
+        // Updated user interaction
+        loader.isUserInteractionEnabled = SwiftLoader.sharedInstance.canHideOnTouch
         
         NotificationCenter.default.addObserver(loader, selector: #selector(loader.rotated(_:)),
                                                          name: NSNotification.Name.UIDeviceOrientationDidChange,

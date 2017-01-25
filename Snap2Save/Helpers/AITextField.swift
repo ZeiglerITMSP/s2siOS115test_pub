@@ -58,25 +58,20 @@ class AITextField: UITextField {
     
     // MARK: -
     
-    required init(coder aDecoder: NSCoder)
-    {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         
         delegate = self
-        createBorder(borderColor: UIColor.white,xpos: 10)
-        
     }
-    required override init(frame: CGRect)
-    {
+    required override init(frame: CGRect) {
         super.init(frame: frame)
+        
         delegate = self
-        createBorder(borderColor: UIColor.white,xpos: 10)
     }
     
     func updateUIAsPerTextFieldType() {
         
-        switch textFieldType
-        {
+        switch textFieldType {
         case AITextFieldType.NormalTextField:
             break;
             
@@ -389,13 +384,11 @@ extension AITextField: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         updateUnderline()
-//        createUnderline(withColor: selectedColor, padding: 0, height: 1)
         updatePlaceHolderTextColor(color: selectedColor)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateUnderline()
-//        createUnderline(withColor: normalColor, padding: 0, height: 1)
         updatePlaceHolderTextColor(color: normalColor)
         
 //        self.aiDelegate?.keyBoardHidden?(textField: self)

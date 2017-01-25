@@ -128,7 +128,7 @@ class OffersVC: UIViewController {
             ]
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
-        print("parameters")
+        print(parameters)
         let url = String(format: "%@/getCurrentOffer", hostUrl)
         ////print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in

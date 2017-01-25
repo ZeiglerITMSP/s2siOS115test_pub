@@ -298,7 +298,7 @@
 
 // **** Scrapping ****
 
-// PAGE TITLES
+// *** PAGE TITLES *****
 // login
 "ebt.logon" = "Logon";
 "ebt.authentication" = "We don’t recognize the computer you’re using.";
@@ -312,7 +312,7 @@
 "ebt.pin" = "Select PIN";
 "ebt.userInformation" = "Enter User Information";
 "ebt.confirmation" = "Confirmation";
-
+"ebt.emailChange" = "Change Email Address";
 // dashboard
 "ebt.securityQuestion" = "Verify Security Question";
 "ebt.accountSummary" = "Account Summary";

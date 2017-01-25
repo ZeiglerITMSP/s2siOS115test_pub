@@ -62,7 +62,6 @@ protocol AIPlaceHolderTextFieldDelegate {
         
         didSet {
             
-//           requiredLabel.isHidden = !isRequredField
         }
     }
     
@@ -152,10 +151,9 @@ protocol AIPlaceHolderTextFieldDelegate {
         contentTextField.selectedColor = selectedColor
         contentTextField.normalColor = normalColor
         
-        contentTextField.createUnderline(withColor: normalColor, padding: 0, height: 1)
+        contentTextField.updateUnderline()
         
         self.infoButton.isHidden = !showInfoButton
-      //  self.requiredLabel.isHidden = !isRequredField
         
         return view
     }
@@ -163,45 +161,14 @@ protocol AIPlaceHolderTextFieldDelegate {
     func refreshView() {
         
         if isSelected {
-            // 84 190 56
             placeholderLabel.textColor = selectedColor
-//            contentTextField.createUnderline(withColor: selectedColor, padding: 0, height: 2)
-           // contentTextField.textColor = selectedColor
         } else {
-            
             placeholderLabel.textColor = normalColor
-//            contentTextField.createUnderline(withColor: normalColor, padding: 0, height: 2)
-//            contentTextField.textColor = normalColor
         }
-        
-        
-        
-//        contentTextField.layer.borderColor = UIColor.red.cgColor
-//        contentTextField.layer.borderWidth = 1
-        
-      //  contentTextField.createUnderline(withColor: selectedColor, padding: 0, height: 2)
-        
-       // createUnderline(withColor: selectedColor, padding: 6, height: 2)
-    }
-    
-    /*
-    func createUnderline(withColor color:UIColor, padding:CGFloat, height:CGFloat) {
-        
-        if (underlineLayer != nil) {
-            underlineLayer.removeFromSuperlayer()
-        }
-        
-        underlineLayer = CALayer()
-        underlineLayer.borderColor = color.cgColor
-        underlineLayer.frame = CGRect(x: padding, y: self.frame.size.height - height, width: self.frame.size.width-(2*padding), height: self.frame.size.height)
-        underlineLayer.borderWidth = height
-        self.contentTextField.layer.addSublayer(underlineLayer)
-        self.contentTextField.layer.masksToBounds = true
         
     }
     
- */
-    
+   
     
 }
 

@@ -215,7 +215,7 @@ class EBTDashboardTVC: UITableViewController {
         
         ebtWebView.getPageHeading(completion: { pageTitle in
             
-            if pageTitle == "Account Summary".localized() {
+            if pageTitle == "ebt.accountSummary".localized() {
                 
                 self.getAccountDetails()
                 
@@ -434,17 +434,17 @@ class EBTDashboardTVC: UITableViewController {
                 "var table = $('#allCompletedTxnGrid tbody');" +
                 "table.find('tr').each(function (i) {" +
                 "var $tds = $(this).find('td')," +
-                "t_date = $tds.eq(2).text();" +
+                "t_date = $tds.eq(2).text().trim();" +
                 "if (t_date) {" +
                 "list[i] = {" +
                 "date: t_date," +
-                "transaction: $tds.eq(3).text()," +
-                "location: $tds.eq(4).text()," +
-                "account: $tds.eq(5).text()," +
-                "card: $tds.eq(6).text()," +
-                "debit_amount: $tds.eq(7).text()," +
-                "credit_amount: $tds.eq(8).text()," +
-                "available_balance: $tds.eq(9).text()" +
+                "transaction: $tds.eq(3).text().trim()," +
+                "location: $tds.eq(4).text().trim()," +
+                "account: $tds.eq(5).text().trim()," +
+                "card: $tds.eq(6).text().trim()," +
+                "debit_amount: $tds.eq(7).text().trim()," +
+                "credit_amount: $tds.eq(8).text().trim()," +
+                "available_balance: $tds.eq(9).text().trim()" +
                 "};" +
                 "}" +
                 "});" +
