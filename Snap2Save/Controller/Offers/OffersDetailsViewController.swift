@@ -105,7 +105,6 @@ class OffersDetailsViewController: UIViewController {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-
     func loadWebView() {
         
         var url : URL? =  nil
@@ -115,9 +114,10 @@ class OffersDetailsViewController: UIViewController {
         else if Localize.currentLanguage() == "es" {
             url = URL(string : urlString_es )
         }
-        
+        if url != nil {
         let request = URLRequest(url: url!)
         offersWebView.loadRequest(request)
         offersWebView.scalesPageToFit = true
+        }
     }
 }
