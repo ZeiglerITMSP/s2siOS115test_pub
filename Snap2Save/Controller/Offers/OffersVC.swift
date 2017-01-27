@@ -154,7 +154,7 @@ class OffersVC: UIViewController {
                         let code = code as! NSNumber
                         if code.intValue == 200 {
                             
-                            if let offer = responseDict?["offer"]{
+                            if let offer = responseDict?["offer"] {
                                 let offer : [String : Any] = offer as! [String : Any]
                                 let imageUrl : String = offer["image_url"] as! String? ?? ""
                                 self.offersImageView.downloadedFrom(link: imageUrl)

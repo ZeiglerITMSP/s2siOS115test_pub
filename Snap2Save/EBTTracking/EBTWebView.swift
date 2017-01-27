@@ -82,22 +82,22 @@ class EBTWebView: NSObject {
     // Get page headline
     func getPageHeading(completion: @escaping (String?) -> ()) {
         
-        let jsHeading = "function getPageHeader() {" +
-            "var pageTitleHeader = $('.PageTitle .PageHeader').first().text().trim();" +
-            "   if (pageTitleHeader.length == 0) {" +
-            "       var pageTitle = $('.PageTitle').first().text().trim();" +
-            "       if (pageTitle.length == 0) {" +
-            "           var pageHeading = $('.PageHeader').first().text().trim();" +
-            "           return pageHeading;" +
-            "       } else {" +
-            "           return pageTitle;" +
-            "       }" +
-            "   } else {" +
-            "       return pageTitleHeader" +
-            "   }" +
-            "}" +
-            
-        "getPageHeader();"
+        let jsHeading = "function getTitle() { " +
+        "var pageTitleHeader = $('.PageTitle .PageHeader').first().text(); " +
+        "var dashboardTitle = $('.PageTitle').first().text(); " +
+        "var loginButton = $('#button_logon').text(); " +
+        "var emptyString = ''; " +
+        "if(pageTitleHeader || pageTitleHeader.length>0){ " +
+         "   return pageTitleHeader.trim(); " +
+        "}else if(dashboardTitle || dashboardTitle.length>0) { " +
+         "   return dashboardTitle.trim(); " +
+        "} else if(loginButton || loginButton.length>0) { " +
+         "   return loginButton.trim(); " +
+        "} " +
+        "return emptyString; " +
+    "} " +
+    
+    "getTitle();"
         
         let javaScript = jsHeading
         
@@ -155,6 +155,23 @@ class EBTWebView: NSObject {
         }
     }
     
+    func checkForSuccessMessage(completion: @escaping (String?) -> ()) {
+        
+        let jsSuccessMessage = "$('#actionMsg .completionText').text().trim();"
+        let javaScript = jsSuccessMessage
+        
+        webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                completion(resultTrimmed)
+                
+            } else {
+                print(error ?? "")
+                completion(nil)
+            }
+        }
+    }
     
     
     

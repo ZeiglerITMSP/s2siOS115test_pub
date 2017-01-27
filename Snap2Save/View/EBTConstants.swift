@@ -9,7 +9,8 @@
 import UIKit
 
 
-let kEBTBaseUrl = "http://internal.appit.ventures/s2s/"
+//let kEBTBaseUrl = "http://internal.appit.ventures/s2s/"
+let kEBTBaseUrl = "http://internal.appit.ventures/s2s/flow2/"
 let kEBTLoginUrl =  kEBTBaseUrl + "ebt_login.html"
 let kEBTLoginUrl_es =  kEBTBaseUrl + "ebt_login.html"
 let kEBTSignupUrl = kEBTBaseUrl + "ebt_registration_cardNumber.html"

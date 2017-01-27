@@ -94,7 +94,7 @@ class EBTCardNumberTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        webView.sendSubview(toBack: self.view)
+        self.view.sendSubview(toBack: webView)
     }
     
     override func didReceiveMemoryWarning() {

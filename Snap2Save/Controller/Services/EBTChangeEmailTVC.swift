@@ -34,8 +34,15 @@ class EBTChangeEmailTVC: UITableViewController {
     
     // Actions
     @IBAction func changeEmailAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         
+        self.changeEmailButton.isEnabled = false
+        self.changeEmailActivityIndicator.startAnimating()
         
+        actionType = ActionType.changeEmail
+        
+        validatePage()
+
         
     }
     
@@ -43,10 +50,17 @@ class EBTChangeEmailTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        currentEmailField.isUserInteractionEnabled = false
+        emailField.contentTextField.keyboardType = .emailAddress
+        confirmEmailField.contentTextField.keyboardType = .emailAddress
+        emailField.contentTextField.returnKeyType = .next
         confirmEmailField.contentTextField.returnKeyType = .done
         
         emailField.contentTextField.aiDelegate = self
         confirmEmailField.contentTextField.aiDelegate = self
+        
+        emailField.contentTextField.updateUIAsPerTextFieldType()
+        confirmEmailField.contentTextField.updateUIAsPerTextFieldType()
         
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
@@ -63,6 +77,23 @@ class EBTChangeEmailTVC: UITableViewController {
         addTapGesture()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadContent()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        ebtWebView.responder = self
+        
+        let webView = ebtWebView.webView!
+        self.view.addSubview(webView)
+        
+        self.view.sendSubview(toBack: webView)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -136,6 +167,8 @@ class EBTChangeEmailTVC: UITableViewController {
     
     func moveToNextController(identifier:String) {
         
+        EBTUser.shared.email = emailField.contentTextField.text!
+        
         let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -172,49 +205,87 @@ extension EBTChangeEmailTVC {
         
     }
     
+    func getCurrentEmailAddress() {
+        
+//        let dobErrorCode = "$('.prelogonInstrText:eq(4)').text().trim();"
+//        
+//        ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
+//            if error != nil {
+//                
+//                print(error ?? "error nil")
+//                
+//            } else {
+//                print(result ?? "result nil")
+//                let stringResult = result as! String
+//                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+//                print(trimmed)
+//                if trimmed.characters.count > 0 {
+//                    
+//                    let components = trimmed.components(separatedBy: "* ")
+//                    
+//                    var list = [String]()
+//                    for comp in components {
+//                        
+//                        let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
+//                        if trimmedNew.characters.count > 0 {
+//                            
+//                            let final = "* " + trimmedNew
+//                            list.append(final)
+//                        }
+//                        
+//                    }
+//                    
+//                    self.passwordRules = list.joined(separator: "\n")
+//                    
+//                } else {
+//                    
+//                }
+//            }
+//        }
+    }
+
     
     func autoFill() {
         
-//        let valdationCode = validationCodeField.contentTextField.text!
-//        
-//        actionType = ActionType.validate
-//        
-//        let jsCardNumber = "$('#txtEmailValidationCode').val('\(valdationCode)');"
-//        let jsSubmit = "$('#validateEmailBtn').click();"
-//        
-//        let javaScript =  jsCardNumber + jsSubmit
-//        
-//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-//            
-//            self.checkForErrorMessage()
-//        }
+        let emailAddress = emailField.contentTextField.text!
+        let confirmEmail = confirmEmailField.contentTextField.text!
+        
+        let jsEmailAddress = "$('#newEMailTextField').val('\(emailAddress)');"
+        let jsCofirmEmail = "$('#validateEMailTextField').val('\(confirmEmail)');"
+        
+        let jsSubmit = "void($('#changeEmailBtn').click());"
+        
+        let javaScript =  jsEmailAddress + jsCofirmEmail + jsSubmit
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            self.checkForErrorMessage()
+        }
     }
     
     
     func checkForErrorMessage() {
         
-//        ebtWebView.getErrorMessage(completion: { result in
-//            
-//            if let errorMessage = result {
-//                if errorMessage.characters.count > 0 {
-//                    // error message
-//                    
-//                    // update view
-//                    if self.ebtWebView.isPageLoading == false {
-//                        self.validateButton.isEnabled = true
-//                        self.validateActivityIndicator.stopAnimating()
-//                    }
-//                    
-//                    self.errorMessageLabel.text = errorMessage
-//                    self.tableView.reloadData()
-//                    
-//                } else {
-//                    
-//                }
-//            } else {
-//                
-//            }
-//        })
+        ebtWebView.getErrorMessage(completion: { result in
+            
+            if let errorMessage = result {
+                if errorMessage.characters.count > 0 {
+                    // error message
+                    
+                    // update view
+                    if self.ebtWebView.isPageLoading == false {
+                        self.changeEmailButton.isEnabled = true
+                        self.changeEmailActivityIndicator.stopAnimating()
+                    }
+                    self.errorMessageLabel.text = errorMessage
+                    self.tableView.reloadData()
+                    
+                } else {
+                    
+                }
+            } else {
+                
+            }
+        })
     }
     
     func validateNextPage() {

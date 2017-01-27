@@ -273,7 +273,7 @@ extension ServicesTVC {
         ebtWebView.responder = self
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        webView.sendSubview(toBack: self.view)
+        self.view.sendSubview(toBack: webView)
         
         var loginUrl = kEBTLoginUrl
         

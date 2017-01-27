@@ -28,6 +28,7 @@ class EBTLoginTVC: UITableViewController {
     var languageSelectionButton: UIButton!
     
     var isTouchIdAvailable = false
+    var isSuccessMessage = false
     
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
@@ -130,10 +131,6 @@ class EBTLoginTVC: UITableViewController {
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
-//        reloadContent()
-//        loadLoginPage()
-        
-        
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         
@@ -160,6 +157,7 @@ class EBTLoginTVC: UITableViewController {
         
         reloadContent()
         autofillUserName()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -169,14 +167,14 @@ class EBTLoginTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        webView.sendSubview(toBack: self.view)
+        self.view.sendSubview(toBack: webView)
         
-        loadLoginPage()
         // Stop listening notification
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
         
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
         
+        checkForStatusMessage()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -259,9 +257,19 @@ class EBTLoginTVC: UITableViewController {
         self.tableView.reloadData()
     }
     
+    func updateErrorTextColor() {
+        
+        if isSuccessMessage {
+            self.errorMessageLabel.textColor = APP_GRREN_COLOR
+        } else {
+            self.errorMessageLabel.textColor = UIColor.red
+        }
+    }
+    
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        updateErrorTextColor()
         if indexPath.row == 1 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
@@ -351,19 +359,14 @@ extension EBTLoginTVC {
         ebtWebView.webView.load(request as URLRequest)
     }
     
+    
     func validatePage() {
         
-        // isCurrentPage
-        let jsLoginValidation = "$('#button_logon').text().trim();"
-        let javaScript = jsLoginValidation
-        
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+        ebtWebView.getPageHeading(completion: { result in
             
-            if let resultString = result as? String {
-                
-                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                
-                if resultTrimmed == self.pageTitle {
+            if let pageTitle = result {
+                // isCurrentPage
+                if pageTitle == self.pageTitle {
                     // current page
                     if self.actionType == ActionType.autofill {
                         self.actionType = nil
@@ -373,21 +376,61 @@ extension EBTLoginTVC {
                         self.registrationClick()
                     }
                     else {
-                        self.checkForErrorMessage()
+                        self.checkForStatusMessage()
+                        //self.checkForErrorMessage()
                     }
                     
                 } else {
-                    // validate for next page
                     self.validateNextPage()
                 }
                 
             } else {
-                print(error ?? "")
-            }
                 
-           
-        }
+            }
+            
+        })
+        
     }
+    
+    
+//    func validatePage() {
+//        
+//        
+//        // isCurrentPage
+//        let jsLoginValidation = "$('#button_logon').text().trim();"
+//        let javaScript = jsLoginValidation
+//        
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            
+//            if let resultString = result as? String {
+//                
+//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+//                
+//                if resultTrimmed == self.pageTitle {
+//                    // current page
+//                    if self.actionType == ActionType.autofill {
+//                        self.actionType = nil
+//                        self.autoFill()
+//                    } else if self.actionType == ActionType.registration {
+//                        self.actionType = nil
+//                        self.registrationClick()
+//                    }
+//                    else {
+//                        self.checkForErrorMessage()
+//                    }
+//                    
+//                } else {
+//                    // validate for next page
+//                    self.validateNextPage()
+//                }
+//                
+//            } else {
+//                print(error ?? "")
+//            }
+//                
+//           
+//        }
+//    }
     
     func validateNextPage() {
     
@@ -442,6 +485,39 @@ extension EBTLoginTVC {
         }
     }
     
+    func checkForStatusMessage() {
+        
+        let javaScript = "$('#infoMsg .actionMessage').text().trim();"
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                if resultTrimmed.characters.count > 0 {
+                    // status message
+                    
+//                    // update view
+//                    if self.ebtWebView.isPageLoading == false {
+//                        
+////                        self.rememberMeButton.isEnabled = true
+////                        self.regenerateActivityIndicator.stopAnimating()
+//                    }
+                    
+                    self.errorMessageLabel.text = resultTrimmed
+                    self.isSuccessMessage = true
+                    self.tableView.reloadData()
+                    
+                } else {
+                    // no status message
+                    self.checkForErrorMessage()
+                }
+                
+            } else {
+                print(error ?? "")
+            }
+        }
+    }
+    
     
     func checkForErrorMessage() {
         
@@ -460,6 +536,7 @@ extension EBTLoginTVC {
                     }
                     
                     self.errorMessageLabel.text = errorMessage
+                    self.isSuccessMessage = false
                     self.tableView.reloadData()
                     
                 } else {
@@ -472,44 +549,6 @@ extension EBTLoginTVC {
             }
         })
     }
-    
-//    func checkForErrorMessage() {
-//        
-//        let javaScript = "$('.errorTextLogin').text();"
-//        
-//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-//            
-//            if let resultString = result as? String {
-//                
-//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-//                
-//                if resultTrimmed.characters.count > 0 {
-//                    // error message
-//                    
-//                    // update view
-//                    if self.ebtWebView.isPageLoading == false {
-//                        self.loginButton.isEnabled = true
-//                        self.registrationButton.isEnabled = true
-//                        self.activityIndicator.stopAnimating()
-//                        self.registrationActivityIndicator.stopAnimating()
-//                    }
-//                    
-//                    self.errorMessageLabel.text = resultTrimmed
-//                    self.tableView.reloadData()
-//                    
-//                } else {
-////                    // no error message
-////                    self.errorMessageLabel.text = nil
-////                    self.tableView.reloadData()
-//                }
-//                
-//            } else {
-//                print(error ?? "")
-//            }
-//        }
-//    }
-    
-    
     
     
 }

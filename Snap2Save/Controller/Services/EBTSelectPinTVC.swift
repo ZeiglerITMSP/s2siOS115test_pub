@@ -13,6 +13,7 @@ class EBTSelectPinTVC: UITableViewController {
     fileprivate enum ActionType {
         
         case pin
+        case useCurrentPin
     }
     
     // Properties
@@ -52,7 +53,14 @@ class EBTSelectPinTVC: UITableViewController {
     
     @IBAction func useCurrentPinAction(_ sender: UIButton) {
         
+        self.view.endEditing(true)
         
+        self.useCurrentPinButton.isEnabled = false
+        self.currentPinActivityIndicator.startAnimating()
+        
+        actionType = ActionType.useCurrentPin
+        
+        validatePage()
     }
     
     // MARK: -
@@ -102,7 +110,7 @@ class EBTSelectPinTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        webView.sendSubview(toBack: self.view)
+        self.view.sendSubview(toBack: webView)
     }
     
     
@@ -198,6 +206,9 @@ extension EBTSelectPinTVC {
                     if self.actionType == ActionType.pin {
                         self.actionType = nil
                         self.autoFill()
+                    } else if self.actionType == ActionType.useCurrentPin {
+                        self.actionType = nil
+                        self.useCurrentPIN()
                     } else {
                         self.checkForErrorMessage()
                     }
@@ -240,6 +251,26 @@ extension EBTSelectPinTVC {
         }
     }
     
+    func useCurrentPIN() {
+        
+        let jsUseCurrentPIN = "$('#btnUseCurrentPin').click();"
+        let javaScript = jsUseCurrentPIN
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            if error != nil {
+//                print(error ?? "error nil")
+//                
+//                self.useCurrentPinButton.isEnabled = true
+//                self.currentPinActivityIndicator.stopAnimating()
+//                
+//            } else {
+//                print(result ?? "result nil")
+//                self.checkForErrorMessage()
+//            }
+        }
+    }
+    
+    
     func checkForErrorMessage() {
         
         ebtWebView.getErrorMessage(completion: { result in
@@ -252,6 +283,8 @@ extension EBTSelectPinTVC {
                     if self.ebtWebView.isPageLoading == false {
                         self.nextButton.isEnabled = true
                         self.nextActivityIndicator.stopAnimating()
+                        self.useCurrentPinButton.isEnabled = true
+                        self.currentPinActivityIndicator.stopAnimating()
                     }
                     
                     self.errorMessageLabel.text = errorMessage

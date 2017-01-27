@@ -97,7 +97,7 @@ class EBTDateOfBirthTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        webView.sendSubview(toBack: self.view)
+        self.view.sendSubview(toBack: webView)
     }
     
     
@@ -305,11 +305,13 @@ securityQuestions();
     func autoFill() {
         
         let dob = dobField.contentTextField.text!
+        let securityNumber = socialSecurityNumberField.contentTextField.text!
         
         let jsDOB = "$('#txtSecurityKeyQuestionAnswer').val('\(dob)');"
+        let jsSecurityNumber = "$('#txtSecurityKeyQuestionAns_0').val('\(securityNumber)');"
         let jsForm = "void($('#btnValidateSecurityAnswer').click());"
         
-        let javaScript = jsDOB + jsForm
+        let javaScript = jsDOB + jsSecurityNumber + jsForm
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             self.checkForErrorMessage()

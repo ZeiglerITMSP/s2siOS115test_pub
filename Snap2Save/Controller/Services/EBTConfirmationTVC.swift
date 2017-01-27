@@ -24,6 +24,8 @@ class EBTConfirmationTVC: UITableViewController {
     
     var pageTitle = "ebt.confirmation".localized()
     
+    var isSuccessMessage = false
+    
     // Outlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
@@ -31,14 +33,12 @@ class EBTConfirmationTVC: UITableViewController {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var validationCodeField: AIPlaceHolderTextField!
     @IBOutlet weak var validateActivityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet weak var resendActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var changeEmailActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var validateButton: UIButton!
     @IBOutlet weak var resendButton: UIButton!
     @IBOutlet weak var changeEmailButton: UIButton!
-    
     @IBOutlet weak var confirmationMessageLabel: UILabel!
-    
-    
     
     
     // Actions
@@ -56,14 +56,25 @@ class EBTConfirmationTVC: UITableViewController {
     
     
     @IBAction func resendAction(_ sender: Any) {
-        
         self.view.endEditing(true)
         
+        self.resendButton.isEnabled = false
+        self.resendActivityIndicator.startAnimating()
+        
+        actionType = ActionType.resend
+        
+        validatePage()
     }
        
     @IBAction func changeEmailAction(_ sender: UIButton) {
-        
         self.view.endEditing(true)
+        
+        self.changeEmailButton.isEnabled = false
+        self.changeEmailActivityIndicator.startAnimating()
+        
+        actionType = ActionType.changeEmail
+        
+        validatePage()
     }
     
     // MARK: -
@@ -96,6 +107,7 @@ class EBTConfirmationTVC: UITableViewController {
         super.viewWillAppear(animated)
         
         reloadContent()
+        validatePage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,7 +117,7 @@ class EBTConfirmationTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        webView.sendSubview(toBack: self.view)
+        self.view.sendSubview(toBack: webView)
     }
     
     
@@ -151,11 +163,20 @@ class EBTConfirmationTVC: UITableViewController {
         
     }
 
+    func updateErrorTextColor() {
+        
+        if isSuccessMessage {
+            self.errorMessageLabel.textColor = APP_GRREN_COLOR
+        } else {
+            self.errorMessageLabel.textColor = UIColor.red
+        }
+    }
     
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 2 {
+            updateErrorTextColor()
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
@@ -163,6 +184,7 @@ class EBTConfirmationTVC: UITableViewController {
         
         return UITableViewAutomaticDimension
     }
+    
     
     // MARK: -
 
@@ -202,8 +224,14 @@ extension EBTConfirmationTVC {
                     if self.actionType == ActionType.validate {
                         self.actionType = nil
                         self.autoFill()
+                    } else if self.actionType == ActionType.resend {
+                        self.actionType = nil
+                        self.resendVerificationCode()
+                    } else if self.actionType == ActionType.changeEmail {
+                        self.actionType = nil
+                        self.changeEmail()
                     } else {
-                        self.checkForErrorMessage()
+                        self.checkForSuccessMessage()
                     }
                 } else {
                     self.validateNextPage()
@@ -224,7 +252,7 @@ extension EBTConfirmationTVC {
         actionType = ActionType.validate
         
         let jsCardNumber = "$('#txtEmailValidationCode').val('\(valdationCode)');"
-        let jsSubmit = "$('#validateEmailBtn').click();"
+        let jsSubmit = "void($('#validateEmailBtn').click());"
         
         let javaScript =  jsCardNumber + jsSubmit
         
@@ -233,6 +261,70 @@ extension EBTConfirmationTVC {
             self.checkForErrorMessage()
         }
     }
+    
+    func resendVerificationCode() {
+        
+        let jsResendClick = "void($('#resendValidationCodeBtn').click());"
+        let javaScript = jsResendClick
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            self.checkForSuccessMessage()
+            
+//            if error != nil {
+//                print(error ?? "error nil")
+//                
+//                self.resendButton.isEnabled = true
+//                self.resendActivityIndicator.stopAnimating()
+//                
+//            } else {
+//                print(result ?? "result nil")
+//                self.checkForSuccessMessage()
+//            }
+        }
+    }
+    
+    func changeEmail() {
+        
+        let jsResendClick = "void($('#changeEmailBtn').click());"
+        let javaScript = jsResendClick
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+
+        }
+    }
+
+    func checkForSuccessMessage() {
+        
+        ebtWebView.checkForSuccessMessage(completion: { result in
+            
+            if let errorMessage = result {
+                if errorMessage.characters.count > 0 {
+                    // success message
+                    
+                    // update view
+                    if self.ebtWebView.isPageLoading == false {
+                        self.validateButton.isEnabled = true
+                        self.validateActivityIndicator.stopAnimating()
+                        self.resendButton.isEnabled = true
+                        self.resendActivityIndicator.stopAnimating()
+                        self.changeEmailButton.isEnabled = true
+                        self.changeEmailActivityIndicator.stopAnimating()
+                    }
+                    
+                    self.errorMessageLabel.text = errorMessage
+                    self.isSuccessMessage = true
+                    self.tableView.reloadData()
+                    
+                } else {
+                    self.checkForErrorMessage()
+                }
+            } else {
+                
+            }
+        })
+    }
+    
     
     
     func checkForErrorMessage() {
@@ -247,9 +339,14 @@ extension EBTConfirmationTVC {
                     if self.ebtWebView.isPageLoading == false {
                         self.validateButton.isEnabled = true
                         self.validateActivityIndicator.stopAnimating()
+                        self.resendButton.isEnabled = true
+                        self.resendActivityIndicator.stopAnimating()
+                        self.changeEmailButton.isEnabled = true
+                        self.changeEmailActivityIndicator.stopAnimating()
                     }
                     
                     self.errorMessageLabel.text = errorMessage
+                    self.isSuccessMessage = false
                     self.tableView.reloadData()
                     
                 } else {
