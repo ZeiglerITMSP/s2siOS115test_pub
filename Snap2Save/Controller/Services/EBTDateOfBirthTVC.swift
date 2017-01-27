@@ -73,8 +73,10 @@ class EBTDateOfBirthTVC: UITableViewController {
         self.socialSecurityNumberField.contentTextField.isSecureTextEntry = true
         self.socialSecurityNumberField.contentTextField.updateUIAsPerTextFieldType()
         
-        ebtWebView.responder = self
+        self.dobField.contentTextField.aiDelegate = self
+        self.socialSecurityNumberField.contentTextField.aiDelegate = self
         
+        ebtWebView.responder = self
         errorMessageLabel.text = nil
      
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: nextButton, radius: 2.0, width: 1.0)
@@ -388,10 +390,8 @@ extension EBTDateOfBirthTVC: AITextFieldProtocol {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == dobField.contentTextField {
-            
-           // socialSecurityNumberField.contentTextField.becomeFirstResponder()
+            socialSecurityNumberField.contentTextField.becomeFirstResponder()
         } else if textField == socialSecurityNumberField.contentTextField {
-            
             textField.resignFirstResponder()
         }
         

@@ -158,6 +158,7 @@ class EBTLoginTVC: UITableViewController {
         reloadContent()
         autofillUserName()
         
+        checkForStatusMessage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -174,7 +175,6 @@ class EBTLoginTVC: UITableViewController {
         
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
         
-        checkForStatusMessage()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -24,7 +24,7 @@ open class SwiftLoader: UIView {
     fileprivate var title: String?
     fileprivate var speed = 1
     
-    var canHideOnTouch = true
+    var canHideOnTouch = false
     
     fileprivate var config : Config = Config() {
         didSet {
