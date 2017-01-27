@@ -178,7 +178,7 @@
 
 // Offers
 "Offers" = "Ofertas";
-
+"No offer exists"= "No existe ninguna oferta";
 
 // Services
 "Services" = "Servicios";

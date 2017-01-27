@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import  Localize_Swift
 
 class OffersDetailsViewController: UIViewController {
 
     var languageSelectionButton: UIButton!
-    var urlString : String = ""
-
+    var urlString_en : String = ""
+    var urlString_es : String = ""
+    var oldLanguage : String = ""
+    var currentlang : String = ""
+    
     @IBOutlet var offersWebView: UIWebView!
     
     
@@ -25,10 +29,23 @@ class OffersDetailsViewController: UIViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         reloadContent()
         
-        let url = URL(string : urlString )
+       // let url = URL(string : urlString )
+        //let request = URLRequest(url: url!)
+        //offersWebView.loadRequest(request)
+
+       /* var url : URL? =  nil
+        if Localize.currentLanguage() == "en" {
+            url = URL(string : urlString_en )
+        }
+        else if Localize.currentLanguage() == "es" {
+            url = URL(string : urlString_es )
+        }
+        
         let request = URLRequest(url: url!)
         offersWebView.loadRequest(request)
-        offersWebView.scalesPageToFit = true
+        offersWebView.scalesPageToFit = true*/
+        
+        loadWebView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +56,7 @@ class OffersDetailsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -75,7 +93,11 @@ class OffersDetailsViewController: UIViewController {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
             self.navigationItem.title = "Offers".localized()
-            
+            self.currentlang = Localize.currentLanguage()
+            if self.oldLanguage != self.currentlang {
+                self.oldLanguage = self.currentlang
+                self.loadWebView()
+            }
         }
     }
 
@@ -84,4 +106,18 @@ class OffersDetailsViewController: UIViewController {
     }
     
 
+    func loadWebView() {
+        
+        var url : URL? =  nil
+        if Localize.currentLanguage() == "en" {
+            url = URL(string : urlString_en )
+        }
+        else if Localize.currentLanguage() == "es" {
+            url = URL(string : urlString_es )
+        }
+        
+        let request = URLRequest(url: url!)
+        offersWebView.loadRequest(request)
+        offersWebView.scalesPageToFit = true
+    }
 }
