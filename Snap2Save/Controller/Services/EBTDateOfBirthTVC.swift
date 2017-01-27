@@ -66,15 +66,12 @@ class EBTDateOfBirthTVC: UITableViewController {
         // dob
         self.dobField.contentTextField.textFieldType = .DatePickerTextField
         self.dobField.contentTextField.dateFormatString = "MM/dd/yyyy"
-        self.dobField.contentTextField.updateUIAsPerTextFieldType()
-        
         self.socialSecurityNumberField.contentTextField.returnKeyType = .done
-        self.socialSecurityNumberField.contentTextField.aiDelegate = self
         self.socialSecurityNumberField.contentTextField.isSecureTextEntry = true
-        self.socialSecurityNumberField.contentTextField.updateUIAsPerTextFieldType()
-        
         self.dobField.contentTextField.aiDelegate = self
         self.socialSecurityNumberField.contentTextField.aiDelegate = self
+        self.dobField.contentTextField.updateUIAsPerTextFieldType()
+        self.socialSecurityNumberField.contentTextField.updateUIAsPerTextFieldType()
         
         ebtWebView.responder = self
         errorMessageLabel.text = nil
@@ -389,14 +386,17 @@ extension EBTDateOfBirthTVC: AITextFieldProtocol {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if textField == dobField.contentTextField {
-            socialSecurityNumberField.contentTextField.becomeFirstResponder()
-        } else if textField == socialSecurityNumberField.contentTextField {
-            textField.resignFirstResponder()
-        }
-        
+        textField.resignFirstResponder()
         return true
     }
     
+    
+    func keyBoardHidden(textField: UITextField) {
+        
+        if textField == dobField.contentTextField {
+            socialSecurityNumberField.contentTextField.becomeFirstResponder()
+        }
+    }
+
 }
 
