@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-//var hostUrl = "http://35.163.6.45/snap2save-api"
 
 
 // development url
@@ -18,7 +17,6 @@ import UIKit
 
 // test url
 var hostUrl = "http://dev.snap2save-a-lot.com/test/api"
-
 
 
 var SCREEN_WIDTH = UIScreen.main.bounds.size.width

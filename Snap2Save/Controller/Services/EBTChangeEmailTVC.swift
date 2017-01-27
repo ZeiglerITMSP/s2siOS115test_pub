@@ -81,6 +81,8 @@ class EBTChangeEmailTVC: UITableViewController {
         super.viewWillAppear(animated)
         
         reloadContent()
+        
+        getCurrentEmailAddress()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -90,7 +92,6 @@ class EBTChangeEmailTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        
         self.view.sendSubview(toBack: webView)
     }
     
@@ -207,43 +208,24 @@ extension EBTChangeEmailTVC {
     
     func getCurrentEmailAddress() {
         
-//        let dobErrorCode = "$('.prelogonInstrText:eq(4)').text().trim();"
-//        
-//        ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
-//            if error != nil {
-//                
-//                print(error ?? "error nil")
-//                
-//            } else {
-//                print(result ?? "result nil")
-//                let stringResult = result as! String
-//                let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-//                print(trimmed)
-//                if trimmed.characters.count > 0 {
-//                    
-//                    let components = trimmed.components(separatedBy: "* ")
-//                    
-//                    var list = [String]()
-//                    for comp in components {
-//                        
-//                        let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
-//                        if trimmedNew.characters.count > 0 {
-//                            
-//                            let final = "* " + trimmedNew
-//                            list.append(final)
-//                        }
-//                        
-//                    }
-//                    
-//                    self.passwordRules = list.joined(separator: "\n")
-//                    
-//                } else {
-//                    
-//                }
-//            }
-//        }
+        let javaScript = "$('#infoMsg .actionMessage').text().trim();"
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                if resultTrimmed.characters.count > 0 {
+                    // status message
+                    self.currentEmailField.contentTextField.text = resultTrimmed
+                } else {
+                    // no status message
+                    self.checkForErrorMessage()
+                }
+            } else {
+                print(error ?? "")
+            }
+        }
     }
-
     
     func autoFill() {
         
