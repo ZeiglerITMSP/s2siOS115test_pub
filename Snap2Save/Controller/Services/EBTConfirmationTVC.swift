@@ -108,7 +108,7 @@ class EBTConfirmationTVC: UITableViewController {
         
         reloadContent()
         validatePage()
-//        getConfirmationMessage()
+        getConfirmationMessage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -289,17 +289,17 @@ extension EBTConfirmationTVC {
     
     func getConfirmationMessage() {
         
-        let javaScript = "function getDescription() { " +
-            "var names = \"\"; " +
+        let javaScript = "function getEmailConfirmation() { " +
+            "var names = '  '; " +
             "$('#emailValidationForm .prelogonInstrTextArea .prelogonInstrText').each(function(i, object) { " +
                 "if (i != 0) { " +
-                    "names += object.innerText.trim()+ '\n'; " +
+                    "names += object.innerText.trim()+ \"\n\"; " +
                 "} " +
             "}); " +
-            "return names " +
+            "return names;" +
         "}; " +
         
-        "getDescription(); "
+        "getEmailConfirmation(); "
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
