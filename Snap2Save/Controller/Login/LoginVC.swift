@@ -499,7 +499,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                           "language": currentLanguage
             ]
         
-        //print("parameters)
+        print(parameters)
         let url = String(format: "%@/checkFbUser", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in

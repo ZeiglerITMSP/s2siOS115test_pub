@@ -723,13 +723,21 @@ extension SignUpTVC: AITextFieldProtocol {
                                 self.presentHome()
                             }
                         }
-                        else {
-                                if let responseDict = json.dictionaryObject {
-                             let alertMessage = responseDict["message"] as! String
-                             self.showAlert(title: "", message: alertMessage)
-                             }
                             
+                        else if code.intValue == 400 {
+                            if let responseDict = json.dictionaryObject {
+                                let alertMessage = responseDict["message"] as! String
+                                self.showAlert(title: "", message: alertMessage)
+                            }
                         }
+
+//                        else {
+//                                if let responseDict = json.dictionaryObject {
+//                             let alertMessage = responseDict["message"] as! String
+//                             self.showAlert(title: "", message: alertMessage)
+//                                    
+//                             }
+//                        }
                     }
                 }
                 break
