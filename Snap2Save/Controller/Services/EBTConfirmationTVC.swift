@@ -108,6 +108,7 @@ class EBTConfirmationTVC: UITableViewController {
         
         reloadContent()
         validatePage()
+        getConfirmationMessage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -118,6 +119,8 @@ class EBTConfirmationTVC: UITableViewController {
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
+        
+        
     }
     
     
@@ -281,6 +284,37 @@ extension EBTConfirmationTVC {
 //                print(result ?? "result nil")
 //                self.checkForSuccessMessage()
 //            }
+        }
+    }
+    
+    func getConfirmationMessage() {
+        
+        let javaScript = "function getEmailConfirmation() { " +
+            "var names = '  '; " +
+            "$('#emailValidationForm .prelogonInstrTextArea .prelogonInstrText').each(function(i, object) { " +
+                "if (i != 0) { " +
+                    "names += object.innerText.trim()+ \"\n\"; " +
+                "} " +
+            "}); " +
+            "return names;" +
+        "}; " +
+        
+        "getEmailConfirmation(); "
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if let resultString = result as? String {
+                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+                if resultTrimmed.characters.count > 0 {
+                    // status message
+                    self.confirmationMessageLabel.text = resultTrimmed
+                    self.tableView.reloadData()
+                } else {
+                    
+                }
+            } else {
+                print(error ?? "")
+            }
         }
     }
     

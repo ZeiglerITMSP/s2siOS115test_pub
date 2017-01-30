@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Jb5-Eo-rzl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Jb5-Eo-rzl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,7 +36,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1wJ-Fo-uvB">
-                                                    <rect key="frame" x="305" y="12" width="22" height="20"/>
+                                                    <rect key="frame" x="304" y="12" width="22" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                                 </activityIndicatorView>
                                             </subviews>
@@ -1571,7 +1571,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhY-Go-MKp">
-                                                <rect key="frame" x="0.0" y="44" width="375" height="652"/>
+                                                <rect key="frame" x="0.0" y="84" width="375" height="612"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="$('.PageHeader').text();" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nsw-ot-jxa">
@@ -1599,7 +1599,6 @@
                                             <constraint firstItem="qTy-mh-Yfr" firstAttribute="leading" secondItem="Qmv-fV-SmN" secondAttribute="leading" id="IKv-rX-qgx"/>
                                             <constraint firstAttribute="height" constant="1000" id="Ih3-JX-xLo"/>
                                             <constraint firstItem="nsw-ot-jxa" firstAttribute="top" secondItem="bhY-Go-MKp" secondAttribute="bottom" id="LMg-0c-0EO"/>
-                                            <constraint firstItem="bhY-Go-MKp" firstAttribute="top" secondItem="Qmv-fV-SmN" secondAttribute="top" constant="44" id="Pjg-xK-97H"/>
                                             <constraint firstAttribute="trailing" secondItem="qTy-mh-Yfr" secondAttribute="trailing" id="ZfD-21-P4E"/>
                                             <constraint firstAttribute="trailing" secondItem="bhY-Go-MKp" secondAttribute="trailing" id="cCK-lk-PBg"/>
                                             <constraint firstItem="qTy-mh-Yfr" firstAttribute="top" secondItem="nsw-ot-jxa" secondAttribute="bottom" constant="4" id="fxc-IN-NnR"/>
@@ -1649,11 +1648,34 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lwj-oq-Bwh">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" id="80J-T8-igt">
+                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="shS-Gl-Z5e">
+                                            <rect key="frame" x="16" y="7" width="283" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="done" id="j8U-dG-4Oh">
+                                        <connections>
+                                            <action selector="loadUrlAction:" destination="RUE-Su-nIk" id="kd8-8i-xne"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Lwj-oq-Bwh" firstAttribute="top" secondItem="cbY-N0-TG1" secondAttribute="bottom" id="34n-Gv-MSW"/>
                             <constraint firstItem="cbY-N0-TG1" firstAttribute="leading" secondItem="Zrw-JT-Ewe" secondAttribute="leading" id="3OB-SA-1yX"/>
                             <constraint firstItem="5SK-JC-8JF" firstAttribute="leading" secondItem="Zrw-JT-Ewe" secondAttribute="leading" id="9ql-vt-BcB"/>
+                            <constraint firstItem="bhY-Go-MKp" firstAttribute="top" secondItem="Lwj-oq-Bwh" secondAttribute="bottom" id="Cw6-Uv-pcd"/>
+                            <constraint firstAttribute="trailing" secondItem="Lwj-oq-Bwh" secondAttribute="trailing" id="Jlo-6F-fkc"/>
+                            <constraint firstItem="Lwj-oq-Bwh" firstAttribute="leading" secondItem="Zrw-JT-Ewe" secondAttribute="leading" id="KqZ-sx-QgH"/>
                             <constraint firstItem="5SK-JC-8JF" firstAttribute="top" secondItem="CFm-1I-v6f" secondAttribute="bottom" constant="4" id="am0-2d-Y9r"/>
                             <constraint firstAttribute="trailing" secondItem="cbY-N0-TG1" secondAttribute="trailing" id="hdX-mW-d4G"/>
                             <constraint firstItem="cbY-N0-TG1" firstAttribute="top" secondItem="Zrw-JT-Ewe" secondAttribute="top" constant="20" id="jnx-7v-Pb8"/>
@@ -1668,6 +1690,7 @@
                         <outlet property="broswerView" destination="bhY-Go-MKp" id="1vz-77-yzE"/>
                         <outlet property="queryTextView" destination="nsw-ot-jxa" id="h4e-TK-46J"/>
                         <outlet property="resultTextView" destination="qTy-mh-Yfr" id="7ch-EQ-yjx"/>
+                        <outlet property="urlTextfield" destination="shS-Gl-Z5e" id="cEN-xr-ga4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cio-kY-Mcf" userLabel="First Responder" sceneMemberID="firstResponder"/>

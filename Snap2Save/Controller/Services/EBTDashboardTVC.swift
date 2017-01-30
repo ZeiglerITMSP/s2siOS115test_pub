@@ -90,7 +90,6 @@ class EBTDashboardTVC: UITableViewController {
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
         
-        
     }
     
     override func didReceiveMemoryWarning() {

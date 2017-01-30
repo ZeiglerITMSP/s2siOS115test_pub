@@ -81,8 +81,6 @@ class EBTChangeEmailTVC: UITableViewController {
         super.viewWillAppear(animated)
         
         reloadContent()
-        
-        getCurrentEmailAddress()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,6 +91,8 @@ class EBTChangeEmailTVC: UITableViewController {
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
+        
+        getCurrentEmailAddress()
     }
     
     override func didReceiveMemoryWarning() {
@@ -142,7 +142,7 @@ class EBTChangeEmailTVC: UITableViewController {
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 2 {
+        if indexPath.row == 1 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
@@ -208,7 +208,7 @@ extension EBTChangeEmailTVC {
     
     func getCurrentEmailAddress() {
         
-        let javaScript = "$('#infoMsg .actionMessage').text().trim();"
+        let javaScript = "$('#currentEmailLbl').text().trim();"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
@@ -217,9 +217,10 @@ extension EBTChangeEmailTVC {
                 if resultTrimmed.characters.count > 0 {
                     // status message
                     self.currentEmailField.contentTextField.text = resultTrimmed
+//                    self.tableView.reloadData()
                 } else {
                     // no status message
-                    self.checkForErrorMessage()
+//                    self.checkForErrorMessage()
                 }
             } else {
                 print(error ?? "")

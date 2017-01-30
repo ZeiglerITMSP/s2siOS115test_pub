@@ -16,6 +16,20 @@ class BrowserVC: UIViewController {
     @IBOutlet weak var queryTextView: UITextView!
     
     @IBOutlet weak var resultTextView: UITextView!
+    
+   
+    @IBOutlet weak var urlTextfield: UITextField!
+    
+    @IBAction func loadUrlAction(_ sender: Any) {
+        
+        
+        let url = NSURL(string: urlTextfield.text!)
+        let request = NSURLRequest(url: url! as URL)
+        
+        webViewMaster.webView.load(request as URLRequest)
+                
+    }
+    
     @IBAction func executeQueryAction(_ sender: Any) {
         
         self.view.endEditing(true)
