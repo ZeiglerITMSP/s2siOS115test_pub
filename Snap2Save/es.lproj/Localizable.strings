@@ -179,6 +179,9 @@
 // Offers
 "Offers" = "Ofertas";
 "No offer exists"= "No existe ninguna oferta";
+"PLEASE CHECK YOUR INTERNET CONNECTION" = "POR FAVOR REVISE SU CONEXION A INTERNET";
+"PLEASE TRY AGAIN LATER" = "POR FAVOR, INTÉNTELO DE NUEVO MÁS TARDE";
+
 
 // Services
 "Services" = "Servicios";

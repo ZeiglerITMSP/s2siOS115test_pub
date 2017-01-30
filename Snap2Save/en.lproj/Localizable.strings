@@ -175,6 +175,8 @@
 
 "Offers" = "Offers";
 "No offer exists" = "No offer exists";
+"PLEASE CHECK YOUR INTERNET CONNECTION" = "PLEASE CHECK YOUR INTERNET CONNECTION";
+"PLEASE TRY AGAIN LATER" = "PLEASE TRY AGAIN LATER";
 
 // Services
 "Services" = "Services";

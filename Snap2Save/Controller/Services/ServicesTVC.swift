@@ -110,7 +110,10 @@ class ServicesTVC: UITableViewController {
                  url = infoScreens["about"] as! String? ?? ""
                     
                 }
-                servicesWebVc.loadUrl = url 
+                servicesWebVc.urlStr_es = infoScreens["about_es"] as! String? ?? ""
+                servicesWebVc.urlStr_en = infoScreens["about"] as! String? ?? ""
+
+                servicesWebVc.loadUrl = url
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.aboutSnap2Save
                 
             }
@@ -123,6 +126,11 @@ class ServicesTVC: UITableViewController {
                 else {
                     url = infoScreens["faq"] as! String? ?? ""
                 }
+                
+                servicesWebVc.urlStr_es = infoScreens["faq_es"] as! String? ?? ""
+                servicesWebVc.urlStr_en = infoScreens["faq"] as! String? ?? ""
+                
+
                 servicesWebVc.loadUrl = url
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.FAQ
 
@@ -136,6 +144,10 @@ class ServicesTVC: UITableViewController {
                 else {
                     url = infoScreens["reward"] as! String? ?? ""
                 }
+                
+                servicesWebVc.urlStr_es = infoScreens["reward_es"] as! String? ?? ""
+                servicesWebVc.urlStr_en = infoScreens["reward"] as! String? ?? ""
+
                 servicesWebVc.loadUrl = url
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.reward
                 
@@ -151,6 +163,9 @@ class ServicesTVC: UITableViewController {
                 else {
                     url = infoScreens["terms"] as! String? ?? ""
                 }
+                servicesWebVc.urlStr_es = infoScreens["terms_es"] as! String? ?? ""
+                servicesWebVc.urlStr_en = infoScreens["terms"] as! String? ?? ""
+
                 servicesWebVc.loadUrl = url
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.termsOfService
                 
@@ -166,6 +181,9 @@ class ServicesTVC: UITableViewController {
                 else {
                     url = infoScreens["privacy"] as! String? ?? ""
                 }
+                servicesWebVc.urlStr_es = infoScreens["privacy_es"] as! String? ?? ""
+                servicesWebVc.urlStr_en = infoScreens["privacy"] as! String? ?? ""
+
                 servicesWebVc.loadUrl = url
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.privacyPolicy
                 
@@ -181,15 +199,13 @@ class ServicesTVC: UITableViewController {
                 else {
                     url = infoScreens["contactus"] as! String? ?? ""
                 }
+                servicesWebVc.urlStr_es = infoScreens["contactus_es"] as! String? ?? ""
+                servicesWebVc.urlStr_en = infoScreens["contactus"] as! String? ?? ""
 
                 servicesWebVc.loadUrl = url 
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.contactUs
 
-
             }
-            
-            
-            
             self.navigationController?.show(servicesWebVc, sender: self)
         }
             
