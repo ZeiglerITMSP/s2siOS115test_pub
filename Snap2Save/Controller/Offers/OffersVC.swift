@@ -165,7 +165,8 @@ class OffersVC: UIViewController {
         if isReachable == false {
             //self.showAlert(title: "", message: "Please check your internet connection".localized());
             DispatchQueue.main.async {
-
+                
+            self.offersImageView.image = nil
             self.messageLabel.isHidden = false
             self.messageLabel.text = "PLEASE CHECK YOUR INTERNET CONNECTION".localized()
             }
