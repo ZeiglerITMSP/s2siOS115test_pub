@@ -20,6 +20,8 @@ class OffersVC: UIViewController {
     // Outlets
     var offersDict : [String : Any]? = nil
     
+    
+    @IBOutlet var messageLabel: UILabel!
     @IBOutlet var offersImageView: UIImageView!
     
     override func viewDidLoad() {
@@ -40,6 +42,8 @@ class OffersVC: UIViewController {
         // offersImageView.image = UIImage.init(named: "snap2save.jpeg")
         offersImageView.isUserInteractionEnabled = true
         offersImageView.contentMode = .scaleAspectFit
+        self.messageLabel.isHidden = true
+
     }
     
     
@@ -49,7 +53,7 @@ class OffersVC: UIViewController {
         getOffers()
         AppHelper.getScreenName(screenName: "Offers screen")
         oldLanguage = Localize.currentLanguage()
-        
+        self.messageLabel.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,6 +97,14 @@ class OffersVC: UIViewController {
     
     func tapGesClicked() {
         
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        if isReachable == false {
+            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            return
+        }
+
         let offerDetails = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "OffersDetailsViewController") as! OffersDetailsViewController
         
         //offerDetails.urlString = "http://www.snap2save.com/app/about_comingsoon.php"
@@ -151,9 +163,17 @@ class OffersVC: UIViewController {
         let isReachable = reachbility.isReachable
         // Reachability
         if isReachable == false {
-            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            //self.showAlert(title: "", message: "Please check your internet connection".localized());
+            DispatchQueue.main.async {
+                
+            self.offersImageView.image = nil
+            self.messageLabel.isHidden = false
+            self.messageLabel.text = "PLEASE CHECK YOUR INTERNET CONNECTION".localized()
+            }
             return
         }
+    
+        self.messageLabel.isHidden = true
         
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
@@ -206,18 +226,25 @@ class OffersVC: UIViewController {
                                 if let imageUrl = imageUrl {
                                     if !imageUrl.isEmpty {
                                         //SwiftLoader.show(title: "Loading...".localized(), animated: true)
-                                        self.offersImageView.downloadedFrom(link: imageUrl)
+                                        self.offersImageView.downloadedFrom(link: imageUrl, failAction: #selector(self.loadImageFailed), target: self)
                                     }   else {
                                         SwiftLoader.hide()
+                                        self.messageLabel.isHidden = false
+                                        self.messageLabel.text = "PLEASE TRY AGAIN LATER".localized()
                                     }
                                     
                                     
                                 } else {
                                     SwiftLoader.hide()
+                                    self.messageLabel.isHidden = false
+                                    self.messageLabel.text = "PLEASE TRY AGAIN LATER".localized()
                                 }
                             } else {
                                 SwiftLoader.hide()
-                                self.showAlert(title: "", message: "No offer exists".localized())
+                                //self.showAlert(title: "", message: "No offer exists".localized())
+                                self.messageLabel.isHidden = false
+                                self.messageLabel.text = "No offer exists".localized()
+                                
                             }
                             
                         } else {
@@ -245,38 +272,13 @@ class OffersVC: UIViewController {
         }
     }
     
-}
-
-
-extension UIImageView {
     
-    func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
-        contentMode = mode
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-                else {
-                    SwiftLoader.hide()
-                    return
-            }
-            DispatchQueue.main.async() { () -> Void in
-                SwiftLoader.hide()
-                
-                self.image = image
-            }
-            }.resume()
+    func loadImageFailed() {
+        SwiftLoader.hide()
+        messageLabel.isHidden = false
+        messageLabel.text = "PLEASE TRY AGAIN LATER".localized()
     }
     
-    func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
-        guard let url = URL(string: link)
-            else {
-                SwiftLoader.hide()
-                return
-        }
-        downloadedFrom(url: url, contentMode: mode)
-    }
 }
+
 

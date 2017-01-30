@@ -11,6 +11,8 @@ import Localize_Swift
 
 class ServicesWebViewVC: UIViewController {
 
+    var languageSelectionButton: UIButton!
+
     enum ServiceType {
         
         case aboutSnap2Save
@@ -21,8 +23,14 @@ class ServicesWebViewVC: UIViewController {
         case reward
     }
     var loadUrl : String = ""
-    var type : ServiceType? = nil
     
+    var urlStr_en : String = ""
+    var urlStr_es : String = ""
+
+    var type : ServiceType? = nil
+    var currentlanguage = ""
+    var oldLanguage = ""
+
     @IBOutlet var servicesWebView: UIWebView!
     
     override func viewDidLoad() {
@@ -31,12 +39,15 @@ class ServicesWebViewVC: UIViewController {
         // Do any additional setup after loading the view.
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
 
-        let url = URL(string : loadUrl )
-        let request = URLRequest(url: url!)
-        servicesWebView.loadRequest(request)
         servicesWebView.scalesPageToFit = true
-        reloadContent()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+
+        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        reloadContent()
+        
+        currentlanguage = Localize.currentLanguage()
+        loadWebView()
 
     }
 
@@ -66,6 +77,11 @@ class ServicesWebViewVC: UIViewController {
         _ = self.navigationController?.popViewController(animated: true)
     }
 
+    func languageButtonClicked() {
+        
+        self.showLanguageSelectionAlert()
+    }
+
     func reloadContent() {
         
         DispatchQueue.main.async {
@@ -88,11 +104,26 @@ class ServicesWebViewVC: UIViewController {
             else if self.type == ServiceType.reward{
                 self.title = "Reward Program".localized()
             }
+            self.loadWebView()
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
         }
         
     }
     
+    func loadWebView() {
+        var url : URL? = nil
+        currentlanguage = Localize.currentLanguage()
+        if currentlanguage == "es" {
+            url = URL(string : urlStr_es )
+        }
+        else if currentlanguage == "en" {
+            url = URL(string : urlStr_en )
+        }
+        let request = URLRequest(url: url!)
+        servicesWebView.loadRequest(request)
+
+    }
 
     /*
     // MARK: - Navigation
