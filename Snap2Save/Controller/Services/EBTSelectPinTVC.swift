@@ -189,6 +189,11 @@ class EBTSelectPinTVC: UITableViewController {
         // Post notification
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
+    
+    func showForceQuitAlert() {
+        
+        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+    }
 
 }
 
@@ -216,7 +221,9 @@ extension EBTSelectPinTVC {
                     self.validateNextPage()
                 }
             } else {
-                
+                if self.ebtWebView.isPageLoading == false {
+                    self.showForceQuitAlert()
+                }
             }
             
         })
@@ -330,6 +337,14 @@ extension EBTSelectPinTVC: EBTWebViewDelegate {
     func didFinishLoadingWebView() {
         
         validatePage()
+    }
+    
+    func didFail() {
+        showForceQuitAlert()
+    }
+    
+    func didFailProvisionalNavigation() {
+        showForceQuitAlert()
     }
     
 }

@@ -19,6 +19,8 @@ import WebKit
     @objc optional func didFinishLoadingWebView()
     @objc optional func navigationAction() -> Bool
     
+    @objc optional func didFailProvisionalNavigation()
+    @objc optional func didFail()
 }
 
 
@@ -272,6 +274,18 @@ extension EBTWebView: WKNavigationDelegate {
         print("\n -- didFail -- \n")
         self.isPageLoading = false
         print(error.localizedDescription)
+        
+        self.responder?.didFail?()
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        
+        print("\n -- didFailProvisionalNavigation -- \n")
+        self.isPageLoading = false
+        print(error.localizedDescription)
+//        let code = (error as NSError).code
+        
+       // self.responder?.didFailProvisionalNavigation?()
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

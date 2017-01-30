@@ -30,6 +30,8 @@ class EBTLoginTVC: UITableViewController {
     var isTouchIdAvailable = false
     var isSuccessMessage = false
     
+    var isProcessCancelled = false
+    
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
     
@@ -158,7 +160,12 @@ class EBTLoginTVC: UITableViewController {
         reloadContent()
         autofillUserName()
         
-        checkForStatusMessage()
+        if isProcessCancelled == false {
+            checkForStatusMessage()
+        } else {
+            isProcessCancelled = false
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -211,6 +218,11 @@ class EBTLoginTVC: UITableViewController {
        _ = self.navigationController?.popViewController(animated: true)
     }
     
+    func showForceQuitAlert() {
+        
+        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(resetFields), showCancel: false)
+    }
+    
     func languageButtonClicked() {
         
         self.showLanguageSelectionAlert()
@@ -245,8 +257,15 @@ class EBTLoginTVC: UITableViewController {
     
     func popToLoginVC() {
         
-        _ = self.navigationController?.popToViewController(self, animated: true)
+        isProcessCancelled = true
         loadLoginPage()
+        _ = self.navigationController?.popToViewController(self, animated: true)
+       
+        resetFields()
+    }
+    
+    func resetFields() {
+        
         userIdField.contentTextField.text = ""
         passwordField.contentTextField.text = ""
         errorMessageLabel.text = ""
@@ -255,6 +274,7 @@ class EBTLoginTVC: UITableViewController {
         registrationButton.isEnabled = true
         registrationActivityIndicator.stopAnimating()
         self.tableView.reloadData()
+        
     }
     
     func updateErrorTextColor() {
@@ -540,9 +560,9 @@ extension EBTLoginTVC {
                     self.tableView.reloadData()
                     
                 } else {
-                    //                    // no error message
-                    //                    self.errorMessageLabel.text = nil
-                    //                    self.tableView.reloadData()
+                    // no error message
+                    self.errorMessageLabel.text = nil
+                    self.tableView.reloadData()
                 }
             } else {
                 
@@ -638,6 +658,14 @@ extension EBTLoginTVC: EBTWebViewDelegate {
     func didFinishLoadingWebView() {
         
         validatePage()
+    }
+    
+    func didFail() {
+        showForceQuitAlert()
+    }
+    
+    func didFailProvisionalNavigation() {
+        showForceQuitAlert()
     }
 }
 

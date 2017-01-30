@@ -176,6 +176,11 @@ class EBTDateOfBirthTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
+    func showForceQuitAlert() {
+        
+        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+    }
+    
     func moveToNextController(identifier:String) {
         
         let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
@@ -293,7 +298,9 @@ securityQuestions();
                     self.validateNextPage()
                 }
             } else {
-                
+                if self.ebtWebView.isPageLoading == false {
+                    self.showForceQuitAlert()
+                }
             }
             
         })
@@ -377,6 +384,14 @@ extension EBTDateOfBirthTVC: EBTWebViewDelegate {
     func didFinishLoadingWebView() {
         
         validatePage()
+    }
+    
+    func didFail() {
+        showForceQuitAlert()
+    }
+    
+    func didFailProvisionalNavigation() {
+        showForceQuitAlert()
     }
     
 }

@@ -155,8 +155,6 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     func backAction() {
         
-//       _ = self.navigationController?.popViewController(animated: true)
-        
         showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
     }
     
@@ -168,6 +166,10 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
+    func showForceQuitAlert() {
+        
+        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+    }
     
     func moveToNextController(identifier:String) {
         
@@ -202,7 +204,9 @@ extension EBTLoginSecurityQuestionTVC {
                 }
                 
             } else {
-                
+                if self.ebtWebView.isPageLoading == false {
+                    self.showForceQuitAlert()
+                }
             }
             
         })
@@ -260,11 +264,7 @@ extension EBTLoginSecurityQuestionTVC {
     
     func autoFill() {
         
-        confirmButton.isEnabled = false
-        confirmActivityIndicator.startAnimating()
-        
         let jsSecurityAnswer = "$('#securityAnswer').val('\(self.securityAnswerField.contentTextField.text!)');"
-//        let jsCheckbox = "$('#registerDeviceFlag').attr('checked');"
         let jsSubmit = "$('#okButton').click();"
         
         let javaScript = jsSecurityAnswer + jsSubmit
@@ -311,6 +311,14 @@ extension EBTLoginSecurityQuestionTVC: EBTWebViewDelegate {
     func didFinishLoadingWebView() {
         
         validatePage()
+    }
+    
+    func didFail() {
+        showForceQuitAlert()
+    }
+    
+    func didFailProvisionalNavigation() {
+        showForceQuitAlert()
     }
     
 }

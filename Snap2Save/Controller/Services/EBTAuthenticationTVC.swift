@@ -134,7 +134,8 @@ class EBTAuthenticationTVC: UITableViewController {
     }
     
     func showForceQuitAlert() {
-        self.showAlert(title: "Sorry!".localized(), message: "Something went wrong. Pleae try again later".localized(), action: #selector(self.cancelProcess))
+        
+        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
     }
     
     
@@ -211,8 +212,7 @@ extension EBTAuthenticationTVC {
                 
             } else {
                 if self.ebtWebView.isPageLoading == false {
-                    
-                    self.showAlert(title: "Sorry!".localized(), message: "Something went wrong. Pleae try again later".localized(), action: #selector(self.cancelProcess))
+                    self.showForceQuitAlert()
                 }
             }
             
@@ -341,6 +341,14 @@ extension EBTAuthenticationTVC: EBTWebViewDelegate {
     func didFinishLoadingWebView() {
         
         validatePage()
+    }
+    
+    func didFail() {
+        showForceQuitAlert()
+    }
+    
+    func didFailProvisionalNavigation() {
+        showForceQuitAlert()
     }
 }
 

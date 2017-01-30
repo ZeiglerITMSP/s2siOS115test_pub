@@ -206,6 +206,10 @@
 
 "Are you sure ?" = "Are you sure ?";
 "The process will be cancelled." = "The process will be cancelled.";
+// timeout cancel alert
+"ebt.alert.timeout.title" = "Sorry!";
+"ebt.alert.timeout.message" = "Something went wrong. Pleae try again later";
+
 
 // login screen
 "USER ID" = "USER ID";

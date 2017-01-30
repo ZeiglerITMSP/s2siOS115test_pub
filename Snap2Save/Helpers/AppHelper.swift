@@ -222,13 +222,16 @@ extension UIViewController {
         }
     }
     
-    func showAlert(title:String? , message:String?, action:Selector, showCancel:Bool? = true) {
+    func showAlert(title:String? , message:String?, action:Selector?, showCancel:Bool? = true) {
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         
         let okAction = UIAlertAction(title: "OK".localized() , style: .default, handler: { alert in
-            self.perform(action)
+            
+            if action != nil {
+                self.perform(action)
+            }
         })
         
         let cancelAction = UIAlertAction(title: "CANCEL".localized() , style: .cancel, handler: nil)
