@@ -151,7 +151,7 @@ class EBTConfirmationTVC: UITableViewController {
             self.titleLabel.text = "ebt.confirmation.titleLabel".localized()
             self.messageLabel.text = "ebt.confirmation.messageLabel".localized()
             
-            self.confirmationMessageLabel.text = "ebt.confirmationMessage".localizedFormat(EBTUser.shared.email!)
+//            self.confirmationMessageLabel.text = "ebt.confirmationMessage".localizedFormat(EBTUser.shared.email!)
             self.title = "ebt.title.register".localized()
             self.pageTitle = "ebt.confirmation".localized()
             self.validationCodeField.placeholderText = "ENTER EMAIL VALIDATION CODE".localized()
@@ -290,14 +290,15 @@ extension EBTConfirmationTVC {
     func getConfirmationMessage() {
         
         let javaScript = "function getEmailConfirmation() { " +
-            "var names = '  '; " +
-            "$('#emailValidationForm .prelogonInstrTextArea .prelogonInstrText').each(function(i, object) { " +
+            "var names = ''; " +
+            "var msgDescription = $('#emailValidationForm .prelogonInstrTextArea .prelogonInstrText');" +
+            "msgDescription.each(function(i, object) { " +
                 "if (i != 0) { " +
-                    "names += object.innerText.trim()+ \"\n\"; " +
+                    "names += object.innerText.trim() + '\\n'; " +
                 "} " +
             "}); " +
             "return names;" +
-        "}; " +
+        "} " +
         
         "getEmailConfirmation(); "
         

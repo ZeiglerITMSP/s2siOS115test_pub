@@ -78,7 +78,7 @@ class EBTDateOfBirthTVC: UITableViewController {
      
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: nextButton, radius: 2.0, width: 1.0)
         
-        getQuestions()
+//        getQuestions()
         
         addTapGesture()
     }
@@ -146,18 +146,18 @@ class EBTDateOfBirthTVC: UITableViewController {
                 return 0
             }
         }
-        if indexPath.row == 2 {
-            
-            if questions.contains("ebt.fieldcheck.dob".localized()) == false {
-                return 0
-            }
-        }
-        if indexPath.row == 3 {
-            
-            if questions.contains("ebt.fieldcheck.socialsecuritynumber".localized()) == false {
-                return 0
-            }
-        }
+//        if indexPath.row == 2 {
+//            
+//            if questions.contains("ebt.fieldcheck.dob".localized()) == false {
+//                return 0
+//            }
+//        }
+//        if indexPath.row == 3 {
+//            
+//            if questions.contains("ebt.fieldcheck.socialsecuritynumber".localized()) == false {
+//                return 0
+//            }
+//        }
         return UITableViewAutomaticDimension
     }
 

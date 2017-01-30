@@ -81,6 +81,7 @@ class EBTChangeEmailTVC: UITableViewController {
         super.viewWillAppear(animated)
         
         reloadContent()
+        getCurrentEmailAddress()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,7 +93,6 @@ class EBTChangeEmailTVC: UITableViewController {
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
         
-        getCurrentEmailAddress()
     }
     
     override func didReceiveMemoryWarning() {

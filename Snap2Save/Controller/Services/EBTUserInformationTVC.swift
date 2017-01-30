@@ -520,7 +520,6 @@ extension EBTUserInformationTVC {
     
     func autoFill() {
         
-        /*
         let userId = self.userIdField.contentTextField.text!.removeWhiteSpaces()
         
         let password = self.passwordField.contentTextField.text!.removeWhiteSpaces()
@@ -535,32 +534,9 @@ extension EBTUserInformationTVC {
         let answerTwo = self.answerTwoField.contentTextField.text!.removeWhiteSpaces()
         let answerThree = self.answerThreeField.contentTextField.text!.removeWhiteSpaces()
         
-        
         let questionOneIndex = questionOneDictionary.getKey(forValue: self.questionOneField.contentTextField.text!)
         let questionTwoIndex = questionTwoDictionary.getKey(forValue: self.questionTwoField.contentTextField.text!)
         let questionThreeIndex = questionThreeDictionary.getKey(forValue: self.questionThreeField.contentTextField.text!)
-        */
-        
-        let userId = "Kiran123"
-        
-        let password = "Kiran1234"
-        let confirmPassword = "Kiran1234"
-        
-        let emailAddress = "Kiran@gmail.com"
-        let confirmEmail = "Kiran@gmail.com"
-        
-        let phoneNumber = "1234567890"
-        
-        let answerOne = "one"
-        let answerTwo = "two"
-        let answerThree = "three"
-        
-        
-        let questionOneIndex = questionOneDictionary.getKey(forValue: self.questionOneField.contentTextField.text!)
-        let questionTwoIndex = questionTwoDictionary.getKey(forValue: self.questionTwoField.contentTextField.text!)
-        let questionThreeIndex = questionThreeDictionary.getKey(forValue: self.questionThreeField.contentTextField.text!)
-        
-        
         
         
         print("q1 = \(questionOneIndex) q2 = \(questionTwoIndex) q3 = \(questionThreeIndex)")

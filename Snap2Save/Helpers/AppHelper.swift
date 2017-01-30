@@ -222,7 +222,7 @@ extension UIViewController {
         }
     }
     
-    func showAlert(title:String? , message:String?, action:Selector) {
+    func showAlert(title:String? , message:String?, action:Selector, showCancel:Bool? = true) {
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -234,7 +234,10 @@ extension UIViewController {
         let cancelAction = UIAlertAction(title: "CANCEL".localized() , style: .cancel, handler: nil)
         
         alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
+        
+        if showCancel == true {
+            alertController.addAction(cancelAction)
+        }
         
         DispatchQueue.main.async {
             
