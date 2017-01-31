@@ -263,8 +263,8 @@
 
 "ebt.userinformation.titleLabel" = "USER INFORMATION";
 "ebt.userinformation.messageLabel" = "Step 3: Please enter the following information.";
-"User ID Rules:" = "User ID Rules:";
-"Password Rules:" = "Password Rules:";
+"User ID Rules" = "User ID Rules";
+"Password Rules" = "Password Rules";
 
 "USER ID" = "USER ID";
 "PASSWORD" = "PASSWORD";

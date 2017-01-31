@@ -100,6 +100,49 @@ open class SwiftLoader: UIView {
         loader.stop()
     }
     
+    
+    open func show(inView view:UIView, title: String?, animated : Bool) -> UIView {
+        
+        let loader = SwiftLoader(frame: CGRect(x: 0,y: 0,width: Config().size,height: Config().size))
+        loader.canUpdated = true
+        loader.animated = animated
+        loader.title = title
+        loader.update()
+        // Updated user interaction
+        loader.isUserInteractionEnabled = SwiftLoader.sharedInstance.canHideOnTouch
+        
+        NotificationCenter.default.addObserver(loader, selector: #selector(loader.rotated(_:)),
+                                               name: NSNotification.Name.UIDeviceOrientationDidChange,
+                                               object: nil)
+        
+        let height : CGFloat = UIScreen.main.bounds.size.height
+        let width : CGFloat = UIScreen.main.bounds.size.width
+        let center : CGPoint = CGPoint(x: width / 2.0, y: height / 2.0)
+        
+        loader.center = center
+        
+        if (loader.superview == nil) {
+            loader.coverView = UIView(frame: view.bounds)
+            loader.coverView?.backgroundColor = loader.config.foregroundColor.withAlphaComponent(loader.config.foregroundAlpha)
+            
+            view.addSubview(loader.coverView!)
+            view.addSubview(loader)
+            loader.start()
+        }
+        
+        return loader
+    }
+    
+    open func hideFromView() {
+        
+        let loader = self
+        NotificationCenter.default.removeObserver(loader)
+        
+        loader.stop()
+        loader.removeFromSuperview()
+    }
+
+    
     open class func setConfig(_ config : Config) {
         let loader = SwiftLoader.sharedInstance
         loader.config = config
