@@ -17,6 +17,8 @@ class OffersDetailsViewController: UIViewController {
     var oldLanguage : String = ""
     var currentlang : String = ""
     
+//    var loader: SwiftLoader?
+    
     @IBOutlet var offersWebView: UIWebView!
     
     
@@ -33,12 +35,17 @@ class OffersDetailsViewController: UIViewController {
 
         reloadContent()
 
+        
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         oldLanguage = Localize.currentLanguage()
         reloadContent()
+        
+//        loader?.start()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -124,6 +131,9 @@ extension OffersDetailsViewController: UIWebViewDelegate {
         let len : Int = Int(lenght)!
         
             if len == 0 {
+                
+//                loader = SwiftLoader.show(inView: offersWebView, title: "TEST..", animated: true)
+                
                 SwiftLoader.show(title: "Loading...".localized(), animated: true)
             }
         }
@@ -131,10 +141,12 @@ extension OffersDetailsViewController: UIWebViewDelegate {
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
+//        loader?.hideFromView()
         SwiftLoader.hide()
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+//        loader?.hideFromView()
         SwiftLoader.hide()
     }
     

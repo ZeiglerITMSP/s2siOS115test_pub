@@ -101,7 +101,7 @@ open class SwiftLoader: UIView {
     }
     
     
-    open func show(inView view:UIView, title: String?, animated : Bool) -> UIView {
+    open class func show(inView view:UIView, title: String?, animated : Bool) -> SwiftLoader {
         
         let loader = SwiftLoader(frame: CGRect(x: 0,y: 0,width: Config().size,height: Config().size))
         loader.canUpdated = true
@@ -149,6 +149,12 @@ open class SwiftLoader: UIView {
         loader.frame = CGRect(x: 0,y: 0,width: loader.config.size,height: loader.config.size)
     }
     
+    func setConfigure(forLoader loader: SwiftLoader, _ config : Config) {
+        
+        loader.config = config
+        loader.frame = CGRect(x: 0,y: 0,width: loader.config.size,height: loader.config.size)
+    }
+    
     /**
      Private methods
      */
@@ -158,7 +164,7 @@ open class SwiftLoader: UIView {
         self.update()
     }
     
-    fileprivate func start() {
+    func start() {
         self.loadingView?.start()
         
         if (self.animated) {
