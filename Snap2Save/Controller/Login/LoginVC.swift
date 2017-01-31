@@ -356,7 +356,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                           "version_code":  version_code,
                           "version_name": version_name,
                           "device_id": device_id,
-                          "push_token":"123123",
+                          "push_token":"",
                           "language": currentLanguage
             ]
         
@@ -495,7 +495,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                           "version_code": version_code,
                           "version_name": version_name,
                           "device_id": device_id,
-                          "push_token":"123123",
+                          "push_token":"",
                           "language": currentLanguage
             ]
         

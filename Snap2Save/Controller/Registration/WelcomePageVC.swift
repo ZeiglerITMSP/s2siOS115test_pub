@@ -38,9 +38,8 @@ class WelcomePageVC: UIViewController {
         UIApplication.shared.keyWindow?.rootViewController = initialViewController
         UIApplication.shared.keyWindow?.makeKeyAndVisible()
         
-        
-
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,8 +50,8 @@ class WelcomePageVC: UIViewController {
         
         reloadContent()
 
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true;
@@ -105,7 +104,7 @@ class WelcomePageVC: UIViewController {
             self.updateBackButtonText()
             self.congratulationsLabel.text = "Congratulations!".localized()
             self.welcomeToLabel.text = "WelcomeText".localized()
-            self.getStartedButton.setTitle("Get Started!".localized(), for: .normal)
+            self.getStartedButton.setTitle("GET STARTED!".localized(), for: .normal)
             
         }
         

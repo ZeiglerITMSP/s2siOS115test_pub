@@ -299,7 +299,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                           "version_code": version_code,
                           "version_name": version_name,
                           "device_id": device_id,
-                          "push_token":"123123",
+                          "push_token":"",
                           "auth_token": auth_token,
                           "language":currentLanguage
             ]
@@ -509,7 +509,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                           "version_code": version_code,
                           "version_name": version_name,
                           "device_id": device_id,
-                          "push_token":"123123",
+                          "push_token":"",
                           "auth_token": auth_token,
                           "language": currentLanguage
             ]

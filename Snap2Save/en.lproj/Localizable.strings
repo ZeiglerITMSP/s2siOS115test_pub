@@ -36,7 +36,7 @@
 "WelcomeText" = "Welcome to Snap2Save.\nYour registration is now complete.";
 "WelcomeSecondLabelText" = "Your registration is now complete.";
 
-"Get Started!" = "Get Started!";
+"GET STARTED!" = "GET STARTED!";
 
 
 
@@ -146,7 +146,7 @@
 // CHANGEPASSWORD VC
 "Change Password" = "Change Password";
 "RE-ENTER NEW PASSWORD" = "RE-ENTER NEW PASSWORD";
-"NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)" = "NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)";
+"NEW PASSWORD (MUST BE AT LEAST 6 CHARACTERS)" = "NEW PASSWORD (MUST BE AT LEAST 6 CHARACTERS)";
 "CURRENT PASSWORD" = "CURRENT PASSWORD";
 "SAVE" = "SAVE";
 

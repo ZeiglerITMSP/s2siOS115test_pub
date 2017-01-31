@@ -665,7 +665,7 @@ extension SignUpTVC: AITextFieldProtocol {
                           "version_code": version_code,
                           "version_name": version_name,
                           "device_id": device_id,
-                          "push_token":"123123",
+                          "push_token":"",
                           "language": currentLanguage
             ]
         
@@ -684,7 +684,7 @@ extension SignUpTVC: AITextFieldProtocol {
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
                 if (json.dictionary != nil) {
-                    // let jsonDict = json
+                    
                     let responseDict = json.dictionaryObject
                     if  let code = responseDict?["code"] {
                         let code = code as! NSNumber
@@ -747,11 +747,8 @@ extension SignUpTVC: AITextFieldProtocol {
                 
                 DispatchQueue.main.async {
                     self.facebookActivityIndicator.stopAnimating()
-
                     self.showAlert(title: "", message:error.localizedDescription);
-
                 }
-                //print("error)
                 break
             }
             

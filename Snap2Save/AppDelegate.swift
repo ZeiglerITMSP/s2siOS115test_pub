@@ -293,7 +293,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                       "version_code": version_code,
                                       "version_name": version_name,
                                       "device_id": device_id,
-                                      "push_token":"123123",
+                                      "push_token":"",
                                       "language":currentLanguage
                         ]
                     
@@ -377,8 +377,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     self.window?.rootViewController = initialViewController
                     self.window?.makeKeyAndVisible()
-                    
-                    
                 }
                     
                 else if typeValue == "3" {
@@ -394,7 +392,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                       "version_code": version_code,
                                       "version_name": version_name,
                                       "device_id": device_id,
-                                      "push_token":"123123",
+                                      "push_token":"",
                                       "language":currentLanguage
                         ]
                     

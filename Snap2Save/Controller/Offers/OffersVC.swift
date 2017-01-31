@@ -191,7 +191,7 @@ class OffersVC: UIViewController {
                                        "auth_token": auth_token,
                                        "language": currentLanguage
         ]
-        
+        self.offersImageView.image = nil
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         print(parameters)
         let url = String(format: "%@/getCurrentOffer", hostUrl)
@@ -215,7 +215,6 @@ class OffersVC: UIViewController {
                                 self.offersDict = offer
                                 
                                 var imageUrl: String?
-                                self.offersImageView.image = nil
                                 
                                 if Localize.currentLanguage() == "en" {
                                     imageUrl = offer["image_url_en"] as? String

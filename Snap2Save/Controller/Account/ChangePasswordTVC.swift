@@ -111,7 +111,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         self.title = "Change Password".localized()
         self.saveButton.setTitle("SAVE".localized(), for: .normal)
         self.currentPasswordTextField.placeholderText = "CURRENT PASSWORD".localized()
-        self.newPasswordTextField.placeholderText = "NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)".localized()
+        self.newPasswordTextField.placeholderText = "NEW PASSWORD (MUST BE AT LEAST 6 CHARACTERS)".localized()
         self.reEnterNewPasswordTextField.placeholderText = "RE-ENTER NEW PASSWORD".localized()
         }
         
@@ -173,7 +173,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
                           "version_code": version_code,
                           "version_name": version_name,
                           "device_id": device_id,
-                          "push_token":"123123",
+                          "push_token":"",
                           "auth_token": auth_token,
                           "language": currentLanguage
             ]

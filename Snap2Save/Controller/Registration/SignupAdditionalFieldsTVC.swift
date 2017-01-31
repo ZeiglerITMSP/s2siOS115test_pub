@@ -525,7 +525,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let group_code = groupCodeTextField.text ?? ""
         let platform = "1"
         let device_id = UIDevice.current.identifierForVendor!.uuidString
-        let push_token = "123213"
+        let push_token = ""
         let currentLanguage = Localize.currentLanguage()
         
         var signup_type = "1"

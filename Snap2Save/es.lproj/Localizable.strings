@@ -48,7 +48,7 @@
 "Congratulations!" = "¡Felicitaciones!";
 "WelcomeText" = "Bienvenido a Snap2Save.\nSu registro ahora está completo.";
 "WelcomeSecondLabelText" = "Su registro ahora está completo.";
-"Get Started!" = "¡COMENCEMOS!";
+"GET STARTED!" = "¡COMENCEMOS!";
 
 //signUpAlert
 "SignUpAlertTitle" = "¡Gracias por unirse a Snap2Save!\n";
@@ -151,7 +151,7 @@
 // CHANGEPASSWORD VC
 "Change Password" = "Cambiar contraseña";
 "RE-ENTER NEW PASSWORD" = "VOLVER A INTRODUCIR CONTRASEÑA NUEVA";
-"NEW PASSWORD (MUST BE ATLEAST 6 CHARACTERS)" = "CONTRASEÑA NUEVA (DEBE TENER AL MENOS 6 CARACTERES)";
+"NEW PASSWORD (MUST BE AT LEAST 6 CHARACTERS)" = "CONTRASEÑA NUEVA (DEBE TENER AL MENOS 6 CARACTERES)";
 "CURRENT PASSWORD" = "CONTRASEÑA ACTUAL";
 "SAVE" = "GUARDAR";
 
@@ -173,7 +173,7 @@
 "Your password must be at least 6 characters in length." = "Su contraseña debe tener 6 caracteres como mínimo.";
 
 
-"Are you sure you want to log out?" = "Are you sure you want to log out?";
+"Are you sure you want to log out?" = "¿Está seguro de que desea cerrar la sesión?";
 "Entries must match to proceed" = "Los valores deben coincidir para continuar";
 
 // Offers

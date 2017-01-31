@@ -23,29 +23,13 @@ class OffersDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //offersWebView.delegate = self
+        offersWebView.delegate = self
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
-       // let url = URL(string : urlString )
-        //let request = URLRequest(url: url!)
-        //offersWebView.loadRequest(request)
-
-       /* var url : URL? =  nil
-        if Localize.currentLanguage() == "en" {
-            url = URL(string : urlString_en )
-        }
-        else if Localize.currentLanguage() == "es" {
-            url = URL(string : urlString_es )
-        }
-        
-        let request = URLRequest(url: url!)
-        offersWebView.loadRequest(request)
-        offersWebView.scalesPageToFit = true*/
-        
-        loadWebView()
         oldLanguage = Localize.currentLanguage()
+        loadWebView()
 
         reloadContent()
 
@@ -54,7 +38,6 @@ class OffersDetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         oldLanguage = Localize.currentLanguage()
-
         reloadContent()
     }
     
@@ -101,7 +84,10 @@ class OffersDetailsViewController: UIViewController {
             self.currentlang = Localize.currentLanguage()
             if self.oldLanguage != self.currentlang {
                 self.oldLanguage = self.currentlang
+                self.offersWebView.loadRequest(URLRequest(url: URL(string:"about:blank")!))
+
                 self.loadWebView()
+                
             }
         }
     }
@@ -120,7 +106,6 @@ class OffersDetailsViewController: UIViewController {
             url = URL(string : urlString_es )
         }
         if url != nil {
-            
         let request = URLRequest(url: url!)
         offersWebView.loadRequest(request)
         offersWebView.scalesPageToFit = true
@@ -128,20 +113,29 @@ class OffersDetailsViewController: UIViewController {
     }
 }
 
-/*extension OffersDetailsViewController: UIWebViewDelegate {
+extension OffersDetailsViewController: UIWebViewDelegate {  
     
     func webViewDidStartLoad(_ webView: UIWebView) {
         
         let script = "document.getElementsByTagName('body')[0].innerHTML.length";
         
-        let lenght = self.offersWebView.stringByEvaluatingJavaScript(from: script)
-        if lenght?.isEmpty == true {
-            SwiftLoader.show(title: "Loading...", animated: true)
+        if let lenght = self.offersWebView.stringByEvaluatingJavaScript(from: script) {
+        
+        let len : Int = Int(lenght)!
+        
+            if len == 0 {
+                SwiftLoader.show(title: "Loading...".localized(), animated: true)
+            }
         }
+        
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         SwiftLoader.hide()
     }
     
-}*/
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        SwiftLoader.hide()
+    }
+    
+}
