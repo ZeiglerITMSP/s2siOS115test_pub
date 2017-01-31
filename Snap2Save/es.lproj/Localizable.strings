@@ -278,8 +278,8 @@
 
 "ebt.userinformation.titleLabel" = "INFORMACION DEL USUARIO";
 "ebt.userinformation.messageLabel" = "Paso 3: Por favor ingrese la siguiente información.";
-"User ID Rules:" = "Reglas de identificación de usuario:";
-"Password Rules:" = "Reglas de la contraseña:";
+"User ID Rules" = "Reglas de identificación de usuario";
+"Password Rules" = "Reglas de la contraseña";
 
 "USER ID" = "IDENTIDAD DE USUARIO";
 "PASSWORD" = "CONTRASEÑA";
