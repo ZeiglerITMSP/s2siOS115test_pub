@@ -191,14 +191,14 @@ class AccountTVC: UITableViewController {
     
     func userLogout() {
         
-        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
-        let isReachable = reachbility.isReachable
-        // Reachability
-        if isReachable == false {
-            self.showAlert(title: "", message: "Please check your internet connection".localized());
-            return
-        }
-        
+//        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+//        let isReachable = reachbility.isReachable
+//        // Reachability
+//        if isReachable == false {
+//            self.showAlert(title: "", message: "Please check your internet connection".localized());
+//            return
+//        }
+//        
 
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
