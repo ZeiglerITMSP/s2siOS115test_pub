@@ -158,10 +158,9 @@ open class SwiftLoader: UIView {
         loader.frame = CGRect(x: 0,y: 0,width: loader.config.size,height: loader.config.size)
     }
     
-    /**
-     Private methods
-     */
     
+    // MARK:- Private methods
+
     fileprivate func setup() {
         self.alpha = 0
         self.update()
@@ -247,9 +246,9 @@ open class SwiftLoader: UIView {
         super.init(coder: aDecoder)
     }
     
-    /**
-     *  Loader View
-     */
+    
+    // MARK:- Loader View
+    
     class SwiftLoadingView : UIView {
         
         fileprivate var speed : Int?
@@ -273,9 +272,7 @@ open class SwiftLoader: UIView {
             super.init(coder: aDecoder)
         }
         
-        /**
-         Setup loading view
-         */
+        // MARK:- Setup loading view
         
         fileprivate func setup() {
             self.backgroundColor = UIColor.clear
@@ -296,9 +293,8 @@ open class SwiftLoader: UIView {
             self.backgroundLayer?.strokeColor = self.config.spinnerColor.cgColor
         }
         
-        /**
-         Draw Circle
-         */
+        
+        // MARK:- Draw Circle
         
         override func draw(_ rect: CGRect) {
             self.backgroundLayer?.frame = self.bounds
@@ -322,9 +318,8 @@ open class SwiftLoader: UIView {
             self.backgroundLayer?.path = processBackgroundPath.cgPath;
         }
         
-        /**
-         Start and stop spinning
-         */
+        
+        // MAKR:- Start and stop spinning
         
         fileprivate func start() {
             self.isSpinning? = true
@@ -347,67 +342,34 @@ open class SwiftLoader: UIView {
         }
     }
     
-    
-    /**
-     * Loader config
-     */
+    // MARK:- Loader config
     public struct Config {
-        
-        /**
-         *  Size of loader
-         */
+        // Size of loader
         public var size : CGFloat = 120.0
-        
-        /**
-         *  Color of spinner view
-         */
+        // Color of spinner view
         public var spinnerColor = UIColor.black
         
-        /**
-         *  S
-         */
         public var spinnerLineWidth :Float = 2.0
-        
-        /**
-         *  Color of title text
-         */
+        // Color of title text
         public var titleTextColor = UIColor.black
-        
-        /**
-         *  Speed of the spinner
-         */
+        // Speed of the spinner
         public var speed :Int = 1
-        
-        /**
-         *  Font for title text in loader
-         */
+        // Font for title text in loader
         public var titleTextFont : UIFont = UIFont.boldSystemFont(ofSize: 16.0)
-        
-        /**
-         *  Background color for loader
-         */
+        // Background color for loader
         public var backgroundColor = UIColor.white
-        
-        /**
-         *  Foreground color
-         */
+        // Foreground color
         public var foregroundColor = UIColor.clear
-        
-        /**
-         *  Foreground alpha CGFloat, between 0.0 and 1.0
-         */
+        // Foreground alpha CGFloat, between 0.0 and 1.0
         public var foregroundAlpha:CGFloat = 0.0
-        
-        /**
-         *  Corner radius for loader
-         */
+        // Corner radius for loader
         public var cornerRadius : CGFloat = 10.0
         
         public init() {}
         
     }
     
-    
+    // MARK: - Touches
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if canHideOnTouch {

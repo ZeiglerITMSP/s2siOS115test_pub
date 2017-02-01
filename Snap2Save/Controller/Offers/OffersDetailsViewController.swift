@@ -43,9 +43,10 @@ class OffersDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         oldLanguage = Localize.currentLanguage()
         reloadContent()
-        
-        loader?.start()
-
+       
+        DispatchQueue.main.async {
+            self.loader?.start()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -118,31 +119,18 @@ extension OffersDetailsViewController: UIWebViewDelegate {
         let len : Int = Int(lenght)!
         
             if len == 0 {
-                
-                var config : SwiftLoader.Config = SwiftLoader.Config()
-                config.size = 110
-                config.spinnerColor = APP_GRREN_COLOR
-                config.foregroundColor = .black
-                config.backgroundColor = .white
-                config.foregroundAlpha = 0.1
-                config.titleTextColor = APP_GRREN_COLOR
-                
-                loader = SwiftLoader.show(inView: offersWebView, title: "TEST..", animated: true, config: config)
-                
-//                SwiftLoader.show(title: "Loading...".localized(), animated: true)
+                self.loader = SwiftLoader.show(inView: self.offersWebView, title: "Loading...".localized(), animated: true, config: AppHelper.getConfigSwiftLoader())
             }
         }
         
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        loader?.hideFromView()
-//        SwiftLoader.hide()
+            self.loader?.hideFromView()
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        loader?.hideFromView()
-//        SwiftLoader.hide()
+            self.loader?.hideFromView()
     }
     
 }

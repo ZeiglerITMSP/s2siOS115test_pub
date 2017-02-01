@@ -76,6 +76,11 @@ class AppHelper {
     
     class func configSwiftLoader() {
         
+        SwiftLoader.setConfig(getConfigSwiftLoader())
+    }
+    
+    class func getConfigSwiftLoader() -> SwiftLoader.Config {
+        
         var config : SwiftLoader.Config = SwiftLoader.Config()
         config.size = 110
         config.spinnerColor = APP_GRREN_COLOR
@@ -83,8 +88,8 @@ class AppHelper {
         config.backgroundColor = .white
         config.foregroundAlpha = 0.1
         config.titleTextColor = APP_GRREN_COLOR
-        SwiftLoader.setConfig(config)
         
+        return config
     }
     
 

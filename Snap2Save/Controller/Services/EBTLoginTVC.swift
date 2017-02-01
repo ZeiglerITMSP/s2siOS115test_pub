@@ -489,7 +489,7 @@ extension EBTLoginTVC {
         
         let javaScript = jsUserID + jspassword + jsSubmit
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            
+            print(error ?? "")
             self.checkForErrorMessage()
         }
     }

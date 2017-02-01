@@ -15,7 +15,7 @@ class DetailedSubtitleCell: UITableViewCell {
     @IBOutlet var detailLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
     
-    
+    @IBOutlet weak var subtitleTwoLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

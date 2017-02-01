@@ -29,6 +29,7 @@ class EBTDashboardTVC: UITableViewController {
     var ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
+    var loader: SwiftLoader?
     
     var accountDetails = [[String:String?]]()
     var recentTransactions: [Transaction]?
@@ -66,19 +67,32 @@ class EBTDashboardTVC: UITableViewController {
         validatePage()
         
         
-        self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
-        self.automaticallyAdjustsScrollViewInsets = false
+//        self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
+//        self.automaticallyAdjustsScrollViewInsets = false
         
-        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+//        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
 
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        
+//        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -60, 0)
+//        
+//        //  yourtableviewname.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//    }
+//    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -60, 0)
+        let sections = accountDetails.count + trasactions.count
+        if sections == 0 {
+            self.loader = SwiftLoader.show(inView: self.view, title: "Loading...".localized(), animated: true, config: AppHelper.getConfigSwiftLoader())
+        }
         
-        //  yourtableviewname.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        DispatchQueue.main.async {
+            self.loader?.start()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,9 +100,10 @@ class EBTDashboardTVC: UITableViewController {
         
         ebtWebView.responder = self
         
-        let webView = ebtWebView.webView!
-        self.view.addSubview(webView)
-        self.view.sendSubview(toBack: webView)
+//        let webView = ebtWebView.webView!
+//        self.view.addSubview(webView)
+//        self.view.sendSubview(toBack: webView)
+//        webView.isHidden = true
         
     }
     
@@ -110,11 +125,16 @@ class EBTDashboardTVC: UITableViewController {
         let sections = accountDetails.count + trasactions.count
         
         if sections == 0 {
-            SwiftLoader.show(title: "Loading...".localized(), animated: true)
-            //            loaderView.isHidden = false
+//            if self.loader == nil {
+//                self.loader = nil
+//                self.loader = SwiftLoader.show(inView: self.tableView, title: "Loading...".localized(), animated: true, config: AppHelper.getConfigSwiftLoader())
+//            }
+//            self.loader = SwiftLoader.show(inView: self.tableView, title: "Loading...".localized(), animated: true, config: AppHelper.getConfigSwiftLoader())
+//            SwiftLoader.show(title: "Loading...".localized(), animated: true)
         } else {
-            SwiftLoader.hide()
-            //            loaderView.isHidden = true
+            self.loader?.hideFromView()
+            self.loader = nil
+//            SwiftLoader.hide()
         }
         
         return sections
@@ -166,6 +186,7 @@ class EBTDashboardTVC: UITableViewController {
             detailedSubtitleCell.titleLabel.text = record?["location"]
             detailedSubtitleCell.detailLabel.text = record?["debit_amount"]
             detailedSubtitleCell.subtitleLabel.text = record?["date"]
+            detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
             
             
             return detailedSubtitleCell
@@ -185,8 +206,17 @@ class EBTDashboardTVC: UITableViewController {
         return nil
     }
     
+    
+   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0.1
+        } else {
+            return 40
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
+        return 0.1
     }
     
     // MARK: -
