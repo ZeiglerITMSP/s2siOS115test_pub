@@ -13,7 +13,17 @@ import LocalAuthentication
 
 class AppHelper {
     
-    
+    class func getImage(fromURL urlString:String, completion: (_ image: UIImage?, _ success: Bool) -> Void) {
+        guard let url = NSURL(string: urlString),
+            let data = NSData(contentsOf: url as URL),
+            let image = UIImage(data: data as Data)
+            else {
+                completion(nil, false);
+                return
+        }
+        
+        completion(image, true)
+    }
     
     class func setRoundCornersToView(borderColor:UIColor?,view:UIView,radius:CGFloat,width:CGFloat) {
         
@@ -317,6 +327,9 @@ public extension Bundle {
 }
 
 public extension UIImageView {
+    
+    
+    
     
     func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit, failAction:Selector?, target:UIViewController) {
         contentMode = mode

@@ -19,7 +19,7 @@ class OffersVC: UIViewController {
     var currentlang = ""
     // Outlets
     var offersDict : [String : Any]? = nil
-    
+
     
     @IBOutlet var messageLabel: UILabel!
     @IBOutlet var offersImageView: UIImageView!
@@ -54,6 +54,8 @@ class OffersVC: UIViewController {
         AppHelper.getScreenName(screenName: "Offers screen")
         oldLanguage = Localize.currentLanguage()
         self.messageLabel.isHidden = true
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -193,6 +195,7 @@ class OffersVC: UIViewController {
         ]
         self.offersImageView.image = nil
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
+        
         print(parameters)
         let url = String(format: "%@/getCurrentOffer", hostUrl)
         ////print("url)
@@ -201,7 +204,6 @@ class OffersVC: UIViewController {
                 
             case .success:
                 DispatchQueue.main.async {
-                    //SwiftLoader.hide()
                     let json = JSON(data: response.data!)
                     print("json response\(json)")
                     let responseDict = json.dictionaryObject
@@ -224,8 +226,27 @@ class OffersVC: UIViewController {
                                 
                                 if let imageUrl = imageUrl {
                                     if !imageUrl.isEmpty {
-                                        //SwiftLoader.show(title: "Loading...".localized(), animated: true)
-                                        self.offersImageView.downloadedFrom(link: imageUrl, failAction: #selector(self.loadImageFailed), target: self)
+                                        
+                                        AppHelper.getImage(fromURL: imageUrl, completion: { (image, success) -> Void in
+                                            if success {
+                                                
+                                                if image != nil {
+//                                                    self.loader?.hideFromView()
+                                                    SwiftLoader.hide()
+                                                    self.offersImageView.image = image
+                                                } else {
+                                                    self.loadImageFailed()
+                                                }
+                                                
+                                            
+                                            } else {
+                                                // Error handling here.
+                                                
+                                               self.loadImageFailed()
+                                            }
+                                        })
+                                        
+                                       // self.offersImageView.downloadedFrom(link: imageUrl, failAction: #selector(self.loadImageFailed), target: self)
                                     }   else {
                                         SwiftLoader.hide()
                                         self.messageLabel.isHidden = false
