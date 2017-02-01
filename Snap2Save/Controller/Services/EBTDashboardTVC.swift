@@ -29,8 +29,6 @@ class EBTDashboardTVC: UITableViewController {
     var ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
-    var loader: SwiftLoader?
-    
     var accountDetails = [[String:String?]]()
     var recentTransactions: [Transaction]?
     
@@ -47,7 +45,6 @@ class EBTDashboardTVC: UITableViewController {
     var startTime: Date!
     
     
-    @IBOutlet weak var loaderView: UIView!
     
     // MARK: -
     override func viewDidLoad() {
@@ -66,44 +63,18 @@ class EBTDashboardTVC: UITableViewController {
         
         validatePage()
         
-        
-//        self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
-//        self.automaticallyAdjustsScrollViewInsets = false
-        
-//        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
 
-    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        
-//        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -60, 0)
-//        
-//        //  yourtableviewname.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-//    }
-//    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let sections = accountDetails.count + trasactions.count
-        if sections == 0 {
-            self.loader = SwiftLoader.show(inView: self.view, title: "Loading...".localized(), animated: true, config: AppHelper.getConfigSwiftLoader())
-        }
-        
-        DispatchQueue.main.async {
-            self.loader?.start()
-        }
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         ebtWebView.responder = self
         
-//        let webView = ebtWebView.webView!
-//        self.view.addSubview(webView)
-//        self.view.sendSubview(toBack: webView)
-//        webView.isHidden = true
+        let webView = ebtWebView.webView!
+        self.view.addSubview(webView)
+        self.view.sendSubview(toBack: webView)
+        webView.isHidden = true
         
     }
     
@@ -122,19 +93,20 @@ class EBTDashboardTVC: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        let sections = accountDetails.count + trasactions.count
+        var sections = 0
+        
+        if accountDetails.count > 0 {
+            sections += 1
+        }
+        if trasactions.count > 0 {
+            sections += 1
+        }
         
         if sections == 0 {
-//            if self.loader == nil {
-//                self.loader = nil
-//                self.loader = SwiftLoader.show(inView: self.tableView, title: "Loading...".localized(), animated: true, config: AppHelper.getConfigSwiftLoader())
-//            }
-//            self.loader = SwiftLoader.show(inView: self.tableView, title: "Loading...".localized(), animated: true, config: AppHelper.getConfigSwiftLoader())
-//            SwiftLoader.show(title: "Loading...".localized(), animated: true)
+
+            SwiftLoader.show(title: "Loading...".localized(), animated: true)
         } else {
-            self.loader?.hideFromView()
-            self.loader = nil
-//            SwiftLoader.hide()
+            SwiftLoader.hide()
         }
         
         return sections
@@ -525,176 +497,7 @@ class EBTDashboardTVC: UITableViewController {
             
         }
     
-//    func getTransactions() {
-//        
-//        let jsTransactionActivity = "function transactionActivity() {" +
-//        "var list = []; " +
-//        "var table = $('#allCompletedTxnGrid tbody'); " +
-//        "table.find('tr').each(function (i) { " +
-//            "var $tds = $(this).find('td'), " +
-//            "t_date = $tds.eq(2).text(); " +
-//            "if (t_date) { " +
-//                "list[i] = {date: t_date, transaction: $tds.eq(3).text(), " +
-//        "location: $tds.eq(4).text(), " +
-//            "account: $tds.eq(5).text(),  " +
-//        "card: $tds.eq(6).text(), debit_amount: $tds.eq(7).text(),  " +
-//            "credit_amount: $tds.eq(8).text(), " +
-//        "available_balance: $tds.eq(9).text()}; " +
-//                
-//            "} " +
-//        "}); " +
-//        "arr = $.grep(list, function (n) { " +
-//            "return n == 0 || n " +
-//        "}); " +
-//        "var jsonSerialized = JSON.stringify(arr); " +
-//        "return jsonSerialized; " +
-//    "} "
-//    
-//        let jsGetTransactions = "function getTransactions(interval){ " +
-//            
-//            "var currentDate = new Date(); " +
-//            "var startTime = currentDate.getTime(); " +
-//            "var currentTime = 0; " +
-//            "while(currentTime < (startTime + interval)){ " +
-//              "  var jsonSerialized = transactionActivity(); " +
-//              "  currentDate = new Date(); " +
-//              "  currentTime = currentDate.getTime(); " +
-//              "  if(jsonSerialized && jsonSerialized.length>2){ " +
-//              "      break; " +
-//              "  } " +
-//            "} " +
-//           " return jsonSerialized; " +
-//        "} " +
-//        "getTransactions(20000); "
-//        
-//        let js = jsTransactionActivity + jsGetTransactions
-//        ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
-//            if error != nil {
-//                print(error ?? "error nil")
-//            } else {
-//                print(result ?? "result nil")
-//                let stringResult = result as! String
-//                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-//                print(trimmedText)
-//                
-//                if trimmedText.characters.count > 0 {
-//                    
-//                    self.transactionsString = trimmedText
-//                    
-//                    let json = JSON.parse(trimmedText)
-//                    print("json response\(json)")
-//                    
-//                    if let responseArray = json.arrayObject {
-//                        
-//                        print(responseArray)
-//                        
-//                        self.trasactions =  responseArray
-//                        
-//                        self.tableView.reloadData()
-//                        
-//                        self.sendEBTInformationToServer()
-//                        /*
-//                         account = SNAP;
-//                         "available_balance" = "$ 312.30";
-//                         card = 0339;
-//                         "credit_amount" = "$ 0.00";
-//                         date = "12/10/2016";
-//                         "debit_amount" = "$ 89.62";
-//                         location = "WM SUPERCEWal-Mart Super CenterAURORACO";
-//                         transaction = "POS Purchase Debit";
-//                         */
-//                        
-//                    }
-//                    // self.loadTransactionActivityPage(url: trimmedText)
-//                    
-//                } else {
-//                    self.tableView.reloadData()
-//                    self.sendEBTInformationToServer()
-//                }
-//            }
-//        }
-//        
-//    }
 
-    
-//    func getTransactions() {
-//        
-//        let js = "function transactionActivity() {" +
-//            "var list = [];" +
-//            "var table = $('#allCompletedTxnGrid tbody');" +
-//            "table.find('tr').each(function (i) {" +
-//            "var $tds = $(this).find('td')," +
-//            "t_date = $tds.eq(2).text();" +
-//            "if (t_date) {" +
-//            "list[i] = {" +
-//            "date: t_date," +
-//            "transaction: $tds.eq(3).text()," +
-//            "location: $tds.eq(4).text()," +
-//            "account: $tds.eq(5).text()," +
-//            "card: $tds.eq(6).text()," +
-//            "debit_amount: $tds.eq(7).text()," +
-//            "credit_amount: $tds.eq(8).text()," +
-//            "available_balance: $tds.eq(9).text()" +
-//            "};" +
-//            "}" +
-//            "});" +
-//            "arr = $.grep(list, function (n) {" +
-//            "return n == 0 || n" +
-//            "});" +
-//            "var jsonSerialized = JSON.stringify(arr);" +
-//            "return jsonSerialized;" +
-//            "}" +
-//        "transactionActivity();"
-//        
-//        
-//        ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
-//            if error != nil {
-//                print(error ?? "error nil")
-//            } else {
-//                print(result ?? "result nil")
-//                let stringResult = result as! String
-//                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-//                print(trimmedText)
-//                
-//                if trimmedText.characters.count > 0 {
-//                    
-//                    self.transactionsString = trimmedText
-//                    
-//                    let json = JSON.parse(trimmedText)
-//                    print("json response\(json)")
-//                    
-//                    if let responseArray = json.arrayObject {
-//                        
-//                        print(responseArray)
-//                        
-//                        self.trasactions =  responseArray
-//                        
-//                        self.tableView.reloadData()
-//                        
-//                        self.sendEBTInformationToServer()
-//                        /*
-//                         account = SNAP;
-//                         "available_balance" = "$ 312.30";
-//                         card = 0339;
-//                         "credit_amount" = "$ 0.00";
-//                         date = "12/10/2016";
-//                         "debit_amount" = "$ 89.62";
-//                         location = "WM SUPERCEWal-Mart Super CenterAURORACO";
-//                         transaction = "POS Purchase Debit";
-//                         */
-//                        
-//                    }
-//                    // self.loadTransactionActivityPage(url: trimmedText)
-//                    
-//                } else {
-//                    self.tableView.reloadData()
-//                    self.sendEBTInformationToServer()
-//                }
-//            }
-//        }
-//        
-//    }
-    
 }
 
 extension EBTDashboardTVC: EBTWebViewDelegate {
@@ -792,12 +595,6 @@ extension EBTDashboardTVC {
             
         }
     }
-    
-    
-    
-    
-    
-    
     
 }
 
