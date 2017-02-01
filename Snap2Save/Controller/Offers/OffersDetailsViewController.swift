@@ -34,9 +34,6 @@ class OffersDetailsViewController: UIViewController {
         loadWebView()
 
         reloadContent()
-
-        
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
