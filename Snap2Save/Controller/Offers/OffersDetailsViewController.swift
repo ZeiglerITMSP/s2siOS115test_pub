@@ -17,7 +17,7 @@ class OffersDetailsViewController: UIViewController {
     var oldLanguage : String = ""
     var currentlang : String = ""
     
-//    var loader: SwiftLoader?
+    var loader: SwiftLoader?
     
     @IBOutlet var offersWebView: UIWebView!
     
@@ -44,7 +44,7 @@ class OffersDetailsViewController: UIViewController {
         oldLanguage = Localize.currentLanguage()
         reloadContent()
         
-//        loader?.start()
+        loader?.start()
 
     }
     
@@ -64,19 +64,6 @@ class OffersDetailsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     
     func languageButtonClicked() {
         self.showLanguageSelectionAlert()
@@ -132,22 +119,30 @@ extension OffersDetailsViewController: UIWebViewDelegate {
         
             if len == 0 {
                 
-//                loader = SwiftLoader.show(inView: offersWebView, title: "TEST..", animated: true)
+                var config : SwiftLoader.Config = SwiftLoader.Config()
+                config.size = 110
+                config.spinnerColor = APP_GRREN_COLOR
+                config.foregroundColor = .black
+                config.backgroundColor = .white
+                config.foregroundAlpha = 0.1
+                config.titleTextColor = APP_GRREN_COLOR
                 
-                SwiftLoader.show(title: "Loading...".localized(), animated: true)
+                loader = SwiftLoader.show(inView: offersWebView, title: "TEST..", animated: true, config: config)
+                
+//                SwiftLoader.show(title: "Loading...".localized(), animated: true)
             }
         }
         
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
-//        loader?.hideFromView()
-        SwiftLoader.hide()
+        loader?.hideFromView()
+//        SwiftLoader.hide()
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-//        loader?.hideFromView()
-        SwiftLoader.hide()
+        loader?.hideFromView()
+//        SwiftLoader.hide()
     }
     
 }

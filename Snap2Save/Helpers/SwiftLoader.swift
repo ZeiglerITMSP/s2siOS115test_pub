@@ -101,9 +101,12 @@ open class SwiftLoader: UIView {
     }
     
     
-    open class func show(inView view:UIView, title: String?, animated : Bool) -> SwiftLoader {
+    open class func show(inView view:UIView, title: String?, animated : Bool, config: Config) -> SwiftLoader {
         
         let loader = SwiftLoader(frame: CGRect(x: 0,y: 0,width: Config().size,height: Config().size))
+        
+        loader.configuration(forLoader: loader, config: config)
+        
         loader.canUpdated = true
         loader.animated = animated
         loader.title = title
@@ -115,8 +118,8 @@ open class SwiftLoader: UIView {
                                                name: NSNotification.Name.UIDeviceOrientationDidChange,
                                                object: nil)
         
-        let height : CGFloat = UIScreen.main.bounds.size.height
-        let width : CGFloat = UIScreen.main.bounds.size.width
+        let height : CGFloat = view.bounds.size.height
+        let width : CGFloat = view.bounds.size.width
         let center : CGPoint = CGPoint(x: width / 2.0, y: height / 2.0)
         
         loader.center = center
@@ -149,7 +152,7 @@ open class SwiftLoader: UIView {
         loader.frame = CGRect(x: 0,y: 0,width: loader.config.size,height: loader.config.size)
     }
     
-    func setConfigure(forLoader loader: SwiftLoader, _ config : Config) {
+    func configuration(forLoader loader: SwiftLoader, config : Config) {
         
         loader.config = config
         loader.frame = CGRect(x: 0,y: 0,width: loader.config.size,height: loader.config.size)

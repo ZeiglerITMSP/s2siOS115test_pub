@@ -87,20 +87,7 @@ class AppHelper {
         
     }
     
-    class func configureThemeFor(loader: SwiftLoader) {
-        
-        var config : SwiftLoader.Config = SwiftLoader.Config()
-        config.size = 110
-        config.spinnerColor = APP_GRREN_COLOR
-        config.foregroundColor = .black
-        config.backgroundColor = .white
-        config.foregroundAlpha = 0.1
-        config.titleTextColor = APP_GRREN_COLOR
-        loader.setConfigure(forLoader: loader, config)
-    }
-    
 
-    
     class func isTouchIDAvailable() -> Bool {
         
         let context = LAContext()
