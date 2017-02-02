@@ -66,14 +66,25 @@ class AppHelper {
     }
     
     class func isValid(input:String) -> Bool {
-        
-        let regex = try! NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: NSRegularExpression.Options())
-        if regex.firstMatch(in: input, options: NSRegularExpression.MatchingOptions(), range:NSMakeRange(0, input.characters.count)) != nil {
+        // only checking for single char and double chars
+        let characterset = CharacterSet(charactersIn: "'\"")
+        if input.rangeOfCharacter(from: characterset) != nil {
+            print("string contains special characters")
             return false
         }
         
         return true
     }
+    
+//    class func isValid(input:String) -> Bool {
+//        
+//        let regex = try! NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: NSRegularExpression.Options())
+//        if regex.firstMatch(in: input, options: NSRegularExpression.MatchingOptions(), range:NSMakeRange(0, input.characters.count)) != nil {
+//            return false
+//        }
+//        
+//        return true
+//    }
     
     
     class func removeSpecialCharacters(fromNumber inputString:String) -> String {

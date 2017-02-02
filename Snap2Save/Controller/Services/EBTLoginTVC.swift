@@ -33,6 +33,8 @@ class EBTLoginTVC: UITableViewController {
     
     var isProcessCancelled = false
     
+    var tempLoginUrl = kEBTLoginUrl
+    
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
     
@@ -153,11 +155,11 @@ class EBTLoginTVC: UITableViewController {
         reloadContent()
         autofillUserName()
         
-        if isProcessCancelled == false {
-            checkForStatusMessage()
-        } else {
-            isProcessCancelled = false
-        }
+//        if isProcessCancelled == false {
+//            checkForStatusMessage()
+//        } else {
+//            isProcessCancelled = false
+//        }
         
     }
     
@@ -358,6 +360,9 @@ extension EBTLoginTVC {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 if resultTrimmed != self.pageTitle {
                     self.loadLoginPage()
+                } else {
+                    // if login page
+                    self.checkForStatusMessage()
                 }
             } else {
                 print(error ?? "")
@@ -372,7 +377,7 @@ extension EBTLoginTVC {
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         
-        var loginUrl = kEBTLoginUrl
+        var loginUrl = tempLoginUrl //kEBTLoginUrl
         if Localize.currentLanguage() == "es" {
             loginUrl = kEBTLoginUrl_es
         }
@@ -397,8 +402,7 @@ extension EBTLoginTVC {
                     } else if self.actionType == ActionType.registration {
                         self.actionType = nil
                         self.registrationClick()
-                    }
-                    else {
+                    } else {
                         self.checkForStatusMessage()
                         //self.checkForErrorMessage()
                     }
@@ -708,6 +712,9 @@ extension EBTLoginTVC: AITextFieldProtocol {
     }
     
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        // checking for only single quote, double quote - bcz script will not work.
+        // not - only allowing [^A-Za-z0-9], bcz spanish characters have to be allowed, and @. for email have to be allowed.
         
         return AppHelper.isValid(input: string)
     }

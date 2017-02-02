@@ -15,7 +15,7 @@ class ServicesTVC: UITableViewController {
     // Properties
     let ebtWebView: EBTWebView = EBTWebView.shared
     
-    
+    var tempLoginUrl = ""
     
     // Outlets
     @IBOutlet weak var ebtLabel: UILabel!
@@ -72,6 +72,16 @@ class ServicesTVC: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "EBTLoginTVC" {
+            
+            let loginVC = segue.destination as! EBTLoginTVC
+            loginVC.tempLoginUrl = tempLoginUrl
+        }
     }
     
     // MARK: - Table view data source
@@ -309,13 +319,17 @@ extension ServicesTVC {
             loginUrl = "https://ucard.chase.com/locale?request_locale=en"
         }
         
+        tempLoginUrl = loginUrl
+        
         if Localize.currentLanguage() == "es" {
             // .. es url
             loginUrl = kEBTLoginUrl_es
         }
         
+        
         let url = NSURL(string: loginUrl)
         let request = NSURLRequest(url: url! as URL)
+        
         
         
         ebtWebView.webView.load(request as URLRequest)
