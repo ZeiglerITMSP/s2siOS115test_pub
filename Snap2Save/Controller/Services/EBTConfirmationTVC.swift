@@ -156,6 +156,7 @@ class EBTConfirmationTVC: UITableViewController {
             self.pageTitle = "ebt.confirmation".localized()
             self.validationCodeField.placeholderText = "ENTER EMAIL VALIDATION CODE".localized()
             self.errorTitleLabel.text = ""
+            self.errorMessageLabel.text = ""
             
             self.validateButton.setTitle("VALIDATE".localized(), for: .normal)
             self.resendButton.setTitle("RESEND".localized(), for: .normal)
@@ -205,9 +206,16 @@ class EBTConfirmationTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
+    func exitProcessIfPossible() {
+        
+        if self.ebtWebView.isPageLoading == false {
+            self.showForceQuitAlert()
+        }
+    }
+    
     func showForceQuitAlert() {
         
-        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
     }
     
     func moveToNextController(identifier:String) {
@@ -245,9 +253,7 @@ extension EBTConfirmationTVC {
                     self.validateNextPage()
                 }
             } else {
-                if self.ebtWebView.isPageLoading == false {
-                    self.showForceQuitAlert()
-                }
+                self.exitProcessIfPossible()
             }
             
         })
@@ -411,11 +417,13 @@ extension EBTConfirmationTVC {
                 } else {
                     // unknown page
                     print("UNKNOWN PAGE")
+                    self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
                 print("PAGE NOT LOADED YET..")
+                self.exitProcessIfPossible()
             }
         })
     }
@@ -449,5 +457,11 @@ extension EBTConfirmationTVC: AITextFieldProtocol {
         
         return true
     }
+    
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return AppHelper.isValid(input: string)
+    }
+
 }
 

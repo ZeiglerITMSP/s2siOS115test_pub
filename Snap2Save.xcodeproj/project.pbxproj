@@ -269,8 +269,8 @@
 		E84AE9C91E07F2A000C5E7F3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
-				E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */,
 				9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */,
+				E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */,
 				E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */,
 			);
 			path = Registration;

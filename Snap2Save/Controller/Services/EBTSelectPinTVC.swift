@@ -142,7 +142,7 @@ class EBTSelectPinTVC: UITableViewController {
             self.pinField.placeholderText = "PIN".localized()
             self.confirmPinField.placeholderText = "CONFIRM PIN".localized()
             self.errorTitleLabel.text = ""//"ebt.error.title".localized()
-            
+            self.errorMessageLabel.text = ""
             self.pinDescriptionLabel.text = "ebt.pin.pinDescription".localized()
             self.titleLabel.text = "ebt.pin.titleLabel".localized()
             self.messageLabel.text = "ebt.pin.messageLabel".localized()
@@ -155,6 +155,13 @@ class EBTSelectPinTVC: UITableViewController {
         
     }
 
+    func exitProcessIfPossible() {
+        
+        if self.ebtWebView.isPageLoading == false {
+            self.showForceQuitAlert()
+        }
+    }
+    
     func moveToNextController(identifier:String) {
         
         let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
@@ -192,7 +199,7 @@ class EBTSelectPinTVC: UITableViewController {
     
     func showForceQuitAlert() {
         
-        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
     }
 
 }
@@ -221,9 +228,7 @@ extension EBTSelectPinTVC {
                     self.validateNextPage()
                 }
             } else {
-                if self.ebtWebView.isPageLoading == false {
-                    self.showForceQuitAlert()
-                }
+                self.exitProcessIfPossible()
             }
             
         })
@@ -318,11 +323,13 @@ extension EBTSelectPinTVC {
                 } else {
                     // unknown page
                     print("UNKNOWN PAGE")
+                    self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
                 print("PAGE NOT LOADED YET..")
+                self.exitProcessIfPossible()
             }
             
         })
@@ -363,5 +370,11 @@ extension EBTSelectPinTVC: AITextFieldProtocol {
         
         return true
     }
+    
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return AppHelper.isValid(input: string)
+    }
+
     
 }

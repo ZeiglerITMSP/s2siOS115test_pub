@@ -26,9 +26,12 @@ class ServicesTVC: UITableViewController {
     @IBOutlet weak var privacyPolicyLabel: UILabel!
     
     @IBOutlet weak var ebtActivityIndicator: UIActivityIndicatorView!
-    
-    
     @IBOutlet var rewardLabel: UILabel!
+    
+    
+    
+    @IBOutlet weak var FlowSegentedControl: UISegmentedControl!
+    
     
     var languageSelectionButton: UIButton!
     
@@ -292,6 +295,19 @@ extension ServicesTVC {
         self.view.sendSubview(toBack: webView)
         
         var loginUrl = kEBTLoginUrl
+        
+        // For testing only
+        if self.FlowSegentedControl.selectedSegmentIndex == 1 {
+            loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"
+        } else if self.FlowSegentedControl.selectedSegmentIndex == 2 {
+            loginUrl = "http://internal.appit.ventures/s2s/flow3/ebt_login.html"
+        } else if self.FlowSegentedControl.selectedSegmentIndex == 3 {
+            loginUrl = "http://internal.appit.ventures/s2s/flow4/ebt_login.html"
+        } else if self.FlowSegentedControl.selectedSegmentIndex == 4 {
+            loginUrl = "http://internal.appit.ventures/s2s/flow5/ebt_login.html"
+        } else if self.FlowSegentedControl.selectedSegmentIndex == 5 {
+            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
+        }
         
         if Localize.currentLanguage() == "es" {
             // .. es url

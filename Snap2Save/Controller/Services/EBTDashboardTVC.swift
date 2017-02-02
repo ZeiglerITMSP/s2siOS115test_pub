@@ -243,7 +243,7 @@ class EBTDashboardTVC: UITableViewController {
         
         execute(javaScript: jsEBTBalance, completion: { result in
             
-            let detail = ["title" : "EBT Balance".localized(), "value": result]
+            let detail = ["title" : "SNAP Balance".localized(), "value": result]
             self.accountDetails.append(detail)
             self.ebtBalance = result
             

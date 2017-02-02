@@ -130,6 +130,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
             self.securityQuestionTitleLabel.text = "SECURITY QUESTION".localized()
             self.securityAnswerField.placeholderText = "SECURITY ANSWER".localized()
             self.errorTitleLabel.text = ""
+            self.errorMessageLabel.text = ""
             
             self.confirmButton.setTitle("CONFIRM".localized(), for: .normal)
             
@@ -168,7 +169,14 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     func showForceQuitAlert() {
         
-        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+    }
+    
+    func exitProcessIfPossible() {
+        
+        if self.ebtWebView.isPageLoading == false {
+            self.showForceQuitAlert()
+        }
     }
     
     func moveToNextController(identifier:String) {
@@ -204,9 +212,7 @@ extension EBTLoginSecurityQuestionTVC {
                 }
                 
             } else {
-                if self.ebtWebView.isPageLoading == false {
-                    self.showForceQuitAlert()
-                }
+                self.exitProcessIfPossible()
             }
             
         })
@@ -224,11 +230,13 @@ extension EBTLoginSecurityQuestionTVC {
                 } else {
                     // unknown page
                     print("UNKNOWN PAGE")
+                    self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
                 print("PAGE NOT LOADED YET..")
+                self.exitProcessIfPossible()
             }
             
         })
@@ -329,8 +337,13 @@ extension EBTLoginSecurityQuestionTVC: AITextFieldProtocol {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
-        
         return true
     }
+    
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return AppHelper.isValid(input: string)
+    }
+
     
 }

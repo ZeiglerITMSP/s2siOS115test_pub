@@ -129,6 +129,7 @@ class EBTChangeEmailTVC: UITableViewController {
             self.confirmEmailField.placeholderText = "CONFIRM E-MAIL ADDRESS".localized()
             
             self.errorTitleLabel.text = ""
+            self.errorMessageLabel.text = ""
             
             self.changeEmailButton.setTitle("CHANGE EMAIL".localized(), for: .normal)
             
@@ -166,9 +167,16 @@ class EBTChangeEmailTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
+    func exitProcessIfPossible() {
+        
+        if self.ebtWebView.isPageLoading == false {
+            self.showForceQuitAlert()
+        }
+    }
+    
     func showForceQuitAlert() {
         
-        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
     }
     
     func moveToNextController(identifier:String) {
@@ -204,9 +212,7 @@ extension EBTChangeEmailTVC {
                     self.validateNextPage()
                 }
             } else {
-                if self.ebtWebView.isPageLoading == false {
-                    self.showForceQuitAlert()
-                }
+                self.exitProcessIfPossible()
             }
         })
     }
@@ -287,11 +293,13 @@ extension EBTChangeEmailTVC {
                 } else {
                     // unknown page
                     print("UNKNOWN PAGE")
+                    self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
                 print("PAGE NOT LOADED YET..")
+                self.exitProcessIfPossible()
             }
         })
     }
@@ -319,10 +327,17 @@ extension EBTChangeEmailTVC: AITextFieldProtocol {
 
 extension EBTChangeEmailTVC: EBTWebViewDelegate {
     
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return AppHelper.isValid(input: string)
+    }
+
+    
     func didFinishLoadingWebView() {
         
         validatePage()
     }
+    
     func didFail() {
         showForceQuitAlert()
     }

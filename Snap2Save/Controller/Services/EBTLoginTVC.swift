@@ -14,6 +14,7 @@ class EBTLoginTVC: UITableViewController {
     
     fileprivate enum ActionType {
         
+        case loadLoginPage
         case autofill
         case registration
     }
@@ -111,9 +112,9 @@ class EBTLoginTVC: UITableViewController {
         super.viewDidLoad()
         
         errorMessageLabel.text = nil
-        
         updateBackButtonText()
         
+        // configure fields
         userIdField.contentTextField.textFieldType = .NormalTextField
         userIdField.contentTextField.autocorrectionType = UITextAutocorrectionType.no
         userIdField.contentTextField.returnKeyType = .next
@@ -123,35 +124,27 @@ class EBTLoginTVC: UITableViewController {
         passwordField.contentTextField.returnKeyType = .done
         passwordField.contentTextField.updateUIAsPerTextFieldType()
         
+        userIdField.contentTextField.aiDelegate = self
+        passwordField.contentTextField.aiDelegate = self
         // Automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
         
         ebtWebView.responder = self
-        
         // language selection
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
-        
+        // backbutton
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
-        
-        
-        
-        userIdField.contentTextField.aiDelegate = self
-        passwordField.contentTextField.aiDelegate = self
-        
+        // style for buttons
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: loginButton, radius: 2.0, width: 1.0)
         AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: registrationButton, radius: 2.0, width: 1.0)
-        
+        // tap gesture to view
         addTapGesture()
-        
+        // touch id config
         isTouchIdAvailable = AppHelper.isTouchIDAvailable()
-        
-//        if isTouchIdAvailable == false {
-//            
-////            self.rememberMeButton.isEnabled = false
-//        }
-        
+        // loader
+        AppHelper.configSwiftLoader()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -215,12 +208,7 @@ class EBTLoginTVC: UITableViewController {
     
     func backAction() {
         
-       _ = self.navigationController?.popViewController(animated: true)
-    }
-    
-    func showForceQuitAlert() {
-        
-        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(resetFields), showCancel: false)
+       _ = self.navigationController?.popToRootViewController(animated: true)
     }
     
     func languageButtonClicked() {
@@ -245,6 +233,7 @@ class EBTLoginTVC: UITableViewController {
             self.remmeberMyUserNameLabel.text = "Remember My User ID".localized()
             
             self.errorTitleLabel.text = ""
+            self.errorMessageLabel.text = ""
             
             self.loginButton.setTitle("LOG IN".localized(), for: .normal)
             self.registrationButton.setTitle("REGISTER".localized(), for: .normal)
@@ -329,6 +318,18 @@ class EBTLoginTVC: UITableViewController {
     
     // MARK: -
     
+    func showForceQuitAlert() {
+        
+        self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(backAction), showCancel: false)
+    }
+    
+    func exitProcessIfPossible() {
+        
+        if self.ebtWebView.isPageLoading == false {
+            self.showForceQuitAlert()
+        }
+    }
+    
     func moveToNextController(identifier:String) {
         
         EBTUser.shared.loggedType = "1" // type 1- login, 2- signup
@@ -366,13 +367,15 @@ extension EBTLoginTVC {
     
     func loadLoginPage() {
         
-        var loginUrl = kEBTLoginUrl
         
+        actionType = ActionType.loadLoginPage
+        
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
+        
+        var loginUrl = kEBTLoginUrl
         if Localize.currentLanguage() == "es" {
-            // .. es url
             loginUrl = kEBTLoginUrl_es
         }
-        
         let url = NSURL(string: loginUrl)
         let request = NSURLRequest(url: url! as URL)
 
@@ -405,7 +408,7 @@ extension EBTLoginTVC {
                 }
                 
             } else {
-                
+                self.exitProcessIfPossible()
             }
             
         })
@@ -463,11 +466,13 @@ extension EBTLoginTVC {
                 } else {
                     // unknown page
                     print("UNKNOWN PAGE")
+                    self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
                 print("PAGE NOT LOADED YET..")
+                self.exitProcessIfPossible()
             }
             
         })
@@ -657,14 +662,32 @@ extension EBTLoginTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
+        if actionType == ActionType.loadLoginPage {
+            actionType = nil
+            
+            SwiftLoader.hide()
+        }
+        
         validatePage()
     }
     
     func didFail() {
+        if actionType == ActionType.loadLoginPage {
+            actionType = nil
+            
+            SwiftLoader.hide()
+        }
+
         showForceQuitAlert()
     }
     
     func didFailProvisionalNavigation() {
+        if actionType == ActionType.loadLoginPage {
+            actionType = nil
+            
+            SwiftLoader.hide()
+        }
+
         showForceQuitAlert()
     }
 }
@@ -682,6 +705,11 @@ extension EBTLoginTVC: AITextFieldProtocol {
         }
         
         return true
+    }
+    
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return AppHelper.isValid(input: string)
     }
     
 }

@@ -205,12 +205,12 @@
 "NEXT" = "NEXT";
 "ebt.title.login" = "Log In";
 "ebt.title.register" = "Register";
-
+// back alert
 "Are you sure ?" = "Are you sure ?";
 "The process will be cancelled." = "The process will be cancelled.";
 // timeout cancel alert
 "ebt.alert.timeout.title" = "Sorry!";
-"ebt.alert.timeout.message" = "Something went wrong. Pleae try again later";
+"ebt.alert.timeout.message" = "We are unable to process your request at this time. Please try again later.";
 
 
 // login screen
@@ -301,7 +301,7 @@
 
 // EBT Dashboard
 "RECENT TRANSACTIONS" = "RECENT TRANSACTIONS";
-"EBT Balance" = "EBT BALANCE";
+"SNAP Balance" = "SNAP BALANCE";
 "CASH Balance" = "CASH BALANCE";
 "No transactions were found." = "No transactions were found.";
 

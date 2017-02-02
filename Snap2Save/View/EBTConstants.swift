@@ -9,10 +9,24 @@
 import UIKit
 
 
-//let kEBTBaseUrl = "http://internal.appit.ventures/s2s/"
-let kEBTBaseUrl = "http://internal.appit.ventures/s2s/flow2/"
+let kEBTBaseUrl = "http://internal.appit.ventures/s2s/"
+
+// which existed before, jumps directly to the Login screen after completing the confirmation step.
+//let kEBTBaseUrl = "http://internal.appit.ventures/s2s/flow2/"
+
+// produces a generic error after accepting the terms, which requires returning to the login page manually.
+//let kEBTBaseUrl = "http://internal.appit.ventures/s2s/flow3/"
+
+// returns to the login page after terms, which is what happened during our EBT session which seemed like a timeout issue.
+//let kEBTBaseUrl = "http://internal.appit.ventures/s2s/flow4/"
+
+// responds to all login attempts with with account locked error.
+//let kEBTBaseUrl = "http://internal.appit.ventures/s2s/flow5/"
+//
+//let kEBTLoginUrl_spanish =  kEBTBaseUrl + "spanish_login.html"
+
 let kEBTLoginUrl =  kEBTBaseUrl + "ebt_login.html"
-let kEBTLoginUrl_es =  kEBTBaseUrl + "ebt_login.html"
+let kEBTLoginUrl_es =  kEBTBaseUrl + "spanish_login.html"
 let kEBTSignupUrl = kEBTBaseUrl + "ebt_registration_cardNumber.html"
 
 

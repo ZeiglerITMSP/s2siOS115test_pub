@@ -128,6 +128,7 @@ class EBTDateOfBirthTVC: UITableViewController {
             self.dobField.placeholderText = "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)".localized()
             self.socialSecurityNumberField.placeholderText = "WHAT IS YOUR SOCIAL SECURITY NUMBER?".localized()
             self.errorTitleLabel.text = ""
+            self.errorMessageLabel.text = ""
             
             self.titleLabel.text = "ebt.dob.titltLabel".localized()
             self.messageLabel.text = "ebt.dob.messageLabel".localized()
@@ -176,9 +177,16 @@ class EBTDateOfBirthTVC: UITableViewController {
         NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
+    func exitProcessIfPossible() {
+        
+        if self.ebtWebView.isPageLoading == false {
+            self.showForceQuitAlert()
+        }
+    }
+    
     func showForceQuitAlert() {
         
-        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
     }
     
     func moveToNextController(identifier:String) {
@@ -298,9 +306,7 @@ securityQuestions();
                     self.validateNextPage()
                 }
             } else {
-                if self.ebtWebView.isPageLoading == false {
-                    self.showForceQuitAlert()
-                }
+                self.exitProcessIfPossible()
             }
             
         })
@@ -363,11 +369,13 @@ securityQuestions();
                 } else {
                     // unknown page
                     print("UNKNOWN PAGE")
+                    self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
                 print("PAGE NOT LOADED YET..")
+                self.exitProcessIfPossible()
             }
             
         })
@@ -411,6 +419,11 @@ extension EBTDateOfBirthTVC: AITextFieldProtocol {
         if textField == dobField.contentTextField {
             socialSecurityNumberField.contentTextField.becomeFirstResponder()
         }
+    }
+    
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return AppHelper.isValid(input: string)
     }
 
 }

@@ -135,9 +135,15 @@ class EBTAuthenticationTVC: UITableViewController {
     
     func showForceQuitAlert() {
         
-        self.showAlert(title: "ebt.alert.timeout.title".localized(), message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
     }
     
+    func exitProcessIfPossible() {
+        
+        if self.ebtWebView.isPageLoading == false {
+            self.showForceQuitAlert()
+        }
+    }
     
     func moveToNextController(identifier:String) {
         
@@ -155,6 +161,7 @@ class EBTAuthenticationTVC: UITableViewController {
             
             self.authenticationCodeField.placeholderText = "AUTHENTICATION CODE".localized()
             self.errorTitleLabel.text = ""
+            self.errorMessageLabel.text = ""
             
             self.titleLabel.text = "ebt.authentication.titleLabel".localized()
             self.messageLabel.text = "ebt.authentication.messageLabel".localized()
@@ -211,9 +218,7 @@ extension EBTAuthenticationTVC {
                 }
                 
             } else {
-                if self.ebtWebView.isPageLoading == false {
-                    self.showForceQuitAlert()
-                }
+                self.exitProcessIfPossible()
             }
             
         })
@@ -231,11 +236,13 @@ extension EBTAuthenticationTVC {
                 } else {
                     // unknown page
                     print("UNKNOWN PAGE")
+                    self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
                 print("PAGE NOT LOADED YET..")
+                self.exitProcessIfPossible()
             }
             
         })
@@ -361,5 +368,11 @@ extension EBTAuthenticationTVC: AITextFieldProtocol {
         
         return true
     }
+    
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return AppHelper.isValid(input: string)
+    }
+
     
 }

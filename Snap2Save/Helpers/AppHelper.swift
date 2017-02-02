@@ -65,6 +65,17 @@ class AppHelper {
         return emailTest.evaluate(with: testStr)
     }
     
+    class func isValid(input:String) -> Bool {
+        
+        let regex = try! NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: NSRegularExpression.Options())
+        if regex.firstMatch(in: input, options: NSRegularExpression.MatchingOptions(), range:NSMakeRange(0, input.characters.count)) != nil {
+            return false
+        }
+        
+        return true
+    }
+    
+    
     class func removeSpecialCharacters(fromNumber inputString:String) -> String {
         let validCharacters : Set<Character> = Set("1234567890".characters)
         return String(inputString.characters.filter {validCharacters.contains($0) })

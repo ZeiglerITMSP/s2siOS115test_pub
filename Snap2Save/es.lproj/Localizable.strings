@@ -224,9 +224,13 @@
 "NEXT" = "SIGUIENTE";
 "ebt.title.login" = "Iniciar sesión";
 "ebt.title.register" = "Registro";
-
+// back alert
 "Are you sure ?" = "Estás seguro ?";
 "The process will be cancelled." = "El proceso será cancelado.";
+// timeout cancel alert
+"ebt.alert.timeout.title" = "¡Lo siento!";
+"ebt.alert.timeout.message" = "No podemos procesar su solicitud en este momento. Por favor, inténtelo de nuevo más tarde.";
+
 
 // login screen
 "USER ID" = "IDENTIDAD DE USUARIO";
@@ -317,7 +321,7 @@
 
 // EBT Dashboard
 "RECENT TRANSACTIONS" = "TRANSACCIONES RECIENTES";
-"EBT Balance" = "EBT EQUILIBRAR";
+"SNAP Balance" = "SNAP EQUILIBRAR";
 "CASH Balance" = "EFECTIVO EQUILIBRAR";
 "No transactions were found." = "No se encontraron transacciones.";
 
