@@ -75,14 +75,15 @@ class ServicesTVC: UITableViewController {
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "EBTLoginTVC" {
-            
-            let loginVC = segue.destination as! EBTLoginTVC
-            loginVC.tempLoginUrl = tempLoginUrl
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        if segue.identifier == "EBTLoginTVC" {
+//            
+//            let loginVC = segue.destination as! EBTLoginTVC
+//            loginVC.tempLoginUrl = tempLoginUrl
+//        }
+//        
+//    }
     
     // MARK: - Table view data source
     
