@@ -23,17 +23,17 @@ This project will include an iOS, Android, and web app allowing mobile users to 
  
   https://fabric.io/kits/ios/crashlytics/install
   
- 5.<b>Facebook iOS SDK:</b>
+ 5. <b>Facebook iOS SDK:</b>
  This open-source library allows you to integrate Facebook into your iOS app.
  
   https://cocoapods.org/pods/FBSDKLoginKit
 
- 6.<b>Google Analytics:</b>
+ 6. <b>Google Analytics:</b>
  Google Analytics lets you measure your advertising ROI as well as track your Flash, video, and social networking sites and applications.
  
   https://developers.google.com/analytics/devguides/collection/ios/v3/
   
-  7.<b>PhoneNumberKit:</b>
+  7. <b>PhoneNumberKit:</b>
  Swift 3.0 framework for parsing, formatting and validating international phone numbers. Inspired by Google's libphonenumber.
   
   https://github.com/marmelroy/PhoneNu…
