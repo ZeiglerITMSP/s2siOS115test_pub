@@ -3,7 +3,8 @@ This project will include an iOS, Android, and web app allowing mobile users to 
 
 ## Third Party Libraries
 
-1. <b>[Localize-Swift](https://github.com/marmelroy/Localize-Swift)</b>
+ 1. <b>[Localize-Swift](https://github.com/marmelroy/Localize-Swift)</b>
+ 
  Localize-Swift is a simple framework that improves i18n and localization in Swift iOS apps - providing cleaner syntax and in-app language switching.
  
  1. <b>Localize-Swift:</b> 
