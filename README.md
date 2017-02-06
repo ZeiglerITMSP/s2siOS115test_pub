@@ -36,4 +36,5 @@ This project will include an iOS, Android, and web app allowing mobile users to 
  7. <b>PhoneNumberKit:</b>
  Swift 3.0 framework for parsing, formatting and validating international phone numbers. Inspired by Google's libphonenumber.
   
-  https://github.com/marmelroy/PhoneNu…
+  https://github.com/marmelroy/PhoneNumberKit
+  
