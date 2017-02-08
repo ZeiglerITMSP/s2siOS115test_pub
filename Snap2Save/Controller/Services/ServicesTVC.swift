@@ -281,7 +281,7 @@ class ServicesTVC: UITableViewController {
             self.navigationItem.title = "Services".localized()
             self.ebtLabel.text = "EBT".localized()
             self.aboutLabel.text = "About Snap2Save".localized()
-            self.faqLabel.text = "FAQ".localized()
+            self.faqLabel.text = "Help".localized()
             self.contactUsLabel.text = "Contact Us".localized()
             self.termsLabel.text = "Terms of Service".localized()
             self.privacyPolicyLabel.text = "Privacy Policy".localized()

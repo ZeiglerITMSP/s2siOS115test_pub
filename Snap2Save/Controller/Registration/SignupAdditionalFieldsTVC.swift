@@ -634,8 +634,29 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     func showSignUpAlert() {
         
+        // 1 - email 2- phone number
+        var contactPrefStr = 0
+        var contact = ""
+        var text_email = ""
+        
+        if let contactPrefernce = userDetailsDict["contact_preference"] {
+            contactPrefStr = contactPrefernce as! Int
+        }
+        
+        if contactPrefStr == 0 {
+            contact = "cell phone number".localized()
+            text_email = "text".localized()
+            
+        }
+        else if contactPrefStr == 1 {
+            contact = "email address".localized()
+            text_email = "email".localized()
+        }
+        
+
         let titleStr : String = "SignUpAlertTitle".localized()
-        let messageStr : String = "SignUpAlertMessage".localized()
+        
+        let messageStr : String = "Before you are able to log in we need to verify your %@. You should receive a confirmation %@ soon. When it arrives, simply click on the link in the %@ and that will complete your registration process.".localizedFormat(contact,text_email,text_email)
         
         let signUpAlert = UIAlertController.init(title: titleStr, message:messageStr, preferredStyle: .alert)
         

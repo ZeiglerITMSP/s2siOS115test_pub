@@ -55,6 +55,19 @@
 "SignUpAlertMessage" = "Antes de que pueda iniciar sesión, debemos verificar su número de teléfono celular.  Debe recibir un mensaje de texto de confirmación en breve.  Cuando llegue, simplemente haga clic sobre el enlace en el mensaje de texto y así completará su proceso de registro.";
 "Close" = "Cerrar";
 
+"Before you are able to log in we need to verify your %@. You should receive a confirmation %@ soon. When it arrives, simply click on the link in the %@ and that will complete your registration process." = "Antes de que pueda iniciar sesión, debemos verificar su %@.  Debe recibir un mensaje de %@ de confirmación en breve.  Cuando llegue, simplemente haga clic sobre el enlace en el mensaje de %@ y así completará su proceso de registro.";
+
+"cell phone number" = "Número Celular";
+
+"email address" = "dirección de correo electrónico";
+
+"text" = "texto";
+
+"email" = "correo electrónico";
+
+
+//"Antes de que pueda iniciar sesión, debemos verificar su dirección de correo electrónico.  Debe recibir un mensaje de correo electrónico de confirmación en breve.  Cuando llegue, simplemente haga clic sobre el enlace en el mensaje de correo electrónico y así completará su proceso de registro."
+
 
 //signUpTVC
 "Register" = "Registrarme";
@@ -174,11 +187,12 @@
 
 
 "Are you sure you want to log out?" = "¿Está seguro de que desea cerrar la sesión?";
-"Entries must match to proceed" = "Los valores deben coincidir para continuar";
+
+"Please enter password." = "Por favor ingrese contraseña.";
 
 // Offers
 "Offers" = "Ofertas";
-"No offer exists"= "No existe ninguna oferta";
+"No offer exists."= "No existe ninguna oferta.";
 "PLEASE CHECK YOUR INTERNET CONNECTION" = "POR FAVOR REVISE SU CONEXION A INTERNET";
 "PLEASE TRY AGAIN LATER" = "POR FAVOR, INTÉNTELO DE NUEVO MÁS TARDE";
 
@@ -186,11 +200,11 @@
 // Services
 "Services" = "Servicios";
 "About Snap2Save" = "Acerca de Snap2Save";
-"FAQ" = "Preguntas más frecuentes";
+"Help" = "Ayuda";
 "Contact Us" = "Contáctenos";
 "Terms of Service" = "Términos de servicio";
 "Privacy Policy" = "Política de privacidad";
-"Reward Program" = "Programa de recompensa";
+"Reward Program" = "Programa de recompensas";
 
 
 

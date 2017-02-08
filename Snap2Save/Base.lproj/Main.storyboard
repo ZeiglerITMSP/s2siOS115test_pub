@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xtN-bV-2Yz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xtN-bV-2Yz">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -172,24 +172,23 @@
                                                     <color key="textColor" red="0.32941176470588235" green="0.74509803921568629" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6r-dg-OxH">
-                                                    <rect key="frame" x="20" y="35.666666666666657" width="335" height="54.333333333333343"/>
-                                                    <string key="text">Join us on Snap2Save and earn 100 points for registering! Points can be redeemed for gift cards or health care rebates through our Reward Program.</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VJd-Hd-rBR">
+                                                    <rect key="frame" x="20" y="30.666666666666664" width="335" height="64.333333333333343"/>
+                                                    <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="Aua-0o-MYc" firstAttribute="leading" secondItem="sQp-g6-Bdu" secondAttribute="leading" constant="20" id="4x4-qq-8dg"/>
-                                                <constraint firstItem="M6r-dg-OxH" firstAttribute="top" secondItem="Aua-0o-MYc" secondAttribute="bottom" constant="5" id="LsU-cB-bbx"/>
+                                                <constraint firstAttribute="bottom" secondItem="VJd-Hd-rBR" secondAttribute="bottom" constant="5" id="CYn-dV-UIM"/>
+                                                <constraint firstItem="VJd-Hd-rBR" firstAttribute="leading" secondItem="sQp-g6-Bdu" secondAttribute="leading" constant="20" id="OI4-re-5rx"/>
                                                 <constraint firstItem="Aua-0o-MYc" firstAttribute="top" secondItem="sQp-g6-Bdu" secondAttribute="top" constant="10" id="Seo-cY-fVJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="Aua-0o-MYc" secondAttribute="trailing" constant="20" id="cEV-NQ-L80"/>
-                                                <constraint firstItem="M6r-dg-OxH" firstAttribute="leading" secondItem="sQp-g6-Bdu" secondAttribute="leading" constant="20" id="cJO-wo-WcF"/>
-                                                <constraint firstItem="M6r-dg-OxH" firstAttribute="top" secondItem="Aua-0o-MYc" secondAttribute="bottom" constant="5" id="jH2-ad-7Jy"/>
-                                                <constraint firstAttribute="bottom" secondItem="M6r-dg-OxH" secondAttribute="bottom" constant="10" id="oPV-2g-Blt"/>
-                                                <constraint firstAttribute="trailing" secondItem="M6r-dg-OxH" secondAttribute="trailing" constant="20" id="vGw-gO-UZg"/>
+                                                <constraint firstItem="VJd-Hd-rBR" firstAttribute="top" secondItem="Aua-0o-MYc" secondAttribute="bottom" id="gw6-mN-21m"/>
+                                                <constraint firstAttribute="trailing" secondItem="VJd-Hd-rBR" secondAttribute="trailing" constant="20" id="yEN-o3-nhX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -730,7 +729,7 @@
                         <outlet property="facebookActivityIndicator" destination="0qS-u8-Hag" id="YdM-IF-qaY"/>
                         <outlet property="facebookBtnBgView" destination="djW-JQ-OLI" id="fvZ-3q-7zm"/>
                         <outlet property="loginWithFBButton" destination="WtS-x6-gB7" id="xxE-t7-ygz"/>
-                        <outlet property="messageLabel" destination="M6r-dg-OxH" id="0J7-eQ-pYC"/>
+                        <outlet property="messageTextView" destination="VJd-Hd-rBR" id="pEz-tu-WY3"/>
                         <outlet property="mobileNumLabel" destination="wE0-ya-bNf" id="KN6-bL-rfz"/>
                         <outlet property="mobileNumTextField" destination="mQT-ie-Az7" id="TVc-bb-OlD"/>
                         <outlet property="passwordLabel" destination="eS0-hP-4j1" id="wTC-aE-ncj"/>

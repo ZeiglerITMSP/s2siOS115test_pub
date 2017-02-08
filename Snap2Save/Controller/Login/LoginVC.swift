@@ -448,6 +448,12 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
             return false
         }
+            
+        else if passwordTextField.text?.characters.count == 0 {
+            self.showAlert(title: "", message: "Please enter password.".localized())
+            return false
+        }
+
         else if (passwordTextField.text?.characters.count)! < 6 {
             self.showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
             return false

@@ -423,7 +423,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
            // if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
                 
             if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
-                self.showAlert(title: "", message: "Entries must match to proceed".localized())
+                self.showAlert(title: "", message: "Entries must match to proceed.".localized())
                     return false
                 }
            // }
@@ -435,7 +435,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
                 
                 if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
-                    self.showAlert(title: "", message: "Entries must match to proceed".localized())
+                    self.showAlert(title: "", message: "Entries must match to proceed.".localized())
                     return false
                 }
             }
@@ -448,7 +448,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         }
         
         if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
-            self.showAlert(title: "", message: "Entries must match to proceed".localized())
+            self.showAlert(title: "", message: "Entries must match to proceed.".localized())
             return false
         }
 

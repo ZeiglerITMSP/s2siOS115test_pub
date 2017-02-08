@@ -92,7 +92,7 @@ class ServicesWebViewVC: UIViewController {
                 self.title = "About Snap2Save".localized()
             }
             else if self.type == ServiceType.FAQ{
-                self.title = "FAQ".localized()
+                self.title = "Help".localized()
             }
             else if self.type == ServiceType.contactUs{
                 self.title = "Contact Us".localized()

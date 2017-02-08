@@ -250,7 +250,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
             return false
         }
         else if reEnterNewPasswordTextField.contentTextField.text != newPasswordTextField.contentTextField.text {
-            self.showAlert(title: "", message: "Entries must match to proceed".localized())
+            self.showAlert(title: "", message: "Entries must match to proceed.".localized())
             return false
         }
         return true

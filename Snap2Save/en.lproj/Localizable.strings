@@ -48,11 +48,22 @@
 "PASSWORD" = "PASSWORD";
 "Forgot Password?" = "Forgot Password?";
 "LOG IN" = "LOG IN";
+
 //"ENGLISH" = "ENGLISH";
 
 //signUpAlert
 "SignUpAlertTitle" = "Thank you for joining Snap2Save!\n";
-"SignUpAlertMessage" = "Before you are able to log in we need to verify your [cell phone number/email address]. You should receive a confirmation [text/email] soon. When it arrives, simply click on the link in the [text/email] and that will complete your registration process.";
+
+"Before you are able to log in we need to verify your %@. You should receive a confirmation %@ soon. When it arrives, simply click on the link in the %@ and that will complete your registration process." = "Before you are able to log in we need to verify your %@. You should receive a confirmation %@ soon. When it arrives, simply click on the link in the %@ and that will complete your registration process.";
+
+"cell phone number" = "cell phone number";
+"email address" = "email address";
+
+"text" = "text";
+
+"email" = "email";
+
+//"SignUpAlertMessage" = "Before you are able to log in we need to verify your [cell phone number/email address]. You should receive a confirmation [text/email] soon. When it arrives, simply click on the link in the [text/email] and that will complete your registration process.";
 "Close" = "Close";
 
 //signUpTVC
@@ -159,6 +170,7 @@
 
 "Please enter a 10-digit cell phone number." = "Please enter a 10-digit cell phone number.";
 "Password must be at least 6 characters in length." = "Password must be at least 6 characters in length.";
+"Please enter password." = "Please enter password.";
 
 "Please enter a valid zip code." = "Please enter a valid zip code.";
 "Please enter a valid email address." = "Please enter a valid email address.";
@@ -168,20 +180,20 @@
 "Your password must be at least 6 characters in length." = "Your password must be at least 6 characters in length.";
 
 "Are you sure you want to log out?" = "Are you sure you want to log out?";
-"Entries must match to proceed" = "Entries must match to proceed";
+
 
 
 // Offers
 
 "Offers" = "Offers";
-"No offer exists" = "No offer exists";
+"No offer exists." = "No offer exists.";
 "PLEASE CHECK YOUR INTERNET CONNECTION" = "PLEASE CHECK YOUR INTERNET CONNECTION";
 "PLEASE TRY AGAIN LATER" = "PLEASE TRY AGAIN LATER";
 
 // Services
 "Services" = "Services";
 "About Snap2Save" = "About Snap2Save";
-"FAQ" = "FAQ";
+"FAQ" = "Help";
 "Contact Us" = "Contact Us";
 "Terms of Service" = "Terms of Service";
 "Privacy Policy" = "Privacy Policy";

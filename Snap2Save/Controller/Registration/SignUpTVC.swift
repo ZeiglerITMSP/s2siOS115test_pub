@@ -18,6 +18,10 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
     
     var facebookDict:[String : Any]? = nil
     var user:User = User()
+    
+    
+    @IBOutlet var messageTextView: UITextView!
+    
     @IBOutlet var facebookActivityIndicator: UIActivityIndicatorView!
     @IBOutlet var reEnterEmailMandatoryLabel: UILabel!
     @IBOutlet var emailManditoryLabel: UILabel!
@@ -214,7 +218,8 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
             self.updateBackButtonText()
             self.title = "Register".localized()
             self.earn100PointsLabel.text = "EARN 100 POINTS!".localized()
-            self.messageLabel.text = "RegisterMessage".localized()
+            self.updateMessageText()
+           // self.messageLabel.text = "RegisterMessage".localized()
             self.loginWithFBButton.setTitle("Register with Facebook".localized(), for: .normal);
             self.requiredInfoLabel.text = "*Required information".localized()
             
@@ -243,6 +248,39 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
     }
     
     
+    func updateMessageText() {
+        
+        let fullMessage = "RegisterMessage".localized()
+        let rangeMessage = "Reward Program".localized()
+        
+        let link = "http://www.snap2save.com/app/about_comingsoon.php"
+        
+        let attributedString = NSMutableAttributedString(string: fullMessage)
+        
+        let fullMessageRange = (attributedString.string as NSString).range(of: fullMessage)
+        // default text style
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: self.messageTextView.textColor!, range: fullMessageRange)
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 14), range: fullMessageRange)
+        let titleParagraphStyle = NSMutableParagraphStyle()
+        titleParagraphStyle.alignment = .left
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: titleParagraphStyle, range: fullMessageRange)
+        
+        // linkRange
+        let linkRange = (attributedString.string as NSString).range(of: rangeMessage)
+        attributedString.addAttribute(NSLinkAttributeName, value: link, range: linkRange)
+        
+        let linkAttributes = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSUnderlineColorAttributeName: UIColor.white,
+            NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue ] as [String : Any]
+        
+        // textView is a UITextView
+        self.messageTextView.linkTextAttributes = linkAttributes
+        self.messageTextView.attributedText = attributedString
+        
+        self.messageTextView.isScrollEnabled = false
+        
+    }
 
     func updateTermsText() {
         
@@ -463,7 +501,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         }
         
         if reEnterMobileNumTextField.text != mobileNumTextField.text {
-            showAlert(title: "", message: "Entries must match to proceed".localized())
+            showAlert(title: "", message: "Entries must match to proceed.".localized())
             return false
         }
         
@@ -474,7 +512,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         }
         
         if reEnterPasswordTextField.text != passwordTextField.text{
-            showAlert(title: "", message: "Entries must match to proceed".localized())
+            showAlert(title: "", message: "Entries must match to proceed.".localized())
             return false
         }
         }
@@ -492,7 +530,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
             
             
         if reEnterEmailTextField.text != emailTextField.text {
-            showAlert(title: "", message: "Entries must match to proceed".localized())
+            showAlert(title: "", message: "Entries must match to proceed.".localized())
             return false
         }
 
