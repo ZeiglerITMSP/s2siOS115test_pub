@@ -253,7 +253,14 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         let fullMessage = "RegisterMessage".localized()
         let rangeMessage = "Reward Program".localized()
         
-        let link = "http://www.snap2save.com/app/about_comingsoon.php"
+        var link = ""
+        
+        if Localize.currentLanguage() == "en" {
+            link = reward_program_en
+        }
+        else if Localize.currentLanguage() == "es" {
+            link = reward_program_es
+        }
         
         let attributedString = NSMutableAttributedString(string: fullMessage)
         
@@ -287,8 +294,14 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         // Terms of Service
         let fullMessage = "TermsMessage".localized()
         let rangeMessage = "TermsLink".localized()
-        let link = "http://www.snap2save.com/app/about_comingsoon.php"
-        
+        var link = ""
+        if Localize.currentLanguage() == "en" {
+            link = terms_en
+        }
+        else if Localize.currentLanguage() == "es" {
+            link = terms_es
+        }
+
         let attributedString = NSMutableAttributedString(string: fullMessage)
         
         let fullMessageRange = (attributedString.string as NSString).range(of: fullMessage)

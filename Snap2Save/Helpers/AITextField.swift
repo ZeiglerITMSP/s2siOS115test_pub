@@ -15,6 +15,10 @@ import UIKit
     @objc optional func textFieldShouldReturn(_ textField: UITextField) -> Bool
     @objc optional func getSelectedIndexFromPicker(selectedIndex : NSInteger,textField:AITextField)
     @objc optional func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    
+    @objc optional func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
+    
+    @objc optional func  textFieldShouldEndEditing(_ textField: UITextField) -> Bool
 }
 
 
@@ -417,6 +421,26 @@ extension AITextField: UITextFieldDelegate {
         }
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        let status = self.aiDelegate?.textFieldShouldBeginEditing?(textField)
+        if let status = status {
+            return status
+        }else {
+            return true
+        }
+    }
+    
+    
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        let status = self.aiDelegate?.textFieldShouldEndEditing?(textField)
+        if let status = status {
+            return status
+        }else {
+            return true
+        }
+    }
+
 }
 
 extension AITextField: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -461,7 +485,6 @@ extension AITextField: UIPickerViewDelegate, UIPickerViewDataSource {
 
         return UIFont.systemFont(ofSize: UIFont.systemFontSize).lineHeight * CGFloat(numberOfLinesForPicker) * UIScreen.main.scale
     }
-    
     
     
 }

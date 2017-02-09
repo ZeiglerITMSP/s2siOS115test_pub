@@ -51,6 +51,12 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         AppHelper.configSwiftLoader()
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 80
+        
+        reEnterMobileNumberTextField.contentTextField.isHidden = true
+        reEnterEmailTextField.contentTextField.isHidden = true
+        
         let backButton = UIButton.init(type: .custom)
         backButton.frame = CGRect(x:0,y:0,width:80,height:25)
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
@@ -67,25 +73,25 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         emailPlaceHolderTextField.contentTextField.textFieldType = AITextField.AITextFieldType.EmailTextField
         reEnterEmailTextField.contentTextField.textFieldType = AITextField.AITextFieldType.EmailTextField
-
+        
         mobileNumberTextField.contentTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         reEnterMobileNumberTextField.contentTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
         
         emailPlaceHolderTextField.contentTextField.updateUIAsPerTextFieldType()
         reEnterEmailTextField.contentTextField.updateUIAsPerTextFieldType()
-
+        
         mobileNumberTextField.contentTextField.updateUIAsPerTextFieldType()
         reEnterMobileNumberTextField.contentTextField.updateUIAsPerTextFieldType()
         
         emailPlaceHolderTextField.contentTextField.aiDelegate = self
         reEnterEmailTextField.contentTextField.aiDelegate = self
-
+        
         mobileNumberTextField.contentTextField.aiDelegate = self
         reEnterMobileNumberTextField.contentTextField.aiDelegate = self
         
         emailPlaceHolderTextField.contentTextField.returnKeyType = UIReturnKeyType.next
         reEnterEmailTextField.contentTextField.returnKeyType = UIReturnKeyType.next
-
+        
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: saveButton, radius: 2.0, width: 1.0)
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -95,6 +101,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         self.view.addGestureRecognizer(tapGesture)
         
         getProfile()
+        
+        
     }
     
     
@@ -105,14 +113,14 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
     }
     
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
         AppHelper.getScreenName(screenName: "Preferences screen")
-
+        
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
@@ -148,47 +156,115 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     func reloadContent() {
         
         DispatchQueue.main.async {
-        self.updateBackButtonText()
-        self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-        self.title = "Preferences".localized()
-        self.updateTextFieldsUi()
-
-        self.saveButton.setTitle("SAVE".localized(), for: .normal)
-        self.contactPreferenceLabel.text = "CONTACT PREFERENCE".localized()
-        self.contactPreferenceSegmentControl.setTitle("Text Message".localized(), forSegmentAt: 0)
-        self.contactPreferenceSegmentControl.setTitle("Email".localized(), forSegmentAt: 1)
-        self.emailPlaceHolderTextField.placeholderText = "EMAIL".localized()
-        self.mobileNumberTextField.placeholderText = "10-DIGIT CELL PHONE NUMBER".localized()
-       self.reEnterMobileNumberTextField.placeholderText = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
-        self.reEnterEmailTextField.placeholderText = "RE-ENTER EMAIL".localized()
+            self.updateBackButtonText()
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.title = "Preferences".localized()
+            self.updateTextFieldsUi()
+            
+            self.saveButton.setTitle("SAVE".localized(), for: .normal)
+            self.contactPreferenceLabel.text = "CONTACT PREFERENCE".localized()
+            self.contactPreferenceSegmentControl.setTitle("Text Message".localized(), forSegmentAt: 0)
+            self.contactPreferenceSegmentControl.setTitle("Email".localized(), forSegmentAt: 1)
+            self.emailPlaceHolderTextField.placeholderText = "EMAIL".localized()
+            self.mobileNumberTextField.placeholderText = "10-DIGIT CELL PHONE NUMBER".localized()
+            self.reEnterMobileNumberTextField.placeholderText = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
+            self.reEnterEmailTextField.placeholderText = "RE-ENTER EMAIL".localized()
         }
     }
     
-  
+    
+    // MARK: - AitextField delegates
+    
     func keyBoardHidden(textField: UITextField) {
         
         if textField == emailPlaceHolderTextField.contentTextField {
-            reEnterEmailTextField.contentTextField.becomeFirstResponder()
-            //mobileNumberTextField.contentTextField.becomeFirstResponder()
+            if reEnterEmailTextField.contentTextField.isHidden == false {
+                reEnterEmailTextField.contentTextField.becomeFirstResponder()
+            }
+            else {
+                mobileNumberTextField.contentTextField.becomeFirstResponder()
+            }
         }
         else if textField == reEnterEmailTextField.contentTextField{
             mobileNumberTextField.contentTextField.becomeFirstResponder()
         }
         else if textField == mobileNumberTextField.contentTextField {
-            reEnterMobileNumberTextField.contentTextField.becomeFirstResponder()
+            if reEnterMobileNumberTextField.contentTextField.isHidden == false {
+                reEnterMobileNumberTextField.contentTextField.becomeFirstResponder()
+            }
+            else {
+                textField.resignFirstResponder()
+            }
             
         } else {
             textField.resignFirstResponder()
-            
         }
     }
     
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
+        let userData = UserDefaults.standard.object(forKey: USER_DATA)
+        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
         
-        if textField == mobileNumberTextField.contentTextField || textField == reEnterMobileNumberTextField.contentTextField {
+        let user = userInfo as! User
         
+        
+        if textField == emailPlaceHolderTextField.contentTextField {
+            
+            let currentEmail = user.email
+            
+            let newEmail = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            
+            if currentEmail != newEmail {
+                if reEnterEmailTextField.contentTextField.isHidden == true {
+                    
+                    self.reEnterEmailTextField.contentTextField.isHidden = false
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
+                    self.tableView.endUpdates()
+                    
+                }
+            }
+            else {
+                if reEnterEmailTextField.contentTextField.isHidden == false {
+                    reEnterEmailTextField.contentTextField.isHidden = true
+                    reEnterEmailTextField.contentTextField.text = ""
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
+                    self.tableView.endUpdates()
+                    
+                }
+            }
+        }
+            
+            
+        else if textField == mobileNumberTextField.contentTextField {
+            
+            let currentMobileNumber = user.phone_number
+            
             let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            let mobileNumber = AppHelper.removeSpecialCharacters(fromNumber: newString)
+            if currentMobileNumber != mobileNumber {
+                if reEnterMobileNumberTextField.contentTextField.isHidden == true {
+                    reEnterMobileNumberTextField.contentTextField.isHidden = false
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .none)
+                    self.tableView.endUpdates()
+                }
+            }
+            else {
+                
+                if reEnterMobileNumberTextField.contentTextField.isHidden == false {
+                    reEnterMobileNumberTextField.contentTextField.isHidden = true
+                    reEnterMobileNumberTextField.contentTextField.text = ""
+
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .none)
+                    self.tableView.endUpdates()
+                }
+            }
+            
+            // let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
             let compo = newString.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
             let decimalString = compo.joined(separator: "") as NSString
             let length = decimalString.length
@@ -226,9 +302,53 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             textField.text = formattedString as String
             return false
         }
-
+            
+        else if textField == reEnterMobileNumberTextField.contentTextField {
+            
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            let compo = newString.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+            let decimalString = compo.joined(separator: "") as NSString
+            let length = decimalString.length
+            let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
+            
+            if length == 0 || (length > 10 && !hasLeadingOne) || length > 11
+            {
+                let newLength = (textField.text! as NSString).length + (string as NSString).length - range.length as Int
+                
+                return (newLength > 10) ? false : true
+            }
+            var index = 0 as Int
+            let formattedString = NSMutableString()
+            
+            if hasLeadingOne
+            {
+                formattedString.append("1 ")
+                index += 1
+            }
+            if (length - index) > 3
+            {
+                let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat("(%@)", areaCode)
+                index += 3
+            }
+            if length - index > 3
+            {
+                let prefix = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat(" %@-", prefix)
+                index += 3
+            }
+            
+            let remainder = decimalString.substring(from: index)
+            formattedString.append(remainder)
+            textField.text = formattedString as String
+            return false
+            
+        }
+        
         return true
     }
+    
+    
     
     // MARK: - Table view data source
     
@@ -242,13 +362,40 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         return 6
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.1
-    }
+        override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return 0.1
+        }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        
+        if indexPath.row == 1 {
+            if reEnterEmailTextField.contentTextField.isHidden == false {
+                return UITableViewAutomaticDimension
+            }
+            else {
+                return 0
+            }
+        } else if indexPath.row == 3 {
+            if reEnterMobileNumberTextField.contentTextField.isHidden == false{
+                return UITableViewAutomaticDimension
+            }
+            else {
+                return 0
+            }
+        }
+        else if indexPath.row == 4 {
+            return 120
+        }
+        
+        return UITableViewAutomaticDimension
+    }
+    
+    
     
     /*
      // MARK: - Navigation
@@ -290,19 +437,19 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let currentLanguage = Localize.currentLanguage()
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
-
+        
         let parameters : Parameters = ["user_id": user_id,
-                          "phone_number": mobileNumber,
-                          "email": email,
-                          "contact_preference": contact_preference,
-                          "platform":"1",
-                          "version_code": version_code,
-                          "version_name": version_name,
-                          "device_id": device_id,
-                          "push_token":"",
-                          "auth_token": auth_token,
-                          "language":currentLanguage
-            ]
+                                       "phone_number": mobileNumber,
+                                       "email": email,
+                                       "contact_preference": contact_preference,
+                                       "platform":"1",
+                                       "version_code": version_code,
+                                       "version_name": version_name,
+                                       "device_id": device_id,
+                                       "push_token":"",
+                                       "auth_token": auth_token,
+                                       "language":currentLanguage
+        ]
         saveActivityIndicator.startAnimating()
         print(parameters)
         let url = String(format: "%@/updatePreferences", hostUrl)
@@ -348,21 +495,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                             
                         }
                     }
-
-                    //let code : NSNumber = responseDict?["code"] as! NSNumber
-                   /* if let messageString = responseDict?["message"] {
-                        
-                        let alertMessage = messageString as! String
-                        let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                        let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                            (action) in
-                            self.view.endEditing(true)
-                            _ = self.navigationController?.popViewController(animated: true)
-                        })
-                        
-                        alertController.addAction(defaultAction)
-                        self.present(alertController, animated: true, completion: nil)
-                    }*/
+                    
                     
                 }
                 break
@@ -372,14 +505,14 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
                     self.showAlert(title: "", message:error.localizedDescription);
-                //print("error)
-            }
+                    //print("error)
+                }
                 break
+                
+            }
+            
             
         }
-        
-        
-    }
     }
     func isValid() -> Bool  {
         
@@ -389,47 +522,48 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let user = userInfo as! User
         let currentEmail = user.email
         
-        //let reEnterEmail = reEnterEmailTextField.contentTextField.text
+        
         let email = emailPlaceHolderTextField.contentTextField.text
         
         let validEmail = AppHelper.isValidEmail(testStr: emailPlaceHolderTextField.contentTextField.text!)
         
-        let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumberTextField.contentTextField.text!)
-        let validPhoneNumber = AppHelper.validate(value: phoneNumber)
+        /*  let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumberTextField.contentTextField.text!)*/
+        
+        let currentMobileNumber = user.phone_number
+        
+        let mobileNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumberTextField.contentTextField.text!)
+        
+        let validPhoneNumber = AppHelper.validate(value: mobileNumber)
         
         
-        if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
-            if  validEmail == false {
-                self.showAlert(title: "", message: "You have chosen to be contacted by email, but have not provided a valid email address.".localized())
-                return false
-                
-            }
-//             if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
-//             self.showAlert(title: "", message: "Entries must match to proceed".localized())
-//             return false
-//             }
-            
-        }
-
+        //        if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
+        //            if  validEmail == false {
+        //                self.showAlert(title: "", message: "You have chosen to be contacted by email, but have not provided a valid email address.".localized())
+        //                return false
+        //
+        //            }
+        ////             if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
+        ////             self.showAlert(title: "", message: "Entries must match to proceed".localized())
+        ////             return false
+        ////             }
+        //
+        //        }
+        
         if currentEmail != email {
-        if let email = emailPlaceHolderTextField.contentTextField.text {
-            if email.characters.count > 0 {
-                if validEmail == false {
-                    self.showAlert(title: "", message: "Please enter a valid email address.".localized())
+            if let email = emailPlaceHolderTextField.contentTextField.text {
+                if email.characters.count > 0 {
+                    if validEmail == false {
+                        self.showAlert(title: "", message: "Please enter a valid email address.".localized())
+                        return false
+                    }
+                }
+                
+                
+                if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
+                    self.showAlert(title: "", message: "Entries must match to proceed.".localized())
                     return false
                 }
             }
-            
-           // if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
-                
-            if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
-                self.showAlert(title: "", message: "Entries must match to proceed.".localized())
-                    return false
-                }
-           // }
-
-        
-        }
         }
         else {
             if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
@@ -439,21 +573,34 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                     return false
                 }
             }
-  
-        }
-       
-        if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
-            self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
-            return false
+            
         }
         
-        if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
-            self.showAlert(title: "", message: "Entries must match to proceed.".localized())
-            return false
+        if currentMobileNumber != mobileNumber {
+            
+            if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
+                self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
+                return false
+            }
+            
+            if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
+                self.showAlert(title: "", message: "Entries must match to proceed.".localized())
+                return false
+            }
+            
         }
-
+        else {
+            if (reEnterMobileNumberTextField.contentTextField.text?.characters.count)! > 0 {
+                
+                if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
+                    self.showAlert(title: "", message: "Entries must match to proceed.".localized())
+                    return false
+                }
+                
+            }
+        }
         return true
-    
+        
         
     }
     
@@ -481,6 +628,8 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         else if user.contact_preference == "2"{
             contactPreferenceSegmentControl.selectedSegmentIndex = 0
         }
+        
+        
     }
     
     func getProfile() {
@@ -493,9 +642,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             return
         }
         
-       // HUD.allowsInteraction = false
-       // HUD.dimsBackground = false
-       // HUD.show(.progress)
+        // HUD.allowsInteraction = false
+        // HUD.dimsBackground = false
+        // HUD.show(.progress)
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
@@ -505,14 +654,14 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let version_code = Bundle.main.buildVersionNumber ?? ""
         
         let parameters : Parameters = ["user_id": user_id,
-                          "platform":"1",
-                          "version_code": version_code,
-                          "version_name": version_name,
-                          "device_id": device_id,
-                          "push_token":"",
-                          "auth_token": auth_token,
-                          "language": currentLanguage
-            ]
+                                       "platform":"1",
+                                       "version_code": version_code,
+                                       "version_name": version_name,
+                                       "device_id": device_id,
+                                       "push_token":"",
+                                       "auth_token": auth_token,
+                                       "language": currentLanguage
+        ]
         
         //print("parameters)
         let url = String(format: "%@/getProfile", hostUrl)
@@ -522,9 +671,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 DispatchQueue.main.async {
-                   // HUD.hide()
+                    // HUD.hide()
                     SwiftLoader.hide()
-
+                    
                 }
                 let json = JSON(data: response.data!)
                 //print(""json response\(json)")
@@ -546,14 +695,14 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                             
                         }
                     }
-                        else {
-                            if let messageString = responseDict?["message"]{
-                                let alertMessage : String = messageString as! String
-                                self.showAlert(title: "", message: alertMessage)
-                            }
+                    else {
+                        if let messageString = responseDict?["message"]{
+                            let alertMessage : String = messageString as! String
+                            self.showAlert(title: "", message: alertMessage)
                         }
-                        
                     }
+                    
+                }
                 
                 break
                 
@@ -561,9 +710,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 DispatchQueue.main.async {
                     //HUD.hide()
                     SwiftLoader.hide()
-
+                    
                     self.showAlert(title: "", message:error.localizedDescription);
-
+                    
                 }
                 //print("error)
                 break
@@ -572,4 +721,46 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         }
         
     }
- }
+    
+    /*func phoneNumberToUSForamt(textField : AIPlaceHolderTextField) -> Bool {
+     
+     let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+     let compo = newString.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+     let decimalString = compo.joined(separator: "") as NSString
+     let length = decimalString.length
+     let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
+     
+     if length == 0 || (length > 10 && !hasLeadingOne) || length > 11
+     {
+     let newLength = (textField.text! as NSString).length + (string as NSString).length - range.length as Int
+     
+     return (newLength > 10) ? false : true
+     }
+     var index = 0 as Int
+     let formattedString = NSMutableString()
+     
+     if hasLeadingOne
+     {
+     formattedString.append("1 ")
+     index += 1
+     }
+     if (length - index) > 3
+     {
+     let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
+     formattedString.appendFormat("(%@)", areaCode)
+     index += 3
+     }
+     if length - index > 3
+     {
+     let prefix = decimalString.substring(with: NSMakeRange(index, 3))
+     formattedString.appendFormat(" %@-", prefix)
+     index += 3
+     }
+     
+     let remainder = decimalString.substring(from: index)
+     formattedString.append(remainder)
+     textField.text = formattedString as String
+     return false
+     
+     }*/
+}

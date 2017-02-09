@@ -17,6 +17,11 @@ import UIKit
 // test url
 var hostUrl = "http://dev.snap2save-a-lot.com/test/api"
 
+var reward_program_en = "http://dev.snap2save-a-lot.com/test/admin/reward/en"
+var reward_program_es = "http://dev.snap2save-a-lot.com/test/admin/reward/es"
+
+var terms_en = "http://dev.snap2save-a-lot.com/test/admin/terms/en"
+var terms_es = "http://dev.snap2save-a-lot.com/test/admin/terms/es"
 
 var SCREEN_WIDTH = UIScreen.main.bounds.size.width
 
