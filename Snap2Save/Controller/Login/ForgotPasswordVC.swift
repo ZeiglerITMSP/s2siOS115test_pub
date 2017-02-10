@@ -30,7 +30,9 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
     // Actions
     @IBAction func submitButtonAction(_ sender: UIButton) {
         
-        let validMobileNum = AppHelper.validate(value: mobileNumberTextField.text!)
+        let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumberTextField.text!)
+        let validMobileNum = AppHelper.validate(value: phoneNumber)
+        
         if mobileNumberTextField.text?.characters.count == 0 || validMobileNum == false{
             self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
             return
@@ -252,14 +254,43 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if textField == mobileNumberTextField {
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            let compo = newString.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+            let decimalString = compo.joined(separator: "") as NSString
+            let length = decimalString.length
+            let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
             
-            let currentCharacterCount = textField.text?.characters.count ?? 0
-            if (range.length + range.location > currentCharacterCount){
-                return false
+            if length == 0 || (length > 10 && !hasLeadingOne) || length > 11
+            {
+                let newLength = (textField.text! as NSString).length + (string as NSString).length - range.length as Int
+                
+                return (newLength > 10) ? false : true
             }
-            let newLength = currentCharacterCount + string.characters.count - range.length
-            return newLength <= 10
+            var index = 0 as Int
+            let formattedString = NSMutableString()
             
+            if hasLeadingOne
+            {
+                formattedString.append("1 ")
+                index += 1
+            }
+            if (length - index) > 3
+            {
+                let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat("(%@)", areaCode)
+                index += 3
+            }
+            if length - index > 3
+            {
+                let prefix = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat(" %@-", prefix)
+                index += 3
+            }
+            
+            let remainder = decimalString.substring(from: index)
+            formattedString.append(remainder)
+            textField.text = formattedString as String
+            return false
         }
         
         return true
