@@ -103,7 +103,7 @@ class OffersVC: UIViewController {
         let isReachable = reachbility.isReachable
         // Reachability
         if isReachable == false {
-            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
             return
         }
 
@@ -165,12 +165,12 @@ class OffersVC: UIViewController {
         let isReachable = reachbility.isReachable
         // Reachability
         if isReachable == false {
-            //self.showAlert(title: "", message: "Please check your internet connection".localized());
+            //self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
             DispatchQueue.main.async {
                 
             self.offersImageView.image = nil
             self.messageLabel.isHidden = false
-            self.messageLabel.text = "PLEASE CHECK YOUR INTERNET CONNECTION".localized()
+            self.messageLabel.text = "THE INTERENT CONNECTION APPEARS TO BE OFFLINE.".localized()
             }
             return
         }
@@ -250,14 +250,14 @@ class OffersVC: UIViewController {
                                     }   else {
                                         SwiftLoader.hide()
                                         self.messageLabel.isHidden = false
-                                        self.messageLabel.text = "PLEASE TRY AGAIN LATER".localized()
+                                        self.messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
                                     }
                                     
                                     
                                 } else {
                                     SwiftLoader.hide()
                                     self.messageLabel.isHidden = false
-                                    self.messageLabel.text = "PLEASE TRY AGAIN LATER".localized()
+                                    self.messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
                                 }
                             } else {
                                 SwiftLoader.hide()
@@ -296,7 +296,7 @@ class OffersVC: UIViewController {
     func loadImageFailed() {
         SwiftLoader.hide()
         messageLabel.isHidden = false
-        messageLabel.text = "PLEASE TRY AGAIN LATER".localized()
+        messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
     }
     
 }

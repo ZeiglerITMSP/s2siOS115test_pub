@@ -110,6 +110,12 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         
         getProfile()
 
+        if (self.tableView.contentSize.height < self.tableView.frame.size.height) {
+            self.tableView.isScrollEnabled = false
+        }
+        else {
+            self.tableView.isScrollEnabled = true
+        }
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -446,7 +452,7 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let isReachable = reachbility.isReachable
         // Reachability
         if isReachable == false {
-            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
             return
         }
         
@@ -624,7 +630,18 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
         let isReachable = reachbility.isReachable
         // Reachability
         if isReachable == false {
-            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            
+            let alertMessage = "The internet connection appears to be offline.".localized()
+            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                (action) in
+                self.view.endEditing(true)
+                _ = self.navigationController?.popViewController(animated: true)
+            })
+            
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+            
             return
         }
         
@@ -689,11 +706,21 @@ class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                   // HUD.hide()
+                    //HUD.hide()
                     SwiftLoader.hide()
-
-                    self.showAlert(title: "", message:error.localizedDescription);
-
+                    let message = error.localizedDescription
+                    let alertMessage = message
+                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                        (action) in
+                        self.view.endEditing(true)
+                        _ = self.navigationController?.popViewController(animated: true)
+                    })
+                    
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    
                 }
                 print("error")
                 break

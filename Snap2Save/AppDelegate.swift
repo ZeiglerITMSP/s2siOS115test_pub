@@ -233,7 +233,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isReachable = reachbility.isReachable
         // Reachability
         if isReachable == false {
-            let alertController = UIAlertController(title: "", message: "Please check your internet connection".localized(), preferredStyle: .alert)
+            let alertController = UIAlertController(title: "", message: "The internet connection appears to be offline.".localized(), preferredStyle: .alert)
             
             
             let okAction = UIAlertAction(title: "OK", style: .default, handler: { alert in

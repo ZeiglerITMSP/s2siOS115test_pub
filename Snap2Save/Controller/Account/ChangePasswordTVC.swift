@@ -63,7 +63,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnTableView(recognizer:)))
         self.view.addGestureRecognizer(tapGesture)
 
-        
+        self.tableView.bounces = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -152,7 +152,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         let isReachable = reachbility.isReachable
         // Reachability
         if isReachable == false {
-            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
             return
         }
         

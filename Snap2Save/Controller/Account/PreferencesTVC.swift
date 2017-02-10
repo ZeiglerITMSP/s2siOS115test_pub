@@ -102,7 +102,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         getProfile()
         
-        
+        self.tableView.bounces = false
     }
     
     
@@ -168,6 +168,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             self.emailPlaceHolderTextField.placeholderText = "EMAIL".localized()
             self.mobileNumberTextField.placeholderText = "10-DIGIT CELL PHONE NUMBER".localized()
             self.reEnterMobileNumberTextField.placeholderText = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
+
             self.reEnterEmailTextField.placeholderText = "RE-ENTER EMAIL".localized()
         }
     }
@@ -413,7 +414,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let isReachable = reachbility.isReachable
         // Reachability
         if isReachable == false {
-            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
             return
         }
         
@@ -638,7 +639,18 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         let isReachable = reachbility.isReachable
         // Reachability
         if isReachable == false {
-            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            
+            let alertMessage = "The internet connection appears to be offline.".localized()
+            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                (action) in
+                self.view.endEditing(true)
+                _ = self.navigationController?.popViewController(animated: true)
+            })
+            
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+
             return
         }
         
@@ -710,8 +722,18 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 DispatchQueue.main.async {
                     //HUD.hide()
                     SwiftLoader.hide()
-                    
-                    self.showAlert(title: "", message:error.localizedDescription);
+                    let message = error.localizedDescription
+                        let alertMessage = message
+                        let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                            (action) in
+                            self.view.endEditing(true)
+                            _ = self.navigationController?.popViewController(animated: true)
+                        })
+                        
+                        alertController.addAction(defaultAction)
+                        self.present(alertController, animated: true, completion: nil)
+
                     
                 }
                 //print("error)
@@ -722,45 +744,4 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
     }
     
-    /*func phoneNumberToUSForamt(textField : AIPlaceHolderTextField) -> Bool {
-     
-     let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-     let compo = newString.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
-     let decimalString = compo.joined(separator: "") as NSString
-     let length = decimalString.length
-     let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
-     
-     if length == 0 || (length > 10 && !hasLeadingOne) || length > 11
-     {
-     let newLength = (textField.text! as NSString).length + (string as NSString).length - range.length as Int
-     
-     return (newLength > 10) ? false : true
-     }
-     var index = 0 as Int
-     let formattedString = NSMutableString()
-     
-     if hasLeadingOne
-     {
-     formattedString.append("1 ")
-     index += 1
-     }
-     if (length - index) > 3
-     {
-     let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
-     formattedString.appendFormat("(%@)", areaCode)
-     index += 3
-     }
-     if length - index > 3
-     {
-     let prefix = decimalString.substring(with: NSMakeRange(index, 3))
-     formattedString.appendFormat(" %@-", prefix)
-     index += 3
-     }
-     
-     let remainder = decimalString.substring(from: index)
-     formattedString.append(remainder)
-     textField.text = formattedString as String
-     return false
-     
-     }*/
-}
+   }

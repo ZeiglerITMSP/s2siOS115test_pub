@@ -172,6 +172,8 @@
 // Reachability
 
 "Please check your internet connection" = "Por favor revise su conexion a internet";
+"The internet connection appears to be offline." = "La conexión a Internet aparece para estar offline.";
+
 
 // Alert Messages
 
@@ -193,8 +195,8 @@
 // Offers
 "Offers" = "Ofertas";
 "No offer exists."= "No existe ninguna oferta.";
-"PLEASE CHECK YOUR INTERNET CONNECTION" = "POR FAVOR REVISE SU CONEXION A INTERNET";
-"PLEASE TRY AGAIN LATER" = "POR FAVOR, INTÉNTELO DE NUEVO MÁS TARDE";
+"PLEASE TRY AGAIN LATER." = "POR FAVOR, INTÉNTELO DE NUEVO MÁS TARDE.";
+"THE INTERENT CONNECTION APPEARS TO BE OFFLINE." = "LA CONEXIÓN INTERENT APARECE PARA ESTAR OFFLINE.";
 
 
 // Services

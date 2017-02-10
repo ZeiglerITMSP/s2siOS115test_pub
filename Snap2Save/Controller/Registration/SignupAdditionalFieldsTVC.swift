@@ -484,7 +484,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let isReachable = reachbility.isReachable
         // Reachability
         if isReachable == false {
-            self.showAlert(title: "", message: "Please check your internet connection".localized());
+            self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
             return
         }
         
