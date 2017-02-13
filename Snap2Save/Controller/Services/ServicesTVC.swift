@@ -222,49 +222,12 @@ class ServicesTVC: UITableViewController {
             }
             self.navigationController?.show(servicesWebVc, sender: self)
         }
-            
-      /*  else if indexPath.section == 2 {
-            
-            let currentLanguage = Localize.currentLanguage()
-            let servicesWebVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "ServicesWebViewVC") as! ServicesWebViewVC
-            let infoScreens : [String : Any] = UserDefaults.standard.object(forKey: INFO_SCREENS) as! [String : Any]
-            
-            if indexPath.row == 0 {
-                var url = ""
-                if currentLanguage == "es" {
-                    url = infoScreens["terms_es"] as! String? ?? ""
-                }
-                else {
-                    url = infoScreens["terms"] as! String? ?? ""
-                }
-                servicesWebVc.loadUrl = url 
-                servicesWebVc.type = ServicesWebViewVC.ServiceType.termsOfService
-
-
-            }
-                
-            else if indexPath.row == 1 {
-                
-                var url = ""
-                if currentLanguage == "es" {
-                    url = infoScreens["privacy_es"] as! String? ?? ""
-                }
-                else {
-                    url = infoScreens["privacy"] as! String? ?? ""
-                }
-                servicesWebVc.loadUrl = url 
-                servicesWebVc.type = ServicesWebViewVC.ServiceType.privacyPolicy
-
-
-            }
-            self.navigationController?.show(servicesWebVc, sender: self)
-            
-        }*/
         
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
-
+    
+    
     
     // MARK: -
     
