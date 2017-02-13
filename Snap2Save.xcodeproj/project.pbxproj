@@ -47,7 +47,6 @@
 		E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */; };
 		E84AE9E31E0821B900C5E7F3 /* AITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9E21E0821B900C5E7F3 /* AITextField.swift */; };
 		E85D89C01E1A8815009CCABB /* Lorem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D89BF1E1A8815009CCABB /* Lorem.swift */; };
-		E8614C281E43608800D22481 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8614C271E43608800D22481 /* Loader.swift */; };
 		E863CEBC1E1BE72E00049F28 /* OffersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E863CEBB1E1BE72E00049F28 /* OffersVC.swift */; };
 		E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA54A1DF53C1300714C65 /* AppDelegate.swift */; };
 		E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA54E1DF53C1300714C65 /* Main.storyboard */; };
@@ -134,7 +133,6 @@
 		E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTVC.swift; sourceTree = "<group>"; };
 		E84AE9E21E0821B900C5E7F3 /* AITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AITextField.swift; sourceTree = "<group>"; };
 		E85D89BF1E1A8815009CCABB /* Lorem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lorem.swift; sourceTree = "<group>"; };
-		E8614C271E43608800D22481 /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		E863CEBB1E1BE72E00049F28 /* OffersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersVC.swift; sourceTree = "<group>"; };
 		E88BA5471DF53C1300714C65 /* Snap2Save.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap2Save.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA54A1DF53C1300714C65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -303,7 +301,6 @@
 			isa = PBXGroup;
 			children = (
 				974D5C381E2E5D9900918BAD /* SwiftLoader.swift */,
-				E8614C271E43608800D22481 /* Loader.swift */,
 				E85D89BF1E1A8815009CCABB /* Lorem.swift */,
 				E826FBCC1E0917BD0089AEA6 /* AppHelper.swift */,
 				E81B74AB1E1105EA00D5EC61 /* LanguageUtility.swift */,
@@ -783,7 +780,6 @@
 				E863CEBC1E1BE72E00049F28 /* OffersVC.swift in Sources */,
 				E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */,
 				E82283AA1E0A72BC008FE084 /* EBTWebView.swift in Sources */,
-				E8614C281E43608800D22481 /* Loader.swift in Sources */,
 				E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */,
 				E84AE9DC1E07F57800C5E7F3 /* PersonalInformationTVC.swift in Sources */,
 				E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */,
