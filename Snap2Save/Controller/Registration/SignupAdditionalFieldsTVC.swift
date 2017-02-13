@@ -585,7 +585,9 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                     if  let code = responseDict?["code"] {
                         let code = code as! NSNumber
                     if code.intValue == 200 {
-                        self.showSignUpAlert();
+                        let title = responseDict?["title"] ?? ""
+                        let message = responseDict?["message"] ?? ""
+                        self.showSignUpAlert(title : title as! String , message: message as! String);
                         self.view.endEditing(true)
                     }
                     else {
@@ -606,7 +608,6 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                     self.showAlert(title: "", message:error.localizedDescription);
 
                 }
-                //print("error)
                 break
             }
             
@@ -632,10 +633,10 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         }
     }
     
-    func showSignUpAlert() {
+    func showSignUpAlert(title : String , message : String) {
         
         // 1 - email 2- phone number
-        var contactPrefStr = 0
+      /*  var contactPrefStr = 0
         var contact = ""
         var text_email = ""
         
@@ -656,11 +657,13 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
 
         let titleStr : String = "SignUpAlertTitle".localized()
         
-        let messageStr : String = "Before you are able to log in we need to verify your %@. You should receive a confirmation %@ soon. When it arrives, simply click on the link in the %@ and that will complete your registration process.".localizedFormat(contact,text_email,text_email)
+        let messageStr : String = "Before you are able to log in we need to verify your %@. You should receive a confirmation %@ soon. When it arrives, simply click on the link in the %@ and that will complete your registration process.".localizedFormat(contact,text_email,text_email)*/
         
-        let signUpAlert = UIAlertController.init(title: titleStr, message:messageStr, preferredStyle: .alert)
+        let messageStr = message
+        let title = title
+        let signUpAlert = UIAlertController.init(title: title, message:messageStr, preferredStyle: .alert)
         
-        let hogan = NSMutableAttributedString(string: titleStr)
+        let hogan = NSMutableAttributedString(string: title)
         
         //Make the attributes, like size and color
         hogan.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFont(ofSize: 16.0), range: NSMakeRange(0,NSString(string: hogan.string).length))
@@ -679,7 +682,6 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         signUpAlert .addAction(closeBtn)
         self.present(signUpAlert, animated: true, completion:nil)
         signUpAlert.view.tintColor = APP_GRREN_COLOR
-
         
     }
     
