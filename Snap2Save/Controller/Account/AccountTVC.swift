@@ -200,6 +200,8 @@ class AccountTVC: UITableViewController {
 //        }
 //        
 
+        SwiftLoader.show(animated: true)
+        
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -217,43 +219,35 @@ class AccountTVC: UITableViewController {
                           "language":currentLanguage
             ]
         
-        ////print("parameters)
         let url = String(format: "%@/logOut", hostUrl)
-        ////print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
-            switch response.result {
-                
-            case .success:
-                //let json = JSON(data: response.data!)
-               // //print(""json response\(json)")
-                
-                //let appDomain = Bundle.main.bundleIdentifier
-                //UserDefaults.standard.removePersistentDomain(forName: appDomain!)
-                self.clearUserData()
-                
-                let storyBoard = UIStoryboard(name: "Main", bundle: nil);
-                let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
-                let user: User = User()
-                AppDelegate.getDelegate().user = user
-                
-                UIApplication.shared.keyWindow?.rootViewController = initialViewController
-                
-                break
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    self.showAlert(title: "", message:error.localizedDescription);
-                }
-                ////print("error)
-                break
-            }
             
+            self.moveTologinScree()
+            
+//            switch response.result {
+//                
+//            case .success:
+//                //let json = JSON(data: response.data!)
+//               // //print(""json response\(json)")
+//                
+//                //let appDomain = Bundle.main.bundleIdentifier
+//                //UserDefaults.standard.removePersistentDomain(forName: appDomain!)
+//                
+//                
+//                break
+//                
+//            case .failure(let error):
+//                
+//                DispatchQueue.main.async {
+//                    self.showAlert(title: "", message:error.localizedDescription);
+//                }
+//                ////print("error)
+//                break
+//            }
+//            
             
         }
     }
-    
-    
     
     func clearUserData() {
         // clear user data
@@ -264,8 +258,20 @@ class AccountTVC: UITableViewController {
         UserDefaults.standard.removeObject(forKey: INFO_SCREENS)
         
        // AppDelegate.getDelegate().setDetaultValues()
+    }
+    
+    func moveTologinScree() {
         
-        
+        // clear user data before you logout
+        self.clearUserData()
+        // hide activity
+        SwiftLoader.hide()
+        // get view controller to move
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil);
+        let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
+        let user: User = User()
+        AppDelegate.getDelegate().user = user
+        UIApplication.shared.keyWindow?.rootViewController = initialViewController
     }
     
     func updateSettings() {
