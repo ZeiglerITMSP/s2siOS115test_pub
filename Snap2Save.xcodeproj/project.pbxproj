@@ -21,6 +21,7 @@
 		978729DD1E0937B000908301 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978729DC1E0937B000908301 /* Constants.swift */; };
 		97DBC2131E35E04B00CD2C75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97DBC2121E35E04B00CD2C75 /* GoogleService-Info.plist */; };
 		97E4338B1E10E5F10095EABA /* USStateAbbreviations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97E4338A1E10E5F10095EABA /* USStateAbbreviations.plist */; };
+		E81A1C3D1E52EA9C00EA9D44 /* EBTHelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81A1C3C1E52EA9C00EA9D44 /* EBTHelpVC.swift */; };
 		E81B74AC1E1105EA00D5EC61 /* LanguageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81B74AB1E1105EA00D5EC61 /* LanguageUtility.swift */; };
 		E81E61671E2366E90016FE74 /* EBTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E61661E2366E90016FE74 /* EBTConstants.swift */; };
 		E81F4A061E3881E30029B3D9 /* EBTChangeEmailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81F4A051E3881E30029B3D9 /* EBTChangeEmailTVC.swift */; };
@@ -106,6 +107,7 @@
 		97E4338A1E10E5F10095EABA /* USStateAbbreviations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = USStateAbbreviations.plist; sourceTree = "<group>"; };
 		9FA0F034D23D4324814FDA78 /* Pods-Snap2SaveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveTests/Pods-Snap2SaveTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A18F168741D7F3E112F16B88 /* Pods_Snap2SaveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E81A1C3C1E52EA9C00EA9D44 /* EBTHelpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTHelpVC.swift; sourceTree = "<group>"; };
 		E81B74AB1E1105EA00D5EC61 /* LanguageUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageUtility.swift; sourceTree = "<group>"; };
 		E81E61661E2366E90016FE74 /* EBTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTConstants.swift; sourceTree = "<group>"; };
 		E81F4A051E3881E30029B3D9 /* EBTChangeEmailTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTChangeEmailTVC.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			children = (
 				E81E61661E2366E90016FE74 /* EBTConstants.swift */,
 				E837F0221E2F505E00BBDA9F /* EBTUser.swift */,
+				E81A1C3C1E52EA9C00EA9D44 /* EBTHelpVC.swift */,
 				E8BAE2A41E0BDDFB00A85AAB /* EBTLogin */,
 				E8BAE2A31E0BDDE200A85AAB /* EBTRegistration */,
 				E83C8AA01E1E4C2200BEA4A6 /* EBTDashboard */,
@@ -773,6 +776,7 @@
 				974D5C391E2E5D9900918BAD /* SwiftLoader.swift in Sources */,
 				976A99771E251A6400F82105 /* FacebookLogin.swift in Sources */,
 				E8BAE2AA1E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift in Sources */,
+				E81A1C3D1E52EA9C00EA9D44 /* EBTHelpVC.swift in Sources */,
 				E83156061E1A7EA3001D30D2 /* DetailedCell.swift in Sources */,
 				E81B74AC1E1105EA00D5EC61 /* LanguageUtility.swift in Sources */,
 				E8BAE2AF1E0BEF8000A85AAB /* EBTUserInformationTVC.swift in Sources */,

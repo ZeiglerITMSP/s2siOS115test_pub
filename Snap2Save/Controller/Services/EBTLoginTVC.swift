@@ -35,6 +35,8 @@ class EBTLoginTVC: UITableViewController {
     
     var tempLoginUrl = kEBTLoginUrl
     
+    var isHelpVCLoaded = false
+    
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
     
@@ -54,6 +56,17 @@ class EBTLoginTVC: UITableViewController {
     
     
     // Action
+    
+    @IBAction func helpButtonAction() {
+        
+        isHelpVCLoaded = true
+        
+        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EBTHelpVC") as! EBTHelpVC
+        self.navigationController?.pushViewController(vc, animated: false)
+        
+    }
+    
+    
     @IBAction func loginAction(_ sender: UIButton) {
         
         self.view.endEditing(true)
@@ -81,8 +94,6 @@ class EBTLoginTVC: UITableViewController {
         
         actionType = ActionType.registration
         validatePage()
-        
-       // performSegue(withIdentifier: "EBTCardNumberTVC", sender: nil)
     }
     
     
@@ -102,18 +113,14 @@ class EBTLoginTVC: UITableViewController {
             authenticateUserWithTouchID(toAutofill: false)
         }
         
-        
         UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
-        
-        
     }
     
     // MARK:-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        errorMessageLabel.text = nil
+        errorMessageLabel.text = ""
         updateBackButtonText()
         
         // configure fields
@@ -147,24 +154,30 @@ class EBTLoginTVC: UITableViewController {
         isTouchIdAvailable = AppHelper.isTouchIDAvailable()
         // loader
         AppHelper.configSwiftLoader()
+        
+        // Add help tab
+//        addHelpTab()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if isHelpVCLoaded == true {
+            return
+        }
+        
         reloadContent()
         autofillUserName()
-        
-//        if isProcessCancelled == false {
-//            checkForStatusMessage()
-//        } else {
-//            isProcessCancelled = false
-//        }
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if isHelpVCLoaded == true {
+            isHelpVCLoaded = false
+            return
+        }
         
         ebtWebView.responder = self
         
@@ -180,6 +193,7 @@ class EBTLoginTVC: UITableViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        
         // Register to receive notification
         NotificationCenter.default.addObserver(self, selector: #selector(popToLoginVC), name: notificationName, object: nil)
         LanguageUtility.removeObserverForLanguageChange(self)
@@ -190,6 +204,29 @@ class EBTLoginTVC: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - 
+//    func addHelpTab() {
+//        
+//        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EBTHelpVCNavigation") as! UINavigationController
+//        let tabBarController = self.tabBarController as! TabViewController
+//        tabBarController.viewControllers?.append(vc)
+//        
+//        vc.tabBarItem = UITabBarItem(title: "EBT HELP".localized(), image: UIImage(named: "tabbarOffersInactive"), selectedImage: UIImage(named: "tabbarOffersActive"))
+//        
+//        tabBarController.updateSelectedItemBackground()
+//    }
+//    
+//    func removeHelpTab() {
+//        
+////        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EBTHelpVCNavigation") as! UINavigationController
+//        
+//        let tabBarController = self.tabBarController as! TabViewController
+//        if tabBarController.viewControllers?.count == 4 {
+//            tabBarController.viewControllers?.removeLast()
+//            tabBarController.updateSelectedItemBackground()
+//        }
+//    }
     
     // MARK: - To Hide Keyboard
     
@@ -210,6 +247,7 @@ class EBTLoginTVC: UITableViewController {
     
     func backAction() {
         
+//        removeHelpTab()
        _ = self.navigationController?.popToRootViewController(animated: true)
     }
     

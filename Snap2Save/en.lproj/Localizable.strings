@@ -30,6 +30,8 @@
 "OFFERS" = "OFFERS";
 "SERVICES" = "SERVICES";
 "ACCOUNT" = "ACCOUNT";
+"EBT HELP" = "EBT HELP";
+
 
 // WelcomePageVc
 "Congratulations!" = "Congratulations!";
