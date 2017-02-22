@@ -161,12 +161,14 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         }
         
         let mobileNumber = mobileNumberTextField.text ?? ""
+        let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumber)
+
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let currentLanguage = Localize.currentLanguage()
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
 
-        let parameters  : Parameters = ["phone_number": mobileNumber,
+        let parameters  : Parameters = ["phone_number": phoneNumber,
                           "platform":"1",
                           "version_code": version_code,
                           "version_name": version_name,
