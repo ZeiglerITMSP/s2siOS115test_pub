@@ -25,6 +25,12 @@
 		E81B74AC1E1105EA00D5EC61 /* LanguageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81B74AB1E1105EA00D5EC61 /* LanguageUtility.swift */; };
 		E81E61671E2366E90016FE74 /* EBTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E61661E2366E90016FE74 /* EBTConstants.swift */; };
 		E81F4A061E3881E30029B3D9 /* EBTChangeEmailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81F4A051E3881E30029B3D9 /* EBTChangeEmailTVC.swift */; };
+		E82258C21E5D783100E8E17E /* RewardStatusTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82258C11E5D783100E8E17E /* RewardStatusTVC.swift */; };
+		E82258C41E5D946300E8E17E /* RedeemPointsTotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82258C31E5D946300E8E17E /* RedeemPointsTotalCell.swift */; };
+		E82258CB1E5D94EA00E8E17E /* RewardDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82258CA1E5D94EA00E8E17E /* RewardDetailCell.swift */; };
+		E82258D11E5D957C00E8E17E /* RewardRecentActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82258D01E5D957C00E8E17E /* RewardRecentActivityCell.swift */; };
+		E82258D31E5DB9DA00E8E17E /* RecentActivityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82258D21E5DB9DA00E8E17E /* RecentActivityHeader.swift */; };
+		E82258D51E5DC55700E8E17E /* RewardFilterTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82258D41E5DC55700E8E17E /* RewardFilterTVC.swift */; };
 		E822839E1E0A61F4008FE084 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E82283A01E0A61F4008FE084 /* Home.storyboard */; };
 		E82283AA1E0A72BC008FE084 /* EBTWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82283A91E0A72BC008FE084 /* EBTWebView.swift */; };
 		E82283AC1E0A72D3008FE084 /* BrowserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82283AB1E0A72D3008FE084 /* BrowserVC.swift */; };
@@ -110,6 +116,12 @@
 		E81B74AB1E1105EA00D5EC61 /* LanguageUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageUtility.swift; sourceTree = "<group>"; };
 		E81E61661E2366E90016FE74 /* EBTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTConstants.swift; sourceTree = "<group>"; };
 		E81F4A051E3881E30029B3D9 /* EBTChangeEmailTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTChangeEmailTVC.swift; sourceTree = "<group>"; };
+		E82258C11E5D783100E8E17E /* RewardStatusTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardStatusTVC.swift; sourceTree = "<group>"; };
+		E82258C31E5D946300E8E17E /* RedeemPointsTotalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemPointsTotalCell.swift; sourceTree = "<group>"; };
+		E82258CA1E5D94EA00E8E17E /* RewardDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardDetailCell.swift; sourceTree = "<group>"; };
+		E82258D01E5D957C00E8E17E /* RewardRecentActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardRecentActivityCell.swift; sourceTree = "<group>"; };
+		E82258D21E5DB9DA00E8E17E /* RecentActivityHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentActivityHeader.swift; sourceTree = "<group>"; };
+		E82258D41E5DC55700E8E17E /* RewardFilterTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardFilterTVC.swift; sourceTree = "<group>"; };
 		E822839F1E0A61F4008FE084 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		E82283A21E0A6AA5008FE084 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Home.strings; sourceTree = "<group>"; };
 		E82283A91E0A72BC008FE084 /* EBTWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTWebView.swift; sourceTree = "<group>"; };
@@ -227,6 +239,27 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		E82258C01E5D77FD00E8E17E /* Reward Status */ = {
+			isa = PBXGroup;
+			children = (
+				E82258C11E5D783100E8E17E /* RewardStatusTVC.swift */,
+				E82258D41E5DC55700E8E17E /* RewardFilterTVC.swift */,
+				E82258C91E5D949F00E8E17E /* Cells */,
+			);
+			name = "Reward Status";
+			sourceTree = "<group>";
+		};
+		E82258C91E5D949F00E8E17E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E82258C31E5D946300E8E17E /* RedeemPointsTotalCell.swift */,
+				E82258CA1E5D94EA00E8E17E /* RewardDetailCell.swift */,
+				E82258D01E5D957C00E8E17E /* RewardRecentActivityCell.swift */,
+				E82258D21E5DB9DA00E8E17E /* RecentActivityHeader.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		E82283A81E0A72A6008FE084 /* EBTTracking */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +327,7 @@
 				E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */,
 				E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */,
 				9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */,
+				E82258C01E5D77FD00E8E17E /* Reward Status */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -763,18 +797,23 @@
 				E84AE9E31E0821B900C5E7F3 /* AITextField.swift in Sources */,
 				E837F0231E2F505E00BBDA9F /* EBTUser.swift in Sources */,
 				9759BE781E0A65AA00A5C76A /* SignUpTVC.swift in Sources */,
+				E82258D11E5D957C00E8E17E /* RewardRecentActivityCell.swift in Sources */,
 				E84AE9D51E07F4B100C5E7F3 /* ForgotPasswordVC.swift in Sources */,
 				E83156041E1A5689001D30D2 /* EBTLoginSecurityQuestionTVC.swift in Sources */,
+				E82258CB1E5D94EA00E8E17E /* RewardDetailCell.swift in Sources */,
 				E81E61671E2366E90016FE74 /* EBTConstants.swift in Sources */,
 				977B64F51E163B5600AA802D /* User.swift in Sources */,
 				E83156081E1A7EB8001D30D2 /* DetailedSubtitleCell.swift in Sources */,
 				E826FBD61E0946970089AEA6 /* EBTLoginTVC.swift in Sources */,
+				E82258D51E5DC55700E8E17E /* RewardFilterTVC.swift in Sources */,
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
 				974D5C391E2E5D9900918BAD /* SwiftLoader.swift in Sources */,
 				976A99771E251A6400F82105 /* FacebookLogin.swift in Sources */,
 				E8BAE2AA1E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift in Sources */,
 				E81A1C3D1E52EA9C00EA9D44 /* EBTHelpVC.swift in Sources */,
 				E83156061E1A7EA3001D30D2 /* DetailedCell.swift in Sources */,
+				E82258C41E5D946300E8E17E /* RedeemPointsTotalCell.swift in Sources */,
+				E82258D31E5DB9DA00E8E17E /* RecentActivityHeader.swift in Sources */,
 				E81B74AC1E1105EA00D5EC61 /* LanguageUtility.swift in Sources */,
 				E8BAE2AF1E0BEF8000A85AAB /* EBTUserInformationTVC.swift in Sources */,
 				E8BAE2B11E0BF52E00A85AAB /* EBTConfirmationTVC.swift in Sources */,
@@ -792,6 +831,7 @@
 				978729DD1E0937B000908301 /* Constants.swift in Sources */,
 				E8BAE2AC1E0BE24400A85AAB /* EBTSelectPinTVC.swift in Sources */,
 				E84AE9D71E07F4BC00C5E7F3 /* ResetPasswordVC.swift in Sources */,
+				E82258C21E5D783100E8E17E /* RewardStatusTVC.swift in Sources */,
 				E826FBCD1E0917BD0089AEA6 /* AppHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

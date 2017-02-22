@@ -1,22 +1,19 @@
 //
-//  DetailedSubtitleCell.swift
-//  Snap2Save
+//  RewardRecentActivityCell.swift
+//  
 //
-//  Created by Appit on 1/2/17.
-//  Copyright © 2017 Appit. All rights reserved.
+//  Created by Appit on 2/22/17.
+//
 //
 
 import UIKit
-import Localize_Swift
 
-class DetailedSubtitleCell: UITableViewCell {
+class RewardRecentActivityCell: UITableViewCell {
 
-    
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var detailLabel: UILabel!
-    @IBOutlet var subtitleLabel: UILabel!
+    @IBOutlet var subDetailLabel: UILabel!
     
-    @IBOutlet weak var subtitleTwoLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

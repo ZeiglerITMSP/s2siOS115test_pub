@@ -149,6 +149,7 @@
 "Auto Log In" = "Auto Log In";
 "Personal Information" = "Personal Information";
 "Preferences" = "Preferences";
+"My Reward Program" = "My Reward Program";
 "Change Password" = "Change Password";
 "Log Out" = "Log Out";
 
@@ -203,6 +204,14 @@
 "Reward Program" = "Reward Program";
 
 
+// Reward Status
+"Reward Status" = "Reward Status";
+"Current Point Total" = "Current Point Total";
+"Lifetime Points Earned:" = "Lifetime Points Earned:";
+"REDEEM POINTS NOW" = "REDEEM POINTS NOW";
+"Unused Health Care Rebates" = "Unused Health Care Rebates";
+"RECENT ACTIVITY" = "RECENT ACTIVITY";
+"Filter" = "Filter";
 
 
 
