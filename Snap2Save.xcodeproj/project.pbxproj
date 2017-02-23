@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		52949BC23A183914DF6D1992 /* Pods_Snap2Save.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */; };
 		6FB268A6557A795CAD814A61 /* Pods_Snap2SaveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */; };
+		970C96381E5ED06E00697E56 /* RedeemPointsAddressTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970C96371E5ED06E00697E56 /* RedeemPointsAddressTVC.swift */; };
+		970C963A1E5EFBE400697E56 /* RedeemPointsMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970C96391E5EFBE400697E56 /* RedeemPointsMessageVC.swift */; };
+		970C963C1E5F09CE00697E56 /* RedeemHealthPointsMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970C963B1E5F09CE00697E56 /* RedeemHealthPointsMessageVC.swift */; };
 		9737ED0C1E14042400120B54 /* ChangePasswordTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */; };
 		974D5C331E2DF55400918BAD /* OffersDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974D5C321E2DF55400918BAD /* OffersDetailsViewController.swift */; };
 		974D5C351E2DFF5B00918BAD /* snap2save.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 974D5C341E2DFF5B00918BAD /* snap2save.jpeg */; };
@@ -97,6 +100,9 @@
 		6F98011C784DEC5A46937289 /* Pods-Snap2SaveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveTests/Pods-Snap2SaveTests.release.xcconfig"; sourceTree = "<group>"; };
 		70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2Save.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2SaveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		970C96371E5ED06E00697E56 /* RedeemPointsAddressTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemPointsAddressTVC.swift; sourceTree = "<group>"; };
+		970C96391E5EFBE400697E56 /* RedeemPointsMessageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemPointsMessageVC.swift; sourceTree = "<group>"; };
+		970C963B1E5F09CE00697E56 /* RedeemHealthPointsMessageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemHealthPointsMessageVC.swift; sourceTree = "<group>"; };
 		9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordTVC.swift; sourceTree = "<group>"; };
 		974D5C321E2DF55400918BAD /* OffersDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersDetailsViewController.swift; sourceTree = "<group>"; };
 		974D5C341E2DFF5B00918BAD /* snap2save.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = snap2save.jpeg; sourceTree = "<group>"; };
@@ -247,6 +253,9 @@
 				E82258C11E5D783100E8E17E /* RewardStatusTVC.swift */,
 				E82258D41E5DC55700E8E17E /* RewardFilterTVC.swift */,
 				E82258D61E5DD39200E8E17E /* RedeemPointsTVC.swift */,
+				970C96371E5ED06E00697E56 /* RedeemPointsAddressTVC.swift */,
+				970C96391E5EFBE400697E56 /* RedeemPointsMessageVC.swift */,
+				970C963B1E5F09CE00697E56 /* RedeemHealthPointsMessageVC.swift */,
 				E82258C91E5D949F00E8E17E /* Cells */,
 			);
 			name = "Reward Status";
@@ -787,6 +796,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				970C96381E5ED06E00697E56 /* RedeemPointsAddressTVC.swift in Sources */,
 				974D5C331E2DF55400918BAD /* OffersDetailsViewController.swift in Sources */,
 				9769997E1E2643A200D05AE8 /* ServicesWebViewVC.swift in Sources */,
 				E81F4A061E3881E30029B3D9 /* EBTChangeEmailTVC.swift in Sources */,
@@ -809,10 +819,12 @@
 				977B64F51E163B5600AA802D /* User.swift in Sources */,
 				E83156081E1A7EB8001D30D2 /* DetailedSubtitleCell.swift in Sources */,
 				E826FBD61E0946970089AEA6 /* EBTLoginTVC.swift in Sources */,
+				970C963C1E5F09CE00697E56 /* RedeemHealthPointsMessageVC.swift in Sources */,
 				E82258D51E5DC55700E8E17E /* RewardFilterTVC.swift in Sources */,
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
 				974D5C391E2E5D9900918BAD /* SwiftLoader.swift in Sources */,
 				976A99771E251A6400F82105 /* FacebookLogin.swift in Sources */,
+				970C963A1E5EFBE400697E56 /* RedeemPointsMessageVC.swift in Sources */,
 				E8BAE2AA1E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift in Sources */,
 				E81A1C3D1E52EA9C00EA9D44 /* EBTHelpVC.swift in Sources */,
 				E83156061E1A7EA3001D30D2 /* DetailedCell.swift in Sources */,

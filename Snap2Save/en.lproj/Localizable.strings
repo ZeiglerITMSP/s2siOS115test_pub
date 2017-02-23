@@ -213,6 +213,32 @@
 "RECENT ACTIVITY" = "RECENT ACTIVITY";
 "Filter" = "Filter";
 
+// Reward Filter
+"DATE RANGE" = "DATE RANGE";
+"FROM" = "FROM";
+"TO" = "TO";
+"FILTER" = "FILTER";
+
+// Redeem Points
+
+"To redeem 500 points, please make your selection and click Continue." = "To redeem 500 points, please make your selection and click Continue.";
+
+"$5 Save-A-Lot Gift Card" = "$5 Save-A-Lot Gift Card";
+"$10 Health Care Rebate" = "$10 Health Care Rebate";
+
+
+// Redeem message
+
+"Your Save-A-Lot gift card will be mailed within 15 days, so be sure to watch for an envelope from Snap2Save!" = "Your Save-A-Lot gift card will be mailed within 15 days, so be sure to watch for an envelope from Snap2Save!";
+
+"DONE" = "DONE";
+
+
+
+
+
+
+
 
 
 

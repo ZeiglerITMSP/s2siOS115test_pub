@@ -110,12 +110,6 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         
         getProfile()
 
-        if (self.tableView.contentSize.height < self.tableView.frame.size.height) {
-            self.tableView.isScrollEnabled = false
-        }
-        else {
-            self.tableView.isScrollEnabled = true
-        }
 
     }
     override func viewWillAppear(_ animated: Bool) {
