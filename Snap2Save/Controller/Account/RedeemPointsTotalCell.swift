@@ -8,10 +8,17 @@
 
 import UIKit
 
-class RedeemPointsTotalCell: UITableViewCell {
-
-    // Properties
+protocol RedeemPointsTotalDelegate {
     
+    func handleRedeemPoints()
+}
+
+class RedeemPointsTotalCell: UITableViewCell {
+    
+    // Properties
+    var delegate:RedeemPointsTotalDelegate?
+    
+    // Outlets
     @IBOutlet var currentPointTotalTitleLabel: UILabel!
     @IBOutlet var lifetimePointsEarnedTitleLabel: UILabel!
     @IBOutlet var lifetimePointsEarnedTitleValue: UILabel!
@@ -19,14 +26,10 @@ class RedeemPointsTotalCell: UITableViewCell {
     @IBOutlet var redeemPointsButton: UIButton!
     
     // Actions
-     @IBAction func redeemPointsButtonAction(_ sender: UIButton) {
+    @IBAction func redeemPointsButtonAction(_ sender: UIButton) {
         
-        
-        
+        self.delegate?.handleRedeemPoints()
     }
-    
-    
-    
     
     
     override func awakeFromNib() {

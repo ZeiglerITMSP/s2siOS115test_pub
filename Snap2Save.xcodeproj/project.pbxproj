@@ -31,6 +31,7 @@
 		E82258D11E5D957C00E8E17E /* RewardRecentActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82258D01E5D957C00E8E17E /* RewardRecentActivityCell.swift */; };
 		E82258D31E5DB9DA00E8E17E /* RecentActivityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82258D21E5DB9DA00E8E17E /* RecentActivityHeader.swift */; };
 		E82258D51E5DC55700E8E17E /* RewardFilterTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82258D41E5DC55700E8E17E /* RewardFilterTVC.swift */; };
+		E82258D71E5DD39200E8E17E /* RedeemPointsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82258D61E5DD39200E8E17E /* RedeemPointsTVC.swift */; };
 		E822839E1E0A61F4008FE084 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E82283A01E0A61F4008FE084 /* Home.storyboard */; };
 		E82283AA1E0A72BC008FE084 /* EBTWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82283A91E0A72BC008FE084 /* EBTWebView.swift */; };
 		E82283AC1E0A72D3008FE084 /* BrowserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82283AB1E0A72D3008FE084 /* BrowserVC.swift */; };
@@ -122,6 +123,7 @@
 		E82258D01E5D957C00E8E17E /* RewardRecentActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardRecentActivityCell.swift; sourceTree = "<group>"; };
 		E82258D21E5DB9DA00E8E17E /* RecentActivityHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentActivityHeader.swift; sourceTree = "<group>"; };
 		E82258D41E5DC55700E8E17E /* RewardFilterTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardFilterTVC.swift; sourceTree = "<group>"; };
+		E82258D61E5DD39200E8E17E /* RedeemPointsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemPointsTVC.swift; sourceTree = "<group>"; };
 		E822839F1E0A61F4008FE084 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		E82283A21E0A6AA5008FE084 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Home.strings; sourceTree = "<group>"; };
 		E82283A91E0A72BC008FE084 /* EBTWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTWebView.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			children = (
 				E82258C11E5D783100E8E17E /* RewardStatusTVC.swift */,
 				E82258D41E5DC55700E8E17E /* RewardFilterTVC.swift */,
+				E82258D61E5DD39200E8E17E /* RedeemPointsTVC.swift */,
 				E82258C91E5D949F00E8E17E /* Cells */,
 			);
 			name = "Reward Status";
@@ -788,6 +791,7 @@
 				9769997E1E2643A200D05AE8 /* ServicesWebViewVC.swift in Sources */,
 				E81F4A061E3881E30029B3D9 /* EBTChangeEmailTVC.swift in Sources */,
 				E83156021E1A561E001D30D2 /* EBTDashboardTVC.swift in Sources */,
+				E82258D71E5DD39200E8E17E /* RedeemPointsTVC.swift in Sources */,
 				E8BAE2A81E0BDEFD00A85AAB /* EBTCardNumberTVC.swift in Sources */,
 				E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */,
 				977B64F71E16407A00AA802D /* AdditionalInformation.swift in Sources */,

@@ -13,6 +13,9 @@ class RewardStatusTVC: UITableViewController {
     // Properties
     var languageSelectionButton: UIButton!
     
+    
+    
+    
     // MARK: -
     
     override func viewDidLoad() {
@@ -125,8 +128,9 @@ class RewardStatusTVC: UITableViewController {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "RedeemPointsTotalCell") as! RedeemPointsTotalCell
+                cell.delegate = self
+                // button style
                 AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: cell.redeemPointsButton, radius: 2.0, width: 1.0)
-                
                 // set text
                 cell.currentPointTotalTitleLabel.text = "Current Point Total".localized()
                 cell.lifetimePointsEarnedTitleLabel.text = "Lifetime Points Earned:".localized()
@@ -158,5 +162,12 @@ extension RewardStatusTVC: RecentActivityHeaderDelegate {
     
     func handleFilter() {
         self.performSegue(withIdentifier: "RewardFilterTVC", sender: self)
+    }
+}
+
+extension RewardStatusTVC: RedeemPointsTotalDelegate {
+    
+    func handleRedeemPoints() {
+        self.performSegue(withIdentifier: "RedeemPointsTVC", sender: self)
     }
 }
