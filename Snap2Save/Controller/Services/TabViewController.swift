@@ -85,11 +85,36 @@ class TabViewController: UITabBarController {
             for index in 0..<self.tabBar.items!.count {
                 
                 let tabBarItem = self.tabBar.items![index]
-                tabBarItem.title = titles[index].localized()
+                var title = ""
+                switch index {
+                case 0:
+                    title = "OFFERS".localized()
+                case 1:
+                    title = "SERVICES".localized()
+                case 2:
+                    title = "ACCOUNT".localized()
+                case 3:
+                    title = "EBT HELP".localized()
+                    
+                default: break
+                    
+                }
+                tabBarItem.title = title
+//                tabBarItem.title = titles[index].localized()
             }
         }
     }
-
+    
+    func removeHelpTab() {
+        
+        //        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EBTHelpVCNavigation") as! UINavigationController
+        
+        let tabBarController = self.tabBarController as! TabViewController
+        if tabBarController.viewControllers?.count == 4 {
+            tabBarController.viewControllers?.removeLast()
+            tabBarController.updateSelectedItemBackground()
+        }
+    }
     
 }
 
@@ -99,6 +124,8 @@ extension TabViewController: UITabBarControllerDelegate {
         
         updateSelectedItemBackground()
     }
+    
+    
     
 }
 

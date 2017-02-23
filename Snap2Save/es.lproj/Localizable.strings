@@ -30,7 +30,7 @@
 "OFFERS" = "OFERTAS";
 "SERVICES" = "SERVICIOS";
 "ACCOUNT" = "CUENTA";
-
+"EBT HELP" = "EBT AYDUA";
 
 
 // LoginVC
@@ -154,6 +154,7 @@
 "Auto Log In" = "Inicio de sesión automático";
 "Personal Information" = "Información personal";
 "Preferences" = "Preferencias";
+"My Reward Program" = "My Reward Program";
 "Change Password" = "Cambiar contraseña";
 "Log Out" = "Cerrar sesión";
 

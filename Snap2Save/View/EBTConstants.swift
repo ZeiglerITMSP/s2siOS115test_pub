@@ -42,7 +42,8 @@ let kEBTSignupUrl = kEBTBaseUrl + "ebt_registration_cardNumber.html"
 let kRememberMeEBT = "kRememberMeEBT"
 let kUserIdEBT = "kUserIdEBT"
 
-
+let kEBTHelp = "https://ucard.chase.com/help/english/welcomePage/index.htm?pageName=Welcome_eng.htm"
+let kEBTHelp_es = "https://ucard.chase.com/help/english/welcomePage/index.htm?pageName=Welcome_eng.htm"
 
 class EBTConstants: NSObject {
     

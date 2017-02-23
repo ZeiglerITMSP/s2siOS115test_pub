@@ -15,37 +15,44 @@ import PKHUD
 
 class AccountTVC: UITableViewController {
     
+    // Properties
     var languageSelectionButton: UIButton!
-    var infoArray : NSMutableArray!
+//    var infoArray : NSMutableArray!
     var user:User = User()
     
-    @IBOutlet var autoLoginLabel: UILabel!
+    enum Rows: Int {
+        case autoLogin
+        case personalInformation
+        case preferences
+        case myRewardProgram
+        case changePassword
+        
+        case count
+    }
     
+    // MARK: - Outlets
+    @IBOutlet var autoLoginLabel: UILabel!
     @IBOutlet var preferencesLabel: UILabel!
     @IBOutlet var personalInfoLabel: UILabel!
-    
+    @IBOutlet weak var myRewardProgramLabel: UILabel!
     @IBOutlet var logOutLabel: UILabel!
     @IBOutlet var changePasswordLabel: UILabel!
-    
     @IBOutlet var loginSwitch: UISwitch!
     
+    // MARK: - Actions
     @IBAction func autoLoginSwitchAction(_ sender: UISwitch) {
         self.updateSettings()
     }
+    
+    // MARK: -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        
+       
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
-        infoArray = ["Auto Log In","Personal Information","Preferences","Change Password"];
+//        infoArray = ["Auto Log In", "Personal Information", "Preferences", "My Reward Program", "Change Password"];
         
         AppHelper.configSwiftLoader()
         let data = UserDefaults.standard.object(forKey: LOGGED_USER)
@@ -80,7 +87,7 @@ class AccountTVC: UITableViewController {
         self.showLanguageSelectionAlert()
     }
     
-    func reloadContent(){
+    func reloadContent() {
         
         DispatchQueue.main.async {
      
@@ -88,11 +95,10 @@ class AccountTVC: UITableViewController {
             
             self.navigationItem.title = "Account".localized()
             
-//            self.navigationController?.navigationItem.title = "Acc"
-            
             self.autoLoginLabel.text = "Auto Log In".localized()
             self.personalInfoLabel.text = "Personal Information".localized()
             self.preferencesLabel.text = "Preferences".localized()
+            self.myRewardProgramLabel.text = "My Reward Program".localized()
             self.changePasswordLabel.text = "Change Password".localized()
             self.logOutLabel.text = "Log Out".localized()
             
@@ -107,19 +113,16 @@ class AccountTVC: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        if section == 0{
-            return infoArray.count
-        }
-        else if section == 1{
+    
+        if section == 0 {
+            return Rows.count.rawValue
+        } else if section == 1 {
             return 1
-        }
-        else{
+        } else {
             return 0
         }
     }
@@ -128,18 +131,15 @@ class AccountTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
-            if indexPath.row == 0 {
+            if indexPath.row == Rows.autoLogin.rawValue {
             
-            }
-            else if indexPath.row == 1 {
+            } else if indexPath.row == Rows.personalInformation.rawValue {
                 self.performSegue(withIdentifier: "PersonalInformationTVC", sender: self)
-            }
-            else if indexPath.row == 2 {
-                //PreferencesTVC
+            } else if indexPath.row == Rows.preferences.rawValue {
                 self.performSegue(withIdentifier: "PreferencesTVC", sender: self)
-                
-            }
-            else if indexPath.row == 3 {
+            } else if indexPath.row == Rows.myRewardProgram.rawValue {
+                self.performSegue(withIdentifier: "RewardStatusTVC", sender: self)
+            } else if indexPath.row == Rows.changePassword.rawValue {
                 self.performSegue(withIdentifier: "ChangePasswordTVC", sender: self)
             }
         }
@@ -162,7 +162,7 @@ class AccountTVC: UITableViewController {
         
         let isFaceBookUser = user.signup_type
         if indexPath.section == 0 {
-        if indexPath.row == 3 {
+        if indexPath.row == Rows.changePassword.rawValue {
             if  isFaceBookUser == "2" {
                 return 0
             }
@@ -200,6 +200,8 @@ class AccountTVC: UITableViewController {
 //        }
 //        
 
+        SwiftLoader.show(animated: true)
+        
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -217,43 +219,35 @@ class AccountTVC: UITableViewController {
                           "language":currentLanguage
             ]
         
-        ////print("parameters)
         let url = String(format: "%@/logOut", hostUrl)
-        ////print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
-            switch response.result {
-                
-            case .success:
-                //let json = JSON(data: response.data!)
-               // //print(""json response\(json)")
-                
-                //let appDomain = Bundle.main.bundleIdentifier
-                //UserDefaults.standard.removePersistentDomain(forName: appDomain!)
-                self.clearUserData()
-                
-                let storyBoard = UIStoryboard(name: "Main", bundle: nil);
-                let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
-                let user: User = User()
-                AppDelegate.getDelegate().user = user
-                
-                UIApplication.shared.keyWindow?.rootViewController = initialViewController
-                
-                break
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    self.showAlert(title: "", message:error.localizedDescription);
-                }
-                ////print("error)
-                break
-            }
             
+            self.moveTologinScree()
+            
+//            switch response.result {
+//                
+//            case .success:
+//                //let json = JSON(data: response.data!)
+//               // //print(""json response\(json)")
+//                
+//                //let appDomain = Bundle.main.bundleIdentifier
+//                //UserDefaults.standard.removePersistentDomain(forName: appDomain!)
+//                
+//                
+//                break
+//                
+//            case .failure(let error):
+//                
+//                DispatchQueue.main.async {
+//                    self.showAlert(title: "", message:error.localizedDescription);
+//                }
+//                ////print("error)
+//                break
+//            }
+//            
             
         }
     }
-    
-    
     
     func clearUserData() {
         // clear user data
@@ -264,8 +258,20 @@ class AccountTVC: UITableViewController {
         UserDefaults.standard.removeObject(forKey: INFO_SCREENS)
         
        // AppDelegate.getDelegate().setDetaultValues()
+    }
+    
+    func moveTologinScree() {
         
-        
+        // clear user data before you logout
+        self.clearUserData()
+        // hide activity
+        SwiftLoader.hide()
+        // get view controller to move
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil);
+        let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
+        let user: User = User()
+        AppDelegate.getDelegate().user = user
+        UIApplication.shared.keyWindow?.rootViewController = initialViewController
     }
     
     func updateSettings() {

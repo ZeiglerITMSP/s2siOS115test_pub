@@ -12,7 +12,7 @@ import Alamofire
 import Localize_Swift
 import PKHUD
 
-class PersonalInformationTVC: UITableViewController,AITextFieldProtocol {
+class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
 
     enum DropDownTags:Int {
         case states = 100
