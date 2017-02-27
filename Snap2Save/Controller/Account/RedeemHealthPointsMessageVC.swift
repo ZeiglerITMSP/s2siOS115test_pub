@@ -33,6 +33,8 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
 
     @IBAction func doneButtonAction(_ sender: UIButton) {
         
+        let rewardStatusVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "RewardStatusTVC") 
+        self.navigationController?.show(rewardStatusVc, sender: self)
         
     }
     override func viewDidLoad() {
@@ -106,34 +108,51 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
             self.addressLabel1.text = "5075 Lincoln Street".localized()
             self.addressLine2.text = "Denver, CO 80216".localized()
             self.addressLine3.text = "(303) 458- 5302".localized()
-          
             
-            let subscriptionNotice:String = "By signing up you are agreeing to the Privacy Policy and End User Agreement of ShiftChange."
+            let subscriptionNotice:String = "www.clinicatepeyac.org"
             
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineHeightMultiple = 1.2
             
             let subscriptionNoticeAttributedString = NSAttributedString(string:subscriptionNotice, attributes: [
-                NSFontAttributeName: UIFont.systemFont(ofSize: 13),
+                NSFontAttributeName: UIFont.systemFont(ofSize: 16),
                 NSParagraphStyleAttributeName: paragraphStyle,
-                NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.80).cgColor,
+                NSForegroundColorAttributeName: UIColor(red: 0.0/0.0,
+                                                        green: 122.0/255.0,
+                                                        blue: 255.0/255.0,
+                                                        alpha: 1) ,
                 ])
             let subscriptionNoticeLinkAttributes = [
-                NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13),
-                NSForegroundColorAttributeName: UIColor.white,
+                NSFontAttributeName: UIFont.boldSystemFont(ofSize: 16),
+                NSForegroundColorAttributeName: UIColor(red: 0.0/0.0,
+                                                        green: 122.0/255.0,
+                                                        blue: 255.0/255.0,
+                                                        alpha: 1),
                 NSUnderlineStyleAttributeName: true
                 ] as [String : Any]
-            let subscriptionNoticeActiveLinkAttributes = [
-                NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13),
-                NSForegroundColorAttributeName: UIColor.gray,
-                NSUnderlineStyleAttributeName: true
-                ] as [String : Any]
+            self.urlLinkLabel.textAlignment = NSTextAlignment.left
+            self.urlLinkLabel.delegate = self
+            self.urlLinkLabel.numberOfLines = 0
+            self.urlLinkLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+            //self.urlLinkLabel.textInsets = UIEdgeInsets(top:10, left:15, bottom:0, right:15)
+            self.urlLinkLabel.setText(subscriptionNoticeAttributedString)
+            self.urlLinkLabel.linkAttributes = subscriptionNoticeLinkAttributes
+            self.urlLinkLabel.activeLinkAttributes = subscriptionNoticeLinkAttributes
             
-
+            let subscribeLinkRange = (subscriptionNotice as NSString).range(of: "www.clinicatepeyac.org")
+            let subscribeURL = NSURL(string:"www.clinicatepeyac.org")!
+            self.urlLinkLabel.addLink(to: subscribeURL as URL!, with:subscribeLinkRange)
             
         }
     }
 
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        
+        let storyboard = UIStoryboard(name: "Home", bundle: nil) as UIStoryboard
+        let redeemVc = storyboard.instantiateViewController(withIdentifier: "RedeemPointsWebVC") as! RedeemPointsWebVC
+        redeemVc.loadUrlStr = "https://www.google.co.in/"
+        self.navigationController?.pushViewController(redeemVc, animated: true)
+    }
 
     
     /*

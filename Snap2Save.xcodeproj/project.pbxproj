@@ -16,6 +16,7 @@
 		974D5C331E2DF55400918BAD /* OffersDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974D5C321E2DF55400918BAD /* OffersDetailsViewController.swift */; };
 		974D5C351E2DFF5B00918BAD /* snap2save.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 974D5C341E2DFF5B00918BAD /* snap2save.jpeg */; };
 		974D5C391E2E5D9900918BAD /* SwiftLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974D5C381E2E5D9900918BAD /* SwiftLoader.swift */; };
+		975006B01E64346500CD80F8 /* RedeemPointsWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975006AF1E64346500CD80F8 /* RedeemPointsWebVC.swift */; };
 		9759BE781E0A65AA00A5C76A /* SignUpTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */; };
 		9769997E1E2643A200D05AE8 /* ServicesWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9769997D1E2643A200D05AE8 /* ServicesWebViewVC.swift */; };
 		976A99771E251A6400F82105 /* FacebookLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A99761E251A6400F82105 /* FacebookLogin.swift */; };
@@ -107,6 +108,7 @@
 		974D5C321E2DF55400918BAD /* OffersDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersDetailsViewController.swift; sourceTree = "<group>"; };
 		974D5C341E2DFF5B00918BAD /* snap2save.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = snap2save.jpeg; sourceTree = "<group>"; };
 		974D5C381E2E5D9900918BAD /* SwiftLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLoader.swift; sourceTree = "<group>"; };
+		975006AF1E64346500CD80F8 /* RedeemPointsWebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemPointsWebVC.swift; sourceTree = "<group>"; };
 		9759BE771E0A65AA00A5C76A /* SignUpTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTVC.swift; sourceTree = "<group>"; };
 		9769997D1E2643A200D05AE8 /* ServicesWebViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesWebViewVC.swift; sourceTree = "<group>"; };
 		976A99761E251A6400F82105 /* FacebookLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLogin.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				970C96371E5ED06E00697E56 /* RedeemPointsAddressTVC.swift */,
 				970C96391E5EFBE400697E56 /* RedeemPointsMessageVC.swift */,
 				970C963B1E5F09CE00697E56 /* RedeemHealthPointsMessageVC.swift */,
+				975006AF1E64346500CD80F8 /* RedeemPointsWebVC.swift */,
 				E82258C91E5D949F00E8E17E /* Cells */,
 			);
 			name = "Reward Status";
@@ -818,6 +821,7 @@
 				E81E61671E2366E90016FE74 /* EBTConstants.swift in Sources */,
 				977B64F51E163B5600AA802D /* User.swift in Sources */,
 				E83156081E1A7EB8001D30D2 /* DetailedSubtitleCell.swift in Sources */,
+				975006B01E64346500CD80F8 /* RedeemPointsWebVC.swift in Sources */,
 				E826FBD61E0946970089AEA6 /* EBTLoginTVC.swift in Sources */,
 				970C963C1E5F09CE00697E56 /* RedeemHealthPointsMessageVC.swift in Sources */,
 				E82258D51E5DC55700E8E17E /* RewardFilterTVC.swift in Sources */,

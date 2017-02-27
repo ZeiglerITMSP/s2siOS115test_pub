@@ -13,9 +13,6 @@ class RewardStatusTVC: UITableViewController {
     // Properties
     var languageSelectionButton: UIButton!
     
-    
-    
-    
     // MARK: -
     
     override func viewDidLoad() {
@@ -52,7 +49,7 @@ class RewardStatusTVC: UITableViewController {
     // MARK: -
     
     func backAction() {
-        _ = self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popToRootViewController(animated: true)
     }
     
     func languageButtonClicked() {

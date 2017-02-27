@@ -253,7 +253,7 @@ class AITextField: UITextField {
         let toolBar = UIToolbar()
         toolBar.frame = CGRect(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 44)
         
-        
+        toolBar.tintColor = APP_ORANGE_COLOR
         let doneButton = UIBarButtonItem(title: "Done".localized(), style: .done, target: self, action: #selector(AITextField.doneButtonClicked))
         
 //        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(AITextField.doneButtonClicked))
@@ -477,7 +477,6 @@ extension AITextField: UIPickerViewDelegate, UIPickerViewDataSource {
         label.text = self.pickerViewArray?.object(at: row) as! String?
         label.font = UIFont.systemFont(ofSize: 24.0)
         label.textAlignment = .center
-//        label.sizeToFit()
         return label;
     }
     

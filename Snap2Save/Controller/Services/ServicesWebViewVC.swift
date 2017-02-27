@@ -53,7 +53,6 @@ class ServicesWebViewVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         oldLanguage = Localize.currentLanguage()
-        
         reloadContent()
     }
     

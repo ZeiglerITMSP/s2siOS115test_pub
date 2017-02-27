@@ -12,7 +12,7 @@ class RedeemPointsTVC: UITableViewController {
 
     
     var languageSelectionButton: UIButton!
-
+    var  isSelected : Bool?
     // outlets
     
     @IBOutlet var redeemPointsTitleLabel: UILabel!
@@ -30,22 +30,29 @@ class RedeemPointsTVC: UITableViewController {
     // Actions
     
     @IBAction func continueButtonAction(_ sender: UIButton) {
-        
+        if isSelected == true {
         self.performSegue(withIdentifier: "redeemPointsAddressTVC", sender: self)
+            
+        }
+        else {
+            let storyboard = UIStoryboard(name: "Home", bundle: nil) as UIStoryboard
+            let redeemVc = storyboard.instantiateViewController(withIdentifier: "RedeemHealthPointsMessageVC") as! RedeemHealthPointsMessageVC
+            self.navigationController?.pushViewController(redeemVc, animated: true)        }
         
     }
     @IBAction func saveALotButtonAction(_ sender: UIButton) {
-        
+        isSelected = true
         self.saveALotButton.setImage(UIImage.init(named: "radioOn"), for: .normal)
         self.healthCareButton.setImage(UIImage.init(named: "radioOff"), for: .normal)
     }
     
     @IBAction func healthCareButtonAction(_ sender: UIButton) {
-        
+        isSelected = false
         self.saveALotButton.setImage(UIImage.init(named: "radioOff"), for: .normal)
         self.healthCareButton.setImage(UIImage.init(named: "radioOn"), for: .normal)
         
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,6 +66,7 @@ class RedeemPointsTVC: UITableViewController {
         
         self.saveALotButton.setImage(UIImage.init(named: "radioOn"), for: .normal)
         self.healthCareButton.setImage(UIImage.init(named: "radioOff"), for: .normal)
+        isSelected = true
         
     }
 
@@ -80,6 +88,16 @@ class RedeemPointsTVC: UITableViewController {
         LanguageUtility.removeObserverForLanguageChange(self)
         super.viewDidDisappear(animated)
     }
+
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            let isSel = isSelected
+            if segue.identifier == "redeemPointsAddressTVC" {
+                let addressVC = segue.destination as! RedeemPointsAddressTVC
+                addressVC.isSelectedSaveAlotGiftCard = isSel
+            }
+            
+        }
+    
 
     func backAction() {
         _ = self.navigationController?.popViewController(animated: true)

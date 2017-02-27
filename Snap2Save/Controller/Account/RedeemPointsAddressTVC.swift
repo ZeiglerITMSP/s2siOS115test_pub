@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Localize_Swift
+import Alamofire
+import  SwiftyJSON
+
 
 class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
 
@@ -18,7 +22,11 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
 
     var statesArray : NSMutableArray?
     
+    var isSelectedSaveAlotGiftCard : Bool?
+    
     var selectedStateIndex : NSInteger!
+    
+    var user : User = User()
 
     @IBOutlet var messageLabel: UILabel!
     
@@ -57,7 +65,10 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
     
     @IBAction func redeemNowButtonAction(_ sender: UIButton) {
         
-        self.performSegue(withIdentifier: "RedeemPointsMessageVC", sender: self)
+        if isSelectedSaveAlotGiftCard == true {
+            self.performSegue(withIdentifier: "RedeemPointsMessageVC", sender: self)
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -80,6 +91,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         loadTextFields();
+        getProfile()
         
     }
     
@@ -302,5 +314,126 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         }
     }
     
+
+    func getProfile(){
+        
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        if isReachable == false {
+            
+            let alertMessage = "The internet connection appears to be offline.".localized()
+            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                (action) in
+                self.view.endEditing(true)
+                _ = self.navigationController?.popViewController(animated: true)
+            })
+            
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
+        let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
+        let currentLanguage = Localize.currentLanguage()
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
+        
+        let parameters : Parameters = ["user_id": user_id,
+                                       "platform":"1",
+                                       "version_code": version_code,
+                                       "version_name": version_name,
+                                       "device_id": device_id,
+                                       "push_token":"",
+                                       "auth_token": auth_token,
+                                       "language": currentLanguage
+        ]
+        
+        print(parameters)
+        // HUD.allowsInteraction = false
+        // HUD.dimsBackground = false
+        // HUD.show(.progress)
+        
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
+        let url = String(format: "%@/getProfile", hostUrl)
+        //print("url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            switch response.result {
+                
+            case .success:
+                DispatchQueue.main.async {
+                    // HUD.hide()
+                    SwiftLoader.hide()
+                }
+                
+                let json = JSON(data: response.data!)
+                //print(""json response\(json)")
+                let responseDict = json.dictionaryObject
+                if let code = responseDict?["code"] {
+                    let code = code as! NSNumber
+                    if code.intValue == 200 {
+                        if let userDict = responseDict?["user"] {
+                            self.user = User.prepareUser(dictionary: userDict as! [String : Any])
+                            // self.user.auth_token = responseDict?["auth_token"] as! String
+                            let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
+                            UserDefaults.standard.set(userData, forKey: USER_DATA)
+                            self.loadUserInformation()
+                        }
+                    }
+                    else {
+                        if let messageString = responseDict?["message"]{
+                            let alertMessage : String = messageString as! String
+                            self.showAlert(title: "", message: alertMessage)
+                        }
+                    }
+                }
+                break
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    //HUD.hide()
+                    SwiftLoader.hide()
+                    let message = error.localizedDescription
+                    let alertMessage = message
+                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                        (action) in
+                        self.view.endEditing(true)
+                        _ = self.navigationController?.popViewController(animated: true)
+                    })
+                    
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    
+                }
+                //print("error")
+                break
+            }
+            
+        }
+        
+    }
+    
+    func loadUserInformation() {
+        
+        let userData = UserDefaults.standard.object(forKey: USER_DATA)
+        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
+        let user:User = userInfo as! User
+        
+        firstNameTF.text = user.additionalInformation?.first_name
+        lastNameTf.text = user.additionalInformation?.last_name
+        addressLine1Tf.text = user.additionalInformation?.address_line1
+        addressLine2Tf.text = user.additionalInformation?.address_line2
+        cityTf.text = user.additionalInformation?.city
+        stateTf.text = user.additionalInformation?.state
+        zipCodeTf.text = user.zipcode
+    }
 
 }

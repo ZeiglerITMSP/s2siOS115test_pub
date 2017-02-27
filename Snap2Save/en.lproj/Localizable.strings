@@ -221,6 +221,7 @@
 
 // Redeem Points
 
+"Redeem Points" = "Redeem Points";
 "To redeem 500 points, please make your selection and click Continue." = "To redeem 500 points, please make your selection and click Continue.";
 
 "$5 Save-A-Lot Gift Card" = "$5 Save-A-Lot Gift Card";
@@ -233,14 +234,17 @@
 
 "DONE" = "DONE";
 
+// redeem message for health card
 
+"A $10 health care rebate has been added to your account!" = "A $10 health care rebate has been added to your account!";
+"To redeem health care rebates at Clinica Tepeyac, simply provide them with the 10-digit cell phone number on your Snap2Save account the next time you receive health care services at their clinic. They will verify your eligibility online and apply the credit to the cost of your visit or procedure." = "To redeem health care rebates at Clinica Tepeyac, simply provide them with the 10-digit cell phone number on your Snap2Save account the next time you receive health care services at their clinic. They will verify your eligibility online and apply the credit to the cost of your visit or procedure.";
 
+"Clinica Tepeyac" = "Clinica Tepeyac";
+"5075 Lincoln Street" = "5075 Lincoln Street";
 
-
-
-
-
-
+"Denver, CO 80216" = "Denver, CO 80216";
+"(303) 458- 5302" = "(303) 458- 5302";
+"www.clinicatepeyac.org" = "www.clinicatepeyac.org";
 
 
 
