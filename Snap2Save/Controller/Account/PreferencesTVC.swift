@@ -675,7 +675,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                                        "language": currentLanguage
         ]
         
-        //print("parameters)
+        print(parameters)
         let url = String(format: "%@/getProfile", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in

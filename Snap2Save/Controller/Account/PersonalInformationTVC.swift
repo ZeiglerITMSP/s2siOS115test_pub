@@ -13,7 +13,7 @@ import Localize_Swift
 import PKHUD
 
 class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
-
+    
     enum DropDownTags:Int {
         case states = 100
         case gender
@@ -32,8 +32,8 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
     var selectedGenderIndex : NSInteger!
     var selectedAgeGroupIndex : NSInteger!
     var SelectedEthnicityIndex : NSInteger!
-
-// outlets
+    
+    // outlets
     
     
     @IBOutlet var userInformationLabel: UILabel!
@@ -90,14 +90,14 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         AppHelper.configSwiftLoader()
-
+        
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: saveButton, radius: 2.0, width: 1.0)
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -109,21 +109,15 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         self.view.addGestureRecognizer(tapGesture)
         
         getProfile()
-
-        if (self.tableView.contentSize.height < self.tableView.frame.size.height) {
-            self.tableView.isScrollEnabled = false
-        }
-        else {
-            self.tableView.isScrollEnabled = true
-        }
-
+        
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
         AppHelper.getScreenName(screenName: "Personal Information screen")
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
@@ -133,12 +127,12 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         LanguageUtility.removeObserverForLanguageChange(self)
         super.viewDidDisappear(animated)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: -
     
     func tapOnTableView(recognizer: UITapGestureRecognizer) {
@@ -146,7 +140,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         self.view.endEditing(true)
     }
     
-
+    
     func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
@@ -162,7 +156,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
         self.title = "Personal Information".localized()
         self.updateTextFieldsUi()
-
+        
         self.userInformationLabel.text = "USER INFORMATION".localized()
         self.firstNameLabel.text = "FIRST NAME".localized()
         self.lastNamelabel.text = "LAST NAME".localized()
@@ -213,35 +207,35 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         if self.SelectedEthnicityIndex != nil {
             self.ethnicityTextField.text = self.ethnicityArray.object(at: self.SelectedEthnicityIndex - 1) as? String
         }
-
+        
         self.tableView.reloadData()
-
+        
         
     }
     
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 11
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-// MARK: -
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    // MARK: -
     
     func loadTextFields(){
         
@@ -250,7 +244,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         ageGroupTextField.tag = 102
         ethnicityTextField.tag = 103
         
-
+        
         firstNameTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         firstNameTextField.updateUIAsPerTextFieldType()
         
@@ -315,7 +309,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         ethnicityTextField.setRightGap(width: 10, placeHolderImage:  UIImage.init(named: "ic_downarrow_input")!)
         ethnicityTextField.text_Color =  UIColor.black
         
-               cityTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
+        cityTextField.textFieldType = AITextField.AITextFieldType.NormalTextField
         cityTextField.updateUIAsPerTextFieldType()
         cityTextField.createUnderline(withColor: APP_LINE_COLOR, padding: 0, height: 1)
         cityTextField.placeHolderLabel = cityLabel
@@ -370,7 +364,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         
         stateTextField.pickerViewArray = statesArray
     }
-
+    
     
     func updateTextFieldsUi(){
         
@@ -389,7 +383,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         zipCodeTextField.updateUIAsPerTextFieldType()
         
     }
-
+    
     // MARK: - AITextField Delegate
     
     func getSelectedIndexFromPicker(selectedIndex: NSInteger, textField: AITextField) {
@@ -408,7 +402,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
             SelectedEthnicityIndex = index+1
         }
     }
-
+    
     func keyBoardHidden(textField: UITextField) {
         if textField == firstNameTextField{
             lastNameTextField.becomeFirstResponder()
@@ -442,7 +436,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
             textField.resignFirstResponder()
         }
     }
-
+    
     func updateUserInformation(){
         
         if !isValid() {
@@ -462,7 +456,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         //print(""user info \(userInfo)")
         
         let user:User = userInfo as! User
-
+        
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -477,7 +471,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         var age_group = ""
         var ethnicity = ""
         let currentLanguage = Localize.currentLanguage()
-
+        
         if selectedGenderIndex != nil{
             gender =  String.init(format: "%d", selectedGenderIndex)
         }
@@ -490,7 +484,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         else{
             age_group = user.additionalInformation?.age_group ?? ""
         }
-
+        
         if SelectedEthnicityIndex != nil{
             ethnicity  = String.init(format: "%d", SelectedEthnicityIndex)
         }
@@ -500,27 +494,27 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
         
-
+        
         let parameters : Parameters = ["first_name" : first_name,
-                          "last_name" : last_name,
-                          "address_line1" : address_line1,
-                          "address_line2" : address_line2,
-                          "city":city,
-                          "state": state,
-                          "gender": gender,
-                          "age_group": age_group,
-                          "referral_code": "",
-                          "ethnicity": ethnicity,
-                          "user_id": user_id,
-                          "platform":"1",
-                          "zipcode" : zipCode,
-                          "version_code": version_code,
-                          "version_name": version_name,
-                          "device_id": device_id,
-                          "push_token":"",
-                          "auth_token": auth_token,
-                          "language":currentLanguage
-            ]
+                                       "last_name" : last_name,
+                                       "address_line1" : address_line1,
+                                       "address_line2" : address_line2,
+                                       "city":city,
+                                       "state": state,
+                                       "gender": gender,
+                                       "age_group": age_group,
+                                       "referral_code": "",
+                                       "ethnicity": ethnicity,
+                                       "user_id": user_id,
+                                       "platform":"1",
+                                       "zipcode" : zipCode,
+                                       "version_code": version_code,
+                                       "version_name": version_name,
+                                       "device_id": device_id,
+                                       "push_token":"",
+                                       "auth_token": auth_token,
+                                       "language":currentLanguage
+        ]
         
         saveActivityIndicator.startAnimating()
         //print("parameters)
@@ -565,9 +559,9 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
             
         }
     }
-
+    
     func loadUserInformation(){
-       // //print(""user id\(self.user.id)")
+        // //print(""user id\(self.user.id)")
         let userData = UserDefaults.standard.object(forKey: USER_DATA)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
         
@@ -575,7 +569,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         
         let user:User = userInfo as! User
         
-       // let userAdditionalInfo : AdditionalInformation = self.user.additionalInformation!
+        // let userAdditionalInfo : AdditionalInformation = self.user.additionalInformation!
         firstNameTextField.text = user.additionalInformation?.first_name
         lastNameTextField.text = user.additionalInformation?.last_name
         addressLine1TextField.text = user.additionalInformation?.address_line1
@@ -584,42 +578,85 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         stateTextField.text = user.additionalInformation?.state
         zipCodeTextField.text = user.zipcode
         
-       if (user.additionalInformation?.gender) != nil {
+        if let gender = user.additionalInformation?.gender {
+            if let index = Int(gender) {
+                if index == 0 {
+                    genderTextField.text = ""
+                } else {
+                    selectedGenderIndex = index
+                    genderTextField.text = genderArray.object(at: index - 1) as? String
+                }
+            } else {
+                genderTextField.text = ""
+            }
+        }
         
-        let index = Int((user.additionalInformation?.gender)!)!
-        if index == 0 {
-            genderTextField.text = ""
-        }
-        else{
-            selectedGenderIndex = index
-        genderTextField.text = genderArray.object(at: index - 1) as? String
-        }
-        }
-        if (user.additionalInformation?.age_group) != nil {
-            
-            let index = Int((user.additionalInformation?.age_group)!)!
-            if index == 0{
+        
+//        if (user.additionalInformation?.gender) != nil/* && ((user.additionalInformation?.gender?.characters.count)! > 0)*/{
+//            
+//            let index = Int((user.additionalInformation?.gender)!)!
+//            if index == 0 {
+//                genderTextField.text = ""
+//            }
+//            else{
+//                selectedGenderIndex = index
+//                genderTextField.text = genderArray.object(at: index - 1) as? String
+//            }
+//        }
+        
+        if let ageGroup = user.additionalInformation?.age_group {
+            if let index = Int(ageGroup) {
+                if index == 0 {
+                    ageGroupTextField.text = ""
+                } else {
+                    selectedAgeGroupIndex = index
+                    ageGroupTextField.text = ageGroupArray.object(at: index - 1) as? String
+                }
+            } else {
                 ageGroupTextField.text = ""
             }
-            else{
-                selectedAgeGroupIndex = index
-                ageGroupTextField.text = ageGroupArray.object(at: index - 1) as? String
-            }
         }
-
-        if (user.additionalInformation?.ethnicity) != nil {
-            
-            let index = Int((user.additionalInformation?.ethnicity)!)!
-            if index == 0 {
+        
+        
+//        
+//        if (user.additionalInformation?.age_group) != nil /*&& ((user.additionalInformation?.gender?.characters.count)! > 0)*/ {
+//            
+//            let index = Int((user.additionalInformation?.age_group)!)!
+//            if index == 0{
+//                ageGroupTextField.text = ""
+//            }
+//            else{
+//                selectedAgeGroupIndex = index
+//                ageGroupTextField.text = ageGroupArray.object(at: index - 1) as? String
+//            }
+//        }
+        
+        if let ethnicity = user.additionalInformation?.ethnicity {
+            if let index = Int(ethnicity) {
+                if index == 0 {
+                    ethnicityTextField.text = ""
+                } else {
+                    SelectedEthnicityIndex = index
+                    ethnicityTextField.text = ethnicityArray.object(at: index - 1) as? String
+                }
+            } else {
                 ethnicityTextField.text = ""
             }
-            else {
-                SelectedEthnicityIndex = index
-                ethnicityTextField.text = ethnicityArray.object(at: index - 1) as? String
-
-            }
         }
-
+        
+//        if (user.additionalInformation?.ethnicity) != nil {
+//            
+//            let index = Int((user.additionalInformation?.ethnicity)!)!
+//            if index == 0 {
+//                ethnicityTextField.text = ""
+//            }
+//            else {
+//                SelectedEthnicityIndex = index
+//                ethnicityTextField.text = ethnicityArray.object(at: index - 1) as? String
+//                
+//            }
+//        }
+//        
         
         
     }
@@ -645,28 +682,28 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
             return
         }
         
-
+        
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
         let currentLanguage = Localize.currentLanguage()
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
-
+        
         let parameters : Parameters = ["user_id": user_id,
-                          "platform":"1",
-                          "version_code": version_code,
-                          "version_name": version_name,
-                          "device_id": device_id,
-                          "push_token":"",
-                          "auth_token": auth_token,
-                          "language": currentLanguage
-            ]
+                                       "platform":"1",
+                                       "version_code": version_code,
+                                       "version_name": version_name,
+                                       "device_id": device_id,
+                                       "push_token":"",
+                                       "auth_token": auth_token,
+                                       "language": currentLanguage
+        ]
         
         print(parameters)
-       // HUD.allowsInteraction = false
-       // HUD.dimsBackground = false
-       // HUD.show(.progress)
+        // HUD.allowsInteraction = false
+        // HUD.dimsBackground = false
+        // HUD.show(.progress)
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let url = String(format: "%@/getProfile", hostUrl)
@@ -676,30 +713,30 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
                 
             case .success:
                 DispatchQueue.main.async {
-                   // HUD.hide()
+                    // HUD.hide()
                     SwiftLoader.hide()
                 }
                 
                 let json = JSON(data: response.data!)
-                //print(""json response\(json)")
+                print("json response\(json)")
                 let responseDict = json.dictionaryObject
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
-                if code.intValue == 200 {
-                    if let userDict = responseDict?["user"] {
-                        self.user = User.prepareUser(dictionary: userDict as! [String : Any])
-                       // self.user.auth_token = responseDict?["auth_token"] as! String
-                        let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
-                        UserDefaults.standard.set(userData, forKey: USER_DATA)
-                        self.loadUserInformation()
+                    if code.intValue == 200 {
+                        if let userDict = responseDict?["user"] {
+                            self.user = User.prepareUser(dictionary: userDict as! [String : Any])
+                            // self.user.auth_token = responseDict?["auth_token"] as! String
+                            let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
+                            UserDefaults.standard.set(userData, forKey: USER_DATA)
+                            self.loadUserInformation()
+                        }
                     }
-                }
-                else {
-                    if let messageString = responseDict?["message"]{
-                          let alertMessage : String = messageString as! String
-                          self.showAlert(title: "", message: alertMessage)
+                    else {
+                        if let messageString = responseDict?["message"]{
+                            let alertMessage : String = messageString as! String
+                            self.showAlert(title: "", message: alertMessage)
+                        }
                     }
-                }
                 }
                 break
                 
@@ -727,7 +764,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
             }
             
         }
-
+        
     }
     
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -757,6 +794,6 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         
         return true
     }
-
+    
 }
 

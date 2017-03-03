@@ -20,6 +20,8 @@ target 'Snap2Save' do
   pod 'PhoneNumberKit', '~> 1.0'
   
   pod 'Google/Analytics'
+  pod 'TTTAttributedLabel'
+
 
 target 'Snap2SaveTests' do
     inherit! :search_paths

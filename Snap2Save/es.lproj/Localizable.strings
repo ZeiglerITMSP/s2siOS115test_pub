@@ -193,6 +193,9 @@
 
 "Please enter password." = "Por favor ingrese contraseña.";
 
+"Please provide all information." = "Please provide all information.";
+
+
 // Offers
 "Offers" = "Ofertas";
 "No offer exists."= "No existe ninguna oferta.";
@@ -210,11 +213,46 @@
 "Reward Program" = "Programa de recompensas";
 
 
+// Reward Status
+"Reward Status" = "Reward Status";
+"Current Point Total" = "Current Point Total";
+"Lifetime Points Earned:" = "Lifetime Points Earned:";
+"REDEEM POINTS NOW" = "REDEEM POINTS NOW";
+"Unused Health Care Rebates" = "Unused Health Care Rebates";
+"RECENT ACTIVITY" = "RECENT ACTIVITY";
+"Filter" = "Filter";
 
 
+// Reward Filter
+"DATE RANGE" = "DATE RANGE";
+"FROM" = "FROM";
+"TO" = "TO";
+"FILTER" = "FILTER";
 
+// Redeem Points
+"Redeem Points" = "Redeem Points";
 
+"To redeem 500 points, please make your selection and click Continue." = "To redeem 500 points, please make your selection and click Continue.";
 
+"$5 Save-A-Lot Gift Card" = "$5 Save-A-Lot Gift Card";
+"$10 Health Care Rebate" = "$10 Health Care Rebate";
+
+// Redeem message
+
+"Your Save-A-Lot gift card will be mailed within 15 days, so be sure to watch for an envelope from Snap2Save!" = "Your Save-A-Lot gift card will be mailed within 15 days, so be sure to watch for an envelope from Snap2Save!";
+
+"DONE" = "DONE";
+
+// redeem message for health card
+
+"A $10 health care rebate has been added to your account!" = "A $10 health care rebate has been added to your account!";
+"To redeem health care rebates at Clinica Tepeyac, simply provide them with the 10-digit cell phone number on your Snap2Save account the next time you receive health care services at their clinic. They will verify your eligibility online and apply the credit to the cost of your visit or procedure." = "To redeem health care rebates at Clinica Tepeyac, simply provide them with the 10-digit cell phone number on your Snap2Save account the next time you receive health care services at their clinic. They will verify your eligibility online and apply the credit to the cost of your visit or procedure.";
+
+"Clinica Tepeyac" = "Clinica Tepeyac";
+"5075 Lincoln Street" = "5075 Lincoln Street";
+"Denver, CO 80216" = "Denver, CO 80216";
+"(303) 458- 5302" = "(303) 458- 5302";
+"www.clinicatepeyac.org" = "www.clinicatepeyac.org";
 
 
 

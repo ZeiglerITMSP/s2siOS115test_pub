@@ -200,8 +200,7 @@ class AccountTVC: UITableViewController {
 //        }
 //        
 
-        SwiftLoader.show(animated: true)
-        
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String

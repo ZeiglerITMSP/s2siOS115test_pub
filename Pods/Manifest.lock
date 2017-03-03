@@ -46,6 +46,7 @@ PODS:
     - PhoneNumberKit/PhoneNumberKitCore
   - PKHUD (4.0.0)
   - SwiftyJSON (3.1.3)
+  - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
@@ -59,6 +60,7 @@ DEPENDENCIES:
   - PhoneNumberKit (~> 1.0)
   - PKHUD (~> 4.0)
   - SwiftyJSON
+  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
@@ -80,7 +82,8 @@ SPEC CHECKSUMS:
   PhoneNumberKit: 7917d5f1ca21cacce535e9aa9c6d7a4537f25726
   PKHUD: 2bb45c936bb8afa39f3cd33ec14e8cc89f624255
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 0686418cf80337801fb70317bc459591785c1126
+PODFILE CHECKSUM: 3bc8d291000db5dc93c365503c0260cea0cbb672
 
 COCOAPODS: 1.1.1
