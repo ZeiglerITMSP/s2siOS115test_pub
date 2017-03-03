@@ -22,8 +22,6 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
 
     var statesArray : NSMutableArray?
     
-    var isSelectedSaveAlotGiftCard : Bool?
-    
     var selectedStateIndex : NSInteger!
     
     var user : User = User()
@@ -65,9 +63,26 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
     
     @IBAction func redeemNowButtonAction(_ sender: UIButton) {
         
-        if isSelectedSaveAlotGiftCard == true {
-            self.performSegue(withIdentifier: "RedeemPointsMessageVC", sender: self)
+        if !isValidData()
+        {
+            return
         }
+        
+        
+        let redeemAlert = UIAlertController.init(title: nil, message: "Are you sure you want to redeem points?".localized(), preferredStyle: .alert)
+        let okBtn = UIAlertAction.init(title: "Ok", style: .default, handler:{
+            (action) in
+            self.getRedeemPoints()
+        })
+        
+        let cancelBtn = UIAlertAction.init(title: "Cancel".localized(), style: .cancel, handler:nil)
+        
+        redeemAlert .addAction(okBtn)
+        redeemAlert.addAction(cancelBtn)
+        
+        self.present(redeemAlert, animated: true, completion:nil)
+        redeemAlert.view.tintColor = APP_GRREN_COLOR
+        
         
     }
     
@@ -313,7 +328,17 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
             textField.resignFirstResponder()
         }
     }
-    
+    func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == zipCodeTf {
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 5
+        }
+        return true
+    }
 
     func getProfile(){
         
@@ -435,5 +460,144 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         stateTf.text = user.additionalInformation?.state
         zipCodeTf.text = user.zipcode
     }
+    
+    func getRedeemPoints() {
+        
+        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
+        let isReachable = reachbility.isReachable
+        // Reachability
+        if isReachable == false {
+            self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
+            return
+        }
+        
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
+        let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
+        let currentLanguage = Localize.currentLanguage()
+        
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
+        
+        let date = NSDate()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        let result = formatter.string(from: date as Date)
+        
+        let dateMilliSec = CUnsignedLongLong((date.timeIntervalSince1970)*1000)
+        
+        let first_name = firstNameTF.text ?? ""
+        let last_name = lastNameTf.text ?? ""
+        let address_line1 = addressLine1Tf.text ?? ""
+        let address_line2 = addressLine2Tf.text ?? ""
+        let city = cityTf.text ?? ""
+        let state = stateTf.text ?? ""
+        let zipCode = zipCodeTf.text ?? ""
 
+        
+        let address :[String : Any] = ["first_name": first_name,
+                                       "last_name": last_name,
+                                       "address_line_1": address_line1,
+                                       "address_line_2": address_line2,
+                                       "city": city,
+                                       "state": state,
+                                       "zipcode": zipCode]
+
+        
+        
+        let parameters : Parameters = ["version_name": version_name,
+                                       "platform": "1",
+                                       "version_code": version_code,
+                                       "language": currentLanguage,
+                                       "auth_token": auth_token,
+                                       "device_id": device_id,
+                                       "user_id": user_id,
+                                       "type" : 4,
+                                       "date": dateMilliSec,
+                                       "date_string": result,
+                                       "address": address]
+        
+        print(parameters)
+        
+        let url = String(format: "%@/redeemPoints", hostUrl)
+        print(url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            switch response.result {
+                
+            case .success:
+                let json = JSON(data: response.data!)
+                print("json response\(json)")
+                SwiftLoader.hide()
+                let responseDict = json.dictionaryObject
+                
+                if let code = responseDict?["code"] {
+                    let code = code as! NSNumber
+                    if code.intValue == 200 {
+                        
+                        self.performSegue(withIdentifier: "RedeemPointsMessageVC", sender: self)
+                        
+                    }
+                    else {
+                        
+                        if let responseDict = json.dictionaryObject {
+                            let alertMessage = responseDict["message"] as! String
+                            self.showAlert(title: "", message: alertMessage)
+                        }
+                    }
+                    
+                }
+                
+                
+                break
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    SwiftLoader.hide()
+                    self.showAlert(title: "", message:error.localizedDescription);
+                }
+                break
+            }
+            
+            
+        }
+
+}
+    
+    
+    func isValidData() -> Bool {
+        
+        if firstNameTF.text?.characters.count == 0 {
+            showAlert(title: "", message: "Please provide all information.".localized())
+            return false
+        }
+        if lastNameTf.text?.characters.count == 0 {
+            showAlert(title: "", message: "Please provide all information.".localized())
+            return false
+        }
+        if addressLine1Tf.text?.characters.count == 0  {
+            showAlert(title: "", message: "Please provide all information.".localized())
+            return false
+        }
+        if addressLine2Tf.text?.characters.count == 0 {
+            showAlert(title: "", message: "Please provide all information.".localized())
+            return false
+        }
+        if cityTf.text?.characters.count == 0  {
+            showAlert(title: "", message: "Please provide all information.".localized())
+            return false
+        }
+        if stateTf.text?.characters.count == 0 {
+            showAlert(title: "", message: "Please provide all information.".localized())
+            return false
+        }
+        if (zipCodeTf.text?.characters.count)! < 5{
+            showAlert(title: "", message: "Please enter a valid zip code.".localized())
+            return false
+        }
+
+      
+        return true
+    }
 }

@@ -7,23 +7,32 @@
 //
 
 import UIKit
+@objc protocol RewardFilterProtocol {
+    @objc optional func rewardFilter(fromDate : String ,toDate : String)
+}
 
-class RewardFilterTVC: UITableViewController,AITextFieldProtocol {
+
+class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
 
     // Properties
     var languageSelectionButton: UIButton!
+    var rewardFilterDelegate : RewardFilterProtocol?
+    var presentedVC: RewardStatusTVC?
     
     // Outlets
     
-    
     @IBOutlet var dateRange: UILabel!
-    
     @IBOutlet weak var fromDateField: AIPlaceHolderTextField!
     @IBOutlet weak var toDateField: AIPlaceHolderTextField!
     @IBOutlet weak var filterButton: UIButton!
     // Actions
     @IBAction func filterButtonAction(_ sender: UIButton) {
         
+        presentedVC?.fromDate = fromDateField.contentTextField.text!
+        presentedVC?.toDate = toDateField.contentTextField.text!
+        presentedVC?.isFromFilterScreen = true
+        
+        _ = self.navigationController?.popViewController(animated: true)
 
     }
     
@@ -41,6 +50,10 @@ class RewardFilterTVC: UITableViewController,AITextFieldProtocol {
         toDateField.contentTextField.textFieldType = .DatePickerTextField
         toDateField.contentTextField.updateUIAsPerTextFieldType()
         // button style
+        
+        fromDateField.contentTextField.dateFormatString = "MM/dd/yyyy"
+        toDateField.contentTextField.dateFormatString = "MM/dd/yyyy"
+        
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: filterButton, radius: 2.0, width: 1.0)
         
         fromDateField.contentTextField.aiDelegate = self

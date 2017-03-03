@@ -193,6 +193,9 @@
 
 "Please enter password." = "Por favor ingrese contraseña.";
 
+"Please provide all information." = "Please provide all information.";
+
+
 // Offers
 "Offers" = "Ofertas";
 "No offer exists."= "No existe ninguna oferta.";
