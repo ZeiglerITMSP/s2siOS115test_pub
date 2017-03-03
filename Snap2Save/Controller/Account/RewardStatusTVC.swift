@@ -25,6 +25,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
     var isFromFilterScreen : Bool?
     
     var limit_value:Int = 10
+    
     var offset:Int = 0
     
     var isLoadingMoreActivity:Bool = false
@@ -199,8 +200,8 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 
                 cell.redeemPointsButton.setTitle("REDEEM POINTS NOW".localized(), for: .normal)
 
-                var currentPointsTotalValue = ""
-                var life_time_points_earned = ""
+                var currentPointsTotalValue = "0"
+                var life_time_points_earned = "0"
                 if let current_points = rewardStatusDict["current_points"] {
                    currentPointsTotalValue  = "\(current_points)"
                 }
@@ -372,6 +373,8 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
     
     func getRecentRedemptionActivity() {
         
+        
+        
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
@@ -445,6 +448,10 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         let url = String(format: "%@/getRecentRedemptionActivity",hostUrl)
         print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            DispatchQueue.main.async {
+                self.tableView.doneRefresh()
+            }
+            self.isLoadingMoreActivity = false
             switch response.result {
                 
             case .success:
