@@ -53,10 +53,10 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
         
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: doneButton, radius: 2.0, width: 1.0)
         
-        /* let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: navigationController, action: nil)
-         self.navigationItem.leftBarButtonItem = backButton*/
+        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: navigationController, action: nil)
+         self.navigationItem.leftBarButtonItem = backButton
         
-        self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
+       // self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
 
         self.urlLinkLabel.textColor = UIColor.white
         self.urlLinkLabel.textAlignment = NSTextAlignment.center
@@ -102,7 +102,7 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
     func reloadContent() {
         
         DispatchQueue.main.async {
-            self.updateBackButtonText()
+            //self.updateBackButtonText()
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Redeem Points".localized()
          

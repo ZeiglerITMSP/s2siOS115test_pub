@@ -28,6 +28,9 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
     // Actions
     @IBAction func filterButtonAction(_ sender: UIButton) {
         
+        if !isValid(){
+            return
+        }
         presentedVC?.fromDate = fromDateField.contentTextField.text!
         presentedVC?.toDate = toDateField.contentTextField.text!
         presentedVC?.isFromFilterScreen = true
@@ -109,6 +112,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         DispatchQueue.main.async {
             self.updateBackButtonText()
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.updateTextFieldsUi()
             self.navigationItem.title = "Reward Status".localized()
             self.fromDateField.placeholderText = "FROM".localized()
             self.toDateField.placeholderText = "TO".localized()
@@ -118,6 +122,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
             self.tableView.reloadData()
         }
     }
+    
     
     // MARK :-
     
@@ -131,6 +136,49 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
             toDateField.contentTextField.resignFirstResponder()
         }
     }
-    
-    
+    func updateTextFieldsUi(){
+        
+        fromDateField.contentTextField.updateUIAsPerTextFieldType()
+        toDateField.contentTextField.updateUIAsPerTextFieldType()
+        
+    }
+
+    func isValid() -> Bool {
+        
+       
+        if fromDateField.contentTextField.text?.characters.count == 0 {
+            showAlert(title: "", message: "Please enter from date.".localized())
+            return false
+
+        }
+        
+        if toDateField.contentTextField.text?.characters.count == 0 {
+            showAlert(title: "", message: "Please enter to date.".localized())
+            return false
+            
+        }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
+        var fromDateMilliSec = CUnsignedLongLong()
+        var toDateMilliSec = CUnsignedLongLong()
+        
+        if (fromDateField?.contentTextField.text?.characters.count)! > 0 {
+            let fromDateVal = dateFormatter.date(from: fromDateField.contentTextField.text!)
+            fromDateMilliSec = CUnsignedLongLong((fromDateVal?.timeIntervalSince1970)!*1000)
+        }
+        
+        if (toDateField?.contentTextField.text?.characters.count)! > 0 {
+            let toDateVal = dateFormatter.date(from: toDateField.contentTextField.text!)
+            toDateMilliSec = CUnsignedLongLong((toDateVal?.timeIntervalSince1970)!*1000)
+        }
+        
+        if fromDateMilliSec > toDateMilliSec {
+            showAlert(title: "", message: "To date should be greater than from date.".localized())
+            return false
+        }
+        
+        return true
+    }
 }

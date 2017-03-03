@@ -163,8 +163,9 @@ class RedeemPointsTVC: UITableViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yyyy"
         let result = formatter.string(from: date as Date)
+        let dateRes = formatter.date(from: result)
         
-        let dateMilliSec = CUnsignedLongLong((date.timeIntervalSince1970)*1000)
+        let dateMilliSec = CUnsignedLongLong((dateRes?.timeIntervalSince1970)!*1000)
         
         /*let first_name = firstNameTF.text ?? ""
          let last_name = lastNameTf.text ?? ""

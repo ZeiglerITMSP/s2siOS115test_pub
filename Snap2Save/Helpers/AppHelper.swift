@@ -307,14 +307,14 @@ extension UINavigationItem {
         
         // Back Action
         let backButton = UIButton.init(type: .custom)
-        backButton.frame = CGRect(x:0,y:0,width:80,height:25)
+        backButton.frame = CGRect(x:0,y:0,width:60,height:25)
         backButton.setImage(UIImage.init(named: "ic_back"), for: .normal)
         backButton.setTitle("Back".localized() , for: .normal)
         backButton.setTitleColor(UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0), for: .normal)
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(target, action: action, for: .touchUpInside)
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
+        backButton.imageEdgeInsets = UIEdgeInsetsMake(0,-15, 0, 0)
         
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = backButton

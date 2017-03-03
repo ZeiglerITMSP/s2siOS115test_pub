@@ -578,7 +578,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         stateTextField.text = user.additionalInformation?.state
         zipCodeTextField.text = user.zipcode
         
-       if (user.additionalInformation?.gender) != nil {
+       if (user.additionalInformation?.gender) != nil/* && ((user.additionalInformation?.gender?.characters.count)! > 0)*/{
         
         let index = Int((user.additionalInformation?.gender)!)!
         if index == 0 {
@@ -589,7 +589,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         genderTextField.text = genderArray.object(at: index - 1) as? String
         }
         }
-        if (user.additionalInformation?.age_group) != nil {
+        if (user.additionalInformation?.age_group) != nil /*&& ((user.additionalInformation?.gender?.characters.count)! > 0)*/ {
             
             let index = Int((user.additionalInformation?.age_group)!)!
             if index == 0{
@@ -675,7 +675,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
                 }
                 
                 let json = JSON(data: response.data!)
-                //print(""json response\(json)")
+                print("json response\(json)")
                 let responseDict = json.dictionaryObject
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber

@@ -83,9 +83,9 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         super.viewWillAppear(animated)
         
         reloadContent()
+        
         if isFromFilterScreen == true {
             offset = 0
-//            isFromFilterScreen = false
             getRecentRedemptionActivity()
         }
     }
@@ -116,7 +116,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Reward Status".localized()
-            
+            self.updateBackButtonText()
             self.tableView.reloadData()
         }
     }
@@ -142,7 +142,11 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+        if indexPath.section == 0 {
+            if indexPath.row == 1{
+                return 25.0
+            }
+        }
         return UITableViewAutomaticDimension
     }
     
@@ -223,7 +227,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
 
                 var unUsedHealthCareRebate = ""
                 if let health_rebate = rewardStatusDict["health_rebate"] {
-                    unUsedHealthCareRebate = "\(health_rebate)"
+                    unUsedHealthCareRebate = "$"+"\(health_rebate)"
                 }
                 // set values
                 cell.detailLabel.text = unUsedHealthCareRebate
@@ -259,7 +263,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                     
                     if dateVal.characters.count > 0 {
                     let dateMillisec = Double(datevalue)
-                    dateStr = convertMillisecondsToDate(milliSeconds: dateMillisec!)
+                    dateStr = convertMillisecondsToDate(milliSeconds: dateMillisec!/1000)
                     }
                 }
                 cell.subDetailLabel.text = dateStr
@@ -337,9 +341,27 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
+                    //HUD.hide()
                     SwiftLoader.hide()
-                    self.showAlert(title: "", message:error.localizedDescription);
+                    let message = error.localizedDescription
+                    let alertMessage = message
+                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                        (action) in
+                        self.view.endEditing(true)
+                        _ = self.navigationController?.popViewController(animated: true)
+                    })
+                    
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    
                 }
+
+//                DispatchQueue.main.async {
+//                    SwiftLoader.hide()
+//                    self.showAlert(title: "", message:error.localizedDescription);
+//                }
                 break
             }
         }
@@ -367,10 +389,9 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         if isFromFilterScreen == true {
             recentActivityArray = [[String: Any]]()
             isFromFilterScreen = false
-            
+             SwiftLoader.show(title: "Loading...".localized(), animated: true)
         }
 
-       // SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -392,13 +413,17 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         if (fromDate?.characters.count)! > 0 {
             let fromDateVal = dateFormatter.date(from: fromDate!)
             fromDateMilliSec = CUnsignedLongLong((fromDateVal?.timeIntervalSince1970)!*1000)
-            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
+//            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
+            fromDateMilliSecStr = "\(fromDateMilliSec)"
+
         }
         
         if (toDate?.characters.count)! > 0 {
             let toDateVal = dateFormatter.date(from: toDate!)
             toDateMilliSec = CUnsignedLongLong((toDateVal?.timeIntervalSince1970)!*1000)
-            toDateMilliSecStr = String.init(format: "%ld", toDateMilliSec)
+            //toDateMilliSecStr = String.init(format: "%ld", toDateMilliSec)
+            toDateMilliSecStr = "\(toDateMilliSec)"
+
         }
         
         
@@ -425,7 +450,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             case .success:
                 let json = JSON(data: response.data!)
                 print("json response\(json)")
-               // SwiftLoader.hide()
+                SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
                 if let code = responseDict?["code"] {
@@ -437,11 +462,17 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                             self.recentActivityArray = self.recentActivityArray + recentActivityArr
                             self.tableView.reloadData()
                         }
+                        print("recentActivityArray count and limit value::%@,%@",self.recentActivityArray.count,self.limit_value)
                         
-                        if self.recentActivityArray.count <= self.limit_value
-                        {
-                            self.hasMoreActivity = false
-                            self.tableView.endLoadMore()
+                        if let recentActivityArr1 = responseDict?["recent_activity"] as? [[String: Any]]! {
+                             print("inside loop count and limit value::%@,%@",recentActivityArr1.count,self.limit_value)
+                            if recentActivityArr1.count < self.limit_value
+                            {
+                                
+                                self.hasMoreActivity = false
+                                self.tableView.endLoadMore()
+                            }
+
                         }
                         
 
@@ -462,7 +493,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    //SwiftLoader.hide()
+                    SwiftLoader.hide()
                     self.showAlert(title: "", message:error.localizedDescription);
                 }
                 break
@@ -476,9 +507,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
     func convertMillisecondsToDate(milliSeconds : Double) -> String {
         
             let dateVar = Date(timeIntervalSince1970: TimeInterval(milliSeconds))
-        
             let dateFormatter = DateFormatter()
-        
             dateFormatter.dateFormat = "MM/dd/yyyy";
             let dateStr = (dateFormatter.string(from: dateVar))
 
@@ -499,12 +528,15 @@ extension RewardStatusTVC: RecentActivityHeaderDelegate {
 extension RewardStatusTVC: RedeemPointsTotalDelegate {
     
     func handleRedeemPoints() {
+        
         var currentPointsTotalValue = ""
-        if let current_points = rewardStatusDict["current_points"] {
+        var currentPoints : Int = 0
+        if let current_points = rewardStatusDict["current_points"]
+        {
             currentPointsTotalValue  = "\(current_points)"
+            currentPoints = Int(currentPointsTotalValue)!
         }
         
-        let currentPoints : Int = Int(currentPointsTotalValue)!
         
         if currentPoints < 500
         {

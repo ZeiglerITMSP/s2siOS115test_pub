@@ -139,6 +139,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         DispatchQueue.main.async {
             self.updateBackButtonText()
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.updateTextFieldsUi()
             self.navigationItem.title = "Redeem Points".localized()
             self.messageLabel.text = "Your Save-A-Lot gift card will be mailed to the following address. If any of the information is incorrect or missing, please make changes or additions as necessary.".localized()
             self.mailingAddressLabel.text = "MAILING ADDRESS".localized()
@@ -150,9 +151,12 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
             self.stateLabel.text = "STATE".localized()
             self.zipCodeLabel.text = "ZIP CODE".localized()
             self.redeemNowButton.setTitle("REDEEM NOW".localized(), for: .normal)
+            self.addressLine1Tf.placeholder = "Street address or PO box".localized()
+            self.addressLine2Tf.placeholder = "Unit, Building, etc.".localized()
             self.tableView.reloadData()
         }
     }
+
 
 
     override func didReceiveMemoryWarning() {
@@ -485,7 +489,8 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         formatter.dateFormat = "MM/dd/yyyy"
         let result = formatter.string(from: date as Date)
         
-        let dateMilliSec = CUnsignedLongLong((date.timeIntervalSince1970)*1000)
+        let dateRes = formatter.date(from: result)
+        let dateMilliSec = CUnsignedLongLong((dateRes?.timeIntervalSince1970)!*1000)
         
         let first_name = firstNameTF.text ?? ""
         let last_name = lastNameTf.text ?? ""
@@ -498,8 +503,8 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         
         let address :[String : Any] = ["first_name": first_name,
                                        "last_name": last_name,
-                                       "address_line_1": address_line1,
-                                       "address_line_2": address_line2,
+                                       "address_line1": address_line1,
+                                       "address_line2": address_line2,
                                        "city": city,
                                        "state": state,
                                        "zipcode": zipCode]

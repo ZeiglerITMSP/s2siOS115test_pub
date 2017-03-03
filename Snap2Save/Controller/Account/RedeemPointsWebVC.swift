@@ -61,7 +61,7 @@ class RedeemPointsWebVC: UIViewController {
         DispatchQueue.main.async {
             self.updateBackButtonText()
             //self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-                self.title = "Reward Points".localized()
+            self.navigationItem.title = "Redeem Points".localized()
         }
         
     }
