@@ -96,6 +96,8 @@ class RedeemPointsTVC: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         reloadContent()
+        AppHelper.getScreenName(screenName: "Redeem Points screen")
+
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -198,16 +200,16 @@ class RedeemPointsTVC: UITableViewController {
                                        "date_string": result,
                                        "address": address]
         
-        print(parameters)
+       // print(parameters)
         
         let url = String(format: "%@/redeemPoints", hostUrl)
-        print(url)
+       // print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+             //   print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 

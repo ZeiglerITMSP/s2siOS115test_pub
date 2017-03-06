@@ -83,8 +83,9 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        reloadContent()
 
+        reloadContent()
+        AppHelper.getScreenName(screenName: "Reward Filter screen")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -161,10 +162,10 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         
-        var fromDateMilliSec = CUnsignedLongLong()
-        var toDateMilliSec = CUnsignedLongLong()
+        var fromDateMilliSec : Int = 0
+        var toDateMilliSec : Int = 0
         
-        if (fromDateField?.contentTextField.text?.characters.count)! > 0 {
+     /*   if (fromDateField?.contentTextField.text?.characters.count)! > 0 {
             let fromDateVal = dateFormatter.date(from: fromDateField.contentTextField.text!)
             fromDateMilliSec = CUnsignedLongLong((fromDateVal?.timeIntervalSince1970)!*1000)
         }
@@ -173,12 +174,29 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
             let toDateVal = dateFormatter.date(from: toDateField.contentTextField.text!)
             toDateMilliSec = CUnsignedLongLong((toDateVal?.timeIntervalSince1970)!*1000)
         }
+        */
         
+        
+        if (fromDateField?.contentTextField.text?.characters.count)! > 0 {
+            let fromDateVal = dateFormatter.date(from: fromDateField.contentTextField.text!)
+            fromDateMilliSec = Int(((fromDateVal?.timeIntervalSince1970)!*1000.0).rounded())
+            
+           // print("Double value \(fromDateMilliSecdouble)")
+            
+          //  print("Unsigned value \(fromDateMilliSec)")
+        }
+        
+        if (toDateField?.contentTextField.text?.characters.count)! > 0 {
+            let toDateVal = dateFormatter.date(from: toDateField.contentTextField.text!)
+            toDateMilliSec = Int(((toDateVal?.timeIntervalSince1970)!*1000.0).rounded())
+            
+        }
+
         if fromDateMilliSec > toDateMilliSec {
             showAlert(title: "", message: "To date should be greater than from date.".localized())
             return false
         }
-        
+
         return true
     }
 }
