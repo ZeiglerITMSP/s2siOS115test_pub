@@ -591,7 +591,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
             showAlert(title: "", message: "Please provide all information.".localized())
             return false
         }
-        if (zipCodeTf.text?.characters.count)! < 5{
+        if (zipCodeTf.text?.characters.count)! < 5 {
             showAlert(title: "", message: "Please enter a valid zip code.".localized())
             return false
         }

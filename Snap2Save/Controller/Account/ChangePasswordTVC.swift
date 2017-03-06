@@ -232,7 +232,6 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
                     self.saveActivityIndicator.stopAnimating()
                     self.showAlert(title: "", message:error.localizedDescription);
                 }
-                //print("error)
                 break
             }
     

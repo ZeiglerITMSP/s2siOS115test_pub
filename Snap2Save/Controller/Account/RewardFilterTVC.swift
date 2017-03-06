@@ -83,7 +83,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-
+        super.viewWillAppear(animated)
         reloadContent()
         AppHelper.getScreenName(screenName: "Reward Filter screen")
     }
@@ -162,8 +162,8 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         
-        var fromDateMilliSec : Int = 0
-        var toDateMilliSec : Int = 0
+        var fromDateMilliSec : Double = 0.0
+        var toDateMilliSec : Double = 0.0
         
      /*   if (fromDateField?.contentTextField.text?.characters.count)! > 0 {
             let fromDateVal = dateFormatter.date(from: fromDateField.contentTextField.text!)
@@ -177,9 +177,9 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         */
         
         
-        if (fromDateField?.contentTextField.text?.characters.count)! > 0 {
+       /* if (fromDateField?.contentTextField.text?.characters.count)! > 0 {
             let fromDateVal = dateFormatter.date(from: fromDateField.contentTextField.text!)
-            fromDateMilliSec = Int(((fromDateVal?.timeIntervalSince1970)!*1000.0).rounded())
+            fromDateMilliSec = Int64(((fromDateVal?.timeIntervalSince1970)!*1000.0).rounded())
             
            // print("Double value \(fromDateMilliSecdouble)")
             
@@ -188,10 +188,27 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         
         if (toDateField?.contentTextField.text?.characters.count)! > 0 {
             let toDateVal = dateFormatter.date(from: toDateField.contentTextField.text!)
-            toDateMilliSec = Int(((toDateVal?.timeIntervalSince1970)!*1000.0).rounded())
+            toDateMilliSec = Int64(((toDateVal?.timeIntervalSince1970)!*1000.0).rounded())
+            
+        }
+*/
+        if (fromDateField?.contentTextField.text?.characters.count)! > 0 {
+            let fromDateVal = dateFormatter.date(from: fromDateField.contentTextField.text!)
+            
+            fromDateMilliSec = (fromDateVal?.timeIntervalSince1970)!*1000
+            
+            // print("Double value \(fromDateMilliSecdouble)")
+            
+            //  print("Unsigned value \(fromDateMilliSec)")
+        }
+        
+        if (toDateField?.contentTextField.text?.characters.count)! > 0 {
+            let toDateVal = dateFormatter.date(from: toDateField.contentTextField.text!)
+            toDateMilliSec = (toDateVal?.timeIntervalSince1970)!*1000
             
         }
 
+        
         if fromDateMilliSec > toDateMilliSec {
             showAlert(title: "", message: "To date should be greater than from date.".localized())
             return false

@@ -248,7 +248,6 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 if let rewardPoints = recentActivityDict["points"] {
                     points = "\(rewardPoints)"
                 }
-                
                 cell.titleLabel.text = recentActivityDict["title"] as! String?
                 cell.detailLabel.text = "\(points)"
                 
@@ -298,7 +297,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                                        "device_id": device_id,
                                        "user_id": user_id]
         
-        //print(parameters)
+        print(parameters)
         
         let url = String(format: "%@/getRewardStatus",hostUrl)
         //print(url)
@@ -307,7 +306,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                //print("json response\(json)")
+                print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
@@ -401,12 +400,12 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         dateFormatter.dateFormat = "MM/dd/yyyy"
         
         
-        var fromDateMilliSec : Int = 0
-        var toDateMilliSec : Int = 0
+        var fromDateMilliSec : Double = 0.0
+        var toDateMilliSec : Double = 0.0
         
         var fromDateMilliSecStr = ""
         var toDateMilliSecStr = ""
-        if (fromDate?.characters.count)! > 0 {
+        /*if (fromDate?.characters.count)! > 0 {
             let fromDateVal = dateFormatter.date(from: fromDate!)
             fromDateMilliSec = Int(((fromDateVal?.timeIntervalSince1970)!*1000.0).rounded())//            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
             fromDateMilliSecStr = "\(fromDateMilliSec)"
@@ -420,7 +419,25 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             //toDateMilliSecStr = String.init(format: "%ld", toDateMilliSec)
             toDateMilliSecStr = "\(toDateMilliSec)"
             
+        }*/
+        
+ 
+        if (fromDate?.characters.count)! > 0 {
+            let fromDateVal = dateFormatter.date(from: fromDate!)
+            fromDateMilliSec = (fromDateVal?.timeIntervalSince1970)!*1000//            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
+            fromDateMilliSecStr = "\(fromDateMilliSec)"
+            
         }
+        
+        if (toDate?.characters.count)! > 0 {
+            
+            let toDateVal = dateFormatter.date(from: toDate!)
+            toDateMilliSec =  (toDateVal?.timeIntervalSince1970)!*1000
+            //toDateMilliSecStr = String.init(format: "%ld", toDateMilliSec)
+            toDateMilliSecStr = "\(toDateMilliSec)"
+            
+        }
+
         
         
         let parameters : Parameters = ["version_name": version_name,

@@ -654,9 +654,6 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             return
         }
         
-        // HUD.allowsInteraction = false
-        // HUD.dimsBackground = false
-        // HUD.show(.progress)
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
@@ -675,7 +672,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                                        "language": currentLanguage
         ]
         
-        print(parameters)
+       // print(parameters)
         let url = String(format: "%@/getProfile", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in

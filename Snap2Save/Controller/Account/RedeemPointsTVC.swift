@@ -95,6 +95,7 @@ class RedeemPointsTVC: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         reloadContent()
         AppHelper.getScreenName(screenName: "Redeem Points screen")
 
@@ -180,8 +181,8 @@ class RedeemPointsTVC: UITableViewController {
         
         let address :[String : Any] = ["first_name": "",
                                        "last_name": "",
-                                       "address_line_1": "",
-                                       "address_line_2": "",
+                                       "address_line1": "",
+                                       "address_line2": "",
                                        "city": "",
                                        "state": "",
                                        "zipcode": ""]
@@ -209,7 +210,7 @@ class RedeemPointsTVC: UITableViewController {
                 
             case .success:
                 let json = JSON(data: response.data!)
-             //   print("json response\(json)")
+               // print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
@@ -231,8 +232,6 @@ class RedeemPointsTVC: UITableViewController {
                     }
                     
                 }
-                
-                
                 break
                 
             case .failure(let error):
@@ -243,13 +242,6 @@ class RedeemPointsTVC: UITableViewController {
                 }
                 break
             }
-            
-            
         }
-        
-        
-        
     }
-
-
 }
