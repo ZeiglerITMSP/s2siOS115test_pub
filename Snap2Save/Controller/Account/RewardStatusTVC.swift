@@ -13,15 +13,13 @@ import Alamofire
 
 
 class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
-
+    
     // Properties
     var languageSelectionButton: UIButton!
     var rewardStatusDict = [String: Any]()
     var recentActivityArray = [[String: Any]]()
     var fromDate : String?
     var toDate : String?
-    var fromTimeSec : String?
-    var toTimeSec : String?
     var isFromFilterScreen : Bool?
     
     var limit_value:Int = 10
@@ -42,19 +40,16 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         // Automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
-        // back 
+        // back
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         fromDate = ""
         toDate = ""
-        fromTimeSec = ""
-        toTimeSec = ""
         
         getRedeemStatus()
-
+        
         self.tableView.toLoadMore {
             
             if self.recentActivityArray.count > 0 {
-                
                 if (!self.isLoadingMoreActivity && self.hasMoreActivity)
                 {
                     self.offset = self.recentActivityArray.count
@@ -63,16 +58,16 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 }
             }
         }
-
+        
         
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "RewardFilterTVC" {
             let rewardFilterTVC = segue.destination as! RewardFilterTVC
@@ -82,11 +77,11 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        AppHelper.getScreenName(screenName: "Reward Status screen")
         reloadContent()
-        
         if isFromFilterScreen == true {
             offset = 0
+            self.hasMoreActivity = true
             getRecentRedemptionActivity()
         }
     }
@@ -123,13 +118,13 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
+        
         if section == 0 {
             return 3
         } else {
@@ -141,7 +136,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             return recentActivityArray.count
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             if indexPath.row == 1{
@@ -184,7 +179,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         }
     }
     
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
@@ -199,16 +194,16 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 cell.lifetimePointsEarnedTitleLabel.text = "Lifetime Points Earned:".localized()
                 
                 cell.redeemPointsButton.setTitle("REDEEM POINTS NOW".localized(), for: .normal)
-
+                
                 var currentPointsTotalValue = "0"
                 var life_time_points_earned = "0"
                 if let current_points = rewardStatusDict["current_points"] {
-                   currentPointsTotalValue  = "\(current_points)"
+                    currentPointsTotalValue  = "\(current_points)"
                 }
                 if let lifeTimePoints = rewardStatusDict["life_time_points_earned"] {
                     life_time_points_earned  = "\(lifeTimePoints)"
                 }
-
+                
                 cell.currentPointTotalTitleValue.text = currentPointsTotalValue
                 cell.lifetimePointsEarnedTitleValue.text = life_time_points_earned
                 
@@ -223,9 +218,9 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "RewardDetailCell") as! RewardDetailCell
                 
                 // set text
-
+                
                 cell.titleLabel.text = "Unused Health Care Rebates".localized()
-
+                
                 var unUsedHealthCareRebate = ""
                 if let health_rebate = rewardStatusDict["health_rebate"] {
                     unUsedHealthCareRebate = "$"+"\(health_rebate)"
@@ -239,7 +234,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             
             if recentActivityArray.count == 0 {
                 // show mesage..
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultMessageTableViewCell") as! DefaultMessageTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultMessageTableViewCell") as! DefaultMessageTableViewCell
                 cell.messageLabel.text = "NO RECENT ACTIVITY AVAILABLE.".localized()
                 
                 return cell
@@ -253,7 +248,6 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 if let rewardPoints = recentActivityDict["points"] {
                     points = "\(rewardPoints)"
                 }
-                
                 cell.titleLabel.text = recentActivityDict["title"] as! String?
                 cell.detailLabel.text = "\(points)"
                 
@@ -263,8 +257,8 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                     let dateVal : String = datevalue
                     
                     if dateVal.characters.count > 0 {
-                    let dateMillisec = Double(datevalue)
-                    dateStr = convertMillisecondsToDate(milliSeconds: dateMillisec!/1000)
+                        let dateMillisec = Double(datevalue)
+                        dateStr = convertMillisecondsToDate(milliSeconds: dateMillisec!/1000)
                     }
                 }
                 cell.subDetailLabel.text = dateStr
@@ -306,7 +300,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         print(parameters)
         
         let url = String(format: "%@/getRewardStatus",hostUrl)
-        print(url)
+        //print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
@@ -358,22 +352,20 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                     
                     
                 }
-
-//                DispatchQueue.main.async {
-//                    SwiftLoader.hide()
-//                    self.showAlert(title: "", message:error.localizedDescription);
-//                }
+                
+                //                DispatchQueue.main.async {
+                //                    SwiftLoader.hide()
+                //                    self.showAlert(title: "", message:error.localizedDescription);
+                //                }
                 break
             }
         }
         
-
+        
     }
     
     
     func getRecentRedemptionActivity() {
-        
-        
         
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
@@ -388,13 +380,13 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             //self.endLoadMore()
             //return
         }
-
+        
         if isFromFilterScreen == true {
             recentActivityArray = [[String: Any]]()
             isFromFilterScreen = false
-             SwiftLoader.show(title: "Loading...".localized(), animated: true)
+            SwiftLoader.show(title: "Loading...".localized(), animated: true)
         }
-
+        
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -408,26 +400,44 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         dateFormatter.dateFormat = "MM/dd/yyyy"
         
         
-        var fromDateMilliSec = CUnsignedLongLong()
-        var toDateMilliSec = CUnsignedLongLong()
+        var fromDateMilliSec : Double = 0.0
+        var toDateMilliSec : Double = 0.0
         
         var fromDateMilliSecStr = ""
         var toDateMilliSecStr = ""
-        if (fromDate?.characters.count)! > 0 {
+        /*if (fromDate?.characters.count)! > 0 {
             let fromDateVal = dateFormatter.date(from: fromDate!)
-            fromDateMilliSec = CUnsignedLongLong((fromDateVal?.timeIntervalSince1970)!*1000)
-//            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
+            fromDateMilliSec = Int(((fromDateVal?.timeIntervalSince1970)!*1000.0).rounded())//            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
             fromDateMilliSecStr = "\(fromDateMilliSec)"
-
+            
         }
         
         if (toDate?.characters.count)! > 0 {
+            
             let toDateVal = dateFormatter.date(from: toDate!)
-            toDateMilliSec = CUnsignedLongLong((toDateVal?.timeIntervalSince1970)!*1000)
+            toDateMilliSec =  Int(((toDateVal?.timeIntervalSince1970)!*1000.0).rounded())
             //toDateMilliSecStr = String.init(format: "%ld", toDateMilliSec)
             toDateMilliSecStr = "\(toDateMilliSec)"
-
+            
+        }*/
+        
+ 
+        if (fromDate?.characters.count)! > 0 {
+            let fromDateVal = dateFormatter.date(from: fromDate!)
+            fromDateMilliSec = (fromDateVal?.timeIntervalSince1970)!*1000//            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
+            fromDateMilliSecStr = "\(fromDateMilliSec)"
+            
         }
+        
+        if (toDate?.characters.count)! > 0 {
+            
+            let toDateVal = dateFormatter.date(from: toDate!)
+            toDateMilliSec =  (toDateVal?.timeIntervalSince1970)!*1000
+            //toDateMilliSecStr = String.init(format: "%ld", toDateMilliSec)
+            toDateMilliSecStr = "\(toDateMilliSec)"
+            
+        }
+
         
         
         let parameters : Parameters = ["version_name": version_name,
@@ -443,10 +453,10 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                                        "to": toDateMilliSecStr,
                                        "time_zone_offset": timeZoneOffset]
         
-        print(parameters)
+        // print(parameters)
         
         let url = String(format: "%@/getRecentRedemptionActivity",hostUrl)
-        print(url)
+        // print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             DispatchQueue.main.async {
                 self.tableView.doneRefresh()
@@ -456,7 +466,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
@@ -469,20 +479,20 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                             self.recentActivityArray = self.recentActivityArray + recentActivityArr
                             self.tableView.reloadData()
                         }
-                        print("recentActivityArray count and limit value::%@,%@",self.recentActivityArray.count,self.limit_value)
+                        // print("recentActivityArray count and limit value::%@,%@",self.recentActivityArray.count,self.limit_value)
                         
                         if let recentActivityArr1 = responseDict?["recent_activity"] as? [[String: Any]]! {
-                             print("inside loop count and limit value::%@,%@",recentActivityArr1.count,self.limit_value)
+                            // print("inside loop count and limit value::%@,%@",recentActivityArr1.count,self.limit_value)
                             if recentActivityArr1.count < self.limit_value
                             {
                                 
                                 self.hasMoreActivity = false
                                 self.tableView.endLoadMore()
                             }
-
+                            
                         }
                         
-
+                        
                     }
                     else {
                         
@@ -507,21 +517,18 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             }
         }
         
-
+        
     }
-
+    
     
     func convertMillisecondsToDate(milliSeconds : Double) -> String {
         
-            let dateVar = Date(timeIntervalSince1970: TimeInterval(milliSeconds))
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd/yyyy";
-            let dateStr = (dateFormatter.string(from: dateVar))
-
-            print(dateFormatter.string(from: dateVar));
-        
+        let dateVar = Date(timeIntervalSince1970: TimeInterval(milliSeconds))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy";
+        let dateStr = (dateFormatter.string(from: dateVar))
         return dateStr
-
+        
     }
 }
 

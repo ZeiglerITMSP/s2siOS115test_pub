@@ -114,6 +114,8 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
+        AppHelper.getScreenName(screenName: "Redeem Points Mailing Address screen")
+
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -301,7 +303,6 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
     
     func getSelectedIndexFromPicker(selectedIndex: NSInteger, textField: AITextField) {
         let index = selectedIndex
-        //print(""Index\(index)")
         if (textField.tag == DropDownTags.states.rawValue) {
              selectedStateIndex = index
         }
@@ -383,11 +384,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
                                        "language": currentLanguage
         ]
         
-        print(parameters)
-        // HUD.allowsInteraction = false
-        // HUD.dimsBackground = false
-        // HUD.show(.progress)
-        
+       // print(parameters)
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let url = String(format: "%@/getProfile", hostUrl)
         //print("url)
@@ -396,12 +393,11 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 DispatchQueue.main.async {
-                    // HUD.hide()
                     SwiftLoader.hide()
                 }
                 
                 let json = JSON(data: response.data!)
-                //print(""json response\(json)")
+                //print("json response\(json)")
                 let responseDict = json.dictionaryObject
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
@@ -442,7 +438,6 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
                     
                     
                 }
-                //print("error")
                 break
             }
             
@@ -523,16 +518,15 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
                                        "date_string": result,
                                        "address": address]
         
-        print(parameters)
+       // print(parameters)
         
         let url = String(format: "%@/redeemPoints", hostUrl)
-        print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+               // print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
@@ -597,7 +591,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
             showAlert(title: "", message: "Please provide all information.".localized())
             return false
         }
-        if (zipCodeTf.text?.characters.count)! < 5{
+        if (zipCodeTf.text?.characters.count)! < 5 {
             showAlert(title: "", message: "Please enter a valid zip code.".localized())
             return false
         }

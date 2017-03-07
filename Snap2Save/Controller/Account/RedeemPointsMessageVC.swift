@@ -51,6 +51,8 @@ class RedeemPointsMessageVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
+        AppHelper.getScreenName(screenName: "Redeem Save a lot Message screen ")
+
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

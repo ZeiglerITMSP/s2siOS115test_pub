@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 
-
 // development url
 //var hostUrl = "http://dev.snap2save-a-lot.com/api";
 

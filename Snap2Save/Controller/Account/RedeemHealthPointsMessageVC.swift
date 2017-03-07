@@ -73,6 +73,8 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
+        AppHelper.getScreenName(screenName: "Redeem Health Points Message screen")
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -216,16 +218,16 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
                                        "date_string": result,
                                        "address": address]
         
-        print(parameters)
+        //print(parameters)
         
         let url = String(format: "%@/redeemPoints", hostUrl)
-        print(url)
+        //print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
