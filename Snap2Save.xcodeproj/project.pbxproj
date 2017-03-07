@@ -13,8 +13,6 @@
 		970C963A1E5EFBE400697E56 /* RedeemPointsMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970C96391E5EFBE400697E56 /* RedeemPointsMessageVC.swift */; };
 		970C963C1E5F09CE00697E56 /* RedeemHealthPointsMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970C963B1E5F09CE00697E56 /* RedeemHealthPointsMessageVC.swift */; };
 		9737ED0C1E14042400120B54 /* ChangePasswordTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */; };
-		974CDFBB1E67EB5D0041EC07 /* RecentActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CDFBA1E67EB5D0041EC07 /* RecentActivity.swift */; };
-		974CDFBD1E67EB900041EC07 /* RewardStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CDFBC1E67EB900041EC07 /* RewardStatus.swift */; };
 		974CDFC61E67FC030041EC07 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 974CDFBF1E67FC030041EC07 /* LICENSE */; };
 		974CDFC71E67FC030041EC07 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 974CDFC01E67FC030041EC07 /* README.md */; };
 		974CDFC81E67FC030041EC07 /* FZURefresh.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 974CDFC21E67FC030041EC07 /* FZURefresh.xcassets */; };
@@ -114,8 +112,6 @@
 		970C96391E5EFBE400697E56 /* RedeemPointsMessageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemPointsMessageVC.swift; sourceTree = "<group>"; };
 		970C963B1E5F09CE00697E56 /* RedeemHealthPointsMessageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemHealthPointsMessageVC.swift; sourceTree = "<group>"; };
 		9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordTVC.swift; sourceTree = "<group>"; };
-		974CDFBA1E67EB5D0041EC07 /* RecentActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentActivity.swift; sourceTree = "<group>"; };
-		974CDFBC1E67EB900041EC07 /* RewardStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardStatus.swift; sourceTree = "<group>"; };
 		974CDFBF1E67FC030041EC07 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		974CDFC01E67FC030041EC07 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		974CDFC21E67FC030041EC07 /* FZURefresh.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FZURefresh.xcassets; sourceTree = "<group>"; };
@@ -351,8 +347,6 @@
 				977B64F41E163B5600AA802D /* User.swift */,
 				977B64F61E16407A00AA802D /* AdditionalInformation.swift */,
 				976A99761E251A6400F82105 /* FacebookLogin.swift */,
-				974CDFBA1E67EB5D0041EC07 /* RecentActivity.swift */,
-				974CDFBC1E67EB900041EC07 /* RewardStatus.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -853,7 +847,6 @@
 				E8BAE2A81E0BDEFD00A85AAB /* EBTCardNumberTVC.swift in Sources */,
 				E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */,
 				977B64F71E16407A00AA802D /* AdditionalInformation.swift in Sources */,
-				974CDFBB1E67EB5D0041EC07 /* RecentActivity.swift in Sources */,
 				E826FBD21E0940A20089AEA6 /* ServicesTVC.swift in Sources */,
 				E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */,
 				974CDFCD1E68539D0041EC07 /* DefaultMessageTableViewCell.swift in Sources */,
@@ -877,7 +870,6 @@
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
 				974D5C391E2E5D9900918BAD /* SwiftLoader.swift in Sources */,
 				976A99771E251A6400F82105 /* FacebookLogin.swift in Sources */,
-				974CDFBD1E67EB900041EC07 /* RewardStatus.swift in Sources */,
 				970C963A1E5EFBE400697E56 /* RedeemPointsMessageVC.swift in Sources */,
 				974CDFCA1E67FC030041EC07 /* FZURefreshFoot.swift in Sources */,
 				E8BAE2AA1E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift in Sources */,

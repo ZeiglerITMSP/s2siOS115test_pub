@@ -352,12 +352,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                     
                     
                 }
-                
-                //                DispatchQueue.main.async {
-                //                    SwiftLoader.hide()
-                //                    self.showAlert(title: "", message:error.localizedDescription);
-                //                }
-                break
+                   break
             }
         }
         
@@ -373,12 +368,6 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         if isReachable == false {
             self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
             return
-        }
-        
-        if self.recentActivityArray.count % self.limit_value != 0
-        {
-            //self.endLoadMore()
-            //return
         }
         
         if isFromFilterScreen == true {
@@ -453,7 +442,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                                        "to": toDateMilliSecStr,
                                        "time_zone_offset": timeZoneOffset]
         
-        // print(parameters)
+         print(parameters)
         
         let url = String(format: "%@/getRecentRedemptionActivity",hostUrl)
         // print(url)
@@ -466,7 +455,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                //print("json response\(json)")
+                print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
