@@ -392,7 +392,7 @@ extension EBTLoginTVC {
             
             if let pageTitle = result {
                 // isCurrentPage
-                if pageTitle == "ebt.logon".localized() {
+                if pageTitle != self.pageTitle {
                     // current page
                     self.loadLoginPage()
                 } else {
