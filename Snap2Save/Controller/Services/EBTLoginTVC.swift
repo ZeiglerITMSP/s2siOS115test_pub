@@ -388,26 +388,46 @@ extension EBTLoginTVC {
     
     func validateLoginPage() {
         
-        // isCurrentPage
-        let jsLoginValidation = "$('#button_logon').text().trim();"
-        let javaScript = jsLoginValidation
-        
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+        ebtWebView.getPageHeading(completion: { result in
             
-            if let resultString = result as? String {
-                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                if resultTrimmed != self.pageTitle {
+            if let pageTitle = result {
+                // isCurrentPage
+                if pageTitle != self.pageTitle {
+                    // current page
                     self.loadLoginPage()
                 } else {
-                    // if login page
                     self.checkForStatusMessage()
                 }
+                
             } else {
-                print(error ?? "")
+                //print(error ?? "")
             }
-        }
+            
+        })
     }
     
+//    func validateLoginPage() {
+//        
+//        // isCurrentPage
+//        let jsLoginValidation = "$('#button_logon').text().trim();"
+//        let javaScript = jsLoginValidation
+//        
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            
+//            if let resultString = result as? String {
+//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+//                if resultTrimmed != self.pageTitle {
+//                    self.loadLoginPage()
+//                } else {
+//                    // if login page
+//                    self.checkForStatusMessage()
+//                }
+//            } else {
+//                print(error ?? "")
+//            }
+//        }
+//    }
+//    
     func loadLoginPage() {
         
         
