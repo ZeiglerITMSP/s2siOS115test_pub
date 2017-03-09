@@ -505,7 +505,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                           "language": currentLanguage
             ]
         
-        print(parameters)
+        //print(parameters)
         let url = String(format: "%@/checkFbUser", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -517,7 +517,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                 }
                 
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+               // print("json response\(json)")
                 let responseDict = json.dictionaryObject
                 if let code = responseDict?["code"] {
                     let code = code as! NSNumber
