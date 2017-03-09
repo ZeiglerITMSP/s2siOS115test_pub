@@ -518,7 +518,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
                                        "date_string": result,
                                        "address": address]
         
-        print(parameters)
+        //print(parameters)
         
         let url = String(format: "%@/redeemPoints", hostUrl)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -526,7 +526,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 

@@ -18,7 +18,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
     var languageSelectionButton: UIButton!
     var rewardFilterDelegate : RewardFilterProtocol?
     var presentedVC: RewardStatusTVC?
-    
+    var toDateTime : String = String()
     // Outlets
     
     @IBOutlet var dateRange: UILabel!
@@ -31,8 +31,15 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         if !isValid(){
             return
         }
+        let endDateStr = toDateField.contentTextField.text!
+        toDateTime = endDateStr + " 11:59 PM"
+        
         presentedVC?.fromDate = fromDateField.contentTextField.text!
-        presentedVC?.toDate = toDateField.contentTextField.text!
+
+        //presentedVC?.toDate = toDateField.contentTextField.text!
+        
+        presentedVC?.toDate = toDateTime
+        
         presentedVC?.isFromFilterScreen = true
         
         _ = self.navigationController?.popViewController(animated: true)
@@ -204,6 +211,8 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         
         if (toDateField?.contentTextField.text?.characters.count)! > 0 {
             let toDateVal = dateFormatter.date(from: toDateField.contentTextField.text!)
+            //let toDateVal = dateFormatter.date(from: toDateTime)
+
             toDateMilliSec = (toDateVal?.timeIntervalSince1970)!*1000
             
         }

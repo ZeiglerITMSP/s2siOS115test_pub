@@ -305,7 +305,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                                        "device_id": device_id,
                                        "user_id": user_id]
         
-        print(parameters)
+        //print(parameters)
         
         let url = String(format: "%@/getRewardStatus",hostUrl)
         //print(url)
@@ -314,7 +314,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
@@ -396,6 +396,8 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateFormat = "MM/dd/yyyy hh:mm a"
         
         var fromDateMilliSec : Double = 0.0
         var toDateMilliSec : Double = 0.0
@@ -428,7 +430,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         
         if (toDate?.characters.count)! > 0 {
             
-            let toDateVal = dateFormatter.date(from: toDate!)
+            let toDateVal = dateFormatter1.date(from: toDate!)
             toDateMilliSec =  (toDateVal?.timeIntervalSince1970)!*1000
             //toDateMilliSecStr = String.init(format: "%ld", toDateMilliSec)
             toDateMilliSecStr = "\(toDateMilliSec)"
