@@ -182,6 +182,8 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let currentLang = Localize.currentLanguage()
+        
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "RedeemPointsTotalCell") as! RedeemPointsTotalCell
@@ -248,7 +250,13 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 if let rewardPoints = recentActivityDict["points"] {
                     points = "\(rewardPoints)"
                 }
-                cell.titleLabel.text = recentActivityDict["title"] as! String?
+                
+                if currentLang == "en" {
+                    cell.titleLabel.text = recentActivityDict["en_title"] as! String?
+                }
+                else if currentLang == "es" {
+                    cell.titleLabel.text = recentActivityDict["es_title"] as! String?
+                }
                 cell.detailLabel.text = "\(points)"
                 
                 var dateStr = ""
@@ -352,12 +360,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                     
                     
                 }
-                
-                //                DispatchQueue.main.async {
-                //                    SwiftLoader.hide()
-                //                    self.showAlert(title: "", message:error.localizedDescription);
-                //                }
-                break
+                   break
             }
         }
         
@@ -373,12 +376,6 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         if isReachable == false {
             self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
             return
-        }
-        
-        if self.recentActivityArray.count % self.limit_value != 0
-        {
-            //self.endLoadMore()
-            //return
         }
         
         if isFromFilterScreen == true {
@@ -453,7 +450,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                                        "to": toDateMilliSecStr,
                                        "time_zone_offset": timeZoneOffset]
         
-        // print(parameters)
+         print(parameters)
         
         let url = String(format: "%@/getRecentRedemptionActivity",hostUrl)
         // print(url)
@@ -466,7 +463,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                //print("json response\(json)")
+                print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
