@@ -299,33 +299,55 @@ extension ServicesTVC {
         ebtWebView.webView.load(request as URLRequest)
     }
     
+//    func validatePage() {
+//        
+//        // isCurrentPage
+//        let jsLoginValidation = "$('#button_logon').text().trim();"
+//        let javaScript = jsLoginValidation
+//        
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            
+//            if let resultString = result as? String {
+//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+//                if resultTrimmed == "ebt.logon".localized() {
+//                    
+//                    self.ebtActivityIndicator.stopAnimating()
+//                    self.performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
+//                    
+//                } else {
+//                    self.ebtActivityIndicator.stopAnimating()
+//                    
+//                }
+//                
+//            } else {
+//                print(error ?? "")
+//            }
+//            
+//        }
+//    }
+
     func validatePage() {
         
-        // isCurrentPage
-        let jsLoginValidation = "$('#button_logon').text().trim();"
-        let javaScript = jsLoginValidation
-        
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+        ebtWebView.getPageHeading(completion: { result in
             
-            if let resultString = result as? String {
-                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                if resultTrimmed == "ebt.logon".localized() {
-                    
+            if let pageTitle = result {
+                // isCurrentPage
+                if pageTitle == "ebt.logon".localized() {
+                    // current page
                     self.ebtActivityIndicator.stopAnimating()
                     self.performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
                     
                 } else {
                     self.ebtActivityIndicator.stopAnimating()
-                    
                 }
                 
             } else {
-                print(error ?? "")
+                //print(error ?? "")
             }
             
-        }
+        })
     }
-
+    
     
 }
 

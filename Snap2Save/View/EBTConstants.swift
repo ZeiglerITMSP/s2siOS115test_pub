@@ -48,9 +48,7 @@ let kEBTHelp_es = "https://ucard.chase.com/help/english/welcomePage/index.htm?pa
 class EBTConstants: NSObject {
     
     
-    
-    
-   class func getEBTViewControllerName(forPageTitle title:String) -> String? {
+    class func getEBTViewControllerName(forPageTitle title:String) -> String? {
         // login
         if title == "ebt.securityQuestion".localized() {
             return "EBTLoginSecurityQuestionTVC"
@@ -61,7 +59,7 @@ class EBTConstants: NSObject {
         } else if title == "ebt.logon".localized() {
             return "EBTLoginTVC"
         }
-        // registration
+            // registration
         else if title == "ebt.cardnumber".localized() {
             return "EBTCardNumberTVC"
         } else if title == "ebt.dob".localized() {
@@ -75,9 +73,36 @@ class EBTConstants: NSObject {
         } else if title == "ebt.emailChange".localized() {
             return "EBTChangeEmailTVC"
         }
-    
+        
         return nil
     }
     
-
+//   class func getEBTViewControllerName(forPageTitle title:String) -> String? {
+//        // login
+//        if title == "ebt.securityQuestion".localized() {
+//            return "EBTLoginSecurityQuestionTVC"
+//        } else if title == "ebt.authentication".localized() {
+//            return "EBTAuthenticationTVC"
+//        } else if title == "ebt.accountSummary".localized() {
+//            return "EBTDashboardTVC"
+//        } else if title == "ebt.logon".localized() {
+//            return "EBTLoginTVC"
+//        }
+//        // registration
+//        else if title == "ebt.cardnumber".localized() {
+//            return "EBTCardNumberTVC"
+//        } else if title == "ebt.dob".localized() {
+//            return "EBTDateOfBirthTVC"
+//        } else if title == "ebt.pin".localized() {
+//            return "EBTSelectPinTVC"
+//        } else if title == "ebt.userInformation".localized() {
+//            return "EBTUserInformationTVC"
+//        } else if title == "ebt.confirmation".localized() {
+//            return "EBTConfirmationTVC"
+//        } else if title == "ebt.emailChange".localized() {
+//            return "EBTChangeEmailTVC"
+//        }
+//    
+//        return nil
+//    }
 }
