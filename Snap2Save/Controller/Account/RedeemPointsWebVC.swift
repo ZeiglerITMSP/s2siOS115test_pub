@@ -117,16 +117,7 @@ extension RedeemPointsWebVC: UIWebViewDelegate {
 
 func webViewDidStartLoad(_ webView: UIWebView) {
     
-//    let script = "document.getElementsByTagName('body')[0].innerHTML.length";
-    
-   // if let lenght = self.servicesWebView.stringByEvaluatingJavaScript(from: script) {
-        
-      //  let len : Int = Int(lenght)!
-        
-        //if len == 0 {
-            SwiftLoader.show(title: "Loading...".localized(), animated: true)
-       // }
-//}
+    SwiftLoader.show(title: "Loading...".localized(), animated: true)
 }
 
 func webViewDidFinishLoad(_ webView: UIWebView) {

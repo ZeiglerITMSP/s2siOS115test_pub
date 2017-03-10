@@ -308,7 +308,6 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         //print(parameters)
         
         let url = String(format: "%@/getRewardStatus",hostUrl)
-        //print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
@@ -360,7 +359,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                     
                     
                 }
-                   break
+                break
             }
         }
         
@@ -405,22 +404,22 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         var fromDateMilliSecStr = ""
         var toDateMilliSecStr = ""
         /*if (fromDate?.characters.count)! > 0 {
-            let fromDateVal = dateFormatter.date(from: fromDate!)
-            fromDateMilliSec = Int(((fromDateVal?.timeIntervalSince1970)!*1000.0).rounded())//            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
-            fromDateMilliSecStr = "\(fromDateMilliSec)"
-            
-        }
+         let fromDateVal = dateFormatter.date(from: fromDate!)
+         fromDateMilliSec = Int(((fromDateVal?.timeIntervalSince1970)!*1000.0).rounded())//            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
+         fromDateMilliSecStr = "\(fromDateMilliSec)"
+         
+         }
+         
+         if (toDate?.characters.count)! > 0 {
+         
+         let toDateVal = dateFormatter.date(from: toDate!)
+         toDateMilliSec =  Int(((toDateVal?.timeIntervalSince1970)!*1000.0).rounded())
+         //toDateMilliSecStr = String.init(format: "%ld", toDateMilliSec)
+         toDateMilliSecStr = "\(toDateMilliSec)"
+         
+         }*/
         
-        if (toDate?.characters.count)! > 0 {
-            
-            let toDateVal = dateFormatter.date(from: toDate!)
-            toDateMilliSec =  Int(((toDateVal?.timeIntervalSince1970)!*1000.0).rounded())
-            //toDateMilliSecStr = String.init(format: "%ld", toDateMilliSec)
-            toDateMilliSecStr = "\(toDateMilliSec)"
-            
-        }*/
         
- 
         if (fromDate?.characters.count)! > 0 {
             let fromDateVal = dateFormatter1.date(from: fromDate!)
             fromDateMilliSec = (fromDateVal?.timeIntervalSince1970)!*1000//            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
@@ -436,7 +435,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             toDateMilliSecStr = "\(toDateMilliSec)"
             
         }
-
+        
         
         
         let parameters : Parameters = ["version_name": version_name,
@@ -452,7 +451,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                                        "to": toDateMilliSecStr,
                                        "time_zone_offset": timeZoneOffset]
         
-         print(parameters)
+        //print(parameters)
         
         let url = String(format: "%@/getRecentRedemptionActivity",hostUrl)
         // print(url)
@@ -465,7 +464,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
@@ -478,10 +477,8 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                             self.recentActivityArray = self.recentActivityArray + recentActivityArr
                             self.tableView.reloadData()
                         }
-                        // print("recentActivityArray count and limit value::%@,%@",self.recentActivityArray.count,self.limit_value)
-                        
                         if let recentActivityArr1 = responseDict?["recent_activity"] as? [[String: Any]]! {
-                            // print("inside loop count and limit value::%@,%@",recentActivityArr1.count,self.limit_value)
+                            
                             if recentActivityArr1.count < self.limit_value
                             {
                                 
