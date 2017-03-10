@@ -89,7 +89,7 @@ class EBTLoginTVC: UITableViewController {
     @IBAction func registrationAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        registrationButton.isEnabled = false
+        //registrationButton.isEnabled = false
         registrationActivityIndicator.startAnimating()
         
         actionType = ActionType.registration
@@ -154,6 +154,8 @@ class EBTLoginTVC: UITableViewController {
         isTouchIdAvailable = AppHelper.isTouchIDAvailable()
         // loader
         AppHelper.configSwiftLoader()
+        
+        self.registrationButton.isHidden = true
         
         // Add help tab
 //        addHelpTab()
@@ -300,7 +302,7 @@ class EBTLoginTVC: UITableViewController {
         errorMessageLabel.text = ""
         loginButton.isEnabled = true
         activityIndicator.stopAnimating()
-        registrationButton.isEnabled = true
+        //registrationButton.isEnabled = true
         registrationActivityIndicator.stopAnimating()
         self.tableView.reloadData()
         
@@ -388,26 +390,46 @@ extension EBTLoginTVC {
     
     func validateLoginPage() {
         
-        // isCurrentPage
-        let jsLoginValidation = "$('#button_logon').text().trim();"
-        let javaScript = jsLoginValidation
-        
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+        ebtWebView.getPageHeading(completion: { result in
             
-            if let resultString = result as? String {
-                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                if resultTrimmed != self.pageTitle {
+            if let pageTitle = result {
+                // isCurrentPage
+                if pageTitle != self.pageTitle {
+                    // current page
                     self.loadLoginPage()
                 } else {
-                    // if login page
                     self.checkForStatusMessage()
                 }
+                
             } else {
-                print(error ?? "")
+                //print(error ?? "")
             }
-        }
+            
+        })
     }
     
+//    func validateLoginPage() {
+//        
+//        // isCurrentPage
+//        let jsLoginValidation = "$('#button_logon').text().trim();"
+//        let javaScript = jsLoginValidation
+//        
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            
+//            if let resultString = result as? String {
+//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+//                if resultTrimmed != self.pageTitle {
+//                    self.loadLoginPage()
+//                } else {
+//                    // if login page
+//                    self.checkForStatusMessage()
+//                }
+//            } else {
+//                print(error ?? "")
+//            }
+//        }
+//    }
+//    
     func loadLoginPage() {
         
         
@@ -597,7 +619,7 @@ extension EBTLoginTVC {
                     if self.ebtWebView.isPageLoading == false {
                         // update view
                         self.loginButton.isEnabled = true
-                        self.registrationButton.isEnabled = true
+                       // self.registrationButton.isEnabled = true
                         self.activityIndicator.stopAnimating()
                         self.registrationActivityIndicator.stopAnimating()
                     }

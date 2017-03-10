@@ -185,6 +185,7 @@
 "Are you sure you want to log out?" = "Are you sure you want to log out?";
 
 "Please provide all information." = "Please provide all information.";
+"You must agree to the Terms of Service." = "You must agree to the Terms of Service.";
 
 // Offers
 
@@ -386,6 +387,23 @@
 "ebt.accountSummary" = "Account Summary";
 "ebt.transactionActivity" = "Transaction Activity";
 
-
-
+//// login
+//"ebt.logon" = "login";
+//"ebt.authentication" = "login_authorization";
+//
+//// registration
+//"ebt.cardnumber" = "sign_up_card";
+//"ebt.acceptTerms" = "sign_up_terms_conditions";
+//"ebt.dob" = "sign_up_dob";
+//"ebt.pin" = "sign_up_select_pin";
+//"ebt.userInformation" = "sign_up_user_information";
+//"ebt.confirmation" = "sign_up_user_confirmation";
+//"ebt.emailChange" = "sign_up_change_email";
+//// dashboard
+//"ebt.securityQuestion" = "login_security_question";
+//"ebt.accountSummary" = "account_dashboard";
+//"ebt.transactionActivity" = "account_transactions";
+//
+//"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
+//"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
 

@@ -18,8 +18,9 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
     
     var facebookDict:[String : Any]? = nil
     var user:User = User()
+    var checkButtonSelected : Bool = false
     
-    
+    @IBOutlet var checkButton: UIButton!
     @IBOutlet var messageTextView: UITextView!
     
     @IBOutlet var facebookActivityIndicator: UIActivityIndicatorView!
@@ -81,6 +82,19 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         }
     }
     
+    @IBAction func checkButtonAction(_ sender: UIButton) {
+        
+        if checkButtonSelected == false {
+            checkButton.setImage(UIImage.init(named: "checkOn"), for: .normal)
+            checkButtonSelected = true
+        }
+        else
+        {
+            checkButton.setImage(UIImage.init(named: "checkOff"), for: .normal)
+            checkButtonSelected = false
+        }
+        
+    }
     @IBAction func continueButtonClicked(_ sender: UIButton) {
         
         if !isValidData(){
@@ -552,6 +566,11 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
                     showAlert(title: "", message: "Please enter a valid email address.".localized())
                     return false
             }
+        }
+        
+        if checkButtonSelected == false {
+            showAlert(title: "", message: "You must agree to the Terms of Service.".localized())
+            return false
         }
         return true
     }

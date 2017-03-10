@@ -485,7 +485,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         let result = formatter.string(from: date as Date)
         
         let dateRes = formatter.date(from: result)
-        let dateMilliSec = CUnsignedLongLong((dateRes?.timeIntervalSince1970)!*1000)
+        let dateMilliSec = (dateRes?.timeIntervalSince1970)!*1000
         
         let first_name = firstNameTF.text ?? ""
         let last_name = lastNameTf.text ?? ""
@@ -518,7 +518,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
                                        "date_string": result,
                                        "address": address]
         
-       // print(parameters)
+        //print(parameters)
         
         let url = String(format: "%@/redeemPoints", hostUrl)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -526,7 +526,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 let json = JSON(data: response.data!)
-               // print("json response\(json)")
+                //print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
@@ -579,10 +579,10 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
             showAlert(title: "", message: "Please provide all information.".localized())
             return false
         }
-        if addressLine2Tf.text?.characters.count == 0 {
-            showAlert(title: "", message: "Please provide all information.".localized())
-            return false
-        }
+//        if addressLine2Tf.text?.characters.count == 0 {
+//            showAlert(title: "", message: "Please provide all information.".localized())
+//            return false
+//        }
         if cityTf.text?.characters.count == 0  {
             showAlert(title: "", message: "Please provide all information.".localized())
             return false

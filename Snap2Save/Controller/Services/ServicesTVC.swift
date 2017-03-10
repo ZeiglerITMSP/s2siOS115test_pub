@@ -43,7 +43,7 @@ class ServicesTVC: UITableViewController {
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
         reloadContent()
-        
+        FlowSegentedControl.isHidden = true
         
     }
     
@@ -86,6 +86,21 @@ class ServicesTVC: UITableViewController {
 //    }
     
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        if  section ==  0 {
+            return 1
+        }
+        else {
+            return 6
+        }
+    }
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -271,17 +286,17 @@ extension ServicesTVC {
         var loginUrl = kEBTLoginUrl
         
         // For testing only
-        if self.FlowSegentedControl.selectedSegmentIndex == 1 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 2 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow3/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 3 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow4/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 4 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow5/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 5 {
-            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
-        }
+//        if self.FlowSegentedControl.selectedSegmentIndex == 1 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 2 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow3/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 3 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow4/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 4 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow5/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 5 {
+//            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
+//        }
         
         tempLoginUrl = loginUrl
         
@@ -299,33 +314,55 @@ extension ServicesTVC {
         ebtWebView.webView.load(request as URLRequest)
     }
     
+//    func validatePage() {
+//        
+//        // isCurrentPage
+//        let jsLoginValidation = "$('#button_logon').text().trim();"
+//        let javaScript = jsLoginValidation
+//        
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            
+//            if let resultString = result as? String {
+//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+//                if resultTrimmed == "ebt.logon".localized() {
+//                    
+//                    self.ebtActivityIndicator.stopAnimating()
+//                    self.performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
+//                    
+//                } else {
+//                    self.ebtActivityIndicator.stopAnimating()
+//                    
+//                }
+//                
+//            } else {
+//                print(error ?? "")
+//            }
+//            
+//        }
+//    }
+
     func validatePage() {
         
-        // isCurrentPage
-        let jsLoginValidation = "$('#button_logon').text().trim();"
-        let javaScript = jsLoginValidation
-        
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+        ebtWebView.getPageHeading(completion: { result in
             
-            if let resultString = result as? String {
-                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                if resultTrimmed == "ebt.logon".localized() {
-                    
+            if let pageTitle = result {
+                // isCurrentPage
+                if pageTitle == "ebt.logon".localized() {
+                    // current page
                     self.ebtActivityIndicator.stopAnimating()
                     self.performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
                     
                 } else {
                     self.ebtActivityIndicator.stopAnimating()
-                    
                 }
                 
             } else {
-                print(error ?? "")
+                //print(error ?? "")
             }
             
-        }
+        })
     }
-
+    
     
 }
 

@@ -106,6 +106,7 @@ class EBTWebView: NSObject {
         webView.evaluateJavaScript(javaScript) { (result, error) in
             
             if let resultString = result as? String {
+                print(resultString)
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 completion(resultTrimmed)
                 
@@ -116,6 +117,41 @@ class EBTWebView: NSObject {
             
         }
     }
+//
+//    func getPageHeading(completion: @escaping (String?) -> ()) {
+//        
+//        let jsErrorMessage = "(function(){" +
+//            "if ($('#txtCardNumber').length && $('#btnValidateCardNumber').length) return 'sign_up_card';" +
+//            "if ($('#btnAcceptTandC').length && $('#btnCancelRegistration').length) return 'sign_up_terms_conditions';" +
+//            "if ($('#btnValidateSecurityAnswer').length && $('#txtSecurityKeyQuestionAnswer').length && $('input.birthDate').length) return 'sign_up_dob';" +
+//            "if ($('#txtNewPin').length && $('#txtConfirmPin').length) return 'sign_up_select_pin';" +
+//            "if ($('#txtConfirmEmail').length && $('select#question2').length) return 'sign_up_user_information';" +
+//            "if ($('#txtEmailValidationCode').length && ('#validateEmailBtn').length && $('#changeEmailBtn').length) return 'sign_up_user_confirmation';" +
+//            "if ($('#currentEmailLbl').length && $('#newEMailTextField').length && $('#validateEMailTextField').length) return 'sign_up_change_email';" +
+//            "if ($('#userId').length && $('#password').length && $('#button_logon').length) return 'login';" +
+//            "if ($('#txtAuthenticationCode').length && $('#okButton').length && $('#cancelBtn').length) return 'login_authorization';" +
+//            "if ($('#securityAnswer').length && $('#registerDeviceFlag').length && $('#okButton').length) return 'login_security_question';" +
+//            "if ($('#fromDateTransHistory').length && $('#toDateTransHistory').length) return 'account_transactions';" +
+//            "if ($('#subHeadercardholderSummary').length ) return 'account_dashboard';" +
+//            "if ($(\"#errorTable p.errorText:contains('Please try again later')\").length) return 'error';" +
+//        "})()"
+//        
+//        let javaScript = jsErrorMessage
+//        
+//        webView.evaluateJavaScript(javaScript) { (result, error) in
+//            print("PageHeading:")
+//            print(result ?? "no title....")
+//            if let resultString = result as? String {
+//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+//                completion(resultTrimmed)
+//                
+//            } else {
+//                print(error ?? "")
+//                completion(nil)
+//            }
+//        }
+//    }
+//    
     
     func getErrorMessage(completion: @escaping (String?) -> ()) {
         
@@ -156,6 +192,8 @@ class EBTWebView: NSObject {
             }
         }
     }
+  
+    
     
     func checkForSuccessMessage(completion: @escaping (String?) -> ()) {
         

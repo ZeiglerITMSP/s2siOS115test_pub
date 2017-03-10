@@ -82,11 +82,9 @@ class RedeemPointsTVC: UITableViewController {
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
-        
         self.saveALotButton.setImage(UIImage.init(named: "radioOn"), for: .normal)
         self.healthCareButton.setImage(UIImage.init(named: "radioOff"), for: .normal)
         isSelected = true
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -168,7 +166,7 @@ class RedeemPointsTVC: UITableViewController {
         let result = formatter.string(from: date as Date)
         let dateRes = formatter.date(from: result)
         
-        let dateMilliSec = CUnsignedLongLong((dateRes?.timeIntervalSince1970)!*1000)
+        let dateMilliSec = (dateRes?.timeIntervalSince1970)!*1000
         
         /*let first_name = firstNameTF.text ?? ""
          let last_name = lastNameTf.text ?? ""
@@ -201,7 +199,7 @@ class RedeemPointsTVC: UITableViewController {
                                        "date_string": result,
                                        "address": address]
         
-       // print(parameters)
+        //print(parameters)
         
         let url = String(format: "%@/redeemPoints", hostUrl)
        // print(url)
@@ -210,7 +208,7 @@ class RedeemPointsTVC: UITableViewController {
                 
             case .success:
                 let json = JSON(data: response.data!)
-               // print("json response\(json)")
+                //print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 

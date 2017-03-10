@@ -701,9 +701,6 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         ]
         
         print(parameters)
-        // HUD.allowsInteraction = false
-        // HUD.dimsBackground = false
-        // HUD.show(.progress)
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let url = String(format: "%@/getProfile", hostUrl)
@@ -759,7 +756,6 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
                     
                     
                 }
-                print("error")
                 break
             }
             
