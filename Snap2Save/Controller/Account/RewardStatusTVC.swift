@@ -422,7 +422,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         
  
         if (fromDate?.characters.count)! > 0 {
-            let fromDateVal = dateFormatter.date(from: fromDate!)
+            let fromDateVal = dateFormatter1.date(from: fromDate!)
             fromDateMilliSec = (fromDateVal?.timeIntervalSince1970)!*1000//            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
             fromDateMilliSecStr = "\(fromDateMilliSec)"
             

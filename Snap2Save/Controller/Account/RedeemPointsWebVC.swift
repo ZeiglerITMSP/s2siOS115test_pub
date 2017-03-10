@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import Localize_Swift
 
 class RedeemPointsWebVC: UIViewController {
 
     var loadUrlStr : String = ""
+    var languageSelectionButton: UIButton!
+    var currentlanguage : String = ""
+    var oldLanguage : String = ""
 
     @IBOutlet var redeemPointsWebView: UIWebView!
     
@@ -18,17 +22,15 @@ class RedeemPointsWebVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        reloadContent()
-
-       let  loadUrl = URL(string : loadUrlStr )
-        self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
-
-        if loadUrl != nil {
-            let request = URLRequest(url: loadUrl!)
-            redeemPointsWebView.loadRequest(request)
-            redeemPointsWebView.scalesPageToFit = true
-        }
+        //redeemPointsWebView.delegate = self
         
+        self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
+        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        reloadContent()
+        oldLanguage = Localize.currentLanguage()
+        loadWebView()
+
 
     }
 
@@ -39,6 +41,8 @@ class RedeemPointsWebVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        oldLanguage = Localize.currentLanguage()
+
         reloadContent()
     }
 
@@ -59,12 +63,43 @@ class RedeemPointsWebVC: UIViewController {
 
     func reloadContent() {
         DispatchQueue.main.async {
-            self.updateBackButtonText()
-            //self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Redeem Points".localized()
+            self.updateBackButtonText()
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.currentlanguage = Localize.currentLanguage()
+            if self.oldLanguage != self.currentlanguage {
+                self.oldLanguage = self.currentlanguage
+                
+                self.loadWebView()
+                
+            }
+
         }
         
     }
+    
+    func languageButtonClicked() {
+        self.showLanguageSelectionAlert()
+    }
+
+    func loadWebView() {
+        var url : URL? = nil
+        currentlanguage = Localize.currentLanguage()
+        if currentlanguage == "es" {
+            url = URL(string : "http://www.clinicatepeyac.org/" )
+        }
+        else if currentlanguage == "en" {
+            url = URL(string : "http://www.clinicatepeyac.org/" )
+        }
+        if url != nil {
+            let request = URLRequest(url: url!)
+            redeemPointsWebView.loadRequest(request)
+            redeemPointsWebView.scalesPageToFit = true
+        }
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 
@@ -76,3 +111,29 @@ class RedeemPointsWebVC: UIViewController {
     */
 
 }
+
+
+//extension RedeemPointsWebVC: UIWebViewDelegate {
+//
+//func webViewDidStartLoad(_ webView: UIWebView) {
+//    
+////    let script = "document.getElementsByTagName('body')[0].innerHTML.length";
+//    
+//   // if let lenght = self.servicesWebView.stringByEvaluatingJavaScript(from: script) {
+//        
+//      //  let len : Int = Int(lenght)!
+//        
+//        //if len == 0 {
+//            SwiftLoader.show(title: "Loading...".localized(), animated: true)
+//       // }
+////}
+//}
+//
+//func webViewDidFinishLoad(_ webView: UIWebView) {
+//    SwiftLoader.hide()
+//}
+//
+//func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+//    SwiftLoader.hide()
+//}
+//}

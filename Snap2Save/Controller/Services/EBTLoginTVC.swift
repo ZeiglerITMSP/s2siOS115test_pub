@@ -89,7 +89,7 @@ class EBTLoginTVC: UITableViewController {
     @IBAction func registrationAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        registrationButton.isEnabled = false
+        //registrationButton.isEnabled = false
         registrationActivityIndicator.startAnimating()
         
         actionType = ActionType.registration
@@ -154,6 +154,8 @@ class EBTLoginTVC: UITableViewController {
         isTouchIdAvailable = AppHelper.isTouchIDAvailable()
         // loader
         AppHelper.configSwiftLoader()
+        
+        self.registrationButton.isHidden = true
         
         // Add help tab
 //        addHelpTab()
@@ -300,7 +302,7 @@ class EBTLoginTVC: UITableViewController {
         errorMessageLabel.text = ""
         loginButton.isEnabled = true
         activityIndicator.stopAnimating()
-        registrationButton.isEnabled = true
+        //registrationButton.isEnabled = true
         registrationActivityIndicator.stopAnimating()
         self.tableView.reloadData()
         
@@ -617,7 +619,7 @@ extension EBTLoginTVC {
                     if self.ebtWebView.isPageLoading == false {
                         // update view
                         self.loginButton.isEnabled = true
-                        self.registrationButton.isEnabled = true
+                       // self.registrationButton.isEnabled = true
                         self.activityIndicator.stopAnimating()
                         self.registrationActivityIndicator.stopAnimating()
                     }

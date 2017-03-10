@@ -19,6 +19,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
     var rewardFilterDelegate : RewardFilterProtocol?
     var presentedVC: RewardStatusTVC?
     var toDateTime : String = String()
+    var fromDateTime : String = String()
     // Outlets
     
     @IBOutlet var dateRange: UILabel!
@@ -31,13 +32,16 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         if !isValid(){
             return
         }
+        let fromDateStr = fromDateField.contentTextField.text!
+        fromDateTime = fromDateStr + " 00:00 AM"
         let endDateStr = toDateField.contentTextField.text!
         toDateTime = endDateStr + " 11:59 PM"
         
-        presentedVC?.fromDate = fromDateField.contentTextField.text!
+       // presentedVC?.fromDate = fromDateField.contentTextField.text!
 
         //presentedVC?.toDate = toDateField.contentTextField.text!
-        
+         presentedVC?.fromDate = fromDateTime
+
         presentedVC?.toDate = toDateTime
         
         presentedVC?.isFromFilterScreen = true

@@ -156,7 +156,7 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
         
         let storyboard = UIStoryboard(name: "Home", bundle: nil) as UIStoryboard
         let redeemVc = storyboard.instantiateViewController(withIdentifier: "RedeemPointsWebVC") as! RedeemPointsWebVC
-        redeemVc.loadUrlStr = "https://www.google.co.in/"
+        redeemVc.loadUrlStr = "https://www.clinicatepeyac.org"
         self.navigationController?.pushViewController(redeemVc, animated: true)
     }
 
