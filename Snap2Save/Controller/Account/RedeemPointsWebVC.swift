@@ -22,7 +22,7 @@ class RedeemPointsWebVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        //redeemPointsWebView.delegate = self
+        redeemPointsWebView.delegate = self
         
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
@@ -69,7 +69,7 @@ class RedeemPointsWebVC: UIViewController {
             self.currentlanguage = Localize.currentLanguage()
             if self.oldLanguage != self.currentlanguage {
                 self.oldLanguage = self.currentlanguage
-                
+                self.redeemPointsWebView.loadRequest(URLRequest(url: URL(string:"about:blank")!))
                 self.loadWebView()
                 
             }
@@ -113,27 +113,27 @@ class RedeemPointsWebVC: UIViewController {
 }
 
 
-//extension RedeemPointsWebVC: UIWebViewDelegate {
-//
-//func webViewDidStartLoad(_ webView: UIWebView) {
-//    
-////    let script = "document.getElementsByTagName('body')[0].innerHTML.length";
-//    
-//   // if let lenght = self.servicesWebView.stringByEvaluatingJavaScript(from: script) {
-//        
-//      //  let len : Int = Int(lenght)!
-//        
-//        //if len == 0 {
-//            SwiftLoader.show(title: "Loading...".localized(), animated: true)
-//       // }
-////}
+extension RedeemPointsWebVC: UIWebViewDelegate {
+
+func webViewDidStartLoad(_ webView: UIWebView) {
+    
+//    let script = "document.getElementsByTagName('body')[0].innerHTML.length";
+    
+   // if let lenght = self.servicesWebView.stringByEvaluatingJavaScript(from: script) {
+        
+      //  let len : Int = Int(lenght)!
+        
+        //if len == 0 {
+            SwiftLoader.show(title: "Loading...".localized(), animated: true)
+       // }
 //}
-//
-//func webViewDidFinishLoad(_ webView: UIWebView) {
-//    SwiftLoader.hide()
-//}
-//
-//func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-//    SwiftLoader.hide()
-//}
-//}
+}
+
+func webViewDidFinishLoad(_ webView: UIWebView) {
+    SwiftLoader.hide()
+}
+
+func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    SwiftLoader.hide()
+}
+}
