@@ -324,9 +324,10 @@ class EBTDashboardTVC: UITableViewController {
             if pageTitle == "ebt.transactionActivity".localized() {
                 
                 self.validateTransactionsTab()
-                
             } else {
-                
+                print("END WITH DATA")
+                self.tableView.reloadData()
+                self.sendEBTInformationToServer()
             }
         })
         
