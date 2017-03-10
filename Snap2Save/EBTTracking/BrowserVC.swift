@@ -98,19 +98,21 @@ class BrowserVC: UIViewController {
     
     func addWebView() {
         
-        
-        let webView = webViewMaster.webView!
-        self.broswerView.addSubview(webView)
-        // constraints
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        let left = NSLayoutConstraint(item: webView, attribute: .left, relatedBy: .equal, toItem: webView.superview, attribute: .left, multiplier: 1, constant: 0)
-        let right = NSLayoutConstraint(item: webView, attribute: .right, relatedBy: .equal, toItem: webView.superview, attribute: .right, multiplier: 1, constant: 0)
-        let top = NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: webView.superview, attribute: .top, multiplier: 1, constant: 0)
-        let bottom = NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: webView.superview, attribute: .bottom, multiplier: 1, constant: 0)
-        webView.superview?.addConstraint(left)
-        webView.superview?.addConstraint(right)
-        webView.superview?.addConstraint(top)
-        webView.superview?.addConstraint(bottom)
+        DispatchQueue.main.async {
+            let webView = self.webViewMaster.webView!
+            self.broswerView.addSubview(webView)
+            // constraints
+            webView.translatesAutoresizingMaskIntoConstraints = false
+            let left = NSLayoutConstraint(item: webView, attribute: .left, relatedBy: .equal, toItem: webView.superview, attribute: .left, multiplier: 1, constant: 0)
+            let right = NSLayoutConstraint(item: webView, attribute: .right, relatedBy: .equal, toItem: webView.superview, attribute: .right, multiplier: 1, constant: 0)
+            let top = NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: webView.superview, attribute: .top, multiplier: 1, constant: 0)
+            let bottom = NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: webView.superview, attribute: .bottom, multiplier: 1, constant: 0)
+            webView.superview?.addConstraint(left)
+            webView.superview?.addConstraint(right)
+            webView.superview?.addConstraint(top)
+            webView.superview?.addConstraint(bottom)
+            
+        }
         
     }
    
