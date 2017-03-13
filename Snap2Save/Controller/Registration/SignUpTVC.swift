@@ -306,8 +306,17 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
     func updateTermsText() {
         
         // Terms of Service
-        let fullMessage = "TermsMessage".localized()
-        let rangeMessage = "TermsLink".localized()
+        let fullMessage = "TermsMessage".localized().makeAsRequired()
+        //let rangeMessage = "TermsLink".localized()
+        let rangeMessage = "Terms of Service"
+
+        let rangeMessage2 = "*"
+        //let range2 : NSMutableAttributedString = NSMutableAttributedString.init(string: " *")
+        
+       // let color : UIColor = UIColor.init(colorLiteralRed: 236.0/255.0, green: 80.0/255.0, blue: 30.0/255.0, alpha: 1.0)
+        
+      //  range2.addAttribute(NSForegroundColorAttributeName, value: color, range: fullMessageRange2)
+        
         var link = ""
         if Localize.currentLanguage() == "en" {
             link = terms_en
@@ -316,15 +325,30 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
             link = terms_es
         }
 
-        let attributedString = NSMutableAttributedString(string: fullMessage)
         
-        let fullMessageRange = (attributedString.string as NSString).range(of: fullMessage)
+        let range = (fullMessage.string as NSString).range(of: rangeMessage)
+        let range1 = (fullMessage.string as NSString).range(of: rangeMessage2)
+
+
+        let attributedString : NSMutableAttributedString = fullMessage as! NSMutableAttributedString
+        // 148 148 153
+        let fullMessageRange = (attributedString.string as NSString).range(of: fullMessage.string)
+        //let fullMessageRange2 = (attributedString.string as NSString).range(of:rangeMessage2)
+
+        let textColor = UIColor.init(red: 148.0/255.0, green: 148.0/255.0, blue: 153.0/255.0, alpha: 1.0)
         // default text style
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: self.termsTextView.textColor!, range: fullMessageRange)
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: textColor, range: range)
+        
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: MandatoryColor, range: range1)
+
         attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: fullMessageRange)
         let titleParagraphStyle = NSMutableParagraphStyle()
         titleParagraphStyle.alignment = .center
+        
         attributedString.addAttribute(NSParagraphStyleAttributeName, value: titleParagraphStyle, range: fullMessageRange)
+        
+        
+        
         
         // linkRange
         let linkRange = (attributedString.string as NSString).range(of: rangeMessage)
@@ -334,6 +358,8 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
             NSForegroundColorAttributeName: APP_GRREN_COLOR,
             NSUnderlineColorAttributeName: APP_GRREN_COLOR,
             NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue ] as [String : Any]
+        
+       // attributedString.append(range2)
         
         // textView is a UITextView
         self.termsTextView.linkTextAttributes = linkAttributes
