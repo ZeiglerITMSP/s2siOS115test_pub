@@ -155,7 +155,7 @@ class EBTLoginTVC: UITableViewController {
         // loader
         AppHelper.configSwiftLoader()
         
-        self.registrationButton.isHidden = true
+       // self.registrationButton.isHidden = true
         
         // Add help tab
 //        addHelpTab()

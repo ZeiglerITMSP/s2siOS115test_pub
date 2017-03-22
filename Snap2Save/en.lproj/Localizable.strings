@@ -368,42 +368,42 @@
 // **** Scrapping ****
 
 // *** PAGE TITLES *****
-// login
-"ebt.logon" = "Logon";
-"ebt.authentication" = "We don’t recognize the computer you’re using.";
-
-// registration
-"ebt.cardnumber" = "Identify Your Card and Accounts";
-"ebt.acceptTerms" = "Online Terms and Conditions";
-"ebt.dob" = "Validate Identity";
-"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
-"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
-"ebt.pin" = "Select PIN";
-"ebt.userInformation" = "Enter User Information";
-"ebt.confirmation" = "Confirmation";
-"ebt.emailChange" = "Change Email Address";
-// dashboard
-"ebt.securityQuestion" = "Verify Security Question";
-"ebt.accountSummary" = "Account Summary";
-"ebt.transactionActivity" = "Transaction Activity";
-
 //// login
-//"ebt.logon" = "login";
-//"ebt.authentication" = "login_authorization";
+//"ebt.logon" = "Logon";
+//"ebt.authentication" = "We don’t recognize the computer you’re using.";
 //
 //// registration
-//"ebt.cardnumber" = "sign_up_card";
-//"ebt.acceptTerms" = "sign_up_terms_conditions";
-//"ebt.dob" = "sign_up_dob";
-//"ebt.pin" = "sign_up_select_pin";
-//"ebt.userInformation" = "sign_up_user_information";
-//"ebt.confirmation" = "sign_up_user_confirmation";
-//"ebt.emailChange" = "sign_up_change_email";
-//// dashboard
-//"ebt.securityQuestion" = "login_security_question";
-//"ebt.accountSummary" = "account_dashboard";
-//"ebt.transactionActivity" = "account_transactions";
-//
+//"ebt.cardnumber" = "Identify Your Card and Accounts";
+//"ebt.acceptTerms" = "Online Terms and Conditions";
+//"ebt.dob" = "Validate Identity";
 //"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
 //"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
+//"ebt.pin" = "Select PIN";
+//"ebt.userInformation" = "Enter User Information";
+//"ebt.confirmation" = "Confirmation";
+//"ebt.emailChange" = "Change Email Address";
+//// dashboard
+//"ebt.securityQuestion" = "Verify Security Question";
+//"ebt.accountSummary" = "Account Summary";
+//"ebt.transactionActivity" = "Transaction Activity";
+
+// login
+"ebt.logon" = "login";
+"ebt.authentication" = "login_authorization";
+
+// registration
+"ebt.cardnumber" = "sign_up_card";
+"ebt.acceptTerms" = "sign_up_terms_conditions";
+"ebt.dob" = "sign_up_dob";
+"ebt.pin" = "sign_up_select_pin";
+"ebt.userInformation" = "sign_up_user_information";
+"ebt.confirmation" = "sign_up_user_confirmation";
+"ebt.emailChange" = "sign_up_change_email";
+// dashboard
+"ebt.securityQuestion" = "login_security_question";
+"ebt.accountSummary" = "account_dashboard";
+"ebt.transactionActivity" = "account_transactions";
+
+"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
+"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
 
