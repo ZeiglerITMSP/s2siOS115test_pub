@@ -137,7 +137,7 @@ class EBTWebView: NSObject {
             "if ($('#userId').length && $('#password').length && $('#button_logon').length) return 'login';" +
             "if ($('#txtAuthenticationCode').length && $('#okButton').length && $('#cancelBtn').length) return 'login_authorization';" +
             "if ($('#securityAnswer').length && $('#registerDeviceFlag').length && $('#okButton').length) return 'login_security_question';" +
-            "if ($('#fromDateTransHistory').length && $('#toDateTransHistory').length) return 'account_transactions';" +
+            "if ($($('#port_panel_02b ul li.green_bullet')[1]).children('strong').length > 0) return 'account_transactions';" +
             "if ($('#subHeadercardholderSummary').length ) return 'account_dashboard';" +
             "if ($(\"#errorTable p.errorText:contains('Please try again later')\").length) return 'error';" +
             "return '';" +
