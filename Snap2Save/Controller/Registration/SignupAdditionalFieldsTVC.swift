@@ -385,12 +385,15 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
             statesDict = NSDictionary(contentsOfFile: path)
         }
         
-        let states = statesDict?.allValues as! [String]
-        let sortedStates = states.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+       // let states = statesDict?.allValues as! [String]
+        let stateKeys = statesDict?.allKeys as! [String]
+        
+        let sortedStates = stateKeys.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
         
         statesArray = NSMutableArray()
         for state in sortedStates {
-            statesArray.add(state)
+            let str = statesDict?.value(forKey: state) as! String
+            statesArray.add(str)
         }
         
         stateTextField.pickerViewArray = statesArray
@@ -564,7 +567,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                           "signup_type": signup_type
             ]
         
-        //print("parameters)
+        print(parameters)
         
         registerActivityIndicator.startAnimating()
         let url = String(format: "%@/signUp", hostUrl)

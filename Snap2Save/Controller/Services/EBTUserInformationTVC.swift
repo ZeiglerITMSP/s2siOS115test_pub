@@ -227,6 +227,10 @@ class EBTUserInformationTVC: UITableViewController {
             self.errorMessageLabel.text = ""
             self.nextButton.setTitle("NEXT".localized(), for: .normal)
             
+            self.questionOneField.contentTextField.placeholder = "Please select a question".localized()
+            self.questionTwoField.contentTextField.placeholder = "Please select a question".localized()
+            self.questionThreeField.contentTextField.placeholder = "Please select a question".localized()
+            
             self.tableView.reloadData()
         }
         

@@ -65,6 +65,8 @@ class AccountTVC: UITableViewController {
         reloadContent()
     }
     
+    // view will appear
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadContent()
@@ -265,6 +267,8 @@ class AccountTVC: UITableViewController {
         self.clearUserData()
         // hide activity
         SwiftLoader.hide()
+        print("swift loader")
+        
         // get view controller to move
         let storyBoard = UIStoryboard(name: "Main", bundle: nil);
         let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
