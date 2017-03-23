@@ -333,7 +333,7 @@ extension EBTWebView: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         print("\n -- navigationAction -- \n")
-    
+        print(navigationAction.request)
         self.isPageLoading = true
         decisionHandler(.allow)
     }

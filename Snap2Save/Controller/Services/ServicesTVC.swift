@@ -43,6 +43,7 @@ class ServicesTVC: UITableViewController {
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
         reloadContent()
+        // TEST
 //        FlowSegentedControl.isHidden = true
         
     }
@@ -74,19 +75,18 @@ class ServicesTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        
-//        if segue.identifier == "EBTLoginTVC" {
-//            
-//            let loginVC = segue.destination as! EBTLoginTVC
-//            loginVC.tempLoginUrl = tempLoginUrl
-//        }
-//        
-//    }
+    // TEST
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "EBTLoginTVC" {
+            
+            let loginVC = segue.destination as! EBTLoginTVC
+            loginVC.tempLoginUrl = tempLoginUrl
+        }
+    }
     
     // MARK: - Table view data source
-    
+    // // TEST
 //    override func numberOfSections(in tableView: UITableView) -> Int {
 //        return 2
 //    }
@@ -282,7 +282,7 @@ extension ServicesTVC {
         self.view.sendSubview(toBack: webView)
         
         var loginUrl = kEBTLoginUrl
-        
+        // TEST
         // For testing only
         if self.FlowSegentedControl.selectedSegmentIndex == 1 {
             loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"

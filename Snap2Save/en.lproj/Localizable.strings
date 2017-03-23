@@ -333,6 +333,8 @@
 "ANSWER 1" = "ANSWER 1";
 "ANSWER 2" = "ANSWER 2";
 "ANSWER 3" = "ANSWER 3";
+"Please select a question" = "Please select a question";
+
 "ebt.userinformation.terms" = "By registering, you agree to the UCARD CENTER SERVICE AGREEMENT and UCARD ONLINE COMMUNICATIONS DELIVERY DISCLOSURE.";
 
 // Confirmation screen

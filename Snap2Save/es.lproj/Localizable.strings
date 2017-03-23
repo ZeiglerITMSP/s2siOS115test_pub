@@ -355,6 +355,7 @@
 "ANSWER 1" = "RESPUESTA 1";
 "ANSWER 2" = "RESPUESTA 2";
 "ANSWER 3" = "RESPUESTA 3";
+"Please select a question" = "Please select a question";
 "ebt.userinformation.terms" = "Al registrarse, usted acepta el ACUERDO DE SERVICIO DEL CENTRO DE UCARD y la DIVULGACIÓN DE ENTREGA DE COMUNICACIONES DE UCARD EN LÍNEA.";
 
 // Confirmation screen
@@ -381,6 +382,7 @@
 "RECENT TRANSACTIONS" = "TRANSACCIONES RECIENTES";
 "SNAP Balance" = "SNAP EQUILIBRAR";
 "CASH Balance" = "EFECTIVO EQUILIBRAR";
+
 "No transactions were found." = "No se encontraron transacciones.";
 
 
