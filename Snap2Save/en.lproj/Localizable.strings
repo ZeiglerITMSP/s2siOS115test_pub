@@ -187,6 +187,9 @@
 "Please provide all information." = "Please provide all information.";
 "You must agree to the Terms of Service." = "You must agree to the Terms of Service.";
 
+"Please enter a date range to view specific transactions." = "Please enter a date range to view specific transactions.";
+"No results found." = "No results found.";
+
 // Offers
 
 "Offers" = "Offers";
@@ -242,9 +245,8 @@
 
 "Clinica Tepeyac" = "Clinica Tepeyac";
 "5075 Lincoln Street" = "5075 Lincoln Street";
-
 "Denver, CO 80216" = "Denver, CO 80216";
-"(303) 458- 5302" = "(303) 458- 5302";
+"(303) 458-5302" = "(303) 458-5302";
 "www.clinicatepeyac.org" = "www.clinicatepeyac.org";
 
 
