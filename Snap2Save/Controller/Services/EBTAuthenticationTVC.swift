@@ -24,6 +24,7 @@ class EBTAuthenticationTVC: UITableViewController {
     fileprivate var actionType: ActionType?
     
     var pageTitle = "ebt.authentication".localized()
+    var isSuccessMessage = false
     
     // Outlets
     
@@ -174,11 +175,20 @@ class EBTAuthenticationTVC: UITableViewController {
         
     }
 
+    func updateErrorTextColor() {
+        
+        if isSuccessMessage {
+            self.errorMessageLabel.textColor = APP_GRREN_COLOR
+        } else {
+            self.errorMessageLabel.textColor = UIColor.red
+        }
+    }
     
     // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 1 {
+            updateErrorTextColor()
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
@@ -193,16 +203,10 @@ class EBTAuthenticationTVC: UITableViewController {
 extension EBTAuthenticationTVC {
     
     // MARK: Scrapping
-    
     func validatePage() {
-        
         ebtWebView.getPageHeading(completion: { result in
-            
-            if let pageTitle = result {
-                // isCurrentPage
-                if pageTitle == self.pageTitle {
-                    // current page
-                    
+            if let pageTitle = result {     // isCurrentPage
+                if pageTitle == self.pageTitle {    // current page
                     if self.actionType == ActionType.generate {
                         self.actionType = nil
                         self.autoFill()
@@ -210,13 +214,12 @@ extension EBTAuthenticationTVC {
                         self.actionType = nil
                         self.regenerate()
                     } else {
-                       self.checkForErrorMessage()
+                        self.checkForSuccessMessage()
+//                       self.checkForErrorMessage()
                     }
-                    
                 } else {
                     self.validateNextPage()
                 }
-                
             } else {
                 self.exitProcessIfPossible()
             }
@@ -226,75 +229,57 @@ extension EBTAuthenticationTVC {
     }
     
     func validateNextPage() {
-        
         ebtWebView.getPageHeading(completion: { result in
-            
             if let pageTitle = result {
-                
                 if let nextVCIdentifier = EBTConstants.getEBTViewControllerName(forPageTitle: pageTitle) {
                     self.moveToNextController(identifier: nextVCIdentifier)
-                } else {
-                    // unknown page
+                } else {    // unknown page
                     print("UNKNOWN PAGE")
                     self.exitProcessIfPossible()
                 }
-                
-            } else {
-                // is page not loaded
+            } else {        // is page not loaded
                 print("PAGE NOT LOADED YET..")
                 self.exitProcessIfPossible()
             }
-            
         })
-        
     }
     
 
     func autoFill() {
-        
         let authenticationCode = authenticationCodeField.contentTextField.text!
-        
         let jsAuthenticationCode = "$('#txtAuthenticationCode').val('\(authenticationCode)');"
         let jsSubmit = "$('#okButton').click();"
         let javaScript = jsAuthenticationCode + jsSubmit
-        
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            
             self.checkForErrorMessage()
         }
     }
     
     func regenerate() {
-        
         let jsRegenerate = "$('#cancelBtn').click();"
         let javaScript = jsRegenerate
-        
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            
-            self.checkForStatusMessage()
+            // page have to be refresh to get message..
+            // self.checkForSuccessMessage()
         }
     }
     
     func checkForErrorMessage() {
-        
         ebtWebView.getErrorMessage(completion: { result in
-            
             if let errorMessage = result {
                 if errorMessage.characters.count > 0 {
                     // error message
-                    
                     if self.ebtWebView.isPageLoading == false {
                         // update view
                         self.confirmButton.isEnabled = true
                         self.confirmActivityIndicator.stopAnimating()
                         print("stop activity")
                     }
-                    
                     self.errorMessageLabel.text = errorMessage
+                    self.isSuccessMessage = false
                     self.tableView.reloadData()
+                } else { // if no error mesage
                     
-                } else {
-
                 }
             } else {
                 
@@ -303,37 +288,58 @@ extension EBTAuthenticationTVC {
     }
 
     
-    func checkForStatusMessage() {
-        
-        let javaScript = "$('.completionText').first().text().trim();"
-        
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            
-            if let resultString = result as? String {
-                
-                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                
-                if resultTrimmed.characters.count > 0 {
-                    // error message
-                    
+//    func checkForStatusMessage() {
+//        
+//        let javaScript = "$('.completionText').first().text().trim();"
+//        
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            
+//            if let resultString = result as? String {
+//                
+//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
+//                
+//                if resultTrimmed.characters.count > 0 {
+//                    // error message
+//                    
+//                    // update view
+//                    if self.ebtWebView.isPageLoading == false {
+//                        
+//                        self.regenerateButton.isEnabled = true
+//                        self.regenerateActivityIndicator.stopAnimating()
+//                    }
+//                    
+//                    self.errorMessageLabel.text = resultTrimmed
+//                    self.tableView.reloadData()
+//                    
+//                } else {
+//                    // no error message
+//                }
+//                
+//            } else {
+//                print(error ?? "")
+//            }
+//        }
+//    }
+    
+    func checkForSuccessMessage() {
+        ebtWebView.checkForSuccessMessage(completion: { result in
+            if let errorMessage = result {
+                if errorMessage.characters.count > 0 { // success message exists
                     // update view
                     if self.ebtWebView.isPageLoading == false {
-                        
                         self.regenerateButton.isEnabled = true
                         self.regenerateActivityIndicator.stopAnimating()
                     }
-                    
-                    self.errorMessageLabel.text = resultTrimmed
+                    self.errorMessageLabel.text = errorMessage
+                    self.isSuccessMessage = true
                     self.tableView.reloadData()
-                    
                 } else {
-                    // no error message
+                    self.checkForErrorMessage()
                 }
-                
             } else {
-                print(error ?? "")
+                self.checkForErrorMessage()
             }
-        }
+        })
     }
     
    

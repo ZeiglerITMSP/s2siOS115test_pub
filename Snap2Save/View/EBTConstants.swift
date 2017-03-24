@@ -10,6 +10,9 @@ import UIKit
 
 
 //let kEBTBaseUrl = "http://internal.appit.ventures/s2s/"
+//let kEBTLoginUrl =  kEBTBaseUrl + "ebt_login.html"
+//let kEBTLoginUrl_es =  kEBTBaseUrl + "spanish_login.html"
+//let kEBTSignupUrl = kEBTBaseUrl + "ebt_registration_cardNumber.html"
 
 // which existed before, jumps directly to the Login screen after completing the confirmation step.
 //let kEBTBaseUrl = "http://internal.appit.ventures/s2s/flow2/"
@@ -25,10 +28,6 @@ import UIKit
 //
 //let kEBTLoginUrl_spanish =  kEBTBaseUrl + "spanish_login.html"
 
-//let kEBTLoginUrl =  kEBTBaseUrl + "ebt_login.html"
-//let kEBTLoginUrl_es =  kEBTBaseUrl + "spanish_login.html"
-//let kEBTSignupUrl = kEBTBaseUrl + "ebt_registration_cardNumber.html"
-//
 
 let kEBTBaseUrl = "https://ucard.chase.com"
 let kEBTLoginUrl =  kEBTBaseUrl + "/locale?request_locale=en"

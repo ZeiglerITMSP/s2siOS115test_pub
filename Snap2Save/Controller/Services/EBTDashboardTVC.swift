@@ -157,9 +157,9 @@ class EBTDashboardTVC: UITableViewController {
             
             detailedSubtitleCell.titleLabel.text = record?["location"]
             detailedSubtitleCell.detailLabel.text = record?["debit_amount"]
+            detailedSubtitleCell.detailLabel2.text = record?["credit_amount"]
             detailedSubtitleCell.subtitleLabel.text = record?["date"]
             detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
-            
             
             return detailedSubtitleCell
         } else {

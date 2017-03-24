@@ -14,6 +14,7 @@ class DetailedSubtitleCell: UITableViewCell {
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var detailLabel: UILabel!
+    @IBOutlet weak var detailLabel2: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
     
     @IBOutlet weak var subtitleTwoLabel: UILabel!
