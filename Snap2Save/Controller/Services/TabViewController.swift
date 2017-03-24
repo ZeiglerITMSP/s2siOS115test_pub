@@ -65,24 +65,8 @@ class TabViewController: UITabBarController {
             }
         }*/
         
+        addSeperatorsToTabBar()
         
-        let itemWidth = floor(self.tabBar.frame.size.width / CGFloat(self.tabBar.items!.count))
-        
-        // this is the separator width.  0.5px matches the line at the top of the tab bar
-        let separatorWidth: CGFloat = 0.5
-        
-        // iterate through the items in the Tab Bar, except the last one
-        for i in 0...(self.tabBar.items!.count - 1) {
-            // make a new separator at the end of each tab bar item
-            let separator = UIView(frame: CGRect(x: itemWidth * CGFloat(i + 1) - CGFloat(separatorWidth / 2), y: 0, width: CGFloat(separatorWidth), height: self.tabBar.frame.size.height))
-            
-            // set the color to light gray (default line color for tab bar)
-            separator.backgroundColor = UIColor.lightGray
-            
-            self.tabBar.addSubview(separator)
-            self.tabBar.bringSubview(toFront: separator)
-        }
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -109,31 +93,38 @@ class TabViewController: UITabBarController {
     
     
     func updateSelectedItemBackground() {
-        
          DispatchQueue.main.async {
-            
-            
             if self.bgView != nil {
                 self.bgView.removeFromSuperview()
             }
-            
             // Add background color to middle tabBarItem
             let itemIndex = self.selectedIndex
-            
             let bgColor = UIColor(red: 84/255, green: 190/255, blue: 56/255, alpha: 1.0)
-            
             let itemWidth = self.tabBar.frame.width / CGFloat(self.tabBar.items!.count)
-            
             let positionX = itemWidth * CGFloat(itemIndex)
-            
             self.bgView = UIView(frame: CGRect(x: positionX, y: 0, width: itemWidth, height: self.tabBar.frame.height))
-            
             self.bgView.backgroundColor = bgColor
-            
             self.tabBar.insertSubview(self.bgView, at: 1)
         }
+    }
+    
+    func addSeperatorsToTabBar() {
         
-}
+        let itemWidth = floor(self.tabBar.frame.size.width / CGFloat(self.tabBar.items!.count))
+        // this is the separator width.  0.5px matches the line at the top of the tab bar
+        let separatorWidth: CGFloat = 0.5
+        // iterate through the items in the Tab Bar, except the last one
+        for i in 0...(self.tabBar.items!.count - 2) {
+            // make a new separator at the end of each tab bar item
+            let separator = UIView(frame: CGRect(x: itemWidth * CGFloat(i + 1) - CGFloat(separatorWidth / 2), y: 0, width: CGFloat(separatorWidth), height: self.tabBar.frame.size.height))
+            // set the color to light gray (default line color for tab bar)
+            separator.backgroundColor = UIColor.lightGray
+            
+            self.tabBar.addSubview(separator)
+            self.tabBar.bringSubview(toFront: separator)
+        }
+        
+    }
     
     func updateTabBarItemsTitle() {
         
