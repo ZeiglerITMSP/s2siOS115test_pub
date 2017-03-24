@@ -158,17 +158,18 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
     func isValid() -> Bool {
         
        
-        if fromDateField.contentTextField.text?.characters.count == 0 {
-            showAlert(title: "", message: "Please enter from date.".localized())
+        if fromDateField.contentTextField.text?.characters.count == 0 || toDateField.contentTextField.text?.characters.count == 0
+        {
+            showAlert(title: "", message: "Please enter a date range to view specific transactions.".localized())
             return false
 
         }
         
-        if toDateField.contentTextField.text?.characters.count == 0 {
-            showAlert(title: "", message: "Please enter to date.".localized())
-            return false
-            
-        }
+//        if toDateField.contentTextField.text?.characters.count == 0 {
+//            showAlert(title: "", message: "Please enter to date.".localized())
+//            return false
+//            
+//        }
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
