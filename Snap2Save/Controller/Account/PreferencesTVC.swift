@@ -168,7 +168,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             self.emailPlaceHolderTextField.placeholderText = "EMAIL".localized()
             self.mobileNumberTextField.placeholderText = "10-DIGIT CELL PHONE NUMBER".localized()
             self.reEnterMobileNumberTextField.placeholderText = "RE-ENTER 10-DIGIT CELL PHONE NUMBER".localized()
-
+            
             self.reEnterEmailTextField.placeholderText = "RE-ENTER EMAIL".localized()
         }
     }
@@ -258,7 +258,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 if reEnterMobileNumberTextField.contentTextField.isHidden == false {
                     reEnterMobileNumberTextField.contentTextField.isHidden = true
                     reEnterMobileNumberTextField.contentTextField.text = ""
-
+                    
                     self.tableView.beginUpdates()
                     self.tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .none)
                     self.tableView.endUpdates()
@@ -363,9 +363,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         return 6
     }
     
-        override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 0.1
-        }
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.1
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -600,8 +600,45 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
             }
         }
-        return true
         
+        if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
+            
+            if currentEmail != email {
+                if emailPlaceHolderTextField.contentTextField.text != nil {
+                    if validEmail == false {
+                        self.showAlert(title: "", message: "Please enter a valid email address.".localized())
+                        return false
+                        
+                    }
+                    
+                    
+                    if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
+                        self.showAlert(title: "", message: "Entries must match to proceed.".localized())
+                        return false
+                    }
+                }
+            }
+            else {
+                if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
+                    
+                    if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
+                        self.showAlert(title: "", message: "Entries must match to proceed.".localized())
+                        return false
+                    }
+                }
+                
+            }
+            
+        }
+        
+        if contactPreferenceSegmentControl.selectedSegmentIndex == 0
+        {
+            if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
+                self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
+                return false
+            }
+        }
+        return true
         
     }
     
@@ -650,7 +687,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
-
+            
             return
         }
         
@@ -672,7 +709,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                                        "language": currentLanguage
         ]
         
-       // print(parameters)
+        // print(parameters)
         let url = String(format: "%@/getProfile", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -720,17 +757,17 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                     //HUD.hide()
                     SwiftLoader.hide()
                     let message = error.localizedDescription
-                        let alertMessage = message
-                        let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                        let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                            (action) in
-                            self.view.endEditing(true)
-                            _ = self.navigationController?.popViewController(animated: true)
-                        })
-                        
-                        alertController.addAction(defaultAction)
-                        self.present(alertController, animated: true, completion: nil)
-
+                    let alertMessage = message
+                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+                        (action) in
+                        self.view.endEditing(true)
+                        _ = self.navigationController?.popViewController(animated: true)
+                    })
+                    
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
                     
                 }
                 //print("error)
@@ -741,4 +778,4 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
     }
     
-   }
+}

@@ -125,12 +125,26 @@ class AppHelper {
     }
     
 
-    class func isTouchIDAvailable() -> Bool {
+    class func isTouchIDAvailable() -> (status:Bool, LAErrorCode:Int?) {
         
         let context = LAContext()
         var error: NSError?
         let status = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
-        return status
+        /*
+        if status == false {
+            switch error!.code {
+            case LAError.touchIDNotAvailable.rawValue:
+                print("touchIDNotAvailable")
+            case LAError.touchIDNotEnrolled.rawValue:
+                print("touchIDNotEnrolled")
+            case LAError.passcodeNotSet.rawValue:
+                print("passcodeNotSet")
+            default:
+                print("default")
+            }
+        }*/
+        
+        return (status: status, LAErrorCode: error?.code)
     }
     
     

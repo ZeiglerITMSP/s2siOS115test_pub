@@ -237,7 +237,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             if recentActivityArray.count == 0 {
                 // show mesage..
                 let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultMessageTableViewCell") as! DefaultMessageTableViewCell
-                cell.messageLabel.text = "NO RECENT ACTIVITY AVAILABLE.".localized()
+                cell.messageLabel.text = "No results found.".localized()
                 
                 return cell
                 
@@ -521,7 +521,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         
         let dateVar = Date(timeIntervalSince1970: TimeInterval(milliSeconds))
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy";
+        dateFormatter.dateFormat = "MM/dd/yy";
         let dateStr = (dateFormatter.string(from: dateVar))
         return dateStr
         
@@ -550,7 +550,7 @@ extension RewardStatusTVC: RedeemPointsTotalDelegate {
         
         if currentPoints < 500
         {
-            self.showAlert(title: "", message: "You need to have minimum 500 points to redeem.".localized())
+            self.showAlert(title: "", message: "You must have 500 or more points to be eligible for a reward.".localized())
         }
         else
         {

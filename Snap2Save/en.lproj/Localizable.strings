@@ -187,6 +187,9 @@
 "Please provide all information." = "Please provide all information.";
 "You must agree to the Terms of Service." = "You must agree to the Terms of Service.";
 
+"Please enter a date range to view specific transactions." = "Please enter a date range to view specific transactions.";
+"No results found." = "No results found.";
+
 // Offers
 
 "Offers" = "Offers";
@@ -242,9 +245,8 @@
 
 "Clinica Tepeyac" = "Clinica Tepeyac";
 "5075 Lincoln Street" = "5075 Lincoln Street";
-
 "Denver, CO 80216" = "Denver, CO 80216";
-"(303) 458- 5302" = "(303) 458- 5302";
+"(303) 458-5302" = "(303) 458-5302";
 "www.clinicatepeyac.org" = "www.clinicatepeyac.org";
 
 
@@ -272,6 +274,8 @@
 "USER ID" = "USER ID";
 "PASSWORD" = "PASSWORD";
 "Remember My User ID" = "Remember My User ID";
+"Touch ID not available" = "Touch ID not available";
+"Your device is not configured for Touch ID." = "Your device is not configured for Touch ID.";
 "LOG IN" = "LOG IN";
 "REGISTER" = "REGISTER";
 "Identify yourself!" = "Identify yourself!";
@@ -279,11 +283,13 @@
 "ebt.login.messageLabel" = "Check your balance and review your transaction activity.";
 
 
+
+
 // Authentication Code
 "AUTHENTICATION CODE" = "AUTHENTICATION CODE";
 "CONFIRM" = "CONFIRM";
 "REGENERATE" = "REGENERATE";
-"ebt.authentication.titleLabel" = "WE DON’T RECOGNIZE THE DEVICE YOU’RE USING";
+"ebt.authentication.titleLabel" = "WE DON’T RECOGNIZE THE DEVICE YOU’RE USING.";
 "ebt.authentication.messageLabel" = "We need to verify your identity before you can access your account. A message, with a temporary authorization code, has been sent to the email address shown on your account. Please check your email and enter the code below. The code is valid for 30 minutes in the current session only.";
 
 
@@ -299,7 +305,7 @@
 "WHAT IS YOUR SOCIAL SECURITY NUMBER?" = "WHAT IS YOUR SOCIAL SECURITY NUMBER?";
 
 // Verify Security Question
-"ebt.securityQuestion.titleLabel" = "VERIFY SECURITY QUESTION";
+"ebt.securityQuestion.titleLabel" = "VERIFY SECURITY QUESTION.";
 "ebt.securityQuestion.messageLabel" = "Please enter the Security Answer you provided during registration.";
 "SECURITY QUESTION" = "SECURITY QUESTION";
 "SECURITY ANSWER" = "SECURITY ANSWER";

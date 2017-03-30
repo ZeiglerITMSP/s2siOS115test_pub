@@ -151,7 +151,18 @@ class EBTLoginTVC: UITableViewController {
         // tap gesture to view
         addTapGesture()
         // touch id config
-        isTouchIdAvailable = AppHelper.isTouchIDAvailable()
+        let touchIDStatus = AppHelper.isTouchIDAvailable()
+        
+        if touchIDStatus.status == false {
+            switch touchIDStatus.LAErrorCode! {
+            case LAError.touchIDNotEnrolled.rawValue:
+                isTouchIdAvailable = true
+            case LAError.passcodeNotSet.rawValue:
+                isTouchIdAvailable = true
+            default:
+                isTouchIdAvailable = false
+            }
+        }
         // loader
         AppHelper.configSwiftLoader()
         
@@ -700,9 +711,9 @@ extension EBTLoginTVC {
 //            UserDefaults.standard.removeObject(forKey: kUserIdEBT)
 //            self.rememberMeButton.isSelected = false
 //            UserDefaults.standard.set(self.rememberMeButton.isSelected, forKey: kRememberMeEBT)
-//            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
-//            ac.addAction(UIAlertAction(title: "OK", style: .default))
-//            present(ac, animated: true)
+            let ac = UIAlertController(title: "Touch ID not available".localized() , message: "Your device is not configured for Touch ID.".localized(), preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
         }
     }
     

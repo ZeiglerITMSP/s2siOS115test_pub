@@ -113,7 +113,7 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
             self.addressTitleLabel.text = "Clinica Tepeyac".localized()
             self.addressLabel1.text = "5075 Lincoln Street".localized()
             self.addressLine2.text = "Denver, CO 80216".localized()
-            self.addressLine3.text = "(303) 458- 5302".localized()
+            self.addressLine3.text = "(303) 458-5302".localized()
             
             let subscriptionNotice:String = "www.clinicatepeyac.org"
             

@@ -190,13 +190,12 @@
 
 
 "Are you sure you want to log out?" = "¿Está seguro de que desea cerrar la sesión?";
-
 "Please enter password." = "Por favor ingrese contraseña.";
-
-
-
 "Please provide all information." = "Please provide all information.";
 "You must agree to the Terms of Service." = "You must agree to the Terms of Service.";
+
+"Please enter a date range to view specific transactions." = "Please enter a date range to view specific transactions.";
+"No results found." = "No results found.";
 
 
 // Offers
@@ -254,7 +253,7 @@
 "Clinica Tepeyac" = "Clinica Tepeyac";
 "5075 Lincoln Street" = "5075 Lincoln Street";
 "Denver, CO 80216" = "Denver, CO 80216";
-"(303) 458- 5302" = "(303) 458- 5302";
+"(303) 458-5302" = "(303) 458-5302";
 "www.clinicatepeyac.org" = "www.clinicatepeyac.org";
 
 
@@ -294,6 +293,8 @@
 "USER ID" = "IDENTIDAD DE USUARIO";
 "PASSWORD" = "CONTRASEÑA";
 "Remember My User ID" = "Recuerda Mi ID De Usuario";
+"Touch ID not available" = "Touch ID not available";
+"Your device is not configured for Touch ID." = "Your device is not configured for Touch ID.";
 "LOG IN" = "INICIAR SESIÓN";
 "REGISTER" = "REGISTRARME";
 "Identify yourself!" = "¡Identifícate!";

@@ -348,8 +348,6 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         attributedString.addAttribute(NSParagraphStyleAttributeName, value: titleParagraphStyle, range: fullMessageRange)
         
         
-        
-        
         // linkRange
         let linkRange = (attributedString.string as NSString).range(of: rangeMessage)
         attributedString.addAttribute(NSLinkAttributeName, value: link, range: linkRange)
@@ -364,7 +362,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         // textView is a UITextView
         self.termsTextView.linkTextAttributes = linkAttributes
         self.termsTextView.attributedText = attributedString
-     
+        self.termsTextView.textAlignment = .left
         self.termsTextView.isScrollEnabled = false
         
        // self.termsTextView.contentSize = self.termsTextView.bounds.size
