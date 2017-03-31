@@ -31,6 +31,7 @@
 		977B64F51E163B5600AA802D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F41E163B5600AA802D /* User.swift */; };
 		977B64F71E16407A00AA802D /* AdditionalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F61E16407A00AA802D /* AdditionalInformation.swift */; };
 		978729DD1E0937B000908301 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978729DC1E0937B000908301 /* Constants.swift */; };
+		978767B51E8E304300220536 /* AdditionalOffersVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978767B41E8E304300220536 /* AdditionalOffersVc.swift */; };
 		97DBC2131E35E04B00CD2C75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97DBC2121E35E04B00CD2C75 /* GoogleService-Info.plist */; };
 		97E4338B1E10E5F10095EABA /* USStateAbbreviations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97E4338A1E10E5F10095EABA /* USStateAbbreviations.plist */; };
 		E81A1C3D1E52EA9C00EA9D44 /* EBTHelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81A1C3C1E52EA9C00EA9D44 /* EBTHelpVC.swift */; };
@@ -131,6 +132,7 @@
 		977B64F41E163B5600AA802D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Snap2Save/Controller/Account/User.swift; sourceTree = SOURCE_ROOT; };
 		977B64F61E16407A00AA802D /* AdditionalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdditionalInformation.swift; path = Snap2Save/Controller/Account/AdditionalInformation.swift; sourceTree = SOURCE_ROOT; };
 		978729DC1E0937B000908301 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		978767B41E8E304300220536 /* AdditionalOffersVc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalOffersVc.swift; sourceTree = "<group>"; };
 		97DBC2121E35E04B00CD2C75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		97DBC2141E35E25400CD2C75 /* Snap2Save-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snap2Save-Bridging-Header.h"; sourceTree = "<group>"; };
 		97DBC2181E360B5200CD2C75 /* Snap2Save.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snap2Save.entitlements; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				974D5C341E2DFF5B00918BAD /* snap2save.jpeg */,
 				E863CEBB1E1BE72E00049F28 /* OffersVC.swift */,
 				974D5C321E2DF55400918BAD /* OffersDetailsViewController.swift */,
+				978767B41E8E304300220536 /* AdditionalOffersVc.swift */,
 			);
 			path = Offers;
 			sourceTree = "<group>";
@@ -844,6 +847,7 @@
 			files = (
 				970C96381E5ED06E00697E56 /* RedeemPointsAddressTVC.swift in Sources */,
 				974D5C331E2DF55400918BAD /* OffersDetailsViewController.swift in Sources */,
+				978767B51E8E304300220536 /* AdditionalOffersVc.swift in Sources */,
 				9769997E1E2643A200D05AE8 /* ServicesWebViewVC.swift in Sources */,
 				E81F4A061E3881E30029B3D9 /* EBTChangeEmailTVC.swift in Sources */,
 				E83156021E1A561E001D30D2 /* EBTDashboardTVC.swift in Sources */,

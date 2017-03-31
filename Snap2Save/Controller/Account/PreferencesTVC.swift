@@ -452,7 +452,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                                        "language":currentLanguage
         ]
         saveActivityIndicator.startAnimating()
-        print(parameters)
+       // print(parameters)
         let url = String(format: "%@/updatePreferences", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -460,7 +460,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print("json response\(json)")
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
                     

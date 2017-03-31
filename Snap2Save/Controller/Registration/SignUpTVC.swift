@@ -695,13 +695,13 @@ extension SignUpTVC: AITextFieldProtocol {
     }
     
     func didFacebookLoginSuccess() {
-        print("SUCCESS")
+        //print("SUCCESS")
         faceBookLogin.getBasicInformation()
     }
     
     func didReceiveUser(information: [String : Any]) {
         
-        print("information is\(information)")
+       // print("information is\(information)")
         
         facebookDict = information
         let email =  facebookDict?["email"] ?? ""
@@ -739,7 +739,7 @@ extension SignUpTVC: AITextFieldProtocol {
                           "language": currentLanguage
             ]
         
-        print(parameters)
+       // print(parameters)
         let url = String(format: "%@/checkFbUser", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in

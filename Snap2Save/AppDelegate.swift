@@ -155,7 +155,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 {
                     
                     let bits = component.components(separatedBy: "=")
-                    ////print(""bits\(bits)")
                     if bits.count == 2  {
                         let key = bits[0]
                         if key == "type" {
