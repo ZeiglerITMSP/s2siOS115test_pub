@@ -619,6 +619,16 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 }
             }
             else {
+                
+              /*  if emailPlaceHolderTextField.contentTextField.text?.characters.count == 0
+                {
+                    if validEmail == false {
+                        self.showAlert(title: "", message: "Please enter a valid email address.".localized())
+                        return false
+                        
+                    }
+ 
+                }*/
                 if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
                     
                     if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
@@ -768,9 +778,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                     alertController.addAction(defaultAction)
                     self.present(alertController, animated: true, completion: nil)
                     
-                    
                 }
-                //print("error)
                 break
             }
             

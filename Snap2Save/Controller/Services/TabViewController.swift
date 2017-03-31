@@ -26,45 +26,6 @@ class TabViewController: UITabBarController {
         self.selectedIndex = 0
         updateSelectedItemBackground()
         
-       /* if let items = self.tabBar.items {
-            
-            //Get the height of the tab bar
-            
-            let height = self.tabBar.bounds.height
-            
-            //Calculate the size of the items
-            
-            let numItems = CGFloat(items.count)
-            let itemSize = CGSize(
-                width: self.tabBar.frame.width / numItems,
-                height: self.tabBar.frame.height)
-            
-            for (index, _) in items.enumerated() {
-                
-                //We don't want a separator on the left of the first item.
-                
-                if index > 0 {
-                    
-                    //Xposition of the item
-                    
-                    let xPosition = itemSize.width * CGFloat(index)
-                    
-                    /* Create UI view at the Xposition,
-                     with a width of 0.5 and height equal
-                     to the tab bar height, and give the
-                     view a background color
-                     */
-                    let separator = UIView(frame: CGRect(
-                        x: xPosition, y: 0, width: 0.5, height: height))
-                    separator.backgroundColor = UIColor.red
-                    
-                    self.tabBar.insertSubview(separator, at: 1)
-                    self.tabBar.bringSubview(toFront: separator)
-                    
-                }
-            }
-        }*/
-        
         addSeperatorsToTabBar()
         
     }
@@ -77,7 +38,7 @@ class TabViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        
         updateSelectedItemBackground()
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(updateTabBarItemsTitle))
     }
@@ -110,7 +71,7 @@ class TabViewController: UITabBarController {
     
     func addSeperatorsToTabBar() {
         
-        let itemWidth = floor(self.tabBar.frame.size.width / CGFloat(self.tabBar.items!.count))
+        let itemWidth = (self.tabBar.frame.size.width / CGFloat(self.tabBar.items!.count))
         // this is the separator width.  0.5px matches the line at the top of the tab bar
         let separatorWidth: CGFloat = 0.5
         // iterate through the items in the Tab Bar, except the last one
