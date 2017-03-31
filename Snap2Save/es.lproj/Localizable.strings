@@ -154,7 +154,7 @@
 "Auto Log In" = "Inicio de sesión automático";
 "Personal Information" = "Información personal";
 "Preferences" = "Preferencias";
-"My Reward Program" = "My Reward Program";
+"My Reward Program" = "Mi programa de recompensas";
 "Change Password" = "Cambiar contraseña";
 "Log Out" = "Cerrar sesión";
 
@@ -200,10 +200,10 @@
 
 // Offers
 "Offers" = "Ofertas";
-"No offer exists."= "No existe ninguna oferta.";
+"No offer exists." = "No existe ninguna oferta.";
 "PLEASE TRY AGAIN LATER." = "POR FAVOR, INTÉNTELO DE NUEVO MÁS TARDE.";
 "THE INTERENT CONNECTION APPEARS TO BE OFFLINE." = "LA CONEXIÓN INTERENT APARECE PARA ESTAR OFFLINE.";
-
+"Additional Offers" = "Additional Offers";
 
 // Services
 "Services" = "Servicios";

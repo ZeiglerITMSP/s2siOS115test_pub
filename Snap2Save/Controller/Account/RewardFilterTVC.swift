@@ -65,9 +65,13 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         toDateField.contentTextField.updateUIAsPerTextFieldType()
         // button style
         
-        fromDateField.contentTextField.dateFormatString = "MM/dd/yyyy"
-        toDateField.contentTextField.dateFormatString = "MM/dd/yyyy"
+        fromDateField.contentTextField.dateFormatString = "MM/dd/yy"
+        toDateField.contentTextField.dateFormatString = "MM/dd/yy"
         
+       let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY", attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 14.0)]) // Font
+        fromDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
+        toDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
+
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: filterButton, radius: 2.0, width: 1.0)
         
         fromDateField.contentTextField.aiDelegate = self
@@ -172,7 +176,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
 //        }
 
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.dateFormat = "MM/dd/yy"
         
         var fromDateMilliSec : Double = 0.0
         var toDateMilliSec : Double = 0.0

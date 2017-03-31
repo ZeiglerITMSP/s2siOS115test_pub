@@ -393,10 +393,10 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         let timeZoneOffset = TimeZone.current.secondsFromGMT()
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.dateFormat = "MM/dd/yy"
         
         let dateFormatter1 = DateFormatter()
-        dateFormatter1.dateFormat = "MM/dd/yyyy hh:mm a"
+        dateFormatter1.dateFormat = "MM/dd/yy hh:mm a"
         
         var fromDateMilliSec : Double = 0.0
         var toDateMilliSec : Double = 0.0
@@ -521,6 +521,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         
         let dateVar = Date(timeIntervalSince1970: TimeInterval(milliSeconds))
         let dateFormatter = DateFormatter()
+       // dateFormatter.timeZone = NSTimeZone.local
         dateFormatter.dateFormat = "MM/dd/yy";
         let dateStr = (dateFormatter.string(from: dateVar))
         return dateStr

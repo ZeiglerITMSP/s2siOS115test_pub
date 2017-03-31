@@ -702,7 +702,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
                                        "language": currentLanguage
         ]
         
-        print(parameters)
+       // print(parameters)
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let url = String(format: "%@/getProfile", hostUrl)

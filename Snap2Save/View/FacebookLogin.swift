@@ -33,18 +33,18 @@ class FacebookLogin: NSObject {
         login.logIn(withReadPermissions: ["public_profile","email"], from: requestController, handler: {(result, error) -> Void in
             
             if (error != nil) {
-                print(error.debugDescription)
+                //print(error.debugDescription)
                 self.delegate?.didFacebookLoginFail()
             } else {
                 let fbloginresult : FBSDKLoginManagerLoginResult = result!
                 
-                print(fbloginresult)
+                //print(fbloginresult)
                 
                 if(fbloginresult.isCancelled) {
-                    print("Cancelled")
+                    //print("Cancelled")
                      self.delegate?.didFacebookLoginFail()
                 } else {
-                    print("Logged in")
+                    //print("Logged in")
                 self.delegate?.didFacebookLoginSuccess()
                     
                     
@@ -59,14 +59,14 @@ class FacebookLogin: NSObject {
         if((FBSDKAccessToken.current()) != nil) {
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email,id, name, first_name, last_name, picture.type(large),gender"]).start(completionHandler: { (connection, result, error) -> Void in
                 if (error == nil) {
-                    print(result ?? "")
+                    //print(result ?? "")
                     let resultDict = result as! [String:Any]
                     
                     let email = resultDict["email"] ?? ""
                     let name = resultDict["name"] ?? ""
-                    print(email, name)
+                    //print(email, name)
                     
-                    print("resultDict \(resultDict)")
+                   // print("resultDict \(resultDict)")
                     self.dataSource?.didReceiveUser(information: resultDict)
                     
                 }

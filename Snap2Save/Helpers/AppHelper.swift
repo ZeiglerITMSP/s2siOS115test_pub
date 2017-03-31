@@ -69,7 +69,6 @@ class AppHelper {
         // only checking for single char and double chars
         let characterset = CharacterSet(charactersIn: "'\"")
         if input.rangeOfCharacter(from: characterset) != nil {
-            print("string contains special characters")
             return false
         }
         

@@ -452,7 +452,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                                        "language":currentLanguage
         ]
         saveActivityIndicator.startAnimating()
-        print(parameters)
+       // print(parameters)
         let url = String(format: "%@/updatePreferences", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -460,7 +460,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+                //print("json response\(json)")
                 DispatchQueue.main.async {
                     self.saveActivityIndicator.stopAnimating()
                     
@@ -619,6 +619,16 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 }
             }
             else {
+                
+              /*  if emailPlaceHolderTextField.contentTextField.text?.characters.count == 0
+                {
+                    if validEmail == false {
+                        self.showAlert(title: "", message: "Please enter a valid email address.".localized())
+                        return false
+                        
+                    }
+ 
+                }*/
                 if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
                     
                     if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
@@ -768,9 +778,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                     alertController.addAction(defaultAction)
                     self.present(alertController, animated: true, completion: nil)
                     
-                    
                 }
-                //print("error)
                 break
             }
             

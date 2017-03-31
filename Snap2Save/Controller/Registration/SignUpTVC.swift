@@ -353,8 +353,8 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         attributedString.addAttribute(NSLinkAttributeName, value: link, range: linkRange)
         
         let linkAttributes = [
-            NSForegroundColorAttributeName: APP_GRREN_COLOR,
-            NSUnderlineColorAttributeName: APP_GRREN_COLOR,
+            NSForegroundColorAttributeName: UIColor.black,
+            NSUnderlineColorAttributeName: UIColor.black,
             NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue ] as [String : Any]
         
        // attributedString.append(range2)
@@ -376,30 +376,6 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
     }
     
     func loadTextFields(){
-        
-        
-        
-             //
-        //        let contactStr = "Contact Preference *".localized
-        //       // let string_to_color = "*"
-        //        let contactStrRange = (contactStr as NSString).range(of: string_to_color)
-        //        let contactStrAttribute = NSMutableAttributedString.init(string: contactStr)
-        //        contactStrAttribute.addAttribute(NSForegroundColorAttributeName, value: APP_ORANGE_COLOR , range: contactStrRange)
-        //        contactPreferenceLabel.attributedText = contactStrAttribute
-        
-        
-//        
-//        let msgStr = "Terms Of Service".localized()
-//        let string              = msgStr
-//        let rangeMsgStr            = (string as NSString).range(of: "Terms of Service.")
-//        let attributedString    = NSMutableAttributedString(string: string)
-//        
-//        attributedString.addAttribute(NSLinkAttributeName, value:("https://appitventures.teamwork.com/dashboard"), range: rangeMsgStr)
-//        attributedString.addAttribute(NSUnderlineStyleAttributeName, value: NSNumber(value: 1), range: rangeMsgStr)
-//        attributedString.addAttribute(NSUnderlineColorAttributeName, value: APP_GRREN_COLOR, range: rangeMsgStr)
-//        attributedString.addAttribute(NSForegroundColorAttributeName, value: APP_GRREN_COLOR , range: rangeMsgStr)
-//        terms_serviceLabel.attributedText = attributedString
-//        
         
         self.updateTermsText()
         
@@ -719,13 +695,13 @@ extension SignUpTVC: AITextFieldProtocol {
     }
     
     func didFacebookLoginSuccess() {
-        print("SUCCESS")
+        //print("SUCCESS")
         faceBookLogin.getBasicInformation()
     }
     
     func didReceiveUser(information: [String : Any]) {
         
-        print("information is\(information)")
+       // print("information is\(information)")
         
         facebookDict = information
         let email =  facebookDict?["email"] ?? ""
@@ -763,7 +739,7 @@ extension SignUpTVC: AITextFieldProtocol {
                           "language": currentLanguage
             ]
         
-        print(parameters)
+       // print(parameters)
         let url = String(format: "%@/checkFbUser", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in

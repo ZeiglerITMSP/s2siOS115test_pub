@@ -16,6 +16,7 @@ class OffersDetailsViewController: UIViewController {
     var urlString_es : String = ""
     var oldLanguage : String = ""
     var currentlang : String = ""
+    var isFromAdditionalOffers : Bool?
     
     var loader: SwiftLoader?
     
@@ -72,12 +73,18 @@ class OffersDetailsViewController: UIViewController {
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
-            self.navigationItem.title = "Offers".localized()
+            if  self.isFromAdditionalOffers == true
+            {
+                self.navigationItem.title = "Additional Offers".localized()
+            }
+            else
+            {
+                self.navigationItem.title = "Offers".localized()
+            }
             self.currentlang = Localize.currentLanguage()
             if self.oldLanguage != self.currentlang {
                 self.oldLanguage = self.currentlang
                 self.offersWebView.loadRequest(URLRequest(url: URL(string:"about:blank")!))
-
                 self.loadWebView()
                 
             }

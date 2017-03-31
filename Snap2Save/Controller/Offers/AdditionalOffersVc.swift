@@ -1,72 +1,70 @@
 //
-//  OffersVC.swift
+//  AdditionalOffersVc.swift
 //  Snap2Save
 //
-//  Created by Appit on 1/3/17.
+//  Created by Malathi on 31/03/17.
 //  Copyright © 2017 Appit. All rights reserved.
 //
 
 import UIKit
 import SwiftyJSON
-import Alamofire
 import Localize_Swift
+import Alamofire
 
-
-class OffersVC: UIViewController {
+class AdditionalOffersVc: UIViewController {
     
     var languageSelectionButton: UIButton!
+    var offersDict : [String : Any]? = nil
     var oldLanguage = ""
     var currentlang = ""
-    // Outlets
-    var offersDict : [String : Any]? = nil
-    
-    @IBOutlet var additionalOffersLabel: UILabel!
-    @IBOutlet var weeklyCircularView: UIView!
+
     @IBOutlet var messageLabel: UILabel!
-    @IBOutlet var offersImageView: UIImageView!
+    @IBOutlet var bgScrollView: UIScrollView!
+    @IBOutlet var bgView: UIView!
+    @IBOutlet var offerImageView: UIImageView!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
-        AppHelper.configSwiftLoader()
+        // Do any additional setup after loading the view.
         
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+        self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
+        
         reloadContent()
+        getWowOffers()
         
         let tapGes : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapGesClicked))
         tapGes.numberOfTapsRequired = 1
         tapGes.numberOfTouchesRequired = 1
-        offersImageView.addGestureRecognizer(tapGes)
+        offerImageView.addGestureRecognizer(tapGes)
         
         // offersImageView.image = UIImage.init(named: "snap2save.jpeg")
-        offersImageView.isUserInteractionEnabled = true
-        offersImageView.contentMode = .scaleAspectFit
+        offerImageView.isUserInteractionEnabled = true
+        offerImageView.contentMode = .scaleAspectFit
         self.messageLabel.isHidden = true
         
-        let offerTapGes : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(offerTapGesClicked))
-        offerTapGes.numberOfTapsRequired = 1
-        offerTapGes.numberOfTouchesRequired = 1
-        weeklyCircularView.addGestureRecognizer(offerTapGes)
-
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadContent()
-        getOffers()
-        AppHelper.getScreenName(screenName: "Offers screen")
         oldLanguage = Localize.currentLanguage()
+        reloadContent()
+        AppHelper.getScreenName(screenName: "Wow offers screen")
         self.messageLabel.isHidden = true
-        
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -74,57 +72,35 @@ class OffersVC: UIViewController {
         super.viewDidDisappear(animated)
     }
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: -
+    func backAction() {
+        _ = self.navigationController?.popViewController(animated: true)
     }
-    
-    
     
     func languageButtonClicked() {
-        
         self.showLanguageSelectionAlert()
-        
     }
-    
     
     func reloadContent() {
         
         DispatchQueue.main.async {
+            self.updateBackButtonText()
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-            self.navigationItem.title = "Offers".localized()
+            self.navigationItem.title = "Additional Offers".localized()
             self.currentlang = Localize.currentLanguage()
-            self.additionalOffersLabel.text = "Additional Offers".localized()
             if self.oldLanguage != self.currentlang {
-                self.getOffers()
+                self.getWowOffers()
                 self.oldLanguage = self.currentlang
             }
+            
             
         }
     }
     
-    func offerTapGesClicked()
-    {
-        let offerDetails = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "AdditionalOffersVc") as! AdditionalOffersVc
-        
-        self.navigationController?.show(offerDetails, sender: self)
-
-    }
+    
     func tapGesClicked() {
         
-//        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
-//        let isReachable = reachbility.isReachable
-//        // Reachability
-//        if isReachable == false {
-//            self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
-//            return
-//        }
-
         let offerDetails = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "OffersDetailsViewController") as! OffersDetailsViewController
-        
-        //offerDetails.urlString = "http://www.snap2save.com/app/about_comingsoon.php"
-        //self.navigationController?.show(offerDetails, sender: self)
         
         if Localize.currentLanguage() == "es" {
             // get es url
@@ -138,7 +114,7 @@ class OffersVC: UIViewController {
                         }
                     }
                     // navigate
-                    offerDetails.isFromAdditionalOffers = false
+                    offerDetails.isFromAdditionalOffers = true
                     self.navigationController?.show(offerDetails, sender: self)
                 }
             }
@@ -153,85 +129,65 @@ class OffersVC: UIViewController {
                             offerDetails.urlString_es = urlStr
                         }
                     }
-                    offerDetails.isFromAdditionalOffers = false
+                    offerDetails.isFromAdditionalOffers = true
                     self.navigationController?.show(offerDetails, sender: self)
                 }
             }
         }
         
-      //  self.navigationController?.show(offerDetails, sender: self)
+        //  self.navigationController?.show(offerDetails, sender: self)
         
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    // MARK: - offers
-    
-    func getOffers() {
+
+    func getWowOffers()
+    {
         
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
         if isReachable == false {
-            //self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
-            DispatchQueue.main.async {
-                
-            self.offersImageView.image = nil
-            self.messageLabel.isHidden = false
-            self.messageLabel.text = "THE INTERENT CONNECTION APPEARS TO BE OFFLINE.".localized()
-            }
+            self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
             return
         }
-    
         self.messageLabel.isHidden = true
-        
+
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
         let currentLanguage = Localize.currentLanguage()
+        
         let version_name = Bundle.main.releaseVersionNumber ?? ""
         let version_code = Bundle.main.buildVersionNumber ?? ""
         
-        
-        let parameters : Parameters = ["user_id": user_id,
-                                       "platform":"1",
+    
+        let parameters : Parameters = ["version_name": version_name,
+                                       "platform": "1",
                                        "version_code": version_code,
-                                       "version_name": version_name,
-                                       "device_id": device_id,
+                                       "language": currentLanguage,
                                        "auth_token": auth_token,
-                                       "language": currentLanguage
-        ]
-        self.offersImageView.image = nil
-        SwiftLoader.show(title: "Loading...".localized(), animated: true)
+                                       "device_id": device_id,
+                                       "user_id": user_id]
         
-       // print(parameters)
-        let url = String(format: "%@/getCurrentOffer", hostUrl)
-        ////print("url)
+        //print(parameters)
+        
+        let url = String(format: "%@/getCurrentWowOffer",hostUrl)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
             case .success:
                 DispatchQueue.main.async {
                     let json = JSON(data: response.data!)
-                    //print("json response\(json)")
+                    print("json response\(json)")
                     let responseDict = json.dictionaryObject
                     
                     if let code = responseDict?["code"] {
                         let code = code as! NSNumber
                         if code.intValue == 200 {
-
+                            
                             if let offers = responseDict?["offer"] as? [String : Any] {
                                 let offer : [String : Any] = offers
                                 self.offersDict = offer
-                                
                                 var imageUrl: String?
                                 
                                 if Localize.currentLanguage() == "en" {
@@ -247,26 +203,26 @@ class OffersVC: UIViewController {
                                             if success {
                                                 
                                                 if image != nil {
-//                                                    self.loader?.hideFromView()
+                                                    //                                                    self.loader?.hideFromView()
                                                     SwiftLoader.hide()
-                                                    self.offersImageView.image = image
+                                                    self.offerImageView.image = image
                                                 } else {
                                                     self.loadImageFailed()
                                                 }
                                                 
-                                            
+                                                
                                             } else {
                                                 // Error handling here.
                                                 
-                                               self.loadImageFailed()
+                                                self.loadImageFailed()
                                             }
                                         })
                                         
-                                       // self.offersImageView.downloadedFrom(link: imageUrl, failAction: #selector(self.loadImageFailed), target: self)
+                                        // self.offersImageView.downloadedFrom(link: imageUrl, failAction: #selector(self.loadImageFailed), target: self)
                                     }   else {
                                         SwiftLoader.hide()
                                         self.messageLabel.isHidden = false
-                                        self.messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
+                                       self.messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
                                     }
                                     
                                     
@@ -277,7 +233,7 @@ class OffersVC: UIViewController {
                                 }
                             } else {
                                 SwiftLoader.hide()
-                                //self.showAlert(title: "", message: "No offer exists".localized())
+                                self.showAlert(title: "", message: "No offer exists".localized())
                                 self.messageLabel.isHidden = false
                                 self.messageLabel.text = "No offer exists.".localized()
                                 
@@ -304,8 +260,9 @@ class OffersVC: UIViewController {
                 //print("error)
                 break
             }
-            
         }
+        
+        
     }
     
     
@@ -314,7 +271,6 @@ class OffersVC: UIViewController {
         messageLabel.isHidden = false
         messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
     }
+
     
 }
-
-
