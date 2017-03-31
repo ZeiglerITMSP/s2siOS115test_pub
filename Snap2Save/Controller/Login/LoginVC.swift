@@ -360,7 +360,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                           "language": currentLanguage
             ]
         
-        //print("parameters)
+       // print(parameters)
         loginActivityIndicator.startAnimating()
         let url = String(format: "%@/logIn", hostUrl)
         //print("url)
@@ -472,7 +472,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     }
     
     func didReceiveUser(information: [String : Any]) {
-        print("information is\(information)")
+        //print("information is\(information)")
         faceBookDict = information
         self.checkFacebookUser()
     }

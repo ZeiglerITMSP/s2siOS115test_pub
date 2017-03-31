@@ -127,9 +127,10 @@ class ServicesTVC: UITableViewController {
             
             let servicesWebVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "ServicesWebViewVC") as! ServicesWebViewVC
             
+            var url : String = ""
+
             if indexPath.row == 0 {
                 
-                var url = ""
                 if currentLanguage == "es" {
                     url = infoScreens["about_es"] as! String? ?? ""
                 }
@@ -146,7 +147,7 @@ class ServicesTVC: UITableViewController {
             }
                 
             else if indexPath.row == 1 {
-                var url = ""
+//                var url : String = ""
                 if currentLanguage == "es" {
                     url = infoScreens["faq_es"] as! String? ?? ""
                 }
@@ -164,7 +165,7 @@ class ServicesTVC: UITableViewController {
             }
             
             else if indexPath.row == 2 {
-                var url = ""
+              //  var url : String  = ""
                 if currentLanguage == "es" {
                     url = infoScreens["reward_es"] as! String? ?? ""
                 }
@@ -183,7 +184,7 @@ class ServicesTVC: UITableViewController {
                 
 
            else if indexPath.row == 3 {
-                var url = ""
+               // var url  : String = ""
                 if currentLanguage == "es" {
                     url = infoScreens["terms_es"] as! String? ?? ""
                 }
@@ -201,7 +202,7 @@ class ServicesTVC: UITableViewController {
                 
             else if indexPath.row == 4 {
                 
-                var url = ""
+               // var url : String = ""
                 if currentLanguage == "es" {
                     url = infoScreens["privacy_es"] as! String? ?? ""
                 }
@@ -219,7 +220,7 @@ class ServicesTVC: UITableViewController {
                 
             else if indexPath.row == 5 {
                 
-                var url = ""
+               // var url : String = ""
                 if currentLanguage == "es" {
                     url = infoScreens["contactus_es"] as! String? ?? ""
                 }
@@ -233,8 +234,12 @@ class ServicesTVC: UITableViewController {
                 servicesWebVc.type = ServicesWebViewVC.ServiceType.contactUs
 
             }
+        
+        if !url.isEmpty || url.characters.count > 0
+        {
             self.navigationController?.show(servicesWebVc, sender: self)
         }
+    }
         
         self.tableView.deselectRow(at: indexPath, animated: true)
     }

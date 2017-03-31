@@ -567,7 +567,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
                           "signup_type": signup_type
             ]
         
-        print(parameters)
+       // print(parameters)
         
         registerActivityIndicator.startAnimating()
         let url = String(format: "%@/signUp", hostUrl)
