@@ -154,6 +154,7 @@ class EBTLoginTVC: UITableViewController {
         let touchIDStatus = AppHelper.isTouchIDAvailable()
         
         if touchIDStatus.status == false {
+            // if touch id status is false, then also in some cases we have to show the 'remember me'
             switch touchIDStatus.LAErrorCode! {
             case LAError.touchIDNotEnrolled.rawValue:
                 isTouchIdAvailable = true
@@ -162,6 +163,8 @@ class EBTLoginTVC: UITableViewController {
             default:
                 isTouchIdAvailable = false
             }
+        } else {
+            isTouchIdAvailable = true
         }
         // loader
         AppHelper.configSwiftLoader()
