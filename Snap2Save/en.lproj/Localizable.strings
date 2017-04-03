@@ -169,26 +169,7 @@
 
 "The internet connection appears to be offline." = "The internet connection appears to be offline.";
 
-// Alert Messages
 
-"Please enter a 10-digit cell phone number." = "Please enter a 10-digit cell phone number.";
-"Password must be at least 6 characters in length." = "Password must be at least 6 characters in length.";
-"Please enter password." = "Please enter password.";
-
-"Please enter a valid zip code." = "Please enter a valid zip code.";
-"Please enter a valid email address." = "Please enter a valid email address.";
-
-"Entries must match to proceed." = "Entries must match to proceed.";
-"Please enter current password" = "Please enter current password";
-"Your password must be at least 6 characters in length." = "Your password must be at least 6 characters in length.";
-
-"Are you sure you want to log out?" = "Are you sure you want to log out?";
-
-"Please provide all information." = "Please provide all information.";
-"You must agree to the Terms of Service." = "You must agree to the Terms of Service.";
-
-"Please enter a date range to view specific transactions." = "Please enter a date range to view specific transactions.";
-"No results found." = "No results found.";
 
 // Offers
 "Offers" = "Offers";
@@ -222,6 +203,7 @@
 "FROM" = "FROM";
 "TO" = "TO";
 "FILTER" = "FILTER";
+"MM/DD/YY" = "MM/DD/YY";
 
 // Redeem Points
 
@@ -231,6 +213,12 @@
 "$5 Save-A-Lot Gift Card" = "$5 Save-A-Lot Gift Card";
 "$10 Health Care Rebate" = "$10 Health Care Rebate";
 
+
+// Mailing address screen
+"Your Save-A-Lot gift card will be mailed to the following address. If any of the information is incorrect or missing, please make changes or additions as necessary." = "Your Save-A-Lot gift card will be mailed to the following address. If any of the information is incorrect or missing, please make changes or additions as necessary.";
+"MAILING ADDRESS" = "MAILING ADDRESS";
+"STREET ADDRESS" = "STREET ADDRESS";
+"REDEEM NOW" = "REDEEM NOW";
 
 // Redeem message
 
@@ -248,6 +236,59 @@
 "Denver, CO 80216" = "Denver, CO 80216";
 "(303) 458-5302" = "(303) 458-5302";
 "www.clinicatepeyac.org" = "www.clinicatepeyac.org";
+
+
+
+
+// Alert Messages
+
+"Please provide all required information." = "Please provide all required information.";
+
+"Please enter a 10-digit cell phone number." = "Please enter a 10-digit cell phone number.";
+"Password must be at least 6 characters in length." = "Password must be at least 6 characters in length.";
+"Please enter password." = "Please enter password.";
+
+"Please enter a valid zip code." = "Please enter a valid zip code.";
+"Please enter a valid email address." = "Please enter a valid email address.";
+
+"Entries must match to proceed." = "Entries must match to proceed.";
+"Please enter current password" = "Please enter current password";
+"Your password must be at least 6 characters in length." = "Your password must be at least 6 characters in length.";
+
+"Are you sure you want to log out?" = "Are you sure you want to log out?";
+
+"Please provide all information." = "Please provide all information.";
+"You must agree to the Terms of Service." = "You must agree to the Terms of Service.";
+
+"Please enter a date range to view specific transactions." = "Please enter a date range to view specific transactions.";
+"No results found." = "No results found.";
+
+"Please select your reward." = "Please select your reward.";
+"Please enter your first name." = "Please enter your first name.";
+"Please enter your last name." = "Please enter your last name.";
+"Please enter your street address." = "Please enter your street address.";
+"Please enter your city." = "Please enter your city.";
+"Please enter your state." = "Please enter your state.";
+"Please enter your zip code." = "Please enter your zip code.";
+"You must have 500 points or more to be eligible for a reward." = "You must have 500 points or more to be eligible for a reward.";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
