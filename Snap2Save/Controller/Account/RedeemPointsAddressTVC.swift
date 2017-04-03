@@ -178,8 +178,6 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-      
-        
         return UITableViewAutomaticDimension
     }
 
@@ -565,15 +563,15 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
     func isValidData() -> Bool {
         
         if firstNameTF.text?.characters.count == 0 {
-            showAlert(title: "", message: "Please provide all information.".localized())
+            showAlert(title: "", message: "Please enter your first name.".localized())
             return false
         }
         if lastNameTf.text?.characters.count == 0 {
-            showAlert(title: "", message: "Please provide all information.".localized())
+            showAlert(title: "", message: "Please enter your last name.".localized())
             return false
         }
         if addressLine1Tf.text?.characters.count == 0  {
-            showAlert(title: "", message: "Please provide all information.".localized())
+            showAlert(title: "", message: "Please enter your street address.".localized())
             return false
         }
 //        if addressLine2Tf.text?.characters.count == 0 {
@@ -581,11 +579,11 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
 //            return false
 //        }
         if cityTf.text?.characters.count == 0  {
-            showAlert(title: "", message: "Please provide all information.".localized())
+            showAlert(title: "", message: "Please enter your city.".localized())
             return false
         }
         if stateTf.text?.characters.count == 0 {
-            showAlert(title: "", message: "Please provide all information.".localized())
+            showAlert(title: "", message: "Please enter your state.".localized())
             return false
         }
         if (zipCodeTf.text?.characters.count)! < 5 {

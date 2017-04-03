@@ -36,7 +36,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1wJ-Fo-uvB">
-                                                    <rect key="frame" x="286" y="12" width="17" height="20"/>
+                                                    <rect key="frame" x="286" y="12" width="16" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                                 </activityIndicatorView>
                                             </subviews>
@@ -4481,16 +4481,16 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="q5m-Ao-Ruk">
-                                            <rect key="frame" x="102.5" y="48" width="170" height="16"/>
+                                            <rect key="frame" x="102" y="48" width="171" height="16"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lifetime Points Earned:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rA8-c3-EuC">
-                                                    <rect key="frame" x="0.0" y="0.0" width="139.5" height="16"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="140" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.39779537671232879" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Cr-AL-jFZ">
-                                                    <rect key="frame" x="145.5" y="0.0" width="24.5" height="16"/>
+                                                    <rect key="frame" x="146" y="0.0" width="25" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.39779537669999998" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -4498,13 +4498,13 @@
                                             </subviews>
                                         </stackView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="567" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruQ-xL-hNt">
-                                            <rect key="frame" x="153.5" y="78" width="69.5" height="44.5"/>
+                                            <rect key="frame" x="153" y="78" width="70" height="45"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="37"/>
                                             <color key="textColor" red="0.3294117647" green="0.74509803919999995" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJa-r9-J7w">
-                                            <rect key="frame" x="20" y="139.5" width="335" height="44"/>
+                                            <rect key="frame" x="20" y="140" width="335" height="44"/>
                                             <color key="backgroundColor" red="0.90980392160000001" green="0.4941176471" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="Qpk-cc-JXj"/>
@@ -4550,7 +4550,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RewardDetailCell" id="bSe-wD-IlR" customClass="RewardDetailCell" customModule="Snap2Save" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RewardDetailCell" rowHeight="44" id="bSe-wD-IlR" customClass="RewardDetailCell" customModule="Snap2Save" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="279" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bSe-wD-IlR" id="scj-15-jN3">
@@ -4558,13 +4558,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unused Health Care Rebates" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="eRA-GK-n4e">
-                                            <rect key="frame" x="18" y="11" width="293" height="21"/>
+                                            <rect key="frame" x="18" y="8" width="293" height="27.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$165" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="GJh-fU-IYy">
-                                            <rect key="frame" x="316" y="11" width="39" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="$165" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="GJh-fU-IYy">
+                                            <rect key="frame" x="316" y="11" width="39" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -4572,8 +4572,8 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="GJh-fU-IYy" firstAttribute="centerY" secondItem="scj-15-jN3" secondAttribute="centerY" id="4LD-Df-2hE"/>
-                                        <constraint firstItem="eRA-GK-n4e" firstAttribute="centerY" secondItem="scj-15-jN3" secondAttribute="centerY" id="8RN-tS-Tjz"/>
-                                        <constraint firstItem="eRA-GK-n4e" firstAttribute="top" secondItem="scj-15-jN3" secondAttribute="topMargin" constant="3" id="Equ-S8-stq"/>
+                                        <constraint firstItem="eRA-GK-n4e" firstAttribute="top" secondItem="scj-15-jN3" secondAttribute="top" constant="8" id="7S3-Gj-09e"/>
+                                        <constraint firstAttribute="bottom" secondItem="eRA-GK-n4e" secondAttribute="bottom" constant="8" id="8xN-eL-0aP"/>
                                         <constraint firstAttribute="trailing" secondItem="GJh-fU-IYy" secondAttribute="trailing" constant="20" id="FwW-HY-ZHY"/>
                                         <constraint firstItem="GJh-fU-IYy" firstAttribute="leading" secondItem="eRA-GK-n4e" secondAttribute="trailing" constant="5" id="cF0-gF-E9A"/>
                                         <constraint firstItem="GJh-fU-IYy" firstAttribute="top" secondItem="scj-15-jN3" secondAttribute="topMargin" constant="3" id="m4j-z9-v3U"/>
@@ -4708,7 +4708,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXV-Wu-eee" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2108" y="3762"/>
+            <point key="canvasLocation" x="2108" y="3761.4692653673164"/>
         </scene>
         <!--Reward Status-->
         <scene sceneID="ppZ-PY-G7c">
