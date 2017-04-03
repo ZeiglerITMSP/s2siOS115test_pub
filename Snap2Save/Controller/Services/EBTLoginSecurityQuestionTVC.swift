@@ -91,6 +91,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
+        webView.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {

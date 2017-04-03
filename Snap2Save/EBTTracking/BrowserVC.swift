@@ -51,20 +51,15 @@ class BrowserVC: UIViewController {
             webViewMaster.webView.goForward()
         }
 
-        
-        
     }
     
     
     @IBAction func reloadAction(_ sender: Any) {
         
         webViewMaster.webView.reload()
-        
     }
     
     @IBAction func printAction(_ sender: Any) {
-        
-        
         webViewMaster.webView.evaluateJavaScript("document.documentElement.outerHTML") { (result, error) in
             
             print(result ?? "")
@@ -72,7 +67,6 @@ class BrowserVC: UIViewController {
             
             self.resultTextView.text = result as? String ?? "--"
         }
-        
     }
     
     let webViewMaster: EBTWebView = EBTWebView.shared
@@ -83,11 +77,15 @@ class BrowserVC: UIViewController {
         super.viewDidLoad()
         
         self.title = "Web View"
-        
         addWebView()
         
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        addWebView()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -99,9 +97,17 @@ class BrowserVC: UIViewController {
     func addWebView() {
         
         DispatchQueue.main.async {
+            
+            
             let webView = self.webViewMaster.webView!
+            webView.isHidden = false
             self.broswerView.addSubview(webView)
-            // constraints
+            
+//            webView.frame = self.broswerView.frame
+//            print(webView)
+//            print(self.broswerView)
+            
+//            // constraints
             webView.translatesAutoresizingMaskIntoConstraints = false
             let left = NSLayoutConstraint(item: webView, attribute: .left, relatedBy: .equal, toItem: webView.superview, attribute: .left, multiplier: 1, constant: 0)
             let right = NSLayoutConstraint(item: webView, attribute: .right, relatedBy: .equal, toItem: webView.superview, attribute: .right, multiplier: 1, constant: 0)
@@ -117,12 +123,7 @@ class BrowserVC: UIViewController {
     }
    
     
-    override func viewDidAppear(_ animated: Bool) {
-    
-        super.viewDidAppear(animated)
-    
-        addWebView()
-    }
+   
     
     /*
     // MARK: - Navigation

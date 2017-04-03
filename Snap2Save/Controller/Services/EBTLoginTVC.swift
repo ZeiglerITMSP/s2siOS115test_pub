@@ -200,6 +200,7 @@ class EBTLoginTVC: UITableViewController {
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
+        webView.isHidden = true
         
         // Stop listening notification
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
@@ -579,13 +580,17 @@ extension EBTLoginTVC {
     
     func registrationClick() {
         
+        let url = NSURL(string: kEBTSignupUrl)
+        let request = NSURLRequest(url: url! as URL)
         
-        let jsRegistration = "javascript:void(window.location.href =$('.prelogonActRegBtns').find(\"a[title='Register for UCARD center']\").attr('href'));"
-        let javaScript = jsRegistration
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            
-            self.checkForErrorMessage()
-        }
+        ebtWebView.webView.load(request as URLRequest)
+        
+//        let jsRegistration = "javascript:void(window.location.href =$('.prelogonActRegBtns').find(\"a[title='Register for UCARD center']\").attr('href'));"
+//        let javaScript = jsRegistration
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            
+//            self.checkForErrorMessage()
+//        }
     }
     
     func checkForStatusMessage() {
