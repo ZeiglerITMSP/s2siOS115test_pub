@@ -142,6 +142,10 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             if indexPath.row == 1{
                 return 25.0
             }
+            /*if indexPath.row == 2
+            {
+                return 44.0
+            }*/
         }
         return UITableViewAutomaticDimension
     }

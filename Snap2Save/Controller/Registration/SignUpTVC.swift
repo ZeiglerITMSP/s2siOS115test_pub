@@ -741,7 +741,7 @@ extension SignUpTVC: AITextFieldProtocol {
         
        // print(parameters)
         let url = String(format: "%@/checkFbUser", hostUrl)
-        //print("url)
+       // print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             switch response.result {

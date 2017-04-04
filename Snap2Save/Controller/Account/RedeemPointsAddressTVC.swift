@@ -89,24 +89,22 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
+        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: redeemNowButton, radius: 2.0, width: 1.0)
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 80
         
-        AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: redeemNowButton, radius: 2.0, width: 1.0)
-        
         // language button
+        loadTextFields();
+
         reloadContent()
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
-        loadTextFields();
+        
+
         getProfile()
+        
+        
         
     }
     
@@ -178,16 +176,11 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         return 8
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return UITableViewAutomaticDimension
     }
-    */
+
     
     func loadTextFields(){
         
@@ -570,15 +563,15 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
     func isValidData() -> Bool {
         
         if firstNameTF.text?.characters.count == 0 {
-            showAlert(title: "", message: "Please provide all information.".localized())
+            showAlert(title: "", message: "Please enter your first name.".localized())
             return false
         }
         if lastNameTf.text?.characters.count == 0 {
-            showAlert(title: "", message: "Please provide all information.".localized())
+            showAlert(title: "", message: "Please enter your last name.".localized())
             return false
         }
         if addressLine1Tf.text?.characters.count == 0  {
-            showAlert(title: "", message: "Please provide all information.".localized())
+            showAlert(title: "", message: "Please enter your street address.".localized())
             return false
         }
 //        if addressLine2Tf.text?.characters.count == 0 {
@@ -586,11 +579,11 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
 //            return false
 //        }
         if cityTf.text?.characters.count == 0  {
-            showAlert(title: "", message: "Please provide all information.".localized())
+            showAlert(title: "", message: "Please enter your city.".localized())
             return false
         }
         if stateTf.text?.characters.count == 0 {
-            showAlert(title: "", message: "Please provide all information.".localized())
+            showAlert(title: "", message: "Please enter your state.".localized())
             return false
         }
         if (zipCodeTf.text?.characters.count)! < 5 {
