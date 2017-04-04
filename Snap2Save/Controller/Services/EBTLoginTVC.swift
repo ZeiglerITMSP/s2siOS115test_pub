@@ -101,19 +101,30 @@ class EBTLoginTVC: UITableViewController {
     
     @IBAction func rememberMeAction(_ sender: UIButton) {
         
-        //sender.isSelected = !sender.isSelected
+        sender.isSelected = !sender.isSelected
         
-        if sender.isSelected == true {
-            // already remember me is clicked, so deselect it
-            UserDefaults.standard.removeObject(forKey: kUserIdEBT)
-            sender.isSelected = false
-            UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
-        } else {
-            // trying to enable remember me..
-            authenticateUserWithTouchID(toAutofill: false)
-        }
+        updateRememberMeStatus(rememberMe: sender.isSelected)
         
-        UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
+//        // Initially it will be disabled
+//        // On deselected, remove user id from defaults, and updatd selection status
+//        // On selection, update selection status
+//        
+//        // On deselected, remove user id from defaults
+//        if sender.isSelected == true {
+//            // already remember me is clicked, so deselect it
+//            UserDefaults.standard.removeObject(forKey: kUserIdEBT)
+//            sender.isSelected = false
+//           // UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
+//        } else {
+//            // trying to enable remember me..
+//            self.rememberMeButton.isSelected = true
+//         //   UserDefaults.standard.set(self.rememberMeButton.isSelected, forKey: kRememberMeEBT)
+//            
+//            
+//          //  authenticateUserWithTouchID(toAutofill: false)
+//        }
+//        // update selection status
+//        UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
     }
     
     // MARK:-
@@ -183,8 +194,9 @@ class EBTLoginTVC: UITableViewController {
         }
         
         reloadContent()
-        autofillUserName()
+//        autofillUserName()
         
+        udateRememberMyStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -259,6 +271,34 @@ class EBTLoginTVC: UITableViewController {
         self.view.endEditing(true)
     }
     
+    // MARK: - Remember UserId
+    
+    func udateRememberMyStatus() {
+        
+        let rememberUserEnabled = UserDefaults.standard.bool(forKey: kRememberMeEBT)
+        rememberMeButton.isSelected = rememberUserEnabled
+        
+        if rememberUserEnabled {
+            autoFillUserIdField()
+        }
+    }
+    
+    func autoFillUserIdField() {
+        
+        let userId = UserDefaults.standard.value(forKey: kUserIdEBT) as? String
+        if userId != nil {
+            self.userIdField.contentTextField.text = userId
+        }
+    }
+    
+    func updateRememberMeStatus(rememberMe: Bool) {
+        // remove existing userid if unchecked remember me
+        if rememberMe == false {
+            UserDefaults.standard.removeObject(forKey: kUserIdEBT)
+        }
+        // store remember me status
+        UserDefaults.standard.set(rememberMe, forKey: kRememberMeEBT)
+    }
     
     // MARK: -
     
@@ -340,11 +380,13 @@ class EBTLoginTVC: UITableViewController {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
-        } else if indexPath.row == 4 {
-            if isTouchIdAvailable == false {
-                return 0
-            }
         }
+        
+//        else if indexPath.row == 4 {
+//            if isTouchIdAvailable == false {
+//                return 0
+//            }
+//        }
         
         return UITableViewAutomaticDimension
     }
