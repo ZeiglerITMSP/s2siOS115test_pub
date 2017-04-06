@@ -107,7 +107,7 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
             //self.updateBackButtonText()
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Redeem Points".localized()
-         
+            self.doneButton.setTitle("DONE".localized(), for: .normal)
             self.titleLabel.text = "A $10 health care rebate has been added to your account!".localized()
             self.messageLabel.text = "To redeem health care rebates at Clinica Tepeyac, simply provide them with the 10-digit cell phone number on your Snap2Save account the next time you receive health care services at their clinic. They will verify your eligibility online and apply the credit to the cost of your visit or procedure.".localized()
             self.addressTitleLabel.text = "Clinica Tepeyac".localized()
@@ -149,8 +149,18 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
             let subscribeURL = NSURL(string:"www.clinicatepeyac.org")!
             self.urlLinkLabel.addLink(to: subscribeURL as URL!, with:subscribeLinkRange)
             
+            
         }
     }
+    
+   /* override func viewWillLayoutSubviews() {
+        
+        self.bgScrollView.contentSize = CGSize(width : 0 ,height : self.doneButton.frame.maxY + 40)
+        var rect : CGRect = self.bgContainerView.frame
+        rect.size.height = self.doneButton.frame.maxY + 100
+        self.bgContainerView.frame = rect
+
+    }*/
 
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
         

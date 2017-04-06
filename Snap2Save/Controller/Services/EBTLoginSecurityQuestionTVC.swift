@@ -42,6 +42,10 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     @IBAction func confirmAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
+        if validateInputs() == false {
+            return
+        }
+        
         confirmButton.isEnabled = false
         confirmActivityIndicator.startAnimating()
         
@@ -91,12 +95,27 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
+        webView.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: -
+    
+    func validateInputs() -> Bool {
+        
+        // userId
+        if AppHelper.isEmpty(string: securityAnswerField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.securityAnswer".localized())
+        } else {
+            return true
+        }
+        return false
+    }
+
     
     // MARK: - To Hide Keyboard
     
@@ -156,7 +175,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     
     func backAction() {
         
-        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
+        showAlert(title: nil, message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {

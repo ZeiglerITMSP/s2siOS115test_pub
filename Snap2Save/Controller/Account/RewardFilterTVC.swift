@@ -68,7 +68,8 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         fromDateField.contentTextField.dateFormatString = "MM/dd/yy"
         toDateField.contentTextField.dateFormatString = "MM/dd/yy"
         
-       let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY", attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 14.0)]) // Font
+        
+       let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY".localized(), attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 14.0)]) // Font
         fromDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
         toDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
 
@@ -135,6 +136,13 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
             
             self.dateRange.text = "DATE RANGE".localized()
             self.filterButton.setTitle("FILTER".localized(), for: .normal)
+            
+            self.fromDateField.contentTextField.placeholder = "MM/DD/YY".localized()
+            self.toDateField.contentTextField.placeholder = "MM/DD/YY".localized()
+            
+            let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY".localized(), attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 14.0)]) // Font
+            self.fromDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
+            self.toDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
             self.tableView.reloadData()
         }
     }

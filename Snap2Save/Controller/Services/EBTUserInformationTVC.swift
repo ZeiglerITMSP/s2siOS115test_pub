@@ -61,6 +61,10 @@ class EBTUserInformationTVC: UITableViewController {
     @IBAction func nextAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
+        if validateInputs() == false {
+            return
+        }
+        
         nextButton.isEnabled = false
         nextActivityIndicator.startAnimating()
         
@@ -177,6 +181,7 @@ class EBTUserInformationTVC: UITableViewController {
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
+        webView.isHidden = true
     }
     
     
@@ -184,6 +189,41 @@ class EBTUserInformationTVC: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: -
+    
+    func validateInputs() -> Bool {
+        
+        // userId
+        if AppHelper.isEmpty(string: userIdField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.userId".localized())
+        } else if AppHelper.isEmpty(string: passwordField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.password".localized())
+        } else if AppHelper.isEmpty(string: confirmPasswordField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.confirmPassword".localized())
+        } else if AppHelper.isEmpty(string: emailAddressField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.email".localized())
+        } else if AppHelper.isEmpty(string: confirmEmailField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.confirmEmail".localized())
+        } else if AppHelper.isEmpty(string: phoneNumberField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.phoneNumber".localized())
+        } else if AppHelper.isEmpty(string: questionOneField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.questionOne".localized())
+        } else if AppHelper.isEmpty(string: questionTwoField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.questionTwo".localized())
+        } else if AppHelper.isEmpty(string: questionThreeField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.questionThree".localized())
+        } else if AppHelper.isEmpty(string: answerOneField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.answerOne".localized())
+        } else if AppHelper.isEmpty(string: answerTwoField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.answerTwo".localized())
+        } else if AppHelper.isEmpty(string: answerThreeField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userinfo.answerThree".localized())
+        } else {
+            return true
+        }
+        return false
     }
     
     // MARK: - To Hide Keyboard
@@ -254,7 +294,7 @@ class EBTUserInformationTVC: UITableViewController {
     func backAction() {
         
 //        self.navigationController?.popViewController(animated: true)
-        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
+        showAlert(title: nil, message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {

@@ -71,6 +71,10 @@ class EBTLoginTVC: UITableViewController {
         
         self.view.endEditing(true)
         
+        if validateInputs() == false {
+            return
+        }
+        
         loginButton.isEnabled = false
         activityIndicator.startAnimating()
         
@@ -78,12 +82,9 @@ class EBTLoginTVC: UITableViewController {
         validatePage()
         
         // save user name
-        if isValid(userId: userIdField.contentTextField.text) {
-            if rememberMeButton.isSelected {
-                saveUserID()
-            }
+        if rememberMeButton.isSelected {
+            saveUserID()
         }
-        
     }
     
     @IBAction func registrationAction(_ sender: UIButton) {
@@ -101,19 +102,30 @@ class EBTLoginTVC: UITableViewController {
     
     @IBAction func rememberMeAction(_ sender: UIButton) {
         
-        //sender.isSelected = !sender.isSelected
+        sender.isSelected = !sender.isSelected
         
-        if sender.isSelected == true {
-            // already remember me is clicked, so deselect it
-            UserDefaults.standard.removeObject(forKey: kUserIdEBT)
-            sender.isSelected = false
-            UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
-        } else {
-            // trying to enable remember me..
-            authenticateUserWithTouchID(toAutofill: false)
-        }
+        updateRememberMeStatus(rememberMe: sender.isSelected)
         
-        UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
+//        // Initially it will be disabled
+//        // On deselected, remove user id from defaults, and updatd selection status
+//        // On selection, update selection status
+//        
+//        // On deselected, remove user id from defaults
+//        if sender.isSelected == true {
+//            // already remember me is clicked, so deselect it
+//            UserDefaults.standard.removeObject(forKey: kUserIdEBT)
+//            sender.isSelected = false
+//           // UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
+//        } else {
+//            // trying to enable remember me..
+//            self.rememberMeButton.isSelected = true
+//         //   UserDefaults.standard.set(self.rememberMeButton.isSelected, forKey: kRememberMeEBT)
+//            
+//            
+//          //  authenticateUserWithTouchID(toAutofill: false)
+//        }
+//        // update selection status
+//        UserDefaults.standard.set(sender.isSelected, forKey: kRememberMeEBT)
     }
     
     // MARK:-
@@ -183,8 +195,9 @@ class EBTLoginTVC: UITableViewController {
         }
         
         reloadContent()
-        autofillUserName()
+//        autofillUserName()
         
+        udateRememberMyStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -200,6 +213,7 @@ class EBTLoginTVC: UITableViewController {
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
+        webView.isHidden = true
         
         // Stop listening notification
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
@@ -258,6 +272,34 @@ class EBTLoginTVC: UITableViewController {
         self.view.endEditing(true)
     }
     
+    // MARK: - Remember UserId
+    
+    func udateRememberMyStatus() {
+        
+        let rememberUserEnabled = UserDefaults.standard.bool(forKey: kRememberMeEBT)
+        rememberMeButton.isSelected = rememberUserEnabled
+        
+        if rememberUserEnabled {
+            autoFillUserIdField()
+        }
+    }
+    
+    func autoFillUserIdField() {
+        
+        let userId = UserDefaults.standard.value(forKey: kUserIdEBT) as? String
+        if userId != nil {
+            self.userIdField.contentTextField.text = userId
+        }
+    }
+    
+    func updateRememberMeStatus(rememberMe: Bool) {
+        // remove existing userid if unchecked remember me
+        if rememberMe == false {
+            UserDefaults.standard.removeObject(forKey: kUserIdEBT)
+        }
+        // store remember me status
+        UserDefaults.standard.set(rememberMe, forKey: kRememberMeEBT)
+    }
     
     // MARK: -
     
@@ -339,11 +381,13 @@ class EBTLoginTVC: UITableViewController {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
-        } else if indexPath.row == 4 {
-            if isTouchIdAvailable == false {
-                return 0
-            }
         }
+        
+//        else if indexPath.row == 4 {
+//            if isTouchIdAvailable == false {
+//                return 0
+//            }
+//        }
         
         return UITableViewAutomaticDimension
     }
@@ -369,7 +413,19 @@ class EBTLoginTVC: UITableViewController {
         return false
     }
     
-    
+
+    func validateInputs() -> Bool {
+        
+        // userId
+        if AppHelper.isEmpty(string: userIdField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userid".localized())
+        } else if AppHelper.isEmpty(string: passwordField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.password".localized())
+        } else {
+            return true
+        }
+        return false
+    }
     
     
     // MARK: -
@@ -579,13 +635,17 @@ extension EBTLoginTVC {
     
     func registrationClick() {
         
+        let url = NSURL(string: kEBTSignupUrl)
+        let request = NSURLRequest(url: url! as URL)
         
-        let jsRegistration = "javascript:void(window.location.href =$('.prelogonActRegBtns').find(\"a[title='Register for UCARD center']\").attr('href'));"
-        let javaScript = jsRegistration
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            
-            self.checkForErrorMessage()
-        }
+        ebtWebView.webView.load(request as URLRequest)
+        
+//        let jsRegistration = "javascript:void(window.location.href =$('.prelogonActRegBtns').find(\"a[title='Register for UCARD center']\").attr('href'));"
+//        let javaScript = jsRegistration
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            
+//            self.checkForErrorMessage()
+//        }
     }
     
     func checkForStatusMessage() {

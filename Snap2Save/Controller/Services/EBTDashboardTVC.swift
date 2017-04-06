@@ -40,11 +40,11 @@ class EBTDashboardTVC: UITableViewController {
     var ebtBalance: String?
     var cashBalance: String?
     var transactionsString: String?
-    
-    // timer 
+    // timer
     var startTime: Date!
-    
-    
+    // load more
+//    var isLoadingMoreActivity:Bool = false
+//    var hasMoreActivity:Bool = true
     
     // MARK: -
     override func viewDidLoad() {
@@ -63,8 +63,19 @@ class EBTDashboardTVC: UITableViewController {
         
         validatePage()
         
+        // Load more
+//        self.tableView.toLoadMore {
+//            
+//            if self.trasactions.count > 0 {
+//                if (!self.isLoadingMoreActivity && self.hasMoreActivity) {
+//                    self.isLoadingMoreActivity = true
+//                    self.goToNextPage()
+//                }
+//            }
+//        }
+        
     }
-
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -102,8 +113,8 @@ class EBTDashboardTVC: UITableViewController {
             sections += 1
         }
         
+        // loader
         if sections == 0 {
-
             SwiftLoader.show(title: "Loading...".localized(), animated: true)
         } else {
             SwiftLoader.hide()
@@ -179,7 +190,7 @@ class EBTDashboardTVC: UITableViewController {
     }
     
     
-   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 0.1
         } else {
@@ -197,7 +208,7 @@ class EBTDashboardTVC: UITableViewController {
         
         _ = self.navigationController?.popToRootViewController(animated: true)
         //        self.navigationController?.popViewController(animated: true)
-      //  showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
+        //  showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -345,8 +356,11 @@ class EBTDashboardTVC: UITableViewController {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if resultTrimmed == "allactTab" {
-//                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
-                    self.getTransactions()
+                                      //  self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
+                    self.startStartEndDatesTimer()
+                    // load 90 days transactions
+                   // self.transactionsHistoryStartEndDates()
+//                    self.getTransactions()
                 } else {
                     self.clickTransactionsTab()
                 }
@@ -371,8 +385,11 @@ class EBTDashboardTVC: UITableViewController {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if resultTrimmed == "allactTab" {
-//                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
-                    self.getTransactions()
+                    self.startStartEndDatesTimer()
+                                       // self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
+                    // load 90 days transactions
+                   // self.transactionsHistoryStartEndDates()
+//                    self.getTransactions()
                 } else {
                     
                 }
@@ -395,8 +412,11 @@ class EBTDashboardTVC: UITableViewController {
                 
                 if resultTrimmed == "allactTab" {
                     
-//                    self.perform(#selector(self.getTransactions), with: self, afterDelay: 10)
-                    self.getTransactions()
+                                       // self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
+                    self.startStartEndDatesTimer()
+//                    self.actionType = ActionType.tranasctionsWithDates
+//                    self.transactionsHistoryStartEndDates()
+//                    self.getTransactions()
                 } else {
                     
                 }
@@ -406,99 +426,209 @@ class EBTDashboardTVC: UITableViewController {
         }
     }
     
-    
-    func getTransactions() {
-        
-        print("getTransactions")
-        // check with initial time
+    func startStartEndDatesTimer() {
+        // On first time setStartTime
         if startTime == nil {
             startTime = Date()
         }
-        
+        // every time calcuate elapsed time
         let elapsed = Date().timeIntervalSince(startTime)
-        print(elapsed)
+        // if elapsed time is not yet reached to 30 seconds, start timer to check transactions after 2 seconds, if elapsed time is reached to 30 seconds, so there is not need to check tranasctions - End
         if elapsed < 30 {
-            print("FIRE")
-            let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(runTransactionsScript), userInfo: nil, repeats: false)
-//            timer.fire()
+            let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(checkForStartEndDateFields), userInfo: nil, repeats: false)
         } else {
             print("END")
+            startTime = nil
+            
             self.tableView.reloadData()
             self.sendEBTInformationToServer()
         }
+        
+    }
+
+    func checkForStartEndDateFields() {
+        
+        let jsIsLastPage = "$('#fromDateTransHistory').attr('id');"
+        ebtWebView.webView.evaluateJavaScript(jsIsLastPage) { (result, error) in
+            print(result ?? "no result")
+            if (result as? String) != nil {
+                self.transactionsHistoryStartEndDates()
+            } else {
+                self.startStartEndDatesTimer()
+            }
+        }
+        
+    }
     
+    func transactionsHistoryStartEndDates() {
+        
+        startTime = nil
+        
+        let jsTransactionDates = "var formatD = function(d){" +
+          "  var dd = d.getDate()," +
+          "  dm = d.getMonth()+1," +
+          "  dy = d.getFullYear();" +
+          "  if (dd<10) dd='0'+dd;" +
+          "  if (dm<10) dm='0'+dm;" +
+         "   return dm+'/'+dd+'/'+dy;" +
+        "};" +
+        "var endDate = new Date(), startDate = new Date(endDate.valueOf());" +
+        "startDate.setDate(endDate.getDate()-90);" +
+        "$('#fromDateTransHistory').val(formatD(startDate));" +
+        "$('#toDateTransHistory').val(formatD(endDate));" +
+        "$('#searchAll').click()"
+        
+        let javaScript = jsTransactionDates
+        
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            print(result ?? "")
+            print(error ?? "")
+           self.perform(#selector(self.getTransactions), with: self, afterDelay: 8)
+        }
     }
     
     
-        func runTransactionsScript() {
-    
-            let js = "function transactionActivity() {" +
-                "var list = [];" +
-                "var table = $('#allCompletedTxnGrid tbody');" +
-                "table.find('tr').each(function (i) {" +
-                "var $tds = $(this).find('td')," +
-                "t_date = $tds.eq(2).text().trim();" +
-                "if (t_date) {" +
-                "list[i] = {" +
-                "date: t_date," +
-                "transaction: $tds.eq(3).text().trim()," +
-                "location: $tds.eq(4).text().trim()," +
-                "account: $tds.eq(5).text().trim()," +
-                "card: $tds.eq(6).text().trim()," +
-                "debit_amount: $tds.eq(7).text().trim()," +
-                "credit_amount: $tds.eq(8).text().trim()," +
-                "available_balance: $tds.eq(9).text().trim()" +
-                "};" +
-                "}" +
-                "});" +
-                "arr = $.grep(list, function (n) {" +
-                "return n == 0 || n" +
-                "});" +
-                "var jsonSerialized = JSON.stringify(arr);" +
-                "return jsonSerialized;" +
-                "}" +
-            "transactionActivity();"
+    /// get startTime, on every time this method is called, it will checks for elapsed time, if 30 seconds reached, end. else check transactions after 2 seconds.
+    func getTransactions() {
+        // On first time setStartTime
+        if startTime == nil {
+            startTime = Date()
+        }
+        // every time calcuate elapsed time
+        let elapsed = Date().timeIntervalSince(startTime)
+        // if elapsed time is not yet reached to 30 seconds, start timer to check transactions after 2 seconds, if elapsed time is reached to 30 seconds, so there is not need to check tranasctions - End
+        if elapsed < 30 {
+            print("FIRE")
+            let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(runTransactionsScript), userInfo: nil, repeats: false)
+            //            timer.fire()
+        } else {
+            print("END")
+            startTime = nil
+            
+            self.tableView.reloadData()
+            self.sendEBTInformationToServer()
+        }
+        
+    }
     
     
-            ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
-                if error != nil {
-                    print(error ?? "error nil")
-                } else {
-                    print(result ?? "result nil")
-                    let stringResult = result as! String
-                    let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                    print("trimmedText:")
-                    print(trimmedText)
-    
-                    if trimmedText.characters.count > 0 {
-                        self.transactionsString = trimmedText
-    
-                        let json = JSON.parse(trimmedText)
-                        print("json response \(json)")
-    
-                        if let responseArray = json.arrayObject {
-    
-                            if responseArray.count == 0 {
-                                self.getTransactions()
-                            } else {
-                                self.trasactions =  responseArray
-                                self.tableView.reloadData()
-                                self.sendEBTInformationToServer()
-                            }
+    func runTransactionsScript() {
+        
+        let js = "function transactionActivity() {" +
+            "var list = [];" +
+            "var table = $('#allCompletedTxnGrid tbody');" +
+            "table.find('tr').each(function (i) {" +
+            "var $tds = $(this).find('td')," +
+            "t_date = $tds.eq(2).text().trim();" +
+            "if (t_date) {" +
+            "list[i] = {" +
+            "date: t_date," +
+            "transaction: $tds.eq(3).text().trim()," +
+            "location: $tds.eq(4).text().trim()," +
+            "account: $tds.eq(5).text().trim()," +
+            "card: $tds.eq(6).text().trim()," +
+            "debit_amount: $tds.eq(7).text().trim()," +
+            "credit_amount: $tds.eq(8).text().trim()," +
+            "available_balance: $tds.eq(9).text().trim()" +
+            "};" +
+            "}" +
+            "});" +
+            "arr = $.grep(list, function (n) {" +
+            "return n == 0 || n" +
+            "});" +
+            "var jsonSerialized = JSON.stringify(arr);" +
+            "return jsonSerialized;" +
+            "}" +
+        "transactionActivity();"
+        
+        
+        ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! String
+                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+                print("trimmedText:")
+                print(trimmedText)
+                
+                if trimmedText.characters.count > 0 {
+                    self.transactionsString = trimmedText
+                    
+                    let json = JSON.parse(trimmedText)
+                    print("json response \(json)")
+                    
+                    if let responseArray = json.arrayObject {
+                        
+                        if responseArray.count == 0 {
+                            self.getTransactions()
+                        } else {
+                            
+                            self.startTime = nil
+                            self.trasactions.append(contentsOf: responseArray)
+                          //  self.tableView.reloadData()
+                            
+                            // stop load more
+//                            DispatchQueue.main.async {
+//                                self.tableView.doneRefresh()
+//                            }
+                          //  self.isLoadingMoreActivity = false
+                            
+                            // next button click
+                            
+                            // temp
+//                            if self.trasactions.count > 100 {
+//                                self.tableView.reloadData()
+//                                self.sendEBTInformationToServer()
+//                            } else {
+//                                self.goToNextPage()
+//                            }
+                            
+                            self.goToNextPage()
+                            
+                            
                         }
-                        
-                    } else {
-                        
-                        self.getTransactions()
-//                        self.tableView.reloadData()
-//                        self.sendEBTInformationToServer()
                     }
+                    
+                } else {
+                    
+                    self.getTransactions()
+                    //                        self.tableView.reloadData()
+                    //                        self.sendEBTInformationToServer()
                 }
             }
-            
         }
+        
+    }
     
-
+    
+    func goToNextPage() {
+        
+        // check if next page exists, and go to next page
+        let jsIsLastPage = "$('#next_allCompletedTxnGrid_pager.ui-state-disabled').attr('id');"
+        ebtWebView.webView.evaluateJavaScript(jsIsLastPage) { (result, error) in
+            print(result ?? "no result")
+            if (result as? String) != nil {
+                // next_allCompletedTxnGrid_pager
+                print("LAST PAGE")
+                self.tableView.reloadData()
+//                self.hasMoreActivity = false
+//                self.tableView.endLoadMore()
+                // send all transactions to server
+                self.sendEBTInformationToServer()
+            } else { // click next page
+                print("NEXT PAGE")
+                let jsNextPageClick = "$('#next_allCompletedTxnGrid_pager > a').click();"
+                let javaScript = jsNextPageClick
+                
+                self.ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+                     self.getTransactions()
+                }
+            }
+        }
+    }
+    
+    
 }
 
 extension EBTDashboardTVC: EBTWebViewDelegate {
@@ -507,17 +637,13 @@ extension EBTDashboardTVC: EBTWebViewDelegate {
     func didFinishLoadingWebView() {
         
         if actionType == .transactions {
-            
             actionType = nil
             validateTransactionPage()
-            
-            
         } else if actionType == .tabClick {
             
             actionType = nil
             validateTabClick()
         }
-        
     }
     
 }
@@ -549,21 +675,21 @@ extension EBTDashboardTVC {
         let cash_balance = cashBalance ?? ""
         
         let parameters : Parameters = ["platform":"1",
-                          "version_code": version_code,
-                          "version_name": version_name,
-                          
-                          "language": currentLanguage,
-                          "auth_token": auth_token,
-                          "device_id": device_id,
-                          
-                          "user_id": user_id,
-                          "ebt_user_id": ebt_user_id,
-                          "type": type,
-                          
-                          "transactions": transactions,
-                          "ebt_balance": ebt_balance,
-                          "cash_balance": cash_balance
-            ]
+                                       "version_code": version_code,
+                                       "version_name": version_name,
+                                       
+                                       "language": currentLanguage,
+                                       "auth_token": auth_token,
+                                       "device_id": device_id,
+                                       
+                                       "user_id": user_id,
+                                       "ebt_user_id": ebt_user_id,
+                                       "type": type,
+                                       
+                                       "transactions": transactions,
+                                       "ebt_balance": ebt_balance,
+                                       "cash_balance": cash_balance
+        ]
         
         print(parameters)
         let url = String(format: "%@/saveEbtInfo", hostUrl)

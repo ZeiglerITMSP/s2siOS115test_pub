@@ -536,20 +536,6 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         let validPhoneNumber = AppHelper.validate(value: mobileNumber)
         
-        
-        //        if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
-        //            if  validEmail == false {
-        //                self.showAlert(title: "", message: "You have chosen to be contacted by email, but have not provided a valid email address.".localized())
-        //                return false
-        //
-        //            }
-        ////             if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
-        ////             self.showAlert(title: "", message: "Entries must match to proceed".localized())
-        ////             return false
-        ////             }
-        //
-        //        }
-        
         if currentEmail != email {
             if let email = emailPlaceHolderTextField.contentTextField.text {
                 if email.characters.count > 0 {
@@ -620,15 +606,6 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             }
             else {
                 
-              /*  if emailPlaceHolderTextField.contentTextField.text?.characters.count == 0
-                {
-                    if validEmail == false {
-                        self.showAlert(title: "", message: "Please enter a valid email address.".localized())
-                        return false
-                        
-                    }
- 
-                }*/
                 if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
                     
                     if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{

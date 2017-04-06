@@ -42,6 +42,10 @@ class EBTCardNumberTVC: UITableViewController {
         
         self.view.endEditing(true)
         
+        if validateInputs() == false {
+            return
+        }
+        
         nextButton.isEnabled = false
         nextActivityIndicator.startAnimating()
         
@@ -95,6 +99,7 @@ class EBTCardNumberTVC: UITableViewController {
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
+        webView.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -102,6 +107,18 @@ class EBTCardNumberTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: -
+    
+    func validateInputs() -> Bool {
+        
+        // userId
+        if AppHelper.isEmpty(string: cardNumberField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.cardNumber".localized())
+        } else {
+            return true
+        }
+        return false
+    }
     
     // MARK: - To Hide Keyboard
     
@@ -169,7 +186,7 @@ class EBTCardNumberTVC: UITableViewController {
     
     func backAction() {
         
-        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
+        showAlert(title: nil, message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
