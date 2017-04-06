@@ -71,6 +71,10 @@ class EBTLoginTVC: UITableViewController {
         
         self.view.endEditing(true)
         
+        if validateInputs() == false {
+            return
+        }
+        
         loginButton.isEnabled = false
         activityIndicator.startAnimating()
         
@@ -78,12 +82,9 @@ class EBTLoginTVC: UITableViewController {
         validatePage()
         
         // save user name
-        if isValid(userId: userIdField.contentTextField.text) {
-            if rememberMeButton.isSelected {
-                saveUserID()
-            }
+        if rememberMeButton.isSelected {
+            saveUserID()
         }
-        
     }
     
     @IBAction func registrationAction(_ sender: UIButton) {
@@ -412,7 +413,19 @@ class EBTLoginTVC: UITableViewController {
         return false
     }
     
-    
+
+    func validateInputs() -> Bool {
+        
+        // userId
+        if AppHelper.isEmpty(string: userIdField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.userid".localized())
+        } else if AppHelper.isEmpty(string: passwordField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.password".localized())
+        } else {
+            return true
+        }
+        return false
+    }
     
     
     // MARK: -

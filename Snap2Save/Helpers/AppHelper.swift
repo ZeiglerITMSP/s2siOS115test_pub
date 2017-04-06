@@ -75,6 +75,16 @@ class AppHelper {
         return true
     }
     
+    class func isEmpty(string:String?) -> Bool {
+        
+        if (string != nil) && (string != "") {
+            return false
+        }
+        
+        return true
+    }
+
+    
 //    class func isValid(input:String) -> Bool {
 //        
 //        let regex = try! NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: NSRegularExpression.Options())

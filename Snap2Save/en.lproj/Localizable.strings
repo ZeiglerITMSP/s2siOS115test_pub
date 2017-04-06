@@ -305,7 +305,7 @@
 "ebt.title.register" = "Register";
 // back alert
 "Are you sure ?" = "Are you sure ?";
-"The process will be cancelled." = "The process will be cancelled.";
+"ebt.processTerminate.alert" = "Are you sure you want to terminate this process?";
 // timeout cancel alert
 "ebt.alert.timeout.title" = "Sorry!";
 "ebt.alert.timeout.message" = "We are unable to process your request at this time. Please try again later.";
@@ -323,15 +323,13 @@
 "ebt.login.titleLabel" = "AN EASY, CONVENIENT WAY TO ACCESS YOUR EBT CARD ACCOUNT INFORMATION.";
 "ebt.login.messageLabel" = "Check your balance and review your transaction activity.";
 
-
-
-
 // Authentication Code
 "AUTHENTICATION CODE" = "AUTHENTICATION CODE";
 "CONFIRM" = "CONFIRM";
 "REGENERATE" = "REGENERATE";
 "ebt.authentication.titleLabel" = "WE DON’T RECOGNIZE THE DEVICE YOU’RE USING.";
 "ebt.authentication.messageLabel" = "We need to verify your identity before you can access your account. A message, with a temporary authorization code, has been sent to the email address shown on your account. Please check your email and enter the code below. The code is valid for 30 minutes in the current session only.";
+
 
 
 // card number
@@ -409,8 +407,35 @@
 "CASH Balance" = "CASH BALANCE";
 "No transactions were found." = "No transactions were found.";
 
+// empty field alert
+"alert.emptyField.userid" = "Enter User ID";
+"alert.emptyField.password" = "Enter Password";
+"alert.emptyField.authentication" = "Enter Authentication Code";
+"alert.emptyField.securityAnswer" = "Enter Security Answer";
 
+"alert.emptyField.cardNumber" = "Enter Card Number";
+"alert.emptyField.dob" = "Enter Date of Birth";
+"alert.emptyField.socialSecurityNumber" = "Enter Social Security Number";
+"alert.emptyField.pin" = "Enter Pin";
+"alert.emptyField.confirmPin" = "Enter Confirm Pin";
 
+"alert.emptyField.userinfo.userId" = "Enter User ID";
+"alert.emptyField.userinfo.password" = "Enter Password";
+"alert.emptyField.userinfo.confirmPassword" = "Enter Confirm Password";
+"alert.emptyField.userinfo.email" = "Enter Email";
+"alert.emptyField.userinfo.confirmEmail" = "Enter Confirm Email";
+"alert.emptyField.userinfo.phoneNumber" = "Enter Phone Number";
+"alert.emptyField.userinfo.questionOne" = "Enter Question 1";
+"alert.emptyField.userinfo.questionTwo" = "Enter Question 2";
+"alert.emptyField.userinfo.questionThree" = "Enter Question 3";
+"alert.emptyField.userinfo.answerOne" = "Enter Answer 1";
+"alert.emptyField.userinfo.answerTwo" = "Enter Answer 2";
+"alert.emptyField.userinfo.answerThree" = "Enter Answer 3";
+
+"alert.emptyField.validationCode" = "Enter Validation Code";
+"alert.emptyField.currentEmail" = "Enter Current Email";
+"alert.emptyField.email" = "Enter Email";
+"alert.emptyField.confirmEmail" = "Enter Confirm Email";
 
 
 

@@ -36,6 +36,10 @@ class EBTChangeEmailTVC: UITableViewController {
     @IBAction func changeEmailAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
+        if validateInputs() == false {
+            return
+        }
+        
         self.changeEmailButton.isEnabled = false
         self.changeEmailActivityIndicator.startAnimating()
         
@@ -101,6 +105,23 @@ class EBTChangeEmailTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: -
+    
+    func validateInputs() -> Bool {
+        
+        // userId
+        if AppHelper.isEmpty(string: currentEmailField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.currentEmail".localized())
+        } else if AppHelper.isEmpty(string: emailField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.email".localized())
+        } else if AppHelper.isEmpty(string: confirmEmailField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.confirmEmail".localized())
+        } else {
+            return true
+        }
+        return false
+    }
+    
     // MARK: - To Hide Keyboard
     
     func addTapGesture() {
@@ -157,7 +178,7 @@ class EBTChangeEmailTVC: UITableViewController {
     
     func backAction() {
         
-        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
+        showAlert(title: nil, message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {

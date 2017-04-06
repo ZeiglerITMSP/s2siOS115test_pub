@@ -43,6 +43,10 @@ class EBTDateOfBirthTVC: UITableViewController {
     @IBAction func nextAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
+        if validateInputs() == false {
+            return
+        }
+        
         nextButton.isEnabled = false
         nextActivityIndicator.startAnimating()
         
@@ -106,6 +110,21 @@ class EBTDateOfBirthTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: -
+    
+    func validateInputs() -> Bool {
+        
+        // userId
+        if AppHelper.isEmpty(string: dobField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.dob".localized())
+        } else if AppHelper.isEmpty(string: socialSecurityNumberField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.socialSecurityNumber".localized())
+        } else {
+            return true
+        }
+        return false
+    }
+    
     // MARK: - To Hide Keyboard
     
     func addTapGesture() {
@@ -167,7 +186,7 @@ class EBTDateOfBirthTVC: UITableViewController {
     // MARK: -
     func backAction() {
 //        self.navigationController?.popViewController(animated: true)
-        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
+        showAlert(title: nil, message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {

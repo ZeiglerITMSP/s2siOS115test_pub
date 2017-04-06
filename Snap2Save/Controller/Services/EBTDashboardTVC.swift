@@ -563,6 +563,8 @@ class EBTDashboardTVC: UITableViewController {
                         if responseArray.count == 0 {
                             self.getTransactions()
                         } else {
+                            
+                            self.startTime = nil
                             self.trasactions.append(contentsOf: responseArray)
                           //  self.tableView.reloadData()
                             
@@ -574,14 +576,15 @@ class EBTDashboardTVC: UITableViewController {
                             
                             // next button click
                             
-                            self.goToNextPage()
-                            // only get 90 transactions.
-//                            if self.trasactions.count < 90 {
-//
-//                            } else {
+                            // temp
+//                            if self.trasactions.count > 100 {
+//                                self.tableView.reloadData()
 //                                self.sendEBTInformationToServer()
+//                            } else {
+//                                self.goToNextPage()
 //                            }
                             
+                            self.goToNextPage()
                             
                             
                         }
@@ -614,6 +617,7 @@ class EBTDashboardTVC: UITableViewController {
                 // send all transactions to server
                 self.sendEBTInformationToServer()
             } else { // click next page
+                print("NEXT PAGE")
                 let jsNextPageClick = "$('#next_allCompletedTxnGrid_pager > a').click();"
                 let javaScript = jsNextPageClick
                 

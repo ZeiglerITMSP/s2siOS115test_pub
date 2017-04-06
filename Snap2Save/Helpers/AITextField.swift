@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 @objc protocol AITextFieldProtocol {
     // protocol definition
@@ -238,7 +239,12 @@ class AITextField: UITextField {
     {
         self.datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 255))
         self.datePicker?.datePickerMode = UIDatePickerMode.date
+        let currentLanguage = Localize.currentLanguage()
+        self.datePicker?.locale = NSLocale.init(localeIdentifier: currentLanguage) as Locale
         self.inputView = self.datePicker
+//        self.datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 255))
+//        self.datePicker?.datePickerMode = UIDatePickerMode.date
+//        self.inputView = self.datePicker
     }
     func addTimePicker() {
         self.datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 255))

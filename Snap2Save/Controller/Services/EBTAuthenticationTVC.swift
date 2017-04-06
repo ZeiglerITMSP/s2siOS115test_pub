@@ -43,6 +43,10 @@ class EBTAuthenticationTVC: UITableViewController {
     @IBAction func confirmAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
+        if validateInputs() == false {
+            return
+        }
+        
         confirmButton.isEnabled = false
         confirmActivityIndicator.startAnimating()
         
@@ -107,6 +111,20 @@ class EBTAuthenticationTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: -
+    
+    func validateInputs() -> Bool {
+        
+        // userId
+        if AppHelper.isEmpty(string: authenticationCodeField.contentTextField.text) {
+            self.showAlert(title: "", message: "alert.emptyField.authentication".localized())
+        } else {
+            return true
+        }
+        return false
+    }
+
+    
     // MARK: - To Hide Keyboard
     
     func addTapGesture() {
@@ -124,7 +142,7 @@ class EBTAuthenticationTVC: UITableViewController {
     
     func backAction() {
         
-        showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
+        showAlert(title: nil, message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
