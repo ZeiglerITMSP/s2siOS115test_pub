@@ -43,7 +43,8 @@ class EBTDashboardTVC: UITableViewController {
     // timer
     var startTime: Date!
     
-    var pageNumber: Int = 1
+    
+    var pageNumber: Int = 1 // 0 for internal build, 1 for live
     
     // load more
 //    var isLoadingMoreActivity:Bool = false
@@ -500,7 +501,9 @@ class EBTDashboardTVC: UITableViewController {
         // every time calcuate elapsed time
         let elapsed = Date().timeIntervalSince(startTime)
         // if elapsed time is not yet reached to 30 seconds, start timer to check transactions after 2 seconds, if elapsed time is reached to 30 seconds, so there is not need to check tranasctions - End
-        if elapsed < 30 {
+        if elapsed < 20 {
+            
+            
             print("FIRE")
             
             let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.checkPageNumber), userInfo: nil, repeats: false)

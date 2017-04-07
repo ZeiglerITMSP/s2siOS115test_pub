@@ -410,34 +410,34 @@
 "No transactions were found." = "No se encontraron transacciones.";
 
 // empty field alert
-"alert.emptyField.userid" = "Enter User ID";
-"alert.emptyField.password" = "Enter Password";
-"alert.emptyField.authentication" = "Enter Authentication Code";
-"alert.emptyField.securityAnswer" = "Enter Security Answer";
+"alert.emptyField.userid" = "Enter User ID.";
+"alert.emptyField.password" = "Enter Password.";
+"alert.emptyField.authentication" = "Enter Authentication Code.";
+"alert.emptyField.securityAnswer" = "Enter Security Answer.";
 
-"alert.emptyField.cardNumber" = "Enter Card Number";
-"alert.emptyField.dob" = "Enter Date of Birth";
-"alert.emptyField.socialSecurityNumber" = "Enter Social Security Number";
-"alert.emptyField.pin" = "Enter Pin";
-"alert.emptyField.confirmPin" = "Enter Confirm Pin";
+"alert.emptyField.cardNumber" = "Enter Card Number.";
+"alert.emptyField.dob" = "Enter Date of Birth.";
+"alert.emptyField.socialSecurityNumber" = "Enter Social Security Number.";
+"alert.emptyField.pin" = "Enter Pin.";
+"alert.emptyField.confirmPin" = "Enter Confirm Pin.";
 
-"alert.emptyField.userinfo.userId" = "Enter User ID";
-"alert.emptyField.userinfo.password" = "Enter Password";
-"alert.emptyField.userinfo.confirmPassword" = "Enter Confirm Password";
-"alert.emptyField.userinfo.email" = "Enter Email";
-"alert.emptyField.userinfo.confirmEmail" = "Enter Confirm Email";
-"alert.emptyField.userinfo.phoneNumber" = "Enter Phone Number";
-"alert.emptyField.userinfo.questionOne" = "Enter Question 1";
-"alert.emptyField.userinfo.questionTwo" = "Enter Question 2";
-"alert.emptyField.userinfo.questionThree" = "Enter Question 3";
-"alert.emptyField.userinfo.answerOne" = "Enter Answer 1";
-"alert.emptyField.userinfo.answerTwo" = "Enter Answer 2";
-"alert.emptyField.userinfo.answerThree" = "Enter Answer 3";
+"alert.emptyField.userinfo.userId" = "Enter User ID.";
+"alert.emptyField.userinfo.password" = "Enter Password.";
+"alert.emptyField.userinfo.confirmPassword" = "Enter Confirm Password.";
+"alert.emptyField.userinfo.email" = "Enter Email.";
+"alert.emptyField.userinfo.confirmEmail" = "Enter Confirm Email.";
+"alert.emptyField.userinfo.phoneNumber" = "Enter Phone Number.";
+"alert.emptyField.userinfo.questionOne" = "Enter Question 1.";
+"alert.emptyField.userinfo.questionTwo" = "Enter Question 2.";
+"alert.emptyField.userinfo.questionThree" = "Enter Question 3.";
+"alert.emptyField.userinfo.answerOne" = "Enter Answer 1.";
+"alert.emptyField.userinfo.answerTwo" = "Enter Answer 2.";
+"alert.emptyField.userinfo.answerThree" = "Enter Answer 3.";
 
-"alert.emptyField.validationCode" = "Enter Validation Code";
-"alert.emptyField.currentEmail" = "Enter Current Email";
-"alert.emptyField.email" = "Enter Email";
-"alert.emptyField.confirmEmail" = "Enter Confirm Email";
+"alert.emptyField.validationCode" = "Enter Validation Code.";
+"alert.emptyField.currentEmail" = "Enter Current Email.";
+"alert.emptyField.email" = "Enter Email.";
+"alert.emptyField.confirmEmail" = "Enter Confirm Email.";
 
 
 // **** Scrapping ****

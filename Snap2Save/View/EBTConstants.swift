@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 //let kEBTBaseUrl = "http://internal.appit.ventures/s2s/"
 //let kEBTLoginUrl =  kEBTBaseUrl + "ebt_login.html"
 //let kEBTLoginUrl_es =  kEBTBaseUrl + "spanish_login.html"
