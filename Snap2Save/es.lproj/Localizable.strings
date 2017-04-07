@@ -335,12 +335,12 @@
 
 
 // card number
-"ebt.cardnumber.titleLabel" = "IDENTIFICA TU TARJETA Y CUENTAS";
+"ebt.cardnumber.titleLabel" = "IDENTIFICA TU TARJETA Y CUENTAS.";
 "ebt.cardnumber.messageLabel" = "Introduce tu número de tarjeta actual.";
 "CARD NUMBER" = "NÚMERO DE TARJETA";
 
 // DOB screen
-"ebt.dob.titltLabel" = "VALIDAR IDENTIDAD";
+"ebt.dob.titltLabel" = "VALIDAR IDENTIDAD.";
 "ebt.dob.messageLabel" = "Paso 1: Proporciona la siguiente información para validar su identidad.";
 "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)" = "¿CUÁL ES TU FECHA DE NACIMIENTO? (MM/DD/AAAA)";
 "WHAT IS YOUR SOCIAL SECURITY NUMBER?" = "¿CUÁL ES TU NÚMERO DE SEGURO SOCIAL?";
@@ -354,7 +354,7 @@
 
 
 // Select PIN
-"ebt.pin.titleLabel" = "SELECCIONAR PIN";
+"ebt.pin.titleLabel" = "SELECCIONAR PIN.";
 "ebt.pin.messageLabel" = "Paso 2: Selecciona PIN.";
 "PIN" = "PIN";
 "CONFIRM PIN" = "CONFIRMAR PIN";
@@ -450,7 +450,7 @@
 //// registration
 //"ebt.cardnumber" = "Identify Your Card and Accounts";
 //"ebt.acceptTerms" = "Online Terms and Conditions";
-//"ebt.dob" = "Validate Identity";
+//"ebt.dob" = "Validate Identity.";
 //"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
 //"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
 //"ebt.pin" = "Select PIN";

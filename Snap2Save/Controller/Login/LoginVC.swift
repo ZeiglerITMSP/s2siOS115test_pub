@@ -330,6 +330,15 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     func userLogin() {
         
+        /*  let tracker = GAI.sharedInstance().defaultTracker
+         let builder = GAIDictionaryBuilder.createEvent(withCategory: "Login",
+         action: "LoginAction",
+         label: nil,
+         value: nil).build()
+         tracker?.send(builder as [NSObject : AnyObject]!)
+         
+         */
+        
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
