@@ -333,12 +333,12 @@
 
 
 // card number
-"ebt.cardnumber.titleLabel" = "IDENTIFY YOUR CARD AND ACCOUNTS";
+"ebt.cardnumber.titleLabel" = "IDENTIFY YOUR CARD AND ACCOUNTS.";
 "ebt.cardnumber.messageLabel" = "Please enter your current card number.";
 "CARD NUMBER" = "CARD NUMBER";
 
 // DOB screen
-"ebt.dob.titltLabel" = "VALIDATE IDENTITY";
+"ebt.dob.titltLabel" = "VALIDATE IDENTITY.";
 "ebt.dob.messageLabel" = "Step 1: Please provide the following information to validate your identity.";
 "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)" = "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)";
 "WHAT IS YOUR SOCIAL SECURITY NUMBER?" = "WHAT IS YOUR SOCIAL SECURITY NUMBER?";
@@ -352,7 +352,7 @@
 
 
 // Select PIN
-"ebt.pin.titleLabel" = "SELECT PIN";
+"ebt.pin.titleLabel" = "SELECT PIN.";
 "ebt.pin.messageLabel" = "Step 2: Select PIN.";
 "PIN" = "PIN";
 "CONFIRM PIN" = "CONFIRM PIN";
@@ -449,7 +449,7 @@
 //// registration
 //"ebt.cardnumber" = "Identify Your Card and Accounts";
 //"ebt.acceptTerms" = "Online Terms and Conditions";
-//"ebt.dob" = "Validate Identity";
+//"ebt.dob" = "Validate Identity.";
 //"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
 //"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
 //"ebt.pin" = "Select PIN";
