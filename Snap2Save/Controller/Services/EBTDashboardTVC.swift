@@ -44,7 +44,7 @@ class EBTDashboardTVC: UITableViewController {
     var startTime: Date!
     
     
-    var pageNumber: Int = 1 // 0 for internal build, 1 for live
+    var pageNumber: Int = 0 // 0 for internal build, 1 for live
     
     // load more
 //    var isLoadingMoreActivity:Bool = false
