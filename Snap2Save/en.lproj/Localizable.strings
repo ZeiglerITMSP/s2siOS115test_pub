@@ -361,7 +361,7 @@
 
 // User Information
 
-"ebt.userinformation.titleLabel" = "USER INFORMATION";
+"ebt.userinformation.titleLabel" = "USER INFORMATION.";
 "ebt.userinformation.messageLabel" = "Step 3: Please enter the following information.";
 "User ID Rules" = "User ID Rules";
 "Password Rules" = "Password Rules";
@@ -383,8 +383,8 @@
 "ebt.userinformation.terms" = "By registering, you agree to the UCARD CENTER SERVICE AGREEMENT and UCARD ONLINE COMMUNICATIONS DELIVERY DISCLOSURE.";
 
 // Confirmation screen
-"ebt.confirmation.titleLabel" = "CONFIRMATION";
-"ebt.confirmation.messageLabel" = "Step 5: Registration complete.";
+"ebt.confirmation.titleLabel" = "CONFIRMATION.";
+"ebt.confirmation.messageLabel" = "Step 4: Registration complete.";
 "ENTER EMAIL VALIDATION CODE" = "ENTER EMAIL VALIDATION CODE";
 "VALIDATE" = "VALIDATE";
 "RESEND" = "RESEND";

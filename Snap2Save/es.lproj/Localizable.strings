@@ -346,7 +346,7 @@
 "WHAT IS YOUR SOCIAL SECURITY NUMBER?" = "¿CUÁL ES TU NÚMERO DE SEGURO SOCIAL?";
 
 // Verify Security Question
-"ebt.securityQuestion.titleLabel" = "VERIFICA LA PREGUNTA DE SEGURIDAD";
+"ebt.securityQuestion.titleLabel" = "VERIFICA LA PREGUNTA DE SEGURIDAD.";
 "ebt.securityQuestion.messageLabel" = "Introduce la respuesta de seguridad que utilizaste durante tu registro.";
 "SECURITY QUESTION" = "PREGUNTA DE SEGURIDAD";
 "SECURITY ANSWER" = "RESPUESTA DE SEGURIDAD";
@@ -363,7 +363,7 @@
 
 // User Information
 
-"ebt.userinformation.titleLabel" = "INFORMACIÓN DEL USUARIO";
+"ebt.userinformation.titleLabel" = "INFORMACIÓN DEL USUARIO.";
 "ebt.userinformation.messageLabel" = "Paso 3: Introduce la siguiente información:";
 "User ID Rules" = "Reglas para la identificación de usuario:";
 "Password Rules" = "Reglas para la contraseña:";
@@ -384,8 +384,8 @@
 "ebt.userinformation.terms" = "Al registrarte, aceptas el ACUERDO DE SERVICIO DE UCARD CENTER y UCARD Online Communications Delivery Disclosure (Divulgación en línea de entrega de comunicaciones de UCARD).";
 
 // Confirmation screen
-"ebt.confirmation.titleLabel" = "CONFIRMACIÓN";
-"ebt.confirmation.messageLabel" = "Paso 5: Tu registro está completo.";
+"ebt.confirmation.titleLabel" = "CONFIRMACIÓN.";
+"ebt.confirmation.messageLabel" = "Paso 4: Tu registro está completo.";
 "ENTER EMAIL VALIDATION CODE" = "INTRODUCE EL CÓDIGO DE VALIDACIÓN";
 "VALIDATE" = "VALIDAR";
 "RESEND" = "REENVIAR";
