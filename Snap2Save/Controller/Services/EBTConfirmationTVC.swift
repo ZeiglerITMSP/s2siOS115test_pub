@@ -325,7 +325,10 @@ extension EBTConfirmationTVC {
             "var msgDescription = $('#emailValidationForm .prelogonInstrTextArea .prelogonInstrText');" +
             "msgDescription.each(function(i, object) { " +
                 "if (i != 0) { " +
-                    "names += object.innerText.trim() + '\\n'; " +
+                    "names += object.innerText.trim(); " +
+                "} " +
+                "if (i == 1) { " +
+                    "names += '. ' " +
                 "} " +
             "}); " +
             "return names;" +
@@ -337,7 +340,8 @@ extension EBTConfirmationTVC {
             
             if let resultString = result as? String {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                if resultTrimmed.characters.count > 0 {
+                let resultRemovedExtraWhiteSpaces = resultTrimmed.condenseWhitespace()
+                if resultRemovedExtraWhiteSpaces.characters.count > 0 {
                     // status message
                     self.confirmationMessageLabel.text = resultTrimmed
                     self.tableView.reloadData()

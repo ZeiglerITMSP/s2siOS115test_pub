@@ -203,10 +203,14 @@ extension String {
 extension String {
     
     func removeWhiteSpaces() -> String {
-        
         return self.trimmingCharacters(in: .whitespaces)
     }
     
+    
+    func condenseWhitespace() -> String {
+        let components = self.components(separatedBy: NSCharacterSet.whitespacesAndNewlines)
+        return components.filter { !$0.isEmpty }.joined(separator: " ")
+    }
     
     //    func heightWith(constrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
     //        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
