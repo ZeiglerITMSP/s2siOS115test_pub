@@ -214,18 +214,17 @@ class EBTLoginTVC: UITableViewController {
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
         webView.isHidden = true
-        
-        // Stop listening notification
+        // remove observer
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
-        
+        // listen language change notification.
         LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         
         // Register to receive notification
         NotificationCenter.default.addObserver(self, selector: #selector(popToLoginVC), name: notificationName, object: nil)
+        // remove language change observer
         LanguageUtility.removeObserverForLanguageChange(self)
         super.viewDidDisappear(animated)
     }

@@ -44,7 +44,7 @@ class EBTDashboardTVC: UITableViewController {
     var startTime: Date!
     
     
-    var pageNumber: Int = 0 // 0 for internal build, 1 for live
+    var pageNumber: Int = 1 // 0 for internal build, 1 for live
     
     // load more
 //    var isLoadingMoreActivity:Bool = false
@@ -171,10 +171,22 @@ class EBTDashboardTVC: UITableViewController {
             let record = trasactions[indexPath.row] as? [String:String]
             
             detailedSubtitleCell.titleLabel.text = record?["location"]
-            detailedSubtitleCell.detailLabel.text = record?["debit_amount"]
-            detailedSubtitleCell.detailLabel2.text = record?["credit_amount"]
+//            detailedSubtitleCell.detailLabel.text = record?["debit_amount"]
+//            detailedSubtitleCell.detailLabel2.text = record?["credit_amount"]
             detailedSubtitleCell.subtitleLabel.text = record?["date"]
             detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
+            
+            // amount
+            let debit_amount = record?["debit_amount"]
+            let credit_amount = record?["credit_amount"]
+            if credit_amount?.containNumbers1To9() == true {
+                detailedSubtitleCell.detailLabel.text = credit_amount
+                detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
+            } else {
+                detailedSubtitleCell.detailLabel.text = debit_amount
+                detailedSubtitleCell.detailLabel.textColor = UIColor.black
+            }
+            
             
             return detailedSubtitleCell
         } else {

@@ -198,6 +198,15 @@ extension String {
         return mobileNumTxtAttribute
     }
     
+    
+    public func containNumbers1To9() -> Bool {
+        
+        let validCharacters : Set<Character> = Set("123456789".characters)
+        let charactersArray = self.characters.filter {validCharacters.contains($0) }
+        
+        return charactersArray.count > 0 ? true : false
+    }
+    
 }
 
 extension String {
