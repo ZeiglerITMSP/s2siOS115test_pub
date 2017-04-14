@@ -8,6 +8,7 @@
 
 import UIKit
 
+// internal
 //let kEBTBaseUrl = "http://internal.appit.ventures/s2s/"
 //let kEBTLoginUrl =  kEBTBaseUrl + "ebt_login.html"
 //let kEBTLoginUrl_es =  kEBTBaseUrl + "spanish_login.html"
@@ -28,6 +29,8 @@ import UIKit
 //let kEBTLoginUrl_spanish =  kEBTBaseUrl + "spanish_login.html"
 
 
+
+// live version
 let kEBTBaseUrl = "https://ucard.chase.com"
 let kEBTLoginUrl =  kEBTBaseUrl + "/locale?request_locale=en"
 let kEBTLoginUrl_es =  kEBTBaseUrl + "/locale?request_locale=es"

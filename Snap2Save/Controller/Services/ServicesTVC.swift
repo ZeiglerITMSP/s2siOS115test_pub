@@ -48,7 +48,6 @@ class ServicesTVC: UITableViewController {
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
-        // TEST
         
         reloadContent()
         
@@ -125,6 +124,7 @@ class ServicesTVC: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "FlowSegmentTableViewCell") as! FlowSegmentTableViewCell
                 //cell.ebtLabel.text = "EBT".localized()
                 self.FlowSegentedControl =  cell.flowSegmentControl
+                // TEST
                 self.FlowSegentedControl.isHidden = true
                 return cell
             }
@@ -324,7 +324,6 @@ class ServicesTVC: UITableViewController {
                                         "auth_token":auth_token
         ]
         
-        
         //print(parameters)
         SwiftLoader.show(title: "Loading...", animated: true)
 
@@ -336,7 +335,7 @@ class ServicesTVC: UITableViewController {
             case .success:
                 
                 let json = JSON(data: response.data!)
-               // print("json response\(json)")
+                print("json response\(json)")
                 DispatchQueue.main.async {
                     SwiftLoader.hide()
                 }
@@ -345,30 +344,37 @@ class ServicesTVC: UITableViewController {
                     if let code = responseDict["code"] {
                         let code = code as! NSNumber
                         if code.intValue == 200 {
-                            if let screens = responseDict["screens"] as? [String : Any]
+                            if let screens = responseDict["screens"]
                             {
-                                self.screensDict = screens
+                               /* self.screensDict = screens
                                 
                                 var listArray = [[String:Any]]()
                                 for infoScreen in self.screensDict {
                                     listArray.append(infoScreen.value as! [String:Any])
                                 }
                                 
-                               // print(listArray)
+                                print(listArray)
                                 
                                 
                                 let sortedList = listArray.sorted { (dict1, dict2) -> Bool in
                                     (dict1["order"] as! Int) < (dict2["order"] as! Int)
                                 }
                                 
-                               // print(sortedList)
+                                print(sortedList)
                                 
                                 self.infoScreensArray = sortedList
+                                */
                                 
                                 //let sortedArray = (listArray as NSArray).sortedArray(using: [NSSortDescriptor(key: "order", ascending: true)]) as! [[String:AnyObject]]
 
                                 // print(sortedArray)
                                 
+                                let sortedArray = (screens as! NSArray).sortedArray(using: [NSSortDescriptor(key: "order", ascending: true)]) as! [[String:AnyObject]]
+                                
+                                print(sortedArray)
+                                
+                                self.infoScreensArray = sortedArray
+
                                 self.tableView.reloadData()
                             
                             }
