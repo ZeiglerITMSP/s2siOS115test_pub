@@ -77,11 +77,12 @@ class ServicesWebViewVC: UIViewController {
     
     func backAction() {
         
-        if servicesWebView.canGoBack == true {
-            servicesWebView.goBack()
-        } else {
-            _ = self.navigationController?.popViewController(animated: true)
-        }
+         _ = self.navigationController?.popViewController(animated: true)
+//        if servicesWebView.canGoBack == true {
+//            servicesWebView.goBack()
+//        } else {
+//            _ = self.navigationController?.popViewController(animated: true)
+//        }
     }
     
     func languageButtonClicked() {

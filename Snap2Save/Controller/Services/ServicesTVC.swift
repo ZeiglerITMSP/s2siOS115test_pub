@@ -345,9 +345,9 @@ class ServicesTVC: UITableViewController {
                     if let code = responseDict["code"] {
                         let code = code as! NSNumber
                         if code.intValue == 200 {
-                            if let screens = responseDict["screens"]
+                            if let screens = responseDict["screens"] as? [String : Any]
                             {
-                                self.screensDict = screens as! [String : Any]
+                                self.screensDict = screens
                                 
                                 var listArray = [[String:Any]]()
                                 for infoScreen in self.screensDict {
