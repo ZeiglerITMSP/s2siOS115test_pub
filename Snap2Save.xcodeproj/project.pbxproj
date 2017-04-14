@@ -32,6 +32,9 @@
 		977B64F71E16407A00AA802D /* AdditionalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F61E16407A00AA802D /* AdditionalInformation.swift */; };
 		978729DD1E0937B000908301 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978729DC1E0937B000908301 /* Constants.swift */; };
 		978767B51E8E304300220536 /* AdditionalOffersVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978767B41E8E304300220536 /* AdditionalOffersVc.swift */; };
+		979E247B1EA0B22E00AFBD7C /* EBTTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E247A1EA0B22E00AFBD7C /* EBTTableViewCell.swift */; };
+		979E247D1EA0B24600AFBD7C /* InfoScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E247C1EA0B24600AFBD7C /* InfoScreenTableViewCell.swift */; };
+		979E247F1EA0B25A00AFBD7C /* FlowSegmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E247E1EA0B25A00AFBD7C /* FlowSegmentTableViewCell.swift */; };
 		97DBC2131E35E04B00CD2C75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97DBC2121E35E04B00CD2C75 /* GoogleService-Info.plist */; };
 		97E4338B1E10E5F10095EABA /* USStateAbbreviations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97E4338A1E10E5F10095EABA /* USStateAbbreviations.plist */; };
 		E81A1C3D1E52EA9C00EA9D44 /* EBTHelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81A1C3C1E52EA9C00EA9D44 /* EBTHelpVC.swift */; };
@@ -133,6 +136,9 @@
 		977B64F61E16407A00AA802D /* AdditionalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdditionalInformation.swift; path = Snap2Save/Controller/Account/AdditionalInformation.swift; sourceTree = SOURCE_ROOT; };
 		978729DC1E0937B000908301 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		978767B41E8E304300220536 /* AdditionalOffersVc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalOffersVc.swift; sourceTree = "<group>"; };
+		979E247A1EA0B22E00AFBD7C /* EBTTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTTableViewCell.swift; sourceTree = "<group>"; };
+		979E247C1EA0B24600AFBD7C /* InfoScreenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreenTableViewCell.swift; sourceTree = "<group>"; };
+		979E247E1EA0B25A00AFBD7C /* FlowSegmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowSegmentTableViewCell.swift; sourceTree = "<group>"; };
 		97DBC2121E35E04B00CD2C75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		97DBC2141E35E25400CD2C75 /* Snap2Save-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snap2Save-Bridging-Header.h"; sourceTree = "<group>"; };
 		97DBC2181E360B5200CD2C75 /* Snap2Save.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snap2Save.entitlements; sourceTree = "<group>"; };
@@ -330,6 +336,9 @@
 			children = (
 				E88C262C1E1539C900F4056F /* TabViewController.swift */,
 				E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */,
+				979E247A1EA0B22E00AFBD7C /* EBTTableViewCell.swift */,
+				979E247E1EA0B25A00AFBD7C /* FlowSegmentTableViewCell.swift */,
+				979E247C1EA0B24600AFBD7C /* InfoScreenTableViewCell.swift */,
 				9769997D1E2643A200D05AE8 /* ServicesWebViewVC.swift */,
 			);
 			path = Services;
@@ -866,9 +875,11 @@
 				974CDFCB1E67FC030041EC07 /* FZURefreshHead.swift in Sources */,
 				E82258D11E5D957C00E8E17E /* RewardRecentActivityCell.swift in Sources */,
 				E84AE9D51E07F4B100C5E7F3 /* ForgotPasswordVC.swift in Sources */,
+				979E247F1EA0B25A00AFBD7C /* FlowSegmentTableViewCell.swift in Sources */,
 				E83156041E1A5689001D30D2 /* EBTLoginSecurityQuestionTVC.swift in Sources */,
 				E82258CB1E5D94EA00E8E17E /* RewardDetailCell.swift in Sources */,
 				E81E61671E2366E90016FE74 /* EBTConstants.swift in Sources */,
+				979E247B1EA0B22E00AFBD7C /* EBTTableViewCell.swift in Sources */,
 				977B64F51E163B5600AA802D /* User.swift in Sources */,
 				E83156081E1A7EB8001D30D2 /* DetailedSubtitleCell.swift in Sources */,
 				975006B01E64346500CD80F8 /* RedeemPointsWebVC.swift in Sources */,
@@ -887,6 +898,7 @@
 				E82258D31E5DB9DA00E8E17E /* RecentActivityHeader.swift in Sources */,
 				E81B74AC1E1105EA00D5EC61 /* LanguageUtility.swift in Sources */,
 				E8BAE2AF1E0BEF8000A85AAB /* EBTUserInformationTVC.swift in Sources */,
+				979E247D1EA0B24600AFBD7C /* InfoScreenTableViewCell.swift in Sources */,
 				E8BAE2B11E0BF52E00A85AAB /* EBTConfirmationTVC.swift in Sources */,
 				E863CEBC1E1BE72E00049F28 /* OffersVC.swift in Sources */,
 				E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */,
