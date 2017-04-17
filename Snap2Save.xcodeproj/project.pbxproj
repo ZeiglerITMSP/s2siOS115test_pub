@@ -31,7 +31,7 @@
 		977B64F51E163B5600AA802D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F41E163B5600AA802D /* User.swift */; };
 		977B64F71E16407A00AA802D /* AdditionalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977B64F61E16407A00AA802D /* AdditionalInformation.swift */; };
 		978729DD1E0937B000908301 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978729DC1E0937B000908301 /* Constants.swift */; };
-		978767B51E8E304300220536 /* AdditionalOffersVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978767B41E8E304300220536 /* AdditionalOffersVc.swift */; };
+		978767B51E8E304300220536 /* AdditionalOffersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978767B41E8E304300220536 /* AdditionalOffersVC.swift */; };
 		979E247B1EA0B22E00AFBD7C /* EBTTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E247A1EA0B22E00AFBD7C /* EBTTableViewCell.swift */; };
 		979E247D1EA0B24600AFBD7C /* InfoScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E247C1EA0B24600AFBD7C /* InfoScreenTableViewCell.swift */; };
 		979E247F1EA0B25A00AFBD7C /* FlowSegmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E247E1EA0B25A00AFBD7C /* FlowSegmentTableViewCell.swift */; };
@@ -61,6 +61,8 @@
 		E83156061E1A7EA3001D30D2 /* DetailedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83156051E1A7EA3001D30D2 /* DetailedCell.swift */; };
 		E83156081E1A7EB8001D30D2 /* DetailedSubtitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83156071E1A7EB8001D30D2 /* DetailedSubtitleCell.swift */; };
 		E837F0231E2F505E00BBDA9F /* EBTUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E837F0221E2F505E00BBDA9F /* EBTUser.swift */; };
+		E8439E461EA4AAA2008079F0 /* OfferTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8439E451EA4AAA2008079F0 /* OfferTableViewCell.swift */; };
+		E8439E481EA4AABD008079F0 /* AdsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8439E471EA4AABD008079F0 /* AdsTableViewCell.swift */; };
 		E84AE9CC1E07F2CA00C5E7F3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */; };
 		E84AE9D01E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */; };
 		E84AE9D31E07F47E00C5E7F3 /* WelcomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */; };
@@ -135,7 +137,7 @@
 		977B64F41E163B5600AA802D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Snap2Save/Controller/Account/User.swift; sourceTree = SOURCE_ROOT; };
 		977B64F61E16407A00AA802D /* AdditionalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdditionalInformation.swift; path = Snap2Save/Controller/Account/AdditionalInformation.swift; sourceTree = SOURCE_ROOT; };
 		978729DC1E0937B000908301 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		978767B41E8E304300220536 /* AdditionalOffersVc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalOffersVc.swift; sourceTree = "<group>"; };
+		978767B41E8E304300220536 /* AdditionalOffersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalOffersVC.swift; sourceTree = "<group>"; };
 		979E247A1EA0B22E00AFBD7C /* EBTTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTTableViewCell.swift; sourceTree = "<group>"; };
 		979E247C1EA0B24600AFBD7C /* InfoScreenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScreenTableViewCell.swift; sourceTree = "<group>"; };
 		979E247E1EA0B25A00AFBD7C /* FlowSegmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowSegmentTableViewCell.swift; sourceTree = "<group>"; };
@@ -170,6 +172,9 @@
 		E83156051E1A7EA3001D30D2 /* DetailedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedCell.swift; sourceTree = "<group>"; };
 		E83156071E1A7EB8001D30D2 /* DetailedSubtitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedSubtitleCell.swift; sourceTree = "<group>"; };
 		E837F0221E2F505E00BBDA9F /* EBTUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EBTUser.swift; path = Snap2Save/EBTTracking/EBTUser.swift; sourceTree = SOURCE_ROOT; };
+		E8439E451EA4AAA2008079F0 /* OfferTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferTableViewCell.swift; sourceTree = "<group>"; };
+		E8439E471EA4AABD008079F0 /* AdsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdsTableViewCell.swift; sourceTree = "<group>"; };
+		E8439E491EA4C73D008079F0 /* OffersVCTemp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersVCTemp.swift; sourceTree = "<group>"; };
 		E84AE9CB1E07F2CA00C5E7F3 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; usesTabs = 0; };
 		E84AE9CF1E07F37D00C5E7F3 /* SignupAdditionalFieldsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupAdditionalFieldsTVC.swift; sourceTree = "<group>"; };
 		E84AE9D21E07F47E00C5E7F3 /* WelcomePageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePageVC.swift; sourceTree = "<group>"; };
@@ -336,9 +341,7 @@
 			children = (
 				E88C262C1E1539C900F4056F /* TabViewController.swift */,
 				E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */,
-				979E247A1EA0B22E00AFBD7C /* EBTTableViewCell.swift */,
-				979E247E1EA0B25A00AFBD7C /* FlowSegmentTableViewCell.swift */,
-				979E247C1EA0B24600AFBD7C /* InfoScreenTableViewCell.swift */,
+				E8439E441EA4A752008079F0 /* Cells */,
 				9769997D1E2643A200D05AE8 /* ServicesWebViewVC.swift */,
 			);
 			path = Services;
@@ -352,6 +355,16 @@
 			);
 			name = EBTDashboard;
 			path = ../Controller/Services;
+			sourceTree = "<group>";
+		};
+		E8439E441EA4A752008079F0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				979E247A1EA0B22E00AFBD7C /* EBTTableViewCell.swift */,
+				979E247E1EA0B25A00AFBD7C /* FlowSegmentTableViewCell.swift */,
+				979E247C1EA0B24600AFBD7C /* InfoScreenTableViewCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		E84AE9C81E07F28300C5E7F3 /* View */ = {
@@ -418,8 +431,11 @@
 			children = (
 				974D5C341E2DFF5B00918BAD /* snap2save.jpeg */,
 				E863CEBB1E1BE72E00049F28 /* OffersVC.swift */,
+				E8439E491EA4C73D008079F0 /* OffersVCTemp.swift */,
+				E8439E451EA4AAA2008079F0 /* OfferTableViewCell.swift */,
+				E8439E471EA4AABD008079F0 /* AdsTableViewCell.swift */,
 				974D5C321E2DF55400918BAD /* OffersDetailsViewController.swift */,
-				978767B41E8E304300220536 /* AdditionalOffersVc.swift */,
+				978767B41E8E304300220536 /* AdditionalOffersVC.swift */,
 			);
 			path = Offers;
 			sourceTree = "<group>";
@@ -856,7 +872,7 @@
 			files = (
 				970C96381E5ED06E00697E56 /* RedeemPointsAddressTVC.swift in Sources */,
 				974D5C331E2DF55400918BAD /* OffersDetailsViewController.swift in Sources */,
-				978767B51E8E304300220536 /* AdditionalOffersVc.swift in Sources */,
+				978767B51E8E304300220536 /* AdditionalOffersVC.swift in Sources */,
 				9769997E1E2643A200D05AE8 /* ServicesWebViewVC.swift in Sources */,
 				E81F4A061E3881E30029B3D9 /* EBTChangeEmailTVC.swift in Sources */,
 				E83156021E1A561E001D30D2 /* EBTDashboardTVC.swift in Sources */,
@@ -880,6 +896,7 @@
 				E82258CB1E5D94EA00E8E17E /* RewardDetailCell.swift in Sources */,
 				E81E61671E2366E90016FE74 /* EBTConstants.swift in Sources */,
 				979E247B1EA0B22E00AFBD7C /* EBTTableViewCell.swift in Sources */,
+				E8439E481EA4AABD008079F0 /* AdsTableViewCell.swift in Sources */,
 				977B64F51E163B5600AA802D /* User.swift in Sources */,
 				E83156081E1A7EB8001D30D2 /* DetailedSubtitleCell.swift in Sources */,
 				975006B01E64346500CD80F8 /* RedeemPointsWebVC.swift in Sources */,
@@ -894,6 +911,7 @@
 				E8BAE2AA1E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift in Sources */,
 				E81A1C3D1E52EA9C00EA9D44 /* EBTHelpVC.swift in Sources */,
 				E83156061E1A7EA3001D30D2 /* DetailedCell.swift in Sources */,
+				E8439E461EA4AAA2008079F0 /* OfferTableViewCell.swift in Sources */,
 				E82258C41E5D946300E8E17E /* RedeemPointsTotalCell.swift in Sources */,
 				E82258D31E5DB9DA00E8E17E /* RecentActivityHeader.swift in Sources */,
 				E81B74AC1E1105EA00D5EC61 /* LanguageUtility.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  AdditionalOffersVc.swift
+//  AdditionalOffersVC.swift
 //  Snap2Save
 //
 //  Created by Malathi on 31/03/17.
@@ -11,7 +11,7 @@ import SwiftyJSON
 import Localize_Swift
 import Alamofire
 
-class AdditionalOffersVc: UIViewController {
+class AdditionalOffersVC: UIViewController {
     
     var languageSelectionButton: UIButton!
     var offersDict : [String : Any]? = nil
