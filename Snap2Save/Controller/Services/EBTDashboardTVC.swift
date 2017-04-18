@@ -42,6 +42,10 @@ class EBTDashboardTVC: UITableViewController {
     var transactionsString: String?
     // timer
     var startTime: Date!
+    
+    
+    var pageNumber: Int = 1 // 0 for internal build, 1 for live
+    
     // load more
 //    var isLoadingMoreActivity:Bool = false
 //    var hasMoreActivity:Bool = true
@@ -167,10 +171,22 @@ class EBTDashboardTVC: UITableViewController {
             let record = trasactions[indexPath.row] as? [String:String]
             
             detailedSubtitleCell.titleLabel.text = record?["location"]
-            detailedSubtitleCell.detailLabel.text = record?["debit_amount"]
-            detailedSubtitleCell.detailLabel2.text = record?["credit_amount"]
+//            detailedSubtitleCell.detailLabel.text = record?["debit_amount"]
+//            detailedSubtitleCell.detailLabel2.text = record?["credit_amount"]
             detailedSubtitleCell.subtitleLabel.text = record?["date"]
             detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
+            
+            // amount
+            let debit_amount = record?["debit_amount"]
+            let credit_amount = record?["credit_amount"]
+            if credit_amount?.containNumbers1To9() == true {
+                detailedSubtitleCell.detailLabel.text = credit_amount
+                detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
+            } else {
+                detailedSubtitleCell.detailLabel.text = debit_amount
+                detailedSubtitleCell.detailLabel.textColor = UIColor.black
+            }
+            
             
             return detailedSubtitleCell
         } else {
@@ -497,9 +513,13 @@ class EBTDashboardTVC: UITableViewController {
         // every time calcuate elapsed time
         let elapsed = Date().timeIntervalSince(startTime)
         // if elapsed time is not yet reached to 30 seconds, start timer to check transactions after 2 seconds, if elapsed time is reached to 30 seconds, so there is not need to check tranasctions - End
-        if elapsed < 30 {
+        if elapsed < 20 {
+            
+            
             print("FIRE")
-            let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(runTransactionsScript), userInfo: nil, repeats: false)
+            
+            let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.checkPageNumber), userInfo: nil, repeats: false)
+            
             //            timer.fire()
         } else {
             print("END")
@@ -511,6 +531,27 @@ class EBTDashboardTVC: UITableViewController {
         
     }
     
+    
+    func checkPageNumber() {
+        
+        let jsPageNumber = "$('.ui-pg-input').val();"
+        ebtWebView.webView.evaluateJavaScript(jsPageNumber, completionHandler: { (result, error) in
+            
+            if result != nil {
+                let resultString = result as! String
+                let currentPageNumber = Int(resultString)
+                print(currentPageNumber ?? "-")
+                if currentPageNumber == self.pageNumber {
+                    
+                    self.runTransactionsScript()
+//                    let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.runTransactionsScript), userInfo: nil, repeats: false)
+                } else {
+                    self.getTransactions()
+                }
+            }
+            
+        })
+    }
     
     func runTransactionsScript() {
         
@@ -546,10 +587,10 @@ class EBTDashboardTVC: UITableViewController {
             if error != nil {
                 print(error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+//                print(result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print("trimmedText:")
+//                print("trimmedText:")
                 print(trimmedText)
                 
                 if trimmedText.characters.count > 0 {
@@ -564,8 +605,12 @@ class EBTDashboardTVC: UITableViewController {
                             self.getTransactions()
                         } else {
                             
-                            self.startTime = nil
                             self.trasactions.append(contentsOf: responseArray)
+                            
+                            self.startTime = nil
+                            self.pageNumber += 1 //= self.pageNumber + 1
+                            
+                            
                           //  self.tableView.reloadData()
                             
                             // stop load more

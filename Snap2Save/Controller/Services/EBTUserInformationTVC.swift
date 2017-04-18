@@ -84,6 +84,8 @@ class EBTUserInformationTVC: UITableViewController {
         passwordField.contentTextField.isSecureTextEntry = true
         confirmPasswordField.contentTextField.isSecureTextEntry = true
         
+        phoneNumberField.contentTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
+
         userIdField.contentTextField.returnKeyType = .next
         passwordField.contentTextField.returnKeyType = .next
         confirmPasswordField.contentTextField.returnKeyType = .next
@@ -762,7 +764,35 @@ extension EBTUserInformationTVC: AITextFieldProtocol {
     }
 
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        
+//        if textField == userIdField.contentTextField {
+//            passwordField.contentTextField.becomeFirstResponder()
+//        } else if textField == passwordField.contentTextField {
+//            confirmPasswordField.contentTextField.becomeFirstResponder()
+//        } else if textField == confirmPasswordField.contentTextField {
+//            emailAddressField.contentTextField.becomeFirstResponder()
+//        } else if textField == emailAddressField.contentTextField {
+//            confirmEmailField.contentTextField.becomeFirstResponder()
+//        } else if textField == confirmEmailField.contentTextField {
+//            phoneNumberField.contentTextField.becomeFirstResponder()
+//        } else if textField == phoneNumberField.contentTextField {
+//            questionOneField.contentTextField.becomeFirstResponder()
+//        } else if textField == answerOneField.contentTextField {
+//            questionTwoField.contentTextField.becomeFirstResponder()
+//        } else if textField == answerTwoField.contentTextField {
+//            questionThreeField.contentTextField.becomeFirstResponder()
+//        } else if textField == answerThreeField.contentTextField {
+//            textField.resignFirstResponder()
+//        } else {
+//            textField.resignFirstResponder()
+//        }
+//        
+//        
+//        return true
+//    }
+    
+    func keyBoardHidden(textField: UITextField) {
         
         if textField == userIdField.contentTextField {
             passwordField.contentTextField.becomeFirstResponder()
@@ -786,8 +816,7 @@ extension EBTUserInformationTVC: AITextFieldProtocol {
             textField.resignFirstResponder()
         }
         
-        
-        return true
+    
     }
     
     func getSelectedIndexFromPicker(selectedIndex: NSInteger, textField: AITextField) {

@@ -335,18 +335,18 @@
 
 
 // card number
-"ebt.cardnumber.titleLabel" = "IDENTIFICA TU TARJETA Y CUENTAS";
+"ebt.cardnumber.titleLabel" = "IDENTIFICA TU TARJETA Y CUENTAS.";
 "ebt.cardnumber.messageLabel" = "Introduce tu número de tarjeta actual.";
 "CARD NUMBER" = "NÚMERO DE TARJETA";
 
 // DOB screen
-"ebt.dob.titltLabel" = "VALIDAR IDENTIDAD";
+"ebt.dob.titltLabel" = "VALIDAR IDENTIDAD.";
 "ebt.dob.messageLabel" = "Paso 1: Proporciona la siguiente información para validar su identidad.";
 "WHAT IS YOUR DATE OF BIRTH? (MM/DD/YYYY)" = "¿CUÁL ES TU FECHA DE NACIMIENTO? (MM/DD/AAAA)";
 "WHAT IS YOUR SOCIAL SECURITY NUMBER?" = "¿CUÁL ES TU NÚMERO DE SEGURO SOCIAL?";
 
 // Verify Security Question
-"ebt.securityQuestion.titleLabel" = "VERIFICA LA PREGUNTA DE SEGURIDAD";
+"ebt.securityQuestion.titleLabel" = "VERIFICA LA PREGUNTA DE SEGURIDAD.";
 "ebt.securityQuestion.messageLabel" = "Introduce la respuesta de seguridad que utilizaste durante tu registro.";
 "SECURITY QUESTION" = "PREGUNTA DE SEGURIDAD";
 "SECURITY ANSWER" = "RESPUESTA DE SEGURIDAD";
@@ -354,7 +354,7 @@
 
 
 // Select PIN
-"ebt.pin.titleLabel" = "SELECCIONAR PIN";
+"ebt.pin.titleLabel" = "SELECCIONAR PIN.";
 "ebt.pin.messageLabel" = "Paso 2: Selecciona PIN.";
 "PIN" = "PIN";
 "CONFIRM PIN" = "CONFIRMAR PIN";
@@ -363,7 +363,7 @@
 
 // User Information
 
-"ebt.userinformation.titleLabel" = "INFORMACIÓN DEL USUARIO";
+"ebt.userinformation.titleLabel" = "INFORMACIÓN DEL USUARIO.";
 "ebt.userinformation.messageLabel" = "Paso 3: Introduce la siguiente información:";
 "User ID Rules" = "Reglas para la identificación de usuario:";
 "Password Rules" = "Reglas para la contraseña:";
@@ -384,8 +384,8 @@
 "ebt.userinformation.terms" = "Al registrarte, aceptas el ACUERDO DE SERVICIO DE UCARD CENTER y UCARD Online Communications Delivery Disclosure (Divulgación en línea de entrega de comunicaciones de UCARD).";
 
 // Confirmation screen
-"ebt.confirmation.titleLabel" = "CONFIRMACIÓN";
-"ebt.confirmation.messageLabel" = "Paso 5: Tu registro está completo.";
+"ebt.confirmation.titleLabel" = "CONFIRMACIÓN.";
+"ebt.confirmation.messageLabel" = "Paso 4: Tu registro está completo.";
 "ENTER EMAIL VALIDATION CODE" = "INTRODUCE EL CÓDIGO DE VALIDACIÓN";
 "VALIDATE" = "VALIDAR";
 "RESEND" = "REENVIAR";
@@ -410,34 +410,34 @@
 "No transactions were found." = "No se encontraron transacciones.";
 
 // empty field alert
-"alert.emptyField.userid" = "Enter User ID";
-"alert.emptyField.password" = "Enter Password";
-"alert.emptyField.authentication" = "Enter Authentication Code";
-"alert.emptyField.securityAnswer" = "Enter Security Answer";
+"alert.emptyField.userid" = "Enter User ID.";
+"alert.emptyField.password" = "Enter Password.";
+"alert.emptyField.authentication" = "Enter Authentication Code.";
+"alert.emptyField.securityAnswer" = "Enter Security Answer.";
 
-"alert.emptyField.cardNumber" = "Enter Card Number";
-"alert.emptyField.dob" = "Enter Date of Birth";
-"alert.emptyField.socialSecurityNumber" = "Enter Social Security Number";
-"alert.emptyField.pin" = "Enter Pin";
-"alert.emptyField.confirmPin" = "Enter Confirm Pin";
+"alert.emptyField.cardNumber" = "Enter Card Number.";
+"alert.emptyField.dob" = "Enter Date of Birth.";
+"alert.emptyField.socialSecurityNumber" = "Enter Social Security Number.";
+"alert.emptyField.pin" = "Enter Pin.";
+"alert.emptyField.confirmPin" = "Enter Confirm Pin.";
 
-"alert.emptyField.userinfo.userId" = "Enter User ID";
-"alert.emptyField.userinfo.password" = "Enter Password";
-"alert.emptyField.userinfo.confirmPassword" = "Enter Confirm Password";
-"alert.emptyField.userinfo.email" = "Enter Email";
-"alert.emptyField.userinfo.confirmEmail" = "Enter Confirm Email";
-"alert.emptyField.userinfo.phoneNumber" = "Enter Phone Number";
-"alert.emptyField.userinfo.questionOne" = "Enter Question 1";
-"alert.emptyField.userinfo.questionTwo" = "Enter Question 2";
-"alert.emptyField.userinfo.questionThree" = "Enter Question 3";
-"alert.emptyField.userinfo.answerOne" = "Enter Answer 1";
-"alert.emptyField.userinfo.answerTwo" = "Enter Answer 2";
-"alert.emptyField.userinfo.answerThree" = "Enter Answer 3";
+"alert.emptyField.userinfo.userId" = "Enter User ID.";
+"alert.emptyField.userinfo.password" = "Enter Password.";
+"alert.emptyField.userinfo.confirmPassword" = "Enter Confirm Password.";
+"alert.emptyField.userinfo.email" = "Enter Email.";
+"alert.emptyField.userinfo.confirmEmail" = "Enter Confirm Email.";
+"alert.emptyField.userinfo.phoneNumber" = "Enter Phone Number.";
+"alert.emptyField.userinfo.questionOne" = "Enter Question 1.";
+"alert.emptyField.userinfo.questionTwo" = "Enter Question 2.";
+"alert.emptyField.userinfo.questionThree" = "Enter Question 3.";
+"alert.emptyField.userinfo.answerOne" = "Enter Answer 1.";
+"alert.emptyField.userinfo.answerTwo" = "Enter Answer 2.";
+"alert.emptyField.userinfo.answerThree" = "Enter Answer 3.";
 
-"alert.emptyField.validationCode" = "Enter Validation Code";
-"alert.emptyField.currentEmail" = "Enter Current Email";
-"alert.emptyField.email" = "Enter Email";
-"alert.emptyField.confirmEmail" = "Enter Confirm Email";
+"alert.emptyField.validationCode" = "Enter Validation Code.";
+"alert.emptyField.currentEmail" = "Enter Current Email.";
+"alert.emptyField.email" = "Enter Email.";
+"alert.emptyField.confirmEmail" = "Enter Confirm Email.";
 
 
 // **** Scrapping ****
@@ -450,7 +450,7 @@
 //// registration
 //"ebt.cardnumber" = "Identify Your Card and Accounts";
 //"ebt.acceptTerms" = "Online Terms and Conditions";
-//"ebt.dob" = "Validate Identity";
+//"ebt.dob" = "Validate Identity.";
 //"ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
 //"ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
 //"ebt.pin" = "Select PIN";

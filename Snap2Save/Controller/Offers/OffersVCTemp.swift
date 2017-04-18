@@ -12,22 +12,24 @@ import Alamofire
 import Localize_Swift
 
 
-class OffersVC: UIViewController {
+class OffersVCTemp: UIViewController {
     
     var languageSelectionButton: UIButton!
     var oldLanguage = ""
     var currentlang = ""
     
-    var offerImage: UIImage?
     var adsSpots:Int = 2
     
     
     // Outlets
     var offersDict : [String : Any]? = nil
     
+    @IBOutlet var additionalOffersLabel: UILabel!
+    @IBOutlet var weeklyCircularView: UIView!
+    @IBOutlet var messageLabel: UILabel!
+    @IBOutlet var offersImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var messageLabel: UILabel!
     
     override func viewDidLoad() {
         
@@ -41,6 +43,21 @@ class OffersVC: UIViewController {
         // tableview
         tableView.delegate = self
         tableView.dataSource = self
+        
+        let tapGes : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapGesClicked))
+        tapGes.numberOfTapsRequired = 1
+        tapGes.numberOfTouchesRequired = 1
+//        offersImageView.addGestureRecognizer(tapGes)
+        
+        // offersImageView.image = UIImage.init(named: "snap2save.jpeg")
+        offersImageView.isUserInteractionEnabled = true
+        offersImageView.contentMode = .scaleAspectFit
+        self.messageLabel.isHidden = true
+        
+        let offerTapGes : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(offerTapGesClicked))
+        offerTapGes.numberOfTapsRequired = 1
+        offerTapGes.numberOfTouchesRequired = 1
+        weeklyCircularView.addGestureRecognizer(offerTapGes)
 
     }
     
@@ -52,6 +69,7 @@ class OffersVC: UIViewController {
         getOffers()
         AppHelper.getScreenName(screenName: "Offers screen")
         oldLanguage = Localize.currentLanguage()
+        self.messageLabel.isHidden = true
         
 
     }
@@ -87,7 +105,7 @@ class OffersVC: UIViewController {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Offers".localized()
             self.currentlang = Localize.currentLanguage()
-//            self.additionalOffersLabel.text = "Additional Offers".localized()
+            self.additionalOffersLabel.text = "Additional Offers".localized()
             if self.oldLanguage != self.currentlang {
                 self.getOffers()
                 self.oldLanguage = self.currentlang
@@ -167,14 +185,14 @@ class OffersVC: UIViewController {
             //self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
             DispatchQueue.main.async {
                 
-//            self.offersImageView.image = nil
-//            self.messageLabel.isHidden = false
-//            self.messageLabel.text = "THE INTERENT CONNECTION APPEARS TO BE OFFLINE.".localized()
+            self.offersImageView.image = nil
+            self.messageLabel.isHidden = false
+            self.messageLabel.text = "THE INTERENT CONNECTION APPEARS TO BE OFFLINE.".localized()
             }
             return
         }
     
-//        self.messageLabel.isHidden = true
+        self.messageLabel.isHidden = true
         
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
@@ -192,7 +210,7 @@ class OffersVC: UIViewController {
                                        "auth_token": auth_token,
                                        "language": currentLanguage
         ]
-//        self.offersImageView.image = nil
+        self.offersImageView.image = nil
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         
        // print(parameters)
@@ -213,8 +231,6 @@ class OffersVC: UIViewController {
 
                             if let offers = responseDict?["offer"] as? [String : Any] {
                                 let offer : [String : Any] = offers
-                                
-                                
                                 self.offersDict = offer
                                 
                                 var imageUrl: String?
@@ -234,10 +250,7 @@ class OffersVC: UIViewController {
                                                 if image != nil {
 //                                                    self.loader?.hideFromView()
                                                     SwiftLoader.hide()
-                                                    
-                                                    self.offerImage = image
-                                                    self.tableView.reloadData()
-                                                   // self.offersImageView.image = image
+                                                    self.offersImageView.image = image
                                                 } else {
                                                     self.loadImageFailed()
                                                 }
@@ -253,21 +266,21 @@ class OffersVC: UIViewController {
                                        // self.offersImageView.downloadedFrom(link: imageUrl, failAction: #selector(self.loadImageFailed), target: self)
                                     }   else {
                                         SwiftLoader.hide()
-//                                        self.messageLabel.isHidden = false
-//                                        self.messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
+                                        self.messageLabel.isHidden = false
+                                        self.messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
                                     }
                                     
                                     
                                 } else {
                                     SwiftLoader.hide()
-//                                    self.messageLabel.isHidden = false
-//                                    self.messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
+                                    self.messageLabel.isHidden = false
+                                    self.messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
                                 }
                             } else {
                                 SwiftLoader.hide()
                                 //self.showAlert(title: "", message: "No offer exists".localized())
-//                                self.messageLabel.isHidden = false
-//                                self.messageLabel.text = "No offer exists.".localized()
+                                self.messageLabel.isHidden = false
+                                self.messageLabel.text = "No offer exists.".localized()
                                 
                             }
                             
@@ -299,8 +312,8 @@ class OffersVC: UIViewController {
     
     func loadImageFailed() {
         SwiftLoader.hide()
-//        messageLabel.isHidden = false
-//        messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
+        messageLabel.isHidden = false
+        messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
     }
     
     
@@ -323,7 +336,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
         } else if section == 1 {
             return 1
         } else {
-            return adsSpots
+            return 2
         }
         
     }
@@ -334,12 +347,12 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 1 {
             
             if adsSpots == 0 {
-                return calculate(percentage: 100, ofValue: tableView.frame.height - 50)
+                return calculate(percentage: 100, ofValue: tableView.frame.height)
             } else {
-                return calculate(percentage: 80, ofValue: tableView.frame.height - 50)
+                return calculate(percentage: 80, ofValue: tableView.frame.height)
             }
         } else {
-            return 120
+            return 180
         }
     }
     
@@ -355,33 +368,15 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
             
             let offerImageCell = tableView.dequeueReusableCell(withIdentifier: "OfferTableViewCell") as! OfferTableViewCell
             
-            if let offerImage = self.offerImage {
-                
-                offerImageCell.offerImageView.image = offerImage
-            }
-            
             return offerImageCell
         }
         else {                          // Ads image cell
             
             let adsImageCell = tableView.dequeueReusableCell(withIdentifier: "AdsTableViewCell") as! AdsTableViewCell
             
-            let img = UIImage(named: "snap2save.jpeg")
-            
-            adsImageCell.adImageView.image = img
-            
             return adsImageCell
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            offerTapGesClicked()
-        } else if indexPath.section == 1 {
-            tapGesClicked()
-        } else {
-            
-        }
-    }
     
 }

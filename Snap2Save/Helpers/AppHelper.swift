@@ -198,15 +198,28 @@ extension String {
         return mobileNumTxtAttribute
     }
     
+    
+    public func containNumbers1To9() -> Bool {
+        
+        let validCharacters : Set<Character> = Set("123456789".characters)
+        let charactersArray = self.characters.filter {validCharacters.contains($0) }
+        
+        return charactersArray.count > 0 ? true : false
+    }
+    
 }
 
 extension String {
     
     func removeWhiteSpaces() -> String {
-        
         return self.trimmingCharacters(in: .whitespaces)
     }
     
+    
+    func condenseWhitespace() -> String {
+        let components = self.components(separatedBy: NSCharacterSet.whitespacesAndNewlines)
+        return components.filter { !$0.isEmpty }.joined(separator: " ")
+    }
     
     //    func heightWith(constrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
     //        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)

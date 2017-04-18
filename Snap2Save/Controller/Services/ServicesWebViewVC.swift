@@ -31,6 +31,8 @@ class ServicesWebViewVC: UIViewController {
     var currentlanguage = ""
     var oldLanguage = ""
     
+    var infoDict = [String : Any]()
+    
     @IBOutlet var servicesWebView: UIWebView!
     
     override func viewDidLoad() {
@@ -74,7 +76,13 @@ class ServicesWebViewVC: UIViewController {
     // MARK: -
     
     func backAction() {
-        _ = self.navigationController?.popViewController(animated: true)
+        
+         _ = self.navigationController?.popViewController(animated: true)
+//        if servicesWebView.canGoBack == true {
+//            servicesWebView.goBack()
+//        } else {
+//            _ = self.navigationController?.popViewController(animated: true)
+//        }
     }
     
     func languageButtonClicked() {
@@ -86,7 +94,7 @@ class ServicesWebViewVC: UIViewController {
         
         DispatchQueue.main.async {
             
-            if self.type == ServiceType.aboutSnap2Save{
+           /* if self.type == ServiceType.aboutSnap2Save{
                 self.title = "About Snap2Save".localized()
             }
             else if self.type == ServiceType.FAQ{
@@ -103,11 +111,21 @@ class ServicesWebViewVC: UIViewController {
             }
             else if self.type == ServiceType.reward{
                 self.title = "Reward Program".localized()
+            }*/
+            
+            if Localize.currentLanguage() == "es"
+            {
+                self.title = self.infoDict["es_title"] as? String
+            }
+            
+            else if Localize.currentLanguage() == "en"
+            {
+                self.title = self.infoDict["en_title"] as! String?
             }
             
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
-            
+
             self.currentlanguage = Localize.currentLanguage()
             
             if self.oldLanguage != self.currentlanguage {
@@ -125,10 +143,12 @@ class ServicesWebViewVC: UIViewController {
         var url : URL? = nil
         currentlanguage = Localize.currentLanguage()
         if currentlanguage == "es" {
-            url = URL(string : urlStr_es )
+            let url_str = infoDict["es_url"] as! String
+            url = URL(string : url_str )
         }
         else if currentlanguage == "en" {
-            url = URL(string : urlStr_en )
+            let url_str = infoDict["en_url"] as! String
+            url = URL(string : url_str )
         }
         
         if url != nil {

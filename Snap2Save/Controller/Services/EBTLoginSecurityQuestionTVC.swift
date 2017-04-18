@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 class EBTLoginSecurityQuestionTVC: UITableViewController {
 
@@ -20,6 +21,8 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     fileprivate var actionType: ActionType?
     
     var pageTitle = "ebt.securityQuestion".localized()
+    
+    var languageSelectionButton: UIButton!
     
     // Ouetles
     
@@ -79,6 +82,11 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: confirmButton, radius: 2.0, width: 1.0)
         
         addTapGesture()
+        
+//        // language selection
+//        languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
+//        LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -96,12 +104,29 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
         webView.isHidden = true
+        
+        // listen language change notification.
+//        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        // remove language change observer
+//        LanguageUtility.removeObserverForLanguageChange(self)
+        super.viewDidDisappear(animated)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+//    func languageButtonClicked() {
+//        
+//        self.showLanguageSelectionAlert()
+//        
+//    }
     
     // MARK: -
     
