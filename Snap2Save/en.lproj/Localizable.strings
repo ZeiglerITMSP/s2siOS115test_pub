@@ -304,8 +304,9 @@
 "ebt.title.login" = "Log In";
 "ebt.title.register" = "Register";
 // back alert
-"Are you sure ?" = "Are you sure ?";
+"ebt.processTerminate.title" = "Are you sure?";
 "ebt.processTerminate.alert" = "Are you sure you want to terminate this process?";
+"ebt.processTerminate.dashboard" = "If you leave this screen, you will be logged out of EBT services.";
 // timeout cancel alert
 "ebt.alert.timeout.title" = "Sorry!";
 "ebt.alert.timeout.message" = "We are unable to process your request at this time. Please try again later.";
@@ -396,9 +397,9 @@
 // Change Email screen
 "ebt.changeEmail.titleLabel" = "CHANGE EMAIL ADDRESS";
 "ebt.changeEmail.messageLabel" = "Please enter your new email address.";
-"CURRENT E-MAIL ADDRESS" = "CURRENT E-MAIL ADDRESS";
-"E-MAIL ADDRESS" = "E-MAIL ADDRESS";
-"CONFIRM E-MAIL ADDRESS" = "CONFIRM E-MAIL ADDRESS";
+"CURRENT E-MAIL ADDRESS" = "CURRENT EMAIL ADDRESS";
+"E-MAIL ADDRESS" = "EMAIL ADDRESS";
+"CONFIRM E-MAIL ADDRESS" = "CONFIRM EMAIL ADDRESS";
 "CHANGE EMAIL" = "CHANGE EMAIL";
 
 // EBT Dashboard

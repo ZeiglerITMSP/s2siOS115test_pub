@@ -306,8 +306,9 @@
 "ebt.title.login" = "Iniciar sesión";
 "ebt.title.register" = "Regístrate";
 // back alert
-"Are you sure ?" = "Estás seguro ?";
+"ebt.processTerminate.title" = "Estás seguro?";
 "ebt.processTerminate.alert" = "¿Está seguro de que desea finalizar este proceso?";
+"ebt.processTerminate.dashboard" = "If you leave this screen, you will be logged out of EBT services.";
 // timeout cancel alert
 "ebt.alert.timeout.title" = "¡Lo siento!";
 "ebt.alert.timeout.message" = "No podemos procesar su solicitud en este momento. Por favor, inténtelo de nuevo más tarde.";
@@ -400,7 +401,7 @@
 "CURRENT E-MAIL ADDRESS" = "DIRECCIÓN DE EMAIL ACTUAL";
 "E-MAIL ADDRESS" = "DIRECCIÓN DE CORREO ELECTRÓNICO";
 "CONFIRM E-MAIL ADDRESS" = "CONFIRMAR EL CORREO";
-"CHANGE EMAIL" = "CAMBIAR E-MAIL";
+"CHANGE EMAIL" = "CAMBIAR EMAIL";
 
 // EBT Dashboard
 "RECENT TRANSACTIONS" = "TRANSACCIONES RECIENTES";

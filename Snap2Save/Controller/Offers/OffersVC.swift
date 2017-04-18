@@ -19,7 +19,7 @@ class OffersVC: UIViewController {
     var currentlang = ""
     
     var offerImage: UIImage?
-    var adsSpots:Int = 2
+    var adsSpots:Int = 0
     
     
     // Outlets

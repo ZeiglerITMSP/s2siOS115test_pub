@@ -186,7 +186,7 @@ class EBTDateOfBirthTVC: UITableViewController {
     // MARK: -
     func backAction() {
 //        self.navigationController?.popViewController(animated: true)
-        showAlert(title: nil, message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
+        showAlert(title: "ebt.processTerminate.title".localized(), message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
