@@ -44,4 +44,24 @@ let USER_AUTOLOGIN = "userAutoLogin"
 let ON_LAUNCH = "onLaunch"
 let INFO_SCREENS = "info_screens"
 
+enum SpotLocation: Int {
+    case generalOffers = 1
+    case services
+    case account
+    case wowOffers
+    case myRewardProgram
+    case ebtLogin
+    case ebtBalance
+}
+
+enum SpotType: Int {
+    case ad = 1
+    case healthy
+}
+
+/*
+ 
+ Request Params: Location: General offers - 1, Servcies - 2, Account - 3, Wow offers - 4, My Reward Program - 5, EBT Landing/Log In - 6, EBT Balance Screen - 7
+ 
+ */
 

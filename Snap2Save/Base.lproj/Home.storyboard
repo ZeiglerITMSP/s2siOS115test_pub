@@ -1371,6 +1371,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ev9-eG-Hwn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AdditionalOffersCell" textLabel="PWo-W4-V01" style="IBUITableViewCellStyleDefault" id="f0u-BU-LKw">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -1424,6 +1425,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="cR0-tD-BiF" firstAttribute="leading" secondItem="KCs-7a-oYj" secondAttribute="leading" id="4EL-s2-QYc"/>
+                                                <constraint firstItem="cR0-tD-BiF" firstAttribute="width" secondItem="KCs-7a-oYj" secondAttribute="width" id="J0P-Yw-zKa"/>
                                                 <constraint firstItem="cR0-tD-BiF" firstAttribute="top" secondItem="KCs-7a-oYj" secondAttribute="top" id="OJg-Na-XeV"/>
                                                 <constraint firstAttribute="bottom" secondItem="cR0-tD-BiF" secondAttribute="bottom" id="eoS-yu-TdN"/>
                                                 <constraint firstAttribute="trailing" secondItem="cR0-tD-BiF" secondAttribute="trailing" id="zBk-zd-xtE"/>

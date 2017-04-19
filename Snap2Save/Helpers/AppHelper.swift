@@ -25,6 +25,19 @@ class AppHelper {
         completion(image, true)
     }
     
+    class func getImage(fromURL urlString:String, name: String?, completion: (_ image: UIImage?, _ success: Bool, _ name: String?) -> Void) {
+        guard let url = NSURL(string: urlString),
+            let data = NSData(contentsOf: url as URL),
+            let image = UIImage(data: data as Data)
+            else {
+                completion(nil, false, name);
+                return
+        }
+        
+        completion(image, true, name)
+    }
+
+    
     class func setRoundCornersToView(borderColor:UIColor?,view:UIView,radius:CGFloat,width:CGFloat) {
         
         view.layer.cornerRadius = radius
