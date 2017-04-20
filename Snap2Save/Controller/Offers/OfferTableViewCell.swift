@@ -12,6 +12,9 @@ class OfferTableViewCell: UITableViewCell {
 
     @IBOutlet weak var offerImageView: UIImageView!
     
+    @IBOutlet weak var mesageLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

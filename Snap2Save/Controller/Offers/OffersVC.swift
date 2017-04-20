@@ -91,10 +91,8 @@ class OffersVC: UIViewController {
     
     func reloadContent() {
         
-        adSpotsLoaded = false
-        offersLoaded = false
-        self.adSpots.removeAll()
-        self.adSpotImages.removeAll()
+        
+        
         
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
@@ -102,6 +100,13 @@ class OffersVC: UIViewController {
             self.currentlang = Localize.currentLanguage()
 //            self.additionalOffersLabel.text = "Additional Offers".localized()
             if self.oldLanguage != self.currentlang {
+                // clear data
+                self.adSpotsLoaded = false
+                self.offersLoaded = false
+                self.adSpots.removeAll()
+                self.adSpotImages.removeAll()
+                self.offerImage = nil
+                self.offersDict = nil
                 
                 self.getOffers()
                 self.getAdSpots()
@@ -178,9 +183,8 @@ class OffersVC: UIViewController {
         self.offersLoaded = true
         if self.adSpotsLoaded {
             SwiftLoader.hide()
+            self.tableView.reloadData()
         }
-        
-        self.tableView.reloadData()
     }
     
     func getOffers() {
@@ -325,11 +329,12 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else if section == 1 {
-            if offerImage != nil {
-                return 1
-            } else {
-                return 0
-            }
+            return 1
+//            if offerImage != nil {
+//                return 1
+//            } else {
+//                return 0
+//            }
         } else {
             return adSpots.count
         }
@@ -376,8 +381,11 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
             let offerImageCell = tableView.dequeueReusableCell(withIdentifier: "OfferTableViewCell") as! OfferTableViewCell
             
             if let offerImage = self.offerImage {
-                
                 offerImageCell.offerImageView.image = offerImage
+                offerImageCell.mesageLabel.isHidden = true
+            } else {
+                offerImageCell.mesageLabel.isHidden = false
+                offerImageCell.mesageLabel.text = "No offer exists.".localized()
             }
             
             return offerImageCell
@@ -438,7 +446,7 @@ extension OffersVC {
              "user_id": user_id,
              "auth_token": auth_token,
              "language": currentLanguage,
-             "location": SpotLocation.generalOffers.rawValue
+             "screen_type": SpotLocation.generalOffers.rawValue
         ]
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
@@ -527,8 +535,9 @@ extension OffersVC {
         self.adSpotsLoaded = true
         if self.offersLoaded {
             SwiftLoader.hide()
+            self.tableView.reloadData()
         }
-        self.tableView.reloadData()
+        
     }
     
     func showSpotDetails(spot: [String:Any]) {

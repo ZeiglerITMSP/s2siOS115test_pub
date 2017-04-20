@@ -1400,15 +1400,25 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tY8-WQ-fYl">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="370.5"/>
                                                 </imageView>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJF-Ux-SB5">
+                                                    <rect key="frame" x="8" y="177" width="359" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                    <color key="textColor" red="0.40784313729999999" green="0.50196078430000002" blue="0.36862745099999999" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="SJF-Ux-SB5" secondAttribute="trailing" constant="8" id="Gro-HC-Zpl"/>
                                                 <constraint firstItem="tY8-WQ-fYl" firstAttribute="top" secondItem="E5n-2o-ap7" secondAttribute="top" id="JPZ-ap-X4A"/>
                                                 <constraint firstAttribute="trailing" secondItem="tY8-WQ-fYl" secondAttribute="trailing" id="KFr-xL-lJh"/>
+                                                <constraint firstItem="SJF-Ux-SB5" firstAttribute="centerY" secondItem="E5n-2o-ap7" secondAttribute="centerY" id="Nb1-NC-izY"/>
+                                                <constraint firstItem="SJF-Ux-SB5" firstAttribute="leading" secondItem="E5n-2o-ap7" secondAttribute="leading" constant="8" id="sHH-3C-ck6"/>
                                                 <constraint firstAttribute="bottom" secondItem="tY8-WQ-fYl" secondAttribute="bottom" id="sbr-bq-8kO"/>
                                                 <constraint firstItem="tY8-WQ-fYl" firstAttribute="leading" secondItem="E5n-2o-ap7" secondAttribute="leading" id="xZz-M8-hkI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="mesageLabel" destination="SJF-Ux-SB5" id="PKT-Jn-u2j"/>
                                             <outlet property="offerImageView" destination="tY8-WQ-fYl" id="7d0-hl-OuT"/>
                                         </connections>
                                     </tableViewCell>
@@ -1437,28 +1447,17 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJF-Ux-SB5">
-                                <rect key="frame" x="10" y="268" width="355" height="17"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                <color key="textColor" red="0.40784313729999999" green="0.50196078430000002" blue="0.36862745099999999" alpha="0.5" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SJF-Ux-SB5" firstAttribute="leading" secondItem="L3Z-Gh-cte" secondAttribute="leading" constant="10" id="5Mp-9H-ab6"/>
-                            <constraint firstAttribute="trailing" secondItem="SJF-Ux-SB5" secondAttribute="trailing" constant="10" id="HhT-l7-Yv4"/>
                             <constraint firstItem="ev9-eG-Hwn" firstAttribute="leading" secondItem="L3Z-Gh-cte" secondAttribute="leading" id="NyC-XI-fbz"/>
                             <constraint firstItem="kXF-zc-Npu" firstAttribute="top" secondItem="ev9-eG-Hwn" secondAttribute="bottom" id="aUE-AP-Mhw"/>
                             <constraint firstAttribute="trailing" secondItem="ev9-eG-Hwn" secondAttribute="trailing" id="eSv-1w-xP2"/>
-                            <constraint firstItem="SJF-Ux-SB5" firstAttribute="centerX" secondItem="L3Z-Gh-cte" secondAttribute="centerX" id="sru-TE-eNF"/>
-                            <constraint firstItem="SJF-Ux-SB5" firstAttribute="centerY" secondItem="L3Z-Gh-cte" secondAttribute="centerY" id="yDD-z2-3PI"/>
                             <constraint firstItem="ev9-eG-Hwn" firstAttribute="top" secondItem="iG6-0z-sfN" secondAttribute="bottom" id="ys9-JC-Pbd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2oM-CS-5g3"/>
                     <connections>
-                        <outlet property="messageLabel" destination="SJF-Ux-SB5" id="2U8-3V-XWb"/>
                         <outlet property="tableView" destination="ev9-eG-Hwn" id="3nJ-x5-qGm"/>
                         <segue destination="ryw-4N-t2f" kind="show" identifier="OffersDetailsViewController" id="rXc-is-4or"/>
                     </connections>
