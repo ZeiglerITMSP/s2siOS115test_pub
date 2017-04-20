@@ -62,6 +62,9 @@ class AppHelper {
         return image
     }
     
+    class func getRatio(width:CGFloat, height: CGFloat, newWidth: CGFloat) -> (CGFloat) {
+        return (height / width) * newWidth
+    }
     
     class  func validate(value: String) -> Bool {
         let PHONE_REGEX = "^\\d{3}\\d{3}\\d{4}$"

@@ -15,8 +15,8 @@ import Localize_Swift
 class OffersVC: UIViewController {
     
     var languageSelectionButton: UIButton!
-    var oldLanguage = ""
-    var currentlang = ""
+//    var oldLanguage = ""
+//    var currentlang = ""
     
     var offerImage: UIImage?
 //    var adsSpots:Int = 2
@@ -25,6 +25,7 @@ class OffersVC: UIViewController {
     
     var adSpotsLoaded = false
     var offersLoaded = false
+    
     // Outlets
     var offersDict : [String : Any]? = nil
     
@@ -40,7 +41,7 @@ class OffersVC: UIViewController {
         // config language options
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
-        reloadContent()
+        updateTitles()
         // tableview
         tableView.delegate = self
         tableView.dataSource = self
@@ -49,6 +50,7 @@ class OffersVC: UIViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.register(UINib(nibName: "AdSpotTableViewCell", bundle: nil), forCellReuseIdentifier: "AdSpotTableViewCell")
     }
     
     
@@ -56,12 +58,7 @@ class OffersVC: UIViewController {
         super.viewWillAppear(animated)
         
         reloadContent()
-        getOffers()
-        getAdSpots()
-        
         AppHelper.getScreenName(screenName: "Offers screen")
-        oldLanguage = Localize.currentLanguage()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,40 +77,35 @@ class OffersVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
     func languageButtonClicked() {
-        
         self.showLanguageSelectionAlert()
-        
     }
     
+    func loadOffersAndAds() {
+        
+        self.adSpotsLoaded = false
+        self.offersLoaded = false
+        self.adSpots.removeAll()
+        self.adSpotImages.removeAll()
+        self.offerImage = nil
+        self.offersDict = nil
+        
+        self.getOffers()
+        self.getAdSpots()
+    }
     
-    func reloadContent() {
-        
-        
-        
+    func updateTitles() {
         
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Offers".localized()
-            self.currentlang = Localize.currentLanguage()
-//            self.additionalOffersLabel.text = "Additional Offers".localized()
-            if self.oldLanguage != self.currentlang {
-                // clear data
-                self.adSpotsLoaded = false
-                self.offersLoaded = false
-                self.adSpots.removeAll()
-                self.adSpotImages.removeAll()
-                self.offerImage = nil
-                self.offersDict = nil
-                
-                self.getOffers()
-                self.getAdSpots()
-                self.oldLanguage = self.currentlang
-            }
-            
         }
+    }
+    
+    func reloadContent() {
+        
+        updateTitles()
+        self.loadOffersAndAds()
     }
     
     func offerTapGesClicked()
@@ -341,10 +333,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func ratio(width:CGFloat, height: CGFloat, newWidth: CGFloat) -> (CGFloat) {
-        
-        return (height / width) * newWidth
-    }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
@@ -361,7 +350,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
             let spot = adSpots[indexPath.row]
             let type = spot["type"]
             let image = adSpotImages["\(type!)"]
-            let height = ratio(width: (image?.size.width)!, height: (image?.size.height)!, newWidth: self.view.frame.width)
+            let height = AppHelper.getRatio(width: (image?.size.width)!, height: (image?.size.height)!, newWidth: self.view.frame.width)
             
             return height
 //            return UITableViewAutomaticDimension
@@ -385,14 +374,14 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
                 offerImageCell.mesageLabel.isHidden = true
             } else {
                 offerImageCell.mesageLabel.isHidden = false
-                offerImageCell.mesageLabel.text = "No offer exists.".localized()
+                offerImageCell.mesageLabel.text = "message.nooffer".localized()
             }
             
             return offerImageCell
         }
         else { // Ads image cell
             
-            let adsImageCell = tableView.dequeueReusableCell(withIdentifier: "AdsTableViewCell") as! AdsTableViewCell
+            let adSpotTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdSpotTableViewCell") as! AdSpotTableViewCell
             
             let spot = adSpots[indexPath.row]
             let type = spot["type"]
@@ -400,9 +389,9 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
             // snap2save.jpeg
 //            let img = UIImage(named: "snap2save.jpeg")
             
-            adsImageCell.adImageView.image = image
+            adSpotTableViewCell.adImageView.image = image
             
-            return adsImageCell
+            return adSpotTableViewCell
         }
     }
     

@@ -1,14 +1,14 @@
 //
-//  AdsTableViewCell.swift
+//  AdSpotTableViewCell.swift
 //  Snap2Save
 //
-//  Created by Appit on 4/17/17.
+//  Created by Appit on 4/20/17.
 //  Copyright © 2017 Appit. All rights reserved.
 //
 
 import UIKit
 
-class AdsTableViewCell: UITableViewCell {
+class AdSpotTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var adImageView: UIImageView!
@@ -23,5 +23,5 @@ class AdsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }
