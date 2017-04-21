@@ -14,13 +14,14 @@
             <rect key="frame" x="0.0" y="0.0" width="350" height="75"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="350" height="75"/>
+                <rect key="frame" x="0.0" y="0.0" width="350" height="74.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1XA-Gr-O5a">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="74.5"/>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="1XA-Gr-O5a" secondAttribute="bottom" id="DJF-t2-ulF"/>
                     <constraint firstItem="1XA-Gr-O5a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="F9r-xB-Y75"/>
@@ -29,10 +30,11 @@
                     <constraint firstAttribute="trailing" secondItem="1XA-Gr-O5a" secondAttribute="trailing" id="mPR-HC-beC"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="adImageView" destination="1XA-Gr-O5a" id="H03-db-0eM"/>
             </connections>
-            <point key="canvasLocation" x="-80" y="31"/>
+            <point key="canvasLocation" x="-324" y="38"/>
         </tableViewCell>
     </objects>
 </document>

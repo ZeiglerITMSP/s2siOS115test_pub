@@ -75,6 +75,8 @@
 		E86D8D211EA8A273001250D9 /* AdSpotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D8D1F1EA8A273001250D9 /* AdSpotTableViewCell.swift */; };
 		E86D8D221EA8A273001250D9 /* AdSpotTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E86D8D201EA8A273001250D9 /* AdSpotTableViewCell.xib */; };
 		E86D8D241EA8B9C6001250D9 /* AdSpotsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */; };
+		E86D8D2A1EA8D21B001250D9 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D8D291EA8D21B001250D9 /* AccountCell.swift */; };
+		E86D8D2C1EA8D229001250D9 /* AccountSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D8D2B1EA8D229001250D9 /* AccountSwitchCell.swift */; };
 		E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA54A1DF53C1300714C65 /* AppDelegate.swift */; };
 		E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA54E1DF53C1300714C65 /* Main.storyboard */; };
 		E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E88BA5511DF53C1300714C65 /* Assets.xcassets */; };
@@ -188,6 +190,8 @@
 		E86D8D1F1EA8A273001250D9 /* AdSpotTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdSpotTableViewCell.swift; sourceTree = "<group>"; };
 		E86D8D201EA8A273001250D9 /* AdSpotTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdSpotTableViewCell.xib; sourceTree = "<group>"; };
 		E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdSpotsManager.swift; sourceTree = "<group>"; };
+		E86D8D291EA8D21B001250D9 /* AccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
+		E86D8D2B1EA8D229001250D9 /* AccountSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSwitchCell.swift; sourceTree = "<group>"; };
 		E88BA5471DF53C1300714C65 /* Snap2Save.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap2Save.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA54A1DF53C1300714C65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E88BA54F1DF53C1300714C65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -344,7 +348,7 @@
 			children = (
 				E88C262C1E1539C900F4056F /* TabViewController.swift */,
 				E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */,
-				E8439E441EA4A752008079F0 /* Cells */,
+				E8439E441EA4A752008079F0 /* ServicesCells */,
 				9769997D1E2643A200D05AE8 /* ServicesWebViewVC.swift */,
 			);
 			path = Services;
@@ -360,14 +364,14 @@
 			path = ../Controller/Services;
 			sourceTree = "<group>";
 		};
-		E8439E441EA4A752008079F0 /* Cells */ = {
+		E8439E441EA4A752008079F0 /* ServicesCells */ = {
 			isa = PBXGroup;
 			children = (
 				979E247A1EA0B22E00AFBD7C /* EBTTableViewCell.swift */,
 				979E247E1EA0B25A00AFBD7C /* FlowSegmentTableViewCell.swift */,
 				979E247C1EA0B24600AFBD7C /* InfoScreenTableViewCell.swift */,
 			);
-			name = Cells;
+			name = ServicesCells;
 			sourceTree = "<group>";
 		};
 		E84AE9C81E07F28300C5E7F3 /* View */ = {
@@ -404,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				E84AE9D91E07F53300C5E7F3 /* AccountTVC.swift */,
+				E86D8D2D1EA8D28C001250D9 /* AccountCells */,
 				E84AE9DB1E07F57800C5E7F3 /* PersonalInformationTVC.swift */,
 				E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */,
 				9737ED0B1E14042400120B54 /* ChangePasswordTVC.swift */,
@@ -442,6 +447,15 @@
 				978767B41E8E304300220536 /* AdditionalOffersVC.swift */,
 			);
 			path = Offers;
+			sourceTree = "<group>";
+		};
+		E86D8D2D1EA8D28C001250D9 /* AccountCells */ = {
+			isa = PBXGroup;
+			children = (
+				E86D8D291EA8D21B001250D9 /* AccountCell.swift */,
+				E86D8D2B1EA8D229001250D9 /* AccountSwitchCell.swift */,
+			);
+			name = AccountCells;
 			sourceTree = "<group>";
 		};
 		E88BA53E1DF53C1200714C65 = {
@@ -892,6 +906,7 @@
 				E84AE9DA1E07F53300C5E7F3 /* AccountTVC.swift in Sources */,
 				974CDFC91E67FC030041EC07 /* FZURefreshExtension.swift in Sources */,
 				E84AE9E31E0821B900C5E7F3 /* AITextField.swift in Sources */,
+				E86D8D2C1EA8D229001250D9 /* AccountSwitchCell.swift in Sources */,
 				E837F0231E2F505E00BBDA9F /* EBTUser.swift in Sources */,
 				9759BE781E0A65AA00A5C76A /* SignUpTVC.swift in Sources */,
 				974CDFCB1E67FC030041EC07 /* FZURefreshHead.swift in Sources */,
@@ -911,6 +926,7 @@
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
 				974D5C391E2E5D9900918BAD /* SwiftLoader.swift in Sources */,
 				976A99771E251A6400F82105 /* FacebookLogin.swift in Sources */,
+				E86D8D2A1EA8D21B001250D9 /* AccountCell.swift in Sources */,
 				970C963A1E5EFBE400697E56 /* RedeemPointsMessageVC.swift in Sources */,
 				974CDFCA1E67FC030041EC07 /* FZURefreshFoot.swift in Sources */,
 				E8BAE2AA1E0BDF2700A85AAB /* EBTDateOfBirthTVC.swift in Sources */,

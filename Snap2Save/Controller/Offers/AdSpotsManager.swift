@@ -25,6 +25,9 @@ class AdSpotsManager: NSObject {
     
     func getAdSpots(forScreen screenType: SpotLocation) {
         
+        adSpots.removeAll()
+        adSpotImages.removeAll()
+        
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
         // Reachability
@@ -51,8 +54,6 @@ class AdSpotsManager: NSObject {
             "screen_type": screenType.rawValue
         ]
         
-        SwiftLoader.show(title: "Loading...".localized(), animated: true)
-        
         print(parameters)
         let url = String(format: "%@/getAdAndHealthySpots", hostUrl)
         ////print("url)
@@ -69,8 +70,14 @@ class AdSpotsManager: NSObject {
                         let code = code as! NSNumber
                         if code.intValue == 200 {
                             if let spots = responseDict?["spots"] as? [[String:Any]] {
+                                print(spots)
                                 self.adSpots = spots
-                                self.downloadAdImages()
+                                if spots.count > 0 {
+                                    self.downloadAdImages()
+                                } else {
+                                    self.reloadAdSpotsIfPossible()
+                                }
+                                
                             } else {
                                 self.reloadAdSpotsIfPossible()
                             }
@@ -98,6 +105,11 @@ class AdSpotsManager: NSObject {
     }
     
     func downloadAdImages() {
+        
+        if adSpots.count == 0 {
+            self.reloadAdSpotsIfPossible()
+            return
+        }
         
         var downloadImages = 0
         adSpotImages.removeAll()

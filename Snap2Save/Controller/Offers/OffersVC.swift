@@ -15,22 +15,13 @@ import Localize_Swift
 class OffersVC: UIViewController {
     
     var languageSelectionButton: UIButton!
-//    var oldLanguage = ""
-//    var currentlang = ""
-    
+    let adSpotManager = AdSpotsManager()
     var offerImage: UIImage?
-//    var adsSpots:Int = 2
-    var adSpots = [[String:Any]]()
-    var adSpotImages = [String:UIImage]()
-    
     var adSpotsLoaded = false
     var offersLoaded = false
-    
-    // Outlets
     var offersDict : [String : Any]? = nil
-    
+    // Outlets
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var messageLabel: UILabel!
     
     override func viewDidLoad() {
@@ -42,6 +33,9 @@ class OffersVC: UIViewController {
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         updateTitles()
+        
+        adSpotManager.delegate = self
+        
         // tableview
         tableView.delegate = self
         tableView.dataSource = self
@@ -85,13 +79,11 @@ class OffersVC: UIViewController {
         
         self.adSpotsLoaded = false
         self.offersLoaded = false
-        self.adSpots.removeAll()
-        self.adSpotImages.removeAll()
         self.offerImage = nil
         self.offersDict = nil
         
         self.getOffers()
-        self.getAdSpots()
+        adSpotManager.getAdSpots(forScreen: .generalOffers)
     }
     
     func updateTitles() {
@@ -173,10 +165,7 @@ class OffersVC: UIViewController {
     func reloadOffersIfPossible() {
         
         self.offersLoaded = true
-        if self.adSpotsLoaded {
-            SwiftLoader.hide()
-            self.tableView.reloadData()
-        }
+        reloadTableViewIfPossible()
     }
     
     func getOffers() {
@@ -308,6 +297,15 @@ class OffersVC: UIViewController {
         
         return value * percentage * (1 / 100)
     }
+    
+    func reloadTableViewIfPossible() {
+        
+        if adSpotsLoaded && offersLoaded {
+            SwiftLoader.hide()
+            self.tableView.reloadData()
+        }
+        
+    }
 }
 
 extension OffersVC: UITableViewDelegate, UITableViewDataSource {
@@ -328,7 +326,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
 //                return 0
 //            }
         } else {
-            return adSpots.count
+            return adSpotManager.adSpots.count
         }
         
     }
@@ -340,16 +338,16 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
             return 50.0
         } else if indexPath.section == 1 {
             
-            if adSpots.count == 0 {
+            if adSpotManager.adSpots.count == 0 {
                 return calculate(percentage: 100, ofValue: tableView.frame.height - 50)
             } else {
                 return calculate(percentage: 80, ofValue: tableView.frame.height - 50)
             }
         } else {
             
-            let spot = adSpots[indexPath.row]
+            let spot = adSpotManager.adSpots[indexPath.row]
             let type = spot["type"]
-            let image = adSpotImages["\(type!)"]
+            let image = adSpotManager.adSpotImages["\(type!)"]
             let height = AppHelper.getRatio(width: (image?.size.width)!, height: (image?.size.height)!, newWidth: self.view.frame.width)
             
             return height
@@ -383,12 +381,9 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
             
             let adSpotTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdSpotTableViewCell") as! AdSpotTableViewCell
             
-            let spot = adSpots[indexPath.row]
+            let spot = adSpotManager.adSpots[indexPath.row]
             let type = spot["type"]
-            let image = adSpotImages["\(type!)"]
-            // snap2save.jpeg
-//            let img = UIImage(named: "snap2save.jpeg")
-            
+            let image = adSpotManager.adSpotImages["\(type!)"]
             adSpotTableViewCell.adImageView.image = image
             
             return adSpotTableViewCell
@@ -401,173 +396,24 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 1 {
             tapGesClicked()
         } else {
-            showSpotDetails(spot: adSpots[indexPath.row])
+            adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
         }
     }
     
 }
 
 // MARK: - Ads
-extension OffersVC {
+extension OffersVC: AdSpotsManagerDelegate {
     
-    func getAdSpots() {
-        
-        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
-        let isReachable = reachbility.isReachable
-        // Reachability
-        if isReachable == false {
-            return
-        }
-        
-        let device_id = UIDevice.current.identifierForVendor!.uuidString
-        let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
-        let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
-        let currentLanguage = Localize.currentLanguage()
-        let version_name = Bundle.main.releaseVersionNumber ?? ""
-        let version_code = Bundle.main.buildVersionNumber ?? ""
-        
-        
-        let parameters : Parameters = [
-             "platform":"1",
-             "version_code": version_code,
-             "version_name": version_name,
-             "device_id": device_id,
-             "user_id": user_id,
-             "auth_token": auth_token,
-             "language": currentLanguage,
-             "screen_type": SpotLocation.generalOffers.rawValue
-        ]
-        
-        SwiftLoader.show(title: "Loading...".localized(), animated: true)
-        
-         print(parameters)
-        let url = String(format: "%@/getAdAndHealthySpots", hostUrl)
-        ////print("url)
-        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
-            switch response.result {
-                
-            case .success:
-                DispatchQueue.main.async {
-                    let json = JSON(data: response.data!)
-                    
-                    let responseDict = json.dictionaryObject
-                    
-                    if let code = responseDict?["code"] {
-                        let code = code as! NSNumber
-                        if code.intValue == 200 {
-                            if let spots = responseDict?["spots"] as? [[String:Any]] {
-                                self.adSpots = spots
-                                self.downloadAdImages()
-                            } else {
-                                self.reloadAdSpotsIfPossible()
-                            }
-                        } else {
-                            SwiftLoader.hide()
-                            if let responseDict = json.dictionaryObject {
-                                let alertMessage = responseDict["message"] as! String
-                                self.showAlert(title: "", message: alertMessage)
-                            }
-                        }
-                    }
-                }
-                break
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    SwiftLoader.hide()
-                    self.showAlert(title: "", message:error.localizedDescription);
-                }
-                break
-            }
-            
-        }
+    func didFinishLoadingSpots() {
+        adSpotsLoaded = true
+        reloadTableViewIfPossible()
     }
     
-    func downloadAdImages() {
-        
-        var downloadImages = 0
-        
-        for spot in adSpots {
-            // image url
-            var imageUrl: String?
-            if Localize.currentLanguage() == "en" {
-                imageUrl = spot["image_url_en"] as? String
-            } else if Localize.currentLanguage() == "es" {
-                imageUrl = spot["image_url_es"] as? String
-            }
-            
-            let type = "\(spot["type"]!)"
-            
-            if imageUrl != nil && (imageUrl?.characters.count)! > 0 {
-                DispatchQueue.main.async {
-                    AppHelper.getImage(fromURL: imageUrl!, name: type, completion: { (image, success, name) -> Void in
-                        downloadImages += 1
-                        print(name!)
-                        if success {
-                            if image != nil {
-                                self.adSpotImages[name!] = image
-                            }
-                        }
-                        // load in table view if all downloaded
-                        if downloadImages == self.adSpots.count {
-                            self.reloadAdSpotsIfPossible()
-                        }
-                    })
-                }
-            }
-        }
-    }
-    
-    func reloadAdSpotsIfPossible() {
-        
-        self.adSpotsLoaded = true
-        if self.offersLoaded {
-            SwiftLoader.hide()
-            self.tableView.reloadData()
-        }
-        
-    }
-    
-    func showSpotDetails(spot: [String:Any]) {
-        
-        let offerDetails = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "OffersDetailsViewController") as! OffersDetailsViewController
-        
-        if Localize.currentLanguage() == "es" {
-            // get es url
-            if  let urlStr_es: String = spot["offer_url_es"] as? String {
-                if !urlStr_es.isEmpty {
-                    offerDetails.urlString_es = urlStr_es
-                    // get en url
-                    if  let urlStr: String = spot["offer_url_en"] as? String {
-                        if !urlStr.isEmpty {
-                            offerDetails.urlString_en = urlStr
-                        }
-                    }
-                    // navigate
-                    offerDetails.isFromAdditionalOffers = false
-                    self.navigationController?.show(offerDetails, sender: self)
-                }
-            }
-        } else if Localize.currentLanguage() == "en" {
-            // get en url
-            if  let urlStr_en : String = spot["offer_url_en"] as? String {
-                if !urlStr_en.isEmpty {
-                    offerDetails.urlString_en = urlStr_en
-                    // get es url
-                    if  let urlStr: String = spot["offer_url_es"] as? String {
-                        if !urlStr.isEmpty {
-                            offerDetails.urlString_es = urlStr
-                        }
-                    }
-                    offerDetails.isFromAdditionalOffers = false
-                    self.navigationController?.show(offerDetails, sender: self)
-                }
-            }
-        }
-        
-        //  self.navigationController?.show(offerDetails, sender: self)
-        
+    func didFailedLoadingSpots(description: String) {
+        adSpotsLoaded = true
+        reloadTableViewIfPossible()
     }
     
 }
+
