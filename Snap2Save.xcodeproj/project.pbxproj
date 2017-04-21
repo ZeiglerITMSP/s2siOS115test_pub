@@ -72,6 +72,7 @@
 		E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */; };
 		E84AE9E31E0821B900C5E7F3 /* AITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84AE9E21E0821B900C5E7F3 /* AITextField.swift */; };
 		E863CEBC1E1BE72E00049F28 /* OffersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E863CEBB1E1BE72E00049F28 /* OffersVC.swift */; };
+		E86D427B1EA9EF6500F00F73 /* SharedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D427A1EA9EF6500F00F73 /* SharedCache.swift */; };
 		E86D8D211EA8A273001250D9 /* AdSpotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D8D1F1EA8A273001250D9 /* AdSpotTableViewCell.swift */; };
 		E86D8D221EA8A273001250D9 /* AdSpotTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E86D8D201EA8A273001250D9 /* AdSpotTableViewCell.xib */; };
 		E86D8D241EA8B9C6001250D9 /* AdSpotsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */; };
@@ -187,6 +188,7 @@
 		E84AE9DD1E07F5EE00C5E7F3 /* PreferencesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTVC.swift; sourceTree = "<group>"; };
 		E84AE9E21E0821B900C5E7F3 /* AITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AITextField.swift; sourceTree = "<group>"; };
 		E863CEBB1E1BE72E00049F28 /* OffersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersVC.swift; sourceTree = "<group>"; };
+		E86D427A1EA9EF6500F00F73 /* SharedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedCache.swift; sourceTree = "<group>"; };
 		E86D8D1F1EA8A273001250D9 /* AdSpotTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdSpotTableViewCell.swift; sourceTree = "<group>"; };
 		E86D8D201EA8A273001250D9 /* AdSpotTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdSpotTableViewCell.xib; sourceTree = "<group>"; };
 		E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdSpotsManager.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				974CDFBE1E67FC030041EC07 /* FZURefresh */,
 				974D5C381E2E5D9900918BAD /* SwiftLoader.swift */,
 				E826FBCC1E0917BD0089AEA6 /* AppHelper.swift */,
+				E86D427A1EA9EF6500F00F73 /* SharedCache.swift */,
 				E81B74AB1E1105EA00D5EC61 /* LanguageUtility.swift */,
 				E84AE9E21E0821B900C5E7F3 /* AITextField.swift */,
 				E826FBD91E094F720089AEA6 /* AIPlaceHolderTextField.xib */,
@@ -920,6 +923,7 @@
 				977B64F51E163B5600AA802D /* User.swift in Sources */,
 				E83156081E1A7EB8001D30D2 /* DetailedSubtitleCell.swift in Sources */,
 				975006B01E64346500CD80F8 /* RedeemPointsWebVC.swift in Sources */,
+				E86D427B1EA9EF6500F00F73 /* SharedCache.swift in Sources */,
 				E826FBD61E0946970089AEA6 /* EBTLoginTVC.swift in Sources */,
 				970C963C1E5F09CE00697E56 /* RedeemHealthPointsMessageVC.swift in Sources */,
 				E82258D51E5DC55700E8E17E /* RewardFilterTVC.swift in Sources */,
