@@ -186,7 +186,7 @@ class EBTCardNumberTVC: UITableViewController {
     
     func backAction() {
         
-        showAlert(title: nil, message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
+        showAlert(title: "ebt.processTerminate.title".localized(), message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {

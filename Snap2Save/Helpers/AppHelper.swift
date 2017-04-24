@@ -25,6 +25,29 @@ class AppHelper {
         completion(image, true)
     }
     
+    class func getImage(fromURL urlString:String, name: String?, completion: @escaping (_ image: UIImage?, _ success: Bool, _ name: String?) -> Void) {
+        
+        let imageCache = SharedCache.shared.imageCache
+        guard let url = URL(string: urlString) else { return }
+        
+        if let cachedImage = imageCache.object(forKey: urlString as NSString) {
+            completion(cachedImage, true, name)
+        } else {
+            guard
+                let data = NSData(contentsOf: url as URL),
+                let image = UIImage(data: data as Data)
+                else {
+                    completion(nil, false, name);
+                    return
+            }
+            DispatchQueue.main.async {
+                imageCache.setObject(image, forKey: urlString as NSString)
+            }
+            
+            completion(image, true, name)
+        }
+    }
+    
     class func setRoundCornersToView(borderColor:UIColor?,view:UIView,radius:CGFloat,width:CGFloat) {
         
         view.layer.cornerRadius = radius
@@ -49,6 +72,9 @@ class AppHelper {
         return image
     }
     
+    class func getRatio(width:CGFloat, height: CGFloat, newWidth: CGFloat) -> (CGFloat) {
+        return (height / width) * newWidth
+    }
     
     class  func validate(value: String) -> Bool {
         let PHONE_REGEX = "^\\d{3}\\d{3}\\d{4}$"
@@ -83,17 +109,17 @@ class AppHelper {
         
         return true
     }
-
     
-//    class func isValid(input:String) -> Bool {
-//        
-//        let regex = try! NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: NSRegularExpression.Options())
-//        if regex.firstMatch(in: input, options: NSRegularExpression.MatchingOptions(), range:NSMakeRange(0, input.characters.count)) != nil {
-//            return false
-//        }
-//        
-//        return true
-//    }
+    
+    //    class func isValid(input:String) -> Bool {
+    //
+    //        let regex = try! NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: NSRegularExpression.Options())
+    //        if regex.firstMatch(in: input, options: NSRegularExpression.MatchingOptions(), range:NSMakeRange(0, input.characters.count)) != nil {
+    //            return false
+    //        }
+    //
+    //        return true
+    //    }
     
     
     class func removeSpecialCharacters(fromNumber inputString:String) -> String {
@@ -133,25 +159,25 @@ class AppHelper {
         return config
     }
     
-
+    
     class func isTouchIDAvailable() -> (status:Bool, LAErrorCode:Int?) {
         
         let context = LAContext()
         var error: NSError?
         let status = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
         /*
-        if status == false {
-            switch error!.code {
-            case LAError.touchIDNotAvailable.rawValue:
-                print("touchIDNotAvailable")
-            case LAError.touchIDNotEnrolled.rawValue:
-                print("touchIDNotEnrolled")
-            case LAError.passcodeNotSet.rawValue:
-                print("passcodeNotSet")
-            default:
-                print("default")
-            }
-        }*/
+         if status == false {
+         switch error!.code {
+         case LAError.touchIDNotAvailable.rawValue:
+         print("touchIDNotAvailable")
+         case LAError.touchIDNotEnrolled.rawValue:
+         print("touchIDNotEnrolled")
+         case LAError.passcodeNotSet.rawValue:
+         print("passcodeNotSet")
+         default:
+         print("default")
+         }
+         }*/
         
         return (status: status, LAErrorCode: error?.code)
     }
@@ -164,7 +190,7 @@ class AppHelper {
         
         guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
         tracker.send(builder.build() as [NSObject : AnyObject])
- 
+        
     }
     
     
@@ -308,13 +334,14 @@ extension UIViewController {
             }
         })
         
-        let cancelAction = UIAlertAction(title: "CANCEL".localized() , style: .cancel, handler: nil)
-        
-        alertController.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "CANCEL".localized() , style: .default, handler: nil)
         
         if showCancel == true {
             alertController.addAction(cancelAction)
         }
+        alertController.addAction(okAction)
+        
+        
         
         DispatchQueue.main.async {
             
@@ -377,10 +404,10 @@ public extension UIImage {
 }
 public extension Bundle {
     
-   public var releaseVersionNumber: String? {
+    public var releaseVersionNumber: String? {
         return infoDictionary?["CFBundleShortVersionString"] as? String
     }
-   public var buildVersionNumber: String? {
+    public var buildVersionNumber: String? {
         return infoDictionary?["CFBundleVersion"] as? String
     }
 }
@@ -399,14 +426,14 @@ public extension UIImageView {
                 let data = data, error == nil,
                 let image = UIImage(data: data)
                 else {
-                 
-                    DispatchQueue.main.async() { () -> Void in
                     
-
-                    if failAction != nil {
+                    DispatchQueue.main.async() { () -> Void in
                         
-                        target.perform(failAction)
-                    }
+                        
+                        if failAction != nil {
+                            
+                            target.perform(failAction)
+                        }
                     }
                     return
             }
@@ -422,7 +449,7 @@ public extension UIImageView {
             else {
                 
                 if failAction != nil {
-                        target.perform(failAction)
+                    target.perform(failAction)
                 }
                 return
         }

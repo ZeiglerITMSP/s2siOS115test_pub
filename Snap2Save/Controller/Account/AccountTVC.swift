@@ -17,8 +17,11 @@ class AccountTVC: UITableViewController {
     
     // Properties
     var languageSelectionButton: UIButton!
-//    var infoArray : NSMutableArray!
     var user:User = User()
+    let adSpotManager = AdSpotsManager()
+    var accountOptions = ["Auto Log In", "Personal Information", "Preferences", "My Reward Program", "Change Password"]
+    
+    var isAutoLogin = false
     
     enum Rows: Int {
         case autoLogin
@@ -26,42 +29,35 @@ class AccountTVC: UITableViewController {
         case preferences
         case myRewardProgram
         case changePassword
-        
-        case count
     }
-    
-    // MARK: - Outlets
-    @IBOutlet var autoLoginLabel: UILabel!
-    @IBOutlet var preferencesLabel: UILabel!
-    @IBOutlet var personalInfoLabel: UILabel!
-    @IBOutlet weak var myRewardProgramLabel: UILabel!
-    @IBOutlet var logOutLabel: UILabel!
-    @IBOutlet var changePasswordLabel: UILabel!
-    @IBOutlet var loginSwitch: UISwitch!
-    
+
     // MARK: - Actions
-    @IBAction func autoLoginSwitchAction(_ sender: UISwitch) {
-        self.updateSettings()
-    }
     
     // MARK: -
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
-//        infoArray = ["Auto Log In", "Personal Information", "Preferences", "My Reward Program", "Change Password"];
+        adSpotManager.delegate = self
+        
+        // Automatic height
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.register(UINib(nibName: "AdSpotTableViewCell", bundle: nil), forCellReuseIdentifier: "AdSpotTableViewCell")
+        
+        //        infoArray = ["Auto Log In", "Personal Information", "Preferences", "My Reward Program", "Change Password"];
         
         AppHelper.configSwiftLoader()
         let data = UserDefaults.standard.object(forKey: LOGGED_USER)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)
-        let user = userInfo as! User
         
-        let isAutoLogin : Bool = user.auto_login ?? true
-        loginSwitch.isOn = isAutoLogin
-        UserDefaults.standard.set(self.loginSwitch.isOn, forKey: USER_AUTOLOGIN)
+        let user = userInfo as! User
+        isAutoLogin = user.auto_login ?? true    // By default it is true
+        UserDefaults.standard.set(isAutoLogin, forKey: USER_AUTOLOGIN)
         reloadContent()
     }
     
@@ -69,14 +65,17 @@ class AccountTVC: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        SwiftLoader.show(title: "Loading...", animated: true)
+        self.adSpotManager.getAdSpots(forScreen: .account)
         reloadContent()
         AppHelper.getScreenName(screenName: "Account screen")
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(languageChanged))
         
     }
     
@@ -85,94 +84,32 @@ class AccountTVC: UITableViewController {
         super.viewDidDisappear(animated)
     }
     
+    
     func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
     
-    func reloadContent() {
+    func languageChanged() {
         
-        DispatchQueue.main.async {
-     
-            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-            
-            self.navigationItem.title = "Account".localized()
-            
-            self.autoLoginLabel.text = "Auto Log In".localized()
-            self.personalInfoLabel.text = "Personal Information".localized()
-            self.preferencesLabel.text = "Preferences".localized()
-            self.myRewardProgramLabel.text = "My Reward Program".localized()
-            self.changePasswordLabel.text = "Change Password".localized()
-            self.logOutLabel.text = "Log Out".localized()
-            
-            }
-   
+        SwiftLoader.show(title: "Loading...", animated: true)
+        reloadContent()
+        adSpotManager.downloadAdImages()
     }
+    
+    
+    func reloadContent() {
+        DispatchQueue.main.async {
+            self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
+            self.navigationItem.title = "Account".localized()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
-        if section == 0 {
-            return Rows.count.rawValue
-        } else if section == 1 {
-            return 1
-        } else {
-            return 0
-        }
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.section == 0 {
-            if indexPath.row == Rows.autoLogin.rawValue {
-            
-            } else if indexPath.row == Rows.personalInformation.rawValue {
-                self.performSegue(withIdentifier: "PersonalInformationTVC", sender: self)
-            } else if indexPath.row == Rows.preferences.rawValue {
-                self.performSegue(withIdentifier: "PreferencesTVC", sender: self)
-            } else if indexPath.row == Rows.myRewardProgram.rawValue {
-                self.performSegue(withIdentifier: "RewardStatusTVC", sender: self)
-            } else if indexPath.row == Rows.changePassword.rawValue {
-                self.performSegue(withIdentifier: "ChangePasswordTVC", sender: self)
-            }
-        }
-        else if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                self.showAlert()
-            }
-        }
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        let data = UserDefaults.standard.object(forKey: LOGGED_USER)
-        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)
-        let user = userInfo as! User
-        
-        let isFaceBookUser = user.signup_type
-        if indexPath.section == 0 {
-        if indexPath.row == Rows.changePassword.rawValue {
-            if  isFaceBookUser == "2" {
-                return 0
-            }
-        }
-        }
-        return UITableViewAutomaticDimension
-    }
-
     func showAlert() {
         
         let logOutAlert = UIAlertController.init(title: nil, message: "Are you sure you want to log out?".localized(), preferredStyle: .alert)
@@ -188,20 +125,12 @@ class AccountTVC: UITableViewController {
         
         self.present(logOutAlert, animated: true, completion:nil)
         logOutAlert.view.tintColor = APP_GRREN_COLOR
-
+        
     }
     
     func userLogout() {
         
-//        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
-//        let isReachable = reachbility.isReachable
-//        // Reachability
-//        if isReachable == false {
-//            self.showAlert(title: "", message: "Please check your internet connection".localized());
-//            return
-//        }
-//        
-
+        
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
@@ -211,41 +140,41 @@ class AccountTVC: UITableViewController {
         let version_code = Bundle.main.buildVersionNumber ?? ""
         
         let parameters : Parameters = ["user_id": user_id,
-                          "auth_token": auth_token,
-                          "platform":"1",
-                          "version_code": version_code,
-                          "version_name": version_name,
-                          "device_id": device_id,
-                          "push_token":"",
-                          "language":currentLanguage
-            ]
+                                       "auth_token": auth_token,
+                                       "platform":"1",
+                                       "version_code": version_code,
+                                       "version_name": version_name,
+                                       "device_id": device_id,
+                                       "push_token":"",
+                                       "language":currentLanguage
+        ]
         
         let url = String(format: "%@/logOut", hostUrl)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             self.moveTologinScree()
             
-//            switch response.result {
-//                
-//            case .success:
-//                //let json = JSON(data: response.data!)
-//               // //print(""json response\(json)")
-//                
-//                //let appDomain = Bundle.main.bundleIdentifier
-//                //UserDefaults.standard.removePersistentDomain(forName: appDomain!)
-//                
-//                
-//                break
-//                
-//            case .failure(let error):
-//                
-//                DispatchQueue.main.async {
-//                    self.showAlert(title: "", message:error.localizedDescription);
-//                }
-//                ////print("error)
-//                break
-//            }
-//            
+            //            switch response.result {
+            //
+            //            case .success:
+            //                //let json = JSON(data: response.data!)
+            //               // //print(""json response\(json)")
+            //
+            //                //let appDomain = Bundle.main.bundleIdentifier
+            //                //UserDefaults.standard.removePersistentDomain(forName: appDomain!)
+            //
+            //
+            //                break
+            //
+            //            case .failure(let error):
+            //
+            //                DispatchQueue.main.async {
+            //                    self.showAlert(title: "", message:error.localizedDescription);
+            //                }
+            //                ////print("error)
+            //                break
+            //            }
+            //
             
         }
     }
@@ -258,7 +187,7 @@ class AccountTVC: UITableViewController {
         UserDefaults.standard.removeObject(forKey: USER_DATA)
         UserDefaults.standard.removeObject(forKey: INFO_SCREENS)
         
-       // AppDelegate.getDelegate().setDetaultValues()
+        // AppDelegate.getDelegate().setDetaultValues()
     }
     
     func moveTologinScree() {
@@ -277,7 +206,7 @@ class AccountTVC: UITableViewController {
         UIApplication.shared.keyWindow?.rootViewController = initialViewController
     }
     
-    func updateSettings() {
+    func updateAutologinStatusInServer(isOn: Bool) {
         
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
@@ -299,14 +228,14 @@ class AccountTVC: UITableViewController {
         let version_code = Bundle.main.buildVersionNumber ?? ""
         
         let parameters : Parameters = ["user_id": user_id,
-                          "auto_login": loginSwitch.isOn,
-                          "auth_token": auth_token,
-                          "platform":"1",
-                          "version_code": version_code,
-                          "version_name": version_name,
-                          "device_id": device_id,
-                          "language":currentLanguage
-            ]
+                                       "auto_login": isOn,
+                                       "auth_token": auth_token,
+                                       "platform":"1",
+                                       "version_code": version_code,
+                                       "version_name": version_name,
+                                       "device_id": device_id,
+                                       "language":currentLanguage
+        ]
         
         ////print("parameters)
         
@@ -329,10 +258,11 @@ class AccountTVC: UITableViewController {
                             
                             self.user = User.prepareUser(dictionary: userDict as! [String : Any])
                             AppDelegate.getDelegate().user = self.user
+                            
                             let userData = NSKeyedArchiver.archivedData(withRootObject: self.user)
                             UserDefaults.standard.set(userData, forKey: LOGGED_USER)
-                            UserDefaults.standard.set(self.loginSwitch.isOn, forKey: USER_AUTOLOGIN)
-
+                            UserDefaults.standard.set(isOn, forKey: USER_AUTOLOGIN)
+                            
                         }
                         
                     }
@@ -362,4 +292,157 @@ class AccountTVC: UITableViewController {
         }
         
     }
+   
+}
+
+// MARK: - Table view data source, delegate
+extension AccountTVC {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if section == 0 {
+            return accountOptions.count
+        } else if section == 1 {
+            return 1
+        } else if section == 2 {
+            return adSpotManager.adSpots.count
+        }
+        
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                let accountSwitchCell = tableView.dequeueReusableCell(withIdentifier: "AccountSwitchCell") as! AccountSwitchCell
+                accountSwitchCell.delegate = self
+                accountSwitchCell.myTitleLabel.text = accountOptions[indexPath.row].localized()
+                accountSwitchCell.mySwitch.isOn = isAutoLogin
+                
+                return accountSwitchCell
+            } else {
+                let basicCell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
+                basicCell.textLabel?.text = accountOptions[indexPath.row].localized()
+                basicCell.textLabel?.textColor = UIColor(colorLiteralRed: 74/255, green: 74/255, blue: 74/255, alpha: 1)
+                return basicCell
+            }
+        }
+        else if indexPath.section == 1 {
+            let basicCell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
+            basicCell.textLabel?.text = "Log Out".localized()
+            basicCell.textLabel?.textColor = UIColor(colorLiteralRed: 236/255, green: 80/255, blue: 30/255, alpha: 1)
+            return basicCell
+        }
+        else if indexPath.section == 2 { // Ads image cell
+            
+            let adSpotTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdSpotTableViewCell") as! AdSpotTableViewCell
+            
+            let spot = adSpotManager.adSpots[indexPath.row]
+            let type = spot["type"]
+            let image = adSpotManager.adSpotImages["\(type!)"]
+            
+            adSpotTableViewCell.adImageView.image = image
+            
+            return adSpotTableViewCell
+        }
+        
+        let cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
+        return cell
+        
+    }
+    
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 {
+            if indexPath.row == Rows.autoLogin.rawValue {
+                
+            } else if indexPath.row == Rows.personalInformation.rawValue {
+                self.performSegue(withIdentifier: "PersonalInformationTVC", sender: self)
+            } else if indexPath.row == Rows.preferences.rawValue {
+                self.performSegue(withIdentifier: "PreferencesTVC", sender: self)
+            } else if indexPath.row == Rows.myRewardProgram.rawValue {
+                self.performSegue(withIdentifier: "RewardStatusTVC", sender: self)
+            } else if indexPath.row == Rows.changePassword.rawValue {
+                self.performSegue(withIdentifier: "ChangePasswordTVC", sender: self)
+            }
+        }
+        else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                self.showAlert()
+            }
+        }
+        else if indexPath.section == 2 {
+            self.adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
+        }
+
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 2 {
+            return 10
+        }
+        return 30
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let data = UserDefaults.standard.object(forKey: LOGGED_USER)
+        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)
+        let user = userInfo as! User
+        
+        let isFaceBookUser = user.signup_type
+        if indexPath.section == 0 {
+            // hide change password row, when logged through facebook
+            if indexPath.row == Rows.changePassword.rawValue {
+                if  isFaceBookUser == "2" {
+                    return 0
+                }
+            }
+        } else if indexPath.section == 2 {
+            let spot = adSpotManager.adSpots[indexPath.row]
+            let type = spot["type"]
+            let image = adSpotManager.adSpotImages["\(type!)"]
+            let height = AppHelper.getRatio(width: (image?.size.width)!, height: (image?.size.height)!, newWidth: self.view.frame.width)
+            
+            return height
+        }
+        
+        return UITableViewAutomaticDimension
+    }
+    
+}
+
+
+extension AccountTVC: AccountSwitchCellDelegate {
+    
+    func didSwithStateChanged(isOn: Bool) {
+        isAutoLogin = isOn
+        self.updateAutologinStatusInServer(isOn: isOn)
+    }
+    
+}
+
+extension AccountTVC: AdSpotsManagerDelegate {
+    
+    func didFinishLoadingSpots() {
+        SwiftLoader.hide()
+        self.tableView.reloadData()
+    }
+    
+    func didFailedLoadingSpots(description: String) {
+        SwiftLoader.hide()
+        self.tableView.reloadData()
+    }
+    
 }

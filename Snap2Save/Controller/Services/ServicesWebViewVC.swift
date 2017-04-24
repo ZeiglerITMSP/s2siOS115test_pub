@@ -77,12 +77,12 @@ class ServicesWebViewVC: UIViewController {
     
     func backAction() {
         
-         _ = self.navigationController?.popViewController(animated: true)
-//        if servicesWebView.canGoBack == true {
-//            servicesWebView.goBack()
-//        } else {
-//            _ = self.navigationController?.popViewController(animated: true)
-//        }
+//         _ = self.navigationController?.popViewController(animated: true)
+        if servicesWebView.canGoBack == true {
+            servicesWebView.goBack()
+        } else {
+            _ = self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func languageButtonClicked() {
@@ -130,7 +130,7 @@ class ServicesWebViewVC: UIViewController {
             
             if self.oldLanguage != self.currentlanguage {
                 self.oldLanguage = self.currentlanguage
-                self.servicesWebView.loadRequest(URLRequest(url: URL(string:"about:blank")!))
+//                self.servicesWebView.loadRequest(URLRequest(url: URL(string:"about:blank")!))
                 
                 self.loadWebView()
                 

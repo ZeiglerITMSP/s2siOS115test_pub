@@ -1,20 +1,15 @@
 //
-//  OfferTableViewCell.swift
+//  AcceuntCell.swift
 //  Snap2Save
 //
-//  Created by Appit on 4/17/17.
+//  Created by Appit on 4/20/17.
 //  Copyright © 2017 Appit. All rights reserved.
 //
 
 import UIKit
 
-class OfferTableViewCell: UITableViewCell {
+class AccountCell: UITableViewCell {
 
-    @IBOutlet weak var offerImageView: UIImageView!
-    
-    @IBOutlet weak var mesageLabel: UILabel!
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -179,10 +179,11 @@
 
 // Offers
 "Offers" = "Ofertas";
+"message.nooffer" = "No se ha encontrado ninguna oferta.";
 "No offer exists." = "No existe ninguna oferta.";
 "PLEASE TRY AGAIN LATER." = "POR FAVOR, INTÉNTELO DE NUEVO MÁS TARDE.";
 "THE INTERENT CONNECTION APPEARS TO BE OFFLINE." = "LA CONEXIÓN INTERENT APARECE PARA ESTAR OFFLINE.";
-"Additional Offers" = "Additional Offers";
+"Additional Offers" = "Ofertas adicionales";
 
 // Services
 "Services" = "Servicios";
@@ -306,8 +307,9 @@
 "ebt.title.login" = "Iniciar sesión";
 "ebt.title.register" = "Regístrate";
 // back alert
-"Are you sure ?" = "Estás seguro ?";
+"ebt.processTerminate.title" = "Estás seguro?";
 "ebt.processTerminate.alert" = "¿Está seguro de que desea finalizar este proceso?";
+"ebt.processTerminate.dashboard" = "If you leave this screen, you will be logged out of EBT services.";
 // timeout cancel alert
 "ebt.alert.timeout.title" = "¡Lo siento!";
 "ebt.alert.timeout.message" = "No podemos procesar su solicitud en este momento. Por favor, inténtelo de nuevo más tarde.";
@@ -400,7 +402,7 @@
 "CURRENT E-MAIL ADDRESS" = "DIRECCIÓN DE EMAIL ACTUAL";
 "E-MAIL ADDRESS" = "DIRECCIÓN DE CORREO ELECTRÓNICO";
 "CONFIRM E-MAIL ADDRESS" = "CONFIRMAR EL CORREO";
-"CHANGE EMAIL" = "CAMBIAR E-MAIL";
+"CHANGE EMAIL" = "CAMBIAR EMAIL";
 
 // EBT Dashboard
 "RECENT TRANSACTIONS" = "TRANSACCIONES RECIENTES";

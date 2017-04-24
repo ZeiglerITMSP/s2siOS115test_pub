@@ -29,6 +29,8 @@ class EBTDashboardTVC: UITableViewController {
     var ebtWebView: EBTWebView = EBTWebView.shared
     fileprivate var actionType: ActionType?
     
+    let snapBalanceKey = "snapBalance"
+    let cashBalanceKey = "cashBalance"
     var accountDetails = [[String:String?]]()
     var recentTransactions: [Transaction]?
     
@@ -37,14 +39,14 @@ class EBTDashboardTVC: UITableViewController {
     var availableBalance: String?
     var trasactions = [Any]()
     
-    var ebtBalance: String?
-    var cashBalance: String?
+//    var ebtBalance: String?
+//    var cashBalance: String?
     var transactionsString: String?
     // timer
     var startTime: Date!
     
     
-    var pageNumber: Int = 1 // 0 for internal build, 1 for live
+    var pageNumber: Int = 0 // 0 for internal build, 1 for live
     
     // load more
 //    var isLoadingMoreActivity:Bool = false
@@ -222,9 +224,9 @@ class EBTDashboardTVC: UITableViewController {
     
     func backAction() {
         
-        _ = self.navigationController?.popToRootViewController(animated: true)
-        //        self.navigationController?.popViewController(animated: true)
-        //  showAlert(title: "Are you sure ?".localized(), message: "The process will be cancelled.".localized(), action: #selector(cancelProcess))
+    //    _ = self.navigationController?.popToRootViewController(animated: true)
+        showAlert(title: "ebt.processTerminate.title".localized(),
+                  message: "ebt.processTerminate.dashboard".localized(), action: #selector(cancelProcess))
     }
     
     func cancelProcess() {
@@ -270,15 +272,18 @@ class EBTDashboardTVC: UITableViewController {
         
         execute(javaScript: jsEBTBalance, completion: { result in
             
-            let detail = ["title" : "SNAP Balance".localized(), "value": result]
+            let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
             self.accountDetails.append(detail)
-            self.ebtBalance = result
+            
+//            self.ebtBalance = result
             
             self.execute(javaScript: jsCashBalance, completion: { result in
                 
-                let detail = ["title" : "CASH Balance".localized() , "value": result]
-                self.accountDetails.append(detail)
-                self.cashBalance = result
+                if result != nil {
+                    let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
+                    self.accountDetails.append(detail)
+//                    self.cashBalance = result
+                }
                 self.getTransactionActivityUlr()
             })
         })
@@ -621,15 +626,15 @@ class EBTDashboardTVC: UITableViewController {
                             
                             // next button click
                             
-                            // temp
-//                            if self.trasactions.count > 100 {
-//                                self.tableView.reloadData()
-//                                self.sendEBTInformationToServer()
-//                            } else {
-//                                self.goToNextPage()
-//                            }
                             
-                            self.goToNextPage()
+                            if self.pageNumber > 50 {
+                                self.tableView.reloadData()
+                                self.sendEBTInformationToServer()
+                            } else {
+                                self.goToNextPage()
+                            }
+                            
+                           // self.goToNextPage()
                             
                             
                         }
@@ -716,8 +721,17 @@ extension EBTDashboardTVC {
         let ebt_user_id = EBTUser.shared.userID ?? ""
         let type = EBTUser.shared.loggedType
         let transactions = transactionsString ?? ""
-        let ebt_balance = ebtBalance ?? ""
-        let cash_balance = cashBalance ?? ""
+        
+        let ebtBalanceFiltered = self.accountDetails.filter { (row) -> Bool in
+            return row["key"]! == self.snapBalanceKey
+        }
+        
+        let cashBalanceFiltered = self.accountDetails.filter { (row) -> Bool in
+            return row["key"]! == self.cashBalanceKey
+        }
+        
+        let ebt_balance = ebtBalanceFiltered.first?["value"] ?? ""
+        let cash_balance = cashBalanceFiltered.first?["value"] ?? ""
         
         let parameters : Parameters = ["platform":"1",
                                        "version_code": version_code,
