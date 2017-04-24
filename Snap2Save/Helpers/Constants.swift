@@ -61,7 +61,6 @@ enum SpotType: Int {
 
 /*
  
- Request Params: Location: General offers - 1, Servcies - 2, Account - 3, Wow offers - 4, My Reward Program - 5, EBT Landing/Log In - 6, EBT Balance Screen - 7
- 
+ Request Params: screen_type: General offers - 1, Servcies - 2, Account - 3, Wow offers - 4, My Reward Program - 5, EBT Landing/Log In - 6, EBT Balance Screen - 7
  */
 
