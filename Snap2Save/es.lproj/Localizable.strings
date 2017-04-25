@@ -179,7 +179,7 @@
 
 // Offers
 "Offers" = "Ofertas";
-"message.nooffer" = "No se ha encontrado ninguna oferta.";
+"message.nooffer" = "No existe ninguna oferta.";
 "No offer exists." = "No existe ninguna oferta.";
 "PLEASE TRY AGAIN LATER." = "POR FAVOR, INTÉNTELO DE NUEVO MÁS TARDE.";
 "THE INTERENT CONNECTION APPEARS TO BE OFFLINE." = "LA CONEXIÓN INTERENT APARECE PARA ESTAR OFFLINE.";
