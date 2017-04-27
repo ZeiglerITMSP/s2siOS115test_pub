@@ -195,7 +195,7 @@ class EBTLoginTVC: UITableViewController {
         }
         
         reloadContent()
-//        autofillUserName()
+        validateLoginPage()
         
         udateRememberMyStatus()
     }
@@ -217,7 +217,7 @@ class EBTLoginTVC: UITableViewController {
         // remove observer
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
         // listen language change notification.
-        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(languageChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -314,6 +314,12 @@ class EBTLoginTVC: UITableViewController {
         
     }
     
+    func languageChanged() {
+        
+        loadLoginPage()
+        reloadContent()
+    }
+    
     func reloadContent() {
         
         DispatchQueue.main.async {
@@ -337,9 +343,9 @@ class EBTLoginTVC: UITableViewController {
             
             self.tableView.reloadData()
             
-            self.validateLoginPage()
         }
     }
+    
     
     func popToLoginVC() {
         
@@ -505,7 +511,7 @@ extension EBTLoginTVC {
         actionType = ActionType.loadLoginPage
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
-        
+        // test
         var loginUrl = tempLoginUrl //kEBTLoginUrl
         if Localize.currentLanguage() == "es" {
             loginUrl = kEBTLoginUrl_es
@@ -607,9 +613,7 @@ extension EBTLoginTVC {
                 print("PAGE NOT LOADED YET..")
                 self.exitProcessIfPossible()
             }
-            
         })
-        
     }
     
     func autoFill() {

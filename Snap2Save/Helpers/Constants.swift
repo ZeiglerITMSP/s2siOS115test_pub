@@ -15,11 +15,10 @@ import UIKit
 // test url
 //var hostUrl = "http://dev.snap2save-a-lot.com/test/api"
 
-
-//*TEST:* http://test-api.snap2save.com/
-//var hostUrl = "http://test-api.snap2save.com/"
-//*DEV:* http://dev.snap2save.com/api/
-var hostUrl = "http://dev.snap2save.com/api/"
+// test
+var hostUrl = "http://test-api.snap2save.com"
+// dev
+//var hostUrl = "http://dev.snap2save.com/api"
 
 
 var reward_program_en = "http://dev.snap2save-a-lot.com/test/admin/reward/en"

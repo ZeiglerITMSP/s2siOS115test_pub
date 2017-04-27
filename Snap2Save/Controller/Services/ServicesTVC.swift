@@ -93,15 +93,15 @@ class ServicesTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // TEST
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "EBTLoginTVC" {
-            
-            let loginVC = segue.destination as! EBTLoginTVC
-            loginVC.tempLoginUrl = tempLoginUrl
-        }
-    }
+//    // TEST
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        if segue.identifier == "EBTLoginTVC" {
+//            
+//            let loginVC = segue.destination as! EBTLoginTVC
+//            loginVC.tempLoginUrl = tempLoginUrl
+//        }
+//    }
     
     // MARK: -
     
@@ -222,7 +222,7 @@ extension ServicesTVC {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section ==  0 {
             // TEST 2 , live 1
-            return 2
+            return 1
         } else if section == 1 {
             return infoScreensArray.count
         } else if section == 2 {
@@ -273,7 +273,7 @@ extension ServicesTVC {
                 //cell.ebtLabel.text = "EBT".localized()
                 self.FlowSegentedControl =  cell.flowSegmentControl
 //                // TEST
-//                self.FlowSegentedControl.isHidden = true
+                self.FlowSegentedControl.isHidden = true
                 return cell
             }
         }
@@ -362,19 +362,19 @@ extension ServicesTVC {
         // get url
         var loginUrl = kEBTLoginUrl
         // TEST
-        // For testing only
-        if self.FlowSegentedControl.selectedSegmentIndex == 1 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 2 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow3/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 3 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow4/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 4 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow5/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 5 {
-            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
-        }
-        tempLoginUrl = loginUrl
+//        // For testing only
+//        if self.FlowSegentedControl.selectedSegmentIndex == 1 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 2 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow3/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 3 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow4/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 4 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow5/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 5 {
+//            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
+//        }
+//        tempLoginUrl = loginUrl
         
         if Localize.currentLanguage() == "es" {
             // .. es url

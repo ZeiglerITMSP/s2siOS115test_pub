@@ -782,13 +782,13 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
     
     func isValid() -> Bool {
         
-        if (zipCodeTextField.text?.characters.count)! > 0 {
+       // if (zipCodeTextField.text?.characters.count)! > 0 {
             if (zipCodeTextField.text?.characters.count)! < 5 {
                 showAlert(title: "", message: "Please enter a valid zip code.".localized())
                 return false
                 
             }
-        }
+        //}
         
         return true
     }
