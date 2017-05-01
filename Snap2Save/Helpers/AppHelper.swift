@@ -241,6 +241,10 @@ extension String {
         return self.trimmingCharacters(in: .whitespaces)
     }
     
+    func removeSpecialChars(validCharacters: String) -> String {
+        let okayChars : Set<Character> = Set(validCharacters.characters)
+        return String(self.characters.filter {okayChars.contains($0) })
+    }
     
     func condenseWhitespace() -> String {
         let components = self.components(separatedBy: NSCharacterSet.whitespacesAndNewlines)

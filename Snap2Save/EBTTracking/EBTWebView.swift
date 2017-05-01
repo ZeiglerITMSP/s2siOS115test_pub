@@ -81,6 +81,11 @@ class EBTWebView: NSObject {
         //        webView.uiDelegate = self
     }
     
+    func loadEmptyPage() {
+        
+        webView.load(URLRequest.init(url: URL(string: "about:blank")!))
+    }
+    
     // Get page headline
 //    func getPageHeading(completion: @escaping (String?) -> ()) {
 //        
