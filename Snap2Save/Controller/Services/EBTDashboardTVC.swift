@@ -374,6 +374,7 @@ class EBTDashboardTVC: UITableViewController {
                 self.validateTransactionsTab()
             } else {
                 print("END WITH DATA")
+                self.isTransactionsLoading = false
                 self.tableView.reloadData()
                 self.sendEBTInformationToServer()
             }
@@ -476,11 +477,10 @@ class EBTDashboardTVC: UITableViewController {
         } else {
             print("END")
             startTime = nil
-            
+            self.isTransactionsLoading = false
             self.tableView.reloadData()
             self.sendEBTInformationToServer()
         }
-        
     }
 
     func checkForStartEndDateFields() {
@@ -546,6 +546,7 @@ class EBTDashboardTVC: UITableViewController {
             print("END")
             startTime = nil
             
+            self.isTransactionsLoading = false
             self.tableView.reloadData()
             self.sendEBTInformationToServer()
         }
@@ -604,25 +605,19 @@ class EBTDashboardTVC: UITableViewController {
             "}" +
         "transactionActivity();"
         
-        
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
                 print(error ?? "error nil")
             } else {
-//                print(result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-//                print("trimmedText:")
-                print(trimmedText)
                 
                 if trimmedText.characters.count > 0 {
                     self.transactionsString = trimmedText
                     
                     let json = JSON.parse(trimmedText)
                     print("json response \(json)")
-                    
                     if let responseArray = json.arrayObject {
-                        
                         if responseArray.count == 0 {
                             self.getTransactions()
                         } else {
@@ -639,8 +634,6 @@ class EBTDashboardTVC: UITableViewController {
                     }
                 } else {
                     self.getTransactions()
-                    //                        self.tableView.reloadData()
-                    //                        self.sendEBTInformationToServer()
                 }
             }
         }
@@ -652,18 +645,17 @@ class EBTDashboardTVC: UITableViewController {
         
         if trasactions.count > 0 {
             // check transaction dates
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "mm/dd/yyyy" //Your date format
-            
+            let dateFormat = "mm/dd/yyyy"
+            // get last transaction date
             let lastTransaction = self.trasactions.last as! [String:Any]
             let lastDateString = lastTransaction["date"] as! String
-            let lastDate = dateFormatter.date(from: lastDateString)!
-            
+            let lastDate = AppHelper.getDate(fromString: lastDateString, withFormat: dateFormat)!
+            // get new transaction date
             let newTransaction = responseArray.first as! [String:Any]
             let newDateString = newTransaction["date"] as! String
-            let newDate = dateFormatter.date(from: newDateString)!
-            
-            if newDate <= lastDate {
+            let newDate = AppHelper.getDate(fromString: newDateString, withFormat: dateFormat)!
+            // compare dates
+            if newDate <= lastDate {    // new transaction date have to be same date of old transaction or past date.
                 return true
             }
         } else {
@@ -706,11 +698,7 @@ class EBTDashboardTVC: UITableViewController {
                 print("LAST PAGE")
                 self.isTransactionsLoading = false
                 self.tableView.reloadData()
-//                self.hasMoreActivity = false
-//                self.tableView.endLoadMore()
-                
-                // send all transactions to server
-//                self.sendEBTInformationToServer()
+                self.sendEBTInformationToServer()
             } else { // click next page
                 print("NEXT PAGE")
                 let jsNextPageClick = "$('#next_allCompletedTxnGrid_pager > a').click();"
