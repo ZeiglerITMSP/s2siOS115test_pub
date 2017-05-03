@@ -66,7 +66,7 @@ class AccountTVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        SwiftLoader.show(title: "Loading...", animated: true)
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
         self.adSpotManager.getAdSpots(forScreen: .account)
         reloadContent()
         AppHelper.getScreenName(screenName: "Account screen")
@@ -91,7 +91,7 @@ class AccountTVC: UITableViewController {
     
     func languageChanged() {
         
-        SwiftLoader.show(title: "Loading...", animated: true)
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
         reloadContent()
         adSpotManager.downloadAdImages()
     }
@@ -113,7 +113,7 @@ class AccountTVC: UITableViewController {
     func showAlert() {
         
         let logOutAlert = UIAlertController.init(title: nil, message: "Are you sure you want to log out?".localized(), preferredStyle: .alert)
-        let englishBtn = UIAlertAction.init(title: "Ok", style: .default, handler:{
+        let englishBtn = UIAlertAction.init(title: "OK".localized(), style: .default, handler:{
             (action) in
             self.userLogout()
         })

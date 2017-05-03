@@ -371,6 +371,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
                 offerImageCell.offerImageView.image = offerImage
                 offerImageCell.mesageLabel.isHidden = true
             } else {
+                offerImageCell.offerImageView.image = nil
                 offerImageCell.mesageLabel.isHidden = false
                 offerImageCell.mesageLabel.text = "message.nooffer".localized()
             }

@@ -43,6 +43,9 @@ class EBTLoginTVC: UITableViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    
     @IBOutlet weak var passwordField: AIPlaceHolderTextField!
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
@@ -195,7 +198,7 @@ class EBTLoginTVC: UITableViewController {
         }
         
         reloadContent()
-//        autofillUserName()
+        validateLoginPage()
         
         udateRememberMyStatus()
     }
@@ -217,7 +220,7 @@ class EBTLoginTVC: UITableViewController {
         // remove observer
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
         // listen language change notification.
-        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(languageChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -314,6 +317,12 @@ class EBTLoginTVC: UITableViewController {
         
     }
     
+    func languageChanged() {
+        
+        loadLoginPage()
+        reloadContent()
+    }
+    
     func reloadContent() {
         
         DispatchQueue.main.async {
@@ -324,6 +333,7 @@ class EBTLoginTVC: UITableViewController {
             
             self.titleLabel.text = "ebt.login.titleLabel".localized()
             self.messageLabel.text = "ebt.login.messageLabel".localized()
+            self.descriptionLabel.text = "ebt.login.description".localized()
             self.pageTitle = "ebt.logon".localized()
             self.userIdField.placeholderText = "USER ID".localized()
             self.passwordField.placeholderText = "PASSWORD".localized()
@@ -337,9 +347,9 @@ class EBTLoginTVC: UITableViewController {
             
             self.tableView.reloadData()
             
-            self.validateLoginPage()
         }
     }
+    
     
     func popToLoginVC() {
         
@@ -376,7 +386,7 @@ class EBTLoginTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         updateErrorTextColor()
-        if indexPath.row == 1 {
+        if indexPath.row == 2 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }
@@ -505,7 +515,7 @@ extension EBTLoginTVC {
         actionType = ActionType.loadLoginPage
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
-        
+        // test
         var loginUrl = tempLoginUrl //kEBTLoginUrl
         if Localize.currentLanguage() == "es" {
             loginUrl = kEBTLoginUrl_es
@@ -607,9 +617,7 @@ extension EBTLoginTVC {
                 print("PAGE NOT LOADED YET..")
                 self.exitProcessIfPossible()
             }
-            
         })
-        
     }
     
     func autoFill() {

@@ -31,7 +31,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
     var selectedStateIndex : NSInteger!
     var selectedGenderIndex : NSInteger!
     var selectedAgeGroupIndex : NSInteger!
-    var SelectedEthnicityIndex : NSInteger!
+    var selectedEthnicityIndex : NSInteger!
     
     // outlets
     
@@ -85,7 +85,13 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
     @IBOutlet var saveActivityIndicator: UIActivityIndicatorView!
     
     @IBAction func saveButtonAction(_ sender: UIButton) {
-        updateUserInformation()
+        
+        if isInformationModified() == true {
+            updateUserInformation()
+        } else {
+            self.showAlert(title: "", message: "alert.nochange".localized());
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -204,8 +210,8 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
             self.ageGroupTextField.text = self.ageGroupArray.object(at: self.selectedAgeGroupIndex - 1) as? String
         }
         
-        if self.SelectedEthnicityIndex != nil {
-            self.ethnicityTextField.text = self.ethnicityArray.object(at: self.SelectedEthnicityIndex - 1) as? String
+        if self.selectedEthnicityIndex != nil {
+            self.ethnicityTextField.text = self.ethnicityArray.object(at: self.selectedEthnicityIndex - 1) as? String
         }
         
         self.tableView.reloadData()
@@ -401,7 +407,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
             selectedAgeGroupIndex = index+1
         }
         else if textField.tag == DropDownTags.ethnicity.rawValue{
-            SelectedEthnicityIndex = index+1
+            selectedEthnicityIndex = index+1
         }
     }
     
@@ -437,6 +443,64 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         else {
             textField.resignFirstResponder()
         }
+    }
+    
+    
+    
+    func isInformationModified() -> Bool {
+        
+        let userData = UserDefaults.standard.object(forKey: USER_DATA)
+        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
+        
+        let user:User = userInfo as! User
+        
+        
+        if user.additionalInformation?.first_name == firstNameTextField.text &&
+            user.additionalInformation?.last_name == lastNameTextField.text &&
+            user.additionalInformation?.address_line1 == addressLine1TextField.text &&
+            user.additionalInformation?.address_line2 == addressLine2TextField.text &&
+            user.additionalInformation?.city == cityTextField.text &&
+            user.additionalInformation?.state == stateTextField.text &&
+            user.zipcode == zipCodeTextField.text {
+        
+            if selectedGenderIndex != nil {
+                if user.additionalInformation?.gender != String(selectedGenderIndex) {
+                    return true
+                }
+            }
+            if selectedAgeGroupIndex != nil {
+                if user.additionalInformation?.age_group != String(selectedAgeGroupIndex) {
+                    return true
+                }
+            }
+            if selectedEthnicityIndex != nil {
+                if user.additionalInformation?.ethnicity != String(selectedEthnicityIndex) {
+                    return true
+                }
+            }
+            
+            return false    // Information not modified
+        } else {
+            return true // Information modified
+        }
+        
+        
+//        guard
+//            user.additionalInformation?.first_name == firstNameTextField.text,
+//            user.additionalInformation?.last_name == lastNameTextField.text,
+//            user.additionalInformation?.address_line1 == addressLine1TextField.text,
+//            user.additionalInformation?.address_line2 == addressLine2TextField.text,
+//            user.additionalInformation?.city == cityTextField.text,
+//            user.additionalInformation?.state == stateTextField.text,
+//            user.zipcode == zipCodeTextField.text,
+//            user.additionalInformation?.gender == "\(selectedGenderIndex)",
+//            user.additionalInformation?.age_group == "\(selectedAgeGroupIndex)",
+//            user.additionalInformation?.ethnicity == "\(selectedEthnicityIndex)"
+//            else {
+//                return true
+//        }
+//        
+//        return false
     }
     
     func updateUserInformation(){
@@ -487,8 +551,8 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
             age_group = user.additionalInformation?.age_group ?? ""
         }
         
-        if SelectedEthnicityIndex != nil{
-            ethnicity  = String.init(format: "%d", SelectedEthnicityIndex)
+        if selectedEthnicityIndex != nil{
+            ethnicity  = String.init(format: "%d", selectedEthnicityIndex)
         }
         else{
             ethnicity = user.additionalInformation?.ethnicity ?? ""
@@ -562,7 +626,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         }
     }
     
-    func loadUserInformation(){
+    func loadUserInformation() {
         // //print(""user id\(self.user.id)")
         let userData = UserDefaults.standard.object(forKey: USER_DATA)
         let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData as! Data)
@@ -638,7 +702,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
                 if index == 0 {
                     ethnicityTextField.text = ""
                 } else {
-                    SelectedEthnicityIndex = index
+                    selectedEthnicityIndex = index
                     ethnicityTextField.text = ethnicityArray.object(at: index - 1) as? String
                 }
             } else {
@@ -653,7 +717,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
 //                ethnicityTextField.text = ""
 //            }
 //            else {
-//                SelectedEthnicityIndex = index
+//                selectedEthnicityIndex = index
 //                ethnicityTextField.text = ethnicityArray.object(at: index - 1) as? String
 //                
 //            }
@@ -782,13 +846,13 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
     
     func isValid() -> Bool {
         
-        if (zipCodeTextField.text?.characters.count)! > 0 {
+       // if (zipCodeTextField.text?.characters.count)! > 0 {
             if (zipCodeTextField.text?.characters.count)! < 5 {
                 showAlert(title: "", message: "Please enter a valid zip code.".localized())
                 return false
                 
             }
-        }
+        //}
         
         return true
     }

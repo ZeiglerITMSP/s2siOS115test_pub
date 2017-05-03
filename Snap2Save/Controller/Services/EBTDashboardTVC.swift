@@ -39,16 +39,16 @@ class EBTDashboardTVC: UITableViewController {
     var availableBalance: String?
     var trasactions = [Any]()
     
-//    var ebtBalance: String?
-//    var cashBalance: String?
-    var transactionsString: String?
+//    var transactionsString: String = ""
     // timer
     var startTime: Date!
     
     
-    var pageNumber: Int = 0 // 0 for internal build, 1 for live
+    var pageNumber: Int = 1 // 0 for internal build, 1 for live
     
     // load more
+    var isTransactionsLoading = false
+    
 //    var isLoadingMoreActivity:Bool = false
 //    var hasMoreActivity:Bool = true
     
@@ -115,7 +115,7 @@ class EBTDashboardTVC: UITableViewController {
         if accountDetails.count > 0 {
             sections += 1
         }
-        if trasactions.count > 0 {
+        if trasactions.count > 0 || isTransactionsLoading == true {
             sections += 1
         }
         
@@ -139,7 +139,14 @@ class EBTDashboardTVC: UITableViewController {
             
             return accountDetails.count
         } else if section == 1 {
-            return trasactions.count
+            
+            var transactionsCount = trasactions.count
+            
+            if isTransactionsLoading {
+                transactionsCount += 1
+            }
+            
+            return transactionsCount
         }
         
         return 0
@@ -168,29 +175,33 @@ class EBTDashboardTVC: UITableViewController {
             
         } else if indexPath.section == 1 {
             
-            let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
+            if indexPath.row < trasactions.count {
+                
+                let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
+                
+                let record = trasactions[indexPath.row] as? [String:String]
+                detailedSubtitleCell.titleLabel.text = record?["location"]
+                detailedSubtitleCell.subtitleLabel.text = record?["date"]
+                detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
+                
+                // amount
+                let debit_amount = record?["debit_amount"]
+                let credit_amount = record?["credit_amount"]
+                if credit_amount?.containNumbers1To9() == true {
+                    detailedSubtitleCell.detailLabel.text = credit_amount
+                    detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
+                } else {
+                    detailedSubtitleCell.detailLabel.text = debit_amount
+                    detailedSubtitleCell.detailLabel.textColor = UIColor.black
+                }
             
-            let record = trasactions[indexPath.row] as? [String:String]
-            
-            detailedSubtitleCell.titleLabel.text = record?["location"]
-//            detailedSubtitleCell.detailLabel.text = record?["debit_amount"]
-//            detailedSubtitleCell.detailLabel2.text = record?["credit_amount"]
-            detailedSubtitleCell.subtitleLabel.text = record?["date"]
-            detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
-            
-            // amount
-            let debit_amount = record?["debit_amount"]
-            let credit_amount = record?["credit_amount"]
-            if credit_amount?.containNumbers1To9() == true {
-                detailedSubtitleCell.detailLabel.text = credit_amount
-                detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
+                return detailedSubtitleCell
             } else {
-                detailedSubtitleCell.detailLabel.text = debit_amount
-                detailedSubtitleCell.detailLabel.textColor = UIColor.black
+                let loaderCell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreActivityTVC") as! LoadMoreActivityTVC
+                loaderCell.startAnimiatingActivit()
+                return loaderCell
             }
             
-            
-            return detailedSubtitleCell
         } else {
             
             return UITableViewCell()
@@ -232,6 +243,8 @@ class EBTDashboardTVC: UITableViewController {
     func cancelProcess() {
         
         //        ebtWebView = nil
+        
+        ebtWebView.loadEmptyPage()
         _ = self.navigationController?.popToRootViewController(animated: true)
         
         //        // Define identifier
@@ -259,31 +272,39 @@ class EBTDashboardTVC: UITableViewController {
     
     func getAccountDetails() {
         
-        //        let jsAccountTypeText = "$('.widgetLabel:eq(0)').text()"
-        //        let jsAccountStatusText = "$('.widgetLabel:eq(1)').text()"
-        //        let jsAvailableBalanceText = "$('.widgetLabel:eq(2)').text()"
-        
-        //        let jsAccountTypeValue = "$('.widgetValue:eq(0)').text()"
-        //        let jsAccountStatusValue = "$('.widgetValue:eq(1)').text()"
-        //        let jsAvailableBalanceValue = "$('.widgetValue:eq(2)').text()"
-        
         let jsEBTBalance = "$($(\"td.widgetValue:contains('SNAP')\").parent().parent().find('td.widgetValue')[2]).html().trim();"
         let jsCashBalance = "$($(\"td.widgetValue:contains('CASH')\").parent().parent().find('td.widgetValue')[2]).html().trim();"
         
         execute(javaScript: jsEBTBalance, completion: { result in
             
-            let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
-            self.accountDetails.append(detail)
-            
-//            self.ebtBalance = result
+            if result != nil {
+                let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
+                self.accountDetails.append(detail)
+//                guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
+//                }
+//                let valueInDouble = Double(valueString) ?? 0
+//                if valueInDouble > 0 {
+//                    let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
+//                    self.accountDetails.append(detail)
+//                }
+            }
             
             self.execute(javaScript: jsCashBalance, completion: { result in
-                
                 if result != nil {
                     let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
                     self.accountDetails.append(detail)
-//                    self.cashBalance = result
+
+//                    guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
+//                    }
+//                    let valueInDouble = Double(valueString) ?? 0
+//                    if valueInDouble > 0 {
+//                        let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
+//                        self.accountDetails.append(detail)
+//                    }
                 }
+                
+                self.isTransactionsLoading = true
+                self.tableView.reloadData()
                 self.getTransactionActivityUlr()
             })
         })
@@ -358,6 +379,7 @@ class EBTDashboardTVC: UITableViewController {
                 self.validateTransactionsTab()
             } else {
                 print("END WITH DATA")
+                self.isTransactionsLoading = false
                 self.tableView.reloadData()
                 self.sendEBTInformationToServer()
             }
@@ -460,11 +482,10 @@ class EBTDashboardTVC: UITableViewController {
         } else {
             print("END")
             startTime = nil
-            
+            self.isTransactionsLoading = false
             self.tableView.reloadData()
             self.sendEBTInformationToServer()
         }
-        
     }
 
     func checkForStartEndDateFields() {
@@ -530,6 +551,7 @@ class EBTDashboardTVC: UITableViewController {
             print("END")
             startTime = nil
             
+            self.isTransactionsLoading = false
             self.tableView.reloadData()
             self.sendEBTInformationToServer()
         }
@@ -568,6 +590,7 @@ class EBTDashboardTVC: UITableViewController {
             "t_date = $tds.eq(2).text().trim();" +
             "if (t_date) {" +
             "list[i] = {" +
+            "id: this.id," +
             "date: t_date," +
             "transaction: $tds.eq(3).text().trim()," +
             "location: $tds.eq(4).text().trim()," +
@@ -587,69 +610,86 @@ class EBTDashboardTVC: UITableViewController {
             "}" +
         "transactionActivity();"
         
-        
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
                 print(error ?? "error nil")
             } else {
-//                print(result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-//                print("trimmedText:")
-                print(trimmedText)
                 
                 if trimmedText.characters.count > 0 {
-                    self.transactionsString = trimmedText
+                   // self.transactionsString.append(trimmedText)
                     
                     let json = JSON.parse(trimmedText)
                     print("json response \(json)")
-                    
                     if let responseArray = json.arrayObject {
-                        
                         if responseArray.count == 0 {
                             self.getTransactions()
                         } else {
-                            
-                            self.trasactions.append(contentsOf: responseArray)
-                            
-                            self.startTime = nil
-                            self.pageNumber += 1 //= self.pageNumber + 1
-                            
-                            
-                          //  self.tableView.reloadData()
-                            
-                            // stop load more
-//                            DispatchQueue.main.async {
-//                                self.tableView.doneRefresh()
-//                            }
-                          //  self.isLoadingMoreActivity = false
-                            
-                            // next button click
-                            
-                            
-                            if self.pageNumber > 50 {
+                            let status = self.validateNewTransactions(responseArray: responseArray)
+                            if status {
+                                self.appendTransactions(responseArray: responseArray)
+                            } else {
+                                // repeated transactions
+                                self.isTransactionsLoading = false
                                 self.tableView.reloadData()
                                 self.sendEBTInformationToServer()
-                            } else {
-                                self.goToNextPage()
                             }
-                            
-                           // self.goToNextPage()
-                            
-                            
                         }
                     }
-                    
                 } else {
-                    
                     self.getTransactions()
-                    //                        self.tableView.reloadData()
-                    //                        self.sendEBTInformationToServer()
                 }
             }
         }
         
     }
+    
+    
+    func validateNewTransactions(responseArray: [Any]) -> Bool {
+        
+        if trasactions.count > 0 {
+            // check transaction dates
+            let dateFormat = "mm/dd/yyyy"
+            // get last transaction date
+            let lastTransaction = self.trasactions.last as! [String:Any]
+            let lastDateString = lastTransaction["date"] as! String
+            let lastDate = AppHelper.getDate(fromString: lastDateString, withFormat: dateFormat)!
+            // get new transaction date
+            let newTransaction = responseArray.first as! [String:Any]
+            let newDateString = newTransaction["date"] as! String
+            let newDate = AppHelper.getDate(fromString: newDateString, withFormat: dateFormat)!
+            // compare dates
+            if newDate <= lastDate {    // new transaction date have to be same date of old transaction or past date.
+                return true
+            }
+        } else {
+            return true
+        }
+
+        return false
+    }
+    
+    func appendTransactions(responseArray: [Any]) {
+        // get last indexPath
+        let lastRow = self.trasactions.count
+        var newIndexPaths = [IndexPath]()
+        for row in 0...responseArray.count - 1 {
+            let indexPath = IndexPath(row: lastRow + row, section: 1)
+            newIndexPaths.append(indexPath)
+        }
+        self.trasactions.append(contentsOf: responseArray)
+        
+        self.startTime = nil
+        self.pageNumber += 1 //= self.pageNumber + 1
+        
+        self.tableView.beginUpdates()
+        self.tableView.insertRows(at: newIndexPaths, with: .none)
+        self.tableView.endUpdates()
+        
+        self.goToNextPage()
+    }
+    
     
     
     func goToNextPage() {
@@ -661,10 +701,8 @@ class EBTDashboardTVC: UITableViewController {
             if (result as? String) != nil {
                 // next_allCompletedTxnGrid_pager
                 print("LAST PAGE")
+                self.isTransactionsLoading = false
                 self.tableView.reloadData()
-//                self.hasMoreActivity = false
-//                self.tableView.endLoadMore()
-                // send all transactions to server
                 self.sendEBTInformationToServer()
             } else { // click next page
                 print("NEXT PAGE")
@@ -720,7 +758,9 @@ extension EBTDashboardTVC {
         
         let ebt_user_id = EBTUser.shared.userID ?? ""
         let type = EBTUser.shared.loggedType
-        let transactions = transactionsString ?? ""
+        
+        let paramsJSON = JSON(self.trasactions)
+        let paramsString = paramsJSON.rawString(.utf8, options: .prettyPrinted)
         
         let ebtBalanceFiltered = self.accountDetails.filter { (row) -> Bool in
             return row["key"]! == self.snapBalanceKey
@@ -745,9 +785,9 @@ extension EBTDashboardTVC {
                                        "ebt_user_id": ebt_user_id,
                                        "type": type,
                                        
-                                       "transactions": transactions,
-                                       "ebt_balance": ebt_balance,
-                                       "cash_balance": cash_balance
+                                       "transactions": paramsString,
+                                       "ebt_balance": ebt_balance!,
+                                       "cash_balance": cash_balance!
         ]
         
         print(parameters)

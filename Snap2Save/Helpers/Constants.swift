@@ -10,11 +10,17 @@ import Foundation
 import UIKit
 
 
-// development url
+// development url old
 //var hostUrl = "http://dev.snap2save-a-lot.com/api";
-
 // test url
-var hostUrl = "http://dev.snap2save-a-lot.com/test/api"
+//var hostUrl = "http://dev.snap2save-a-lot.com/test/api"
+
+// new
+// test
+var hostUrl = "http://test-api.snap2save.com"
+// dev
+//var hostUrl = "http://dev.snap2save.com/api"
+
 
 var reward_program_en = "http://dev.snap2save-a-lot.com/test/admin/reward/en"
 var reward_program_es = "http://dev.snap2save-a-lot.com/test/admin/reward/es"

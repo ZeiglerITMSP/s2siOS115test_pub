@@ -111,6 +111,22 @@ class AppHelper {
     }
     
     
+    // Date Conversions
+    
+    class func getDate(fromString string: String, withFormat format: String = "dd-mm-yyyy") -> Date? {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format //Your date format
+        return dateFormatter.date(from: string) //according to date format your date string
+    }
+    
+    class func getString(fromDate date: Date, withFormat format: String = "MMM d, yyyy") -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format //Your New Date format as per requirement change it own
+        return dateFormatter.string(from: date)
+    }
+    
     //    class func isValid(input:String) -> Bool {
     //
     //        let regex = try! NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: NSRegularExpression.Options())
@@ -241,6 +257,10 @@ extension String {
         return self.trimmingCharacters(in: .whitespaces)
     }
     
+    func removeSpecialChars(validCharacters: String) -> String {
+        let okayChars : Set<Character> = Set(validCharacters.characters)
+        return String(self.characters.filter {okayChars.contains($0) })
+    }
     
     func condenseWhitespace() -> String {
         let components = self.components(separatedBy: NSCharacterSet.whitespacesAndNewlines)
@@ -334,7 +354,7 @@ extension UIViewController {
             }
         })
         
-        let cancelAction = UIAlertAction(title: "CANCEL".localized() , style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel".localized() , style: .default, handler: nil)
         
         if showCancel == true {
             alertController.addAction(cancelAction)
