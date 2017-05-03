@@ -41,7 +41,7 @@ class RedeemPointsTVC: UITableViewController {
         else {
             
             let redeemAlert = UIAlertController.init(title: nil, message: "Are you sure you want to redeem points?".localized(), preferredStyle: .alert)
-            let okBtn = UIAlertAction.init(title: "Ok", style: .default, handler:{
+            let okBtn = UIAlertAction.init(title: "OK".localized(), style: .default, handler:{
                 (action) in
                 self.getRedeemPoints()
             })

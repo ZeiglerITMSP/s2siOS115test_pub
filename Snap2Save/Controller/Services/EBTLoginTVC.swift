@@ -43,6 +43,9 @@ class EBTLoginTVC: UITableViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    
     @IBOutlet weak var passwordField: AIPlaceHolderTextField!
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
@@ -330,6 +333,7 @@ class EBTLoginTVC: UITableViewController {
             
             self.titleLabel.text = "ebt.login.titleLabel".localized()
             self.messageLabel.text = "ebt.login.messageLabel".localized()
+            self.descriptionLabel.text = "ebt.login.description".localized()
             self.pageTitle = "ebt.logon".localized()
             self.userIdField.placeholderText = "USER ID".localized()
             self.passwordField.placeholderText = "PASSWORD".localized()
@@ -382,7 +386,7 @@ class EBTLoginTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         updateErrorTextColor()
-        if indexPath.row == 1 {
+        if indexPath.row == 2 {
             if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
                 return 0
             }

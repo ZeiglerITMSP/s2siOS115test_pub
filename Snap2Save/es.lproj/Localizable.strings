@@ -158,6 +158,10 @@
 "Change Password" = "Cambiar contraseña";
 "Log Out" = "Cerrar sesión";
 
+// PERSONAL INFORMATION VC
+"alert.nochange" = "No se ha hecho ningún cambio.";
+
+
 // PREFERENCE VC
 "Preferences" = "Preferencias";
 "You have chosen to be contacted by email, but have not provided a valid email address." = "Has escogido que te contactamos por email, pero no has ingresado una dirección de email válida.";
@@ -326,6 +330,7 @@
 "Identify yourself!" = "¡Identifícate!";
 "ebt.login.titleLabel" = "UNA MANERA FÁCIL Y PRÁCTICA DE ACCEDER A LA INFORMACIÓN DE LA CUENTA DE SU TARJETA DE EBT";
 "ebt.login.messageLabel" = "Ve tu saldo y revisa tu actividad de transacciones.";
+"ebt.login.description" = "To log in enter your existing Chase UCard User ID and Password, or click on Register to sign up.";
 
 
 // Authentication Code
@@ -348,7 +353,7 @@
 "WHAT IS YOUR SOCIAL SECURITY NUMBER?" = "¿CUÁL ES TU NÚMERO DE SEGURO SOCIAL?";
 
 // Verify Security Question
-"ebt.securityQuestion.titleLabel" = "VERIFICA LA PREGUNTA DE SEGURIDAD.";
+"ebt.securityQuestion.titleLabel" = "VERIFICAR PREGUNTA DE SEGURIDAD.";
 "ebt.securityQuestion.messageLabel" = "Introduce la respuesta de seguridad que utilizaste durante tu registro.";
 "SECURITY QUESTION" = "PREGUNTA DE SEGURIDAD";
 "SECURITY ANSWER" = "RESPUESTA DE SEGURIDAD";

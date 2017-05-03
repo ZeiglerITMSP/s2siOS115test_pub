@@ -153,6 +153,9 @@
 "Change Password" = "Change Password";
 "Log Out" = "Log Out";
 
+// PERSONAL INFORMATION VC
+"alert.nochange" = "No change has been made.";
+
 // PREFERENCE VC
 "Preferences" = "Preferences";
 "You have chosen to be contacted by email, but have not provided a valid email address." = "You have chosen to be contacted by email, but have not provided a valid email address.";
@@ -324,6 +327,7 @@
 "Identify yourself!" = "Identify yourself!";
 "ebt.login.titleLabel" = "AN EASY, CONVENIENT WAY TO ACCESS YOUR EBT CARD ACCOUNT INFORMATION.";
 "ebt.login.messageLabel" = "Check your balance and review your transaction activity.";
+"ebt.login.description" = "To log in enter your existing Chase UCard User ID and Password, or click on Register to sign up.";
 
 // Authentication Code
 "AUTHENTICATION CODE" = "AUTHENTICATION CODE";

@@ -112,7 +112,7 @@ class ServicesTVC: UITableViewController {
     
     func languageChanged() {
         
-        SwiftLoader.show(title: "Loading...", animated: true)
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
         screensLoaded = true
         reloadContent()
         adSpotManager.downloadAdImages()
@@ -162,7 +162,7 @@ class ServicesTVC: UITableViewController {
                                         "auth_token":auth_token
         ]
         //print(parameters)
-        SwiftLoader.show(title: "Loading...", animated: true)
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
         
         let url = String(format: "%@/infoScreensList", hostUrl)
         //print("url)

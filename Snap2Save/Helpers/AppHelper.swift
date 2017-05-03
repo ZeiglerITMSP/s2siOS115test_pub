@@ -354,7 +354,7 @@ extension UIViewController {
             }
         })
         
-        let cancelAction = UIAlertAction(title: "CANCEL".localized() , style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel".localized() , style: .default, handler: nil)
         
         if showCancel == true {
             alertController.addAction(cancelAction)

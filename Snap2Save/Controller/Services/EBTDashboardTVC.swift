@@ -39,7 +39,7 @@ class EBTDashboardTVC: UITableViewController {
     var availableBalance: String?
     var trasactions = [Any]()
     
-    var transactionsString: String?
+//    var transactionsString: String = ""
     // timer
     var startTime: Date!
     
@@ -278,24 +278,29 @@ class EBTDashboardTVC: UITableViewController {
         execute(javaScript: jsEBTBalance, completion: { result in
             
             if result != nil {
-                guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
-                }
-                let valueInDouble = Double(valueString) ?? 0
-                if valueInDouble > 0 {
-                    let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
-                    self.accountDetails.append(detail)
-                }
+                let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
+                self.accountDetails.append(detail)
+//                guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
+//                }
+//                let valueInDouble = Double(valueString) ?? 0
+//                if valueInDouble > 0 {
+//                    let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
+//                    self.accountDetails.append(detail)
+//                }
             }
             
             self.execute(javaScript: jsCashBalance, completion: { result in
                 if result != nil {
-                    guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
-                    }
-                    let valueInDouble = Double(valueString) ?? 0
-                    if valueInDouble > 0 {
-                        let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
-                        self.accountDetails.append(detail)
-                    }
+                    let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
+                    self.accountDetails.append(detail)
+
+//                    guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
+//                    }
+//                    let valueInDouble = Double(valueString) ?? 0
+//                    if valueInDouble > 0 {
+//                        let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
+//                        self.accountDetails.append(detail)
+//                    }
                 }
                 
                 self.isTransactionsLoading = true
@@ -613,7 +618,7 @@ class EBTDashboardTVC: UITableViewController {
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if trimmedText.characters.count > 0 {
-                    self.transactionsString = trimmedText
+                   // self.transactionsString.append(trimmedText)
                     
                     let json = JSON.parse(trimmedText)
                     print("json response \(json)")
@@ -753,7 +758,9 @@ extension EBTDashboardTVC {
         
         let ebt_user_id = EBTUser.shared.userID ?? ""
         let type = EBTUser.shared.loggedType
-        let transactions = transactionsString ?? ""
+        
+        let paramsJSON = JSON(self.trasactions)
+        let paramsString = paramsJSON.rawString(.utf8, options: .prettyPrinted)
         
         let ebtBalanceFiltered = self.accountDetails.filter { (row) -> Bool in
             return row["key"]! == self.snapBalanceKey
@@ -778,7 +785,7 @@ extension EBTDashboardTVC {
                                        "ebt_user_id": ebt_user_id,
                                        "type": type,
                                        
-                                       "transactions": transactions,
+                                       "transactions": paramsString,
                                        "ebt_balance": ebt_balance!,
                                        "cash_balance": cash_balance!
         ]
