@@ -75,6 +75,23 @@ class EBTWebView: NSObject {
 
         configuration.preferences = preferences
         
+        
+        let controller = WKUserContentController()
+        let jsPath = Bundle.main.path(forResource: "ebt_scrapping", ofType: "js");
+        var scriptSourceCode = ""
+        do {
+            scriptSourceCode = try String(contentsOfFile: jsPath!, encoding: String.Encoding.utf8)
+        } catch _ {
+            //jsContent = nil
+        }
+        
+        
+      //  let scriptSourceCode = "function getMyName() { return 'kiran'; }"
+        let script = WKUserScript(source: scriptSourceCode, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: true)
+        controller.addUserScript(script)
+        
+        configuration.userContentController = controller
+        
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
         //        webView = WKWebView()
         webView.navigationDelegate = self
@@ -183,33 +200,111 @@ class EBTWebView: NSObject {
         }
     }
     
+    func loadConfiguration() {
+        
+//        let configuration = WKWebViewConfiguration()
+//        let controller = WKUserContentController()
+//        
+//        let scriptSourceCode = "function getMyName() { return 'kiran'; }"
+//        let script = WKUserScript(source: scriptSourceCode, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: true)
+//        controller.addUserScript(script)
+//        
+//        configuration.userContentController = controller
+//        
+//        webView.configuration = configuration
+        
+    }
+    
+    func getMyName() {
+        
+        let js = "getMyName();"
+        webView.evaluateJavaScript(js) { (result, error) in
+            print(result ?? "")
+            print(error ?? "")
+        }
+        
+        let name = "kiran"
+        let surname = "sarella"
+        let jsParams = "appendTwoStrings('\(name)', '\(surname)');"
+        webView.evaluateJavaScript(jsParams) { (result, error) in
+            print(result ?? "")
+            print(error ?? "")
+        }
+        
+        
+    }
     
     func getErrorMessage(completion: @escaping (String?) -> ()) {
         
-        let jsErrorMessage = "function getErrorMessage() { " +
-            "var errorInvalidField = $('.errorInvalidField').first().text().trim(); " +
-            "var errorLoginField = $('.errorTextLogin').text().trim(); " +
-            "var vallidationExcpMsg = $('#VallidationExcpMsg').first().text().trim(); " +
-            "var errorHeading = $('.errorText').first().text().trim(); " +
-            "if(errorHeading) { " +
-                "errorHeading = errorHeading.trim() + \"\\n\\n\"; " +
-            "} else { " +
-                "errorHeading = \"\"; " +
-            "} " +
-            
-            "if(vallidationExcpMsg || vallidationExcpMsg.length>0){ " +
-                "return errorHeading + vallidationExcpMsg.trim(); " +
-            "} else if(errorInvalidField || errorInvalidField.length>0) {" +
-                "return errorHeading + errorInvalidField.trim(); " +
-            "} else if(errorLoginField || errorLoginField.length>0) { " +
-                "return errorHeading + errorLoginField.trim(); " +
-            "}" +
-        "}" +
-            
-        "getErrorMessage();"
         
         
-        let javaScript = jsErrorMessage
+//        NSString *jqueryCDN = @"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js";
+//        NSData *jquery = [NSData dataWithContentsOfURL:[NSURL URLWithString:jqueryCDN]];
+//        NSString *jqueryString = [[NSMutableString alloc] initWithData:jquery encoding:NSUTF8StringEncoding];
+//        [webView stringByEvaluatingJavaScriptFromString:jqueryString];
+//        
+//        
+        
+        
+        
+        
+        
+//        let jsErrorMessage = "function getErrorMessage() { " +
+//            
+//            "var errorTable = document.getElementById('errorTable').getElementsByClassName('errorText')[0].innerText.trim();" +
+//            " return errorTable;" +
+//            "}" +
+//        "getErrorMessage();"
+        
+//                let jsErrorMessage = "function getErrorMessage() { " +
+//                    "var errorInvalidField = document.getElementsByClassName('errorInvalidField')[0].innerText.trim(); " +
+//                    "var errorLoginField = document.getElementsByClassName('errorTextLogin').innerText.trim(); " +
+//                    "var vallidationExcpMsg = document.getElementsById('VallidationExcpMsg').innerText.trim(); " +
+//                    "var errorHeading = document.getElementById('errorTable').getElementsByClassName('errorText')[0].innerText.trim();" +
+//                    "if(errorHeading) { " +
+//                        "errorHeading = errorHeading.trim() + \"\\n\\n\"; " +
+//                    "} else { " +
+//                        "errorHeading = \"\"; " +
+//                    "} " +
+//        
+//                    "if(vallidationExcpMsg || vallidationExcpMsg.length>0){ " +
+//                        "return errorHeading + vallidationExcpMsg.trim(); " +
+//                    "} else if(errorInvalidField || errorInvalidField.length>0) {" +
+//                        "return errorHeading + errorInvalidField.trim(); " +
+//                    "} else if(errorLoginField || errorLoginField.length>0) { " +
+//                        "return errorHeading + errorLoginField.trim(); " +
+//                    "}" +
+//                    "else {   return errorHeading; }" +
+//                "}" +
+//                "getErrorMessage();"
+        
+
+        
+//        let jsErrorMessage = "function getErrorMessage() { " +
+//            "var errorInvalidField = $('.errorInvalidField').first().text().trim(); " +
+//            "var errorLoginField = $('.errorTextLogin').text().trim(); " +
+//            "var vallidationExcpMsg = $('#VallidationExcpMsg').first().text().trim(); " +
+//            "var errorHeading = $('.errorText').first().text().trim(); " +
+//            "var errorTable = document.getElementById('errorTable').getElementsByClassName('errorText')[0].innerText.trim();" +
+//            "if(errorHeading) { " +
+//                "errorHeading = errorHeading.trim() + \"\\n\\n\"; " +
+//            "} else { " +
+//                "errorHeading = errorTable; " +
+//            "} " +
+//            
+//            "if(vallidationExcpMsg || vallidationExcpMsg.length>0){ " +
+//                "return errorHeading + vallidationExcpMsg.trim(); " +
+//            "} else if(errorInvalidField || errorInvalidField.length>0) {" +
+//                "return errorHeading + errorInvalidField.trim(); " +
+//            "} else if(errorLoginField || errorLoginField.length>0) { " +
+//                "return errorHeading + errorLoginField.trim(); " +
+//            "}" +
+//            "else {   return errorHeading; }" +
+//        "}" +
+//        "getErrorMessage();"
+//        
+        
+        let javaScript = "getErrorMessage();"
         
         webView.evaluateJavaScript(javaScript) { (result, error) in
             

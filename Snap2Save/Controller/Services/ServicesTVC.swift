@@ -380,13 +380,34 @@ extension ServicesTVC {
             // .. es url
             loginUrl = kEBTLoginUrl_es
         }
+//        
+        let htmlString = getHTML()
+        ebtWebView.webView.loadHTMLString(htmlString, baseURL: nil)
+//
         // load url
-        let url = NSURL(string: loginUrl)
-        let request = NSURLRequest(url: url! as URL)
-        ebtWebView.webView.load(request as URLRequest)
+//        let url = NSURL(string: loginUrl)
+//        let request = NSURLRequest(url: url! as URL)
+//        ebtWebView.webView.load(request as URLRequest)
+    }
+    
+    func getHTML() -> String {
+        var html = ""
+        if let htmlPathURL = Bundle.main.url(forResource: "Error Page copy", withExtension: "htm"){
+            do {
+                html = try String(contentsOf: htmlPathURL, encoding: .utf8)
+            } catch  {
+                print("Unable to get the file.")
+            }
+        }
+        
+        return html
     }
     
     func validatePage() {
+        
+        ebtWebView.loadConfiguration()
+        ebtWebView.getMyName()
+        
         ebtWebView.getPageHeading(completion: { result in
             if let pageTitle = result {
                 // isCurrentPage
@@ -399,6 +420,10 @@ extension ServicesTVC {
                 }
             } else {
                 //print(error ?? "")
+                self.ebtWebView.getErrorMessage(completion: { (result) in
+                    print(result ?? "no error")
+                })
+                self.ebtActivityIndicator.stopAnimating()
             }
         })
     }

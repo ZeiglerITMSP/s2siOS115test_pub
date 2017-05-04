@@ -78,6 +78,9 @@
 		E86D8D241EA8B9C6001250D9 /* AdSpotsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */; };
 		E86D8D2A1EA8D21B001250D9 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D8D291EA8D21B001250D9 /* AccountCell.swift */; };
 		E86D8D2C1EA8D229001250D9 /* AccountSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D8D2B1EA8D229001250D9 /* AccountSwitchCell.swift */; };
+		E888F60E1EBA010000315CAD /* Error Page copy.htm in Resources */ = {isa = PBXBuildFile; fileRef = E888F60B1EBA010000315CAD /* Error Page copy.htm */; };
+		E888F60F1EBA010000315CAD /* Error Page.htm in Resources */ = {isa = PBXBuildFile; fileRef = E888F60D1EBA010000315CAD /* Error Page.htm */; };
+		E888F6111EBA163F00315CAD /* ebt_scrapping.js in Resources */ = {isa = PBXBuildFile; fileRef = E888F6101EBA163F00315CAD /* ebt_scrapping.js */; };
 		E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA54A1DF53C1300714C65 /* AppDelegate.swift */; };
 		E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA54E1DF53C1300714C65 /* Main.storyboard */; };
 		E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E88BA5511DF53C1300714C65 /* Assets.xcassets */; };
@@ -195,6 +198,9 @@
 		E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdSpotsManager.swift; sourceTree = "<group>"; };
 		E86D8D291EA8D21B001250D9 /* AccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		E86D8D2B1EA8D229001250D9 /* AccountSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSwitchCell.swift; sourceTree = "<group>"; };
+		E888F60B1EBA010000315CAD /* Error Page copy.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "Error Page copy.htm"; sourceTree = "<group>"; };
+		E888F60D1EBA010000315CAD /* Error Page.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "Error Page.htm"; sourceTree = "<group>"; };
+		E888F6101EBA163F00315CAD /* ebt_scrapping.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ebt_scrapping.js; sourceTree = "<group>"; };
 		E88BA5471DF53C1300714C65 /* Snap2Save.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap2Save.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA54A1DF53C1300714C65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E88BA54F1DF53C1300714C65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -340,8 +346,12 @@
 		E82283A81E0A72A6008FE084 /* EBTTracking */ = {
 			isa = PBXGroup;
 			children = (
+				E888F60B1EBA010000315CAD /* Error Page copy.htm */,
+				E888F60C1EBA010000315CAD /* Error Page_files */,
+				E888F60D1EBA010000315CAD /* Error Page.htm */,
 				E82283A91E0A72BC008FE084 /* EBTWebView.swift */,
 				E82283AB1E0A72D3008FE084 /* BrowserVC.swift */,
+				E888F6101EBA163F00315CAD /* ebt_scrapping.js */,
 			);
 			name = EBTTracking;
 			path = ../EBTTracking;
@@ -461,6 +471,13 @@
 				E86D8D2B1EA8D229001250D9 /* AccountSwitchCell.swift */,
 			);
 			name = AccountCells;
+			sourceTree = "<group>";
+		};
+		E888F60C1EBA010000315CAD /* Error Page_files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Error Page_files";
 			sourceTree = "<group>";
 		};
 		E88BA53E1DF53C1200714C65 = {
@@ -711,12 +728,15 @@
 				E86D8D221EA8A273001250D9 /* AdSpotTableViewCell.xib in Resources */,
 				E826FBDA1E094F720089AEA6 /* AIPlaceHolderTextField.xib in Resources */,
 				97DBC2131E35E04B00CD2C75 /* GoogleService-Info.plist in Resources */,
+				E888F60E1EBA010000315CAD /* Error Page copy.htm in Resources */,
 				974CDFC81E67FC030041EC07 /* FZURefresh.xcassets in Resources */,
 				9737FEE51E76AB1600B6B9BB /* USStateAbbreviations_old.plist in Resources */,
 				E822839E1E0A61F4008FE084 /* Home.storyboard in Resources */,
 				974CDFC61E67FC030041EC07 /* LICENSE in Resources */,
+				E888F60F1EBA010000315CAD /* Error Page.htm in Resources */,
 				E88BA59A1DF5B25D00714C65 /* Localizable.strings in Resources */,
 				E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */,
+				E888F6111EBA163F00315CAD /* ebt_scrapping.js in Resources */,
 				974D5C351E2DFF5B00918BAD /* snap2save.jpeg in Resources */,
 				97E4338B1E10E5F10095EABA /* USStateAbbreviations.plist in Resources */,
 				E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */,
