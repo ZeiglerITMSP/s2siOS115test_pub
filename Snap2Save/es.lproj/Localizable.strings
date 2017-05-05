@@ -76,7 +76,7 @@
 "Register with Facebook" = "REGÍSTRATE CON FACEBOOK";
 "*Required information" = "*Información obligatoria";
 "10-DIGIT CELL PHONE NUMBER" = "NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
-"RE-ENTER 10-DIGIT CELL PHONE NUMBER" = "REINTRODUCIR NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
+"RE-ENTER 10-DIGIT CELL PHONE NUMBER" = "REINTRODUCIR NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS ";
 "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)" = "CONTRASEÑA (DEBE TENER AL MENOS 6 CARACTERES)";
 "RE-ENTER PASSWORD" = "REINTRODUCIR CONTRASEÑA";
 "ZIP CODE" = "CÓDIGO POSTAL";
@@ -85,7 +85,7 @@
 "Email" = "Email";
 "EMAIL" = "EMAIL";
 "RE-ENTER EMAIL" = "REINTRODUCIR DIRECCIÓN DE EMAIL";
-"TermsMessage" = "I have read, understand and agree to the Snap2Save Terms of Service Agreement.";
+"TermsMessage" = "He leído, entiendo y acepto el Acuerdo de Condiciones de servicio de Snap2Save.";
 "TermsLink" = "Condiciones de servicio";
 "CONTINUE" = "CONTINUAR";
 
@@ -168,7 +168,7 @@
 
 // CHANGEPASSWORD VC
 "Change Password" = "Cambiar contraseña";
-"RE-ENTER NEW PASSWORD" = "VOLVER A INTRODUCIR CONTRASEÑA NUEVA";
+"RE-ENTER NEW PASSWORD" = "REINTRODUCIR CONTRASEÑA NUEVA";
 "NEW PASSWORD (MUST BE AT LEAST 6 CHARACTERS)" = "CONTRASEÑA NUEVA (DEBE TENER AL MENOS 6 CARACTERES)";
 "CURRENT PASSWORD" = "CONTRASEÑA ACTUAL";
 "SAVE" = "GUARDAR";
@@ -177,7 +177,7 @@
 // Reachability
 
 "Please check your internet connection" = "Por favor revise su conexion a internet";
-"The internet connection appears to be offline." = "La conexión a Internet aparece para estar offline.";
+"The internet connection appears to be offline." = "La conexión a Internet parece estar fuera de línea.";
 
 
 
@@ -188,6 +188,7 @@
 "PLEASE TRY AGAIN LATER." = "POR FAVOR, INTÉNTELO DE NUEVO MÁS TARDE.";
 "THE INTERENT CONNECTION APPEARS TO BE OFFLINE." = "LA CONEXIÓN INTERENT APARECE PARA ESTAR OFFLINE.";
 "Additional Offers" = "Ofertas adicionales";
+"Weekly Circular" = "Circular semanal";
 
 // Services
 "Services" = "Servicios";
@@ -223,7 +224,7 @@
 "To redeem 500 points, please make your selection and click Continue." = "Para canjear 500 puntos, haz tu selección y haz clic en Continuar.";
 
 "$5 Save-A-Lot Gift Card" = "Tarjeta de regalo Save-A-Lot de $5";
-"$10 Health Care Rebate" = "Descuento en atención médica de $10";
+"$10 Health Care Rebate" = " Descuento en atención médica por $10";
 
 
 // Mailing address screen
@@ -254,10 +255,10 @@
 // Alert Messages
 
 "Please provide all required information." = "Provee toda la información requerida.";
-"Please enter a 10-digit cell phone number." = "Escribe tu número de teléfono celular de 10 dígitos.";
-"Password must be at least 6 characters in length." = "Tu nueva contraseña debe tener un mínimo de 6 caracteres.";
+"Please enter a 10-digit cell phone number." = "Introduce un número de teléfono celular de 10 dígitos.";
+"Password must be at least 6 characters in length." = "Tu contraseña debe tener un mínimo de 6 caracteres.";
 "Please enter a valid zip code." = "Introduce un código postal válido.";
-"Please enter a valid email address." = "Introduce una dirección de email válida.";
+"Please enter a valid email address." = "Introduce un email válido.";
 
 "Entries must match to proceed." = "Los valores deben coincidir para continuar.";
 "Please enter current password" = "Please enter current password";
@@ -267,12 +268,12 @@
 "Are you sure you want to log out?" = "¿Estás seguro de que deseas cerrar la sesión?";
 "Please enter password." = "Introduce tu contraseña.";
 
-"Please provide all information." = "Please provide all information.";
-"You must agree to the Terms of Service." = "You must agree to the Terms of Service.";
+"Please provide all information." = "Proporcione toda la información.";
+"You must agree to the Terms of Service." = "Debes aceptar las Condiciones de servicio.";
 
 "Please enter a date range to view specific transactions." = "Indica un rango de fechas para ver las transacciones específicas.";
 
-"No results found." = "No results found.";
+"No results found." = "No se encontró ningún resultado.";
 
 "Please select your reward." = "Selecciona tu recompensa.";
 "Please enter your first name." = "Escribe tu nombre completo.";
@@ -281,11 +282,11 @@
 "Please enter your city." = "Escribe tu ciudad.";
 "Please enter your state." = "Escribe tu estado.";
 "Please enter your zip code." = "Introduce tu código postal.";
-"You must have 500 points or more to be eligible for a reward." = "Debes tener 500 puntos o más para reunir los requisitos para una recompensa.";
+"You must have 500 points or more to be eligible for a reward." = "Debe tener 500 puntos o más para reunir los requisitos para una recompensa.";
 
+"Are you sure you want to redeem points?" = "¿Está seguro de que desea canjear puntos?";
 
-
-
+"The TO date must be later than or equal to the FROM date." = "La fecha HASTA debe ser posterior o igual a la fecha DESDE.";
 
 
 
@@ -311,9 +312,9 @@
 "ebt.title.login" = "Iniciar sesión";
 "ebt.title.register" = "Regístrate";
 // back alert
-"ebt.processTerminate.title" = "Estás seguro?";
-"ebt.processTerminate.alert" = "¿Está seguro de que desea finalizar este proceso?";
-"ebt.processTerminate.dashboard" = "If you leave this screen, you will be logged out of EBT services.";
+"ebt.processTerminate.title" = "¿Estás seguro?";
+"ebt.processTerminate.alert" = "¿Estás seguro de que quieres terminar este proceso?";
+"ebt.processTerminate.dashboard" = "Si abandonas esta pantalla, se cerrará la sesión de los servicios de EB";
 // timeout cancel alert
 "ebt.alert.timeout.title" = "¡Lo siento!";
 "ebt.alert.timeout.message" = "No podemos procesar su solicitud en este momento. Por favor, inténtelo de nuevo más tarde.";
@@ -330,7 +331,7 @@
 "Identify yourself!" = "¡Identifícate!";
 "ebt.login.titleLabel" = "UNA MANERA FÁCIL Y PRÁCTICA DE ACCEDER A LA INFORMACIÓN DE LA CUENTA DE SU TARJETA DE EBT";
 "ebt.login.messageLabel" = "Ve tu saldo y revisa tu actividad de transacciones.";
-"ebt.login.description" = "To log in enter your existing Chase UCard User ID and Password, or click on Register to sign up.";
+"ebt.login.description" = "Para iniciar sesión, ingresa tu ID de usuario y contraseña de tu Chase UCard que ya tienes o haz clic en Registrarte.";
 
 
 // Authentication Code
@@ -411,40 +412,41 @@
 
 // EBT Dashboard
 "RECENT TRANSACTIONS" = "TRANSACCIONES RECIENTES";
-"SNAP Balance" = "SNAP Saldo";
-"CASH Balance" = "EFECTIVO Saldo";
+"SNAP Balance" = "SALDO SNAP";
+"CASH Balance" = "SALDO EN EFECTIVO";
 
 "No transactions were found." = "No se encontraron transacciones.";
 
 // empty field alert
-"alert.emptyField.userid" = "Enter User ID.";
-"alert.emptyField.password" = "Enter Password.";
-"alert.emptyField.authentication" = "Enter Authentication Code.";
-"alert.emptyField.securityAnswer" = "Enter Security Answer.";
+"alert.emptyField.userid" = "Introduce ID de usuario.";
+"alert.emptyField.password" = "Introduce contraseña.";
+"alert.emptyField.authentication" = "Introduce código de autenticación.";
+"alert.emptyField.securityAnswer" = "Introduce respuesta de seguridad.";
 
-"alert.emptyField.cardNumber" = "Enter Card Number.";
-"alert.emptyField.dob" = "Enter Date of Birth.";
-"alert.emptyField.socialSecurityNumber" = "Enter Social Security Number.";
-"alert.emptyField.pin" = "Enter Pin.";
-"alert.emptyField.confirmPin" = "Enter Confirm Pin.";
+"alert.emptyField.cardNumber" = "Introduce número de tarjeta.";
+"alert.emptyField.dob" = "Identifica fecha de nacimiento.";
+"alert.emptyField.socialSecurityNumber" = "Introduce número de seguro social.";
 
-"alert.emptyField.userinfo.userId" = "Enter User ID.";
-"alert.emptyField.userinfo.password" = "Enter Password.";
-"alert.emptyField.userinfo.confirmPassword" = "Enter Confirm Password.";
-"alert.emptyField.userinfo.email" = "Enter Email.";
-"alert.emptyField.userinfo.confirmEmail" = "Enter Confirm Email.";
-"alert.emptyField.userinfo.phoneNumber" = "Enter Phone Number.";
-"alert.emptyField.userinfo.questionOne" = "Enter Question 1.";
-"alert.emptyField.userinfo.questionTwo" = "Enter Question 2.";
-"alert.emptyField.userinfo.questionThree" = "Enter Question 3.";
-"alert.emptyField.userinfo.answerOne" = "Enter Answer 1.";
-"alert.emptyField.userinfo.answerTwo" = "Enter Answer 2.";
-"alert.emptyField.userinfo.answerThree" = "Enter Answer 3.";
+"alert.emptyField.pin" = "Introduce PIN.";
+"alert.emptyField.confirmPin" = "Confirmar PIN.";
 
-"alert.emptyField.validationCode" = "Enter Validation Code.";
-"alert.emptyField.currentEmail" = "Enter Current Email.";
-"alert.emptyField.email" = "Enter Email.";
-"alert.emptyField.confirmEmail" = "Enter Confirm Email.";
+"alert.emptyField.userinfo.userId" = "Introduce ID de usuario.";
+"alert.emptyField.userinfo.password" = "Introduce contraseña.";
+"alert.emptyField.userinfo.confirmPassword" = "Confirmar contraseña.";
+"alert.emptyField.userinfo.email" = "Introduce email.";
+"alert.emptyField.userinfo.confirmEmail" = "Confirmar dirección de email.";
+"alert.emptyField.userinfo.phoneNumber" = "Introduce número de teléfono.";
+"alert.emptyField.userinfo.questionOne" = "Selecciona pregunta 1.";
+"alert.emptyField.userinfo.questionTwo" = "Selecciona pregunta 2.";
+"alert.emptyField.userinfo.questionThree" = "Selecciona pregunta 3.";
+"alert.emptyField.userinfo.answerOne" = "Introduce respuesta 1.";
+"alert.emptyField.userinfo.answerTwo" = "Introduce respuesta 2.";
+"alert.emptyField.userinfo.answerThree" = "Introduce respuesta 3.";
+
+"alert.emptyField.validationCode" = "Introduce código de validación.";
+"alert.emptyField.currentEmail" = "Introduce email actual.";
+"alert.emptyField.email" = "Introduce email.";
+"alert.emptyField.confirmEmail" = "Introduce Confirmar email.";
 
 
 // **** Scrapping ****

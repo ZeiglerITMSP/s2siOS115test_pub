@@ -181,7 +181,7 @@
 "PLEASE TRY AGAIN LATER." = "PLEASE TRY AGAIN LATER.";
 "THE INTERENT CONNECTION APPEARS TO BE OFFLINE." = "THE INTERENT CONNECTION APPEARS TO BE OFFLINE.";
 "Additional Offers" = "Additional Offers";
-
+"Weekly Circular" = "Weekly Circular";
 
 // Services
 "Services" = "Services";
@@ -275,9 +275,9 @@
 "Please enter your state." = "Please enter your state.";
 "Please enter your zip code." = "Please enter your zip code.";
 "You must have 500 points or more to be eligible for a reward." = "You must have 500 points or more to be eligible for a reward.";
+"Are you sure you want to redeem points?" = "Are you sure you want to redeem points?";
 
-
-
+"The TO date must be later than or equal to the FROM date." = "The TO date must be later than or equal to the FROM date.";
 
 
 
@@ -423,24 +423,24 @@
 "alert.emptyField.dob" = "Enter Date of Birth.";
 "alert.emptyField.socialSecurityNumber" = "Enter Social Security Number.";
 "alert.emptyField.pin" = "Enter Pin.";
-"alert.emptyField.confirmPin" = "Enter Confirm Pin.";
+"alert.emptyField.confirmPin" = "Confirm Pin.";
 
 "alert.emptyField.userinfo.userId" = "Enter User ID.";
 "alert.emptyField.userinfo.password" = "Enter Password.";
-"alert.emptyField.userinfo.confirmPassword" = "Enter Confirm Password.";
-"alert.emptyField.userinfo.email" = "Enter Email.";
-"alert.emptyField.userinfo.confirmEmail" = "Enter Confirm Email.";
+"alert.emptyField.userinfo.confirmPassword" = "Confirm Password.";
+"alert.emptyField.userinfo.email" = "Enter email address.";
+"alert.emptyField.userinfo.confirmEmail" = "Confirm email address.";
 "alert.emptyField.userinfo.phoneNumber" = "Enter Phone Number.";
-"alert.emptyField.userinfo.questionOne" = "Enter Question 1.";
-"alert.emptyField.userinfo.questionTwo" = "Enter Question 2.";
-"alert.emptyField.userinfo.questionThree" = "Enter Question 3.";
+"alert.emptyField.userinfo.questionOne" = "Select question 1.";
+"alert.emptyField.userinfo.questionTwo" = "Select question 2.";
+"alert.emptyField.userinfo.questionThree" = "Select question 3.";
 "alert.emptyField.userinfo.answerOne" = "Enter Answer 1.";
 "alert.emptyField.userinfo.answerTwo" = "Enter Answer 2.";
 "alert.emptyField.userinfo.answerThree" = "Enter Answer 3.";
 
 "alert.emptyField.validationCode" = "Enter Validation Code.";
 "alert.emptyField.currentEmail" = "Enter Current Email.";
-"alert.emptyField.email" = "Enter Email.";
+"alert.emptyField.email" = "Enter Email address.";
 "alert.emptyField.confirmEmail" = "Enter Confirm Email.";
 
 
