@@ -9,24 +9,14 @@
 import UIKit
 import WebKit
 
-// Ctrl + U
-// class -> .
-// id -> #
-
-
 @objc protocol EBTWebViewDelegate {
-    
     @objc optional func didFinishLoadingWebView()
     @objc optional func navigationAction() -> Bool
-    
     @objc optional func didFailProvisionalNavigation()
     @objc optional func didFail()
 }
 
-
 class EBTWebView: NSObject {
-    
-    
     
     static let shared: EBTWebView = {
         let instance = EBTWebView()
@@ -40,23 +30,15 @@ class EBTWebView: NSObject {
         case dob
     }
     
-    // Properties
+    // MARK: - Properties
     var webView : WKWebView!
     var actionType: ActionType = .none
     
     var responder: EBTWebViewDelegate?
     
-    
-    let jsSubmit = "void($('form')[1].submit())"
-    let jsGetAllElements = "document.documentElement.outerHTML"
-    let jsGetErrorCode = "$(\".errorInvalidField\").text().trim();"
-    
     var isPageLoading = false
     
-    // ..
-    
-    
-    
+    // MARK: -
     
     override init() {
         super.init()
@@ -66,36 +48,27 @@ class EBTWebView: NSObject {
     
     func loadWebView() {
         
-        // init and load request in webview.
-        
-        
+        // webview configuration
         let configuration = WKWebViewConfiguration()
+        // configuration preferences
         let preferences = WKPreferences()
         preferences.javaScriptCanOpenWindowsAutomatically = true
-
         configuration.preferences = preferences
-        
-        
+        // configuration user content
         let controller = WKUserContentController()
         let jsPath = Bundle.main.path(forResource: "ebt_scrapping", ofType: "js");
         var scriptSourceCode = ""
         do {
             scriptSourceCode = try String(contentsOfFile: jsPath!, encoding: String.Encoding.utf8)
         } catch _ {
-            //jsContent = nil
         }
-        
-        
-      //  let scriptSourceCode = "function getMyName() { return 'kiran'; }"
+        // user script
         let script = WKUserScript(source: scriptSourceCode, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: true)
         controller.addUserScript(script)
-        
         configuration.userContentController = controller
-        
+        // create webview
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
-        //        webView = WKWebView()
         webView.navigationDelegate = self
-        //        webView.uiDelegate = self
     }
     
     func loadEmptyPage() {
@@ -103,211 +76,28 @@ class EBTWebView: NSObject {
         webView.load(URLRequest.init(url: URL(string: "about:blank")!))
     }
     
-    // Get page headline
-//    func getPageHeading(completion: @escaping (String?) -> ()) {
-//        
-//        let jsHeading = "function getTitle() { " +
-//        "var pageTitleHeader = $('.PageTitle .PageHeader').first().text(); " +
-//        "var dashboardTitle = $('.PageTitle').first().text(); " +
-//        "var loginButton = $('#button_logon').text(); " +
-//        "var emptyString = ''; " +
-//        "if(pageTitleHeader || pageTitleHeader.length>0){ " +
-//         "   return pageTitleHeader.trim(); " +
-//        "}else if(dashboardTitle || dashboardTitle.length>0) { " +
-//         "   return dashboardTitle.trim(); " +
-//        "} else if(loginButton || loginButton.length>0) { " +
-//         "   return loginButton.trim(); " +
-//        "} " +
-//        "return emptyString; " +
-//    "} " +
-//    
-//    "getTitle();"
-//        
-//        let javaScript = jsHeading
-//        
-//        webView.evaluateJavaScript(javaScript) { (result, error) in
-//            
-//            if let resultString = result as? String {
-//                print(resultString)
-//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-//                completion(resultTrimmed)
-//                
-//            } else {
-//                print(error ?? "")
-//                completion(nil)
-//            }
-//            
-//        }
-//    }
 
     func getPageHeading(completion: @escaping (String?) -> ()) {
         
-        // $($('#port_panel_02b ul li.green_bullet')[1]).children('strong').length > 0
-        // if ($('#fromDateTransHistory').length && $('#toDateTransHistory').length) return 'account_transactions';
-        
-        // if ($($('#port_panel_02b ul li.green_bullet')[1]).children('strong').length) return 'account_transactions';
-        
-        
-        let jsErrorMessage = "function identifyPage(){" +
-            "if ($('#txtCardNumber').length && $('#btnValidateCardNumber').length) return 'sign_up_card';" +
-            "if ($('#btnAcceptTandC').length && $('#btnCancelRegistration').length) return 'sign_up_terms_conditions';" +
-            "if ($('#btnValidateSecurityAnswer').length && $('#txtSecurityKeyQuestionAnswer').length && $('input.birthDate').length) return 'sign_up_dob';" +
-            "if ($('#txtNewPin').length && $('#txtConfirmPin').length) return 'sign_up_select_pin';" +
-            "if ($('#txtConfirmEmail').length && $('select#question2').length) return 'sign_up_user_information';" +
-            "if ($('#txtEmailValidationCode').length && ('#validateEmailBtn').length && $('#changeEmailBtn').length) return 'sign_up_user_confirmation';" +
-            "if ($('#currentEmailLbl').length && $('#newEMailTextField').length && $('#validateEMailTextField').length) return 'sign_up_change_email';" +
-            "if ($('#userId').length && $('#password').length && $('#button_logon').length) return 'login';" +
-            "if ($('#txtAuthenticationCode').length && $('#okButton').length && $('#cancelBtn').length) return 'login_authorization';" +
-            "if ($('#securityAnswer').length && $('#registerDeviceFlag').length && $('#okButton').length) return 'login_security_question';" +
-            "if ($($('#port_panel_02b ul li.green_bullet')[1]).children('strong').length > 0) return 'account_transactions';" +
-            "if ($('#subHeadercardholderSummary').length ) return 'account_dashboard';" +
-            "if ($(\"#errorTable p.errorText:contains('Please try again later')\").length) return 'error';" +
-            "return '';" +
-            "} " +
-        "identifyPage()"
-        
-       /* let jsErrorMessage = "(function(){" +
-            "if ($('#txtCardNumber').length && $('#btnValidateCardNumber').length) return 'sign_up_card';" +
-            "if ($('#btnAcceptTandC').length && $('#btnCancelRegistration').length) return 'sign_up_terms_conditions';" +
-            "if ($('#btnValidateSecurityAnswer').length && $('#txtSecurityKeyQuestionAnswer').length && $('input.birthDate').length) return 'sign_up_dob';" +
-            "if ($('#txtNewPin').length && $('#txtConfirmPin').length) return 'sign_up_select_pin';" +
-            "if ($('#txtConfirmEmail').length && $('select#question2').length) return 'sign_up_user_information';" +
-            "if ($('#txtEmailValidationCode').length && ('#validateEmailBtn').length && $('#changeEmailBtn').length) return 'sign_up_user_confirmation';" +
-            "if ($('#currentEmailLbl').length && $('#newEMailTextField').length && $('#validateEMailTextField').length) return 'sign_up_change_email';" +
-            "if ($('#userId').length && $('#password').length && $('#button_logon').length) return 'login';" +
-            "if ($('#txtAuthenticationCode').length && $('#okButton').length && $('#cancelBtn').length) return 'login_authorization';" +
-            "if ($('#securityAnswer').length && $('#registerDeviceFlag').length && $('#okButton').length) return 'login_security_question';" +
-            "if ($($('#port_panel_02b ul li.green_bullet')[1]).children('strong').length) return 'account_transactions';" +
-            "if ($('#subHeadercardholderSummary').length ) return 'account_dashboard';" +
-            "if ($(\"#errorTable p.errorText:contains('Please try again later')\").length) return 'error';" +
-        "})()"
- */
- 
-        
+        let jsErrorMessage = "identifyPage();"
         let javaScript = jsErrorMessage
-        
         webView.evaluateJavaScript(javaScript) { (result, error) in
             print("PageHeading:")
             print(result ?? "no title....")
             if let resultString = result as? String {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 completion(resultTrimmed)
-                
             } else {
                 print(error ?? "")
                 completion(nil)
             }
         }
     }
-    
-    func loadConfiguration() {
-        
-//        let configuration = WKWebViewConfiguration()
-//        let controller = WKUserContentController()
-//        
-//        let scriptSourceCode = "function getMyName() { return 'kiran'; }"
-//        let script = WKUserScript(source: scriptSourceCode, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: true)
-//        controller.addUserScript(script)
-//        
-//        configuration.userContentController = controller
-//        
-//        webView.configuration = configuration
-        
-    }
-    
-    func getMyName() {
-        
-        let js = "getMyName();"
-        webView.evaluateJavaScript(js) { (result, error) in
-            print(result ?? "")
-            print(error ?? "")
-        }
-        
-        let name = "kiran"
-        let surname = "sarella"
-        let jsParams = "appendTwoStrings('\(name)', '\(surname)');"
-        webView.evaluateJavaScript(jsParams) { (result, error) in
-            print(result ?? "")
-            print(error ?? "")
-        }
-        
-        
-    }
-    
+   
     func getErrorMessage(completion: @escaping (String?) -> ()) {
         
-        
-        
-//        NSString *jqueryCDN = @"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js";
-//        NSData *jquery = [NSData dataWithContentsOfURL:[NSURL URLWithString:jqueryCDN]];
-//        NSString *jqueryString = [[NSMutableString alloc] initWithData:jquery encoding:NSUTF8StringEncoding];
-//        [webView stringByEvaluatingJavaScriptFromString:jqueryString];
-//        
-//        
-        
-        
-        
-        
-        
-//        let jsErrorMessage = "function getErrorMessage() { " +
-//            
-//            "var errorTable = document.getElementById('errorTable').getElementsByClassName('errorText')[0].innerText.trim();" +
-//            " return errorTable;" +
-//            "}" +
-//        "getErrorMessage();"
-        
-//                let jsErrorMessage = "function getErrorMessage() { " +
-//                    "var errorInvalidField = document.getElementsByClassName('errorInvalidField')[0].innerText.trim(); " +
-//                    "var errorLoginField = document.getElementsByClassName('errorTextLogin').innerText.trim(); " +
-//                    "var vallidationExcpMsg = document.getElementsById('VallidationExcpMsg').innerText.trim(); " +
-//                    "var errorHeading = document.getElementById('errorTable').getElementsByClassName('errorText')[0].innerText.trim();" +
-//                    "if(errorHeading) { " +
-//                        "errorHeading = errorHeading.trim() + \"\\n\\n\"; " +
-//                    "} else { " +
-//                        "errorHeading = \"\"; " +
-//                    "} " +
-//        
-//                    "if(vallidationExcpMsg || vallidationExcpMsg.length>0){ " +
-//                        "return errorHeading + vallidationExcpMsg.trim(); " +
-//                    "} else if(errorInvalidField || errorInvalidField.length>0) {" +
-//                        "return errorHeading + errorInvalidField.trim(); " +
-//                    "} else if(errorLoginField || errorLoginField.length>0) { " +
-//                        "return errorHeading + errorLoginField.trim(); " +
-//                    "}" +
-//                    "else {   return errorHeading; }" +
-//                "}" +
-//                "getErrorMessage();"
-        
-
-        
-//        let jsErrorMessage = "function getErrorMessage() { " +
-//            "var errorInvalidField = $('.errorInvalidField').first().text().trim(); " +
-//            "var errorLoginField = $('.errorTextLogin').text().trim(); " +
-//            "var vallidationExcpMsg = $('#VallidationExcpMsg').first().text().trim(); " +
-//            "var errorHeading = $('.errorText').first().text().trim(); " +
-//            "var errorTable = document.getElementById('errorTable').getElementsByClassName('errorText')[0].innerText.trim();" +
-//            "if(errorHeading) { " +
-//                "errorHeading = errorHeading.trim() + \"\\n\\n\"; " +
-//            "} else { " +
-//                "errorHeading = errorTable; " +
-//            "} " +
-//            
-//            "if(vallidationExcpMsg || vallidationExcpMsg.length>0){ " +
-//                "return errorHeading + vallidationExcpMsg.trim(); " +
-//            "} else if(errorInvalidField || errorInvalidField.length>0) {" +
-//                "return errorHeading + errorInvalidField.trim(); " +
-//            "} else if(errorLoginField || errorLoginField.length>0) { " +
-//                "return errorHeading + errorLoginField.trim(); " +
-//            "}" +
-//            "else {   return errorHeading; }" +
-//        "}" +
-//        "getErrorMessage();"
-//        
-        
         let javaScript = "getErrorMessage();"
-        
         webView.evaluateJavaScript(javaScript) { (result, error) in
-            
             if let resultString = result as? String {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 completion(resultTrimmed)
@@ -318,12 +108,11 @@ class EBTWebView: NSObject {
             }
         }
     }
-  
     
     
     func checkForSuccessMessage(completion: @escaping (String?) -> ()) {
         
-        let jsSuccessMessage = "$('#actionMsg .completionText').text().trim();"
+        let jsSuccessMessage = "checkForSuccessMessage();"
         let javaScript = jsSuccessMessage
         
         webView.evaluateJavaScript(javaScript) { (result, error) in
@@ -343,7 +132,7 @@ class EBTWebView: NSObject {
     
     func getPageHeader(completion: @escaping (String?) -> ()) {
         
-        let jsPageTitle = "$('.PageHeader').first().text().trim();"
+        let jsPageTitle = "getPageHeader();"
         webView.evaluateJavaScript(jsPageTitle) { (result, error) in
             if error != nil {
                 //print("error ?? "error nil")
@@ -363,7 +152,7 @@ class EBTWebView: NSObject {
     
     func getPageTitle(completion: @escaping (String?) -> ()) {
         
-        let javaScript = "$('.PageTitle').first().text().trim();"
+        let javaScript = "getPageTitle();"
         webView.evaluateJavaScript(javaScript) { (result, error) in
             
             if let resultString = result as? String {
@@ -383,7 +172,6 @@ class EBTWebView: NSObject {
     
     func execute(javascript:String) {
         
-        
         webView.evaluateJavaScript(javascript) { (result, error) in
             if error != nil {
                 print(error ?? "error nil")
@@ -395,7 +183,6 @@ class EBTWebView: NSObject {
                     let pageTitle = stringResult?.trimmingCharacters(in: .whitespacesAndNewlines)
                     print(pageTitle ?? "nil")
                 }
-                
             }
         }
     }
@@ -447,9 +234,7 @@ extension EBTWebView: WKNavigationDelegate {
         print("\n -- didFailProvisionalNavigation -- \n")
         self.isPageLoading = false
         print(error.localizedDescription)
-//        let code = (error as NSError).code
-        
-       // self.responder?.didFailProvisionalNavigation?()
+
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -458,100 +243,16 @@ extension EBTWebView: WKNavigationDelegate {
         self.isPageLoading = true
         decisionHandler(.allow)
     }
-    
-//        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//            print("\n -- navigationAction -- \n")
-//    
-//            
-//            
-//    //        print(navigationAction.request)
-//    
-//            print(navigationAction.navigationType)
-//            print(navigationAction.targetFrame ?? "nil")
-//    
-//            print(navigationAction.request.url?.absoluteString ?? "no url")
-//            print(navigationAction.sourceFrame.isMainFrame)
-//    
-//            decisionHandler(self.shouldStartDecidePolicy())
-//    
-//    
-    //        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
-    //
-    //            decisionHandler(.cancel)
-    //            return
-    //        }
-    //
-    //        let status = self.responder?.navigationAction?()
-    //        if status != nil {
-    //            return decisionHandler(.allow)
-    //        }
-    
-    //        decisionHandler(.allow)
-//        }
-    
-    //    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-    //
-    //        print("\n -- navigationResponse -- \n")
-    //
-    ////        print(navigationResponse.response)
-    //
-    //        print(navigationResponse.isForMainFrame)
-    //
-    ////        decisionHandler(self.shouldStartDecidePolicy())
-    //
-    ////
-    ////        if navigationResponse.isForMainFrame {
-    ////            decisionHandler(.allow)
-    ////        } else {
-    ////            decisionHandler(.cancel)
-    ////        }
-    //        decisionHandler(.allow)
-    //
-    //    }
-    
-//        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-//            print("\n -- didStartProvisional -- \n")
-//    
-//            self.isPageLoading = true
-//        }
-    
+ 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("\n -- didFinish -- \n")
         self.isPageLoading = false
         self.responder?.didFinishLoadingWebView?()
     }
     
-    //    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-    //
-    //        print("\n -- didReceiveServerRedirectForProvisional -- \n")
-    //    }
-    //
-    //    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-    //        print("\n -- didCommit -- \n")
-    //
-    //    }
-    //
-    
+
     
 }
-
-
-//
-//extension EBTWebView: WKUIDelegate {
-//
-//    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-//        
-//        if navigationAction.targetFrame == nil {
-//            webView.load(navigationAction.request)
-//        }
-//        return nil
-//        
-//    }
-//    
-//
-//}
-//
-
 
 
 

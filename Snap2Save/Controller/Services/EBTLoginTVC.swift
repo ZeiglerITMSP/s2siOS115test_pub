@@ -237,7 +237,7 @@ class EBTLoginTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - 
+    // MARK: -
 //    func addHelpTab() {
 //        
 //        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EBTHelpVCNavigation") as! UINavigationController
@@ -486,31 +486,8 @@ extension EBTLoginTVC {
             
         })
     }
-    
-//    func validateLoginPage() {
-//        
-//        // isCurrentPage
-//        let jsLoginValidation = "$('#button_logon').text().trim();"
-//        let javaScript = jsLoginValidation
-//        
-//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-//            
-//            if let resultString = result as? String {
-//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-//                if resultTrimmed != self.pageTitle {
-//                    self.loadLoginPage()
-//                } else {
-//                    // if login page
-//                    self.checkForStatusMessage()
-//                }
-//            } else {
-//                print(error ?? "")
-//            }
-//        }
-//    }
-//    
+  
     func loadLoginPage() {
-        
         
         actionType = ActionType.loadLoginPage
         
@@ -558,46 +535,6 @@ extension EBTLoginTVC {
         
     }
     
-    
-//    func validatePage() {
-//        
-//        
-//        // isCurrentPage
-//        let jsLoginValidation = "$('#button_logon').text().trim();"
-//        let javaScript = jsLoginValidation
-//        
-//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-//            
-//            if let resultString = result as? String {
-//                
-//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-//                
-//                if resultTrimmed == self.pageTitle {
-//                    // current page
-//                    if self.actionType == ActionType.autofill {
-//                        self.actionType = nil
-//                        self.autoFill()
-//                    } else if self.actionType == ActionType.registration {
-//                        self.actionType = nil
-//                        self.registrationClick()
-//                    }
-//                    else {
-//                        self.checkForErrorMessage()
-//                    }
-//                    
-//                } else {
-//                    // validate for next page
-//                    self.validateNextPage()
-//                }
-//                
-//            } else {
-//                print(error ?? "")
-//            }
-//                
-//           
-//        }
-//    }
-    
     func validateNextPage() {
     
         ebtWebView.getPageHeading(completion: { result in
@@ -622,18 +559,10 @@ extension EBTLoginTVC {
     
     func autoFill() {
         
-//        loginButton.isEnabled = false
-//        activityIndicator.startAnimating()
-        
-        let userid = self.userIdField.contentTextField.text!
+        let userId = self.userIdField.contentTextField.text!
         let password = self.passwordField.contentTextField.text!
-        
-        let jsUserID = "$('#userId').val('\(userid)');"
-        let jspassword = "$('#password').val('\(password)');"
-        let jsSubmit = "$('#submit').click();"
-        //        let jsSubmit = "$(\"form[name='form1']\").submit();"
-        
-        let javaScript = jsUserID + jspassword + jsSubmit
+
+        let javaScript = "autofillLoginDetailsAndSubmit('\(userId)','\(password)');"
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             print(error ?? "")
             self.checkForErrorMessage()
@@ -657,7 +586,7 @@ extension EBTLoginTVC {
     
     func checkForStatusMessage() {
         
-        let javaScript = "$('#infoMsg .actionMessage').text().trim();"
+        let javaScript = "checkForLoginStatusMessage();"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             

@@ -203,7 +203,12 @@ class AccountTVC: UITableViewController {
         let initialViewController: UINavigationController = storyBoard.instantiateInitialViewController()! as! UINavigationController
         let user: User = User()
         AppDelegate.getDelegate().user = user
+        self.tableView.delegate = nil
+        self.tableView.dataSource = nil
+        
         UIApplication.shared.keyWindow?.rootViewController = initialViewController
+        UIApplication.shared.keyWindow?.makeKeyAndVisible()
+        
     }
     
     func updateAutologinStatusInServer(isOn: Bool) {
@@ -326,16 +331,16 @@ extension AccountTVC {
                 
                 return accountSwitchCell
             } else {
-                let basicCell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
-                basicCell.textLabel?.text = accountOptions[indexPath.row].localized()
-                basicCell.textLabel?.textColor = UIColor(colorLiteralRed: 74/255, green: 74/255, blue: 74/255, alpha: 1)
+                let basicCell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! AccountCell
+                basicCell.titleLabel?.text = accountOptions[indexPath.row].localized()
+                basicCell.titleLabel?.textColor = UIColor(colorLiteralRed: 74/255, green: 74/255, blue: 74/255, alpha: 1)
                 return basicCell
             }
         }
         else if indexPath.section == 1 {
-            let basicCell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
-            basicCell.textLabel?.text = "Log Out".localized()
-            basicCell.textLabel?.textColor = UIColor(colorLiteralRed: 236/255, green: 80/255, blue: 30/255, alpha: 1)
+            let basicCell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! AccountCell
+            basicCell.titleLabel?.text = "Log Out".localized()
+            basicCell.titleLabel?.textColor = UIColor(colorLiteralRed: 236/255, green: 80/255, blue: 30/255, alpha: 1)
             return basicCell
         }
         else if indexPath.section == 2 { // Ads image cell
@@ -385,14 +390,20 @@ extension AccountTVC {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 2 {
-            return 10
+       
+        if adSpotManager.adSpots.count > 0 {
+            return 0.001
+        } else {
+            if section <= 1 {
+                return 30
+            } else {
+                return 0.001
+            }
         }
-        return 30
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return 0.001
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

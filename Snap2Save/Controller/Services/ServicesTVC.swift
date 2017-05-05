@@ -233,14 +233,20 @@ extension ServicesTVC {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 2 {
-            return 10
+        
+        if adSpotManager.adSpots.count > 0 {
+            return 0.001
+        } else {
+            if section <= 1 {
+                return 30
+            } else {
+                return 0.001
+            }
         }
-        return 30
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return 0.001
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -381,18 +387,18 @@ extension ServicesTVC {
             loginUrl = kEBTLoginUrl_es
         }
 //        
-        let htmlString = getHTML()
-        ebtWebView.webView.loadHTMLString(htmlString, baseURL: nil)
+//        let htmlString = getHTML()
+//        ebtWebView.webView.loadHTMLString(htmlString, baseURL: nil)
 //
         // load url
-//        let url = NSURL(string: loginUrl)
-//        let request = NSURLRequest(url: url! as URL)
-//        ebtWebView.webView.load(request as URLRequest)
+        let url = NSURL(string: loginUrl)
+        let request = NSURLRequest(url: url! as URL)
+        ebtWebView.webView.load(request as URLRequest)
     }
     
     func getHTML() -> String {
         var html = ""
-        if let htmlPathURL = Bundle.main.url(forResource: "Error Page copy", withExtension: "htm"){
+        if let htmlPathURL = Bundle.main.url(forResource: "Error Page", withExtension: "htm"){
             do {
                 html = try String(contentsOf: htmlPathURL, encoding: .utf8)
             } catch  {
@@ -404,9 +410,6 @@ extension ServicesTVC {
     }
     
     func validatePage() {
-        
-        ebtWebView.loadConfiguration()
-        ebtWebView.getMyName()
         
         ebtWebView.getPageHeading(completion: { result in
             if let pageTitle = result {
