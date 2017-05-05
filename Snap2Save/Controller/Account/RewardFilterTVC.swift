@@ -236,7 +236,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
 
         
         if fromDateMilliSec > toDateMilliSec {
-            showAlert(title: "", message: "To date should be greater than from date.".localized())
+            showAlert(title: "", message: "The TO date must be later than or equal to the FROM date.".localized())
             return false
         }
 

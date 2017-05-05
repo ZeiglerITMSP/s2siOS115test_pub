@@ -359,7 +359,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 0 { // Additional Offers cell
             let additionalOffersCell = tableView.dequeueReusableCell(withIdentifier: "AdditionalOffersCell")
-            additionalOffersCell?.textLabel?.text = "Additional Offers".localized()
+            additionalOffersCell?.textLabel?.text = "Weekly Circular".localized()
             
             return additionalOffersCell!
         }

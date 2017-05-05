@@ -307,8 +307,8 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         
         // Terms of Service
         let fullMessage = "TermsMessage".localized().makeAsRequired()
-        //let rangeMessage = "TermsLink".localized()
-        let rangeMessage = "Terms of Service"
+        let rangeMessage = "TermsLink".localized()
+        //let rangeMessage = "Terms of Service"
 
         let rangeMessage2 = "*"
         //let range2 : NSMutableAttributedString = NSMutableAttributedString.init(string: " *")
