@@ -255,10 +255,17 @@ extension ServicesTVC {
             
             let spot = adSpotManager.adSpots[indexPath.row]
             let type = spot["type"]
-            let image = adSpotManager.adSpotImages["\(type!)"]
-            let height = AppHelper.getRatio(width: (image?.size.width)!, height: (image?.size.height)!, newWidth: self.view.frame.width)
+            if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                if adImage.size.width > self.view.frame.width {
+                    let height = AppHelper.getRatio(width: adImage.size.width,
+                                                    height: adImage.size.height,
+                                                    newWidth: self.view.frame.width)
+                    
+                    return height
+                }
+            }
             
-            return height
+            return UITableViewAutomaticDimension
             
         } else {
             return UITableViewAutomaticDimension

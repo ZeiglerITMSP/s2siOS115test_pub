@@ -319,7 +319,12 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else if section == 1 {
-            return 1
+            
+            if offersLoaded == true {
+                return 1
+            }
+            
+            return 0
 //            if offerImage != nil {
 //                return 1
 //            } else {
@@ -337,21 +342,37 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             return 50.0
         } else if indexPath.section == 1 {
-            
-            if adSpotManager.adSpots.count == 0 {
-                return calculate(percentage: 100, ofValue: tableView.frame.height - 50)
+
+            if let offerImage = self.offerImage {
+                
+                if offerImage.size.width > self.view.frame.width {
+                    let height = AppHelper.getRatio(width: offerImage.size.width,
+                                                    height: offerImage.size.height,
+                                                    newWidth: self.view.frame.width)
+                    
+                    return height
+                }
             } else {
-                return calculate(percentage: 80, ofValue: tableView.frame.height - 50)
+                return 120.0
             }
+            
+            return UITableViewAutomaticDimension
+
         } else {
             
             let spot = adSpotManager.adSpots[indexPath.row]
             let type = spot["type"]
-            let image = adSpotManager.adSpotImages["\(type!)"]
-            let height = AppHelper.getRatio(width: (image?.size.width)!, height: (image?.size.height)!, newWidth: self.view.frame.width)
+            if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                if adImage.size.width > self.view.frame.width {
+                    let height = AppHelper.getRatio(width: adImage.size.width,
+                                                    height: adImage.size.height,
+                                                    newWidth: self.view.frame.width)
+                    
+                    return height
+                }
+            }
             
-            return height
-//            return UITableViewAutomaticDimension
+            return UITableViewAutomaticDimension
         }
     }
     
@@ -371,9 +392,11 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
                 offerImageCell.offerImageView.image = offerImage
                 offerImageCell.mesageLabel.isHidden = true
             } else {
-                offerImageCell.offerImageView.image = nil
-                offerImageCell.mesageLabel.isHidden = false
-                offerImageCell.mesageLabel.text = "message.nooffer".localized()
+                if offersLoaded == true {   // to hide message on first load
+                    offerImageCell.offerImageView.image = nil
+                    offerImageCell.mesageLabel.isHidden = false
+                    offerImageCell.mesageLabel.text = "message.nooffer".localized()
+                }
             }
             
             return offerImageCell
