@@ -379,10 +379,10 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 { // Additional Offers cell
-            let additionalOffersCell = tableView.dequeueReusableCell(withIdentifier: "AdditionalOffersCell")
-            additionalOffersCell?.textLabel?.text = "Weekly Circular".localized()
+            let additionalOffersCell = tableView.dequeueReusableCell(withIdentifier: "OfferTitleTVC") as! OfferTitleTVC
+            additionalOffersCell.titleLabel?.text = "Weekly Circular".localized()
             
-            return additionalOffersCell!
+            return additionalOffersCell
         }
         else if indexPath.section == 1 { // Offer image cell
             
@@ -415,6 +415,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if indexPath.section == 0 {
             offerTapGesClicked()
         } else if indexPath.section == 1 {
@@ -422,6 +423,8 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
         }
+        
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
 }

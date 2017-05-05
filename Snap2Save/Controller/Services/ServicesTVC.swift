@@ -358,6 +358,7 @@ extension ServicesTVC {
             self.adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
         }
         
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
 }

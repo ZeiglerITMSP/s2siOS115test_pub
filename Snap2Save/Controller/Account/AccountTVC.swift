@@ -66,9 +66,9 @@ class AccountTVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        reloadContent()
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         self.adSpotManager.getAdSpots(forScreen: .account)
-        reloadContent()
         AppHelper.getScreenName(screenName: "Account screen")
         
     }

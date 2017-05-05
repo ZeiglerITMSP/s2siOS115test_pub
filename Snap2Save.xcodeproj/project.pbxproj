@@ -80,6 +80,7 @@
 		E86D8D2C1EA8D229001250D9 /* AccountSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86D8D2B1EA8D229001250D9 /* AccountSwitchCell.swift */; };
 		E874F2841EBC5E5E00BB3DCA /* horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = E874F2821EBC5E5E00BB3DCA /* horizontal.png */; };
 		E874F2851EBC5E5E00BB3DCA /* vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = E874F2831EBC5E5E00BB3DCA /* vertical.png */; };
+		E874F2871EBC99C800BB3DCA /* OfferTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E874F2861EBC99C800BB3DCA /* OfferTitleTVC.swift */; };
 		E87A57131EBB673900C97194 /* large.png in Resources */ = {isa = PBXBuildFile; fileRef = E87A57111EBB673800C97194 /* large.png */; };
 		E87A57141EBB673900C97194 /* small.png in Resources */ = {isa = PBXBuildFile; fileRef = E87A57121EBB673800C97194 /* small.png */; };
 		E888F60E1EBA010000315CAD /* Error Page copy.htm in Resources */ = {isa = PBXBuildFile; fileRef = E888F60B1EBA010000315CAD /* Error Page copy.htm */; };
@@ -204,6 +205,7 @@
 		E86D8D2B1EA8D229001250D9 /* AccountSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSwitchCell.swift; sourceTree = "<group>"; };
 		E874F2821EBC5E5E00BB3DCA /* horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horizontal.png; sourceTree = "<group>"; };
 		E874F2831EBC5E5E00BB3DCA /* vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vertical.png; sourceTree = "<group>"; };
+		E874F2861EBC99C800BB3DCA /* OfferTitleTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferTitleTVC.swift; sourceTree = "<group>"; };
 		E87A57111EBB673800C97194 /* large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = large.png; sourceTree = "<group>"; };
 		E87A57121EBB673800C97194 /* small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small.png; sourceTree = "<group>"; };
 		E888F60B1EBA010000315CAD /* Error Page copy.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "Error Page copy.htm"; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 				E863CEBB1E1BE72E00049F28 /* OffersVC.swift */,
 				E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */,
 				E8439E451EA4AAA2008079F0 /* OfferTableViewCell.swift */,
+				E874F2861EBC99C800BB3DCA /* OfferTitleTVC.swift */,
 				E86D8D1F1EA8A273001250D9 /* AdSpotTableViewCell.swift */,
 				E86D8D201EA8A273001250D9 /* AdSpotTableViewCell.xib */,
 				974D5C321E2DF55400918BAD /* OffersDetailsViewController.swift */,
@@ -969,6 +972,7 @@
 				E88BA57C1DF53D1500714C65 /* LandingVC.swift in Sources */,
 				974D5C391E2E5D9900918BAD /* SwiftLoader.swift in Sources */,
 				976A99771E251A6400F82105 /* FacebookLogin.swift in Sources */,
+				E874F2871EBC99C800BB3DCA /* OfferTitleTVC.swift in Sources */,
 				E86D8D2A1EA8D21B001250D9 /* AccountCell.swift in Sources */,
 				970C963A1E5EFBE400697E56 /* RedeemPointsMessageVC.swift in Sources */,
 				974CDFCA1E67FC030041EC07 /* FZURefreshFoot.swift in Sources */,

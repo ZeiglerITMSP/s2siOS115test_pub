@@ -75,7 +75,7 @@ class OffersDetailsViewController: UIViewController {
             self.updateBackButtonText()
             if  self.isFromAdditionalOffers == true
             {
-                self.navigationItem.title = "Additional Offers".localized()
+                self.navigationItem.title = "Weekly Circular".localized()
             }
             else
             {

@@ -23,6 +23,8 @@ function appendTwoStrings(x, y) {
     return "\(x)" + " " + y;
 }
 
+
+
 function getErrorMessage() {
 
     var errorInvalidField = "";
@@ -68,7 +70,6 @@ function getErrorMessage() {
 }
 
 
-
 function identifyPage() {
     if ($('#txtCardNumber').length && $('#btnValidateCardNumber').length) return 'sign_up_card';
     if ($('#btnAcceptTandC').length && $('#btnCancelRegistration').length) return 'sign_up_terms_conditions';
@@ -100,7 +101,7 @@ function getPageTitle() {
 }
 
 
-// Login
+// MARK: -  Login
 function autofillLoginDetailsAndSubmit(userName, password) {
     
     $('#userId').val(userName);
@@ -112,7 +113,7 @@ function checkForLoginStatusMessage() {
     return $('#infoMsg .actionMessage').text().trim();
 }
 
-// Authentication code
+// MARK: -  Authentication code
 function autofillAuthenticationCodeAndSubmit(authenticationCode) {
     
     $('#txtAuthenticationCode').val(authenticationCode);
@@ -123,7 +124,7 @@ function clickRegenerateButton() {
     return $('#cancelBtn').click();
 }
 
-// security question
+// MARK: -  security question
 function getSecurityQuestion() {
     return $('.cdpLeftAlignedTdLabel').first().text().trim();
 }
@@ -132,6 +133,69 @@ function autoFillSecurityAnswerAndSubmit(securityQuestion) {
     $('#securityAnswer').val(securityQuestion);
     $('#okButton').click();
 }
+
+// MARK: - Dashboard
+function getSnapBalance() {
+    return $($("td.widgetValue:contains('SNAP')").parent().parent().find('td.widgetValue')[2]).html().trim();
+}
+
+function getCashBalance() {
+    return $($("td.widgetValue:contains('CASH')").parent().parent().find('td.widgetValue')[2]).html().trim();
+}
+
+function getTransactionsPageURL() {
+    return $('.green_bullet:eq(1) a').attr('href');
+}
+
+function loadTransactionsPage(url) {
+    window.location.href = url;
+}
+
+function validateTransactionsTab() {
+    return $('#transActTabs li.ui-state-active').attr('id');
+}
+
+function clickTransactionsTab() {
+    $('#allactTab a').click();
+}
+
+function validateTransactionsTabClick() {
+    return $('#transActTabs li.ui-state-active').attr('id');
+}
+
+function checkForStartEndDateFields() {
+    return $('#fromDateTransHistory').attr('id');
+}
+
+
+function setTransactionsHistoryStartEndDates() {
+    
+   var formatD = function(d) {
+    var dd = d.getDate(),
+    dm = d.getMonth()+1,
+    dy = d.getFullYear();
+    if (dd<10) dd='0'+dd;
+    if (dm<10) dm='0'+dm;
+    return dm+'/'+dd+'/'+dy;
+    };
+    var endDate = new Date(), startDate = new Date(endDate.valueOf());
+    startDate.setDate(endDate.getDate()-90);
+    $('#fromDateTransHistory').val(formatD(startDate));
+    $('#toDateTransHistory').val(formatD(endDate));
+    $('#searchAll').click()
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

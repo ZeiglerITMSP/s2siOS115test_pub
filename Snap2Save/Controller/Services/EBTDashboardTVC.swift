@@ -253,7 +253,7 @@ class EBTDashboardTVC: UITableViewController {
         //        NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
-    // JavaScript
+    // MARK: - JavaScript
     
     func validatePage() {
         
@@ -272,8 +272,8 @@ class EBTDashboardTVC: UITableViewController {
     
     func getAccountDetails() {
         
-        let jsEBTBalance = "$($(\"td.widgetValue:contains('SNAP')\").parent().parent().find('td.widgetValue')[2]).html().trim();"
-        let jsCashBalance = "$($(\"td.widgetValue:contains('CASH')\").parent().parent().find('td.widgetValue')[2]).html().trim();"
+        let jsEBTBalance = "getSnapBalance();"
+        let jsCashBalance = "getCashBalance();"
         
         execute(javaScript: jsEBTBalance, completion: { result in
             
@@ -305,7 +305,7 @@ class EBTDashboardTVC: UITableViewController {
                 
                 self.isTransactionsLoading = true
                 self.tableView.reloadData()
-                self.getTransactionActivityUlr()
+                self.getTransactionActivityURL()
             })
         })
     }
@@ -332,9 +332,9 @@ class EBTDashboardTVC: UITableViewController {
     
     // Transaction History
     
-    func getTransactionActivityUlr() {
+    func getTransactionActivityURL() {
         
-        let js = "$('.green_bullet:eq(1) a').attr('href');"
+        let js = "getTransactionsPageURL();"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
@@ -361,7 +361,7 @@ class EBTDashboardTVC: UITableViewController {
     func loadTransactionActivityPage(url:String) {
         
         actionType = .transactions
-        let js = "window.location.href = '\(url)';"
+        let js = "loadTransactionsPage('\(url)');"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             
@@ -389,7 +389,7 @@ class EBTDashboardTVC: UITableViewController {
     
     func validateTransactionsTab() {
         
-        let jsLoginValidation = "$('#transActTabs li.ui-state-active').attr('id');"
+        let jsLoginValidation = "validateTransactionsTab();"
         let javaScript = jsLoginValidation
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
@@ -418,7 +418,7 @@ class EBTDashboardTVC: UITableViewController {
         
         actionType = ActionType.tabClick
         
-        let jsTabClick = "$('#allactTab a').click();"
+        let jsTabClick = "clickTransactionsTab();"
         let javaScript = jsTabClick
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
@@ -444,7 +444,7 @@ class EBTDashboardTVC: UITableViewController {
     
     func validateTabClick() {
         
-        let jsLoginValidation = "$('#transActTabs li.ui-state-active').attr('id');"
+        let jsLoginValidation = "validateTransactionsTabClick();"
         let javaScript = jsLoginValidation
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
@@ -490,7 +490,7 @@ class EBTDashboardTVC: UITableViewController {
 
     func checkForStartEndDateFields() {
         
-        let jsIsLastPage = "$('#fromDateTransHistory').attr('id');"
+        let jsIsLastPage = "checkForStartEndDateFields();"
         ebtWebView.webView.evaluateJavaScript(jsIsLastPage) { (result, error) in
             print(result ?? "no result")
             if (result as? String) != nil {
