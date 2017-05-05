@@ -81,6 +81,7 @@
 		E874F2841EBC5E5E00BB3DCA /* horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = E874F2821EBC5E5E00BB3DCA /* horizontal.png */; };
 		E874F2851EBC5E5E00BB3DCA /* vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = E874F2831EBC5E5E00BB3DCA /* vertical.png */; };
 		E874F2871EBC99C800BB3DCA /* OfferTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E874F2861EBC99C800BB3DCA /* OfferTitleTVC.swift */; };
+		E874F2891EBCB09400BB3DCA /* ebt_registration_scrapping.js in Resources */ = {isa = PBXBuildFile; fileRef = E874F2881EBCB09400BB3DCA /* ebt_registration_scrapping.js */; };
 		E87A57131EBB673900C97194 /* large.png in Resources */ = {isa = PBXBuildFile; fileRef = E87A57111EBB673800C97194 /* large.png */; };
 		E87A57141EBB673900C97194 /* small.png in Resources */ = {isa = PBXBuildFile; fileRef = E87A57121EBB673800C97194 /* small.png */; };
 		E888F60E1EBA010000315CAD /* Error Page copy.htm in Resources */ = {isa = PBXBuildFile; fileRef = E888F60B1EBA010000315CAD /* Error Page copy.htm */; };
@@ -206,6 +207,7 @@
 		E874F2821EBC5E5E00BB3DCA /* horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horizontal.png; sourceTree = "<group>"; };
 		E874F2831EBC5E5E00BB3DCA /* vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vertical.png; sourceTree = "<group>"; };
 		E874F2861EBC99C800BB3DCA /* OfferTitleTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferTitleTVC.swift; sourceTree = "<group>"; };
+		E874F2881EBCB09400BB3DCA /* ebt_registration_scrapping.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ebt_registration_scrapping.js; sourceTree = "<group>"; };
 		E87A57111EBB673800C97194 /* large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = large.png; sourceTree = "<group>"; };
 		E87A57121EBB673800C97194 /* small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small.png; sourceTree = "<group>"; };
 		E888F60B1EBA010000315CAD /* Error Page copy.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "Error Page copy.htm"; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				E82283A91E0A72BC008FE084 /* EBTWebView.swift */,
 				E82283AB1E0A72D3008FE084 /* BrowserVC.swift */,
 				E888F6101EBA163F00315CAD /* ebt_scrapping.js */,
+				E874F2881EBCB09400BB3DCA /* ebt_registration_scrapping.js */,
 			);
 			name = EBTTracking;
 			path = ../EBTTracking;
@@ -754,6 +757,7 @@
 				E88BA59A1DF5B25D00714C65 /* Localizable.strings in Resources */,
 				E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */,
 				E888F6111EBA163F00315CAD /* ebt_scrapping.js in Resources */,
+				E874F2891EBCB09400BB3DCA /* ebt_registration_scrapping.js in Resources */,
 				E874F2841EBC5E5E00BB3DCA /* horizontal.png in Resources */,
 				974D5C351E2DFF5B00918BAD /* snap2save.jpeg in Resources */,
 				E874F2851EBC5E5E00BB3DCA /* vertical.png in Resources */,

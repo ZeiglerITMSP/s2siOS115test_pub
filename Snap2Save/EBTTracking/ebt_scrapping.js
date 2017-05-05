@@ -13,18 +13,6 @@
 //    let jsGetErrorCode = "$(\".errorInvalidField\").text().trim();"
 
 
-
-function getMyName() {
-    return 'kiran';
-}
-
-function appendTwoStrings(x, y) {
-    
-    return "\(x)" + " " + y;
-}
-
-
-
 function getErrorMessage() {
 
     var errorInvalidField = "";
@@ -61,7 +49,8 @@ function getErrorMessage() {
         return errorHeading + errorLoginField.trim();
     }
     else {
-        if (document.getElementById('errorTable').style.display != 'none') {
+        if (document.getElementById('errorTable') &&
+            document.getElementById('errorTable').style.display != 'none') {
             return errorHeading;
         } else {
             return "";
@@ -185,10 +174,44 @@ function setTransactionsHistoryStartEndDates() {
     $('#searchAll').click()
 }
 
+function getCurrentPageNumber() {
+    return $('.ui-pg-input').val();
+}
+    
+function getTransactions() {
+    var list = [];
+    var table = $('#allCompletedTxnGrid tbody');
+    table.find('tr').each(function (i) {
+                          var $tds = $(this).find('td'),
+                          t_date = $tds.eq(2).text().trim();
+                          if (t_date) {
+                            list[i] = {
+                                id: this.id,
+                                date: t_date,
+                                transaction: $tds.eq(3).text().trim(),
+                                location: $tds.eq(4).text().trim(),
+                                account: $tds.eq(5).text().trim(),
+                                card: $tds.eq(6).text().trim(),
+                                debit_amount: $tds.eq(7).text().trim(),
+                                credit_amount: $tds.eq(8).text().trim(),
+                                available_balance: $tds.eq(9).text().trim()
+                            };
+                          }
+    });
+    arr = $.grep(list, function (n) {
+            return n == 0 || n;
+    });
+    var jsonSerialized = JSON.stringify(arr);
+    return jsonSerialized;
+}
 
+function isLastPage() {
+    return $('#next_allCompletedTxnGrid_pager.ui-state-disabled').attr('id');
+}
 
-
-
+function gotoNextPage() {
+    $('#next_allCompletedTxnGrid_pager > a').click();
+}
 
 
 

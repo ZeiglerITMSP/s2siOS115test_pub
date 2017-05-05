@@ -56,19 +56,34 @@ class EBTWebView: NSObject {
         configuration.preferences = preferences
         // configuration user content
         let controller = WKUserContentController()
-        let jsPath = Bundle.main.path(forResource: "ebt_scrapping", ofType: "js");
+        
+        // login user script
+        let loginJS = prepareUserScript(fromFile: "ebt_scrapping")
+        controller.addUserScript(loginJS)
+        
+        // registration user script
+        let registrationJS = prepareUserScript(fromFile: "ebt_registration_scrapping")
+        controller.addUserScript(registrationJS)
+        
+        configuration.userContentController = controller
+        // create webview
+        webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        webView.navigationDelegate = self
+    }
+    
+    func prepareUserScript(fromFile fileName:String) -> WKUserScript {
+        
+        // load registration scrapping script
+        let jsPath = Bundle.main.path(forResource: fileName, ofType: "js");
         var scriptSourceCode = ""
         do {
             scriptSourceCode = try String(contentsOfFile: jsPath!, encoding: String.Encoding.utf8)
         } catch _ {
         }
-        // user script
+        
         let script = WKUserScript(source: scriptSourceCode, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: true)
-        controller.addUserScript(script)
-        configuration.userContentController = controller
-        // create webview
-        webView = WKWebView(frame: CGRect.zero, configuration: configuration)
-        webView.navigationDelegate = self
+        
+        return script
     }
     
     func loadEmptyPage() {

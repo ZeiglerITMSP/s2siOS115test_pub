@@ -506,21 +506,21 @@ class EBTDashboardTVC: UITableViewController {
         
         startTime = nil
         
-        let jsTransactionDates = "var formatD = function(d){" +
-          "  var dd = d.getDate()," +
-          "  dm = d.getMonth()+1," +
-          "  dy = d.getFullYear();" +
-          "  if (dd<10) dd='0'+dd;" +
-          "  if (dm<10) dm='0'+dm;" +
-         "   return dm+'/'+dd+'/'+dy;" +
-        "};" +
-        "var endDate = new Date(), startDate = new Date(endDate.valueOf());" +
-        "startDate.setDate(endDate.getDate()-90);" +
-        "$('#fromDateTransHistory').val(formatD(startDate));" +
-        "$('#toDateTransHistory').val(formatD(endDate));" +
-        "$('#searchAll').click()"
+//        let jsTransactionDates = "var formatD = function(d){" +
+//          "  var dd = d.getDate()," +
+//          "  dm = d.getMonth()+1," +
+//          "  dy = d.getFullYear();" +
+//          "  if (dd<10) dd='0'+dd;" +
+//          "  if (dm<10) dm='0'+dm;" +
+//         "   return dm+'/'+dd+'/'+dy;" +
+//        "};" +
+//        "var endDate = new Date(), startDate = new Date(endDate.valueOf());" +
+//        "startDate.setDate(endDate.getDate()-90);" +
+//        "$('#fromDateTransHistory').val(formatD(startDate));" +
+//        "$('#toDateTransHistory').val(formatD(endDate));" +
+//        "$('#searchAll').click()"
         
-        let javaScript = jsTransactionDates
+        let javaScript = "setTransactionsHistoryStartEndDates();"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             print(result ?? "")
@@ -561,7 +561,7 @@ class EBTDashboardTVC: UITableViewController {
     
     func checkPageNumber() {
         
-        let jsPageNumber = "$('.ui-pg-input').val();"
+        let jsPageNumber = "getCurrentPageNumber();"
         ebtWebView.webView.evaluateJavaScript(jsPageNumber, completionHandler: { (result, error) in
             
             if result != nil {
@@ -582,33 +582,35 @@ class EBTDashboardTVC: UITableViewController {
     
     func runTransactionsScript() {
         
-        let js = "function transactionActivity() {" +
-            "var list = [];" +
-            "var table = $('#allCompletedTxnGrid tbody');" +
-            "table.find('tr').each(function (i) {" +
-            "var $tds = $(this).find('td')," +
-            "t_date = $tds.eq(2).text().trim();" +
-            "if (t_date) {" +
-            "list[i] = {" +
-            "id: this.id," +
-            "date: t_date," +
-            "transaction: $tds.eq(3).text().trim()," +
-            "location: $tds.eq(4).text().trim()," +
-            "account: $tds.eq(5).text().trim()," +
-            "card: $tds.eq(6).text().trim()," +
-            "debit_amount: $tds.eq(7).text().trim()," +
-            "credit_amount: $tds.eq(8).text().trim()," +
-            "available_balance: $tds.eq(9).text().trim()" +
-            "};" +
-            "}" +
-            "});" +
-            "arr = $.grep(list, function (n) {" +
-            "return n == 0 || n" +
-            "});" +
-            "var jsonSerialized = JSON.stringify(arr);" +
-            "return jsonSerialized;" +
-            "}" +
-        "transactionActivity();"
+//        let js = "function transactionActivity() {" +
+//            "var list = [];" +
+//            "var table = $('#allCompletedTxnGrid tbody');" +
+//            "table.find('tr').each(function (i) {" +
+//            "var $tds = $(this).find('td')," +
+//            "t_date = $tds.eq(2).text().trim();" +
+//            "if (t_date) {" +
+//            "list[i] = {" +
+//            "id: this.id," +
+//            "date: t_date," +
+//            "transaction: $tds.eq(3).text().trim()," +
+//            "location: $tds.eq(4).text().trim()," +
+//            "account: $tds.eq(5).text().trim()," +
+//            "card: $tds.eq(6).text().trim()," +
+//            "debit_amount: $tds.eq(7).text().trim()," +
+//            "credit_amount: $tds.eq(8).text().trim()," +
+//            "available_balance: $tds.eq(9).text().trim()" +
+//            "};" +
+//            "}" +
+//            "});" +
+//            "arr = $.grep(list, function (n) {" +
+//            "return n == 0 || n" +
+//            "});" +
+//            "var jsonSerialized = JSON.stringify(arr);" +
+//            "return jsonSerialized;" +
+//            "}" +
+//        "transactionActivity();"
+
+        let js = "getTransactions();"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
@@ -695,7 +697,7 @@ class EBTDashboardTVC: UITableViewController {
     func goToNextPage() {
         
         // check if next page exists, and go to next page
-        let jsIsLastPage = "$('#next_allCompletedTxnGrid_pager.ui-state-disabled').attr('id');"
+        let jsIsLastPage = "isLastPage();"
         ebtWebView.webView.evaluateJavaScript(jsIsLastPage) { (result, error) in
             print(result ?? "no result")
             if (result as? String) != nil {
@@ -706,7 +708,7 @@ class EBTDashboardTVC: UITableViewController {
                 self.sendEBTInformationToServer()
             } else { // click next page
                 print("NEXT PAGE")
-                let jsNextPageClick = "$('#next_allCompletedTxnGrid_pager > a').click();"
+                let jsNextPageClick = "gotoNextPage();"
                 let javaScript = jsNextPageClick
                 
                 self.ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
