@@ -137,7 +137,7 @@
 
 //ForgotPassword
 "Forgot Password" = "Olvidé mi contraseña";
-"forgotPasswordMessage" = "Introduce el número de teléfono celular de 10 dígitos asociado con tu cuenta."
+"forgotPasswordMessage" = "Introduce el número de teléfono celular de 10 dígitos asociado con tu cuenta.";
 "10-DIGIT CELL PHONE NUMBER" = "NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
 "SUBMIT" = "ENVIAR";
 
