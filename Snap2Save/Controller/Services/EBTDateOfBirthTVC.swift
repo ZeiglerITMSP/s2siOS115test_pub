@@ -223,15 +223,15 @@ extension EBTDateOfBirthTVC {
     
     func getQuestions() {
         
-        let js =
-            
-            "function questions() {    " +
-                    "var my = $(\"label[for='securityAnswer']\").text().trim(); " +
-                    "return my;  " +
-            "}  " +
+//        let js =
+//            
+//            "function questions() {    " +
+//                    "var my = $(\"label[for='securityAnswer']\").text().trim(); " +
+//                    "return my;  " +
+//            "}  " +
+//        
+//            "questions();              "
         
-            "questions();              "
-            
             /*
             "function securityQuestions() {            " +
             "var list = [];                                 " +
@@ -270,6 +270,7 @@ extension EBTDateOfBirthTVC {
 securityQuestions();
  */
         
+        let js = "getQuestionsFromDOBpage();"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
@@ -339,12 +340,13 @@ securityQuestions();
         let dob = dobField.contentTextField.text!
         let securityNumber = socialSecurityNumberField.contentTextField.text!
         
-        let jsDOB = "$('#txtSecurityKeyQuestionAnswer').val('\(dob)');"
-        let jsSecurityNumber = "$('#txtSecurityKeyQuestionAns_0').val('\(securityNumber)');"
-        let jsForm = "void($('#btnValidateSecurityAnswer').click());"
-        
-        let javaScript = jsDOB + jsSecurityNumber + jsForm
-        
+//        let jsDOB = "$('#txtSecurityKeyQuestionAnswer').val('\(dob)');"
+//        let jsSecurityNumber = "$('#txtSecurityKeyQuestionAns_0').val('\(securityNumber)');"
+//        let jsForm = "void($('#btnValidateSecurityAnswer').click());"
+//        
+//        let javaScript = jsDOB + jsSecurityNumber + jsForm
+
+        let javaScript = "autoFillDOBandSecurityQuestion('\(dob)', '\(securityNumber)');"
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             self.checkForErrorMessage()
         }

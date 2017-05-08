@@ -252,12 +252,13 @@ extension EBTCardNumberTVC {
     func autoFill() {
         
         let cardNumber = self.cardNumberField.contentTextField.text!
+//
+//        let jsCardNumber = "$('#txtCardNumber').val('\(cardNumber)');"
+//        let jsSubmit = "void($('#btnValidateCardNumber').click());"
         
-        let jsCardNumber = "$('#txtCardNumber').val('\(cardNumber)');"
-        let jsSubmit = "void($('#btnValidateCardNumber').click());"
+//        let javaScript =  jsCardNumber + jsSubmit
         
-        let javaScript =  jsCardNumber + jsSubmit
-        
+        let javaScript = "autoFillCardNumber('\(cardNumber)');";
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             if error != nil {
                 print(error ?? "error nil")
@@ -298,7 +299,7 @@ extension EBTCardNumberTVC {
 
     func acceptSubmit() {
         
-        let jsAcceptClick = "void($('form')[1].submit());"
+        let jsAcceptClick = "acceptTerms();"
         
         ebtWebView.webView.evaluateJavaScript(jsAcceptClick) { (result, error) in
             if error != nil {

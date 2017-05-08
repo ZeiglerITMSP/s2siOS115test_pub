@@ -61,9 +61,9 @@ class EBTWebView: NSObject {
         let loginJS = prepareUserScript(fromFile: "ebt_scrapping")
         controller.addUserScript(loginJS)
         
-//        // registration user script
-//        let registrationJS = prepareUserScript(fromFile: "ebt_registration_scrapping")
-//        controller.addUserScript(registrationJS)
+        // registration user script
+        let registrationJS = prepareUserScript(fromFile: "ebt_registration_scrapping")
+        controller.addUserScript(registrationJS)
         
         configuration.userContentController = controller
         // create webview

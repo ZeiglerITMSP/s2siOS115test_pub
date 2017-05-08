@@ -285,11 +285,12 @@ extension EBTConfirmationTVC {
         
         actionType = ActionType.validate
         
-        let jsCardNumber = "$('#txtEmailValidationCode').val('\(valdationCode)');"
-        let jsSubmit = "void($('#validateEmailBtn').click());"
-        
-        let javaScript =  jsCardNumber + jsSubmit
-        
+//        let jsCardNumber = "$('#txtEmailValidationCode').val('\(valdationCode)');"
+//        let jsSubmit = "void($('#validateEmailBtn').click());"
+//        
+//        let javaScript =  jsCardNumber + jsSubmit
+
+        let javaScript = "autofillConfirmationCode('\(valdationCode)');"
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
             self.checkForErrorMessage()
@@ -298,9 +299,10 @@ extension EBTConfirmationTVC {
     
     func resendVerificationCode() {
         
-        let jsResendClick = "void($('#resendValidationCodeBtn').click());"
-        let javaScript = jsResendClick
-        
+//        let jsResendClick = "void($('#resendValidationCodeBtn').click());"
+//        let javaScript = jsResendClick
+
+        let javaScript = "resendVerficationCode();"
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
             self.checkForSuccessMessage()
@@ -320,21 +322,7 @@ extension EBTConfirmationTVC {
     
     func getConfirmationMessage() {
         
-        let javaScript = "function getEmailConfirmation() { " +
-            "var names = ''; " +
-            "var msgDescription = $('#emailValidationForm .prelogonInstrTextArea .prelogonInstrText');" +
-            "msgDescription.each(function(i, object) { " +
-                "if (i != 0) { " +
-                    "names += object.innerText.trim(); " +
-                "} " +
-                "if (i == 1) { " +
-                    "names += '. ' " +
-                "} " +
-            "}); " +
-            "return names;" +
-        "} " +
-        
-        "getEmailConfirmation(); "
+        let javaScript = "getEmailConfirmation();"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
@@ -356,7 +344,7 @@ extension EBTConfirmationTVC {
     
     func changeEmail() {
         
-        let jsResendClick = "void($('#changeEmailBtn').click());"
+        let jsResendClick = "changeEmail();"
         let javaScript = jsResendClick
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in

@@ -262,14 +262,15 @@ extension EBTSelectPinTVC {
         let newPin = self.pinField.contentTextField.text!
         let confirmPin = self.confirmPinField.contentTextField.text!
         
-        let jsNewPin = "$('#txtNewPin').val('\(newPin)');"
-        let jsConfirmPin = "$('#txtConfirmPin').val('\(confirmPin)');"
-        
-//        let jsForm = "void($('form')[1].submit());"
-        let jsForm = "void($('#btnPinSetup').click());"
-        
-        let javaScript = jsNewPin + jsConfirmPin + jsForm
-        
+//        let jsNewPin = "$('#txtNewPin').val('\(newPin)');"
+//        let jsConfirmPin = "$('#txtConfirmPin').val('\(confirmPin)');"
+//        
+////        let jsForm = "void($('form')[1].submit());"
+//        let jsForm = "void($('#btnPinSetup').click());"
+//        
+//        let javaScript = jsNewPin + jsConfirmPin + jsForm
+
+        let javaScript = "autoFillPin('\(newPin)', '\(confirmPin)');"
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             if error != nil {
                 print(error ?? "error nil")
@@ -286,8 +287,10 @@ extension EBTSelectPinTVC {
     
     func useCurrentPIN() {
         
-        let jsUseCurrentPIN = "$('#btnUseCurrentPin').click();"
-        let javaScript = jsUseCurrentPIN
+//        let jsUseCurrentPIN = "$('#btnUseCurrentPin').click();"
+//        let javaScript = jsUseCurrentPIN
+
+        let javaScript = "useCurrentPin();"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
 //            if error != nil {
