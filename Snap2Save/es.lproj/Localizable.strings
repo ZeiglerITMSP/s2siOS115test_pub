@@ -255,21 +255,21 @@
 // Alert Messages
 
 "Please provide all required information." = "Provee toda la información requerida.";
-"Please enter a 10-digit cell phone number." = "Introduce un número de teléfono celular de 10 dígitos.";
-"Password must be at least 6 characters in length." = "Tu contraseña debe tener un mínimo de 6 caracteres.";
+"Please enter a 10-digit cell phone number." = "Escribe tu número de teléfono celular de 10 dígitos.";
+"Password must be at least 6 characters in length." = "Tu nueva contraseña debe tener un mínimo de 6 caracteres.";
 "Please enter a valid zip code." = "Introduce un código postal válido.";
 "Please enter a valid email address." = "Introduce un email válido.";
 
 "Entries must match to proceed." = "Los valores deben coincidir para continuar.";
 "Please enter current password" = "Please enter current password";
-"Your password must be at least 6 characters in length." = "Su contraseña debe tener 6 caracteres como mínimo.";
+"Your password must be at least 6 characters in length." = "Tu nueva contraseña debe tener un mínimo de 6 caracteres.";
 
 
 "Are you sure you want to log out?" = "¿Estás seguro de que deseas cerrar la sesión?";
 "Please enter password." = "Introduce tu contraseña.";
 
 "Please provide all information." = "Proporcione toda la información.";
-"You must agree to the Terms of Service." = "Debes aceptar las Condiciones de servicio.";
+"You must agree to the Terms of Service." = "Debe aceptar las Condiciones de servicio.";
 
 "Please enter a date range to view specific transactions." = "Indica un rango de fechas para ver las transacciones específicas.";
 
@@ -282,7 +282,7 @@
 "Please enter your city." = "Escribe tu ciudad.";
 "Please enter your state." = "Escribe tu estado.";
 "Please enter your zip code." = "Introduce tu código postal.";
-"You must have 500 points or more to be eligible for a reward." = "Debe tener 500 puntos o más para reunir los requisitos para una recompensa.";
+"alert.redeempoints.min" = "Debe tener 500 puntos o más para reunir los requisitos para una recompensa.";
 
 "Are you sure you want to redeem points?" = "¿Está seguro de que desea canjear puntos?";
 

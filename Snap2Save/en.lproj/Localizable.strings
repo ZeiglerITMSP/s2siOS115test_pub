@@ -248,8 +248,8 @@
 
 "Please provide all required information." = "Please provide all required information.";
 
-"Please enter a 10-digit cell phone number." = "Please enter a 10-digit cell phone number.";
-"Password must be at least 6 characters in length." = "Password must be at least 6 characters in length.";
+"Please enter a 10-digit cell phone number." = "Please enter 10-digit cell phone number.";
+"Password must be at least 6 characters in length." = "Your password must be at least 6 characters in length.";
 "Please enter password." = "Please enter password.";
 
 "Please enter a valid zip code." = "Please enter a valid zip code.";
@@ -274,7 +274,7 @@
 "Please enter your city." = "Please enter your city.";
 "Please enter your state." = "Please enter your state.";
 "Please enter your zip code." = "Please enter your zip code.";
-"You must have 500 points or more to be eligible for a reward." = "You must have 500 points or more to be eligible for a reward.";
+"alert.redeempoints.min" = "You must have 500 points or more to be eligible for a reward.";
 "Are you sure you want to redeem points?" = "Are you sure you want to redeem points?";
 
 "The TO date must be later than or equal to the FROM date." = "The TO date must be later than or equal to the FROM date.";
