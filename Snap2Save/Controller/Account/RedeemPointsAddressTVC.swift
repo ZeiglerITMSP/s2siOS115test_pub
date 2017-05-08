@@ -476,7 +476,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         
         let date = NSDate()
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.dateFormat = "MM/dd/yy"
         let result = formatter.string(from: date as Date)
         
         let dateRes = formatter.date(from: result)

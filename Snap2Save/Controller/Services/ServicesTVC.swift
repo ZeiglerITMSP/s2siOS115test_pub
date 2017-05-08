@@ -93,15 +93,15 @@ class ServicesTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-//    // TEST
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        
-//        if segue.identifier == "EBTLoginTVC" {
-//            
-//            let loginVC = segue.destination as! EBTLoginTVC
-//            loginVC.tempLoginUrl = tempLoginUrl
-//        }
-//    }
+    // TEST
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "EBTLoginTVC" {
+            
+            let loginVC = segue.destination as! EBTLoginTVC
+            loginVC.tempLoginUrl = tempLoginUrl
+        }
+    }
     
     // MARK: -
     
@@ -222,7 +222,7 @@ extension ServicesTVC {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section ==  0 {
             // TEST 2 , live 1
-            return 1
+            return 2
         } else if section == 1 {
             return infoScreensArray.count
         } else if section == 2 {
@@ -233,14 +233,27 @@ extension ServicesTVC {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 2 {
-            return 10
+        
+        if adSpotManager.adSpots.count > 0 {
+            return 0.001
+        } else {
+            if section <= 1 {
+                return 30
+            } else {
+                return 0.001
+            }
         }
-        return 30
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return 0.001
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -249,10 +262,17 @@ extension ServicesTVC {
             
             let spot = adSpotManager.adSpots[indexPath.row]
             let type = spot["type"]
-            let image = adSpotManager.adSpotImages["\(type!)"]
-            let height = AppHelper.getRatio(width: (image?.size.width)!, height: (image?.size.height)!, newWidth: self.view.frame.width)
+            if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                if adImage.size.width > self.view.frame.width {
+                    let height = AppHelper.getRatio(width: adImage.size.width,
+                                                    height: adImage.size.height,
+                                                    newWidth: self.view.frame.width)
+                    
+                    return height
+                }
+            }
             
-            return height
+            return UITableViewAutomaticDimension
             
         } else {
             return UITableViewAutomaticDimension
@@ -273,7 +293,7 @@ extension ServicesTVC {
                 //cell.ebtLabel.text = "EBT".localized()
                 self.FlowSegentedControl =  cell.flowSegmentControl
 //                // TEST
-                self.FlowSegentedControl.isHidden = true
+//                self.FlowSegentedControl.isHidden = true
                 return cell
             }
         }
@@ -345,6 +365,7 @@ extension ServicesTVC {
             self.adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
         }
         
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
 }
@@ -362,31 +383,49 @@ extension ServicesTVC {
         // get url
         var loginUrl = kEBTLoginUrl
         // TEST
-//        // For testing only
-//        if self.FlowSegentedControl.selectedSegmentIndex == 1 {
-//            loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"
-//        } else if self.FlowSegentedControl.selectedSegmentIndex == 2 {
-//            loginUrl = "http://internal.appit.ventures/s2s/flow3/ebt_login.html"
-//        } else if self.FlowSegentedControl.selectedSegmentIndex == 3 {
-//            loginUrl = "http://internal.appit.ventures/s2s/flow4/ebt_login.html"
-//        } else if self.FlowSegentedControl.selectedSegmentIndex == 4 {
-//            loginUrl = "http://internal.appit.ventures/s2s/flow5/ebt_login.html"
-//        } else if self.FlowSegentedControl.selectedSegmentIndex == 5 {
-//            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
-//        }
-//        tempLoginUrl = loginUrl
+        // For testing only
+        if self.FlowSegentedControl.selectedSegmentIndex == 1 {
+            loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"
+        } else if self.FlowSegentedControl.selectedSegmentIndex == 2 {
+            loginUrl = "http://internal.appit.ventures/s2s/flow3/ebt_login.html"
+        } else if self.FlowSegentedControl.selectedSegmentIndex == 3 {
+            loginUrl = "http://internal.appit.ventures/s2s/flow4/ebt_login.html"
+        } else if self.FlowSegentedControl.selectedSegmentIndex == 4 {
+            loginUrl = "http://internal.appit.ventures/s2s/flow5/ebt_login.html"
+        } else if self.FlowSegentedControl.selectedSegmentIndex == 5 {
+            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
+        }
+        tempLoginUrl = loginUrl
         
         if Localize.currentLanguage() == "es" {
             // .. es url
             loginUrl = kEBTLoginUrl_es
         }
+//        
+//        let htmlString = getHTML()
+//        ebtWebView.webView.loadHTMLString(htmlString, baseURL: nil)
+//
         // load url
         let url = NSURL(string: loginUrl)
         let request = NSURLRequest(url: url! as URL)
         ebtWebView.webView.load(request as URLRequest)
     }
     
+    func getHTML() -> String {
+        var html = ""
+        if let htmlPathURL = Bundle.main.url(forResource: "Error Page", withExtension: "htm"){
+            do {
+                html = try String(contentsOf: htmlPathURL, encoding: .utf8)
+            } catch  {
+                print("Unable to get the file.")
+            }
+        }
+        
+        return html
+    }
+    
     func validatePage() {
+        
         ebtWebView.getPageHeading(completion: { result in
             if let pageTitle = result {
                 // isCurrentPage
@@ -399,6 +438,10 @@ extension ServicesTVC {
                 }
             } else {
                 //print(error ?? "")
+                self.ebtWebView.getErrorMessage(completion: { (result) in
+                    print(result ?? "no error")
+                })
+                self.ebtActivityIndicator.stopAnimating()
             }
         })
     }

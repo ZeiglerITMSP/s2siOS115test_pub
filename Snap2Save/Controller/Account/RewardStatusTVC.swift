@@ -555,7 +555,7 @@ extension RewardStatusTVC: RedeemPointsTotalDelegate {
         
         if currentPoints < 500
         {
-            self.showAlert(title: "", message: "You must have 500 or more points to be eligible for a reward.".localized())
+            self.showAlert(title: "", message: "alert.redeempoints.min".localized())
         }
         else
         {

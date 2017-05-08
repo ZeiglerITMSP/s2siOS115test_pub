@@ -290,7 +290,7 @@ extension EBTLoginSecurityQuestionTVC {
     
     func getSecurityQuestion() {
         
-        let js = "$('.cdpLeftAlignedTdLabel').first().text().trim();"
+        let js = "getSecurityQuestion();"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
@@ -315,13 +315,10 @@ extension EBTLoginSecurityQuestionTVC {
 
     
     func autoFill() {
-        
-        let jsSecurityAnswer = "$('#securityAnswer').val('\(self.securityAnswerField.contentTextField.text!)');"
-        let jsSubmit = "$('#okButton').click();"
-        
-        let javaScript = jsSecurityAnswer + jsSubmit
+
+        let securityAnswer = self.securityAnswerField.contentTextField.text!
+        let javaScript = "autoFillSecurityAnswerAndSubmit('\(securityAnswer)');"
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            
             self.checkForErrorMessage()
         }
     }

@@ -162,7 +162,7 @@ class RedeemPointsTVC: UITableViewController {
         
         let date = NSDate()
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.dateFormat = "MM/dd/yy"
         let result = formatter.string(from: date as Date)
         let dateRes = formatter.date(from: result)
         
@@ -199,7 +199,7 @@ class RedeemPointsTVC: UITableViewController {
                                        "date_string": result,
                                        "address": address]
         
-        //print(parameters)
+        print(parameters)
         
         let url = String(format: "%@/redeemPoints", hostUrl)
        // print(url)
@@ -208,7 +208,7 @@ class RedeemPointsTVC: UITableViewController {
                 
             case .success:
                 let json = JSON(data: response.data!)
-                //print("json response\(json)")
+                print("json response\(json)")
                 SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 

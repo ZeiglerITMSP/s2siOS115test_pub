@@ -1,14 +1,14 @@
 //
-//  AcceuntCell.swift
+//  OfferTitleTVC.swift
 //  Snap2Save
 //
-//  Created by Appit on 4/20/17.
+//  Created by Appit on 5/5/17.
 //  Copyright © 2017 Appit. All rights reserved.
 //
 
 import UIKit
 
-class AccountCell: UITableViewCell {
+class OfferTitleTVC: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     

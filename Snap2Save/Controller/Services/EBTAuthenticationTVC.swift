@@ -266,16 +266,14 @@ extension EBTAuthenticationTVC {
 
     func autoFill() {
         let authenticationCode = authenticationCodeField.contentTextField.text!
-        let jsAuthenticationCode = "$('#txtAuthenticationCode').val('\(authenticationCode)');"
-        let jsSubmit = "$('#okButton').click();"
-        let javaScript = jsAuthenticationCode + jsSubmit
+        let javaScript = "autofillAuthenticationCodeAndSubmit('\(authenticationCode)');"
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             self.checkForErrorMessage()
         }
     }
     
     func regenerate() {
-        let jsRegenerate = "$('#cancelBtn').click();"
+        let jsRegenerate = "clickRegenerateButton();"
         let javaScript = jsRegenerate
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             // page have to be refresh to get message..
@@ -305,40 +303,6 @@ extension EBTAuthenticationTVC {
             }
         })
     }
-
-    
-//    func checkForStatusMessage() {
-//        
-//        let javaScript = "$('.completionText').first().text().trim();"
-//        
-//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-//            
-//            if let resultString = result as? String {
-//                
-//                let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-//                
-//                if resultTrimmed.characters.count > 0 {
-//                    // error message
-//                    
-//                    // update view
-//                    if self.ebtWebView.isPageLoading == false {
-//                        
-//                        self.regenerateButton.isEnabled = true
-//                        self.regenerateActivityIndicator.stopAnimating()
-//                    }
-//                    
-//                    self.errorMessageLabel.text = resultTrimmed
-//                    self.tableView.reloadData()
-//                    
-//                } else {
-//                    // no error message
-//                }
-//                
-//            } else {
-//                print(error ?? "")
-//            }
-//        }
-//    }
     
     func checkForSuccessMessage() {
         ebtWebView.checkForSuccessMessage(completion: { result in

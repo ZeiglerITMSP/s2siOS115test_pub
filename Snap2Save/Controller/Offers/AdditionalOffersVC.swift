@@ -86,7 +86,7 @@ class AdditionalOffersVC: UIViewController {
         DispatchQueue.main.async {
             self.updateBackButtonText()
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
-            self.navigationItem.title = "Additional Offers".localized()
+            self.navigationItem.title = "Weekly Circular".localized()
             self.currentlang = Localize.currentLanguage()
             if self.oldLanguage != self.currentlang {
                 self.getWowOffers()
