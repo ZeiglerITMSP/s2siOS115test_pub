@@ -233,7 +233,7 @@ class AdditionalOffersVC: UIViewController {
                                 }
                             } else {
                                 SwiftLoader.hide()
-                                self.showAlert(title: "", message: "No offer exists".localized())
+                                self.showAlert(title: "", message: "No offer exists.".localized())
                                 self.messageLabel.isHidden = false
                                 self.messageLabel.text = "No offer exists.".localized()
                                 

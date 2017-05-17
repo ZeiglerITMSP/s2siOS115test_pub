@@ -241,7 +241,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
     func isValid() -> Bool {
         
         if (currentPasswordTextField.contentTextField.text?.characters.count)! < 6 {
-            self.showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
+            self.showAlert(title: "", message: "Your password must be at least 6 characters in length.".localized())
             return false
         }
         else if (newPasswordTextField.contentTextField.text?.characters.count)! < 6 {

@@ -369,10 +369,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                           "language": currentLanguage
             ]
         
-       // print(parameters)
+        print(parameters)
         loginActivityIndicator.startAnimating()
         let url = String(format: "%@/logIn", hostUrl)
-        //print("url)
+        print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             switch response.result {
