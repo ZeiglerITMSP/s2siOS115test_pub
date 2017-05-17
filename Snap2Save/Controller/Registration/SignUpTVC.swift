@@ -523,7 +523,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         let socialId : String = facebookDict?["id"] as! String? ?? ""
         
         if mobileNumTextField.text?.characters.count == 0 || validMobileNum == false {
-            showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
+            showAlert(title: "", message: "Please enter 10-digit cell phone number.".localized())
             return false
         }
         

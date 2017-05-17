@@ -255,8 +255,8 @@
 // Alert Messages
 
 "Please provide all required information." = "Provee toda la información requerida.";
-"Please enter a 10-digit cell phone number." = "Introduce un número de teléfono celular de 10 dígitos.";
-"Password must be at least 6 characters in length." = "La contraseña debe tener al menos 6 caracteres.";
+"Please enter 10-digit cell phone number." = "Escribe tu número de teléfono celular de 10 dígitos.";
+"Password must be at least 6 characters in length." = "Tu contraseña debe tener un mínimo de 6 caracteres.";
 "Please enter a valid zip code." = "Introduce un código postal válido.";
 "Please enter a valid email address." = "Introduce un email válido.";
 
