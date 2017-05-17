@@ -11,7 +11,7 @@ import UIKit
 
 
 // development url old
-//var hostUrl = "http://dev.snap2save-a-lot.com/api";
+//var hostUrl = "http://dev.snap2save-a-lot.com/api"
 // test url
 //var hostUrl = "http://dev.snap2save-a-lot.com/test/api"
 
