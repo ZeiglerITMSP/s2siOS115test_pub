@@ -17,16 +17,23 @@ import UIKit
 
 // new
 // test
-var hostUrl = "http://test-api.snap2save.com"
+//var hostUrl = "http://test-api.snap2save.com"
 // dev
 //var hostUrl = "http://dev.snap2save.com/api"
+// *PRODUCTION:* 
+var hostUrl = "http://api.snap2save.com"
 
+// admin urls
+// dev
+//var admintUrl = "http://dev.snap2save-a-lot.com/test/admin"
+// production
+var adminUrl = "http://admin.snap2save.com"
 
-var reward_program_en = "http://dev.snap2save-a-lot.com/test/admin/reward/en"
-var reward_program_es = "http://dev.snap2save-a-lot.com/test/admin/reward/es"
+var reward_program_en = adminUrl + "/reward/en"
+var reward_program_es = adminUrl + "/reward/es"
 
-var terms_en = "http://dev.snap2save-a-lot.com/test/admin/terms/en"
-var terms_es = "http://dev.snap2save-a-lot.com/test/admin/terms/es"
+var terms_en = adminUrl + "/terms/en"
+var terms_es = adminUrl + "/terms/es"
 
 var SCREEN_WIDTH = UIScreen.main.bounds.size.width
 
