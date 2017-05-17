@@ -17,11 +17,11 @@ import UIKit
 
 // new
 // test
-//var hostUrl = "http://test-api.snap2save.com"
+var hostUrl = "http://test-api.snap2save.com"
 // dev
 //var hostUrl = "http://dev.snap2save.com/api"
 // *PRODUCTION:* 
-var hostUrl = "http://api.snap2save.com"
+//var hostUrl = "http://api.snap2save.com"
 
 // admin urls
 // dev
