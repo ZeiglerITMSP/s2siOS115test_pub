@@ -331,7 +331,7 @@ extension EBTConfirmationTVC {
                 let resultRemovedExtraWhiteSpaces = resultTrimmed.condenseWhitespace()
                 if resultRemovedExtraWhiteSpaces.characters.count > 0 {
                     // status message
-                    self.confirmationMessageLabel.text = resultTrimmed
+                    self.confirmationMessageLabel.text = resultRemovedExtraWhiteSpaces
                     self.tableView.reloadData()
                 } else {
                     
