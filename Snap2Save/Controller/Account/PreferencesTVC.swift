@@ -566,7 +566,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         if currentMobileNumber != mobileNumber {
             
             if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
-                self.showAlert(title: "", message: "Please enter 10-digit cell phone number.".localized())
+                self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
                 return false
             }
             
