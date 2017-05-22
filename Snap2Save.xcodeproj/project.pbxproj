@@ -695,7 +695,7 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = PGJV67G4NG;
 						LastSwiftMigration = 0810;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -1204,8 +1204,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.s2s.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "97c2a548-a0b7-40b0-820a-fd4bb4b69a69";
+				PROVISIONING_PROFILE_SPECIFIER = s2s_development;
 				SWIFT_OBJC_BRIDGING_HEADER = "Snap2Save/Snap2Save-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1222,7 +1222,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Snap2Save/Snap2Save.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = PGJV67G4NG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1233,8 +1233,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.s2s.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "710f0efa-4d32-40c5-91cf-0ed04aeacb9c";
+				PROVISIONING_PROFILE_SPECIFIER = s2s_distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "Snap2Save/Snap2Save-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

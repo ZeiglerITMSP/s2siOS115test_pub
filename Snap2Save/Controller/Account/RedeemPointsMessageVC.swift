@@ -79,6 +79,7 @@ class RedeemPointsMessageVC: UIViewController {
            // self.updateBackButtonText()
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Redeem Points".localized()
+            self.doneButton.setTitle("DONE".localized(), for: .normal)
             self.messageLabel.text = "Your Save-A-Lot gift card will be mailed within 15 days, so be sure to watch for an envelope from Snap2Save!".localized()
         }
     }
