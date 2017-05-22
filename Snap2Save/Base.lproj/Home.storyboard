@@ -1691,6 +1691,7 @@
                         <segue destination="8bl-KT-UbW" kind="relationship" relationship="viewControllers" id="Zu8-6t-Ggp"/>
                         <segue destination="owa-1n-xbu" kind="relationship" relationship="viewControllers" id="tnV-UI-xCr"/>
                         <segue destination="hvU-s9-CbF" kind="relationship" relationship="viewControllers" id="a4T-tU-FPx"/>
+                        <segue destination="RUE-Su-nIk" kind="relationship" relationship="viewControllers" id="Q79-2Y-W0J"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ed-kV-pJ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1706,11 +1707,11 @@
                         <viewControllerLayoutGuide type="bottom" id="GjO-jr-F29"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Zrw-JT-Ewe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1351"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5SK-JC-8JF">
-                                <rect key="frame" x="0.0" y="24" width="375" height="1376"/>
+                                <rect key="frame" x="0.0" y="24" width="375" height="1327"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qmv-fV-SmN">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>

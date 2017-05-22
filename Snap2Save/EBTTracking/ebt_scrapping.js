@@ -98,6 +98,19 @@ function autofillLoginDetailsAndSubmit(userName, password) {
     $('#submit').click();
 }
 
+function isSpanishPageLoaded() {
+    var selectedLanguage = $('#sample').children().children().children().children('label').text();
+    if (selectedLanguage) {
+        if (selectedLanguage != "Idioma") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    return true;
+}
+
+
 function checkForLoginStatusMessage() {
     return $('#infoMsg .actionMessage').text().trim();
 }

@@ -35,7 +35,7 @@ class EBTLoginTVC: UITableViewController {
     
     var tempLoginUrl = kEBTLoginUrl
     
-    var isHelpVCLoaded = false
+//    var isHelpVCLoaded = false
     
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
@@ -60,14 +60,14 @@ class EBTLoginTVC: UITableViewController {
     
     // Action
     
-    @IBAction func helpButtonAction() {
-        
-        isHelpVCLoaded = true
-        
-        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EBTHelpVC") as! EBTHelpVC
-        self.navigationController?.pushViewController(vc, animated: false)
-        
-    }
+//    @IBAction func helpButtonAction() {
+//        
+////        isHelpVCLoaded = true
+//        
+//        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EBTHelpVC") as! EBTHelpVC
+//        self.navigationController?.pushViewController(vc, animated: false)
+//        
+//    }
     
     
     @IBAction func loginAction(_ sender: UIButton) {
@@ -193,23 +193,30 @@ class EBTLoginTVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if isHelpVCLoaded == true {
-            return
-        }
+//        if isHelpVCLoaded == true {
+//            return
+//        }
         
         reloadContent()
-        validateLoginPage()
         
+//        if EBTUser.shared.isForceQuit {
+//            EBTUser.shared.isForceQuit = false
+//            loadLoginPage()
+//        } else {
+//            validateLoginPage()
+//        }
+//
+        validateLoginPage()
         udateRememberMyStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if isHelpVCLoaded == true {
-            isHelpVCLoaded = false
-            return
-        }
+//        if isHelpVCLoaded == true {
+//            isHelpVCLoaded = false
+//            return
+//        }
         
         ebtWebView.responder = self
         
@@ -477,16 +484,42 @@ extension EBTLoginTVC {
                     // current page
                     self.loadLoginPage()
                 } else {
-                    self.checkForStatusMessage()
+                    self.validateSpanishLoginPage()
+//                    self.checkForStatusMessage()
                 }
-                
             } else {
                 //print(error ?? "")
             }
-            
         })
     }
   
+    func validateSpanishLoginPage() {
+        //getCurrentLanguage()
+        let javaScript = "isSpanishPageLoaded();"
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! Bool
+//                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+//                print(trimmedText)
+                if stringResult == false {
+                    self.loadLoginPage()
+                } else {
+                    self.checkForStatusMessage()
+                }
+                
+//                if trimmedText != "Idioma" {
+//                    self.loadLoginPage()
+//                } else {
+//                    self.checkForStatusMessage()
+//                }
+            }
+        }
+    }
+    
     func loadLoginPage() {
         
         actionType = ActionType.loadLoginPage

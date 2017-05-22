@@ -214,6 +214,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
     func showForceQuitAlert() {
         
         self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        EBTUser.shared.isForceQuit = true
     }
     
     func exitProcessIfPossible() {
