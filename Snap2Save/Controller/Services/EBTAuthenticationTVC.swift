@@ -213,7 +213,6 @@ class EBTAuthenticationTVC: UITableViewController {
                 return 0
             }
         }
-        
         return UITableViewAutomaticDimension
     }
     

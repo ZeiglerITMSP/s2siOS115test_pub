@@ -67,6 +67,7 @@ class EBTDashboardTVC: UITableViewController {
         
         ebtWebView.responder = self
         
+        actionType = ActionType.accountDetails
         validatePage()
         
         // Load more
@@ -253,6 +254,19 @@ class EBTDashboardTVC: UITableViewController {
         //        NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
+    func showForceQuitAlert() {
+        
+        self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        EBTUser.shared.isForceQuit = true
+    }
+    
+    func exitProcessIfPossible() {
+        
+        if self.ebtWebView.isPageLoading == false {
+            self.showForceQuitAlert()
+        }
+    }
+    
     // MARK: - JavaScript
     
     func validatePage() {
@@ -260,11 +274,20 @@ class EBTDashboardTVC: UITableViewController {
         ebtWebView.getPageHeading(completion: { pageTitle in
             
             if pageTitle == "ebt.accountSummary".localized() {
-                
-                self.getAccountDetails()
-                
+                if self.actionType == ActionType.accountDetails {
+                    self.getAccountDetails()
+                }
             } else {
                 
+                self.validateTransactionPage()
+                
+//                if actionType == .transactions {
+//                    actionType = nil
+//                    validateTransactionPage()
+//                } else if actionType == .tabClick {
+//                    actionType = nil
+//                    validateTabClick()
+//                }
             }
         })
         
@@ -331,7 +354,6 @@ class EBTDashboardTVC: UITableViewController {
     }
     
     // Transaction History
-    
     func getTransactionActivityURL() {
         
         let js = "getTransactionsPageURL();"
@@ -376,12 +398,23 @@ class EBTDashboardTVC: UITableViewController {
             
             if pageTitle == "ebt.transactionActivity".localized() {
                 
-                self.validateTransactionsTab()
+                
+                if self.actionType == .transactions {
+                    self.actionType = nil
+                    self.validateTransactionsTab()
+                } else if self.actionType == .tabClick {
+                    self.actionType = nil
+                    self.validateTabClick()
+                }
+                
             } else {
                 print("END WITH DATA")
                 self.isTransactionsLoading = false
                 self.tableView.reloadData()
                 self.sendEBTInformationToServer()
+                
+                // check if redirected to loginpage or other page
+                self.exitProcessIfPossible()
             }
         })
         
@@ -395,9 +428,7 @@ class EBTDashboardTVC: UITableViewController {
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
             if let resultString = result as? String {
-                
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                
                 if resultTrimmed == "allactTab" {
                                       //  self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
                     self.startStartEndDatesTimer()
@@ -726,14 +757,7 @@ extension EBTDashboardTVC: EBTWebViewDelegate {
     
     func didFinishLoadingWebView() {
         
-        if actionType == .transactions {
-            actionType = nil
-            validateTransactionPage()
-        } else if actionType == .tabClick {
-            
-            actionType = nil
-            validateTabClick()
-        }
+        validatePage()
     }
     
 }
