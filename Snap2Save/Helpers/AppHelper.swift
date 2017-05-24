@@ -337,8 +337,8 @@ extension UIViewController {
         let defaultAction = UIAlertAction(title: "OK".localized() , style: .default, handler: nil)
         alertController.addAction(defaultAction)
         DispatchQueue.main.async {
-            
             self.present(alertController, animated: true, completion: nil)
+            alertController.view.tintColor = APP_GRREN_COLOR
         }
     }
     
@@ -362,10 +362,10 @@ extension UIViewController {
         alertController.addAction(okAction)
         
         
-        
         DispatchQueue.main.async {
             
             self.present(alertController, animated: true, completion: nil)
+            alertController.view.tintColor = APP_GRREN_COLOR
         }
     }
     

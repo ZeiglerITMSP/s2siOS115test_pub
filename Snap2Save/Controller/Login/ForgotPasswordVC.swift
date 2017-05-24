@@ -200,21 +200,21 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
                         if code.intValue == 200 {
                             
                             let alertMessage = responseDict["message"] as! String
-                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                                (action) in
-                                let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
-                                self.navigationController?.show(loginVc, sender: self)
-                                
-                                
-                            })
-                            alertController.addAction(defaultAction)
-                            DispatchQueue.main.async {
-                                
-                                self.present(alertController, animated: true, completion: nil)
-                            }
-                            
-                            
+//                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//                            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                                (action) in
+//                                let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+//                                self.navigationController?.show(loginVc, sender: self)
+//                                
+//                                
+//                            })
+//                            alertController.addAction(defaultAction)
+//                            DispatchQueue.main.async {
+//                                
+//                                self.present(alertController, animated: true, completion: nil)
+//                            }
+//                            
+                            self.showAlert(title: "", message: alertMessage, action: #selector(self.alertAction), showCancel: false)
                         }
                         else {
                             if let responseDict = json.dictionaryObject {
@@ -298,14 +298,11 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         return true
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func alertAction() {
+        
+        let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+        self.navigationController?.show(loginVc, sender: self)
+  
+    }
     
 }

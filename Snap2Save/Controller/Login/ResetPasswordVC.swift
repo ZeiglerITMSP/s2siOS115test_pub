@@ -29,7 +29,11 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     @IBOutlet var resetPasswordActivityIndicator: UIActivityIndicatorView!
     @IBAction func resetPasswordButtonAction(_ sender: UIButton) {
         
-        if (passwordTextField.text?.characters.count)! == 0 || (passwordTextField.text?.characters.count)! < 6{
+        if (passwordTextField.text?.characters.count)! == 0 {
+            self.showAlert(title: "", message: "Enter new pasword.".localized())
+            return
+        }
+        else if (passwordTextField.text?.characters.count)! < 6{
             self.showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
             return
         }
@@ -203,20 +207,23 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
                 
                 if let responseDict = json.dictionaryObject {
                     let alertMessage = responseDict["message"] as! String
-                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                        (action) in
-                        let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
-                        self.navigationController?.show(loginVc, sender: self)
-                        self.view.endEditing(true)
-                    })
+//                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                        (action) in
+//                        let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+//                        self.navigationController?.show(loginVc, sender: self)
+//                        self.view.endEditing(true)
+//                    })
+//                    
+//                    alertController.addAction(defaultAction)
+//                   
+//                    DispatchQueue.main.async {
+//                        self.present(alertController, animated: true, completion: nil)
+//                        alertController.view.tintColor = APP_GRREN_COLOR
+//                    }
                     
-                    alertController.addAction(defaultAction)
-                   
-                    DispatchQueue.main.async {
-                        self.present(alertController, animated: true, completion: nil)
-                        alertController.view.tintColor = APP_GRREN_COLOR
-                    }
+                    self.showAlert(title: "", message: alertMessage, action: #selector(self.alertAction), showCancel: false)
+                    
                 }
                 
                 break
@@ -237,4 +244,10 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     
 }
 
+    func alertAction() {
+        let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+        self.navigationController?.show(loginVc, sender: self)
+        self.view.endEditing(true)
+
+    }
 }

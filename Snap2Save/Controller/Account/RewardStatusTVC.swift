@@ -351,16 +351,16 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                     SwiftLoader.hide()
                     let message = error.localizedDescription
                     let alertMessage = message
-                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                        (action) in
-                        self.view.endEditing(true)
-                        _ = self.navigationController?.popViewController(animated: true)
-                    })
-                    
-                    alertController.addAction(defaultAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    
+//                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                        (action) in
+//                        self.view.endEditing(true)
+//                        _ = self.navigationController?.popViewController(animated: true)
+//                    })
+//                    
+//                    alertController.addAction(defaultAction)
+//                    self.present(alertController, animated: true, completion: nil)
+                    self.showAlert(title: "", message: alertMessage, action: #selector(self.alertAction), showCancel:false)
                     
                 }
                 break
@@ -561,6 +561,12 @@ extension RewardStatusTVC: RedeemPointsTotalDelegate {
         {
             self.performSegue(withIdentifier: "RedeemPointsTVC", sender: self)
         }
+    }
+    
+    func alertAction() {
+        self.view.endEditing(true)
+        _ = self.navigationController?.popViewController(animated: true)
+        
     }
 }
 

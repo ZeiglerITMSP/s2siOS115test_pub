@@ -243,6 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             DispatchQueue.main.async {
                 UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+                alertController.view.tintColor = APP_GRREN_COLOR
             }
             
         }
@@ -336,6 +337,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         DispatchQueue.main.async {
                                             
                                             UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+                                            alertController.view.tintColor = APP_GRREN_COLOR
                                         }
                                     }
                                 }
@@ -353,6 +355,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 alertController.addAction(okAction)
                                 
                                 UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+                                alertController.view.tintColor = APP_GRREN_COLOR
                             }
                             
                             ////print("error)
@@ -416,7 +419,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 alertController.addAction(okAction)
                                 let viewController = UIApplication.topViewController();                                            DispatchQueue.main.async {
                                     viewController?.present(alertController, animated: false, completion: nil)
-                                    
+                                    alertController.view.tintColor = APP_GRREN_COLOR
                                 }
                             }
                             break
@@ -433,7 +436,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 let viewController = UIApplication.topViewController();
                                 DispatchQueue.main.async {
                                     viewController?.present(alertController, animated: false, completion: nil)
-                                    alertController.view.tintColor = UIColor.blue
+                                    alertController.view.tintColor = APP_GRREN_COLOR
                                     
                                 }
                             }

@@ -348,16 +348,16 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         if isReachable == false {
             
             let alertMessage = "The internet connection appears to be offline.".localized()
-            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                (action) in
-                self.view.endEditing(true)
-                _ = self.navigationController?.popViewController(animated: true)
-            })
-            
-            alertController.addAction(defaultAction)
-            self.present(alertController, animated: true, completion: nil)
-            
+//            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                (action) in
+//                self.view.endEditing(true)
+//                _ = self.navigationController?.popViewController(animated: true)
+//            })
+//            
+//            alertController.addAction(defaultAction)
+//            self.present(alertController, animated: true, completion: nil)
+          self.showAlert(title: "", message: alertMessage, action:#selector(self.alertAction),showCancel: false)
             return
         }
         
@@ -421,16 +421,16 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
                     SwiftLoader.hide()
                     let message = error.localizedDescription
                     let alertMessage = message
-                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                        (action) in
-                        self.view.endEditing(true)
-                        _ = self.navigationController?.popViewController(animated: true)
-                    })
-                    
-                    alertController.addAction(defaultAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    
+//                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                        (action) in
+//                        self.view.endEditing(true)
+//                        _ = self.navigationController?.popViewController(animated: true)
+//                    })
+//                    
+//                    alertController.addAction(defaultAction)
+//                    self.present(alertController, animated: true, completion: nil)
+                 self.showAlert(title: "", message: alertMessage, action:#selector(self.alertAction),showCancel: false)
                     
                 }
                 break
@@ -593,5 +593,11 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
 
       
         return true
+    }
+    
+    func alertAction() {
+        self.view.endEditing(true)
+        _ = self.navigationController?.popViewController(animated: true)
+        
     }
 }

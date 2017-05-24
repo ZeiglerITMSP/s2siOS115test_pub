@@ -197,20 +197,20 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
                         if code.intValue == 200 {
                             
                             let alertMessage = responseDict?["message"] as! String
-                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                                (action) in
-                                
-                                self.view.endEditing(true)
-                                _ = self.navigationController?.popViewController(animated: true)
-                                
-                            })
-                            alertController.addAction(defaultAction)
-                            DispatchQueue.main.async {
-                                
-                                self.present(alertController, animated: true, completion: nil)
-                            }
-                            
+//                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//                            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                                (action) in
+//                                
+//                                self.view.endEditing(true)
+//                                _ = self.navigationController?.popViewController(animated: true)
+//                                
+//                            })
+//                            alertController.addAction(defaultAction)
+//                            DispatchQueue.main.async {
+//                                
+//                                self.present(alertController, animated: true, completion: nil)
+//                            }
+                            self.showAlert(title: "", message: alertMessage, action:#selector(self.alertAction),showCancel: false)
                             
                         }
                         else {
@@ -254,4 +254,11 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         }
         return true
     }
+    
+    func alertAction() {
+        self.view.endEditing(true)
+        _ = self.navigationController?.popViewController(animated: true)
+        
+    }
+
 }
