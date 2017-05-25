@@ -22,7 +22,6 @@ class OffersVC: UIViewController {
     var offersDict : [String : Any]? = nil
     // Outlets
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var messageLabel: UILabel!
     
     override func viewDidLoad() {
         
@@ -108,19 +107,8 @@ class OffersVC: UIViewController {
 
     }
     func tapGesClicked() {
-        
-//        let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
-//        let isReachable = reachbility.isReachable
-//        // Reachability
-//        if isReachable == false {
-//            self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
-//            return
-//        }
 
         let offerDetails = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "OffersDetailsViewController") as! OffersDetailsViewController
-        
-        //offerDetails.urlString = "http://www.snap2save.com/app/about_comingsoon.php"
-        //self.navigationController?.show(offerDetails, sender: self)
         
         if Localize.currentLanguage() == "es" {
             // get es url
@@ -155,8 +143,6 @@ class OffersVC: UIViewController {
             }
         }
         
-      //  self.navigationController?.show(offerDetails, sender: self)
-        
     }
     
     
@@ -175,16 +161,8 @@ class OffersVC: UIViewController {
         // Reachability
         if isReachable == false {
             //self.showAlert(title: "", message: "The internet connection appears to be offline.".localized());
-            DispatchQueue.main.async {
-                
-//            self.offersImageView.image = nil
-//            self.messageLabel.isHidden = false
-//            self.messageLabel.text = "THE INTERENT CONNECTION APPEARS TO BE OFFLINE.".localized()
-            }
             return
         }
-    
-//        self.messageLabel.isHidden = true
         
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
@@ -202,19 +180,15 @@ class OffersVC: UIViewController {
                                        "auth_token": auth_token,
                                        "language": currentLanguage
         ]
-//        self.offersImageView.image = nil
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
-        
-       // print(parameters)
         let url = String(format: "%@/getCurrentOffer", hostUrl)
-        ////print("url)
+        
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
             case .success:
                 DispatchQueue.main.async {
                     let json = JSON(data: response.data!)
-                    //print("json response\(json)")
                     let responseDict = json.dictionaryObject
                     
                     if let code = responseDict?["code"] {
@@ -288,15 +262,13 @@ class OffersVC: UIViewController {
     
     func loadImageFailed() {
         SwiftLoader.hide()
-//        messageLabel.isHidden = false
-//        messageLabel.text = "PLEASE TRY AGAIN LATER.".localized()
     }
     
     
-    func calculate(percentage:CGFloat, ofValue value: CGFloat) -> CGFloat {
-        
-        return value * percentage * (1 / 100)
-    }
+//    func calculate(percentage:CGFloat, ofValue value: CGFloat) -> CGFloat {
+//        
+//        return value * percentage * (1 / 100)
+//    }
     
     func reloadTableViewIfPossible() {
         
@@ -323,13 +295,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
             if offersLoaded == true {
                 return 1
             }
-            
             return 0
-//            if offerImage != nil {
-//                return 1
-//            } else {
-//                return 0
-//            }
         } else {
             return adSpotManager.adSpots.count
         }
