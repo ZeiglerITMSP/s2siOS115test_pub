@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 @objc protocol RewardFilterProtocol {
     @objc optional func rewardFilter(fromDate : String ,toDate : String)
 }

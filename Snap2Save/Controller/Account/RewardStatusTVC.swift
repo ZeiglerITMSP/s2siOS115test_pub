@@ -12,7 +12,7 @@ import Localize_Swift
 import Alamofire
 
 
-class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
+class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
     
     // Properties
     var languageSelectionButton: UIButton!
@@ -29,6 +29,10 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
     var isLoadingMoreActivity:Bool = false
     var hasMoreActivity:Bool = true
     
+    let adSpotManager = AdSpotsManager()
+    var adSpotsLoaded = false
+    var offersLoaded = false
+    
     // MARK: -
     
     override func viewDidLoad() {
@@ -36,16 +40,24 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         // language button
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
-        reloadContent()
+        
         // Automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.register(UINib(nibName: "AdSpotTableViewCell", bundle: nil), forCellReuseIdentifier: "AdSpotTableViewCell")
+        
         // back
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         fromDate = ""
         toDate = ""
         
+        adSpotManager.delegate = self
+        
+        updateTitles()
         getRedeemStatus()
+        
+        adSpotManager.getAdSpots(forScreen: .myRewardProgram)
         
         self.tableView.toLoadMore {
             
@@ -58,9 +70,6 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 }
             }
         }
-        
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -77,7 +86,9 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         AppHelper.getScreenName(screenName: "Reward Status screen")
+        
         reloadContent()
         if isFromFilterScreen == true {
             offset = 0
@@ -107,6 +118,12 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
     }
     
     func reloadContent() {
+    
+        updateTitles()
+        loadAds()
+    }
+    
+    func updateTitles() {
         
         DispatchQueue.main.async {
             
@@ -117,172 +134,16 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         }
     }
     
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+    func loadAds() {
+        
+        self.adSpotsLoaded = false
+        adSpotManager.getAdSpots(forScreen: .wowOffers)
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
     }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if section == 0 {
-            return 3
-        } else {
-            
-            if recentActivityArray.count == 0 {
-                return 1
-            }
-            
-            return recentActivityArray.count
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            if indexPath.row == 1{
-                return 25.0
-            }
-            /*if indexPath.row == 2
-            {
-                return 44.0
-            }*/
-        }
-        return UITableViewAutomaticDimension
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        if section == 1 {
-            return "RECENT ACTIVITY".localized()
-        }
-        
-        return nil
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        if section == 1 {
-            
-            let header = tableView.dequeueReusableCell(withIdentifier: "RecentActivityHeader") as! RecentActivityHeader
-            header.delegate = self
-            // set text
-            header.titleLabel.text = "RECENT ACTIVITY".localized()
-            header.filterButton.setTitle("Filter".localized(), for: .normal)
-            
-            return header
-        }
-        
-        return nil
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 0.1
-        } else {
-            return 50
-        }
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let currentLang = Localize.currentLanguage()
-        
-        if indexPath.section == 0 {
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "RedeemPointsTotalCell") as! RedeemPointsTotalCell
-                cell.delegate = self
-                // button style
-                AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: cell.redeemPointsButton, radius: 2.0, width: 1.0)
-                // set text
-                
-                cell.currentPointTotalTitleLabel.text = "Current Point Total".localized()
-                cell.lifetimePointsEarnedTitleLabel.text = "Lifetime Points Earned:".localized()
-                
-                cell.redeemPointsButton.setTitle("REDEEM POINTS NOW".localized(), for: .normal)
-                
-                var currentPointsTotalValue = "0"
-                var life_time_points_earned = "0"
-                if let current_points = rewardStatusDict["current_points"] {
-                    currentPointsTotalValue  = "\(current_points)"
-                }
-                if let lifeTimePoints = rewardStatusDict["life_time_points_earned"] {
-                    life_time_points_earned  = "\(lifeTimePoints)"
-                }
-                
-                cell.currentPointTotalTitleValue.text = currentPointsTotalValue
-                cell.lifetimePointsEarnedTitleValue.text = life_time_points_earned
-                
-                return cell
-                
-            }
-            else if indexPath.row == 1 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "BlankCell")
-                return cell!
-            }
-            else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "RewardDetailCell") as! RewardDetailCell
-                
-                // set text
-                
-                cell.titleLabel.text = "Unused Health Care Rebates".localized()
-                
-                var unUsedHealthCareRebate = ""
-                if let health_rebate = rewardStatusDict["health_rebate"] {
-                    unUsedHealthCareRebate = "$"+"\(health_rebate)"
-                }
-                // set values
-                cell.detailLabel.text = unUsedHealthCareRebate
-                
-                return cell
-            }
-        } else { // section 1
-            
-            if recentActivityArray.count == 0 {
-                // show mesage..
-                let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultMessageTableViewCell") as! DefaultMessageTableViewCell
-                cell.messageLabel.text = "No results found.".localized()
-                
-                return cell
-                
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "RewardRecentActivityCell") as! RewardRecentActivityCell
-                // set values
-                
-                let recentActivityDict = recentActivityArray[indexPath.row]
-                var points = ""
-                if let rewardPoints = recentActivityDict["points"] {
-                    points = "\(rewardPoints)"
-                }
-                
-                if currentLang == "en" {
-                    cell.titleLabel.text = recentActivityDict["en_title"] as! String?
-                }
-                else if currentLang == "es" {
-                    cell.titleLabel.text = recentActivityDict["es_title"] as! String?
-                }
-                cell.detailLabel.text = "\(points)"
-                
-                var dateStr = ""
-                if let datevalue = recentActivityDict["date"] as? String
-                {
-                    let dateVal : String = datevalue
-                    
-                    if dateVal.characters.count > 0 {
-                        let dateMillisec = Double(datevalue)
-                        dateStr = convertMillisecondsToDate(milliSeconds: dateMillisec!/1000)
-                    }
-                }
-                cell.subDetailLabel.text = dateStr
-                
-                return cell
-            }
-            
-        }
-        
-    }
-    
+
+    // MARK: -
     func getRedeemStatus() {
+        self.offersLoaded = false
         
         let reachbility:NetworkReachabilityManager = NetworkReachabilityManager()!
         let isReachable = reachbility.isReachable
@@ -292,7 +153,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             return
         }
         
-        SwiftLoader.show(title: "Loading...".localized(), animated: true)
+//        SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -318,7 +179,7 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
             case .success:
                 let json = JSON(data: response.data!)
                 //print("json response\(json)")
-                SwiftLoader.hide()
+//                SwiftLoader.hide()
                 let responseDict = json.dictionaryObject
                 
                 if let code = responseDict?["code"] {
@@ -329,18 +190,17 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                         if let recentActivityArr = responseDict?["recent_activity"] as? [[String: Any]]! {
                             self.recentActivityArray = recentActivityArr
                         }
-                        self.tableView.reloadData()
+                        self.reloadDataIfPossible()
+//                        self.tableView.reloadData()
                     }
                     else {
-                        
+                        self.reloadDataIfPossible()
                         if let responseDict = json.dictionaryObject {
                             let alertMessage = responseDict["message"] as! String
                             self.showAlert(title: "", message: alertMessage)
                         }
                     }
-                    
                 }
-                
                 
                 break
                 
@@ -348,7 +208,8 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
                 
                 DispatchQueue.main.async {
                     //HUD.hide()
-                    SwiftLoader.hide()
+//                    SwiftLoader.hide()
+                    self.reloadDataIfPossible()
                     let message = error.localizedDescription
                     let alertMessage = message
 //                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
@@ -361,13 +222,10 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
 //                    alertController.addAction(defaultAction)
 //                    self.present(alertController, animated: true, completion: nil)
                     self.showAlert(title: "", message: alertMessage, action: #selector(self.alertAction), showCancel:false)
-                    
                 }
                 break
             }
         }
-        
-        
     }
     
     
@@ -529,6 +387,215 @@ class RewardStatusTVC: UITableViewController,RewardFilterProtocol {
         dateFormatter.dateFormat = "MM/dd/yy";
         let dateStr = (dateFormatter.string(from: dateVar))
         return dateStr
+    }
+    
+    
+    // MARK: -
+    
+    // MARK: - offers
+    
+    func reloadDataIfPossible() {
+        
+        self.offersLoaded = true
+        reloadTableViewIfPossible()
+    }
+    
+    func reloadTableViewIfPossible() {
+        
+        if adSpotsLoaded && offersLoaded {
+            SwiftLoader.hide()
+            self.tableView.reloadData()
+        }
+    }
+}
+
+// MARK: - Table view data source
+extension RewardStatusTVC {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if section == 0 {
+            return adSpotManager.adSpots.count
+        } else if section == 1 {
+            return 3
+        } else {
+            if recentActivityArray.count == 0 {
+                return 1
+            }
+            return recentActivityArray.count
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.section == 0 {
+            
+            let spot = adSpotManager.adSpots[indexPath.row]
+            let type = spot["type"]
+            if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                if adImage.size.width > self.view.frame.width {
+                    let height = AppHelper.getRatio(width: adImage.size.width,
+                                                    height: adImage.size.height,
+                                                    newWidth: self.view.frame.width)
+                    
+                    return height
+                }
+            }
+            return UITableViewAutomaticDimension
+            
+        } else if indexPath.section == 1 {
+            if indexPath.row == 1 {
+                return 25.0
+            }
+        }
+        
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if section == 2 {
+            return "RECENT ACTIVITY".localized()
+        }
+        
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if section == 2 {
+            let header = tableView.dequeueReusableCell(withIdentifier: "RecentActivityHeader") as! RecentActivityHeader
+            header.delegate = self
+            // set text
+            header.titleLabel.text = "RECENT ACTIVITY".localized()
+            header.filterButton.setTitle("Filter".localized(), for: .normal)
+            return header
+        }
+        
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 || section == 1 {
+            return 0.1
+        } else {
+            return 50
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let currentLang = Localize.currentLanguage()
+        
+        if indexPath.section == 0 {
+            
+            let adSpotTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdSpotTableViewCell") as! AdSpotTableViewCell
+            
+            let spot = adSpotManager.adSpots[indexPath.row]
+            let type = spot["type"]
+            let image = adSpotManager.adSpotImages["\(type!)"]
+            adSpotTableViewCell.adImageView.image = image
+            
+            return adSpotTableViewCell
+        } else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "RedeemPointsTotalCell") as! RedeemPointsTotalCell
+                cell.delegate = self
+                // button style
+                AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: cell.redeemPointsButton, radius: 2.0, width: 1.0)
+                // set text
+                
+                cell.currentPointTotalTitleLabel.text = "Current Point Total".localized()
+                cell.lifetimePointsEarnedTitleLabel.text = "Lifetime Points Earned:".localized()
+                
+                cell.redeemPointsButton.setTitle("REDEEM POINTS NOW".localized(), for: .normal)
+                
+                var currentPointsTotalValue = "0"
+                var life_time_points_earned = "0"
+                if let current_points = rewardStatusDict["current_points"] {
+                    currentPointsTotalValue  = "\(current_points)"
+                }
+                if let lifeTimePoints = rewardStatusDict["life_time_points_earned"] {
+                    life_time_points_earned  = "\(lifeTimePoints)"
+                }
+                
+                cell.currentPointTotalTitleValue.text = currentPointsTotalValue
+                cell.lifetimePointsEarnedTitleValue.text = life_time_points_earned
+                
+                return cell
+                
+            }
+            else if indexPath.row == 1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "BlankCell")
+                return cell!
+            }
+            else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "RewardDetailCell") as! RewardDetailCell
+                
+                // set text
+                
+                cell.titleLabel.text = "Unused Health Care Rebates".localized()
+                
+                var unUsedHealthCareRebate = ""
+                if let health_rebate = rewardStatusDict["health_rebate"] {
+                    unUsedHealthCareRebate = "$"+"\(health_rebate)"
+                }
+                // set values
+                cell.detailLabel.text = unUsedHealthCareRebate
+                
+                return cell
+            }
+        } else { // section 1
+            
+            if recentActivityArray.count == 0 {
+                // show mesage..
+                let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultMessageTableViewCell") as! DefaultMessageTableViewCell
+                cell.messageLabel.text = "No results found.".localized()
+                
+                return cell
+                
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "RewardRecentActivityCell") as! RewardRecentActivityCell
+                // set values
+                
+                let recentActivityDict = recentActivityArray[indexPath.row]
+                var points = ""
+                if let rewardPoints = recentActivityDict["points"] {
+                    points = "\(rewardPoints)"
+                }
+                
+                if currentLang == "en" {
+                    cell.titleLabel.text = recentActivityDict["en_title"] as! String?
+                }
+                else if currentLang == "es" {
+                    cell.titleLabel.text = recentActivityDict["es_title"] as! String?
+                }
+                cell.detailLabel.text = "\(points)"
+                
+                var dateStr = ""
+                if let datevalue = recentActivityDict["date"] as? String
+                {
+                    let dateVal : String = datevalue
+                    
+                    if dateVal.characters.count > 0 {
+                        let dateMillisec = Double(datevalue)
+                        dateStr = convertMillisecondsToDate(milliSeconds: dateMillisec!/1000)
+                    }
+                }
+                cell.subDetailLabel.text = dateStr
+                
+                return cell
+            }
+            
+        }
         
     }
 }
@@ -568,5 +635,26 @@ extension RewardStatusTVC: RedeemPointsTotalDelegate {
         _ = self.navigationController?.popViewController(animated: true)
         
     }
+}
+
+
+// MARK: - Ads
+extension RewardStatusTVC: AdSpotsManagerDelegate {
+    
+    func didFinishLoadingSpots() {
+        
+        self.tableView.reloadData()
+        
+        adSpotsLoaded = true
+        reloadTableViewIfPossible()
+    }
+    
+    func didFailedLoadingSpots(description: String) {
+        self.tableView.reloadData()
+        
+        adSpotsLoaded = true
+        reloadTableViewIfPossible()
+    }
+    
 }
 

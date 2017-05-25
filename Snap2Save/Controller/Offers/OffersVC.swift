@@ -235,7 +235,7 @@ class OffersVC: UIViewController {
                                 self.reloadOffersIfPossible()
                             }
                         } else {
-                            SwiftLoader.hide()
+                            self.reloadOffersIfPossible()
                             if let responseDict = json.dictionaryObject {
                                 let alertMessage = responseDict["message"] as! String
                                 self.showAlert(title: "", message: alertMessage)
@@ -247,9 +247,9 @@ class OffersVC: UIViewController {
                 break
                 
             case .failure(let error):
-                
+                self.reloadOffersIfPossible()
                 DispatchQueue.main.async {
-                    SwiftLoader.hide()
+//                    SwiftLoader.hide()
                     self.showAlert(title: "", message:error.localizedDescription);
                 }
                 //print("error)
