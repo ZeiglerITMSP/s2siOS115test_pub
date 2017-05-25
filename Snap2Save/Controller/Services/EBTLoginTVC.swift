@@ -32,9 +32,9 @@ class EBTLoginTVC: UITableViewController {
     var isSuccessMessage = false
     
     var isProcessCancelled = false
-    
     var tempLoginUrl = kEBTLoginUrl
     
+    let adSpotManager = AdSpotsManager()
 //    var isHelpVCLoaded = false
     
     // Outlets
@@ -56,6 +56,9 @@ class EBTLoginTVC: UITableViewController {
     
     @IBOutlet weak var registrationActivityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var adImageView: UIImageView!
+    
+    @IBOutlet weak var adImageViewTwo: UIImageView!
     
     
     // Action
@@ -165,6 +168,10 @@ class EBTLoginTVC: UITableViewController {
         AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: registrationButton, radius: 2.0, width: 1.0)
         // tap gesture to view
         addTapGesture()
+        
+        adSpotManager.delegate = self
+        
+        
         // touch id config
         let touchIDStatus = AppHelper.isTouchIDAvailable()
         
@@ -188,6 +195,8 @@ class EBTLoginTVC: UITableViewController {
         
         // Add help tab
 //        addHelpTab()
+        
+//        adSpotManager.getAdSpots(forScreen: .ebtLogin)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -353,6 +362,7 @@ class EBTLoginTVC: UITableViewController {
             self.registrationButton.setTitle("REGISTER".localized(), for: .normal)
             
             self.tableView.reloadData()
+            self.adSpotManager.getAdSpots(forScreen: .ebtLogin)
             
         }
     }
@@ -389,27 +399,9 @@ class EBTLoginTVC: UITableViewController {
         }
     }
     
-    // MARK: - Table view
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        updateErrorTextColor()
-        if indexPath.row == 2 {
-            if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
-                return 0
-            }
-        }
-        
-//        else if indexPath.row == 4 {
-//            if isTouchIdAvailable == false {
-//                return 0
-//            }
-//        }
-        
-        return UITableViewAutomaticDimension
-    }
     
     
-    // MARK: - Fields validation 
+    // MARK: - Fields validation
     
     func isValid(userId:String?) -> Bool {
         
@@ -465,6 +457,71 @@ class EBTLoginTVC: UITableViewController {
         
         let vc = UIStoryboard(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+}
+
+// MARK: - Table view
+extension EBTLoginTVC {
+    
+  
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        updateErrorTextColor()
+        if indexPath.row == 2 {
+            if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
+                return 0
+            }
+        } else if indexPath.row == 8 {
+            
+            if adSpotManager.adSpots.count > 0 {
+                
+                let spot = adSpotManager.adSpots[0]
+                let type = spot["type"]
+                if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                    if adImage.size.width > self.view.frame.width {
+                        let height = AppHelper.getRatio(width: adImage.size.width,
+                                                        height: adImage.size.height,
+                                                        newWidth: self.view.frame.width)
+                        
+                        return height
+                    }
+                }
+                
+                return UITableViewAutomaticDimension
+            }
+        }
+        else if indexPath.row == 9 {
+            
+            if adSpotManager.adSpots.count == 2 {
+                
+                let spot = adSpotManager.adSpots[1]
+                let type = spot["type"]
+                if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                    if adImage.size.width > self.view.frame.width {
+                        let height = AppHelper.getRatio(width: adImage.size.width,
+                                                        height: adImage.size.height,
+                                                        newWidth: self.view.frame.width)
+                        
+                        return height
+                    }
+                }
+                
+                return UITableViewAutomaticDimension
+            }
+        }
+
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == 8 || indexPath.row == 9 {
+             adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     
@@ -820,6 +877,42 @@ extension EBTLoginTVC: AITextFieldProtocol {
         // not - only allowing [^A-Za-z0-9], bcz spanish characters have to be allowed, and @. for email have to be allowed.
         
         return AppHelper.isValid(input: string)
+    }
+    
+}
+
+
+// MARK: - Ads
+extension EBTLoginTVC: AdSpotsManagerDelegate {
+    
+    func didFinishLoadingSpots() {
+        
+        updateAdImage()
+    }
+    
+    func didFailedLoadingSpots(description: String) {
+
+        
+    }
+    
+    // function
+    func updateAdImage() {
+        if adSpotManager.adSpots.count > 0 {
+            for i in 0..<adSpotManager.adSpots.count {
+                if i == 0 {
+                    let spot = adSpotManager.adSpots[i]
+                    let type = spot["type"]
+                    let image = adSpotManager.adSpotImages["\(type!)"]
+                    self.adImageView.image = image
+                } else {
+                    let spot = adSpotManager.adSpots[i]
+                    let type = spot["type"]
+                    let image = adSpotManager.adSpotImages["\(type!)"]
+                    self.adImageViewTwo.image = image
+                }
+                self.tableView.reloadData()
+            }
+        }
     }
     
 }

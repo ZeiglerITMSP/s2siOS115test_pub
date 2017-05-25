@@ -596,8 +596,18 @@ extension RewardStatusTVC {
             }
             
         }
-        
     }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 {
+            adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+
 }
 
 extension RewardStatusTVC: RecentActivityHeaderDelegate {
