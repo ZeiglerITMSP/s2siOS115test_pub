@@ -39,6 +39,7 @@ class EBTDashboardTVC: UITableViewController {
     var availableBalance: String?
     var trasactions = [Any]()
     
+    let adSpotManager = AdSpotsManager()
     //    var transactionsString: String = ""
     // timer
     var startTime: Date!
@@ -48,6 +49,7 @@ class EBTDashboardTVC: UITableViewController {
     
     // load more
     var isTransactionsLoading = false
+    var accoutDetailsLoaded = false
     
     //    var isLoadingMoreActivity:Bool = false
     //    var hasMoreActivity:Bool = true
@@ -64,23 +66,17 @@ class EBTDashboardTVC: UITableViewController {
         // Automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.register(UINib(nibName: "AdSpotTableViewCell", bundle: nil), forCellReuseIdentifier: "AdSpotTableViewCell")
+        
+        adSpotManager.delegate = self
         
         ebtWebView.responder = self
         
         actionType = ActionType.accountDetails
         validatePage()
         
-        // Load more
-        //        self.tableView.toLoadMore {
-        //
-        //            if self.trasactions.count > 0 {
-        //                if (!self.isLoadingMoreActivity && self.hasMoreActivity) {
-        //                    self.isLoadingMoreActivity = true
-        //                    self.goToNextPage()
-        //                }
-        //            }
-        //        }
-        
+        adSpotManager.getAdSpots(forScreen: .ebtBalance)
     }
     
     
@@ -139,6 +135,168 @@ class EBTDashboardTVC: UITableViewController {
     }
     
 }
+
+// MARK: - Table view data source, delegate
+extension EBTDashboardTVC {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        
+//        var sections = 0
+//        
+//        if accountDetails.count > 0 {
+//            sections += 1
+//        }
+//        if trasactions.count > 0 || isTransactionsLoading == true {
+//            sections += 1
+//        }
+//        
+//        // loader
+//        if sections == 0 {
+//            SwiftLoader.show(title: "Loading...".localized(), animated: true)
+//        } else {
+//            SwiftLoader.hide()
+//        }
+//        
+//        return sections
+        
+        
+        if accoutDetailsLoaded == false {
+            SwiftLoader.show(title: "Loading...".localized(), animated: true)
+        } else {
+            SwiftLoader.hide()
+        }
+        
+        return 3
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if section == 0 {
+            return adSpotManager.adSpots.count
+        } else if section == 1 {
+            return accountDetails.count
+        } else if section == 2 {
+            
+            var transactionsCount = trasactions.count
+            
+            if isTransactionsLoading {
+                transactionsCount += 1
+            }
+            
+            return transactionsCount
+        }
+        
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.section == 0 {
+            
+            let spot = adSpotManager.adSpots[indexPath.row]
+            let type = spot["type"]
+            if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                if adImage.size.width > self.view.frame.width {
+                    let height = AppHelper.getRatio(width: adImage.size.width,
+                                                    height: adImage.size.height,
+                                                    newWidth: self.view.frame.width)
+                    
+                    return height
+                }
+            }
+            
+            return UITableViewAutomaticDimension
+        }
+        
+        return UITableViewAutomaticDimension
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            let adSpotTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdSpotTableViewCell") as! AdSpotTableViewCell
+            
+            let spot = adSpotManager.adSpots[indexPath.row]
+            let type = spot["type"]
+            let image = adSpotManager.adSpotImages["\(type!)"]
+            adSpotTableViewCell.adImageView.image = image
+            
+            return adSpotTableViewCell
+
+        } else if indexPath.section == 1 {
+            
+            let detailedCell = tableView.dequeueReusableCell(withIdentifier: "DetailedCell", for: indexPath) as! DetailedCell
+            
+            let detail = accountDetails[indexPath.row]
+            
+            let value = detail["value"]
+            detailedCell.titleLabel.text = detail["title"]!
+            detailedCell.detailLabel.text = value ?? ""
+            
+            return detailedCell
+            
+        } else if indexPath.section == 2 {
+            
+            if indexPath.row < trasactions.count {
+                
+                let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
+                
+                let record = trasactions[indexPath.row] as? [String:String]
+                detailedSubtitleCell.titleLabel.text = record?["location"]
+                detailedSubtitleCell.subtitleLabel.text = record?["date"]
+                detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
+                
+                // amount
+                let debit_amount = record?["debit_amount"]
+                let credit_amount = record?["credit_amount"]
+                if credit_amount?.containNumbers1To9() == true {
+                    detailedSubtitleCell.detailLabel.text = credit_amount
+                    detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
+                } else {
+                    detailedSubtitleCell.detailLabel.text = debit_amount
+                    detailedSubtitleCell.detailLabel.textColor = UIColor.black
+                }
+                
+                return detailedSubtitleCell
+            } else {
+                let loaderCell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreActivityTVC") as! LoadMoreActivityTVC
+                loaderCell.startAnimiatingActivit()
+                return loaderCell
+            }
+            
+        } else {
+            
+            return UITableViewCell()
+        }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if section == 2 {
+            return "RECENT TRANSACTIONS".localized()
+        }
+        
+        return nil
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 || section == 1 {
+            return 0.1
+        } else {
+            return 40
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+}
+
+
 // MARK: - JavaScript
 extension EBTDashboardTVC {
     
@@ -198,7 +356,7 @@ extension EBTDashboardTVC {
                     //                        self.accountDetails.append(detail)
                     //                    }
                 }
-                
+                self.accoutDetailsLoaded = true
                 self.isTransactionsLoading = true
                 self.tableView.reloadData()
                 self.getTransactionActivityURL()
@@ -581,7 +739,7 @@ extension EBTDashboardTVC {
         let lastRow = self.trasactions.count
         var newIndexPaths = [IndexPath]()
         for row in 0...responseArray.count - 1 {
-            let indexPath = IndexPath(row: lastRow + row, section: 1)
+            let indexPath = IndexPath(row: lastRow + row, section: 2)
             newIndexPaths.append(indexPath)
         }
         self.trasactions.append(contentsOf: responseArray)
@@ -625,132 +783,6 @@ extension EBTDashboardTVC {
     
 }
 
-// MARK: - Table view data source, delegate
-extension EBTDashboardTVC {
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        var sections = 0
-        
-        if accountDetails.count > 0 {
-            sections += 1
-        }
-        if trasactions.count > 0 || isTransactionsLoading == true {
-            sections += 1
-        }
-        
-        // loader
-        if sections == 0 {
-            SwiftLoader.show(title: "Loading...".localized(), animated: true)
-        } else {
-            SwiftLoader.hide()
-        }
-        
-        return sections
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if section == 0 {
-            
-            if accountDetails.count == 0 {
-                return 1
-            }
-            
-            return accountDetails.count
-        } else if section == 1 {
-            
-            var transactionsCount = trasactions.count
-            
-            if isTransactionsLoading {
-                transactionsCount += 1
-            }
-            
-            return transactionsCount
-        }
-        
-        return 0
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return UITableViewAutomaticDimension
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.section == 0 {
-            
-            let detailedCell = tableView.dequeueReusableCell(withIdentifier: "DetailedCell", for: indexPath) as! DetailedCell
-            
-            let detail = accountDetails[indexPath.row]
-            
-            let value = detail["value"]
-            detailedCell.titleLabel.text = detail["title"]!
-            detailedCell.detailLabel.text = value ?? ""
-            
-            return detailedCell
-            
-        } else if indexPath.section == 1 {
-            
-            if indexPath.row < trasactions.count {
-                
-                let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
-                
-                let record = trasactions[indexPath.row] as? [String:String]
-                detailedSubtitleCell.titleLabel.text = record?["location"]
-                detailedSubtitleCell.subtitleLabel.text = record?["date"]
-                detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
-                
-                // amount
-                let debit_amount = record?["debit_amount"]
-                let credit_amount = record?["credit_amount"]
-                if credit_amount?.containNumbers1To9() == true {
-                    detailedSubtitleCell.detailLabel.text = credit_amount
-                    detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
-                } else {
-                    detailedSubtitleCell.detailLabel.text = debit_amount
-                    detailedSubtitleCell.detailLabel.textColor = UIColor.black
-                }
-                
-                return detailedSubtitleCell
-            } else {
-                let loaderCell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreActivityTVC") as! LoadMoreActivityTVC
-                loaderCell.startAnimiatingActivit()
-                return loaderCell
-            }
-            
-        } else {
-            
-            return UITableViewCell()
-        }
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        if section == 1 {
-            return "RECENT TRANSACTIONS".localized()
-        }
-        
-        return nil
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 0.1
-        } else {
-            return 40
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
-    }
-    
-}
 
 
 extension EBTDashboardTVC: EBTWebViewDelegate {
@@ -851,3 +883,22 @@ extension EBTDashboardTVC {
     
 }
 
+
+// MARK: - Ads
+extension EBTDashboardTVC: AdSpotsManagerDelegate {
+    
+    func didFinishLoadingSpots() {
+//        let range = NSMakeRange(0, 1)
+//        let indexSet = NSIndexSet(index: 0)
+        tableView.reloadSections([0], with: .automatic)
+        
+//        adSpotsLoaded = true
+//        reloadTableViewIfPossible()
+    }
+    
+    func didFailedLoadingSpots(description: String) {
+//        adSpotsLoaded = true
+//        reloadTableViewIfPossible()
+    }
+    
+}
