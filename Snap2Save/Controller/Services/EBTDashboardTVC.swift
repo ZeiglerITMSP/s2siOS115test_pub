@@ -39,7 +39,7 @@ class EBTDashboardTVC: UITableViewController {
     var availableBalance: String?
     var trasactions = [Any]()
     
-//    var transactionsString: String = ""
+    //    var transactionsString: String = ""
     // timer
     var startTime: Date!
     
@@ -49,8 +49,8 @@ class EBTDashboardTVC: UITableViewController {
     // load more
     var isTransactionsLoading = false
     
-//    var isLoadingMoreActivity:Bool = false
-//    var hasMoreActivity:Bool = true
+    //    var isLoadingMoreActivity:Bool = false
+    //    var hasMoreActivity:Bool = true
     
     // MARK: -
     override func viewDidLoad() {
@@ -71,15 +71,15 @@ class EBTDashboardTVC: UITableViewController {
         validatePage()
         
         // Load more
-//        self.tableView.toLoadMore {
-//            
-//            if self.trasactions.count > 0 {
-//                if (!self.isLoadingMoreActivity && self.hasMoreActivity) {
-//                    self.isLoadingMoreActivity = true
-//                    self.goToNextPage()
-//                }
-//            }
-//        }
+        //        self.tableView.toLoadMore {
+        //
+        //            if self.trasactions.count > 0 {
+        //                if (!self.isLoadingMoreActivity && self.hasMoreActivity) {
+        //                    self.isLoadingMoreActivity = true
+        //                    self.goToNextPage()
+        //                }
+        //            }
+        //        }
         
     }
     
@@ -102,141 +102,12 @@ class EBTDashboardTVC: UITableViewController {
     }
     
     
-    // MARK: -
-    
-    
-    
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        var sections = 0
-        
-        if accountDetails.count > 0 {
-            sections += 1
-        }
-        if trasactions.count > 0 || isTransactionsLoading == true {
-            sections += 1
-        }
-        
-        // loader
-        if sections == 0 {
-            SwiftLoader.show(title: "Loading...".localized(), animated: true)
-        } else {
-            SwiftLoader.hide()
-        }
-        
-        return sections
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if section == 0 {
-            
-            if accountDetails.count == 0 {
-                return 1
-            }
-            
-            return accountDetails.count
-        } else if section == 1 {
-            
-            var transactionsCount = trasactions.count
-            
-            if isTransactionsLoading {
-                transactionsCount += 1
-            }
-            
-            return transactionsCount
-        }
-        
-        return 0
-    }
-    
-    // MARK: - Table view
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return UITableViewAutomaticDimension
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.section == 0 {
-            
-            let detailedCell = tableView.dequeueReusableCell(withIdentifier: "DetailedCell", for: indexPath) as! DetailedCell
-            
-            let detail = accountDetails[indexPath.row]
-            
-            let value = detail["value"]
-            detailedCell.titleLabel.text = detail["title"]!
-            detailedCell.detailLabel.text = value ?? ""
-            
-            return detailedCell
-            
-        } else if indexPath.section == 1 {
-            
-            if indexPath.row < trasactions.count {
-                
-                let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
-                
-                let record = trasactions[indexPath.row] as? [String:String]
-                detailedSubtitleCell.titleLabel.text = record?["location"]
-                detailedSubtitleCell.subtitleLabel.text = record?["date"]
-                detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
-                
-                // amount
-                let debit_amount = record?["debit_amount"]
-                let credit_amount = record?["credit_amount"]
-                if credit_amount?.containNumbers1To9() == true {
-                    detailedSubtitleCell.detailLabel.text = credit_amount
-                    detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
-                } else {
-                    detailedSubtitleCell.detailLabel.text = debit_amount
-                    detailedSubtitleCell.detailLabel.textColor = UIColor.black
-                }
-            
-                return detailedSubtitleCell
-            } else {
-                let loaderCell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreActivityTVC") as! LoadMoreActivityTVC
-                loaderCell.startAnimiatingActivit()
-                return loaderCell
-            }
-            
-        } else {
-            
-            return UITableViewCell()
-        }
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        if section == 1 {
-            return "RECENT TRANSACTIONS".localized()
-        }
-        
-        return nil
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 0.1
-        } else {
-            return 40
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
-    }
     
     // MARK: -
     
     func backAction() {
         
-    //    _ = self.navigationController?.popToRootViewController(animated: true)
+        //    _ = self.navigationController?.popToRootViewController(animated: true)
         showAlert(title: "ebt.processTerminate.title".localized(),
                   message: "ebt.processTerminate.dashboard".localized(), action: #selector(cancelProcess))
     }
@@ -267,7 +138,9 @@ class EBTDashboardTVC: UITableViewController {
         }
     }
     
-    // MARK: - JavaScript
+}
+// MARK: - JavaScript
+extension EBTDashboardTVC {
     
     func validatePage() {
         
@@ -281,13 +154,13 @@ class EBTDashboardTVC: UITableViewController {
                 
                 self.validateTransactionPage()
                 
-//                if actionType == .transactions {
-//                    actionType = nil
-//                    validateTransactionPage()
-//                } else if actionType == .tabClick {
-//                    actionType = nil
-//                    validateTabClick()
-//                }
+                //                if actionType == .transactions {
+                //                    actionType = nil
+                //                    validateTransactionPage()
+                //                } else if actionType == .tabClick {
+                //                    actionType = nil
+                //                    validateTabClick()
+                //                }
             }
         })
         
@@ -303,27 +176,27 @@ class EBTDashboardTVC: UITableViewController {
             if result != nil {
                 let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
                 self.accountDetails.append(detail)
-//                guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
-//                }
-//                let valueInDouble = Double(valueString) ?? 0
-//                if valueInDouble > 0 {
-//                    let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
-//                    self.accountDetails.append(detail)
-//                }
+                //                guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
+                //                }
+                //                let valueInDouble = Double(valueString) ?? 0
+                //                if valueInDouble > 0 {
+                //                    let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
+                //                    self.accountDetails.append(detail)
+                //                }
             }
             
             self.execute(javaScript: jsCashBalance, completion: { result in
                 if result != nil {
                     let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
                     self.accountDetails.append(detail)
-
-//                    guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
-//                    }
-//                    let valueInDouble = Double(valueString) ?? 0
-//                    if valueInDouble > 0 {
-//                        let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
-//                        self.accountDetails.append(detail)
-//                    }
+                    
+                    //                    guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
+                    //                    }
+                    //                    let valueInDouble = Double(valueString) ?? 0
+                    //                    if valueInDouble > 0 {
+                    //                        let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
+                    //                        self.accountDetails.append(detail)
+                    //                    }
                 }
                 
                 self.isTransactionsLoading = true
@@ -430,11 +303,11 @@ class EBTDashboardTVC: UITableViewController {
             if let resultString = result as? String {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 if resultTrimmed == "allactTab" {
-                                      //  self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
+                    //  self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
                     self.startStartEndDatesTimer()
                     // load 90 days transactions
-                   // self.transactionsHistoryStartEndDates()
-//                    self.getTransactions()
+                    // self.transactionsHistoryStartEndDates()
+                    //                    self.getTransactions()
                 } else {
                     self.clickTransactionsTab()
                 }
@@ -460,10 +333,10 @@ class EBTDashboardTVC: UITableViewController {
                 
                 if resultTrimmed == "allactTab" {
                     self.startStartEndDatesTimer()
-                                       // self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
+                    // self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
                     // load 90 days transactions
-                   // self.transactionsHistoryStartEndDates()
-//                    self.getTransactions()
+                    // self.transactionsHistoryStartEndDates()
+                    //                    self.getTransactions()
                 } else {
                     
                 }
@@ -486,11 +359,11 @@ class EBTDashboardTVC: UITableViewController {
                 
                 if resultTrimmed == "allactTab" {
                     
-                                       // self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
+                    // self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
                     self.startStartEndDatesTimer()
-//                    self.actionType = ActionType.tranasctionsWithDates
-//                    self.transactionsHistoryStartEndDates()
-//                    self.getTransactions()
+                    //                    self.actionType = ActionType.tranasctionsWithDates
+                    //                    self.transactionsHistoryStartEndDates()
+                    //                    self.getTransactions()
                 } else {
                     
                 }
@@ -518,7 +391,7 @@ class EBTDashboardTVC: UITableViewController {
             self.sendEBTInformationToServer()
         }
     }
-
+    
     func checkForStartEndDateFields() {
         
         let jsIsLastPage = "checkForStartEndDateFields();"
@@ -537,26 +410,26 @@ class EBTDashboardTVC: UITableViewController {
         
         startTime = nil
         
-//        let jsTransactionDates = "var formatD = function(d){" +
-//          "  var dd = d.getDate()," +
-//          "  dm = d.getMonth()+1," +
-//          "  dy = d.getFullYear();" +
-//          "  if (dd<10) dd='0'+dd;" +
-//          "  if (dm<10) dm='0'+dm;" +
-//         "   return dm+'/'+dd+'/'+dy;" +
-//        "};" +
-//        "var endDate = new Date(), startDate = new Date(endDate.valueOf());" +
-//        "startDate.setDate(endDate.getDate()-90);" +
-//        "$('#fromDateTransHistory').val(formatD(startDate));" +
-//        "$('#toDateTransHistory').val(formatD(endDate));" +
-//        "$('#searchAll').click()"
+        //        let jsTransactionDates = "var formatD = function(d){" +
+        //          "  var dd = d.getDate()," +
+        //          "  dm = d.getMonth()+1," +
+        //          "  dy = d.getFullYear();" +
+        //          "  if (dd<10) dd='0'+dd;" +
+        //          "  if (dm<10) dm='0'+dm;" +
+        //         "   return dm+'/'+dd+'/'+dy;" +
+        //        "};" +
+        //        "var endDate = new Date(), startDate = new Date(endDate.valueOf());" +
+        //        "startDate.setDate(endDate.getDate()-90);" +
+        //        "$('#fromDateTransHistory').val(formatD(startDate));" +
+        //        "$('#toDateTransHistory').val(formatD(endDate));" +
+        //        "$('#searchAll').click()"
         
         let javaScript = "setTransactionsHistoryStartEndDates();"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             print(result ?? "")
             print(error ?? "")
-           self.perform(#selector(self.getTransactions), with: self, afterDelay: 8)
+            self.perform(#selector(self.getTransactions), with: self, afterDelay: 8)
         }
     }
     
@@ -602,7 +475,7 @@ class EBTDashboardTVC: UITableViewController {
                 if currentPageNumber == self.pageNumber {
                     
                     self.runTransactionsScript()
-//                    let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.runTransactionsScript), userInfo: nil, repeats: false)
+                    //                    let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.runTransactionsScript), userInfo: nil, repeats: false)
                 } else {
                     self.getTransactions()
                 }
@@ -613,34 +486,34 @@ class EBTDashboardTVC: UITableViewController {
     
     func runTransactionsScript() {
         
-//        let js = "function transactionActivity() {" +
-//            "var list = [];" +
-//            "var table = $('#allCompletedTxnGrid tbody');" +
-//            "table.find('tr').each(function (i) {" +
-//            "var $tds = $(this).find('td')," +
-//            "t_date = $tds.eq(2).text().trim();" +
-//            "if (t_date) {" +
-//            "list[i] = {" +
-//            "id: this.id," +
-//            "date: t_date," +
-//            "transaction: $tds.eq(3).text().trim()," +
-//            "location: $tds.eq(4).text().trim()," +
-//            "account: $tds.eq(5).text().trim()," +
-//            "card: $tds.eq(6).text().trim()," +
-//            "debit_amount: $tds.eq(7).text().trim()," +
-//            "credit_amount: $tds.eq(8).text().trim()," +
-//            "available_balance: $tds.eq(9).text().trim()" +
-//            "};" +
-//            "}" +
-//            "});" +
-//            "arr = $.grep(list, function (n) {" +
-//            "return n == 0 || n" +
-//            "});" +
-//            "var jsonSerialized = JSON.stringify(arr);" +
-//            "return jsonSerialized;" +
-//            "}" +
-//        "transactionActivity();"
-
+        //        let js = "function transactionActivity() {" +
+        //            "var list = [];" +
+        //            "var table = $('#allCompletedTxnGrid tbody');" +
+        //            "table.find('tr').each(function (i) {" +
+        //            "var $tds = $(this).find('td')," +
+        //            "t_date = $tds.eq(2).text().trim();" +
+        //            "if (t_date) {" +
+        //            "list[i] = {" +
+        //            "id: this.id," +
+        //            "date: t_date," +
+        //            "transaction: $tds.eq(3).text().trim()," +
+        //            "location: $tds.eq(4).text().trim()," +
+        //            "account: $tds.eq(5).text().trim()," +
+        //            "card: $tds.eq(6).text().trim()," +
+        //            "debit_amount: $tds.eq(7).text().trim()," +
+        //            "credit_amount: $tds.eq(8).text().trim()," +
+        //            "available_balance: $tds.eq(9).text().trim()" +
+        //            "};" +
+        //            "}" +
+        //            "});" +
+        //            "arr = $.grep(list, function (n) {" +
+        //            "return n == 0 || n" +
+        //            "});" +
+        //            "var jsonSerialized = JSON.stringify(arr);" +
+        //            "return jsonSerialized;" +
+        //            "}" +
+        //        "transactionActivity();"
+        
         let js = "getTransactions();"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
@@ -651,7 +524,7 @@ class EBTDashboardTVC: UITableViewController {
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if trimmedText.characters.count > 0 {
-                   // self.transactionsString.append(trimmedText)
+                    // self.transactionsString.append(trimmedText)
                     
                     let json = JSON.parse(trimmedText)
                     print("json response \(json)")
@@ -699,7 +572,7 @@ class EBTDashboardTVC: UITableViewController {
         } else {
             return true
         }
-
+        
         return false
     }
     
@@ -743,7 +616,7 @@ class EBTDashboardTVC: UITableViewController {
                 let javaScript = jsNextPageClick
                 
                 self.ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-                     self.getTransactions()
+                    self.getTransactions()
                 }
             }
         }
@@ -751,6 +624,134 @@ class EBTDashboardTVC: UITableViewController {
     
     
 }
+
+// MARK: - Table view data source, delegate
+extension EBTDashboardTVC {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        
+        var sections = 0
+        
+        if accountDetails.count > 0 {
+            sections += 1
+        }
+        if trasactions.count > 0 || isTransactionsLoading == true {
+            sections += 1
+        }
+        
+        // loader
+        if sections == 0 {
+            SwiftLoader.show(title: "Loading...".localized(), animated: true)
+        } else {
+            SwiftLoader.hide()
+        }
+        
+        return sections
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if section == 0 {
+            
+            if accountDetails.count == 0 {
+                return 1
+            }
+            
+            return accountDetails.count
+        } else if section == 1 {
+            
+            var transactionsCount = trasactions.count
+            
+            if isTransactionsLoading {
+                transactionsCount += 1
+            }
+            
+            return transactionsCount
+        }
+        
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return UITableViewAutomaticDimension
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            
+            let detailedCell = tableView.dequeueReusableCell(withIdentifier: "DetailedCell", for: indexPath) as! DetailedCell
+            
+            let detail = accountDetails[indexPath.row]
+            
+            let value = detail["value"]
+            detailedCell.titleLabel.text = detail["title"]!
+            detailedCell.detailLabel.text = value ?? ""
+            
+            return detailedCell
+            
+        } else if indexPath.section == 1 {
+            
+            if indexPath.row < trasactions.count {
+                
+                let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
+                
+                let record = trasactions[indexPath.row] as? [String:String]
+                detailedSubtitleCell.titleLabel.text = record?["location"]
+                detailedSubtitleCell.subtitleLabel.text = record?["date"]
+                detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
+                
+                // amount
+                let debit_amount = record?["debit_amount"]
+                let credit_amount = record?["credit_amount"]
+                if credit_amount?.containNumbers1To9() == true {
+                    detailedSubtitleCell.detailLabel.text = credit_amount
+                    detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
+                } else {
+                    detailedSubtitleCell.detailLabel.text = debit_amount
+                    detailedSubtitleCell.detailLabel.textColor = UIColor.black
+                }
+                
+                return detailedSubtitleCell
+            } else {
+                let loaderCell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreActivityTVC") as! LoadMoreActivityTVC
+                loaderCell.startAnimiatingActivit()
+                return loaderCell
+            }
+            
+        } else {
+            
+            return UITableViewCell()
+        }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if section == 1 {
+            return "RECENT TRANSACTIONS".localized()
+        }
+        
+        return nil
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0.1
+        } else {
+            return 40
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+}
+
 
 extension EBTDashboardTVC: EBTWebViewDelegate {
     

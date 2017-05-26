@@ -469,56 +469,63 @@ extension EBTLoginTVC {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         updateErrorTextColor()
-        if indexPath.row == 2 {
-            if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
-                return 0
-            }
-        } else if indexPath.row == 8 {
-            
-            if adSpotManager.adSpots.count > 0 {
-                
-                let spot = adSpotManager.adSpots[0]
-                let type = spot["type"]
-                if let adImage = adSpotManager.adSpotImages["\(type!)"] {
-                    if adImage.size.width > self.view.frame.width {
-                        let height = AppHelper.getRatio(width: adImage.size.width,
-                                                        height: adImage.size.height,
-                                                        newWidth: self.view.frame.width)
-                        
-                        return height
-                    }
+        
+        if indexPath.section == 0 {
+            if indexPath.row == 2 {
+                if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
+                    return 0
                 }
+            }
+        } else if indexPath.section == 1 {
+            
+            if indexPath.row == 0 {
                 
-                return UITableViewAutomaticDimension
+                if adSpotManager.adSpots.count > 0 {
+                    
+                    let spot = adSpotManager.adSpots[0]
+                    let type = spot["type"]
+                    if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                        if adImage.size.width > self.view.frame.width {
+                            let height = AppHelper.getRatio(width: adImage.size.width,
+                                                            height: adImage.size.height,
+                                                            newWidth: self.view.frame.width)
+                            
+                            return height
+                        }
+                    }
+                    
+                    return UITableViewAutomaticDimension
+                }
+            }
+            else if indexPath.row == 1 {
+                
+                if adSpotManager.adSpots.count == 2 {
+                    
+                    let spot = adSpotManager.adSpots[1]
+                    let type = spot["type"]
+                    if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                        if adImage.size.width > self.view.frame.width {
+                            let height = AppHelper.getRatio(width: adImage.size.width,
+                                                            height: adImage.size.height,
+                                                            newWidth: self.view.frame.width)
+                            
+                            return height
+                        }
+                    }
+                    
+                    return UITableViewAutomaticDimension
+                }
             }
         }
-        else if indexPath.row == 9 {
-            
-            if adSpotManager.adSpots.count == 2 {
-                
-                let spot = adSpotManager.adSpots[1]
-                let type = spot["type"]
-                if let adImage = adSpotManager.adSpotImages["\(type!)"] {
-                    if adImage.size.width > self.view.frame.width {
-                        let height = AppHelper.getRatio(width: adImage.size.width,
-                                                        height: adImage.size.height,
-                                                        newWidth: self.view.frame.width)
-                        
-                        return height
-                    }
-                }
-                
-                return UITableViewAutomaticDimension
-            }
-        }
-
+        
+       
         return UITableViewAutomaticDimension
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 8 || indexPath.row == 9 {
-             adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
+        if indexPath.section == 1 {
+            adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
         }
         
         tableView.deselectRow(at: indexPath, animated: false)
