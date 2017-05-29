@@ -25,6 +25,10 @@ class AppHelper {
         completion(image, true)
     }
     
+//    class func calculate(percentage:CGFloat, ofValue value: CGFloat) -> CGFloat {
+//        return value * percentage * (1 / 100)
+//    }
+    
     class func getImage(fromURL urlString:String, name: String?, completion: @escaping (_ image: UIImage?, _ success: Bool, _ name: String?) -> Void) {
         
         let imageCache = SharedCache.shared.imageCache
@@ -33,18 +37,35 @@ class AppHelper {
         if let cachedImage = imageCache.object(forKey: urlString as NSString) {
             completion(cachedImage, true, name)
         } else {
-            guard
-                let data = NSData(contentsOf: url as URL),
-                let image = UIImage(data: data as Data)
-                else {
-                    completion(nil, false, name);
-                    return
-            }
-            DispatchQueue.main.async {
-                imageCache.setObject(image, forKey: urlString as NSString)
-            }
             
-            completion(image, true, name)
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
+                
+                if error == nil {
+                    guard let image = UIImage(data: data!)
+                        else { return }
+                    
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        imageCache.setObject(image, forKey: urlString as NSString)
+                        completion(image, true, name)
+                    })
+                } else {
+                    completion(nil, false, name)
+                }
+                
+            }).resume()
+            
+//            guard
+//                let data = NSData(contentsOf: url as URL),
+//                let image = UIImage(data: data as Data)
+//                else {
+//                    completion(nil, false, name);
+//                    return
+//            }
+//            DispatchQueue.main.async {
+//                imageCache.setObject(image, forKey: urlString as NSString)
+//            }
+            
+//            completion(image, true, name)
         }
     }
     
@@ -206,7 +227,6 @@ class AppHelper {
         
         guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
         tracker.send(builder.build() as [NSObject : AnyObject])
-        
     }
     
     
@@ -380,7 +400,6 @@ extension UIViewController {
         
         let backButton = self.navigationItem.leftBarButtonItem?.customView as? UIButton
         backButton?.setTitle("Back".localized() , for: .normal)
-        
     }
 }
 

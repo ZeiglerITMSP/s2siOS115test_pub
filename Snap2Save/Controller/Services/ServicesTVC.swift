@@ -123,6 +123,7 @@ class ServicesTVC: UITableViewController {
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Services".localized()
+            self.tableView.reloadData()
         }
     }
     

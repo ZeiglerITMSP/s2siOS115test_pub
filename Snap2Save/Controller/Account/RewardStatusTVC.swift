@@ -33,6 +33,8 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
     var adSpotsLoaded = false
     var offersLoaded = false
     
+    var screenLanguage: String!
+    
     // MARK: -
     
     override func viewDidLoad() {
@@ -41,23 +43,21 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
-        // Automatic height
+        // tableview automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.tableView.register(UINib(nibName: "AdSpotTableViewCell", bundle: nil), forCellReuseIdentifier: "AdSpotTableViewCell")
-        
-        // back
+        // back button
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         fromDate = ""
         toDate = ""
-        
+        // adspot manager
         adSpotManager.delegate = self
-        
+        // call apis
         updateTitles()
         getRedeemStatus()
-        
-        adSpotManager.getAdSpots(forScreen: .myRewardProgram)
+        loadAdSpots(onLanguageChange: false)
         
         self.tableView.toLoadMore {
             
@@ -70,12 +70,10 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
                 }
             }
         }
+        
+        screenLanguage = Localize.currentLanguage()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "RewardFilterTVC" {
@@ -87,9 +85,14 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        AppHelper.getScreenName(screenName: "Reward Status screen")
+        if screenLanguage != Localize.currentLanguage() {
+            screenLanguage = Localize.currentLanguage()
+            languageChanged()
+        } else {
+            updateTitles()
+        }
         
-        reloadContent()
+        // load more loader
         if isFromFilterScreen == true {
             offset = 0
             self.hasMoreActivity = true
@@ -98,8 +101,8 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
-        
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(languageChanged))
+        AppHelper.getScreenName(screenName: "Reward Status screen")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -117,16 +120,15 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
         self.showLanguageSelectionAlert()
     }
     
-    func reloadContent() {
-    
+    func languageChanged() {
+        
         updateTitles()
-        loadAds()
+        loadAdSpots(onLanguageChange: true)
     }
     
     func updateTitles() {
         
         DispatchQueue.main.async {
-            
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Reward Status".localized()
             self.updateBackButtonText()
@@ -134,11 +136,16 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
         }
     }
     
-    func loadAds() {
+    func loadAdSpots(onLanguageChange: Bool) {
         
         self.adSpotsLoaded = false
-        adSpotManager.getAdSpots(forScreen: .wowOffers)
-        SwiftLoader.show(title: "Loading...".localized(), animated: true)
+        
+        if onLanguageChange {
+            SwiftLoader.show(title: "Loading...".localized(), animated: true)
+            adSpotManager.downloadAdImages()
+        } else {
+            adSpotManager.getAdSpots(forScreen: .myRewardProgram)
+        }
     }
 
     // MARK: -
@@ -153,7 +160,7 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
             return
         }
         
-//        SwiftLoader.show(title: "Loading...".localized(), animated: true)
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
         let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
@@ -598,13 +605,10 @@ extension RewardStatusTVC {
         }
     }
     
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if indexPath.section == 0 {
             adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
         }
-        
         tableView.deselectRow(at: indexPath, animated: false)
     }
 

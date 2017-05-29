@@ -54,7 +54,7 @@ class AdSpotsManager: NSObject {
             "screen_type": screenType.rawValue
         ]
         
-        print(parameters)
+//        print(parameters)
         let url = String(format: "%@/getAdAndHealthySpots", hostUrl)
         print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -66,11 +66,12 @@ class AdSpotsManager: NSObject {
                     
                     let responseDict = json.dictionaryObject
                     
+//                    print(responseDict ?? "")
                     if let code = responseDict?["code"] {
                         let code = code as! NSNumber
                         if code.intValue == 200 {
                             if let spots = responseDict?["spots"] as? [[String:Any]] {
-                                print(spots)
+                                print("spots count: \(spots.count)")
                                 self.adSpots = spots
                                 if spots.count > 0 {
                                     self.downloadAdImages()
@@ -166,7 +167,8 @@ class AdSpotsManager: NSObject {
                         }
                     }
                     // navigate
-                    offerDetails.isFromAdditionalOffers = false
+//                    offerDetails.isFromAdditionalOffers = false
+                    offerDetails.navigationTitle = "Offers"
                     controller.navigationController?.show(offerDetails, sender: controller)
                 }
             }
@@ -181,7 +183,8 @@ class AdSpotsManager: NSObject {
                             offerDetails.urlString_es = urlStr
                         }
                     }
-                    offerDetails.isFromAdditionalOffers = false
+                    offerDetails.navigationTitle = "Offers"
+//                    offerDetails.isFromAdditionalOffers = false
                     controller.navigationController?.show(offerDetails, sender: controller)
                 }
             }

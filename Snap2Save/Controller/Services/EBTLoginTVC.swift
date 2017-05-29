@@ -35,6 +35,7 @@ class EBTLoginTVC: UITableViewController {
     var tempLoginUrl = kEBTLoginUrl
     
     let adSpotManager = AdSpotsManager()
+    var screenLanguage: String!
 //    var isHelpVCLoaded = false
     
     // Outlets
@@ -42,10 +43,7 @@ class EBTLoginTVC: UITableViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
-    
     @IBOutlet weak var descriptionLabel: UILabel!
-    
-    
     @IBOutlet weak var passwordField: AIPlaceHolderTextField!
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
@@ -53,15 +51,18 @@ class EBTLoginTVC: UITableViewController {
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var remmeberMyUserNameLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     @IBOutlet weak var registrationActivityIndicator: UIActivityIndicatorView!
-    
     @IBOutlet weak var adImageView: UIImageView!
-    
     @IBOutlet weak var adImageViewTwo: UIImageView!
     
     
     // Action
+    
+    @IBAction func imageViewOneAction(_ sender: UITapGestureRecognizer) {
+        
+        print("tap gesture")
+    }
+    
     
 //    @IBAction func helpButtonAction() {
 //        
@@ -167,7 +168,7 @@ class EBTLoginTVC: UITableViewController {
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: loginButton, radius: 2.0, width: 1.0)
         AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: registrationButton, radius: 2.0, width: 1.0)
         // tap gesture to view
-        addTapGesture()
+//        addTapGesture()
         
         adSpotManager.delegate = self
         
@@ -193,28 +194,24 @@ class EBTLoginTVC: UITableViewController {
         
        // self.registrationButton.isHidden = true
         
-        // Add help tab
-//        addHelpTab()
         
-//        adSpotManager.getAdSpots(forScreen: .ebtLogin)
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
+        loadAdSpots(onLanguageChange: false)
+        
+        screenLanguage = Localize.currentLanguage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        if isHelpVCLoaded == true {
-//            return
-//        }
-        
+
         reloadContent()
         
-//        if EBTUser.shared.isForceQuit {
-//            EBTUser.shared.isForceQuit = false
-//            loadLoginPage()
-//        } else {
-//            validateLoginPage()
-//        }
-//
+        if screenLanguage != Localize.currentLanguage() {
+            screenLanguage = Localize.currentLanguage()
+            loadAdSpots(onLanguageChange: true)
+        }
+        
         validateLoginPage()
         udateRememberMyStatus()
     }
@@ -230,6 +227,7 @@ class EBTLoginTVC: UITableViewController {
         ebtWebView.responder = self
         
         let webView = ebtWebView.webView!
+        
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
         webView.isHidden = true
@@ -252,6 +250,7 @@ class EBTLoginTVC: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     // MARK: -
 //    func addHelpTab() {
@@ -337,6 +336,8 @@ class EBTLoginTVC: UITableViewController {
         
         loadLoginPage()
         reloadContent()
+        
+        loadAdSpots(onLanguageChange: true)
     }
     
     func reloadContent() {
@@ -361,12 +362,20 @@ class EBTLoginTVC: UITableViewController {
             self.loginButton.setTitle("LOG IN".localized(), for: .normal)
             self.registrationButton.setTitle("REGISTER".localized(), for: .normal)
             
+            self.tableView.setContentOffset(CGPoint.zero, animated: false)
             self.tableView.reloadData()
-            self.adSpotManager.getAdSpots(forScreen: .ebtLogin)
-            
         }
     }
     
+    func loadAdSpots(onLanguageChange: Bool) {
+        
+        if onLanguageChange {
+//            SwiftLoader.show(title: "Loading...".localized(), animated: true)
+            adSpotManager.downloadAdImages()
+        } else {
+            adSpotManager.getAdSpots(forScreen: .ebtLogin)
+        }
+    }
     
     func popToLoginVC() {
         
@@ -465,7 +474,7 @@ class EBTLoginTVC: UITableViewController {
 // MARK: - Table view
 extension EBTLoginTVC {
     
-  
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         updateErrorTextColor()
@@ -518,19 +527,30 @@ extension EBTLoginTVC {
             }
         }
         
-       
         return UITableViewAutomaticDimension
     }
     
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        self.view.endEditing(true)
         if indexPath.section == 1 {
             adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
         }
         
         tableView.deselectRow(at: indexPath, animated: false)
+        
     }
     
+//    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+//        
+//        if indexPath.section == 1 {
+//            adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
+//        }
+//
+//        return true
+//    }
+
     
 }
 
@@ -894,12 +914,13 @@ extension EBTLoginTVC: AdSpotsManagerDelegate {
     
     func didFinishLoadingSpots() {
         
+        SwiftLoader.hide()
         updateAdImage()
     }
     
     func didFailedLoadingSpots(description: String) {
 
-        
+        SwiftLoader.hide()
     }
     
     // function

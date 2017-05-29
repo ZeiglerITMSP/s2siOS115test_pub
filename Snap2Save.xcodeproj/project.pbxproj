@@ -199,7 +199,7 @@
 		E86D427A1EA9EF6500F00F73 /* SharedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedCache.swift; sourceTree = "<group>"; };
 		E86D8D1F1EA8A273001250D9 /* AdSpotTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdSpotTableViewCell.swift; sourceTree = "<group>"; };
 		E86D8D201EA8A273001250D9 /* AdSpotTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdSpotTableViewCell.xib; sourceTree = "<group>"; };
-		E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdSpotsManager.swift; sourceTree = "<group>"; };
+		E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdSpotsManager.swift; path = Offers/AdSpotsManager.swift; sourceTree = "<group>"; };
 		E86D8D291EA8D21B001250D9 /* AccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		E86D8D2B1EA8D229001250D9 /* AccountSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSwitchCell.swift; sourceTree = "<group>"; };
 		E874F2821EBC5E5E00BB3DCA /* horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horizontal.png; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 		E88BA5971DF5B1CA00714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E88BA59B1DF5B25D00714C65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E88BA59D1DF5B26100714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E88C262C1E1539C900F4056F /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		E88C262C1E1539C900F4056F /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabViewController.swift; path = Services/TabViewController.swift; sourceTree = "<group>"; };
 		E8B576F51EB73ABB00905D3D /* LoadMoreActivityTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreActivityTVC.swift; sourceTree = "<group>"; };
 		E8BAE2A11E0BABEF00A85AAB /* EBTAuthenticationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTAuthenticationTVC.swift; sourceTree = "<group>"; };
 		E8BAE2A71E0BDEFD00A85AAB /* EBTCardNumberTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTCardNumberTVC.swift; sourceTree = "<group>"; };
@@ -366,7 +366,6 @@
 		E826FBD01E09408D0089AEA6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E88C262C1E1539C900F4056F /* TabViewController.swift */,
 				E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */,
 				E8439E441EA4A752008079F0 /* ServicesCells */,
 				9769997D1E2643A200D05AE8 /* ServicesWebViewVC.swift */,
@@ -382,6 +381,15 @@
 			);
 			name = EBTDashboard;
 			path = ../Controller/Services;
+			sourceTree = "<group>";
+		};
+		E83CC02E1ED84B01000C6CB2 /* AdSpotTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				E86D8D1F1EA8A273001250D9 /* AdSpotTableViewCell.swift */,
+				E86D8D201EA8A273001250D9 /* AdSpotTableViewCell.xib */,
+			);
+			name = AdSpotTableViewCell;
 			sourceTree = "<group>";
 		};
 		E8439E441EA4A752008079F0 /* ServicesCells */ = {
@@ -460,13 +468,11 @@
 			children = (
 				974D5C341E2DFF5B00918BAD /* snap2save.jpeg */,
 				E863CEBB1E1BE72E00049F28 /* OffersVC.swift */,
-				E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */,
 				E8439E451EA4AAA2008079F0 /* OfferTableViewCell.swift */,
 				E874F2861EBC99C800BB3DCA /* OfferTitleTVC.swift */,
-				E86D8D1F1EA8A273001250D9 /* AdSpotTableViewCell.swift */,
-				E86D8D201EA8A273001250D9 /* AdSpotTableViewCell.xib */,
-				974D5C321E2DF55400918BAD /* OffersDetailsViewController.swift */,
+				E83CC02E1ED84B01000C6CB2 /* AdSpotTableViewCell */,
 				978767B41E8E304300220536 /* AdditionalOffersVC.swift */,
+				974D5C321E2DF55400918BAD /* OffersDetailsViewController.swift */,
 			);
 			path = Offers;
 			sourceTree = "<group>";
@@ -550,6 +556,8 @@
 			isa = PBXGroup;
 			children = (
 				E88BA57B1DF53D1500714C65 /* LandingVC.swift */,
+				E88C262C1E1539C900F4056F /* TabViewController.swift */,
+				E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */,
 				E84AE9CA1E07F2B300C5E7F3 /* Login */,
 				E84AE9C91E07F2A000C5E7F3 /* Registration */,
 				E826FBD01E09408D0089AEA6 /* Services */,

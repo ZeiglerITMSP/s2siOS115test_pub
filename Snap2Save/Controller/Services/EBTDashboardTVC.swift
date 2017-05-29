@@ -45,7 +45,7 @@ class EBTDashboardTVC: UITableViewController {
     var startTime: Date!
     
     
-    var pageNumber: Int = 0 // 0 for internal build, 1 for live
+    var pageNumber: Int = 1 // 0 for internal build, 1 for live
     
     // load more
     var isTransactionsLoading = false
@@ -292,6 +292,15 @@ extension EBTDashboardTVC {
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 {
+            adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
 }
@@ -888,17 +897,11 @@ extension EBTDashboardTVC {
 extension EBTDashboardTVC: AdSpotsManagerDelegate {
     
     func didFinishLoadingSpots() {
-//        let range = NSMakeRange(0, 1)
-//        let indexSet = NSIndexSet(index: 0)
         tableView.reloadSections([0], with: .automatic)
-        
-//        adSpotsLoaded = true
-//        reloadTableViewIfPossible()
     }
     
     func didFailedLoadingSpots(description: String) {
-//        adSpotsLoaded = true
-//        reloadTableViewIfPossible()
+        
     }
     
 }

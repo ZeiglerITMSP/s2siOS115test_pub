@@ -20,7 +20,8 @@ class AdditionalOffersVC: UIViewController {
     var adSpotsLoaded = false
     var offersLoaded = false
     var offersDict : [String : Any]? = nil
-
+    var screenLanguage: String!
+    
     // Outlets
     @IBOutlet weak var tableView: UITableView!
     
@@ -33,7 +34,6 @@ class AdditionalOffersVC: UIViewController {
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
-        updateTitles()
         adSpotManager.delegate = self
         
         // tableview
@@ -46,24 +46,31 @@ class AdditionalOffersVC: UIViewController {
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.tableView.register(UINib(nibName: "AdSpotTableViewCell", bundle: nil), forCellReuseIdentifier: "AdSpotTableViewCell")
         
+        updateTitles()
+        getWowOffers()
+        loadAdSpots(onLanguageChange: false)
+        
+        screenLanguage = Localize.currentLanguage()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadContent()
-        AppHelper.getScreenName(screenName: "Wow offers screen")
+        if screenLanguage != Localize.currentLanguage() {
+            screenLanguage = Localize.currentLanguage()
+            languageChanged()
+        } else {
+            updateTitles()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(reloadContent))
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(languageChanged))
+        
+        AppHelper.getScreenName(screenName: "Wow offers screen")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -80,6 +87,14 @@ class AdditionalOffersVC: UIViewController {
     func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
+
+    
+    func languageChanged() {
+        
+        updateTitles()
+        downloadOfferImage()
+        loadAdSpots(onLanguageChange: true)
+    }
     
     func updateTitles() {
         
@@ -87,27 +102,22 @@ class AdditionalOffersVC: UIViewController {
             self.updateBackButtonText()
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Offers".localized()
+            self.tableView.setContentOffset(CGPoint.zero, animated: false)
+            self.tableView.reloadData()
         }
     }
     
-    func reloadContent() {
-        
-        updateTitles()
-        self.loadOffersAndAds()
-        
-    }
-    
-    func loadOffersAndAds() {
+    func loadAdSpots(onLanguageChange: Bool) {
         
         self.adSpotsLoaded = false
-        self.offersLoaded = false
-        self.offerImage = nil
-        self.offersDict = nil
         
-        self.getWowOffers()
-        adSpotManager.getAdSpots(forScreen: .wowOffers)
+        if onLanguageChange {
+            SwiftLoader.show(title: "Loading...".localized(), animated: true)
+            adSpotManager.downloadAdImages()
+        } else {
+            adSpotManager.getAdSpots(forScreen: .wowOffers)
+        }
     }
-    
     
     func tapGesClicked() {
         
@@ -125,7 +135,8 @@ class AdditionalOffersVC: UIViewController {
                         }
                     }
                     // navigate
-                    offerDetails.isFromAdditionalOffers = true
+                    offerDetails.navigationTitle = "Offers"
+//                    offerDetails.isFromAdditionalOffers = true
                     self.navigationController?.show(offerDetails, sender: self)
                 }
             }
@@ -140,7 +151,8 @@ class AdditionalOffersVC: UIViewController {
                             offerDetails.urlString_es = urlStr
                         }
                     }
-                    offerDetails.isFromAdditionalOffers = true
+                    offerDetails.navigationTitle = "Offers"
+//                    offerDetails.isFromAdditionalOffers = true
                     self.navigationController?.show(offerDetails, sender: self)
                 }
             }
@@ -160,6 +172,10 @@ class AdditionalOffersVC: UIViewController {
             return
         }
 
+        self.offersLoaded = false
+        self.offerImage = nil
+        self.offersDict = nil
+        
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         let device_id = UIDevice.current.identifierForVendor!.uuidString
         let user_id  = UserDefaults.standard.object(forKey: USER_ID) ?? ""
@@ -196,36 +212,8 @@ class AdditionalOffersVC: UIViewController {
                             if let offers = responseDict?["offer"] as? [String : Any] {
                                 let offer : [String : Any] = offers
                                 self.offersDict = offer
-                                var imageUrl: String?
                                 
-                                if Localize.currentLanguage() == "en" {
-                                    imageUrl = offer["image_url_en"] as? String
-                                } else if Localize.currentLanguage() == "es" {
-                                    imageUrl = offer["image_url_es"] as? String
-                                }
-                                
-                                if let imageUrl = imageUrl {
-                                    if !imageUrl.isEmpty {
-                                        
-                                        AppHelper.getImage(fromURL: imageUrl, completion: { (image, success) -> Void in
-                                            if success {
-                                                
-                                                if image != nil {
-                                                    self.offerImage = image
-                                                    self.reloadOffersIfPossible()
-                                                } else {
-                                                    self.reloadOffersIfPossible()
-                                                }
-                                            } else {
-                                                self.reloadOffersIfPossible()
-                                            }
-                                        })
-                                    }   else {
-                                        self.reloadOffersIfPossible()
-                                    }
-                                } else {
-                                    self.reloadOffersIfPossible()
-                                }
+                                self.downloadOfferImage()
                             } else {
                                self.reloadOffersIfPossible()
                             }
@@ -249,6 +237,43 @@ class AdditionalOffersVC: UIViewController {
                 }
                 //print("error)
                 break
+            }
+        }
+        
+    }
+    
+    func downloadOfferImage() {
+        
+        if let offer = self.offersDict {
+            
+            var imageUrl: String?
+            
+            if Localize.currentLanguage() == "en" {
+                imageUrl = offer["image_url_en"] as? String
+            } else if Localize.currentLanguage() == "es" {
+                imageUrl = offer["image_url_es"] as? String
+            }
+            
+            if let imageUrl = imageUrl {
+                if !imageUrl.isEmpty {
+                    AppHelper.getImage(fromURL: imageUrl, name: nil, completion: { (image, success, name) in
+                        if success {
+                            if image != nil {
+                                self.offerImage = image
+                                self.reloadOffersIfPossible()
+                            } else {
+                                self.reloadOffersIfPossible()
+                            }
+                        } else {
+                            self.reloadOffersIfPossible()
+                        }
+                    })
+                    
+                }   else {
+                    self.reloadOffersIfPossible()
+                }
+            } else {
+                self.reloadOffersIfPossible()
             }
         }
         
@@ -290,17 +315,17 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 1 {
-            
+        if section == 0 {
             if offersLoaded == true {
                 return 1
             }
-            return 0
-        } else {
+        } else if section == 1 {
             return adSpotManager.adSpots.count
         }
         
+        return 0
     }
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -313,7 +338,6 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             
             if let offerImage = self.offerImage {
-                
                 if offerImage.size.width > self.view.frame.width {
                     let height = AppHelper.getRatio(width: offerImage.size.width,
                                                     height: offerImage.size.height,
@@ -324,11 +348,7 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 return 120.0
             }
-            
-            return UITableViewAutomaticDimension
-            
-        } else {
-            
+        } else if indexPath.section == 1 {
             let spot = adSpotManager.adSpots[indexPath.row]
             let type = spot["type"]
             if let adImage = adSpotManager.adSpotImages["\(type!)"] {
@@ -340,15 +360,14 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
                     return height
                 }
             }
-            
-            return UITableViewAutomaticDimension
         }
+        
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 { // Offer image cell
-            
             let offerImageCell = tableView.dequeueReusableCell(withIdentifier: "OfferTableViewCell") as! OfferTableViewCell
             
             if let offerImage = self.offerImage {
@@ -364,7 +383,7 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
             
             return offerImageCell
         }
-        else { // Ads image cell
+        else if indexPath.section == 1 { // Ads image cell
             
             let adSpotTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdSpotTableViewCell") as! AdSpotTableViewCell
             
@@ -375,13 +394,15 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
             
             return adSpotTableViewCell
         }
+        
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
             tapGesClicked()
-        } else {
+        } else if indexPath.section == 1 {
             adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
         }
         

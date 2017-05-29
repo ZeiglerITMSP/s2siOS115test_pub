@@ -69,6 +69,8 @@ class EBTWebView: NSObject {
         // create webview
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
         webView.navigationDelegate = self
+        
+        webView.isUserInteractionEnabled = false
     }
     
     func prepareUserScript(fromFile fileName:String) -> WKUserScript {
