@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.s2s.snap2save</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -56,7 +56,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>19</string>
+	<string>22</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

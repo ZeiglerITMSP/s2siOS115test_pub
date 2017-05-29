@@ -369,10 +369,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
                           "language": currentLanguage
             ]
         
-       // print(parameters)
+        print(parameters)
         loginActivityIndicator.startAnimating()
         let url = String(format: "%@/logIn", hostUrl)
-        //print("url)
+        print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             switch response.result {
@@ -454,7 +454,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let validNum = AppHelper.validate(value: phoneNumber)
         
         if ((mobileNumTextField.text?.characters.count)! == 0 || validNum == false ) {
-            showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
+            showAlert(title: "", message: "Please enter 10-digit cell phone number.".localized())
             return false
         }
             

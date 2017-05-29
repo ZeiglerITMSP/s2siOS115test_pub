@@ -471,21 +471,21 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                         if code.intValue == 200 {
                             
                             let alertMessage = responseDict?["message"] as! String
-                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                                (action) in
-                                
-                                self.view.endEditing(true)
-                                _ = self.navigationController?.popViewController(animated: true)
-                                
-                            })
-                            alertController.addAction(defaultAction)
-                            DispatchQueue.main.async {
-                                
-                                self.present(alertController, animated: true, completion: nil)
-                            }
+//                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//                            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                                (action) in
+//                                
+//                                self.view.endEditing(true)
+//                                _ = self.navigationController?.popViewController(animated: true)
+//                                
+//                            })
+//                            alertController.addAction(defaultAction)
+//                            DispatchQueue.main.async {
+//                                
+//                                self.present(alertController, animated: true, completion: nil)
+//                            }
                             
-                            
+                           self.showAlert(title: "", message: alertMessage, action:#selector(self.alertAction), showCancel: false)
                         }
                         else {
                             if let responseDict = json.dictionaryObject {
@@ -621,7 +621,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         if contactPreferenceSegmentControl.selectedSegmentIndex == 0
         {
             if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
-                self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
+                self.showAlert(title: "", message: "Please enter 10-digit cell phone number.".localized())
                 return false
             }
         }
@@ -665,16 +665,16 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         if isReachable == false {
             
             let alertMessage = "The internet connection appears to be offline.".localized()
-            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                (action) in
-                self.view.endEditing(true)
-                _ = self.navigationController?.popViewController(animated: true)
-            })
-            
-            alertController.addAction(defaultAction)
-            self.present(alertController, animated: true, completion: nil)
-            
+//            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                (action) in
+//                self.view.endEditing(true)
+//                _ = self.navigationController?.popViewController(animated: true)
+//            })
+//            
+//            alertController.addAction(defaultAction)
+//            self.present(alertController, animated: true, completion: nil)
+             self.showAlert(title: "", message: alertMessage, action:#selector(self.alertAction),showCancel: false)
             return
         }
         
@@ -741,20 +741,22 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
                 
             case .failure(let error):
                 DispatchQueue.main.async {
-                    //HUD.hide()
+//                    //HUD.hide()
                     SwiftLoader.hide()
                     let message = error.localizedDescription
                     let alertMessage = message
-                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                        (action) in
-                        self.view.endEditing(true)
-                        _ = self.navigationController?.popViewController(animated: true)
-                    })
+//                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                        (action) in
+//                        self.view.endEditing(true)
+//                        _ = self.navigationController?.popViewController(animated: true)
+//                        })
+//                    
+//                    alertController.addAction(defaultAction)
+//                    self.present(alertController, animated: true, completion: nil)
+//                    
                     
-                    alertController.addAction(defaultAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    
+                    self.showAlert(title: "", message: alertMessage, action:#selector(self.alertAction),showCancel: false)
                 }
                 break
             }
@@ -763,4 +765,9 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
     }
     
+    func alertAction() {
+        self.view.endEditing(true)
+        _ = self.navigationController?.popViewController(animated: true)
+
+    }
 }

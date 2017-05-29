@@ -599,15 +599,17 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
                     if let messageString = responseDict?["message"] {
                         
                         let alertMessage = messageString as! String
-                        let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                        let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                            (action) in
-                            self.view.endEditing(true)
-                            _ = self.navigationController?.popViewController(animated: true)
-                        })
+//                        let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//                        let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                            (action) in
+//                            self.view.endEditing(true)
+//                            _ = self.navigationController?.popViewController(animated: true)
+//                        })
+//                        
+//                        alertController.addAction(defaultAction)
+//                        self.present(alertController, animated: true, completion: nil)
                         
-                        alertController.addAction(defaultAction)
-                        self.present(alertController, animated: true, completion: nil)
+                          self.showAlert(title: "", message: alertMessage, action: #selector(self.alertAction), showCancel: false)
                     }
                     
                 }
@@ -735,16 +737,16 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         if isReachable == false {
             
             let alertMessage = "The internet connection appears to be offline.".localized()
-            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                (action) in
-                self.view.endEditing(true)
-                _ = self.navigationController?.popViewController(animated: true)
-            })
-            
-            alertController.addAction(defaultAction)
-            self.present(alertController, animated: true, completion: nil)
-            
+//            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                (action) in
+//                self.view.endEditing(true)
+//                _ = self.navigationController?.popViewController(animated: true)
+//            })
+//            
+//            alertController.addAction(defaultAction)
+//            self.present(alertController, animated: true, completion: nil)
+            self.showAlert(title: "", message: alertMessage, action: #selector(alertAction), showCancel: false)
             return
         }
         
@@ -809,17 +811,17 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
                     //HUD.hide()
                     SwiftLoader.hide()
                     let message = error.localizedDescription
-                    let alertMessage = message
-                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                        (action) in
-                        self.view.endEditing(true)
-                        _ = self.navigationController?.popViewController(animated: true)
-                    })
-                    
-                    alertController.addAction(defaultAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    
+//                    let alertMessage = message
+//                    let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//                    let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                        (action) in
+//                        self.view.endEditing(true)
+//                        _ = self.navigationController?.popViewController(animated: true)
+//                    })
+//                    
+//                    alertController.addAction(defaultAction)
+//                    self.present(alertController, animated: true, completion: nil)
+                    self.showAlert(title: "", message: message, action: #selector(self.alertAction), showCancel: false)
                     
                 }
                 break
@@ -855,6 +857,11 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         //}
         
         return true
+    }
+    
+    func alertAction() {
+        self.view.endEditing(true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
 }

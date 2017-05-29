@@ -61,14 +61,16 @@ class EBTWebView: NSObject {
         let loginJS = prepareUserScript(fromFile: "ebt_scrapping")
         controller.addUserScript(loginJS)
         
-//        // registration user script
-//        let registrationJS = prepareUserScript(fromFile: "ebt_registration_scrapping")
-//        controller.addUserScript(registrationJS)
+        // registration user script
+        let registrationJS = prepareUserScript(fromFile: "ebt_registration_scrapping")
+        controller.addUserScript(registrationJS)
         
         configuration.userContentController = controller
         // create webview
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
         webView.navigationDelegate = self
+        
+        webView.isUserInteractionEnabled = false
     }
     
     func prepareUserScript(fromFile fileName:String) -> WKUserScript {

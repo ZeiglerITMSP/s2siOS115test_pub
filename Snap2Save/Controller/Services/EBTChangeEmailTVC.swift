@@ -199,6 +199,7 @@ class EBTChangeEmailTVC: UITableViewController {
     func showForceQuitAlert() {
         
         self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        EBTUser.shared.isForceQuit = true
     }
     
     func moveToNextController(identifier:String) {
@@ -241,7 +242,7 @@ extension EBTChangeEmailTVC {
     
     func getCurrentEmailAddress() {
         
-        let javaScript = "$('#currentEmailLbl').text().trim();"
+        let javaScript = "getCurrentEmailAddress();"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
@@ -266,12 +267,14 @@ extension EBTChangeEmailTVC {
         let emailAddress = emailField.contentTextField.text!
         let confirmEmail = confirmEmailField.contentTextField.text!
         
-        let jsEmailAddress = "$('#newEMailTextField').val('\(emailAddress)');"
-        let jsCofirmEmail = "$('#validateEMailTextField').val('\(confirmEmail)');"
+//        let jsEmailAddress = "$('#newEMailTextField').val('\(emailAddress)');"
+//        let jsCofirmEmail = "$('#validateEMailTextField').val('\(confirmEmail)');"
+//        
+//        let jsSubmit = "void($('#changeEmailBtn').click());"
+//        
+//        let javaScript =  jsEmailAddress + jsCofirmEmail + jsSubmit
         
-        let jsSubmit = "void($('#changeEmailBtn').click());"
-        
-        let javaScript =  jsEmailAddress + jsCofirmEmail + jsSubmit
+        let javaScript = "autoFillChangeEmail('\(emailAddress)', '\(confirmEmail)');"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             self.checkForErrorMessage()

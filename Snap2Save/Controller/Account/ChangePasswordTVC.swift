@@ -179,7 +179,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
             ]
         
         saveActivityIndicator.startAnimating()
-        ////print("parameters)
+        print(parameters)
         let url = String(format: "%@/changePassword", hostUrl)
         ////print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -197,20 +197,20 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
                         if code.intValue == 200 {
                             
                             let alertMessage = responseDict?["message"] as! String
-                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
-                            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
-                                (action) in
-                                
-                                self.view.endEditing(true)
-                                _ = self.navigationController?.popViewController(animated: true)
-                                
-                            })
-                            alertController.addAction(defaultAction)
-                            DispatchQueue.main.async {
-                                
-                                self.present(alertController, animated: true, completion: nil)
-                            }
-                            
+//                            let alertController = UIAlertController(title: "", message: alertMessage, preferredStyle: .alert)
+//                            let defaultAction = UIAlertAction.init(title: "OK", style: .default, handler: {
+//                                (action) in
+//                                
+//                                self.view.endEditing(true)
+//                                _ = self.navigationController?.popViewController(animated: true)
+//                                
+//                            })
+//                            alertController.addAction(defaultAction)
+//                            DispatchQueue.main.async {
+//                                
+//                                self.present(alertController, animated: true, completion: nil)
+//                            }
+                            self.showAlert(title: "", message: alertMessage, action:#selector(self.alertAction),showCancel: false)
                             
                         }
                         else {
@@ -241,7 +241,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
     func isValid() -> Bool {
         
         if (currentPasswordTextField.contentTextField.text?.characters.count)! < 6 {
-            self.showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
+            self.showAlert(title: "", message: "Your password must be at least 6 characters in length.".localized())
             return false
         }
         else if (newPasswordTextField.contentTextField.text?.characters.count)! < 6 {
@@ -254,4 +254,11 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
         }
         return true
     }
+    
+    func alertAction() {
+        self.view.endEditing(true)
+        _ = self.navigationController?.popViewController(animated: true)
+        
+    }
+
 }

@@ -38,6 +38,7 @@ class ServicesWebViewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        self.automaticallyAdjustsScrollViewInsets = false
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         servicesWebView.delegate = self
         servicesWebView.scalesPageToFit = true

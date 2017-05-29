@@ -32,20 +32,18 @@ class EBTLoginTVC: UITableViewController {
     var isSuccessMessage = false
     
     var isProcessCancelled = false
-    
     var tempLoginUrl = kEBTLoginUrl
     
-    var isHelpVCLoaded = false
+    let adSpotManager = AdSpotsManager()
+    var screenLanguage: String!
+//    var isHelpVCLoaded = false
     
     // Outlets
     @IBOutlet weak var userIdField: AIPlaceHolderTextField!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
-    
     @IBOutlet weak var descriptionLabel: UILabel!
-    
-    
     @IBOutlet weak var passwordField: AIPlaceHolderTextField!
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
@@ -53,21 +51,27 @@ class EBTLoginTVC: UITableViewController {
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var remmeberMyUserNameLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     @IBOutlet weak var registrationActivityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet weak var adImageView: UIImageView!
+    @IBOutlet weak var adImageViewTwo: UIImageView!
     
     
     // Action
     
-    @IBAction func helpButtonAction() {
+    @IBAction func imageViewOneAction(_ sender: UITapGestureRecognizer) {
         
-        isHelpVCLoaded = true
-        
-        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EBTHelpVC") as! EBTHelpVC
-        self.navigationController?.pushViewController(vc, animated: false)
-        
+        print("tap gesture")
     }
+    
+    
+//    @IBAction func helpButtonAction() {
+//        
+////        isHelpVCLoaded = true
+//        
+//        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "EBTHelpVC") as! EBTHelpVC
+//        self.navigationController?.pushViewController(vc, animated: false)
+//        
+//    }
     
     
     @IBAction func loginAction(_ sender: UIButton) {
@@ -164,7 +168,11 @@ class EBTLoginTVC: UITableViewController {
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: loginButton, radius: 2.0, width: 1.0)
         AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: registrationButton, radius: 2.0, width: 1.0)
         // tap gesture to view
-        addTapGesture()
+//        addTapGesture()
+        
+        adSpotManager.delegate = self
+        
+        
         // touch id config
         let touchIDStatus = AppHelper.isTouchIDAvailable()
         
@@ -186,34 +194,40 @@ class EBTLoginTVC: UITableViewController {
         
        // self.registrationButton.isHidden = true
         
-        // Add help tab
-//        addHelpTab()
+        
+        SwiftLoader.show(title: "Loading...".localized(), animated: true)
+        loadAdSpots(onLanguageChange: false)
+        
+        screenLanguage = Localize.currentLanguage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if isHelpVCLoaded == true {
-            return
+
+        reloadContent()
+        
+        if screenLanguage != Localize.currentLanguage() {
+            screenLanguage = Localize.currentLanguage()
+            loadAdSpots(onLanguageChange: true)
         }
         
-        reloadContent()
         validateLoginPage()
-        
         udateRememberMyStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if isHelpVCLoaded == true {
-            isHelpVCLoaded = false
-            return
-        }
+//        if isHelpVCLoaded == true {
+//            isHelpVCLoaded = false
+//            return
+//        }
         
         ebtWebView.responder = self
         
         let webView = ebtWebView.webView!
+        
         self.view.addSubview(webView)
         self.view.sendSubview(toBack: webView)
         webView.isHidden = true
@@ -236,6 +250,7 @@ class EBTLoginTVC: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     // MARK: -
 //    func addHelpTab() {
@@ -321,6 +336,8 @@ class EBTLoginTVC: UITableViewController {
         
         loadLoginPage()
         reloadContent()
+        
+        loadAdSpots(onLanguageChange: true)
     }
     
     func reloadContent() {
@@ -345,11 +362,20 @@ class EBTLoginTVC: UITableViewController {
             self.loginButton.setTitle("LOG IN".localized(), for: .normal)
             self.registrationButton.setTitle("REGISTER".localized(), for: .normal)
             
+            self.tableView.setContentOffset(CGPoint.zero, animated: false)
             self.tableView.reloadData()
-            
         }
     }
     
+    func loadAdSpots(onLanguageChange: Bool) {
+        
+        if onLanguageChange {
+//            SwiftLoader.show(title: "Loading...".localized(), animated: true)
+            adSpotManager.downloadAdImages()
+        } else {
+            adSpotManager.getAdSpots(forScreen: .ebtLogin)
+        }
+    }
     
     func popToLoginVC() {
         
@@ -382,27 +408,9 @@ class EBTLoginTVC: UITableViewController {
         }
     }
     
-    // MARK: - Table view
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        updateErrorTextColor()
-        if indexPath.row == 2 {
-            if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
-                return 0
-            }
-        }
-        
-//        else if indexPath.row == 4 {
-//            if isTouchIdAvailable == false {
-//                return 0
-//            }
-//        }
-        
-        return UITableViewAutomaticDimension
-    }
     
     
-    // MARK: - Fields validation 
+    // MARK: - Fields validation
     
     func isValid(userId:String?) -> Bool {
         
@@ -463,6 +471,89 @@ class EBTLoginTVC: UITableViewController {
     
 }
 
+// MARK: - Table view
+extension EBTLoginTVC {
+    
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        updateErrorTextColor()
+        
+        if indexPath.section == 0 {
+            if indexPath.row == 2 {
+                if (errorMessageLabel.text == nil || errorMessageLabel.text == "") {
+                    return 0
+                }
+            }
+        } else if indexPath.section == 1 {
+            
+            if indexPath.row == 0 {
+                
+                if adSpotManager.adSpots.count > 0 {
+                    
+                    let spot = adSpotManager.adSpots[0]
+                    let type = spot["type"]
+                    if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                        if adImage.size.width > self.view.frame.width {
+                            let height = AppHelper.getRatio(width: adImage.size.width,
+                                                            height: adImage.size.height,
+                                                            newWidth: self.view.frame.width)
+                            
+                            return height
+                        }
+                    }
+                    
+                    return UITableViewAutomaticDimension
+                }
+            }
+            else if indexPath.row == 1 {
+                
+                if adSpotManager.adSpots.count == 2 {
+                    
+                    let spot = adSpotManager.adSpots[1]
+                    let type = spot["type"]
+                    if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                        if adImage.size.width > self.view.frame.width {
+                            let height = AppHelper.getRatio(width: adImage.size.width,
+                                                            height: adImage.size.height,
+                                                            newWidth: self.view.frame.width)
+                            
+                            return height
+                        }
+                    }
+                    
+                    return UITableViewAutomaticDimension
+                }
+            }
+        }
+        
+        return UITableViewAutomaticDimension
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.view.endEditing(true)
+        if indexPath.section == 1 {
+            adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+    }
+    
+//    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+//        
+//        if indexPath.section == 1 {
+//            adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
+//        }
+//
+//        return true
+//    }
+
+    
+}
+
 extension EBTLoginTVC {
     
     // MARK: Scrapping
@@ -477,16 +568,42 @@ extension EBTLoginTVC {
                     // current page
                     self.loadLoginPage()
                 } else {
-                    self.checkForStatusMessage()
+                    self.validateSpanishLoginPage()
+//                    self.checkForStatusMessage()
                 }
-                
             } else {
                 //print(error ?? "")
             }
-            
         })
     }
   
+    func validateSpanishLoginPage() {
+        //getCurrentLanguage()
+        let javaScript = "isSpanishPageLoaded();"
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            
+            if error != nil {
+                print(error ?? "error nil")
+            } else {
+                print(result ?? "result nil")
+                let stringResult = result as! Bool
+//                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
+//                print(trimmedText)
+                if stringResult == false {
+                    self.loadLoginPage()
+                } else {
+                    self.checkForStatusMessage()
+                }
+                
+//                if trimmedText != "Idioma" {
+//                    self.loadLoginPage()
+//                } else {
+//                    self.checkForStatusMessage()
+//                }
+            }
+        }
+    }
+    
     func loadLoginPage() {
         
         actionType = ActionType.loadLoginPage
@@ -787,6 +904,43 @@ extension EBTLoginTVC: AITextFieldProtocol {
         // not - only allowing [^A-Za-z0-9], bcz spanish characters have to be allowed, and @. for email have to be allowed.
         
         return AppHelper.isValid(input: string)
+    }
+    
+}
+
+
+// MARK: - Ads
+extension EBTLoginTVC: AdSpotsManagerDelegate {
+    
+    func didFinishLoadingSpots() {
+        
+        SwiftLoader.hide()
+        updateAdImage()
+    }
+    
+    func didFailedLoadingSpots(description: String) {
+
+        SwiftLoader.hide()
+    }
+    
+    // function
+    func updateAdImage() {
+        if adSpotManager.adSpots.count > 0 {
+            for i in 0..<adSpotManager.adSpots.count {
+                if i == 0 {
+                    let spot = adSpotManager.adSpots[i]
+                    let type = spot["type"]
+                    let image = adSpotManager.adSpotImages["\(type!)"]
+                    self.adImageView.image = image
+                } else {
+                    let spot = adSpotManager.adSpots[i]
+                    let type = spot["type"]
+                    let image = adSpotManager.adSpotImages["\(type!)"]
+                    self.adImageViewTwo.image = image
+                }
+                self.tableView.reloadData()
+            }
+        }
     }
     
 }

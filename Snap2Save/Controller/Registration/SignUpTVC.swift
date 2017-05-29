@@ -140,7 +140,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 60
         self.navigationController?.navigationBar.isHidden = false
-        
+        AppHelper.configSwiftLoader()
         loadTextFields()
         
         let backButton = UIButton.init(type: .custom)
@@ -300,7 +300,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         self.messageTextView.attributedText = attributedString
         
         self.messageTextView.isScrollEnabled = false
-        
+        self.messageTextView.delegate = self
     }
 
     func updateTermsText() {
@@ -364,6 +364,8 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         self.termsTextView.attributedText = attributedString
         self.termsTextView.textAlignment = .left
         self.termsTextView.isScrollEnabled = false
+        
+        self.termsTextView.delegate = self
         
        // self.termsTextView.contentSize = self.termsTextView.bounds.size
     }
@@ -829,4 +831,27 @@ extension SignUpTVC: AITextFieldProtocol {
     }
     
 
+    
 }
+
+extension SignUpTVC: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        if textView == messageTextView {
+        let servicesWebVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "ServicesWebViewVC") as! ServicesWebViewVC
+        let dict = ["en_url" : "http://test-admin.snap2save.com/reward/en" , "es_title" : "Programa de recompensas" ,"en_title" : "Reward Program" ,"es_url" : "http://test-admin.snap2save.com/reward/es"]
+        servicesWebVc.infoDict = dict
+        self.navigationController?.show(servicesWebVc, sender: self)
+        }
+        
+        else if textView == termsTextView {
+            let servicesWebVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "ServicesWebViewVC") as! ServicesWebViewVC
+            let dict = ["en_url" : "http://test-admin.snap2save.com/terms/en" , "es_title" : "Condiciones de servicio" ,"en_title" : "Terms of Service" ,"es_url" : "http://test-admin.snap2save.com/terms/es"]
+            servicesWebVc.infoDict = dict
+            self.navigationController?.show(servicesWebVc, sender: self)
+        }
+        return false
+    }
+    
+}
+

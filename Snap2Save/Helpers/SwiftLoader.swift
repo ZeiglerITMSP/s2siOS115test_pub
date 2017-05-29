@@ -301,8 +301,8 @@ open class SwiftLoader: UIView {
         }
         
         fileprivate func drawBackgroundCircle(_ partial : Bool) {
-            let startAngle : CGFloat = CGFloat(M_PI) / CGFloat(2.0)
-            var endAngle : CGFloat = (2.0 * CGFloat(M_PI)) + startAngle
+            let startAngle : CGFloat = CGFloat.pi / CGFloat(2.0)
+            var endAngle : CGFloat = (2.0 * CGFloat.pi) + startAngle
             
             let center : CGPoint = CGPoint(x: self.bounds.size.width / 2, y: self.bounds.size.height / 2)
             let radius : CGFloat = (CGFloat(self.bounds.size.width) - CGFloat(self.lineWidth!)) / CGFloat(2.0)
@@ -311,7 +311,7 @@ open class SwiftLoader: UIView {
             processBackgroundPath.lineWidth = CGFloat(self.lineWidth!)
             
             if (partial) {
-                endAngle = (1.8 * CGFloat(M_PI)) + startAngle
+                endAngle = (1.8 * CGFloat.pi) + startAngle
             }
             
             processBackgroundPath.addArc(withCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
@@ -327,7 +327,7 @@ open class SwiftLoader: UIView {
             speed = 1
             
             let rotationAnimation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-            rotationAnimation.toValue = NSNumber(value: M_PI * 2.0 as Double)
+            rotationAnimation.toValue = NSNumber(value: Double.pi * 2.0)
             rotationAnimation.duration = CFTimeInterval(speed!);
             rotationAnimation.isCumulative = true;
             rotationAnimation.repeatCount = HUGE;
@@ -347,11 +347,11 @@ open class SwiftLoader: UIView {
         // Size of loader
         public var size : CGFloat = 120.0
         // Color of spinner view
-        public var spinnerColor = UIColor.black
+        public var spinnerColor = APP_GRREN_COLOR
         
         public var spinnerLineWidth :Float = 2.0
         // Color of title text
-        public var titleTextColor = UIColor.black
+        public var titleTextColor = APP_GRREN_COLOR
         // Speed of the spinner
         public var speed :Int = 1
         // Font for title text in loader

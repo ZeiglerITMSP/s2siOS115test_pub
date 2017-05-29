@@ -317,6 +317,7 @@ class EBTUserInformationTVC: UITableViewController {
     func showForceQuitAlert() {
         
         self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        EBTUser.shared.isForceQuit = true
     }
 
     func moveToNextController(identifier:String) {
@@ -336,7 +337,7 @@ extension EBTUserInformationTVC {
     
     func getUserIdRules() {
         
-        let dobErrorCode = "$('.prelogonInstrText:eq(2)').text().trim();"
+        let dobErrorCode = "getUserIdRules();"
         
         ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
             if error != nil {
@@ -375,7 +376,7 @@ extension EBTUserInformationTVC {
     
     func getPasswordRules() {
         
-        let dobErrorCode = "$('.prelogonInstrText:eq(4)').text().trim();"
+        let dobErrorCode = "getPasswordRules();"
         
         ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
             if error != nil {
@@ -415,16 +416,7 @@ extension EBTUserInformationTVC {
     
     func getQuestionOneList() {
         
-        let js = "function getQuestion1Options() { " +
-            "var object = {}; " +
-            
-            "$('#question1 option').each(function () {    " +
-            "    object[$(this).val()] = $(this).text().trim();    " +
-            "});                                            " +
-            "var jsonSerialized = JSON.stringify(object);   " +
-            "return jsonSerialized                          " +
-        "}                                                  " +
-        "getQuestion1Options();                             "
+        let js = "getQuestion1Options();"
     
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
@@ -461,16 +453,7 @@ extension EBTUserInformationTVC {
     
     func getQuestionTwoList() {
         
-        let js = "function getQuestion2Options() { " +
-            "var object = {}; " +
-            
-            "$('#question2 option').each(function () {    " +
-            "    object[$(this).val()] = $(this).text().trim();    " +
-            "});                                            " +
-            "var jsonSerialized = JSON.stringify(object);   " +
-            "return jsonSerialized                          " +
-            "}                                                  " +
-        "getQuestion2Options();                             "
+        let js = "getQuestion2Options();"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
@@ -507,16 +490,7 @@ extension EBTUserInformationTVC {
     
     func getQuestionThreeList() {
         
-        let js = "function getQuestion3Options() { " +
-            "var object = {}; " +
-            
-            "$('#question3 option').each(function () {    " +
-            "    object[$(this).val()] = $(this).text().trim();    " +
-            "});                                            " +
-            "var jsonSerialized = JSON.stringify(object);   " +
-            "return jsonSerialized                          " +
-            "}                                                  " +
-        "getQuestion3Options();                             "
+        let js = "getQuestion3Options();"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
@@ -598,28 +572,30 @@ extension EBTUserInformationTVC {
         let questionThreeIndex = questionThreeDictionary.getKey(forValue: self.questionThreeField.contentTextField.text!)
         
         
-        print("q1 = \(questionOneIndex) q2 = \(questionTwoIndex) q3 = \(questionThreeIndex)")
+      //  print("q1 = \(questionOneIndex) q2 = \(questionTwoIndex) q3 = \(questionThreeIndex)")
         
-        let jsUserId = "$('#txtUserid').val('\(userId)');"
-        let jsPassword = "$('#txtPassword').val('\(password)');"
-        let jsConfirmPassword = "$('#txtConfirmPassword').val('\(confirmPassword)');"
-        let jsEmailAddress = "$('#txtEmail').val('\(emailAddress)');"
-        let jsConfirmEmail = "$('#txtConfirmEmail').val('\(confirmEmail)');"
-        let jsPhoneNumber = "$('#txtPhoneNumber').val('\(phoneNumber)');"
+//        let jsUserId = "$('#txtUserid').val('\(userId)');"
+//        let jsPassword = "$('#txtPassword').val('\(password)');"
+//        let jsConfirmPassword = "$('#txtConfirmPassword').val('\(confirmPassword)');"
+//        let jsEmailAddress = "$('#txtEmail').val('\(emailAddress)');"
+//        let jsConfirmEmail = "$('#txtConfirmEmail').val('\(confirmEmail)');"
+//        let jsPhoneNumber = "$('#txtPhoneNumber').val('\(phoneNumber)');"
+//        
+//        let jsQuestionOne = "$('#question1').val('\(questionOneIndex ?? "-1")');"
+//        let jsQuestionTwo = "$('#question2').val('\(questionTwoIndex  ?? "-1")');"
+//        let jsQuestionThree = "$('#question3').val('\(questionThreeIndex ?? "-1")');"
+//        
+//        let jsAnswerOne = "$('#response1TextField1').val('\(answerOne)');"
+//        let jsAnswerTwo = "$('#response1TextField2').val('\(answerTwo)');"
+//        let jsAnswerThree = "$('#response1TextField3').val('\(answerThree)');"
+//        
+//        let jsCheckbox = "$('#chkElecCommsOpt').prop('checked', true);"
+//        
+//        let jsForm = "void($('#btnValidateUserInfo').click());"
+//        
+//        let javaScript = jsUserId + jsPassword + jsConfirmPassword + jsEmailAddress + jsConfirmEmail + jsPhoneNumber + jsQuestionOne + jsQuestionTwo + jsQuestionThree + jsAnswerOne + jsAnswerTwo + jsAnswerThree + jsCheckbox + jsForm
         
-        let jsQuestionOne = "$('#question1').val('\(questionOneIndex ?? "-1")');"
-        let jsQuestionTwo = "$('#question2').val('\(questionTwoIndex  ?? "-1")');"
-        let jsQuestionThree = "$('#question3').val('\(questionThreeIndex ?? "-1")');"
-        
-        let jsAnswerOne = "$('#response1TextField1').val('\(answerOne)');"
-        let jsAnswerTwo = "$('#response1TextField2').val('\(answerTwo)');"
-        let jsAnswerThree = "$('#response1TextField3').val('\(answerThree)');"
-        
-        let jsCheckbox = "$('#chkElecCommsOpt').prop('checked', true);"
-        
-        let jsForm = "void($('#btnValidateUserInfo').click());"
-        
-        let javaScript = jsUserId + jsPassword + jsConfirmPassword + jsEmailAddress + jsConfirmEmail + jsPhoneNumber + jsQuestionOne + jsQuestionTwo + jsQuestionThree + jsAnswerOne + jsAnswerTwo + jsAnswerThree + jsCheckbox + jsForm
+        let javaScript = "autofillUserInformation('\(userId)', '\(password)', '\(confirmPassword)', '\(emailAddress)', '\(confirmEmail)', '\(phoneNumber)', '\(questionOneIndex ?? "-1")', '\(questionTwoIndex ?? "-1")', '\(questionThreeIndex ?? "-1")', '\(answerOne)', '\(answerTwo)', '\(answerThree)');"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             if error != nil {

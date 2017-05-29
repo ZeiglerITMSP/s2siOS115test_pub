@@ -84,8 +84,6 @@
 		E874F2891EBCB09400BB3DCA /* ebt_registration_scrapping.js in Resources */ = {isa = PBXBuildFile; fileRef = E874F2881EBCB09400BB3DCA /* ebt_registration_scrapping.js */; };
 		E87A57131EBB673900C97194 /* large.png in Resources */ = {isa = PBXBuildFile; fileRef = E87A57111EBB673800C97194 /* large.png */; };
 		E87A57141EBB673900C97194 /* small.png in Resources */ = {isa = PBXBuildFile; fileRef = E87A57121EBB673800C97194 /* small.png */; };
-		E888F60E1EBA010000315CAD /* Error Page copy.htm in Resources */ = {isa = PBXBuildFile; fileRef = E888F60B1EBA010000315CAD /* Error Page copy.htm */; };
-		E888F60F1EBA010000315CAD /* Error Page.htm in Resources */ = {isa = PBXBuildFile; fileRef = E888F60D1EBA010000315CAD /* Error Page.htm */; };
 		E888F6111EBA163F00315CAD /* ebt_scrapping.js in Resources */ = {isa = PBXBuildFile; fileRef = E888F6101EBA163F00315CAD /* ebt_scrapping.js */; };
 		E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88BA54A1DF53C1300714C65 /* AppDelegate.swift */; };
 		E88BA5501DF53C1300714C65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88BA54E1DF53C1300714C65 /* Main.storyboard */; };
@@ -201,7 +199,7 @@
 		E86D427A1EA9EF6500F00F73 /* SharedCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedCache.swift; sourceTree = "<group>"; };
 		E86D8D1F1EA8A273001250D9 /* AdSpotTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdSpotTableViewCell.swift; sourceTree = "<group>"; };
 		E86D8D201EA8A273001250D9 /* AdSpotTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdSpotTableViewCell.xib; sourceTree = "<group>"; };
-		E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdSpotsManager.swift; sourceTree = "<group>"; };
+		E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdSpotsManager.swift; path = Offers/AdSpotsManager.swift; sourceTree = "<group>"; };
 		E86D8D291EA8D21B001250D9 /* AccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		E86D8D2B1EA8D229001250D9 /* AccountSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSwitchCell.swift; sourceTree = "<group>"; };
 		E874F2821EBC5E5E00BB3DCA /* horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horizontal.png; sourceTree = "<group>"; };
@@ -210,8 +208,6 @@
 		E874F2881EBCB09400BB3DCA /* ebt_registration_scrapping.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ebt_registration_scrapping.js; sourceTree = "<group>"; };
 		E87A57111EBB673800C97194 /* large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = large.png; sourceTree = "<group>"; };
 		E87A57121EBB673800C97194 /* small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small.png; sourceTree = "<group>"; };
-		E888F60B1EBA010000315CAD /* Error Page copy.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "Error Page copy.htm"; sourceTree = "<group>"; };
-		E888F60D1EBA010000315CAD /* Error Page.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "Error Page.htm"; sourceTree = "<group>"; };
 		E888F6101EBA163F00315CAD /* ebt_scrapping.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ebt_scrapping.js; sourceTree = "<group>"; };
 		E88BA5471DF53C1300714C65 /* Snap2Save.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap2Save.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88BA54A1DF53C1300714C65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -230,7 +226,7 @@
 		E88BA5971DF5B1CA00714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E88BA59B1DF5B25D00714C65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E88BA59D1DF5B26100714C65 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E88C262C1E1539C900F4056F /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		E88C262C1E1539C900F4056F /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabViewController.swift; path = Services/TabViewController.swift; sourceTree = "<group>"; };
 		E8B576F51EB73ABB00905D3D /* LoadMoreActivityTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreActivityTVC.swift; sourceTree = "<group>"; };
 		E8BAE2A11E0BABEF00A85AAB /* EBTAuthenticationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTAuthenticationTVC.swift; sourceTree = "<group>"; };
 		E8BAE2A71E0BDEFD00A85AAB /* EBTCardNumberTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBTCardNumberTVC.swift; sourceTree = "<group>"; };
@@ -358,9 +354,6 @@
 		E82283A81E0A72A6008FE084 /* EBTTracking */ = {
 			isa = PBXGroup;
 			children = (
-				E888F60B1EBA010000315CAD /* Error Page copy.htm */,
-				E888F60C1EBA010000315CAD /* Error Page_files */,
-				E888F60D1EBA010000315CAD /* Error Page.htm */,
 				E82283A91E0A72BC008FE084 /* EBTWebView.swift */,
 				E82283AB1E0A72D3008FE084 /* BrowserVC.swift */,
 				E888F6101EBA163F00315CAD /* ebt_scrapping.js */,
@@ -373,7 +366,6 @@
 		E826FBD01E09408D0089AEA6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E88C262C1E1539C900F4056F /* TabViewController.swift */,
 				E826FBD11E0940A20089AEA6 /* ServicesTVC.swift */,
 				E8439E441EA4A752008079F0 /* ServicesCells */,
 				9769997D1E2643A200D05AE8 /* ServicesWebViewVC.swift */,
@@ -389,6 +381,15 @@
 			);
 			name = EBTDashboard;
 			path = ../Controller/Services;
+			sourceTree = "<group>";
+		};
+		E83CC02E1ED84B01000C6CB2 /* AdSpotTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				E86D8D1F1EA8A273001250D9 /* AdSpotTableViewCell.swift */,
+				E86D8D201EA8A273001250D9 /* AdSpotTableViewCell.xib */,
+			);
+			name = AdSpotTableViewCell;
 			sourceTree = "<group>";
 		};
 		E8439E441EA4A752008079F0 /* ServicesCells */ = {
@@ -467,13 +468,11 @@
 			children = (
 				974D5C341E2DFF5B00918BAD /* snap2save.jpeg */,
 				E863CEBB1E1BE72E00049F28 /* OffersVC.swift */,
-				E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */,
 				E8439E451EA4AAA2008079F0 /* OfferTableViewCell.swift */,
 				E874F2861EBC99C800BB3DCA /* OfferTitleTVC.swift */,
-				E86D8D1F1EA8A273001250D9 /* AdSpotTableViewCell.swift */,
-				E86D8D201EA8A273001250D9 /* AdSpotTableViewCell.xib */,
-				974D5C321E2DF55400918BAD /* OffersDetailsViewController.swift */,
+				E83CC02E1ED84B01000C6CB2 /* AdSpotTableViewCell */,
 				978767B41E8E304300220536 /* AdditionalOffersVC.swift */,
+				974D5C321E2DF55400918BAD /* OffersDetailsViewController.swift */,
 			);
 			path = Offers;
 			sourceTree = "<group>";
@@ -485,13 +484,6 @@
 				E86D8D2B1EA8D229001250D9 /* AccountSwitchCell.swift */,
 			);
 			name = AccountCells;
-			sourceTree = "<group>";
-		};
-		E888F60C1EBA010000315CAD /* Error Page_files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Error Page_files";
 			sourceTree = "<group>";
 		};
 		E88BA53E1DF53C1200714C65 = {
@@ -564,6 +556,8 @@
 			isa = PBXGroup;
 			children = (
 				E88BA57B1DF53D1500714C65 /* LandingVC.swift */,
+				E88C262C1E1539C900F4056F /* TabViewController.swift */,
+				E86D8D231EA8B9C6001250D9 /* AdSpotsManager.swift */,
 				E84AE9CA1E07F2B300C5E7F3 /* Login */,
 				E84AE9C91E07F2A000C5E7F3 /* Registration */,
 				E826FBD01E09408D0089AEA6 /* Services */,
@@ -748,12 +742,10 @@
 				E86D8D221EA8A273001250D9 /* AdSpotTableViewCell.xib in Resources */,
 				E826FBDA1E094F720089AEA6 /* AIPlaceHolderTextField.xib in Resources */,
 				97DBC2131E35E04B00CD2C75 /* GoogleService-Info.plist in Resources */,
-				E888F60E1EBA010000315CAD /* Error Page copy.htm in Resources */,
 				974CDFC81E67FC030041EC07 /* FZURefresh.xcassets in Resources */,
 				9737FEE51E76AB1600B6B9BB /* USStateAbbreviations_old.plist in Resources */,
 				E822839E1E0A61F4008FE084 /* Home.storyboard in Resources */,
 				974CDFC61E67FC030041EC07 /* LICENSE in Resources */,
-				E888F60F1EBA010000315CAD /* Error Page.htm in Resources */,
 				E88BA59A1DF5B25D00714C65 /* Localizable.strings in Resources */,
 				E88BA5521DF53C1300714C65 /* Assets.xcassets in Resources */,
 				E888F6111EBA163F00315CAD /* ebt_scrapping.js in Resources */,
@@ -1193,7 +1185,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Snap2Save/Snap2Save.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Cathy Maglione (2APHA8Y955)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cathy Maglione (2APHA8Y955)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PGJV67G4NG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1204,7 +1196,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.s2s.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "abc5a334-387b-4c94-932c-9a7c2d516f1f";
+				PROVISIONING_PROFILE = "97c2a548-a0b7-40b0-820a-fd4bb4b69a69";
 				PROVISIONING_PROFILE_SPECIFIER = s2s_development;
 				SWIFT_OBJC_BRIDGING_HEADER = "Snap2Save/Snap2Save-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1222,7 +1214,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Snap2Save/Snap2Save.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = PGJV67G4NG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1233,7 +1225,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.s2s.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ee8f720a-3734-4126-9ee0-38199da40d40";
+				PROVISIONING_PROFILE = "710f0efa-4d32-40c5-91cf-0ed04aeacb9c";
 				PROVISIONING_PROFILE_SPECIFIER = s2s_distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "Snap2Save/Snap2Save-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

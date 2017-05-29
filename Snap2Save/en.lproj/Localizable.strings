@@ -248,8 +248,9 @@
 
 "Please provide all required information." = "Please provide all required information.";
 
-"Please enter a 10-digit cell phone number." = "Please enter 10-digit cell phone number.";
-"Password must be at least 6 characters in length." = "Your password must be at least 6 characters in length.";
+"Please enter 10-digit cell phone number." = "Please enter 10-digit cell phone number.";
+"Please enter a 10-digit cell phone number." = "Please enter a 10-digit cell phone number.";
+"Password must be at least 6 characters in length." = "Password must be at least 6 characters in length.";
 "Please enter password." = "Please enter password.";
 
 "Please enter a valid zip code." = "Please enter a valid zip code.";
@@ -279,7 +280,7 @@
 
 "The TO date must be later than or equal to the FROM date." = "The TO date must be later than or equal to the FROM date.";
 
-
+"Enter new pasword." = "Enter new pasword.";
 
 
 

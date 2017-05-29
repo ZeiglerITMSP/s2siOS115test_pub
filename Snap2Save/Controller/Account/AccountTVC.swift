@@ -66,11 +66,11 @@ class AccountTVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadContent()
+        
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         self.adSpotManager.getAdSpots(forScreen: .account)
         AppHelper.getScreenName(screenName: "Account screen")
-        
+        reloadContent()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,6 +101,7 @@ class AccountTVC: UITableViewController {
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.navigationItem.title = "Account".localized()
+            self.tableView.reloadData()
         }
     }
     

@@ -39,18 +39,20 @@ class EBTDashboardTVC: UITableViewController {
     var availableBalance: String?
     var trasactions = [Any]()
     
-//    var transactionsString: String = ""
+    let adSpotManager = AdSpotsManager()
+    //    var transactionsString: String = ""
     // timer
     var startTime: Date!
     
     
-    var pageNumber: Int = 0 // 0 for internal build, 1 for live
+    var pageNumber: Int = 1 // 0 for internal build, 1 for live
     
     // load more
     var isTransactionsLoading = false
+    var accoutDetailsLoaded = false
     
-//    var isLoadingMoreActivity:Bool = false
-//    var hasMoreActivity:Bool = true
+    //    var isLoadingMoreActivity:Bool = false
+    //    var hasMoreActivity:Bool = true
     
     // MARK: -
     override func viewDidLoad() {
@@ -64,22 +66,17 @@ class EBTDashboardTVC: UITableViewController {
         // Automatic height
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.register(UINib(nibName: "AdSpotTableViewCell", bundle: nil), forCellReuseIdentifier: "AdSpotTableViewCell")
+        
+        adSpotManager.delegate = self
         
         ebtWebView.responder = self
         
+        actionType = ActionType.accountDetails
         validatePage()
         
-        // Load more
-//        self.tableView.toLoadMore {
-//            
-//            if self.trasactions.count > 0 {
-//                if (!self.isLoadingMoreActivity && self.hasMoreActivity) {
-//                    self.isLoadingMoreActivity = true
-//                    self.goToNextPage()
-//                }
-//            }
-//        }
-        
+        adSpotManager.getAdSpots(forScreen: .ebtBalance)
     }
     
     
@@ -101,44 +98,84 @@ class EBTDashboardTVC: UITableViewController {
     }
     
     
+    
     // MARK: -
     
+    func backAction() {
+        
+        //    _ = self.navigationController?.popToRootViewController(animated: true)
+        showAlert(title: "ebt.processTerminate.title".localized(),
+                  message: "ebt.processTerminate.dashboard".localized(), action: #selector(cancelProcess))
+    }
     
+    func cancelProcess() {
+        
+        //        ebtWebView = nil
+        
+        ebtWebView.loadEmptyPage()
+        _ = self.navigationController?.popToRootViewController(animated: true)
+        
+        //        // Define identifier
+        //        let notificationName = Notification.Name("POPTOLOGIN")
+        //        // Post notification
+        //        NotificationCenter.default.post(name: notificationName, object: nil)
+    }
     
+    func showForceQuitAlert() {
+        
+        self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        EBTUser.shared.isForceQuit = true
+    }
     
-    // MARK: - Table view data source
+    func exitProcessIfPossible() {
+        
+        if self.ebtWebView.isPageLoading == false {
+            self.showForceQuitAlert()
+        }
+    }
+    
+}
+
+// MARK: - Table view data source, delegate
+extension EBTDashboardTVC {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        var sections = 0
+//        var sections = 0
+//        
+//        if accountDetails.count > 0 {
+//            sections += 1
+//        }
+//        if trasactions.count > 0 || isTransactionsLoading == true {
+//            sections += 1
+//        }
+//        
+//        // loader
+//        if sections == 0 {
+//            SwiftLoader.show(title: "Loading...".localized(), animated: true)
+//        } else {
+//            SwiftLoader.hide()
+//        }
+//        
+//        return sections
         
-        if accountDetails.count > 0 {
-            sections += 1
-        }
-        if trasactions.count > 0 || isTransactionsLoading == true {
-            sections += 1
-        }
         
-        // loader
-        if sections == 0 {
+        if accoutDetailsLoaded == false {
             SwiftLoader.show(title: "Loading...".localized(), animated: true)
         } else {
             SwiftLoader.hide()
         }
         
-        return sections
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
-            
-            if accountDetails.count == 0 {
-                return 1
-            }
-            
-            return accountDetails.count
+            return adSpotManager.adSpots.count
         } else if section == 1 {
+            return accountDetails.count
+        } else if section == 2 {
             
             var transactionsCount = trasactions.count
             
@@ -152,8 +189,24 @@ class EBTDashboardTVC: UITableViewController {
         return 0
     }
     
-    // MARK: - Table view
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.section == 0 {
+            
+            let spot = adSpotManager.adSpots[indexPath.row]
+            let type = spot["type"]
+            if let adImage = adSpotManager.adSpotImages["\(type!)"] {
+                if adImage.size.width > self.view.frame.width {
+                    let height = AppHelper.getRatio(width: adImage.size.width,
+                                                    height: adImage.size.height,
+                                                    newWidth: self.view.frame.width)
+                    
+                    return height
+                }
+            }
+            
+            return UITableViewAutomaticDimension
+        }
         
         return UITableViewAutomaticDimension
     }
@@ -162,6 +215,16 @@ class EBTDashboardTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
+            let adSpotTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdSpotTableViewCell") as! AdSpotTableViewCell
+            
+            let spot = adSpotManager.adSpots[indexPath.row]
+            let type = spot["type"]
+            let image = adSpotManager.adSpotImages["\(type!)"]
+            adSpotTableViewCell.adImageView.image = image
+            
+            return adSpotTableViewCell
+
+        } else if indexPath.section == 1 {
             
             let detailedCell = tableView.dequeueReusableCell(withIdentifier: "DetailedCell", for: indexPath) as! DetailedCell
             
@@ -173,7 +236,7 @@ class EBTDashboardTVC: UITableViewController {
             
             return detailedCell
             
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             
             if indexPath.row < trasactions.count {
                 
@@ -194,7 +257,7 @@ class EBTDashboardTVC: UITableViewController {
                     detailedSubtitleCell.detailLabel.text = debit_amount
                     detailedSubtitleCell.detailLabel.textColor = UIColor.black
                 }
-            
+                
                 return detailedSubtitleCell
             } else {
                 let loaderCell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreActivityTVC") as! LoadMoreActivityTVC
@@ -211,7 +274,7 @@ class EBTDashboardTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        if section == 1 {
+        if section == 2 {
             return "RECENT TRANSACTIONS".localized()
         }
         
@@ -220,7 +283,7 @@ class EBTDashboardTVC: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
+        if section == 0 || section == 1 {
             return 0.1
         } else {
             return 40
@@ -231,40 +294,40 @@ class EBTDashboardTVC: UITableViewController {
         return 0.1
     }
     
-    // MARK: -
-    
-    func backAction() {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-    //    _ = self.navigationController?.popToRootViewController(animated: true)
-        showAlert(title: "ebt.processTerminate.title".localized(),
-                  message: "ebt.processTerminate.dashboard".localized(), action: #selector(cancelProcess))
+        if indexPath.section == 0 {
+            adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    func cancelProcess() {
-        
-        //        ebtWebView = nil
-        
-        ebtWebView.loadEmptyPage()
-        _ = self.navigationController?.popToRootViewController(animated: true)
-        
-        //        // Define identifier
-        //        let notificationName = Notification.Name("POPTOLOGIN")
-        //        // Post notification
-        //        NotificationCenter.default.post(name: notificationName, object: nil)
-    }
-    
-    // MARK: - JavaScript
+}
+
+
+// MARK: - JavaScript
+extension EBTDashboardTVC {
     
     func validatePage() {
         
         ebtWebView.getPageHeading(completion: { pageTitle in
             
             if pageTitle == "ebt.accountSummary".localized() {
-                
-                self.getAccountDetails()
-                
+                if self.actionType == ActionType.accountDetails {
+                    self.getAccountDetails()
+                }
             } else {
                 
+                self.validateTransactionPage()
+                
+                //                if actionType == .transactions {
+                //                    actionType = nil
+                //                    validateTransactionPage()
+                //                } else if actionType == .tabClick {
+                //                    actionType = nil
+                //                    validateTabClick()
+                //                }
             }
         })
         
@@ -280,29 +343,29 @@ class EBTDashboardTVC: UITableViewController {
             if result != nil {
                 let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
                 self.accountDetails.append(detail)
-//                guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
-//                }
-//                let valueInDouble = Double(valueString) ?? 0
-//                if valueInDouble > 0 {
-//                    let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
-//                    self.accountDetails.append(detail)
-//                }
+                //                guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
+                //                }
+                //                let valueInDouble = Double(valueString) ?? 0
+                //                if valueInDouble > 0 {
+                //                    let detail = ["title" : "SNAP Balance".localized(), "value": result, "key": self.snapBalanceKey]
+                //                    self.accountDetails.append(detail)
+                //                }
             }
             
             self.execute(javaScript: jsCashBalance, completion: { result in
                 if result != nil {
                     let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
                     self.accountDetails.append(detail)
-
-//                    guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
-//                    }
-//                    let valueInDouble = Double(valueString) ?? 0
-//                    if valueInDouble > 0 {
-//                        let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
-//                        self.accountDetails.append(detail)
-//                    }
+                    
+                    //                    guard let valueString = result?.removeSpecialChars(validCharacters: "0123456789.") else { return
+                    //                    }
+                    //                    let valueInDouble = Double(valueString) ?? 0
+                    //                    if valueInDouble > 0 {
+                    //                        let detail = ["title" : "CASH Balance".localized() , "value": result, "key": self.cashBalanceKey]
+                    //                        self.accountDetails.append(detail)
+                    //                    }
                 }
-                
+                self.accoutDetailsLoaded = true
                 self.isTransactionsLoading = true
                 self.tableView.reloadData()
                 self.getTransactionActivityURL()
@@ -331,7 +394,6 @@ class EBTDashboardTVC: UITableViewController {
     }
     
     // Transaction History
-    
     func getTransactionActivityURL() {
         
         let js = "getTransactionsPageURL();"
@@ -376,12 +438,23 @@ class EBTDashboardTVC: UITableViewController {
             
             if pageTitle == "ebt.transactionActivity".localized() {
                 
-                self.validateTransactionsTab()
+                
+                if self.actionType == .transactions {
+                    self.actionType = nil
+                    self.validateTransactionsTab()
+                } else if self.actionType == .tabClick {
+                    self.actionType = nil
+                    self.validateTabClick()
+                }
+                
             } else {
                 print("END WITH DATA")
                 self.isTransactionsLoading = false
                 self.tableView.reloadData()
                 self.sendEBTInformationToServer()
+                
+                // check if redirected to loginpage or other page
+                self.exitProcessIfPossible()
             }
         })
         
@@ -395,15 +468,13 @@ class EBTDashboardTVC: UITableViewController {
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             
             if let resultString = result as? String {
-                
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                
                 if resultTrimmed == "allactTab" {
-                                      //  self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
+                    //  self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
                     self.startStartEndDatesTimer()
                     // load 90 days transactions
-                   // self.transactionsHistoryStartEndDates()
-//                    self.getTransactions()
+                    // self.transactionsHistoryStartEndDates()
+                    //                    self.getTransactions()
                 } else {
                     self.clickTransactionsTab()
                 }
@@ -429,10 +500,10 @@ class EBTDashboardTVC: UITableViewController {
                 
                 if resultTrimmed == "allactTab" {
                     self.startStartEndDatesTimer()
-                                       // self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
+                    // self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
                     // load 90 days transactions
-                   // self.transactionsHistoryStartEndDates()
-//                    self.getTransactions()
+                    // self.transactionsHistoryStartEndDates()
+                    //                    self.getTransactions()
                 } else {
                     
                 }
@@ -455,11 +526,11 @@ class EBTDashboardTVC: UITableViewController {
                 
                 if resultTrimmed == "allactTab" {
                     
-                                       // self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
+                    // self.perform(#selector(self.transactionsHistoryStartEndDates), with: self, afterDelay: 10)
                     self.startStartEndDatesTimer()
-//                    self.actionType = ActionType.tranasctionsWithDates
-//                    self.transactionsHistoryStartEndDates()
-//                    self.getTransactions()
+                    //                    self.actionType = ActionType.tranasctionsWithDates
+                    //                    self.transactionsHistoryStartEndDates()
+                    //                    self.getTransactions()
                 } else {
                     
                 }
@@ -487,7 +558,7 @@ class EBTDashboardTVC: UITableViewController {
             self.sendEBTInformationToServer()
         }
     }
-
+    
     func checkForStartEndDateFields() {
         
         let jsIsLastPage = "checkForStartEndDateFields();"
@@ -506,26 +577,26 @@ class EBTDashboardTVC: UITableViewController {
         
         startTime = nil
         
-//        let jsTransactionDates = "var formatD = function(d){" +
-//          "  var dd = d.getDate()," +
-//          "  dm = d.getMonth()+1," +
-//          "  dy = d.getFullYear();" +
-//          "  if (dd<10) dd='0'+dd;" +
-//          "  if (dm<10) dm='0'+dm;" +
-//         "   return dm+'/'+dd+'/'+dy;" +
-//        "};" +
-//        "var endDate = new Date(), startDate = new Date(endDate.valueOf());" +
-//        "startDate.setDate(endDate.getDate()-90);" +
-//        "$('#fromDateTransHistory').val(formatD(startDate));" +
-//        "$('#toDateTransHistory').val(formatD(endDate));" +
-//        "$('#searchAll').click()"
+        //        let jsTransactionDates = "var formatD = function(d){" +
+        //          "  var dd = d.getDate()," +
+        //          "  dm = d.getMonth()+1," +
+        //          "  dy = d.getFullYear();" +
+        //          "  if (dd<10) dd='0'+dd;" +
+        //          "  if (dm<10) dm='0'+dm;" +
+        //         "   return dm+'/'+dd+'/'+dy;" +
+        //        "};" +
+        //        "var endDate = new Date(), startDate = new Date(endDate.valueOf());" +
+        //        "startDate.setDate(endDate.getDate()-90);" +
+        //        "$('#fromDateTransHistory').val(formatD(startDate));" +
+        //        "$('#toDateTransHistory').val(formatD(endDate));" +
+        //        "$('#searchAll').click()"
         
         let javaScript = "setTransactionsHistoryStartEndDates();"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             print(result ?? "")
             print(error ?? "")
-           self.perform(#selector(self.getTransactions), with: self, afterDelay: 8)
+            self.perform(#selector(self.getTransactions), with: self, afterDelay: 8)
         }
     }
     
@@ -571,7 +642,7 @@ class EBTDashboardTVC: UITableViewController {
                 if currentPageNumber == self.pageNumber {
                     
                     self.runTransactionsScript()
-//                    let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.runTransactionsScript), userInfo: nil, repeats: false)
+                    //                    let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.runTransactionsScript), userInfo: nil, repeats: false)
                 } else {
                     self.getTransactions()
                 }
@@ -582,34 +653,34 @@ class EBTDashboardTVC: UITableViewController {
     
     func runTransactionsScript() {
         
-//        let js = "function transactionActivity() {" +
-//            "var list = [];" +
-//            "var table = $('#allCompletedTxnGrid tbody');" +
-//            "table.find('tr').each(function (i) {" +
-//            "var $tds = $(this).find('td')," +
-//            "t_date = $tds.eq(2).text().trim();" +
-//            "if (t_date) {" +
-//            "list[i] = {" +
-//            "id: this.id," +
-//            "date: t_date," +
-//            "transaction: $tds.eq(3).text().trim()," +
-//            "location: $tds.eq(4).text().trim()," +
-//            "account: $tds.eq(5).text().trim()," +
-//            "card: $tds.eq(6).text().trim()," +
-//            "debit_amount: $tds.eq(7).text().trim()," +
-//            "credit_amount: $tds.eq(8).text().trim()," +
-//            "available_balance: $tds.eq(9).text().trim()" +
-//            "};" +
-//            "}" +
-//            "});" +
-//            "arr = $.grep(list, function (n) {" +
-//            "return n == 0 || n" +
-//            "});" +
-//            "var jsonSerialized = JSON.stringify(arr);" +
-//            "return jsonSerialized;" +
-//            "}" +
-//        "transactionActivity();"
-
+        //        let js = "function transactionActivity() {" +
+        //            "var list = [];" +
+        //            "var table = $('#allCompletedTxnGrid tbody');" +
+        //            "table.find('tr').each(function (i) {" +
+        //            "var $tds = $(this).find('td')," +
+        //            "t_date = $tds.eq(2).text().trim();" +
+        //            "if (t_date) {" +
+        //            "list[i] = {" +
+        //            "id: this.id," +
+        //            "date: t_date," +
+        //            "transaction: $tds.eq(3).text().trim()," +
+        //            "location: $tds.eq(4).text().trim()," +
+        //            "account: $tds.eq(5).text().trim()," +
+        //            "card: $tds.eq(6).text().trim()," +
+        //            "debit_amount: $tds.eq(7).text().trim()," +
+        //            "credit_amount: $tds.eq(8).text().trim()," +
+        //            "available_balance: $tds.eq(9).text().trim()" +
+        //            "};" +
+        //            "}" +
+        //            "});" +
+        //            "arr = $.grep(list, function (n) {" +
+        //            "return n == 0 || n" +
+        //            "});" +
+        //            "var jsonSerialized = JSON.stringify(arr);" +
+        //            "return jsonSerialized;" +
+        //            "}" +
+        //        "transactionActivity();"
+        
         let js = "getTransactions();"
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
@@ -620,7 +691,7 @@ class EBTDashboardTVC: UITableViewController {
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if trimmedText.characters.count > 0 {
-                   // self.transactionsString.append(trimmedText)
+                    // self.transactionsString.append(trimmedText)
                     
                     let json = JSON.parse(trimmedText)
                     print("json response \(json)")
@@ -668,7 +739,7 @@ class EBTDashboardTVC: UITableViewController {
         } else {
             return true
         }
-
+        
         return false
     }
     
@@ -677,7 +748,7 @@ class EBTDashboardTVC: UITableViewController {
         let lastRow = self.trasactions.count
         var newIndexPaths = [IndexPath]()
         for row in 0...responseArray.count - 1 {
-            let indexPath = IndexPath(row: lastRow + row, section: 1)
+            let indexPath = IndexPath(row: lastRow + row, section: 2)
             newIndexPaths.append(indexPath)
         }
         self.trasactions.append(contentsOf: responseArray)
@@ -712,7 +783,7 @@ class EBTDashboardTVC: UITableViewController {
                 let javaScript = jsNextPageClick
                 
                 self.ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-                     self.getTransactions()
+                    self.getTransactions()
                 }
             }
         }
@@ -721,19 +792,14 @@ class EBTDashboardTVC: UITableViewController {
     
 }
 
+
+
 extension EBTDashboardTVC: EBTWebViewDelegate {
     
     
     func didFinishLoadingWebView() {
         
-        if actionType == .transactions {
-            actionType = nil
-            validateTransactionPage()
-        } else if actionType == .tabClick {
-            
-            actionType = nil
-            validateTabClick()
-        }
+        validatePage()
     }
     
 }
@@ -826,3 +892,16 @@ extension EBTDashboardTVC {
     
 }
 
+
+// MARK: - Ads
+extension EBTDashboardTVC: AdSpotsManagerDelegate {
+    
+    func didFinishLoadingSpots() {
+        tableView.reloadSections([0], with: .automatic)
+    }
+    
+    func didFailedLoadingSpots(description: String) {
+        
+    }
+    
+}
