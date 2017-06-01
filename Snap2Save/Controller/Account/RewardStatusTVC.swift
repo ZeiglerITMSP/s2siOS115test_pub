@@ -177,7 +177,7 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
                                        "device_id": device_id,
                                        "user_id": user_id]
         
-        //print(parameters)
+        print(parameters)
         
         let url = String(format: "%@/getRewardStatus",hostUrl)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -320,7 +320,7 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
                                        "to": toDateMilliSecStr,
                                        "time_zone_offset": timeZoneOffset]
         
-        //print(parameters)
+        print(parameters)
         
         let url = String(format: "%@/getRecentRedemptionActivity",hostUrl)
         // print(url)
@@ -580,10 +580,10 @@ extension RewardStatusTVC {
                 }
                 
                 if currentLang == "en" {
-                    cell.titleLabel.text = recentActivityDict["en_title"] as! String?
+                    cell.titleLabel.text = recentActivityDict["en_title"] as? String
                 }
                 else if currentLang == "es" {
-                    cell.titleLabel.text = recentActivityDict["es_title"] as! String?
+                    cell.titleLabel.text = recentActivityDict["es_title"] as? String
                 }
                 cell.detailLabel.text = "\(points)"
                 
