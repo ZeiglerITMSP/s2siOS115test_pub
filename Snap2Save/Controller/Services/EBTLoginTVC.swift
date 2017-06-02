@@ -449,7 +449,7 @@ class EBTLoginTVC: UITableViewController {
     
     func showForceQuitAlert() {
         
-        self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(backAction), showCancel: false)
+        self.showAlert(title: "", message: "ebt.alert.timeout.message".localized(), action: #selector(backAction), showCancel: false)
     }
     
     func exitProcessIfPossible() {
