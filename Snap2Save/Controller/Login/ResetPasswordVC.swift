@@ -30,7 +30,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     @IBAction func resetPasswordButtonAction(_ sender: UIButton) {
         
         if (passwordTextField.text?.characters.count)! == 0 {
-            self.showAlert(title: "", message: "Enter new pasword.".localized())
+            self.showAlert(title: "", message: "Enter new password.".localized())
             return
         }
         else if (passwordTextField.text?.characters.count)! < 6{
