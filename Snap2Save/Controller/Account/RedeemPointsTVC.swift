@@ -40,13 +40,13 @@ class RedeemPointsTVC: UITableViewController {
         }
         else {
             
-            let redeemAlert = UIAlertController.init(title: nil, message: "Are you sure you want to redeem points?".localized(), preferredStyle: .alert)
+            let redeemAlert = UIAlertController.init(title: "", message: "Are you sure you want to redeem points?".localized(), preferredStyle: .alert)
             let okBtn = UIAlertAction.init(title: "OK".localized(), style: .default, handler:{
                 (action) in
                 self.getRedeemPoints()
             })
             
-            let cancelBtn = UIAlertAction.init(title: "Cancel".localized(), style: .cancel, handler:nil)
+            let cancelBtn = UIAlertAction.init(title: "Cancel".localized(), style: .default, handler:nil)
             
             redeemAlert .addAction(okBtn)
             redeemAlert.addAction(cancelBtn)

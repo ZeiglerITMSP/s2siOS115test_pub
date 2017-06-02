@@ -291,7 +291,7 @@
 "The TO date must be later than or equal to the FROM date." = "La fecha HASTA debe ser posterior o igual a la fecha DESDE.";
 
 
-"Enter new pasword." = "Ingrese un nuevo pasword.";
+"Enter new password." = "Introduzca nueva contraseña.";
 
 
 
@@ -406,7 +406,7 @@
 
 
 // Change Email screen
-"ebt.changeEmail.titleLabel" = "Cambiar dirección de email";
+"ebt.changeEmail.titleLabel" = "CAMBIAR DIRECCIÓN DE EMAIL.";
 "ebt.changeEmail.messageLabel" = "Ingrese su nueva dirección de correo electrónico.";
 "CURRENT E-MAIL ADDRESS" = "DIRECCIÓN DE EMAIL ACTUAL";
 "E-MAIL ADDRESS" = "DIRECCIÓN DE CORREO ELECTRÓNICO";
@@ -449,7 +449,7 @@
 "alert.emptyField.validationCode" = "Introduce código de validación.";
 "alert.emptyField.currentEmail" = "Introduce email actual.";
 "alert.emptyField.email" = "Introduce email.";
-"alert.emptyField.confirmEmail" = "Introduce Confirmar email.";
+"alert.emptyField.confirmEmail" = "Confirmar dirección de email.";
 
 
 // **** Scrapping ****

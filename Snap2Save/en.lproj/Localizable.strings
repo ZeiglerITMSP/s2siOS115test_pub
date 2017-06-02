@@ -280,7 +280,7 @@
 
 "The TO date must be later than or equal to the FROM date." = "The TO date must be later than or equal to the FROM date.";
 
-"Enter new pasword." = "Enter new pasword.";
+"Enter new password." = "Enter new password.";
 
 
 
@@ -401,7 +401,7 @@
 
 
 // Change Email screen
-"ebt.changeEmail.titleLabel" = "CHANGE EMAIL ADDRESS";
+"ebt.changeEmail.titleLabel" = "CHANGE EMAIL ADDRESS.";
 "ebt.changeEmail.messageLabel" = "Please enter your new email address.";
 "CURRENT E-MAIL ADDRESS" = "CURRENT EMAIL ADDRESS";
 "E-MAIL ADDRESS" = "EMAIL ADDRESS";
@@ -415,34 +415,34 @@
 "No transactions were found." = "No transactions were found.";
 
 // empty field alert
-"alert.emptyField.userid" = "Enter User ID.";
-"alert.emptyField.password" = "Enter Password.";
-"alert.emptyField.authentication" = "Enter Authentication Code.";
-"alert.emptyField.securityAnswer" = "Enter Security Answer.";
+"alert.emptyField.userid" = "Enter user ID.";
+"alert.emptyField.password" = "Enter password.";
+"alert.emptyField.authentication" = "Enter authentication code.";
+"alert.emptyField.securityAnswer" = "Enter security answer.";
 
-"alert.emptyField.cardNumber" = "Enter Card Number.";
-"alert.emptyField.dob" = "Enter Date of Birth.";
-"alert.emptyField.socialSecurityNumber" = "Enter Social Security Number.";
-"alert.emptyField.pin" = "Enter Pin.";
-"alert.emptyField.confirmPin" = "Confirm Pin.";
+"alert.emptyField.cardNumber" = "Enter card number.";
+"alert.emptyField.dob" = "Enter date of birth.";
+"alert.emptyField.socialSecurityNumber" = "Enter social security number.";
+"alert.emptyField.pin" = "Enter PIN.";
+"alert.emptyField.confirmPin" = "Confirm PIN.";
 
-"alert.emptyField.userinfo.userId" = "Enter User ID.";
-"alert.emptyField.userinfo.password" = "Enter Password.";
-"alert.emptyField.userinfo.confirmPassword" = "Confirm Password.";
+"alert.emptyField.userinfo.userId" = "Enter user ID.";
+"alert.emptyField.userinfo.password" = "Enter password.";
+"alert.emptyField.userinfo.confirmPassword" = "Confirm password.";
 "alert.emptyField.userinfo.email" = "Enter email address.";
 "alert.emptyField.userinfo.confirmEmail" = "Confirm email address.";
-"alert.emptyField.userinfo.phoneNumber" = "Enter Phone Number.";
+"alert.emptyField.userinfo.phoneNumber" = "Enter phone number.";
 "alert.emptyField.userinfo.questionOne" = "Select question 1.";
 "alert.emptyField.userinfo.questionTwo" = "Select question 2.";
 "alert.emptyField.userinfo.questionThree" = "Select question 3.";
-"alert.emptyField.userinfo.answerOne" = "Enter Answer 1.";
-"alert.emptyField.userinfo.answerTwo" = "Enter Answer 2.";
-"alert.emptyField.userinfo.answerThree" = "Enter Answer 3.";
+"alert.emptyField.userinfo.answerOne" = "Enter answer 1.";
+"alert.emptyField.userinfo.answerTwo" = "Enter answer 2.";
+"alert.emptyField.userinfo.answerThree" = "Enter answer 3.";
 
-"alert.emptyField.validationCode" = "Enter Validation Code.";
-"alert.emptyField.currentEmail" = "Enter Current Email.";
-"alert.emptyField.email" = "Enter Email address.";
-"alert.emptyField.confirmEmail" = "Enter Confirm Email.";
+"alert.emptyField.validationCode" = "Enter validation code.";
+"alert.emptyField.currentEmail" = "Enter current email.";
+"alert.emptyField.email" = "Enter email address.";
+"alert.emptyField.confirmEmail" = "Confirm email address.";
 
 
 

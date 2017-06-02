@@ -66,6 +66,10 @@ class EBTChangeEmailTVC: UITableViewController {
         emailField.contentTextField.updateUIAsPerTextFieldType()
         confirmEmailField.contentTextField.updateUIAsPerTextFieldType()
         
+        // text style
+        currentEmailField.placeholderLabel.textColor = UIColor.black
+        currentEmailField.placeholderLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
+        
         // Back Action
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
@@ -198,7 +202,7 @@ class EBTChangeEmailTVC: UITableViewController {
     
     func showForceQuitAlert() {
         
-        self.showAlert(title: nil, message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
+        self.showAlert(title: "", message: "ebt.alert.timeout.message".localized(), action: #selector(self.cancelProcess), showCancel: false)
         EBTUser.shared.isForceQuit = true
     }
     
