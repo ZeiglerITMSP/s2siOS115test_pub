@@ -93,7 +93,7 @@ class ServicesTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // TEST
+//    // TEST
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        
 //        if segue.identifier == "EBTLoginTVC" {
@@ -293,7 +293,7 @@ extension ServicesTVC {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "FlowSegmentTableViewCell") as! FlowSegmentTableViewCell
                 //cell.ebtLabel.text = "EBT".localized()
                 self.FlowSegentedControl =  cell.flowSegmentControl
-//                // TEST
+                // TEST
                 self.FlowSegentedControl.isHidden = true
                 return cell
             }
@@ -397,7 +397,7 @@ extension ServicesTVC {
 //            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
 //        }
 //        tempLoginUrl = loginUrl
-//        
+        
         if Localize.currentLanguage() == "es" {
             // .. es url
             loginUrl = kEBTLoginUrl_es
