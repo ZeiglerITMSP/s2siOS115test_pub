@@ -75,6 +75,11 @@ class OffersVC: UIViewController {
     
     // MARK: -
     
+    func popToOffersVC() {
+        
+        self.navigationController?.popToRootViewController(animated: false)
+    }
+    
     func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
