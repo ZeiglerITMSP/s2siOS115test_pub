@@ -315,11 +315,11 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
+        if section == 1 {
             if offersLoaded == true {
                 return 1
             }
-        } else if section == 1 {
+        } else if section == 0 {
             return adSpotManager.adSpots.count
         }
         
@@ -335,7 +335,7 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             
             if let offerImage = self.offerImage {
                 if offerImage.size.width > self.view.frame.width {
@@ -348,7 +348,7 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 return 120.0
             }
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 0 {
             let spot = adSpotManager.adSpots[indexPath.row]
             let type = spot["type"]
             if let adImage = adSpotManager.adSpotImages["\(type!)"] {
@@ -367,7 +367,7 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 { // Offer image cell
+        if indexPath.section == 1 { // Offer image cell
             let offerImageCell = tableView.dequeueReusableCell(withIdentifier: "OfferTableViewCell") as! OfferTableViewCell
             
             if let offerImage = self.offerImage {
@@ -383,7 +383,7 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
             
             return offerImageCell
         }
-        else if indexPath.section == 1 { // Ads image cell
+        else if indexPath.section == 0 { // Ads image cell
             
             let adSpotTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdSpotTableViewCell") as! AdSpotTableViewCell
             
@@ -400,9 +400,9 @@ extension AdditionalOffersVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             tapGesClicked()
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 0 {
             adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
         }
         

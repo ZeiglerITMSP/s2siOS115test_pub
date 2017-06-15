@@ -45,7 +45,7 @@ class EBTDashboardTVC: UITableViewController {
     var startTime: Date!
     
     
-    var pageNumber: Int = 1 // 0 for internal build, 1 for live
+    var pageNumber: Int = 0 // 0 for internal build, 1 for live
     
     // load more
     var isTransactionsLoading = false
@@ -78,6 +78,7 @@ class EBTDashboardTVC: UITableViewController {
         
         adSpotManager.getAdSpots(forScreen: .ebtBalance)
     }
+    
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -171,9 +172,9 @@ extension EBTDashboardTVC {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
+        if section == 1 {
             return adSpotManager.adSpots.count
-        } else if section == 1 {
+        } else if section == 0 {
             return accountDetails.count
         } else if section == 2 {
             
@@ -191,7 +192,7 @@ extension EBTDashboardTVC {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             
             let spot = adSpotManager.adSpots[indexPath.row]
             let type = spot["type"]
@@ -214,7 +215,7 @@ extension EBTDashboardTVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             let adSpotTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdSpotTableViewCell") as! AdSpotTableViewCell
             
             let spot = adSpotManager.adSpots[indexPath.row]
@@ -224,7 +225,7 @@ extension EBTDashboardTVC {
             
             return adSpotTableViewCell
 
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 0 {
             
             let detailedCell = tableView.dequeueReusableCell(withIdentifier: "DetailedCell", for: indexPath) as! DetailedCell
             
@@ -296,7 +297,7 @@ extension EBTDashboardTVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
         }
         
@@ -897,7 +898,7 @@ extension EBTDashboardTVC {
 extension EBTDashboardTVC: AdSpotsManagerDelegate {
     
     func didFinishLoadingSpots() {
-        tableView.reloadSections([0], with: .automatic)
+        tableView.reloadSections([1], with: .automatic)
     }
     
     func didFailedLoadingSpots(description: String) {

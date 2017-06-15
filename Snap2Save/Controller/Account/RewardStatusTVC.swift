@@ -15,6 +15,13 @@ import Alamofire
 class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
     
     // Properties
+    
+    enum Sections: Int {
+        case redeemPoints = 0
+        case adSpots
+        case recentActivity
+    }
+    
     var languageSelectionButton: UIButton!
     var rewardStatusDict = [String: Any]()
     var recentActivityArray = [[String: Any]]()
@@ -425,21 +432,23 @@ extension RewardStatusTVC {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
+        if section == Sections.adSpots.rawValue {
             return adSpotManager.adSpots.count
-        } else if section == 1 {
+        } else if section == Sections.redeemPoints.rawValue {
             return 3
-        } else {
+        } else if section == Sections.recentActivity.rawValue {
             if recentActivityArray.count == 0 {
                 return 1
             }
             return recentActivityArray.count
         }
+        
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 {
+        if indexPath.section == Sections.adSpots.rawValue {
             
             let spot = adSpotManager.adSpots[indexPath.row]
             let type = spot["type"]
@@ -454,7 +463,7 @@ extension RewardStatusTVC {
             }
             return UITableViewAutomaticDimension
             
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == Sections.redeemPoints.rawValue {
             if indexPath.row == 1 {
                 return 25.0
             }
@@ -465,7 +474,7 @@ extension RewardStatusTVC {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        if section == 2 {
+        if section == Sections.recentActivity.rawValue {
             return "RECENT ACTIVITY".localized()
         }
         
@@ -474,7 +483,7 @@ extension RewardStatusTVC {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if section == 2 {
+        if section == Sections.recentActivity.rawValue {
             let header = tableView.dequeueReusableCell(withIdentifier: "RecentActivityHeader") as! RecentActivityHeader
             header.delegate = self
             // set text
@@ -487,7 +496,7 @@ extension RewardStatusTVC {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 || section == 1 {
+        if section == Sections.adSpots.rawValue || section == Sections.redeemPoints.rawValue {
             return 0.1
         } else {
             return 50
@@ -502,7 +511,7 @@ extension RewardStatusTVC {
         
         let currentLang = Localize.currentLanguage()
         
-        if indexPath.section == 0 {
+        if indexPath.section == Sections.adSpots.rawValue {
             
             let adSpotTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AdSpotTableViewCell") as! AdSpotTableViewCell
             
@@ -512,7 +521,7 @@ extension RewardStatusTVC {
             adSpotTableViewCell.adImageView.image = image
             
             return adSpotTableViewCell
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == Sections.redeemPoints.rawValue {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "RedeemPointsTotalCell") as! RedeemPointsTotalCell
                 cell.delegate = self
@@ -560,7 +569,7 @@ extension RewardStatusTVC {
                 
                 return cell
             }
-        } else { // section 1
+        } else if indexPath.section == Sections.recentActivity.rawValue {
             
             if recentActivityArray.count == 0 {
                 // show mesage..
@@ -588,14 +597,17 @@ extension RewardStatusTVC {
                 cell.detailLabel.text = "\(points)"
                 
                 var dateStr = ""
-                if let datevalue = recentActivityDict["date"] as? String
-                {
-                    let dateVal : String = datevalue
-                    
-                    if dateVal.characters.count > 0 {
-                        let dateMillisec = Double(datevalue)
-                        dateStr = convertMillisecondsToDate(milliSeconds: dateMillisec!/1000)
-                    }
+//                if let datevalue = recentActivityDict["date"] as? String
+//                {
+//                    let dateVal : String = datevalue
+//                    
+//                    if dateVal.characters.count > 0 {
+//                        let dateMillisec = Double(datevalue)
+//                        dateStr = convertMillisecondsToDate(milliSeconds: dateMillisec!/1000)
+//                    }
+//                }
+                if let datevalue = recentActivityDict["date_string"] as? String {
+                    dateStr = datevalue
                 }
                 cell.subDetailLabel.text = dateStr
                 
@@ -603,10 +615,15 @@ extension RewardStatusTVC {
             }
             
         }
+        
+        
+        else {
+            return UITableViewCell()
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        if indexPath.section == Sections.adSpots.rawValue {
             adSpotManager.showAdSpotDetails(spot: adSpotManager.adSpots[indexPath.row], inController: self)
         }
         tableView.deselectRow(at: indexPath, animated: false)
