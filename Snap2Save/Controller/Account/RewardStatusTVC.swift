@@ -597,14 +597,17 @@ extension RewardStatusTVC {
                 cell.detailLabel.text = "\(points)"
                 
                 var dateStr = ""
-                if let datevalue = recentActivityDict["date"] as? String
-                {
-                    let dateVal : String = datevalue
-                    
-                    if dateVal.characters.count > 0 {
-                        let dateMillisec = Double(datevalue)
-                        dateStr = convertMillisecondsToDate(milliSeconds: dateMillisec!/1000)
-                    }
+//                if let datevalue = recentActivityDict["date"] as? String
+//                {
+//                    let dateVal : String = datevalue
+//                    
+//                    if dateVal.characters.count > 0 {
+//                        let dateMillisec = Double(datevalue)
+//                        dateStr = convertMillisecondsToDate(milliSeconds: dateMillisec!/1000)
+//                    }
+//                }
+                if let datevalue = recentActivityDict["date_string"] as? String {
+                    dateStr = datevalue
                 }
                 cell.subDetailLabel.text = dateStr
                 

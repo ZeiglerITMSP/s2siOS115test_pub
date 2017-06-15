@@ -13,7 +13,7 @@ let kEBTBaseUrl = "http://internal.appit.ventures/s2s/"
 let kEBTLoginUrl =  kEBTBaseUrl + "ebt_login.html"
 let kEBTLoginUrl_es =  kEBTBaseUrl + "spanish_login.html"
 let kEBTSignupUrl = kEBTBaseUrl + "ebt_registration_cardNumber.html"
-//
+
 // which existed before, jumps directly to the Login screen after completing the confirmation step.
 //let kEBTBaseUrl = "http://internal.appit.ventures/s2s/flow2/"
 
