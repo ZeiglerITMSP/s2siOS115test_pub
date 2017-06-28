@@ -20,6 +20,7 @@ class OffersVC: UIViewController {
     var adSpotsLoaded = false
     var offersLoaded = false
     var offersDict : [String : Any]? = nil
+    
     // Outlets
     @IBOutlet weak var tableView: UITableView!
     
@@ -74,6 +75,11 @@ class OffersVC: UIViewController {
     }
     
     // MARK: -
+    
+    func popToOffersVC() {
+        
+        self.navigationController?.popToRootViewController(animated: false)
+    }
     
     func languageButtonClicked() {
         self.showLanguageSelectionAlert()

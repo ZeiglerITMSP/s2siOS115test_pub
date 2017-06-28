@@ -432,8 +432,21 @@ extension ServicesTVC {
                 // isCurrentPage
                 if pageTitle == "ebt.logon".localized() {
                     // current page
-                    self.ebtActivityIndicator.stopAnimating()
-                    self.performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
+                    if Localize.currentLanguage() == "es" {
+                        self.validateSpanishLoginPage(completion: { (isSpanish) in
+                            if isSpanish {
+                                // loaded spanish page
+                                self.ebtActivityIndicator.stopAnimating()
+                                self.performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
+                            } else {
+                                // if spanish page not loaded, then reload login page
+                                self.ebtActivityIndicator.stopAnimating()
+                            }
+                        })
+                    } else {
+                        self.ebtActivityIndicator.stopAnimating()
+                        self.performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
+                    }
                 } else {
                     self.ebtActivityIndicator.stopAnimating()
                 }
@@ -445,6 +458,29 @@ extension ServicesTVC {
                 self.ebtActivityIndicator.stopAnimating()
             }
         })
+    }
+    
+    func validateSpanishLoginPage(completion: @escaping (Bool) -> ()) {
+        // test
+        completion(true)
+//        let javaScript = "isSpanishPageLoaded();"
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            if error != nil {
+//                print(error ?? "error nil")
+//                completion(false)
+//            } else {
+//                print(result ?? "result nil")
+//                if let isSpanish = result as? Bool {
+//                    if isSpanish == false {
+//                        completion(false)
+//                    } else {
+//                        completion(true)
+//                    }
+//                } else {
+//                    completion(false)
+//                }
+//            }
+//        }
     }
     
     

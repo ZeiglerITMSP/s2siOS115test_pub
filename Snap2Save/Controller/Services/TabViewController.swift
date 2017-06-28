@@ -131,11 +131,17 @@ extension TabViewController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         
+        if tabBarController.selectedIndex == 0 {
+            if viewController.childViewControllers.count > 1 {
+                if let offersNavVC = viewController as? UINavigationController {
+                    offersNavVC.popToRootViewController(animated: false)
+                }
+            }
+        }
         updateSelectedItemBackground()
     }
     
-    
-    
+  
 }
 
 

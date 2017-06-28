@@ -86,7 +86,7 @@ class EBTLoginTVC: UITableViewController {
         activityIndicator.startAnimating()
         
         actionType = ActionType.autofill
-        validatePage()
+        validatePageAndPerformAction()
         
         // save user name
         if rememberMeButton.isSelected {
@@ -101,7 +101,7 @@ class EBTLoginTVC: UITableViewController {
         registrationActivityIndicator.startAnimating()
         
         actionType = ActionType.registration
-        validatePage()
+        validatePageAndPerformAction()
     }
     
     
@@ -213,6 +213,7 @@ class EBTLoginTVC: UITableViewController {
         }
         
         validateLoginPage()
+//        validatePageAndPerformAction()
         udateRememberMyStatus()
     }
     
@@ -561,48 +562,135 @@ extension EBTLoginTVC {
     func validateLoginPage() {
         
         ebtWebView.getPageHeading(completion: { result in
-            
             if let pageTitle = result {
-                // isCurrentPage
+                // validate login page title
                 if pageTitle != self.pageTitle {
-                    // current page
+                    // load login page
                     self.loadLoginPage()
                 } else {
-                    self.validateSpanishLoginPage()
-//                    self.checkForStatusMessage()
+                    
+                    if Localize.currentLanguage() == "es" {
+                        self.validateSpanishLoginPage(completion: { (isSpanish) in
+                            if isSpanish {
+                                // loaded spanish page
+                                self.checkForStatusMessage()
+                            } else {
+                                // if spanish page not loaded, then reload login page
+                                self.exitProcessIfPossible()
+                            }
+                        })
+                    } else {
+                        self.checkForStatusMessage()
+                    }
                 }
             } else {
-                //print(error ?? "")
+                
             }
         })
     }
-  
-    func validateSpanishLoginPage() {
-        //getCurrentLanguage()
-        let javaScript = "isSpanishPageLoaded();"
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            
-            if error != nil {
-                print(error ?? "error nil")
-            } else {
-                print(result ?? "result nil")
-                let stringResult = result as! Bool
-//                let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-//                print(trimmedText)
-                if stringResult == false {
-                    self.loadLoginPage()
+    
+    /// Used to vaidate page - if valid, perform desired action. else check for error message, or next page. exit process if invalid.
+    func validatePageAndPerformAction() {
+        // get page title
+        ebtWebView.getPageHeading(completion: { result in
+            if let pageTitle = result {
+                // validate if page is login page
+                if pageTitle == self.pageTitle {
+                    // check if login page is loaded in current language.
+                    // if current language is spanish, validate for spanish page, then perform action.
+                    // if current language is english, perform page action.
+                    if Localize.currentLanguage() == "es" {
+                        self.validateSpanishLoginPage(completion: { (isSpanish) in
+                            if isSpanish {
+                                // if spanish page, perform page action
+                                self.performActionOnPage()
+                            } else {
+                                // if not spanish page. reload login page
+                                self.loadLoginPage()
+                            }
+                        })
+                    } else {
+                        self.performActionOnPage()
+                    }
                 } else {
-                    self.checkForStatusMessage()
+                    // if not current page, check for next page
+                    self.validateNextPage()
                 }
-                
-//                if trimmedText != "Idioma" {
-//                    self.loadLoginPage()
-//                } else {
-//                    self.checkForStatusMessage()
-//                }
+            } else {
+                // if no page title, then exit process
+                self.exitProcessIfPossible()
             }
+        })
+    }
+    
+    func performActionOnPage() {
+        
+        if self.actionType == ActionType.autofill {
+            // autofill
+            self.actionType = nil
+            self.autoFill()
+        } else if self.actionType == ActionType.registration {
+            // registration
+            self.actionType = nil
+            self.registrationClick()
+        } else {
+            // error message
+            self.checkForStatusMessage()
         }
     }
+    
+    func validateSpanishLoginPage(completion: @escaping (Bool) -> ()) {
+        completion(true)
+//        let javaScript = "isSpanishPageLoaded();"
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//            if error != nil {
+//                print(error ?? "error nil")
+//                completion(false)
+//            } else {
+//                print(result ?? "result nil")
+//                if let isSpanish = result as? Bool {
+//
+//                    if isSpanish == false {
+//                        // if spanish page not loaded, then reload login page
+//                        completion(false)
+//                    } else {
+//                        // loaded spanish page
+//                        completion(true)
+//                    }
+//                } else {
+//                    completion(false)
+//                }
+//
+//            }
+//        }
+    }
+    
+    
+//    func validateSpanishLoginPage() {
+//        let javaScript = "isSpanishPageLoaded();"
+//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+//
+//            if error != nil {
+//                print(error ?? "error nil")
+//            } else {
+//                print(result ?? "result nil")
+//                if let stringResult = result as? String {
+//
+//                    let isSpanish = (stringResult as NSString).boolValue
+//                    if isSpanish == false {
+//                        // if spanish page not loaded, then reload login page
+//                        self.loadLoginPage()
+//                    } else {
+//                        // loaded spanish page
+//                        self.checkForStatusMessage()
+//                    }
+//                } else {
+//
+//                }
+//            }
+//        }
+//    }
+//
     
     func loadLoginPage() {
         
@@ -616,41 +704,10 @@ extension EBTLoginTVC {
         }
         let url = NSURL(string: loginUrl)
         let request = NSURLRequest(url: url! as URL)
-
+        
         ebtWebView.webView.load(request as URLRequest)
     }
     
-    
-    func validatePage() {
-        
-        ebtWebView.getPageHeading(completion: { result in
-            
-            if let pageTitle = result {
-                // isCurrentPage
-                if pageTitle == self.pageTitle {
-                    // current page
-                    if self.actionType == ActionType.autofill {
-                        self.actionType = nil
-                        self.autoFill()
-                    } else if self.actionType == ActionType.registration {
-                        self.actionType = nil
-                        self.registrationClick()
-                    } else {
-                        self.checkForStatusMessage()
-                        //self.checkForErrorMessage()
-                    }
-                    
-                } else {
-                    self.validateNextPage()
-                }
-                
-            } else {
-                self.exitProcessIfPossible()
-            }
-            
-        })
-        
-    }
     
     func validateNextPage() {
     
@@ -855,11 +912,9 @@ extension EBTLoginTVC: EBTWebViewDelegate {
         
         if actionType == ActionType.loadLoginPage {
             actionType = nil
-            
             SwiftLoader.hide()
         }
-        
-        validatePage()
+        validatePageAndPerformAction()
     }
     
     func didFail() {
