@@ -463,6 +463,7 @@ extension ServicesTVC {
     func validateSpanishLoginPage(completion: @escaping (Bool) -> ()) {
         // test
         completion(true)
+        
 //        let javaScript = "isSpanishPageLoaded();"
 //        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
 //            if error != nil {
@@ -481,6 +482,8 @@ extension ServicesTVC {
 //                }
 //            }
 //        }
+//        
+        
     }
     
     

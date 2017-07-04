@@ -153,7 +153,7 @@ class AccountTVC: UITableViewController {
         let url = String(format: "%@/logOut", hostUrl)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
-            self.moveTologinScree()
+            self.moveTologinScreen()
             
             //            switch response.result {
             //
@@ -187,11 +187,11 @@ class AccountTVC: UITableViewController {
         UserDefaults.standard.removeObject(forKey: LOGGED_USER)
         UserDefaults.standard.removeObject(forKey: USER_DATA)
         UserDefaults.standard.removeObject(forKey: INFO_SCREENS)
-        
+        AppDelegate.getDelegate().removeLanguageObserver()
         // AppDelegate.getDelegate().setDetaultValues()
     }
     
-    func moveTologinScree() {
+    func moveTologinScreen() {
         
         // clear user data before you logout
         self.clearUserData()

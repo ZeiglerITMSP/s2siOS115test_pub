@@ -545,6 +545,12 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
             return false
         }
         }
+        
+        if (zipCodeTextField.text?.characters.count)! == 0 {
+            showAlert(title: "", message: "Please enter your zip code.".localized())
+            return false
+        }
+        
         if (zipCodeTextField.text?.characters.count)! < 5 {
             showAlert(title: "", message: "Please enter a valid zip code.".localized())
             return false

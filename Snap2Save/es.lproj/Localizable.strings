@@ -35,7 +35,7 @@
 
 // LoginVC
 "Log In" = "Iniciar sesión";
-"Log In with Facebook" = "INICAIAR SESIÓN CON FACEBOOK";
+"Log In with Facebook" = "INICIAR SESIÓN CON FACEBOOK";
 
 "or" = "o";
 "10-DIGIT CELL PHONE NUMBER" = "NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
@@ -76,7 +76,7 @@
 "Register with Facebook" = "REGÍSTRATE CON FACEBOOK";
 "*Required information" = "*Información obligatoria";
 "10-DIGIT CELL PHONE NUMBER" = "NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
-"RE-ENTER 10-DIGIT CELL PHONE NUMBER" = "REINTRODUCIR NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS ";
+"RE-ENTER 10-DIGIT CELL PHONE NUMBER" = "VOLVER A INTRODUCIR NÚMERO DE TELÉFONO CELULAR DE 10 DÍGITOS";
 "PASSWORD (MUST BE AT LEAST 6 CHARACTERS)" = "CONTRASEÑA (DEBE TENER AL MENOS 6 CARACTERES)";
 "RE-ENTER PASSWORD" = "REINTRODUCIR CONTRASEÑA";
 "ZIP CODE" = "CÓDIGO POSTAL";
@@ -291,9 +291,9 @@
 "The TO date must be later than or equal to the FROM date." = "La fecha HASTA debe ser posterior o igual a la fecha DESDE.";
 
 
-"Enter new password." = "Introduzca nueva contraseña.";
+"Enter new password." = "Introduce contraseña nueva.";
 
-
+"Please enter your zip code." = "Introduce tu código postal.";
 
 
 
@@ -317,7 +317,7 @@
 // back alert
 "ebt.processTerminate.title" = "¿Estás seguro?";
 "ebt.processTerminate.alert" = "¿Estás seguro de que quieres terminar este proceso?";
-"ebt.processTerminate.dashboard" = "Si abandonas esta pantalla, se cerrará la sesión de los servicios de EB";
+"ebt.processTerminate.dashboard" = "Si abandonas esta pantalla, se cerrará la sesión de los servicios de EBT.";
 // timeout cancel alert
 "ebt.alert.timeout.title" = "¡Lo siento!";
 "ebt.alert.timeout.message" = "No podemos procesar su solicitud en este momento. Por favor, inténtelo de nuevo más tarde.";
@@ -332,7 +332,7 @@
 "LOG IN" = "INICIAR SESIÓN";
 "REGISTER" = "REGÍSTRATE";
 "Identify yourself!" = "¡Identifícate!";
-"ebt.login.titleLabel" = "UNA MANERA FÁCIL Y PRÁCTICA DE ACCEDER A LA INFORMACIÓN DE LA CUENTA DE SU TARJETA DE EBT";
+"ebt.login.titleLabel" = "UNA MANERA FÁCIL Y PRÁCTICA DE ACCEDER A LA INFORMACIÓN DE LA CUENTA DE SU TARJETA DE EBT.";
 "ebt.login.messageLabel" = "Ve tu saldo y revisa tu actividad de transacciones.";
 "ebt.login.description" = "Para iniciar sesión, ingresa tu ID de usuario y contraseña de tu Chase UCard que ya tienes o haz clic en Registrarte.";
 
@@ -357,7 +357,7 @@
 "WHAT IS YOUR SOCIAL SECURITY NUMBER?" = "¿CUÁL ES TU NÚMERO DE SEGURO SOCIAL?";
 
 // Verify Security Question
-"ebt.securityQuestion.titleLabel" = "VERIFICAR PREGUNTA DE SEGURIDAD.";
+"ebt.securityQuestion.titleLabel" = "VERIFICA LA PREGUNTA DE SEGURIDAD.";
 "ebt.securityQuestion.messageLabel" = "Introduce la respuesta de seguridad que utilizaste durante tu registro.";
 "SECURITY QUESTION" = "PREGUNTA DE SEGURIDAD";
 "SECURITY ANSWER" = "RESPUESTA DE SEGURIDAD";

@@ -198,14 +198,12 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
             contentInset.bottom = keyboardFrame.size.height
             // contentInset.top = 0
             bgScrollView.contentInset = contentInset
-            //print(""scrollView content inset in loop \(bgScrollView.contentInset)")
         }
         else
         {
             var contentInset:UIEdgeInsets = UIEdgeInsets.zero
             contentInset.top = 0;
             bgScrollView.contentInset = contentInset
-            //print(""scrollView content inset out of loop \(bgScrollView.contentInset)")
         }
         
     }
@@ -445,6 +443,9 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     
     
     func presentHome() {
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        appdelegate.addLanguageObserver()
+        appdelegate.sendCurrentLanguageToServer()
         self.performSegue(withIdentifier: "HomeStoryboard", sender: self)
     }
     

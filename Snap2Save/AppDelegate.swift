@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Status
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
+        // register notification for language change.
+        
         let isLogged = UserDefaults.standard.dictionaryRepresentation().keys.contains(LOGGED_USER)
         
         if isLogged == true {
@@ -60,6 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if user_id != nil && auth_token != nil {
                 // user exists
                 storyBoard = UIStoryboard(name: "Home", bundle: nil);
+                addLanguageObserver()
+
             }
             else {
                 storyBoard = UIStoryboard(name: "Main", bundle: nil);
@@ -452,6 +456,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             
         }
+    }
+    
+    func addLanguageObserver() {
+        LanguageUtility.addOberverForLanguageChange(self, selector: #selector(sendCurrentLanguageToServer))
+    }
+    
+    func removeLanguageObserver() {
+        LanguageUtility.removeObserverForLanguageChange(self)
+    }
+    func sendCurrentLanguageToServer() {
+        print(#function)
+        
+        let user_id = UserDefaults.standard.object(forKey: USER_ID)
+        
+        if user_id != nil {
+        
+        let device_id = UIDevice.current.identifierForVendor!.uuidString
+        let currentLanguage = Localize.currentLanguage()
+        let version_name = Bundle.main.releaseVersionNumber ?? ""
+        let version_code = Bundle.main.buildVersionNumber ?? ""
+        let auth_token : String = UserDefaults.standard.object(forKey: AUTH_TOKEN) as! String
+
+        let parameters : Parameters = ["user_id": user_id ?? "",
+                                       "language":currentLanguage,
+                                       "platform":"1",
+                                       "version_code": version_code,
+                                       "version_name": version_name,
+                                       "device_id": device_id,
+                                       "push_token":"",
+                                       "auth_token":auth_token
+        ]
+        
+        
+        print(parameters)
+        
+        let url = String(format: "%@/updateLanguage", hostUrl)
+        print(url)
+        Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
+            
+            switch response.result {
+            case .success:
+                
+                let json = JSON(data: response.data!)
+                if let responseDict = json.dictionaryObject {
+                    print(responseDict)
+                }
+                break
+                
+            case .failure(let error):
+                print(error)
+                break
+            }
+            
+        }
+        
+    }
+
     }
 }
 
