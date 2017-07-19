@@ -294,7 +294,7 @@ extension ServicesTVC {
                 //cell.ebtLabel.text = "EBT".localized()
                 self.FlowSegentedControl =  cell.flowSegmentControl
                 // TEST
-//                self.FlowSegentedControl.isHidden = true
+                //self.FlowSegentedControl.isHidden = true
                 return cell
             }
         }
@@ -398,6 +398,8 @@ extension ServicesTVC {
         }
         tempLoginUrl = loginUrl
         
+        // ------
+        
         if Localize.currentLanguage() == "es" {
             // .. es url
             loginUrl = kEBTLoginUrl_es
@@ -482,7 +484,7 @@ extension ServicesTVC {
 //                }
 //            }
 //        }
-//        
+        
         
     }
     

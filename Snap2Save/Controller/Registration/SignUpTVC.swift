@@ -845,14 +845,14 @@ extension SignUpTVC: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         if textView == messageTextView {
         let servicesWebVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "ServicesWebViewVC") as! ServicesWebViewVC
-        let dict = ["en_url" : "http://test-admin.snap2save.com/reward/en" , "es_title" : "Programa de recompensas" ,"en_title" : "Reward Program" ,"es_url" : "http://test-admin.snap2save.com/reward/es"]
+        let dict = ["en_url" : reward_program_en , "es_title" : "Programa de recompensas" ,"en_title" : "Reward Program" ,"es_url" : reward_program_es ]
         servicesWebVc.infoDict = dict
         self.navigationController?.show(servicesWebVc, sender: self)
         }
         
         else if textView == termsTextView {
             let servicesWebVc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "ServicesWebViewVC") as! ServicesWebViewVC
-            let dict = ["en_url" : "http://test-admin.snap2save.com/terms/en" , "es_title" : "Condiciones de servicio" ,"en_title" : "Terms of Service" ,"es_url" : "http://test-admin.snap2save.com/terms/es"]
+            let dict = ["en_url" : terms_en , "es_title" : "Condiciones de servicio" ,"en_title" : "Terms of Service" ,"es_url" : terms_es]
             servicesWebVc.infoDict = dict
             self.navigationController?.show(servicesWebVc, sender: self)
         }

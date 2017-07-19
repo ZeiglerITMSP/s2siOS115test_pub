@@ -423,7 +423,10 @@
 // empty field alert
 "alert.emptyField.userid" = "Introduce ID de usuario.";
 "alert.emptyField.password" = "Introduce contraseña.";
-"alert.emptyField.authentication" = "Introduce código de autenticación.";
+//"alert.emptyField.authentication" = "Introduce código de autenticación.";
+
+"alert.emptyField.authentication" = "Introduce código de validación.";
+
 "alert.emptyField.securityAnswer" = "Introduce respuesta de seguridad.";
 
 "alert.emptyField.cardNumber" = "Introduce número de tarjeta.";
