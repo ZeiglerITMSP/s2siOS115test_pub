@@ -342,13 +342,13 @@ extension EBTUserInformationTVC {
         ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
             if error != nil {
                 
-                print(error ?? "error nil")
+                //print(error ?? "error nil")
                 
             } else {
-                print(result ?? "result nil")
+                //print(result ?? "result nil")
                 let stringResult = result as! String
                 let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmed)
+                //print(trimmed)
                 if trimmed.characters.count > 0 {
                     
                     
@@ -381,13 +381,13 @@ extension EBTUserInformationTVC {
         ebtWebView.webView.evaluateJavaScript(dobErrorCode) { (result, error) in
             if error != nil {
                 
-                print(error ?? "error nil")
+               // print(error ?? "error nil")
                 
             } else {
-                print(result ?? "result nil")
+                //print(result ?? "result nil")
                 let stringResult = result as! String
                 let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmed)
+                //print(trimmed)
                 if trimmed.characters.count > 0 {
                     
                     let components = trimmed.components(separatedBy: "* ")
@@ -420,17 +420,17 @@ extension EBTUserInformationTVC {
     
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+               // print(error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print(result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedText)
+               // print(trimmedText)
                 
                 if trimmedText.characters.count > 0 {
                     
                     let json = JSON.parse(trimmedText)
-                    print("json response \(json)")
+                   // print("json response \(json)")
                     
                     if let responseDict = json.dictionaryObject {
                         
@@ -457,17 +457,17 @@ extension EBTUserInformationTVC {
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+               // print(error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print(result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedText)
+                //print(trimmedText)
                 
                 if trimmedText.characters.count > 0 {
                     
                     let json = JSON.parse(trimmedText)
-                    print("json response \(json)")
+                   // print("json response \(json)")
                     
                     if let responseDict = json.dictionaryObject {
                         
@@ -494,17 +494,17 @@ extension EBTUserInformationTVC {
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print(error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+               // print(result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedText)
+               // print(trimmedText)
                 
                 if trimmedText.characters.count > 0 {
                     
                     let json = JSON.parse(trimmedText)
-                    print("json response \(json)")
+                   // print("json response \(json)")
                     
                     if let responseDict = json.dictionaryObject {
                         
@@ -599,10 +599,10 @@ extension EBTUserInformationTVC {
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+               // print(error ?? "error nil")
                 
             } else {
-                print(result ?? "result nil")
+               // print(result ?? "result nil")
                 self.checkForErrorMessage()
             }
         }
@@ -649,13 +649,13 @@ extension EBTUserInformationTVC {
                     self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
                     // unknown page
-                    print("UNKNOWN PAGE")
+                  //  print("UNKNOWN PAGE")
                     self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
-                print("PAGE NOT LOADED YET..")
+               // print("PAGE NOT LOADED YET..")
                 self.exitProcessIfPossible()
             }
             

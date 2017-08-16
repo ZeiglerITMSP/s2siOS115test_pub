@@ -94,14 +94,14 @@ class ServicesTVC: UITableViewController {
     }
     
     // TEST
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "EBTLoginTVC" {
-            
-            let loginVC = segue.destination as! EBTLoginTVC
-            loginVC.tempLoginUrl = tempLoginUrl
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        if segue.identifier == "EBTLoginTVC" {
+//            
+//            let loginVC = segue.destination as! EBTLoginTVC
+//            loginVC.tempLoginUrl = tempLoginUrl
+//        }
+//    }
     
     // MARK: -
     
@@ -172,7 +172,7 @@ class ServicesTVC: UITableViewController {
             switch response.result {
             case .success:
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+              //  print("json response\(json)")
                 if let responseDict = json.dictionaryObject {
                     if let code = responseDict["code"] {
                         let code = code as! NSNumber
@@ -180,7 +180,7 @@ class ServicesTVC: UITableViewController {
                             if let screens = responseDict["screens"] {
                                 
                                 let sortedArray = (screens as! NSArray).sortedArray(using: [NSSortDescriptor(key: "order", ascending: true)]) as! [[String:AnyObject]]
-                                print(sortedArray)
+                              //  print(sortedArray)
                                 self.infoScreensArray = sortedArray
                                 self.screensLoaded = true
                                 self.reloadTableViewIfPossible()
@@ -223,7 +223,7 @@ extension ServicesTVC {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section ==  0 {
             // TEST 2 , live 1
-            return 2
+            return 1
         } else if section == 1 {
             return infoScreensArray.count
         } else if section == 2 {
@@ -294,7 +294,7 @@ extension ServicesTVC {
                 //cell.ebtLabel.text = "EBT".localized()
                 self.FlowSegentedControl =  cell.flowSegmentControl
                 // TEST
-                //self.FlowSegentedControl.isHidden = true
+                self.FlowSegentedControl.isHidden = true
                 return cell
             }
         }
@@ -384,19 +384,19 @@ extension ServicesTVC {
         // get url
         var loginUrl = kEBTLoginUrl
         // TEST
-        // For testing only
-        if self.FlowSegentedControl.selectedSegmentIndex == 1 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 2 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow3/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 3 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow4/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 4 {
-            loginUrl = "http://internal.appit.ventures/s2s/flow5/ebt_login.html"
-        } else if self.FlowSegentedControl.selectedSegmentIndex == 5 {
-            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
-        }
-        tempLoginUrl = loginUrl
+//        // For testing only
+//        if self.FlowSegentedControl.selectedSegmentIndex == 1 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 2 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow3/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 3 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow4/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 4 {
+//            loginUrl = "http://internal.appit.ventures/s2s/flow5/ebt_login.html"
+//        } else if self.FlowSegentedControl.selectedSegmentIndex == 5 {
+//            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
+//        }
+//        tempLoginUrl = loginUrl
         
         // ------
         
@@ -420,7 +420,7 @@ extension ServicesTVC {
             do {
                 html = try String(contentsOf: htmlPathURL, encoding: .utf8)
             } catch  {
-                print("Unable to get the file.")
+               // print("Unable to get the file.")
             }
         }
         
@@ -455,7 +455,7 @@ extension ServicesTVC {
             } else {
                 //print(error ?? "")
                 self.ebtWebView.getErrorMessage(completion: { (result) in
-                    print(result ?? "no error")
+                   // print(result ?? "no error")
                 })
                 self.ebtActivityIndicator.stopAnimating()
             }
@@ -464,26 +464,26 @@ extension ServicesTVC {
     
     func validateSpanishLoginPage(completion: @escaping (Bool) -> ()) {
         // test
-        completion(true)
+      //  completion(true)
         
-//        let javaScript = "isSpanishPageLoaded();"
-//        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-//            if error != nil {
-//                print(error ?? "error nil")
-//                completion(false)
-//            } else {
-//                print(result ?? "result nil")
-//                if let isSpanish = result as? Bool {
-//                    if isSpanish == false {
-//                        completion(false)
-//                    } else {
-//                        completion(true)
-//                    }
-//                } else {
-//                    completion(false)
-//                }
-//            }
-//        }
+        let javaScript = "isSpanishPageLoaded();"
+        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
+            if error != nil {
+               // print(error ?? "error nil")
+                completion(false)
+            } else {
+               // print(result ?? "result nil")
+                if let isSpanish = result as? Bool {
+                    if isSpanish == false {
+                        completion(false)
+                    } else {
+                        completion(true)
+                    }
+                } else {
+                    completion(false)
+                }
+            }
+        }
         
         
     }

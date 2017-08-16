@@ -270,7 +270,7 @@ class OffersVC: UIViewController {
                     AppHelper.getImage(fromURL: imageUrl, name: nil, completion: { (image, success, name) in
                         if success {
                             if image != nil {
-                                print("OFFER LOADED")
+                               // print("OFFER LOADED")
                                 self.offerImage = image
                                 self.reloadOffersIfPossible()
                             } else {

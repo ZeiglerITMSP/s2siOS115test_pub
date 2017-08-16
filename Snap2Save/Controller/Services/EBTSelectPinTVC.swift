@@ -274,13 +274,13 @@ extension EBTSelectPinTVC {
         let javaScript = "autoFillPin('\(newPin)', '\(confirmPin)');"
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+               // print(error ?? "error nil")
                 
                 self.nextButton.isEnabled = true
                 self.nextActivityIndicator.stopAnimating()
                 
             } else {
-                print(result ?? "result nil")
+                // print(result ?? "result nil")
                 self.checkForErrorMessage()
             }
         }
@@ -347,13 +347,13 @@ extension EBTSelectPinTVC {
                     self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
                     // unknown page
-                    print("UNKNOWN PAGE")
+                  //  print("UNKNOWN PAGE")
                     self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
-                print("PAGE NOT LOADED YET..")
+               // print("PAGE NOT LOADED YET..")
                 self.exitProcessIfPossible()
             }
             

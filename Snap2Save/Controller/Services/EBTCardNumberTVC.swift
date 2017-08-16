@@ -262,9 +262,9 @@ extension EBTCardNumberTVC {
         let javaScript = "autoFillCardNumber('\(cardNumber)');";
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+               // print(error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print(result ?? "result nil")
                 self.checkForErrorMessage()
             }
         }
@@ -304,9 +304,9 @@ extension EBTCardNumberTVC {
         
         ebtWebView.webView.evaluateJavaScript(jsAcceptClick) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print(error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print(result ?? "result nil")
             }
         }
     }
@@ -321,13 +321,13 @@ extension EBTCardNumberTVC {
                     self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
                     // unknown page
-                    print("UNKNOWN PAGE")
+                    //print("UNKNOWN PAGE")
                     self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
-                print("PAGE NOT LOADED YET..")
+                //print("PAGE NOT LOADED YET..")
                 self.exitProcessIfPossible()
             }
         })

@@ -202,7 +202,7 @@ class AdditionalOffersVC: UIViewController {
             case .success:
                 DispatchQueue.main.async {
                     let json = JSON(data: response.data!)
-                    print("json response\(json)")
+                   // print("json response\(json)")
                     let responseDict = json.dictionaryObject
                     
                     if let code = responseDict?["code"] {

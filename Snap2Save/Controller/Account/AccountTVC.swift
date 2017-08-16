@@ -197,7 +197,7 @@ class AccountTVC: UITableViewController {
         self.clearUserData()
         // hide activity
         SwiftLoader.hide()
-        print("swift loader")
+        //print("swift loader")
         
         // get view controller to move
         let storyBoard = UIStoryboard(name: "Main", bundle: nil);

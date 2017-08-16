@@ -466,7 +466,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LanguageUtility.removeObserverForLanguageChange(self)
     }
     func sendCurrentLanguageToServer() {
-        print(#function)
+      //  print(#function)
         
         let user_id = UserDefaults.standard.object(forKey: USER_ID)
         
@@ -489,10 +489,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         
         
-        print(parameters)
+        //print(parameters)
         
         let url = String(format: "%@/updateLanguage", hostUrl)
-        print(url)
+        //print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
             switch response.result {
@@ -500,12 +500,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 let json = JSON(data: response.data!)
                 if let responseDict = json.dictionaryObject {
-                    print(responseDict)
+                    //print(responseDict)
                 }
                 break
                 
             case .failure(let error):
-                print(error)
+               //print(error)
                 break
             }
             

@@ -274,13 +274,13 @@ extension EBTLoginSecurityQuestionTVC {
                     self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
                     // unknown page
-                    print("UNKNOWN PAGE")
+                    //print("UNKNOWN PAGE")
                     self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
-                print("PAGE NOT LOADED YET..")
+               // print("PAGE NOT LOADED YET..")
                 self.exitProcessIfPossible()
             }
             
@@ -295,12 +295,12 @@ extension EBTLoginSecurityQuestionTVC {
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print(error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print(result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedText)
+               // print(trimmedText)
                 
                 if trimmedText.characters.count > 0 {
                     

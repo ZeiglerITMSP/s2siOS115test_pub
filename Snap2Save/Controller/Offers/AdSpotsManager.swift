@@ -56,7 +56,7 @@ class AdSpotsManager: NSObject {
         
 //        print(parameters)
         let url = String(format: "%@/getAdAndHealthySpots", hostUrl)
-        print(url)
+        //print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
@@ -71,7 +71,7 @@ class AdSpotsManager: NSObject {
                         let code = code as! NSNumber
                         if code.intValue == 200 {
                             if let spots = responseDict?["spots"] as? [[String:Any]] {
-                                print("spots count: \(spots.count)")
+                              //  print("spots count: \(spots.count)")
                                 self.adSpots = spots
                                 if spots.count > 0 {
                                     self.downloadAdImages()
@@ -130,7 +130,7 @@ class AdSpotsManager: NSObject {
                 DispatchQueue.main.async {
                     AppHelper.getImage(fromURL: imageUrl!, name: type, completion: { (image, success, name) -> Void in
                         downloadImages += 1
-                        print(name!)
+                      //  print(name!)
                         if success {
                             if image != nil {
                                 self.adSpotImages[name!] = image

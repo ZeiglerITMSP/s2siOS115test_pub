@@ -99,13 +99,13 @@ class EBTWebView: NSObject {
         let jsErrorMessage = "identifyPage();"
         let javaScript = jsErrorMessage
         webView.evaluateJavaScript(javaScript) { (result, error) in
-            print("PageHeading:")
-            print(result ?? "no title....")
+           // print("PageHeading:")
+           // print(result ?? "no title....")
             if let resultString = result as? String {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 completion(resultTrimmed)
             } else {
-                print(error ?? "")
+                //print(error ?? "")
                 completion(nil)
             }
         }
@@ -120,7 +120,7 @@ class EBTWebView: NSObject {
                 completion(resultTrimmed)
                 
             } else {
-                print(error ?? "")
+                //print(error ?? "")
                 completion(nil)
             }
         }
@@ -139,7 +139,7 @@ class EBTWebView: NSObject {
                 completion(resultTrimmed)
                 
             } else {
-                print(error ?? "")
+               // print(error ?? "")
                 completion(nil)
             }
         }
@@ -177,7 +177,7 @@ class EBTWebView: NSObject {
                 completion(resultTrimmed)
                 
             } else {
-                print(error ?? "")
+               // print(error ?? "")
                 completion(nil)
             }
             
@@ -191,14 +191,14 @@ class EBTWebView: NSObject {
         
         webView.evaluateJavaScript(javascript) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+               // print(error ?? "error nil")
                 
             } else {
                 
                 if let result = result {
                     let stringResult = result as? String
                     let pageTitle = stringResult?.trimmingCharacters(in: .whitespacesAndNewlines)
-                    print(pageTitle ?? "nil")
+                   // print(pageTitle ?? "nil")
                 }
             }
         }
@@ -209,14 +209,14 @@ class EBTWebView: NSObject {
         
         webView.evaluateJavaScript(javascript) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+               // print(error ?? "error nil")
                 
             } else {
                 
                 if let result = result {
                     let stringResult = result as? String
                     let pageTitle = stringResult?.trimmingCharacters(in: .whitespacesAndNewlines)
-                    print(pageTitle ?? "nil")
+                   // print(pageTitle ?? "nil")
                     
                     DispatchQueue.main.async {
                         textView.text = pageTitle
@@ -239,30 +239,30 @@ extension EBTWebView: WKNavigationDelegate {
     //MARK:- WKNavigationDelegate
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print("\n -- didFail -- \n")
+       // print("\n -- didFail -- \n")
         self.isPageLoading = false
-        print(error.localizedDescription)
+      //  print(error.localizedDescription)
         
         self.responder?.didFail?()
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         
-        print("\n -- didFailProvisionalNavigation -- \n")
+       // print("\n -- didFailProvisionalNavigation -- \n")
         self.isPageLoading = false
-        print(error.localizedDescription)
+       // print(error.localizedDescription)
 
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        print("\n -- navigationAction -- \n")
-        print(navigationAction.request)
+      //  print("\n -- navigationAction -- \n")
+      //  print(navigationAction.request)
         self.isPageLoading = true
         decisionHandler(.allow)
     }
  
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("\n -- didFinish -- \n")
+      //  print("\n -- didFinish -- \n")
         self.isPageLoading = false
         self.responder?.didFinishLoadingWebView?()
     }

@@ -184,7 +184,7 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
                                        "device_id": device_id,
                                        "user_id": user_id]
         
-        print(parameters)
+       // print(parameters)
         
         let url = String(format: "%@/getRewardStatus",hostUrl)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
@@ -327,7 +327,7 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
                                        "to": toDateMilliSecStr,
                                        "time_zone_offset": timeZoneOffset]
         
-        print(parameters)
+       // print(parameters)
         
         let url = String(format: "%@/getRecentRedemptionActivity",hostUrl)
         // print(url)

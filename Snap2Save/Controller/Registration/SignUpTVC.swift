@@ -760,7 +760,7 @@ extension SignUpTVC: AITextFieldProtocol {
                 }
                 
                 let json = JSON(data: response.data!)
-                print("json response\(json)")
+               // print("json response\(json)")
                 if (json.dictionary != nil) {
                     
                     let responseDict = json.dictionaryObject

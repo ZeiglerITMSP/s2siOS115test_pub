@@ -179,7 +179,7 @@ class ChangePasswordTVC: UITableViewController,AITextFieldProtocol {
             ]
         
         saveActivityIndicator.startAnimating()
-        print(parameters)
+        //print(parameters)
         let url = String(format: "%@/changePassword", hostUrl)
         ////print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
