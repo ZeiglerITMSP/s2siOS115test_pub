@@ -44,8 +44,8 @@ class EBTDashboardTVC: UITableViewController {
     // timer
     var startTime: Date!
     
-    
-    var pageNumber: Int = 0 // 0 for internal build, 1 for live
+    // test
+    var pageNumber: Int = 1 // 0 for internal build, 1 for live
     
     // load more
     var isTransactionsLoading = false
@@ -379,13 +379,13 @@ extension EBTDashboardTVC {
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print(error ?? "error nil")
                 
                 completion(nil)
                 
             } else {
                 
-                print(result ?? "result nil")
+                //print(result ?? "result nil")
                 let resultString = result as! String
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 
@@ -401,12 +401,12 @@ extension EBTDashboardTVC {
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print(error ?? "error nil")
             } else {
-                print(result ?? "result nil")
+                //print(result ?? "result nil")
                 let stringResult = result as! String
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
-                print(trimmedText)
+                //print(trimmedText)
                 
                 if trimmedText.characters.count > 0 {
                     
@@ -428,8 +428,8 @@ extension EBTDashboardTVC {
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             
-            print(error ?? "error nil")
-            print(result ?? "result nil")
+            //print(error ?? "error nil")
+            //print(result ?? "result nil")
         }
     }
     
@@ -449,7 +449,7 @@ extension EBTDashboardTVC {
                 }
                 
             } else {
-                print("END WITH DATA")
+                //print("END WITH DATA")
                 self.isTransactionsLoading = false
                 self.tableView.reloadData()
                 self.sendEBTInformationToServer()
@@ -480,7 +480,7 @@ extension EBTDashboardTVC {
                     self.clickTransactionsTab()
                 }
             } else {
-                print(error ?? "")
+                //print(error ?? "")
             }
         }
     }
@@ -509,7 +509,7 @@ extension EBTDashboardTVC {
                     
                 }
             } else {
-                print(error ?? "")
+               // print(error ?? "")
             }
         }
     }
@@ -536,7 +536,7 @@ extension EBTDashboardTVC {
                     
                 }
             } else {
-                print(error ?? "")
+                //print(error ?? "")
             }
         }
     }
@@ -552,7 +552,7 @@ extension EBTDashboardTVC {
         if elapsed < 30 {
             let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(checkForStartEndDateFields), userInfo: nil, repeats: false)
         } else {
-            print("END")
+            //print("END")
             startTime = nil
             self.isTransactionsLoading = false
             self.tableView.reloadData()
@@ -564,7 +564,7 @@ extension EBTDashboardTVC {
         
         let jsIsLastPage = "checkForStartEndDateFields();"
         ebtWebView.webView.evaluateJavaScript(jsIsLastPage) { (result, error) in
-            print(result ?? "no result")
+            //print(result ?? "no result")
             if (result as? String) != nil {
                 self.transactionsHistoryStartEndDates()
             } else {
@@ -595,8 +595,8 @@ extension EBTDashboardTVC {
         let javaScript = "setTransactionsHistoryStartEndDates();"
         
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            print(result ?? "")
-            print(error ?? "")
+            //print(result ?? "")
+            //print(error ?? "")
             self.perform(#selector(self.getTransactions), with: self, afterDelay: 8)
         }
     }
@@ -614,13 +614,13 @@ extension EBTDashboardTVC {
         if elapsed < 20 {
             
             
-            print("FIRE")
+            //print("FIRE")
             
             let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.checkPageNumber), userInfo: nil, repeats: false)
             
             //            timer.fire()
         } else {
-            print("END")
+            //print("END")
             startTime = nil
             
             self.isTransactionsLoading = false
@@ -639,7 +639,7 @@ extension EBTDashboardTVC {
             if result != nil {
                 let resultString = result as! String
                 let currentPageNumber = Int(resultString)
-                print(currentPageNumber ?? "-")
+                //print(currentPageNumber ?? "-")
                 if currentPageNumber == self.pageNumber {
                     
                     self.runTransactionsScript()
@@ -686,7 +686,7 @@ extension EBTDashboardTVC {
         
         ebtWebView.webView.evaluateJavaScript(js) { (result, error) in
             if error != nil {
-                print(error ?? "error nil")
+                //print(error ?? "error nil")
             } else {
                 let stringResult = result as! String
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -695,7 +695,7 @@ extension EBTDashboardTVC {
                     // self.transactionsString.append(trimmedText)
                     
                     let json = JSON.parse(trimmedText)
-                    print("json response \(json)")
+                    //print("json response \(json)")
                     if let responseArray = json.arrayObject {
                         if responseArray.count == 0 {
                             self.getTransactions()
@@ -771,15 +771,15 @@ extension EBTDashboardTVC {
         // check if next page exists, and go to next page
         let jsIsLastPage = "isLastPage();"
         ebtWebView.webView.evaluateJavaScript(jsIsLastPage) { (result, error) in
-            print(result ?? "no result")
+            //print(result ?? "no result")
             if (result as? String) != nil {
                 // next_allCompletedTxnGrid_pager
-                print("LAST PAGE")
+                //print("LAST PAGE")
                 self.isTransactionsLoading = false
                 self.tableView.reloadData()
                 self.sendEBTInformationToServer()
             } else { // click next page
-                print("NEXT PAGE")
+                //print("NEXT PAGE")
                 let jsNextPageClick = "gotoNextPage();"
                 let javaScript = jsNextPageClick
                 
@@ -859,9 +859,9 @@ extension EBTDashboardTVC {
                                        "cash_balance": cash_balance!
         ]
         
-        print(parameters)
+        //print(parameters)
         let url = String(format: "%@/saveEbtInfo", hostUrl)
-        print(url)
+        //print(url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             switch response.result {
                 
@@ -869,7 +869,7 @@ extension EBTDashboardTVC {
                 DispatchQueue.main.async {
                     
                     let json = JSON(data: response.data!)
-                    print("json response\(json)")
+                    //print("json response\(json)")
                     let responseDict = json.dictionaryObject
                     
                     if let code = responseDict?["code"] {
@@ -883,8 +883,8 @@ extension EBTDashboardTVC {
                 }
                 break
                 
-            case .failure(let error):
-                print(error)
+            case .failure(let _):
+                //print(error)
                 break
             }
             

@@ -60,7 +60,7 @@ class EBTLoginTVC: UITableViewController {
     
     @IBAction func imageViewOneAction(_ sender: UITapGestureRecognizer) {
         
-        print("tap gesture")
+        //print("tap gesture")
     }
     
     
@@ -719,13 +719,13 @@ extension EBTLoginTVC {
                     self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
                     // unknown page
-                    print("UNKNOWN PAGE")
+                   // print("UNKNOWN PAGE")
                     self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
-                print("PAGE NOT LOADED YET..")
+                //print("PAGE NOT LOADED YET..")
                 self.exitProcessIfPossible()
             }
         })
@@ -738,7 +738,7 @@ extension EBTLoginTVC {
 
         let javaScript = "autofillLoginDetailsAndSubmit('\(userId)','\(password)');"
         ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            print(error ?? "")
+            //print(error ?? "")
             self.checkForErrorMessage()
         }
     }
@@ -786,7 +786,7 @@ extension EBTLoginTVC {
                 }
                 
             } else {
-                print(error ?? "")
+                //print(error ?? "")
             }
         }
     }

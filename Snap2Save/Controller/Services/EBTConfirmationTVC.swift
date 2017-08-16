@@ -338,7 +338,7 @@ extension EBTConfirmationTVC {
                     
                 }
             } else {
-                print(error ?? "")
+                //print(error ?? "")
             }
         }
     }
@@ -427,13 +427,13 @@ extension EBTConfirmationTVC {
                     self.moveToNextController(identifier: nextVCIdentifier)
                 } else {
                     // unknown page
-                    print("UNKNOWN PAGE")
+                    //print("UNKNOWN PAGE")
                     self.exitProcessIfPossible()
                 }
                 
             } else {
                 // is page not loaded
-                print("PAGE NOT LOADED YET..")
+                //print("PAGE NOT LOADED YET..")
                 self.exitProcessIfPossible()
             }
         })

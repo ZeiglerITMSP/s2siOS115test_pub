@@ -394,13 +394,14 @@
 			name = ServicesCells;
 			sourceTree = "<group>";
 		};
-		E84AE9C81E07F28300C5E7F3 /* View */ = {
+		E84AE9C81E07F28300C5E7F3 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
 				977B64F41E163B5600AA802D /* User.swift */,
 				977B64F61E16407A00AA802D /* AdditionalInformation.swift */,
 				976A99761E251A6400F82105 /* FacebookLogin.swift */,
 			);
+			name = DataModels;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -506,8 +507,7 @@
 				97DBC2181E360B5200CD2C75 /* Snap2Save.entitlements */,
 				E88BA54A1DF53C1300714C65 /* AppDelegate.swift */,
 				E84AE9E11E0821AB00C5E7F3 /* Helpers */,
-				E88BA5791DF53CF500714C65 /* Model */,
-				E84AE9C81E07F28300C5E7F3 /* View */,
+				E84AE9C81E07F28300C5E7F3 /* DataModels */,
 				E81E61651E2365A30016FE74 /* EBT */,
 				E88BA5781DF53CD600714C65 /* Controller */,
 				E88BA54E1DF53C1300714C65 /* Main.storyboard */,
@@ -553,13 +553,6 @@
 				E84AE9D81E07F50600C5E7F3 /* Account */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		E88BA5791DF53CF500714C65 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		E8BAE2A31E0BDDE200A85AAB /* EBTRegistration */ = {
@@ -1088,8 +1081,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cathy Maglione (2APHA8Y955)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cathy Maglione (2APHA8Y955)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = PGJV67G4NG;
@@ -1180,8 +1173,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Snap2Save/Snap2Save.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cathy Maglione (2APHA8Y955)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
 				DEVELOPMENT_TEAM = PGJV67G4NG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1192,8 +1185,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.s2s.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "97c2a548-a0b7-40b0-820a-fd4bb4b69a69";
-				PROVISIONING_PROFILE_SPECIFIER = s2s_development;
+				PROVISIONING_PROFILE = "d39ef5c1-1bed-4ac3-998f-f1572c384de2";
+				PROVISIONING_PROFILE_SPECIFIER = s2s_appstore;
 				SWIFT_OBJC_BRIDGING_HEADER = "Snap2Save/Snap2Save-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1210,7 +1203,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Snap2Save/Snap2Save.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
 				DEVELOPMENT_TEAM = PGJV67G4NG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1221,8 +1214,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.s2s.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "710f0efa-4d32-40c5-91cf-0ed04aeacb9c";
-				PROVISIONING_PROFILE_SPECIFIER = s2s_distribution;
+				PROVISIONING_PROFILE = "d39ef5c1-1bed-4ac3-998f-f1572c384de2";
+				PROVISIONING_PROFILE_SPECIFIER = s2s_appstore;
 				SWIFT_OBJC_BRIDGING_HEADER = "Snap2Save/Snap2Save-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

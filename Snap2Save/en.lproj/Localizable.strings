@@ -18,6 +18,7 @@
 
 "Done" = "Done";
 "OK" = "OK";
+"Ok" = "Ok";
 "Loading..." = "Loading...";
 
 // LANGUAGE
@@ -282,7 +283,7 @@
 
 "Enter new password." = "Enter new password.";
 
-
+"Please enter your zip code." = "Please enter your zip code.";
 
 
 

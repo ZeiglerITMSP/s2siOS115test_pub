@@ -46,7 +46,6 @@ class OffersVC: UIViewController {
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         // table view cell register
         self.tableView.register(UINib(nibName: "AdSpotTableViewCell", bundle: nil), forCellReuseIdentifier: "AdSpotTableViewCell")
-        
         //        updateTitles()
     }
     
@@ -271,7 +270,7 @@ class OffersVC: UIViewController {
                     AppHelper.getImage(fromURL: imageUrl, name: nil, completion: { (image, success, name) in
                         if success {
                             if image != nil {
-                                print("OFFER LOADED")
+                               // print("OFFER LOADED")
                                 self.offerImage = image
                                 self.reloadOffersIfPossible()
                             } else {
@@ -329,12 +328,21 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        return headerView
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.1
     }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        
+//        let headerView = UIView()
+//        headerView.backgroundColor = .clear
+//        return headerView
+//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {

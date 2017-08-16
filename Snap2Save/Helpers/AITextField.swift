@@ -260,7 +260,7 @@ class AITextField: UITextField {
         toolBar.frame = CGRect(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 44)
         
         toolBar.tintColor = APP_ORANGE_COLOR
-        let doneButton = UIBarButtonItem(title: "Done".localized(), style: .done, target: self, action: #selector(AITextField.doneButtonClicked))
+        let doneButton = UIBarButtonItem(title: "Ok".localized(), style: .done, target: self, action: #selector(AITextField.doneButtonClicked))
         
 //        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(AITextField.doneButtonClicked))
         

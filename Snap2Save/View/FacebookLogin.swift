@@ -62,8 +62,8 @@ class FacebookLogin: NSObject {
                     //print(result ?? "")
                     let resultDict = result as! [String:Any]
                     
-                    let email = resultDict["email"] ?? ""
-                    let name = resultDict["name"] ?? ""
+                    _ = resultDict["email"] ?? ""
+                    _ = resultDict["name"] ?? ""
                     //print(email, name)
                     
                    // print("resultDict \(resultDict)")

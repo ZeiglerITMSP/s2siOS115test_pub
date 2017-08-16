@@ -62,8 +62,8 @@ class BrowserVC: UIViewController {
     @IBAction func printAction(_ sender: Any) {
         webViewMaster.webView.evaluateJavaScript("document.documentElement.outerHTML") { (result, error) in
             
-            print(result ?? "")
-            print(error ?? "")
+            //print(result ?? "")
+            //print(error ?? "")
             
             self.resultTextView.text = result as? String ?? "--"
         }
