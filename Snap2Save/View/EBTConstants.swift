@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 // internal
 //let kEBTBaseUrl = "http://internal.appit.ventures/s2s/"
@@ -45,6 +46,17 @@ let kUserIdEBT = "kUserIdEBT"
 
 let kEBTHelp = "https://ucard.chase.com/help/english/welcomePage/index.htm?pageName=Welcome_eng.htm"
 let kEBTHelp_es = "https://ucard.chase.com/help/english/welcomePage/index.htm?pageName=Welcome_eng.htm"
+
+class EBTData: NSObject {
+    static let shared: EBTData = EBTData()
+    
+    var transactionsArray: [[String:String]] = []
+    var accountBalancesObject: [String : String] = [:]
+    
+    override init() {
+        
+    }
+}
 
 class EBTConstants: NSObject {
     
