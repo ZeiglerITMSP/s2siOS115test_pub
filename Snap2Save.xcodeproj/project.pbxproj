@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FF7EF151FBA646E00AD1801 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7EF141FBA646E00AD1801 /* Alamofire-SwiftyJSON.swift */; };
 		52949BC23A183914DF6D1992 /* Pods_Snap2Save.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */; };
 		6FB268A6557A795CAD814A61 /* Pods_Snap2SaveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C10791D8C680864FEE2148 /* Pods_Snap2SaveUITests.framework */; };
 		970C96381E5ED06E00697E56 /* RedeemPointsAddressTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970C96371E5ED06E00697E56 /* RedeemPointsAddressTVC.swift */; };
@@ -120,6 +121,7 @@
 /* Begin PBXFileReference section */
 		0A04D45C935B15E8F8735FB7 /* Pods-Snap2SaveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveUITests/Pods-Snap2SaveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		23C55B236A435BA0D7B2F840 /* Pods-Snap2Save.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2Save.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2Save/Pods-Snap2Save.debug.xcconfig"; sourceTree = "<group>"; };
+		2FF7EF141FBA646E00AD1801 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
 		390369A27A4965626A26EA86 /* Pods-Snap2Save.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2Save.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2Save/Pods-Snap2Save.release.xcconfig"; sourceTree = "<group>"; };
 		6F98011C784DEC5A46937289 /* Pods-Snap2SaveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snap2SaveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snap2SaveTests/Pods-Snap2SaveTests.release.xcconfig"; sourceTree = "<group>"; };
 		70471D2506ED2958DD55B987 /* Pods_Snap2Save.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snap2Save.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -452,6 +454,7 @@
 				978729DC1E0937B000908301 /* Constants.swift */,
 				9737FEE41E76AB1600B6B9BB /* USStateAbbreviations_old.plist */,
 				97E4338A1E10E5F10095EABA /* USStateAbbreviations.plist */,
+				2FF7EF141FBA646E00AD1801 /* Alamofire-SwiftyJSON.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -668,9 +671,9 @@
 				TargetAttributes = {
 					E88BA5461DF53C1300714C65 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = PGJV67G4NG;
+						DevelopmentTeam = 8H583F92Q8;
 						LastSwiftMigration = 0810;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -917,6 +920,7 @@
 				E82258D71E5DD39200E8E17E /* RedeemPointsTVC.swift in Sources */,
 				E8BAE2A81E0BDEFD00A85AAB /* EBTCardNumberTVC.swift in Sources */,
 				E88BA54B1DF53C1300714C65 /* AppDelegate.swift in Sources */,
+				2FF7EF151FBA646E00AD1801 /* Alamofire-SwiftyJSON.swift in Sources */,
 				977B64F71E16407A00AA802D /* AdditionalInformation.swift in Sources */,
 				E826FBD21E0940A20089AEA6 /* ServicesTVC.swift in Sources */,
 				E84AE9DE1E07F5EE00C5E7F3 /* PreferencesTVC.swift in Sources */,
@@ -1174,8 +1178,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Snap2Save/Snap2Save.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
-				DEVELOPMENT_TEAM = PGJV67G4NG;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8H583F92Q8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Snap2Save/Controller/Services",
@@ -1185,8 +1190,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.s2s.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d39ef5c1-1bed-4ac3-998f-f1572c384de2";
-				PROVISIONING_PROFILE_SPECIFIER = s2s_appstore;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Snap2Save/Snap2Save-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1203,8 +1208,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Snap2Save/Snap2Save.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
-				DEVELOPMENT_TEAM = PGJV67G4NG;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8H583F92Q8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Snap2Save/Controller/Services",
@@ -1214,8 +1220,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.s2s.snap2save;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d39ef5c1-1bed-4ac3-998f-f1572c384de2";
-				PROVISIONING_PROFILE_SPECIFIER = s2s_appstore;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Snap2Save/Snap2Save-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

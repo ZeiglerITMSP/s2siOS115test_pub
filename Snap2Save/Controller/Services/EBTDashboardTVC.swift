@@ -10,6 +10,7 @@ import UIKit
 import Localize_Swift
 import SwiftyJSON
 import Alamofire
+import SwiftyJSON
 
 class EBTDashboardTVC: UITableViewController {
     
@@ -74,7 +75,14 @@ class EBTDashboardTVC: UITableViewController {
         ebtWebView.responder = self
         
         actionType = ActionType.accountDetails
-        validatePage()
+        loadDataIntoTable()
+        
+        self.isTransactionsLoading = false
+        self.accoutDetailsLoaded = true
+        self.tableView.reloadData()
+        self.sendEBTInformationToServer()
+        
+        SwiftLoader.hide()
         
         adSpotManager.getAdSpots(forScreen: .ebtBalance)
     }
@@ -246,11 +254,11 @@ extension EBTDashboardTVC {
                 let record = trasactions[indexPath.row] as? [String:String]
                 detailedSubtitleCell.titleLabel.text = record?["location"]
                 detailedSubtitleCell.subtitleLabel.text = record?["date"]
-                detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
+                detailedSubtitleCell.subtitleTwoLabel.text = record?["account_type"]
                 
                 // amount
-                let debit_amount = record?["debit_amount"]
-                let credit_amount = record?["credit_amount"]
+                let debit_amount = record?["deposit_amount"]
+                let credit_amount = record?["completion_amount"]
                 if credit_amount?.containNumbers1To9() == true {
                     detailedSubtitleCell.detailLabel.text = credit_amount
                     detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
@@ -309,6 +317,17 @@ extension EBTDashboardTVC {
 
 // MARK: - JavaScript
 extension EBTDashboardTVC {
+    
+    func loadDataIntoTable() {
+        trasactions = EBTData.shared.transactionsArray
+        for key in EBTData.shared.accountBalancesObject.keys {
+            if key.contains("cash") {
+                accountDetails.append(["title" : "CASH Balance".localized(), "value": EBTData.shared.accountBalancesObject[key]!, "key": self.cashBalanceKey])
+            } else if key.contains("food") {
+                accountDetails.append(["title" : "SNAP Balance".localized(), "value": EBTData.shared.accountBalancesObject[key]!, "key": self.snapBalanceKey])
+            }
+        }
+    }
     
     func validatePage() {
         

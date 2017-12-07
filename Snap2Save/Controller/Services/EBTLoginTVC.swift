@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 import Localize_Swift
 import LocalAuthentication
 
@@ -732,14 +733,59 @@ extension EBTLoginTVC {
     }
     
     func autoFill() {
+        let userId = self.userIdField.contentTextField.text ?? ""
+        let password = self.passwordField.contentTextField.text ?? ""
         
-        let userId = self.userIdField.contentTextField.text!
-        let password = self.passwordField.contentTextField.text!
+        let headers = [
+            "Content-Type": "application/json"
+        ] as HTTPHeaders
+        
+        let body = [
+            "cardNumber": userId,
+            "pinCode": password
+        ] as Parameters
 
-        let javaScript = "autofillLoginDetailsAndSubmit('\(userId)','\(password)');"
-        ebtWebView.webView.evaluateJavaScript(javaScript) { (result, error) in
-            //print(error ?? "")
-            self.checkForErrorMessage()
+        request("https://dev.trush.in/ebt/ebtInfo", method: .post, parameters: body, encoding: JSONEncoding(), headers: headers).validate().responseSwiftyJSON { (response) in
+            switch response.result {
+            case .success:
+                if let json = response.result.value {
+                    guard json["status"]["code"].intValue == 200 else {
+                        self.activityIndicator.stopAnimating()
+                        self.registrationActivityIndicator.stopAnimating()
+                        self.errorMessageLabel.text = json["status"]["message"].string ?? "The server encountered an unknown error"
+                        self.isSuccessMessage = false
+                        self.loginButton.isEnabled = true
+                        self.tableView.reloadData()
+                        return
+                    }
+                    EBTData.shared.transactionsArray = (json["transactions"].arrayObject as! [[String:String]])
+                    EBTData.shared.accountBalancesObject = json["account_balance"].dictionaryObject as! [String:String]
+                    self.moveToNextController(identifier: "EBTDashboardTVC")
+                } else {
+                    self.activityIndicator.stopAnimating()
+                    self.registrationActivityIndicator.stopAnimating()
+                    self.errorMessageLabel.text = "The server encountered an unknown error"
+                    self.isSuccessMessage = false
+                    self.loginButton.isEnabled = true
+                    self.tableView.reloadData()
+                }
+            case .failure( _):
+                if let json = response.result.value {
+                    self.activityIndicator.stopAnimating()
+                    self.registrationActivityIndicator.stopAnimating()
+                    self.errorMessageLabel.text = json["status"]["message"].string ?? "The server encountered an unknown error"
+                    self.isSuccessMessage = false
+                    self.loginButton.isEnabled = true
+                    self.tableView.reloadData()
+                } else {
+                    self.activityIndicator.stopAnimating()
+                    self.registrationActivityIndicator.stopAnimating()
+                    self.errorMessageLabel.text = "The server encountered an unknown error"
+                    self.isSuccessMessage = false
+                    self.loginButton.isEnabled = true
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
     

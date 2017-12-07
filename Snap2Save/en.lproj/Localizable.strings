@@ -319,8 +319,8 @@
 
 
 // login screen
-"USER ID" = "USER ID";
-"PASSWORD" = "PASSWORD";
+"USER ID" = "Card Number";
+"PASSWORD" = "Pin Code";
 "Remember My User ID" = "Remember My User ID";
 "Touch ID not available" = "Touch ID not available";
 "Your device is not configured for Touch ID." = "Your device is not configured for Touch ID.";
@@ -329,7 +329,7 @@
 "Identify yourself!" = "Identify yourself!";
 "ebt.login.titleLabel" = "AN EASY, CONVENIENT WAY TO ACCESS YOUR EBT CARD ACCOUNT INFORMATION.";
 "ebt.login.messageLabel" = "Check your balance and review your transaction activity.";
-"ebt.login.description" = "To log in enter your existing Chase UCard User ID and Password, or click on Register to sign up.";
+"ebt.login.description" = "To log in enter your card number and pin code, or click on Register to sign up.";
 
 // Authentication Code
 "AUTHENTICATION CODE" = "AUTHENTICATION CODE";
