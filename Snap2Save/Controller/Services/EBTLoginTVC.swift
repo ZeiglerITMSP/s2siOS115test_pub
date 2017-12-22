@@ -98,7 +98,7 @@ class EBTLoginTVC: UITableViewController {
     @IBAction func registrationAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        //registrationButton.isEnabled = false
+        registrationButton.isEnabled = false
         registrationActivityIndicator.startAnimating()
         
         actionType = ActionType.registration
@@ -193,7 +193,7 @@ class EBTLoginTVC: UITableViewController {
         // loader
         AppHelper.configSwiftLoader()
         
-       // self.registrationButton.isHidden = true
+       self.registrationButton.isHidden = true
         
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
@@ -354,9 +354,9 @@ class EBTLoginTVC: UITableViewController {
             self.messageLabel.text = "ebt.login.messageLabel".localized()
             self.descriptionLabel.text = "ebt.login.description".localized()
             self.pageTitle = "ebt.logon".localized()
-            self.userIdField.placeholderText = "USER ID".localized()
-            self.passwordField.placeholderText = "PASSWORD".localized()
-            self.remmeberMyUserNameLabel.text = "Remember My User ID".localized()
+            self.userIdField.placeholderText = "ebt.login.cardnumber".localized()
+            self.passwordField.placeholderText = "ebt.login.pin".localized()
+            self.remmeberMyUserNameLabel.text = "ebt.login.remember".localized()
             
             self.errorTitleLabel.text = ""
             self.errorMessageLabel.text = ""
@@ -395,7 +395,7 @@ class EBTLoginTVC: UITableViewController {
         errorMessageLabel.text = ""
         loginButton.isEnabled = true
         activityIndicator.stopAnimating()
-        //registrationButton.isEnabled = true
+        registrationButton.isEnabled = false
         registrationActivityIndicator.stopAnimating()
         self.tableView.reloadData()
         
@@ -436,6 +436,7 @@ class EBTLoginTVC: UITableViewController {
     func validateInputs() -> Bool {
         
         // userId
+        
         if AppHelper.isEmpty(string: userIdField.contentTextField.text) {
             self.showAlert(title: "", message: "alert.emptyField.userid".localized())
         } else if AppHelper.isEmpty(string: passwordField.contentTextField.text) {
@@ -849,7 +850,7 @@ extension EBTLoginTVC {
                     if self.ebtWebView.isPageLoading == false {
                         // update view
                         self.loginButton.isEnabled = true
-                       // self.registrationButton.isEnabled = true
+                        self.registrationButton.isEnabled = false
                         self.activityIndicator.stopAnimating()
                         self.registrationActivityIndicator.stopAnimating()
                     }
