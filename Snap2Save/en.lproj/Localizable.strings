@@ -330,6 +330,11 @@
 "ebt.login.titleLabel" = "AN EASY, CONVENIENT WAY TO ACCESS YOUR EBT CARD ACCOUNT INFORMATION.";
 "ebt.login.messageLabel" = "Check your balance and review your transaction activity.";
 "ebt.login.description" = "To log in enter your card number and pin code, or click on Register to sign up.";
+"ebt.login.cardnumber" = "EBT CARD NUMBER";
+"ebt.login.pin" = "PIN *";
+"ebt.login.remember" = "Remember My Card Number";
+
+
 
 // Authentication Code
 "AUTHENTICATION CODE" = "AUTHENTICATION CODE";
@@ -374,8 +379,8 @@
 "User ID Rules" = "User ID Rules";
 "Password Rules" = "Password Rules";
 
-"USER ID" = "USER ID";
-"PASSWORD" = "PASSWORD";
+"USER ID" = "EBT CARD NUMBER";
+"PASSWORD" = "PIN";
 "CONFIRM NEW PASSWORD" = "CONFIRM PASSWORD";
 "EMAIL ADDRESS" = "EMAIL ADDRESS";
 "CONFIRM EMAIL ADDRESS" = "CONFIRM EMAIL ADDRESS";

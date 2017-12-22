@@ -144,11 +144,12 @@ class EBTLoginTVC: UITableViewController {
         updateBackButtonText()
         
         // configure fields
-        userIdField.contentTextField.textFieldType = .NormalTextField
+        userIdField.contentTextField.textFieldType = .NumberTextField
         userIdField.contentTextField.autocorrectionType = UITextAutocorrectionType.no
         userIdField.contentTextField.returnKeyType = .next
         userIdField.contentTextField.updateUIAsPerTextFieldType()
         
+        passwordField.contentTextField.textFieldType = .NumberTextField
         passwordField.contentTextField.isSecureTextEntry = true
         passwordField.contentTextField.returnKeyType = .done
         passwordField.contentTextField.updateUIAsPerTextFieldType()
@@ -1001,9 +1002,6 @@ extension EBTLoginTVC: AITextFieldProtocol {
     }
     
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        // checking for only single quote, double quote - bcz script will not work.
-        // not - only allowing [^A-Za-z0-9], bcz spanish characters have to be allowed, and @. for email have to be allowed.
         
         return AppHelper.isValid(input: string)
     }

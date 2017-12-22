@@ -335,6 +335,10 @@
 "ebt.login.titleLabel" = "UNA MANERA FÁCIL Y PRÁCTICA DE ACCEDER A LA INFORMACIÓN DE LA CUENTA DE SU TARJETA DE EBT.";
 "ebt.login.messageLabel" = "Ve tu saldo y revisa tu actividad de transacciones.";
 "ebt.login.description" = "Para iniciar sesión, ingresa tu ID de usuario y contraseña de tu Chase UCard que ya tienes o haz clic en Registrarte.";
+"ebt.login.cardnumber" = "NÚMERO DE TARJETA DE EBT";
+"ebt.login.pin" = "PIN *";
+"ebt.login.remember" = "Recordar mi número de tarjeta";
+
 
 
 // Authentication Code
