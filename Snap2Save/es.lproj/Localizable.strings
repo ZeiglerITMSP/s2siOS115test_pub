@@ -324,8 +324,6 @@
 
 
 // login screen
-"USER ID" = "IDENTIFICACIÓN DE USUARIO";
-"PASSWORD" = "CONTRASEÑA";
 "Remember My User ID" = "Recordar mi identificación de usuario";
 "Touch ID not available" = "Touch ID not available";
 "Your device is not configured for Touch ID." = "Your device is not configured for Touch ID.";
@@ -334,9 +332,9 @@
 "Identify yourself!" = "¡Identifícate!";
 "ebt.login.titleLabel" = "UNA MANERA FÁCIL Y PRÁCTICA DE ACCEDER A LA INFORMACIÓN DE LA CUENTA DE SU TARJETA DE EBT.";
 "ebt.login.messageLabel" = "Ve tu saldo y revisa tu actividad de transacciones.";
-"ebt.login.description" = "Para iniciar sesión, ingresa tu ID de usuario y contraseña de tu Chase UCard que ya tienes o haz clic en Registrarte.";
+"ebt.login.description" = "Para iniciar sesión, simplemente introduce tu número de tarjeta de EBT y el PIN.";
 "ebt.login.cardnumber" = "NÚMERO DE TARJETA DE EBT";
-"ebt.login.pin" = "PIN *";
+"ebt.login.pin" = "PIN";
 "ebt.login.remember" = "Recordar mi número de tarjeta";
 
 
@@ -384,7 +382,6 @@
 "Password Rules" = "Reglas para la contraseña:";
 
 "USER ID" = "IDENTIFICACIÓN DE USUARIO";
-"PASSWORD" = "CONTRASEÑA";
 "CONFIRM NEW PASSWORD" = "CONFIRMAR CONTRASEÑA";
 "EMAIL ADDRESS" = "DIRECCIÓN DE EMAIL";
 "CONFIRM EMAIL ADDRESS" = "CONFIRMAR DIRECCIÓN DE EMAIL";
@@ -425,8 +422,8 @@
 "No transactions were found." = "No se encontraron transacciones.";
 
 // empty field alert
-"alert.emptyField.userid" = "Introduce ID de usuario.";
-"alert.emptyField.password" = "Introduce contraseña.";
+"alert.emptyField.userid" = "Introduce número de tarjeta de EBT.";
+"alert.emptyField.password" = "Introduce PIN.";
 //"alert.emptyField.authentication" = "Introduce código de autenticación.";
 
 "alert.emptyField.authentication" = "Introduce código de validación.";

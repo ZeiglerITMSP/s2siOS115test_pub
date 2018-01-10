@@ -121,7 +121,7 @@ class EBTDashboardTVC: UITableViewController {
         
         //        ebtWebView = nil
         
-        ebtWebView.loadEmptyPage()
+        // ebtWebView.loadEmptyPage()
         _ = self.navigationController?.popToRootViewController(animated: true)
         
         //        // Define identifier
