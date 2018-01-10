@@ -234,6 +234,7 @@ class AITextField: UITextField {
         self.picker?.delegate = self
         self.picker?.dataSource = self
         self.inputView = self.picker;
+        self.picker?.translatesAutoresizingMaskIntoConstraints = false
     }
     func addDatePicker()
     {
@@ -256,18 +257,15 @@ class AITextField: UITextField {
     // MARK: - ToolBar
     func setToolBar()
     {
-        let toolBar = UIToolbar()
-        toolBar.frame = CGRect(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 44)
-        
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 44))
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
         toolBar.tintColor = APP_ORANGE_COLOR
+        toolBar.sizeToFit()
+        
         let doneButton = UIBarButtonItem(title: "Ok".localized(), style: .done, target: self, action: #selector(AITextField.doneButtonClicked))
-        
-//        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(AITextField.doneButtonClicked))
-        
         let cancelButton = UIBarButtonItem(title: "Cancel".localized(), style: .done, target: self, action:  #selector(AITextField.cancelButtonClicked))
-        
-//        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(AITextField.cancelButtonClicked))
-        
+
         let flixibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
         
         toolBar.items = [cancelButton,flixibleSpace,doneButton]
