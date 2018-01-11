@@ -12,6 +12,8 @@ import SwiftyJSON
 import Alamofire
 import SwiftyJSON
 
+var isViewingDashboard = false
+
 class EBTDashboardTVC: UITableViewController {
     
     struct Transaction {
@@ -99,6 +101,14 @@ class EBTDashboardTVC: UITableViewController {
         self.view.sendSubview(toBack: webView)
         webView.isHidden = true
         
+        isViewingDashboard = true
+
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        isViewingDashboard = false
     }
     
     override func didReceiveMemoryWarning() {
