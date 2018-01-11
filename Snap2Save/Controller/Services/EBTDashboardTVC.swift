@@ -34,7 +34,11 @@ class EBTDashboardTVC: UITableViewController {
     
     let snapBalanceKey = "snapBalance"
     let cashBalanceKey = "cashBalance"
-    var accountDetails = [[String:String?]]()
+    var accountDetails = [[String:String?]]() {
+        didSet {
+            accountDetails = accountDetails.reversed()
+        }
+    }
     var recentTransactions: [Transaction]?
     
     var accountType: String?
@@ -262,7 +266,7 @@ extension EBTDashboardTVC {
                 let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
                 
                 let record = trasactions[indexPath.row] as? [String:String]
-                detailedSubtitleCell.titleLabel.text = record?["location"]
+                detailedSubtitleCell.titleLabel.text = record?["transaction_type"]
                 detailedSubtitleCell.subtitleLabel.text = record?["date"]
                 detailedSubtitleCell.subtitleTwoLabel.text = record?["account_type"]
                 
@@ -270,11 +274,11 @@ extension EBTDashboardTVC {
                 let debit_amount = record?["deposit_amount"]
                 let credit_amount = record?["completion_amount"]
                 if credit_amount?.containNumbers1To9() == true {
-                    detailedSubtitleCell.detailLabel.text = credit_amount
-                    detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
+                    detailedSubtitleCell.detailLabel.text = credit_amount?.replacingOccurrences(of: "-", with: "")
+                    detailedSubtitleCell.detailLabel.textColor = UIColor.black
                 } else {
                     detailedSubtitleCell.detailLabel.text = debit_amount
-                    detailedSubtitleCell.detailLabel.textColor = UIColor.black
+                    detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
                 }
                 
                 return detailedSubtitleCell
