@@ -49,10 +49,8 @@ class EBTLoginTVC: UITableViewController {
     @IBOutlet weak var errorTitleLabel: UILabel!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var remmeberMyUserNameLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var registrationActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var adImageView: UIImageView!
     @IBOutlet weak var adImageViewTwo: UIImageView!
     
@@ -93,16 +91,6 @@ class EBTLoginTVC: UITableViewController {
         if rememberMeButton.isSelected {
             saveUserID()
         }
-    }
-    
-    @IBAction func registrationAction(_ sender: UIButton) {
-        self.view.endEditing(true)
-        
-        registrationButton.isEnabled = false
-        registrationActivityIndicator.startAnimating()
-        
-        actionType = ActionType.registration
-        validatePageAndPerformAction()
     }
     
     
@@ -168,7 +156,6 @@ class EBTLoginTVC: UITableViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         // style for buttons
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: loginButton, radius: 2.0, width: 1.0)
-        AppHelper.setRoundCornersToView(borderColor: APP_GRREN_COLOR, view: registrationButton, radius: 2.0, width: 1.0)
         // tap gesture to view
 //        addTapGesture()
         
@@ -194,7 +181,6 @@ class EBTLoginTVC: UITableViewController {
         // loader
         AppHelper.configSwiftLoader()
         
-       self.registrationButton.isHidden = true
         
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
@@ -363,7 +349,6 @@ class EBTLoginTVC: UITableViewController {
             self.errorMessageLabel.text = ""
             
             self.loginButton.setTitle("LOG IN".localized(), for: .normal)
-            self.registrationButton.setTitle("REGISTER".localized(), for: .normal)
             
             self.tableView.setContentOffset(CGPoint.zero, animated: false)
             self.tableView.reloadData()
@@ -396,8 +381,6 @@ class EBTLoginTVC: UITableViewController {
         errorMessageLabel.text = ""
         loginButton.isEnabled = true
         activityIndicator.stopAnimating()
-        registrationButton.isEnabled = false
-        registrationActivityIndicator.stopAnimating()
         self.tableView.reloadData()
         
     }
@@ -594,36 +577,38 @@ extension EBTLoginTVC {
     
     /// Used to vaidate page - if valid, perform desired action. else check for error message, or next page. exit process if invalid.
     func validatePageAndPerformAction() {
-        // get page title
-        ebtWebView.getPageHeading(completion: { result in
-            if let pageTitle = result {
-                // validate if page is login page
-                if pageTitle == self.pageTitle {
-                    // check if login page is loaded in current language.
-                    // if current language is spanish, validate for spanish page, then perform action.
-                    // if current language is english, perform page action.
-                    if Localize.currentLanguage() == "es" {
-                        self.validateSpanishLoginPage(completion: { (isSpanish) in
-                            if isSpanish {
-                                // if spanish page, perform page action
-                                self.performActionOnPage()
-                            } else {
-                                // if not spanish page. reload login page
-                                self.loadLoginPage()
-                            }
-                        })
-                    } else {
-                        self.performActionOnPage()
-                    }
-                } else {
-                    // if not current page, check for next page
-                    self.validateNextPage()
-                }
-            } else {
-                // if no page title, then exit process
-                self.exitProcessIfPossible()
-            }
-        })
+        self.autoFill()
+
+//        // get page title
+//        ebtWebView.getPageHeading(completion: { result in
+//            if let pageTitle = result {
+//                // validate if page is login page
+//                if pageTitle == self.pageTitle {
+//                    // check if login page is loaded in current language.
+//                    // if current language is spanish, validate for spanish page, then perform action.
+//                    // if current language is english, perform page action.
+//                    if Localize.currentLanguage() == "es" {
+//                        self.validateSpanishLoginPage(completion: { (isSpanish) in
+//                            if isSpanish {
+//                                // if spanish page, perform page action
+//                                self.performActionOnPage()
+//                            } else {
+//                                // if not spanish page. reload login page
+//                                self.loadLoginPage()
+//                            }
+//                        })
+//                    } else {
+//                        self.performActionOnPage()
+//                    }
+//                } else {
+//                    // if not current page, check for next page
+//                    self.validateNextPage()
+//                }
+//            } else {
+//                // if no page title, then exit process
+//                self.exitProcessIfPossible()
+//            }
+//        })
     }
     
     func performActionOnPage() {
@@ -753,7 +738,6 @@ extension EBTLoginTVC {
                 if let json = response.result.value {
                     guard json["status"]["code"].intValue == 200 else {
                         self.activityIndicator.stopAnimating()
-                        self.registrationActivityIndicator.stopAnimating()
                         self.errorMessageLabel.text = json["status"]["message"].string ?? "The server encountered an unknown error"
                         self.isSuccessMessage = false
                         self.loginButton.isEnabled = true
@@ -765,7 +749,6 @@ extension EBTLoginTVC {
                     self.moveToNextController(identifier: "EBTDashboardTVC")
                 } else {
                     self.activityIndicator.stopAnimating()
-                    self.registrationActivityIndicator.stopAnimating()
                     self.errorMessageLabel.text = "The server encountered an unknown error"
                     self.isSuccessMessage = false
                     self.loginButton.isEnabled = true
@@ -774,14 +757,12 @@ extension EBTLoginTVC {
             case .failure( _):
                 if let json = response.result.value {
                     self.activityIndicator.stopAnimating()
-                    self.registrationActivityIndicator.stopAnimating()
                     self.errorMessageLabel.text = json["status"]["message"].string ?? "The server encountered an unknown error"
                     self.isSuccessMessage = false
                     self.loginButton.isEnabled = true
                     self.tableView.reloadData()
                 } else {
                     self.activityIndicator.stopAnimating()
-                    self.registrationActivityIndicator.stopAnimating()
                     self.errorMessageLabel.text = "The server encountered an unknown error"
                     self.isSuccessMessage = false
                     self.loginButton.isEnabled = true
@@ -851,9 +832,7 @@ extension EBTLoginTVC {
                     if self.ebtWebView.isPageLoading == false {
                         // update view
                         self.loginButton.isEnabled = true
-                        self.registrationButton.isEnabled = false
                         self.activityIndicator.stopAnimating()
-                        self.registrationActivityIndicator.stopAnimating()
                     }
                     
                     self.errorMessageLabel.text = errorMessage
@@ -1006,6 +985,14 @@ extension EBTLoginTVC: AITextFieldProtocol {
         return AppHelper.isValid(input: string)
     }
     
+    func keyBoardHidden(textField: UITextField) {
+        if textField == userIdField.contentTextField {
+            passwordField.contentTextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+    }
+
 }
 
 

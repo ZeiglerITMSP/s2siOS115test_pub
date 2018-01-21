@@ -334,6 +334,7 @@ extension EBTDashboardTVC {
     
     func loadDataIntoTable() {
         trasactions = EBTData.shared.transactionsArray
+
         for key in EBTData.shared.accountBalancesObject.keys {
             if key.contains("cash") {
                 accountDetails.append(["title" : "CASH Balance".localized(), "value": EBTData.shared.accountBalancesObject[key]!, "key": self.cashBalanceKey])
