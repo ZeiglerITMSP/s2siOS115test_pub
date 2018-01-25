@@ -729,7 +729,8 @@ extension EBTLoginTVC {
         
         let body = [
             "cardNumber": userId,
-            "pinCode": password
+            "pinCode": password,
+            "language": Localize.currentLanguage()
         ] as Parameters
 
         request("https://dev.trush.in/ebt/ebtInfo", method: .post, parameters: body, encoding: JSONEncoding(), headers: headers).validate().responseSwiftyJSON { (response) in
