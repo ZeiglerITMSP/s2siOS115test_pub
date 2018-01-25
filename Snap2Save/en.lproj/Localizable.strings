@@ -490,3 +490,5 @@
 "ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
 "ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
 
+"ebt.snap" = "Snap";
+"ebt.cash" = "Cash";

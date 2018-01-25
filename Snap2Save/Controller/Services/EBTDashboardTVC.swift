@@ -268,7 +268,14 @@ extension EBTDashboardTVC {
                 let record = trasactions[indexPath.row] as? [String:String]
                 detailedSubtitleCell.titleLabel.text = record?["transaction_type"]
                 detailedSubtitleCell.subtitleLabel.text = record?["date"]
-                detailedSubtitleCell.subtitleTwoLabel.text = record?["account_type"]
+
+                var account_type = ""
+                if (record?["account_type"] ?? "Cash") == "Cash" {
+                    account_type = "ebt.cash"
+                } else if (record?["account_type"] ?? "Cash") == "Food" {
+                    account_type = "ebt.snap"
+                }
+                detailedSubtitleCell.subtitleTwoLabel.text = account_type.localized().uppercased()
                 
                 // amount
                 let debit_amount = record?["deposit_amount"]
