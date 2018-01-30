@@ -1452,10 +1452,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIv-fB-vCK">
-                                                    <rect key="frame" x="15" y="12.5" width="46" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zIv-fB-vCK">
+                                                    <rect key="frame" x="15" y="12.5" width="311" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <color key="textColor" red="0.16862745098039217" green="0.32156862745098036" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFL-uQ-zde">
@@ -1477,6 +1477,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="fAb-43-Vgy" secondAttribute="bottom" id="3jV-rc-lZM"/>
                                                 <constraint firstItem="zIv-fB-vCK" firstAttribute="leading" secondItem="Fqh-qp-wpu" secondAttribute="leading" constant="15" id="9dv-x3-GVf"/>
                                                 <constraint firstItem="fAb-43-Vgy" firstAttribute="top" secondItem="Fqh-qp-wpu" secondAttribute="top" id="Eav-0S-JfX"/>
+                                                <constraint firstItem="fAb-43-Vgy" firstAttribute="leading" secondItem="zIv-fB-vCK" secondAttribute="trailing" constant="15" id="YVh-5E-W2F"/>
                                                 <constraint firstAttribute="bottom" secondItem="VFL-uQ-zde" secondAttribute="bottom" id="csj-rU-g7r"/>
                                                 <constraint firstAttribute="trailing" secondItem="VFL-uQ-zde" secondAttribute="trailing" id="djl-ue-qz1"/>
                                                 <constraint firstItem="VFL-uQ-zde" firstAttribute="leading" secondItem="Fqh-qp-wpu" secondAttribute="leading" id="jAm-jg-6CL"/>

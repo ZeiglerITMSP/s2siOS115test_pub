@@ -387,6 +387,9 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 { // Additional Offers cell
             let additionalOffersCell = tableView.dequeueReusableCell(withIdentifier: "OfferTitleTVC") as! OfferTitleTVC
             additionalOffersCell.titleLabel?.text = "Weekly Circular".localized()
+            additionalOffersCell.titleLabel?.adjustsFontSizeToFitWidth = true
+            additionalOffersCell.titleLabel?.allowsDefaultTighteningForTruncation = true
+            additionalOffersCell.titleLabel?.textColor = UIColor(red: 43/255, green: 82/255, blue: 155/255, alpha: 1)
             
             return additionalOffersCell
         }
