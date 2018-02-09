@@ -50,7 +50,6 @@
 "10-DIGIT CELL PHONE NUMBER" = "10-DIGIT CELL PHONE NUMBER";
 "PASSWORD" = "PASSWORD";
 "Forgot Password?" = "Forgot Password?";
-"LOG IN" = "LOG IN";
 
 //"ENGLISH" = "ENGLISH";
 
@@ -182,7 +181,7 @@
 "PLEASE TRY AGAIN LATER." = "PLEASE TRY AGAIN LATER.";
 "THE INTERENT CONNECTION APPEARS TO BE OFFLINE." = "THE INTERENT CONNECTION APPEARS TO BE OFFLINE.";
 "Additional Offers" = "Additional Offers";
-"Weekly Circular" = "Weekly Circular";
+"Weekly Circular" = "Save-A-Lot Weekly Ad";
 
 // Services
 "Services" = "Services";
@@ -320,16 +319,19 @@
 
 // login screen
 "USER ID" = "Card Number";
-"PASSWORD" = "Pin Code";
 "Remember My User ID" = "Remember My User ID";
 "Touch ID not available" = "Touch ID not available";
 "Your device is not configured for Touch ID." = "Your device is not configured for Touch ID.";
-"LOG IN" = "LOG IN";
 "REGISTER" = "REGISTER";
 "Identify yourself!" = "Identify yourself!";
 "ebt.login.titleLabel" = "AN EASY, CONVENIENT WAY TO ACCESS YOUR EBT CARD ACCOUNT INFORMATION.";
 "ebt.login.messageLabel" = "Check your balance and review your transaction activity.";
-"ebt.login.description" = "To log in enter your card number and pin code, or click on Register to sign up.";
+"ebt.login.description" = "To log in, simply enter your EBT Card Number and PIN.";
+"ebt.login.cardnumber" = "EBT CARD NUMBER";
+"ebt.login.pin" = "PIN";
+"ebt.login.remember" = "Remember My Card Number";
+
+
 
 // Authentication Code
 "AUTHENTICATION CODE" = "AUTHENTICATION CODE";
@@ -374,8 +376,7 @@
 "User ID Rules" = "User ID Rules";
 "Password Rules" = "Password Rules";
 
-"USER ID" = "USER ID";
-"PASSWORD" = "PASSWORD";
+"USER ID" = "EBT CARD NUMBER";
 "CONFIRM NEW PASSWORD" = "CONFIRM PASSWORD";
 "EMAIL ADDRESS" = "EMAIL ADDRESS";
 "CONFIRM EMAIL ADDRESS" = "CONFIRM EMAIL ADDRESS";
@@ -416,8 +417,8 @@
 "No transactions were found." = "No transactions were found.";
 
 // empty field alert
-"alert.emptyField.userid" = "Enter user ID.";
-"alert.emptyField.password" = "Enter password.";
+"alert.emptyField.userid" = "Enter EBT card number.";
+"alert.emptyField.password" = "Enter PIN.";
 "alert.emptyField.authentication" = "Enter authentication code.";
 "alert.emptyField.securityAnswer" = "Enter security answer.";
 
@@ -489,3 +490,5 @@
 "ebt.fieldcheck.dob" = "What is your date of birth? (mm/dd/yyyy)";
 "ebt.fieldcheck.socialsecuritynumber" = "What is your Social Security Number?";
 
+"ebt.snap" = "Snap";
+"ebt.cash" = "Cash";

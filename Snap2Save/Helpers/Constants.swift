@@ -9,27 +9,18 @@
 import Foundation
 import UIKit
 
-
-// development url old
-//var hostUrl = "http://dev.snap2save-a-lot.com/api"
-// test url
-//var hostUrl = "http://dev.snap2save-a-lot.com/test/api"
-
-// new
 // test
-//var hostUrl = "http://test-api.snap2save.com"
+var hostUrl = "http://test-api.snap2save.com"
 // dev
 //var hostUrl = "http://dev.snap2save.com/api"
-// *PRODUCTION:* 
+// production
 //var hostUrl = "http://api.snap2save.com"
 
-var hostUrl = "http://api.snap2save.com"
-
 // admin urls
-// dev
-//var admintUrl = "http://dev.snap2save-a-lot.com/test/admin"
+// test
+var adminUrl = "http://test-admin.snap2save.com"
 // production
-var adminUrl = "http://admin.snap2save.com"
+//var adminUrl = "http://admin.snap2save.com"
 
 var reward_program_en = adminUrl + "/reward/en"
 var reward_program_es = adminUrl + "/reward/es"

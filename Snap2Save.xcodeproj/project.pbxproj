@@ -671,7 +671,7 @@
 				TargetAttributes = {
 					E88BA5461DF53C1300714C65 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 8H583F92Q8;
+						DevelopmentTeam = PGJV67G4NG;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1180,7 +1180,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8H583F92Q8;
+				DEVELOPMENT_TEAM = PGJV67G4NG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Snap2Save/Controller/Services",
@@ -1210,7 +1210,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Piranhas, Inc. (PGJV67G4NG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8H583F92Q8;
+				DEVELOPMENT_TEAM = PGJV67G4NG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Snap2Save/Controller/Services",
