@@ -374,44 +374,46 @@ extension ServicesTVC {
 extension ServicesTVC {
     
     func loadLoginPage() {
-        self.ebtActivityIndicator.startAnimating()
-        // config webview
-        ebtWebView.responder = self
-        let webView = ebtWebView.webView!
-        self.view.addSubview(webView)
-        self.view.sendSubview(toBack: webView)
-        webView.isHidden = true
-        // get url
-        var loginUrl = kEBTLoginUrl
-        // TEST
-//        // For testing only
-//        if self.FlowSegentedControl.selectedSegmentIndex == 1 {
-//            loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"
-//        } else if self.FlowSegentedControl.selectedSegmentIndex == 2 {
-//            loginUrl = "http://internal.appit.ventures/s2s/flow3/ebt_login.html"
-//        } else if self.FlowSegentedControl.selectedSegmentIndex == 3 {
-//            loginUrl = "http://internal.appit.ventures/s2s/flow4/ebt_login.html"
-//        } else if self.FlowSegentedControl.selectedSegmentIndex == 4 {
-//            loginUrl = "http://internal.appit.ventures/s2s/flow5/ebt_login.html"
-//        } else if self.FlowSegentedControl.selectedSegmentIndex == 5 {
-//            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
-//        }
-//        tempLoginUrl = loginUrl
-        
-        // ------
-        
-        if Localize.currentLanguage() == "es" {
-            // .. es url
-            loginUrl = kEBTLoginUrl_es
-        }
-//        
-//        let htmlString = getHTML()
-//        ebtWebView.webView.loadHTMLString(htmlString, baseURL: nil)
+        self.performSegue(withIdentifier: "EBTLoginTVC", sender: nil)
+
+//        self.ebtActivityIndicator.startAnimating()
+//        // config webview
+//        ebtWebView.responder = self
+//        let webView = ebtWebView.webView!
+//        self.view.addSubview(webView)
+//        self.view.sendSubview(toBack: webView)
+//        webView.isHidden = true
+//        // get url
+//        var loginUrl = kEBTLoginUrl
+//        // TEST
+////        // For testing only
+////        if self.FlowSegentedControl.selectedSegmentIndex == 1 {
+////            loginUrl = "http://internal.appit.ventures/s2s/flow2/ebt_login.html"
+////        } else if self.FlowSegentedControl.selectedSegmentIndex == 2 {
+////            loginUrl = "http://internal.appit.ventures/s2s/flow3/ebt_login.html"
+////        } else if self.FlowSegentedControl.selectedSegmentIndex == 3 {
+////            loginUrl = "http://internal.appit.ventures/s2s/flow4/ebt_login.html"
+////        } else if self.FlowSegentedControl.selectedSegmentIndex == 4 {
+////            loginUrl = "http://internal.appit.ventures/s2s/flow5/ebt_login.html"
+////        } else if self.FlowSegentedControl.selectedSegmentIndex == 5 {
+////            loginUrl = "https://ucard.chase.com/locale?request_locale=en"
+////        }
+////        tempLoginUrl = loginUrl
 //
-        // load url
-        let url = NSURL(string: loginUrl)
-        let request = NSURLRequest(url: url! as URL)
-        ebtWebView.webView.load(request as URLRequest)
+//        // ------
+//
+//        if Localize.currentLanguage() == "es" {
+//            // .. es url
+//            loginUrl = kEBTLoginUrl_es
+//        }
+////
+////        let htmlString = getHTML()
+////        ebtWebView.webView.loadHTMLString(htmlString, baseURL: nil)
+////
+//        // load url
+//        let url = NSURL(string: loginUrl)
+//        let request = NSURLRequest(url: url! as URL)
+//        ebtWebView.webView.load(request as URLRequest)
     }
     
     func getHTML() -> String {

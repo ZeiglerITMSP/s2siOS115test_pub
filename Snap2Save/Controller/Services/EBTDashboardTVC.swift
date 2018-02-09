@@ -10,6 +10,9 @@ import UIKit
 import Localize_Swift
 import SwiftyJSON
 import Alamofire
+import SwiftyJSON
+
+var isViewingDashboard = false
 
 class EBTDashboardTVC: UITableViewController {
     
@@ -31,7 +34,11 @@ class EBTDashboardTVC: UITableViewController {
     
     let snapBalanceKey = "snapBalance"
     let cashBalanceKey = "cashBalance"
-    var accountDetails = [[String:String?]]()
+    var accountDetails = [[String:String?]]() {
+        didSet {
+            accountDetails = accountDetails.reversed()
+        }
+    }
     var recentTransactions: [Transaction]?
     
     var accountType: String?
@@ -74,7 +81,14 @@ class EBTDashboardTVC: UITableViewController {
         ebtWebView.responder = self
         
         actionType = ActionType.accountDetails
-        validatePage()
+        loadDataIntoTable()
+        
+        self.isTransactionsLoading = false
+        self.accoutDetailsLoaded = true
+        self.tableView.reloadData()
+        self.sendEBTInformationToServer()
+        
+        SwiftLoader.hide()
         
         adSpotManager.getAdSpots(forScreen: .ebtBalance)
     }
@@ -91,6 +105,14 @@ class EBTDashboardTVC: UITableViewController {
         self.view.sendSubview(toBack: webView)
         webView.isHidden = true
         
+        isViewingDashboard = true
+
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        isViewingDashboard = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -113,7 +135,7 @@ class EBTDashboardTVC: UITableViewController {
         
         //        ebtWebView = nil
         
-        ebtWebView.loadEmptyPage()
+        // ebtWebView.loadEmptyPage()
         _ = self.navigationController?.popToRootViewController(animated: true)
         
         //        // Define identifier
@@ -244,19 +266,26 @@ extension EBTDashboardTVC {
                 let detailedSubtitleCell = tableView.dequeueReusableCell(withIdentifier: "DetailedSubtitleCell", for: indexPath) as! DetailedSubtitleCell
                 
                 let record = trasactions[indexPath.row] as? [String:String]
-                detailedSubtitleCell.titleLabel.text = record?["location"]
+                detailedSubtitleCell.titleLabel.text = record?["transaction_type"]
                 detailedSubtitleCell.subtitleLabel.text = record?["date"]
-                detailedSubtitleCell.subtitleTwoLabel.text = record?["account"]
+
+                var account_type = ""
+                if (record?["account_type"] ?? "Cash") == "Cash" {
+                    account_type = "ebt.cash"
+                } else if (record?["account_type"] ?? "Cash") == "Food" {
+                    account_type = "ebt.snap"
+                }
+                detailedSubtitleCell.subtitleTwoLabel.text = account_type.localized().uppercased()
                 
                 // amount
-                let debit_amount = record?["debit_amount"]
-                let credit_amount = record?["credit_amount"]
+                let debit_amount = record?["deposit_amount"]
+                let credit_amount = record?["completion_amount"]
                 if credit_amount?.containNumbers1To9() == true {
-                    detailedSubtitleCell.detailLabel.text = credit_amount
-                    detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
+                    detailedSubtitleCell.detailLabel.text = credit_amount?.replacingOccurrences(of: "-", with: "")
+                    detailedSubtitleCell.detailLabel.textColor = UIColor.black
                 } else {
                     detailedSubtitleCell.detailLabel.text = debit_amount
-                    detailedSubtitleCell.detailLabel.textColor = UIColor.black
+                    detailedSubtitleCell.detailLabel.textColor = APP_GRREN_COLOR
                 }
                 
                 return detailedSubtitleCell
@@ -309,6 +338,18 @@ extension EBTDashboardTVC {
 
 // MARK: - JavaScript
 extension EBTDashboardTVC {
+    
+    func loadDataIntoTable() {
+        trasactions = EBTData.shared.transactionsArray
+
+        for key in EBTData.shared.accountBalancesObject.keys {
+            if key.contains("cash") {
+                accountDetails.append(["title" : "CASH Balance".localized(), "value": EBTData.shared.accountBalancesObject[key]!, "key": self.cashBalanceKey])
+            } else if key.contains("food") {
+                accountDetails.append(["title" : "SNAP Balance".localized(), "value": EBTData.shared.accountBalancesObject[key]!, "key": self.snapBalanceKey])
+            }
+        }
+    }
     
     func validatePage() {
         

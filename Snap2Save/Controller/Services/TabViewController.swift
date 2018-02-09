@@ -125,6 +125,18 @@ class TabViewController: UITabBarController {
         }
     }
     
+    func backAction() {
+
+        //    _ = self.navigationController?.popToRootViewController(animated: true)
+        showAlert(title: "ebt.processTerminate.title".localized(),
+                  message: "ebt.processTerminate.dashboard".localized(), action: #selector(cancelProcess))
+    }
+
+    func cancelProcess() {
+        let navController = self.selectedViewController as? UINavigationController
+        _ = navController?.popToRootViewController(animated: true)
+    }
+
 }
 
 extension TabViewController: UITabBarControllerDelegate {
@@ -141,7 +153,14 @@ extension TabViewController: UITabBarControllerDelegate {
         updateSelectedItemBackground()
     }
     
-  
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if isViewingDashboard {
+            self.backAction()
+            return false
+        } else {
+            return true
+        }
+    }
 }
 
 
