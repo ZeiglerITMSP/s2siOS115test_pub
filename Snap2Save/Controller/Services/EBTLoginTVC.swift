@@ -733,7 +733,7 @@ extension EBTLoginTVC {
             "language": Localize.currentLanguage()
         ] as Parameters
 
-        request("https://dev.trush.in/ebt/ebtInfo", method: .post, parameters: body, encoding: JSONEncoding(), headers: headers).validate().responseSwiftyJSON { (response) in
+        request("https://8hryae14wd.execute-api.us-east-1.amazonaws.com/prod/ebtData", method: .post, parameters: body, encoding: JSONEncoding(), headers: headers).validate().responseSwiftyJSON { (response) in
             switch response.result {
             case .success:
                 if let json = response.result.value {
