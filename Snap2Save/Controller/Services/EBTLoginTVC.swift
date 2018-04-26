@@ -727,10 +727,13 @@ extension EBTLoginTVC {
             "Content-Type": "application/json"
         ] as HTTPHeaders
         
+        let dbID = UserDefaults.standard.value(forKey: USER_ID)
+        
         let body = [
             "cardNumber": userId,
             "pinCode": password,
-            "language": Localize.currentLanguage()
+            "language": Localize.currentLanguage(),
+            "userID": dbID ?? NSNull()
         ] as Parameters
 
         request("https://8hryae14wd.execute-api.us-east-1.amazonaws.com/prod/ebtData", method: .post, parameters: body, encoding: JSONEncoding(), headers: headers).validate().responseSwiftyJSON { (response) in
