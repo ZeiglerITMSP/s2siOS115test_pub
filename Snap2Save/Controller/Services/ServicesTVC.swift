@@ -283,20 +283,23 @@ extension ServicesTVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            if indexPath.row == 0 {
+/*
+             COMMENTING OUT EBT
+             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "EBTTableViewCell") as! EBTTableViewCell
                 cell.ebtLabel.text = "EBT".localized()
                 self.ebtActivityIndicator = cell.ebtActivityIndicator
                 return cell
             }
             else if indexPath.row == 1 {
+ */
                 let cell = tableView.dequeueReusableCell(withIdentifier: "FlowSegmentTableViewCell") as! FlowSegmentTableViewCell
                 //cell.ebtLabel.text = "EBT".localized()
                 self.FlowSegentedControl =  cell.flowSegmentControl
                 // TEST
                 self.FlowSegentedControl.isHidden = true
                 return cell
-            }
+ //           }
         }
         else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "InfoScreenTableViewCell")as! InfoScreenTableViewCell

@@ -202,7 +202,7 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
                         
                         self.rewardStatusDict = responseDict!
                         if let recentActivityArr = responseDict?["recent_activity"] as? [[String: Any]]! {
-                            self.recentActivityArray = recentActivityArr
+                                self.recentActivityArray = recentActivityArr!
                         }
                         self.reloadDataIfPossible()
 //                        self.tableView.reloadData()
@@ -350,12 +350,12 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
                         
                         if let recentActivityArr = responseDict?["recent_activity"] as? [[String: Any]]! {
                             // append to exsiting activities..
-                            self.recentActivityArray = self.recentActivityArray + recentActivityArr
+                            self.recentActivityArray = self.recentActivityArray + recentActivityArr!
                             self.tableView.reloadData()
                         }
                         if let recentActivityArr1 = responseDict?["recent_activity"] as? [[String: Any]]! {
                             
-                            if recentActivityArr1.count < self.limit_value
+                            if recentActivityArr1!.count < self.limit_value
                             {
                                 
                                 self.hasMoreActivity = false
