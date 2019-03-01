@@ -168,7 +168,7 @@ class AdSpotsManager: NSObject {
                     }
                     // navigate
 //                    offerDetails.isFromAdditionalOffers = false
-                    offerDetails.navigationTitle = "Offers"
+                    offerDetails.navigationTitle = ""
                     controller.navigationController?.show(offerDetails, sender: controller)
                 }
             }
@@ -183,7 +183,7 @@ class AdSpotsManager: NSObject {
                             offerDetails.urlString_es = urlStr
                         }
                     }
-                    offerDetails.navigationTitle = "Offers"
+                    offerDetails.navigationTitle = ""
 //                    offerDetails.isFromAdditionalOffers = false
                     controller.navigationController?.show(offerDetails, sender: controller)
                 }
