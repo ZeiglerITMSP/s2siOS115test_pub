@@ -124,6 +124,7 @@ class ServicesWebViewVC: UIViewController {
                 self.title = self.infoDict["en_title"] as! String?
             }
             
+            self.title="";
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()
 
