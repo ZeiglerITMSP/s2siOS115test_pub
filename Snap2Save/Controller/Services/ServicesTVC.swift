@@ -239,7 +239,7 @@ extension ServicesTVC {
             return 0.001
         } else {
             if section <= 1 {
-                return 30
+                return 0.001
             } else {
                 return 0.001
             }
