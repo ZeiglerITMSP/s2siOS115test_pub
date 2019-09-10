@@ -10,16 +10,16 @@ import Foundation
 import UIKit
 
 // test
-var hostUrl = "https://test-api.snap2save.com"
+ var hostUrl = "https://test-api.snap2save.com"
 // dev
 // production
-//var hostUrl = "https://api.snap2save.com"
+// var hostUrl = "https://api.snap2save.com"
 
 // admin urls
 // test
-var adminUrl = "https://test-admin.snap2save.com"
+ var adminUrl = "https://test-admin.snap2save.com"
 // production
-//var adminUrl = "https://admin.snap2save.com"
+// var adminUrl = "https://admin.snap2save.com"
 
 var reward_program_en = adminUrl + "/reward/en"
 var reward_program_es = adminUrl + "/reward/es"

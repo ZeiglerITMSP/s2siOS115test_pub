@@ -165,7 +165,7 @@ class ServicesTVC: UITableViewController {
         //print(parameters)
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         
-        let url = String(format: "%@/infoScreensList", hostUrl)
+        let url = String(format: "%@/infoScreensList?include_ada=1", hostUrl)
         //print("url)
         Alamofire.postRequest(URL(string:url)!, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
             
