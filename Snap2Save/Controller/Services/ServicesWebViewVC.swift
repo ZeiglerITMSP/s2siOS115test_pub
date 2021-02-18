@@ -8,6 +8,7 @@
 
 import UIKit
 import Localize_Swift
+import Google
 
 class ServicesWebViewVC: UIViewController {
     
@@ -114,6 +115,14 @@ class ServicesWebViewVC: UIViewController {
                 self.title = "Reward Program".localized()
             }*/
             
+      
+            if let gai = GAI.sharedInstance() {
+                gai.trackUncaughtExceptions = true  // report uncaught exceptions
+                // gai.logger.logLevel = GAILogLevel.verbose  // remove before app release
+            }
+
+            let tracker = GAI.sharedInstance().defaultTracker
+            
             if Localize.currentLanguage() == "es"
             {
                 self.title = self.infoDict["es_title"] as? String
@@ -123,7 +132,14 @@ class ServicesWebViewVC: UIViewController {
             {
                 self.title = self.infoDict["en_title"] as! String?
             }
+
+            let builder = GAIDictionaryBuilder.createEvent(withCategory: "Services",
+                                                           action: "ButtonClick",
+                                                           label: self.title,
+                                                           value: 1).build()
             
+            tracker?.send(builder as [NSObject : AnyObject]!)
+
             self.title="";
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
             self.updateBackButtonText()

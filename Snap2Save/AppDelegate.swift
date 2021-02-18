@@ -29,6 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Status
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
+        enum InitilizationError:Error {
+            case CantInitializeFirebase
+        }
+        
+        throw InitilizationError.CantInitializeFirebase;
+        
         // register notification for language change.
         
         let isLogged = UserDefaults.standard.dictionaryRepresentation().keys.contains(LOGGED_USER)

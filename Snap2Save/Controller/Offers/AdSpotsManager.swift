@@ -155,6 +155,16 @@ class AdSpotsManager: NSObject {
         
         let offerDetails = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "OffersDetailsViewController") as! OffersDetailsViewController
         
+        print ("showAdSpotDetails 2")
+        print (spot)
+        
+        if let gai = GAI.sharedInstance() {
+            gai.trackUncaughtExceptions = true  // report uncaught exceptions
+            // gai.logger.logLevel = GAILogLevel.verbose  // remove before app release
+        }
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        
         if Localize.currentLanguage() == "es" {
             // get es url
             if  let urlStr_es: String = spot["offer_url_es"] as? String {
@@ -168,6 +178,13 @@ class AdSpotsManager: NSObject {
                     }
                     // navigate
 //                    offerDetails.isFromAdditionalOffers = false
+                    let builder = GAIDictionaryBuilder.createEvent(withCategory: "Ads",
+                                                                   action: "Click",
+                                                                   label: "Table",
+                                                                   value: 1).build()
+                    
+                    tracker?.send(builder as [NSObject : AnyObject]!)
+
                     offerDetails.navigationTitle = ""
                     controller.navigationController?.show(offerDetails, sender: controller)
                 }
@@ -183,12 +200,22 @@ class AdSpotsManager: NSObject {
                             offerDetails.urlString_es = urlStr
                         }
                     }
+                    let builder = GAIDictionaryBuilder.createEvent(withCategory: "Ads EN",
+                                                                   action: "Click",
+                                                                   label: "Table",
+                                                                   value: 1).build()
+                    
+                    tracker?.send(builder as [NSObject : AnyObject]!)
+
                     offerDetails.navigationTitle = ""
 //                    offerDetails.isFromAdditionalOffers = false
                     controller.navigationController?.show(offerDetails, sender: controller)
+                    
                 }
             }
         }
+        
+
     }
     
     

@@ -129,6 +129,8 @@ class OffersVC: UIViewController {
         
         let offerDetails = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "OffersDetailsViewController") as! OffersDetailsViewController
         
+        print("tapGesClicked")
+        print (offersDict)
         if Localize.currentLanguage() == "es" {
             // get es url
             if  let urlStr_es: String = offersDict?["offer_url_es"] as? String {
