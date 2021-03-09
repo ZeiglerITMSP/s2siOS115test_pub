@@ -43,7 +43,7 @@ class ServicesWebViewVC: UIViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         servicesWebView.delegate = self
         servicesWebView.scalesPageToFit = true
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -77,7 +77,7 @@ class ServicesWebViewVC: UIViewController {
     
     // MARK: -
     
-    func backAction() {
+    @objc func backAction() {
         
 //         _ = self.navigationController?.popViewController(animated: true)
         if servicesWebView.canGoBack == true {
@@ -87,12 +87,12 @@ class ServicesWebViewVC: UIViewController {
         }
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         
         self.showLanguageSelectionAlert()
     }
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
         DispatchQueue.main.async {
             

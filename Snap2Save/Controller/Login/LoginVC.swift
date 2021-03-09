@@ -150,18 +150,18 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     }
     // MARK: -
     
-    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+    @objc func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
     }
     
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         
         self.showLanguageSelectionAlert()
         
     }
-    
+    @objc  
     func reloadContent() {
         DispatchQueue.main.async {
             
@@ -180,7 +180,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
     }
     
     
-    func animateWithKeyboard(notification: NSNotification) {
+    @objc func animateWithKeyboard(notification: NSNotification) {
         
         // Based on both Apple's docs and personal experience,
         // I assume userInfo and its documented keys are available.
@@ -208,7 +208,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
     }
     
-    func backButtonAction(){
+    @objc func backButtonAction(){
         
         _ = self.navigationController?.popToRootViewController(animated: true)
         
@@ -228,7 +228,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         // Sets the translucent background color
         self.navigationController?.navigationBar.backgroundColor = UIColor.clear        // Set translucent. (Default value is already true, so this can be removed if desired.)
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBarNSAttributedStringKey.foregroundColorgroundColorAttributeName: UIColor.white]
         
         let lineView = UIView(frame: CGRect(x: 0, y: 44, width: SCREEN_WIDTH, height: 1))
         lineView.backgroundColor = UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.4)

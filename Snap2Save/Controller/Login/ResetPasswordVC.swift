@@ -97,7 +97,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         //let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         //self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
         self.navigationController?.navigationBar.barTintColor = APP_GRREN_COLOR
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: navigationController, action: nil)
         self.navigationItem.leftBarButtonItem = backButton
         reloadContent()
@@ -112,19 +112,19 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     
     // MARK: -
     
-    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+    @objc func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
     }
     
     
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
         
     }
     
-    func reloadContent() {
+    @objc func reloadContent() {
         DispatchQueue.main.async {
             self.title = "Reset Password".localized()
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
@@ -244,7 +244,7 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     
 }
 
-    func alertAction() {
+    @objc func alertAction() {
         let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
         self.navigationController?.show(loginVc, sender: self)
         self.view.endEditing(true)

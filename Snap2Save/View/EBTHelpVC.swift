@@ -64,13 +64,13 @@ class EBTHelpVC: UIViewController {
     
     // MARK: -
     
-    func backAction() {
+    @objc func backAction() {
         
         //        removeHelpTab()
         _ = self.navigationController?.popViewController(animated: false)
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         
         self.showLanguageSelectionAlert()
         

@@ -135,7 +135,7 @@ class EBTChangeEmailTVC: UITableViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+    @objc func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
     }
@@ -180,12 +180,12 @@ class EBTChangeEmailTVC: UITableViewController {
     
     // MARK: -
     
-    func backAction() {
+    @objc func backAction() {
         
         showAlert(title: "ebt.processTerminate.title".localized(), message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
     }
     
-    func cancelProcess() {
+    @objc func cancelProcess() {
         
         // Define identifier
         let notificationName = Notification.Name("POPTOLOGIN")

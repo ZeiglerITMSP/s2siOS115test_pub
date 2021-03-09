@@ -273,7 +273,7 @@ class EBTLoginTVC: UITableViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+    @objc func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
     }
@@ -309,19 +309,19 @@ class EBTLoginTVC: UITableViewController {
     
     // MARK: -
     
-    func backAction() {
+    @objc func backAction() {
         
 //        removeHelpTab()
        _ = self.navigationController?.popToRootViewController(animated: true)
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         
         self.showLanguageSelectionAlert()
         
     }
     
-    func languageChanged() {
+    @objc func languageChanged() {
         
         loadLoginPage()
         reloadContent()
@@ -365,7 +365,7 @@ class EBTLoginTVC: UITableViewController {
         }
     }
     
-    func popToLoginVC() {
+    @objc func popToLoginVC() {
         
         isProcessCancelled = true
         loadLoginPage()

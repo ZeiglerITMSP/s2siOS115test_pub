@@ -55,7 +55,7 @@ class LanguageUtility: NSObject {
 extension UIViewController {
     
     /// Language selection alert
-    func showLanguageSelectionAlert() {
+    @objc func showLanguageSelectionAlert() {
         
         let languageAlert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
         

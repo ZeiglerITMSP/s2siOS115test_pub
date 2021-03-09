@@ -118,15 +118,15 @@ class RedeemPointsTVC: UITableViewController {
 //        }
     
 
-    func backAction() {
+    @objc func backAction() {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
         DispatchQueue.main.async {
             self.updateBackButtonText()

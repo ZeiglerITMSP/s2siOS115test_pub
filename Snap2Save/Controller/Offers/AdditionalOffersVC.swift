@@ -80,16 +80,16 @@ class AdditionalOffersVC: UIViewController {
     }
     
     // MARK: -
-    func backAction() {
+    @objc func backAction() {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
 
     
-    func languageChanged() {
+    @objc func languageChanged() {
         
         updateTitles()
         downloadOfferImage()

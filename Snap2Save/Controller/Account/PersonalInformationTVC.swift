@@ -141,22 +141,22 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
     
     // MARK: -
     
-    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+    @objc func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
     }
     
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
     
-    func backAction() {
+    @objc func backAction() {
         _ = self.navigationController?.popViewController(animated: true)
         
     }
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
         self.updateBackButtonText()
         self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
@@ -862,7 +862,7 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
         return true
     }
     
-    func alertAction() {
+    @objc func alertAction() {
         self.view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)
     }

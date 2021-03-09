@@ -32,7 +32,7 @@ open class SwiftLoader: UIView {
         }
     }
     
-    func rotated(_ notification: Notification) {
+    @objc func rotated(_ notification: Notification) {
         
         let loader = SwiftLoader.sharedInstance
         
@@ -343,6 +343,7 @@ open class SwiftLoader: UIView {
     }
     
     // MARK:- Loader config
+    @available(iOS 10.0, *)
     public struct Config {
         // Size of loader
         public var size : CGFloat = 120.0

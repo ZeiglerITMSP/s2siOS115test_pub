@@ -105,12 +105,12 @@ class ServicesTVC: UITableViewController {
     
     // MARK: -
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         
         self.showLanguageSelectionAlert()
     }
     
-    func languageChanged() {
+    @objc func languageChanged() {
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         screensLoaded = true

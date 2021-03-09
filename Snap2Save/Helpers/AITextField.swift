@@ -275,7 +275,7 @@ class AITextField: UITextField {
     /*
      When user click done button
      */
-    func doneButtonClicked()
+    @objc func doneButtonClicked()
     {
         switch self.textFieldType {
             
@@ -310,7 +310,7 @@ class AITextField: UITextField {
     /*/;
      When user clicked cancel button.
      */
-    func cancelButtonClicked()
+    @objc func cancelButtonClicked()
     {
         switch self.textFieldType {
         case AITextFieldType.DatePickerTextField:

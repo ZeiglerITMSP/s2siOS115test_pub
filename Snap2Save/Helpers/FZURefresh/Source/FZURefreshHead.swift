@@ -58,10 +58,10 @@ open class FZURefreshHead: UIView {
     
     required public init?(coder aDecoder: NSCoder) {fatalError("init(coder:) has not been implemented")}
     
-    func keyboradWillShow(){
+    @objc func keyboradWillShow(){
         keyboardIsShowing = true
     }
-    func keyboradWillHide(){
+    @objc func keyboradWillHide(){
         keyboardIsShowing = false
     }
     

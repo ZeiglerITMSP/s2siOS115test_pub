@@ -173,7 +173,7 @@ class AppHelper {
         let string_to_color = "*"
         let contactStrRange = (mobileNumTxt as NSString).range(of: string_to_color)
         
-        mobileNumTxtAttribute.addAttribute(NSForegroundColorAttributeName, value: APP_ORANGE_COLOR , range: contactStrRange)
+        mobileNumTxtAttribute.addAttribute(NSAttributedStringKey.foregroundColor, value: APP_ORANGE_COLOR , range: contactStrRange)
         
         return mobileNumTxtAttribute
     }
@@ -243,7 +243,7 @@ extension String {
         let string_to_color = "*"
         let contactStrRange = (mobileNumTxt as NSString).range(of: string_to_color)
         
-        mobileNumTxtAttribute.addAttribute(NSForegroundColorAttributeName, value: MandatoryColor , range: contactStrRange)
+        mobileNumTxtAttribute.addAttNSAttributedStringKey.foregroundColoruteName, value: MandatoryColor , range: contactStrRange)
         
         return mobileNumTxtAttribute
     }
@@ -255,7 +255,7 @@ extension String {
         let string_to_color = "*"
         let contactStrRange = (self as NSString).range(of: string_to_color)
         
-        mobileNumTxtAttribute.addAttribute(NSForegroundColorAttributeName, value: MandatoryColor , range: contactStrRange)
+        mobileNumTxtAttribute.addAttNSAttributedStringKey.foregroundColoruteName, value: MandatoryColor , range: contactStrRange)
         
         return mobileNumTxtAttribute
     }

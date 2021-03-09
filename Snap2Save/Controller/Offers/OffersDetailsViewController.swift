@@ -73,11 +73,11 @@ class OffersDetailsViewController: UIViewController {
     
 
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
     
-    func languageChanged() {
+    @objc func languageChanged() {
         
         updateTitles()
         loadWebView()
@@ -116,7 +116,7 @@ class OffersDetailsViewController: UIViewController {
 //        }
 //    }
 
-    func backAction() {
+    @objc func backAction() {
         _ = self.navigationController?.popViewController(animated: true)
     }
     

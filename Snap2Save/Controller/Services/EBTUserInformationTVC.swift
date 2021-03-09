@@ -237,7 +237,7 @@ class EBTUserInformationTVC: UITableViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+    @objc func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
     }
@@ -293,13 +293,13 @@ class EBTUserInformationTVC: UITableViewController {
     
     // MARK: -
     
-    func backAction() {
+    @objc func backAction() {
         
 //        self.navigationController?.popViewController(animated: true)
         showAlert(title: "ebt.processTerminate.title".localized(), message: "ebt.processTerminate.alert".localized(), action: #selector(cancelProcess))
     }
     
-    func cancelProcess() {
+    @objc func cancelProcess() {
         
         // Define identifier
         let notificationName = Notification.Name("POPTOLOGIN")
@@ -693,9 +693,9 @@ extension EBTUserInformationTVC: AIPlaceHolderTextFieldDelegate {
         let messageText = NSMutableAttributedString(
             string: message,
             attributes: [
-                NSParagraphStyleAttributeName: paragraphStyle,
-                NSFontAttributeName : UIFont(name: "System-Light", size: 12) ?? UIFont.systemFont(ofSize: 12),
-                NSForegroundColorAttributeName : UIColor.gray
+                NSAttributedStringKey.paragraphStyle: paragraphStyle,
+                NSAttributedStringKey.font : UIFont(name: "System-Light", size: 12) ?? UIFont.systemFont(ofSize: 12),
+                NSAttributedStringKey.foregroundColor : UIColor.gray
             ]
         )
         

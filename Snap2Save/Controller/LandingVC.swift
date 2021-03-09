@@ -56,7 +56,7 @@ class LandingVC: UIViewController {
     }
     
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
          DispatchQueue.main.async {
             

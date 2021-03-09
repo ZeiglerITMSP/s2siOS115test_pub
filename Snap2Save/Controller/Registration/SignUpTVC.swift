@@ -160,7 +160,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         // super.setNavigationBarImage(image: navBarBGImg)
         self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -214,18 +214,18 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
 
     // MARK: - 
     
-    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+    @objc func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         
         self.showLanguageSelectionAlert()
         
     }
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
@@ -280,15 +280,15 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         
         let fullMessageRange = (attributedString.string as NSString).range(of: fullMessage)
         // default text style
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: self.messageTextView.textColor!, range: fullMessageRange)
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 14), range: fullMessageRange)
+        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: self.messageTextView.textColor!, range: fullMessageRange)
+        attributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 14), range: fullMessageRange)
         let titleParagraphStyle = NSMutableParagraphStyle()
         titleParagraphStyle.alignment = .left
-        attributedString.addAttribute(NSParagraphStyleAttributeName, value: titleParagraphStyle, range: fullMessageRange)
+        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: titleParagraphStyle, range: fullMessageRange)
         
         // linkRange
         let linkRange = (attributedString.string as NSString).range(of: rangeMessage)
-        attributedString.addAttribute(NSLinkAttributeName, value: link, range: linkRange)
+        attributedString.addAttribute(NSAttributedStringKey.link, value: link, range: linkRange)
         
         let linkAttributes = [
             NSForegroundColorAttributeName: UIColor.white,
@@ -337,20 +337,20 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
 
         let textColor = UIColor.init(red: 148.0/255.0, green: 148.0/255.0, blue: 153.0/255.0, alpha: 1.0)
         // default text style
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: textColor, range: range)
+        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: textColor, range: range)
         
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: MandatoryColor, range: range1)
+        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: MandatoryColor, range: range1)
 
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: fullMessageRange)
+        attributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 15), range: fullMessageRange)
         let titleParagraphStyle = NSMutableParagraphStyle()
         titleParagraphStyle.alignment = .center
         
-        attributedString.addAttribute(NSParagraphStyleAttributeName, value: titleParagraphStyle, range: fullMessageRange)
+        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: titleParagraphStyle, range: fullMessageRange)
         
         
         // linkRange
         let linkRange = (attributedString.string as NSString).range(of: rangeMessage)
-        attributedString.addAttribute(NSLinkAttributeName, value: link, range: linkRange)
+        attributedString.addAttribute(NSAttributedStringKey.link, value: link, range: linkRange)
         
         let linkAttributes = [
             NSForegroundColorAttributeName: UIColor.black,
@@ -370,7 +370,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
        // self.termsTextView.contentSize = self.termsTextView.bounds.size
     }
     
-    func backButtonAction(){
+    @objc func backButtonAction(){
         
         self.view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)

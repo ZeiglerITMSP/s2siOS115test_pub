@@ -90,13 +90,13 @@ class WelcomePageVC: UIViewController {
     
     // MARK: -
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         
         self.showLanguageSelectionAlert()
         
     }
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
         DispatchQueue.main.async {
             

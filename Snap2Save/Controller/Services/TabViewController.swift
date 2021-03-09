@@ -87,7 +87,7 @@ class TabViewController: UITabBarController {
         
     }
     
-    func updateTabBarItemsTitle() {
+    @objc func updateTabBarItemsTitle() {
         
         if (self.tabBar.items != nil) {
             
@@ -132,7 +132,7 @@ class TabViewController: UITabBarController {
                   message: "ebt.processTerminate.dashboard".localized(), action: #selector(cancelProcess))
     }
 
-    func cancelProcess() {
+    @objc func cancelProcess() {
         let navController = self.selectedViewController as? UINavigationController
         _ = navController?.popToRootViewController(animated: true)
     }

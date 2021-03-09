@@ -124,14 +124,14 @@ class EBTDashboardTVC: UITableViewController {
     
     // MARK: -
     
-    func backAction() {
+    @objc func backAction() {
         
         //    _ = self.navigationController?.popToRootViewController(animated: true)
         showAlert(title: "ebt.processTerminate.title".localized(),
                   message: "ebt.processTerminate.dashboard".localized(), action: #selector(cancelProcess))
     }
     
-    func cancelProcess() {
+    @objc func cancelProcess() {
         
         //        ebtWebView = nil
         
@@ -601,7 +601,7 @@ extension EBTDashboardTVC {
         }
     }
     
-    func checkForStartEndDateFields() {
+    @objc func checkForStartEndDateFields() {
         
         let jsIsLastPage = "checkForStartEndDateFields();"
         ebtWebView.webView.evaluateJavaScript(jsIsLastPage) { (result, error) in
@@ -644,7 +644,7 @@ extension EBTDashboardTVC {
     
     
     /// get startTime, on every time this method is called, it will checks for elapsed time, if 30 seconds reached, end. else check transactions after 2 seconds.
-    func getTransactions() {
+    @objc func getTransactions() {
         // On first time setStartTime
         if startTime == nil {
             startTime = Date()
@@ -672,7 +672,7 @@ extension EBTDashboardTVC {
     }
     
     
-    func checkPageNumber() {
+    @objc func checkPageNumber() {
         
         let jsPageNumber = "getCurrentPageNumber();"
         ebtWebView.webView.evaluateJavaScript(jsPageNumber, completionHandler: { (result, error) in

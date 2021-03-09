@@ -471,7 +471,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func removeLanguageObserver() {
         LanguageUtility.removeObserverForLanguageChange(self)
     }
-    func sendCurrentLanguageToServer() {
+    @objc func sendCurrentLanguageToServer() {
       //  print(#function)
         
         let user_id = UserDefaults.standard.object(forKey: USER_ID)

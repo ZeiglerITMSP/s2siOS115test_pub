@@ -80,11 +80,11 @@ class OffersVC: UIViewController {
         self.navigationController?.popToRootViewController(animated: false)
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
     
-    func languageChanged() {
+    @objc func languageChanged() {
         
         updateTitles()
         downloadOfferImage()

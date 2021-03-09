@@ -119,15 +119,15 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
     
     // MARK: -
     
-    func backAction() {
+    @objc func backAction() {
         _ = self.navigationController?.popToRootViewController(animated: true)
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
     
-    func languageChanged() {
+    @objc func languageChanged() {
         
         updateTitles()
         loadAdSpots(onLanguageChange: true)
@@ -661,7 +661,7 @@ extension RewardStatusTVC: RedeemPointsTotalDelegate {
         }
     }
     
-    func alertAction() {
+    @objc func alertAction() {
         self.view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)
         

@@ -65,7 +65,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         // super.setNavigationBarImage(image: navBarBGImg)
         self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
         
         mobileNumberTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField
@@ -114,14 +114,14 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
     
     // MARK: -
     
-    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+    @objc func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
     }
     
     
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
         DispatchQueue.main.async {
             self.title = "Forgot Password".localized()
@@ -139,11 +139,11 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         mobileNumberTextField.updateUIAsPerTextFieldType();
     }
     
-    func languageButtonClicked(){
+    @objc func languageButtonClicked(){
         
         self.showLanguageSelectionAlert()
     }
-    func backButtonAction(){
+    @objc func backButtonAction(){
         
         _ = self.navigationController?.popViewController(animated: true)
         
@@ -298,7 +298,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         return true
     }
     
-    func alertAction() {
+    @objc func alertAction() {
         
         let loginVc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
         self.navigationController?.show(loginVc, sender: self)

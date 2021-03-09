@@ -97,11 +97,11 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
         DispatchQueue.main.async {
             //self.updateBackButtonText()
@@ -121,9 +121,9 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
             paragraphStyle.lineHeightMultiple = 1.2
             
             let subscriptionNoticeAttributedString = NSAttributedString(string:subscriptionNotice, attributes: [
-                NSFontAttributeName: UIFont.systemFont(ofSize: 16),
-                NSParagraphStyleAttributeName: paragraphStyle,
-                NSForegroundColorAttributeName: UIColor(red: 0.0/0.0,
+                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16),
+                NSAttributedStringKey.paragraphStyle: paragraphStyle,
+                NSAttributedStringKey.foregroundColor: UIColor(red: 0.0/0.0,
                                                         green: 122.0/255.0,
                                                         blue: 255.0/255.0,
                                                         alpha: 1) ,

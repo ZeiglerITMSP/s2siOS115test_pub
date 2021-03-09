@@ -126,15 +126,15 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         super.viewDidDisappear(animated)
     }
     
-    func backAction() {
+    @objc func backAction() {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
         DispatchQueue.main.async {
             self.updateBackButtonText()
@@ -601,7 +601,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         return true
     }
     
-    func alertAction() {
+    @objc func alertAction() {
         self.view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)
         

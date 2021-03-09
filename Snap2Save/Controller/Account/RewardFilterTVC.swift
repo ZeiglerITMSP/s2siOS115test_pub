@@ -70,7 +70,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         toDateField.contentTextField.dateFormatString = "MM/dd/yy"
         
         
-       let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY".localized(), attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 14.0)]) // Font
+        let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY".localized(), attributes: [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 14.0)]) // Font
         fromDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
         toDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
 
@@ -117,15 +117,15 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
     }
     
     // MARK: -
-    func backAction() {
+    @objc func backAction() {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
         DispatchQueue.main.async {
             self.updateBackButtonText()
@@ -141,7 +141,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
             self.fromDateField.contentTextField.placeholder = "MM/DD/YY".localized()
             self.toDateField.contentTextField.placeholder = "MM/DD/YY".localized()
             
-            let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY".localized(), attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 14.0)]) // Font
+            let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY".localized(), attributes: [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 14.0)]) // Font
             self.fromDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
             self.toDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
             self.tableView.reloadData()

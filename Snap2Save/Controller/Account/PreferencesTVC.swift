@@ -138,22 +138,22 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
     
     
     // MARK: -
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
     
-    func backButtonAction(){
+    @objc func backButtonAction(){
         
         _ = self.navigationController?.popViewController(animated: true)
         
     }
     
-    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+    @objc func tapOnTableView(recognizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
         DispatchQueue.main.async {
             self.updateBackButtonText()
@@ -765,7 +765,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
     }
     
-    func alertAction() {
+    @objc func alertAction() {
         self.view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)
 

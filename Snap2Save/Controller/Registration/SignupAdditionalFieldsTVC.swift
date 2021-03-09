@@ -113,7 +113,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         // super.setNavigationBarImage(image: navBarBGImg)
         self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
         loadTextFields();
         //print("userDetailsDict)
@@ -162,19 +162,19 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     // MARK: -
     
-    func tapOnTableView(recognizer: UITapGestureRecognizer) {
+    @objc func tapOnTableView(recognizer: UITapGestureRecognizer) {
         
         self.view.endEditing(true)
     }
     
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         
         self.showLanguageSelectionAlert()
         
     }
     
-    func reloadContent() {
+    @objc func reloadContent() {
         
         DispatchQueue.main.async {
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)
@@ -255,7 +255,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         }
     }
     
-    func backButtonAction(){
+    @objc func backButtonAction(){
         _ = self.navigationController?.popViewController(animated: true)
         self.view.endEditing(true)
         
@@ -669,9 +669,9 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let hogan = NSMutableAttributedString(string: title)
         
         //Make the attributes, like size and color
-        hogan.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFont(ofSize: 16.0), range: NSMakeRange(0,NSString(string: hogan.string).length))
+        hogan.addAttribute(NSAttributedStringKey.font, value: UIFont.boldSystemFont(ofSize: 16.0), range: NSMakeRange(0,NSString(string: hogan.string).length))
         
-        hogan.addAttribute(NSForegroundColorAttributeName, value: APP_GRREN_COLOR, range: NSMakeRange(0, NSString(string: hogan.string).length))
+        hogan.addAttribute(NSAttributedStringKey.foregroundColor, value: APP_GRREN_COLOR, range: NSMakeRange(0, NSString(string: hogan.string).length))
         
         signUpAlert.setValue(hogan, forKey: "attributedTitle")
         

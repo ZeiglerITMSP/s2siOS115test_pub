@@ -57,11 +57,11 @@ class RedeemPointsWebVC: UIViewController {
         super.viewDidDisappear(animated)
     }
 
-    func backAction() {
+    @objc func backAction() {
         _ = self.navigationController?.popViewController(animated: true)
     }
 
-    func reloadContent() {
+    @objc func reloadContent() {
         DispatchQueue.main.async {
             self.navigationItem.title = "Redeem Points".localized()
             self.updateBackButtonText()
@@ -78,7 +78,7 @@ class RedeemPointsWebVC: UIViewController {
         
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
 

@@ -69,11 +69,11 @@ class RedeemPointsMessageVC: UIViewController {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
 
-    func reloadContent() {
+    @objc func reloadContent() {
         
         DispatchQueue.main.async {
            // self.updateBackButtonText()

@@ -85,11 +85,11 @@ class AccountTVC: UITableViewController {
     }
     
     
-    func languageButtonClicked() {
+    @objc func languageButtonClicked() {
         self.showLanguageSelectionAlert()
     }
     
-    func languageChanged() {
+    @objc func languageChanged() {
         
         SwiftLoader.show(title: "Loading...".localized(), animated: true)
         reloadContent()
@@ -334,14 +334,14 @@ extension AccountTVC {
             } else {
                 let basicCell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! AccountCell
                 basicCell.titleLabel?.text = accountOptions[indexPath.row].localized()
-                basicCell.titleLabel?.textColor = UIColor(colorLiteralRed: 74/255, green: 74/255, blue: 74/255, alpha: 1)
+                basicCell.titleLabel?.textColor = UIColor(displayP3Red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
                 return basicCell
             }
         }
         else if indexPath.section == 1 {
             let basicCell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! AccountCell
             basicCell.titleLabel?.text = "Log Out".localized()
-            basicCell.titleLabel?.textColor = UIColor(colorLiteralRed: 236/255, green: 80/255, blue: 30/255, alpha: 1)
+            basicCell.titleLabel?.textColor = UIColor(displayP3Red: 236/255, green: 80/255, blue: 30/255, alpha: 1)
             return basicCell
         }
         else if indexPath.section == 2 { // Ads image cell
