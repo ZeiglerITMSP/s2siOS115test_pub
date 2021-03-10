@@ -137,7 +137,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.title = "Register"
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 60
         self.navigationController?.navigationBar.isHidden = false
         AppHelper.configSwiftLoader()
@@ -151,7 +151,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
+        backButton.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -20, bottom: 0, right: 0)
         
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = backButton
@@ -160,7 +160,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         // super.setNavigationBarImage(image: navBarBGImg)
         self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -280,11 +280,11 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         
         let fullMessageRange = (attributedString.string as NSString).range(of: fullMessage)
         // default text style
-        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: self.messageTextView.textColor!, range: fullMessageRange)
-        attributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 14), range: fullMessageRange)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: self.messageTextView.textColor!, range: fullMessageRange)
+        attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 14), range: fullMessageRange)
         let titleParagraphStyle = NSMutableParagraphStyle()
         titleParagraphStyle.alignment = .left
-        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: titleParagraphStyle, range: fullMessageRange)
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: titleParagraphStyle, range: fullMessageRange)
         
         // linkRange
        // let linkRange = (attributedString.string as NSString).range(of: rangeMessage)
@@ -337,15 +337,15 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
 
         let textColor = UIColor.init(red: 148.0/255.0, green: 148.0/255.0, blue: 153.0/255.0, alpha: 1.0)
         // default text style
-        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: textColor, range: range)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: textColor, range: range)
         
-        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: MandatoryColor, range: range1)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: MandatoryColor, range: range1)
 
-        attributedString.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 15), range: fullMessageRange)
+        attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 15), range: fullMessageRange)
         let titleParagraphStyle = NSMutableParagraphStyle()
         titleParagraphStyle.alignment = .center
         
-        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: titleParagraphStyle, range: fullMessageRange)
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: titleParagraphStyle, range: fullMessageRange)
         
         
         // linkRange
@@ -512,7 +512,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
             }
     }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     func isValidData() -> Bool{
@@ -524,7 +524,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         let validEmail = AppHelper.isValidEmail(testStr: emailTextField.text!)
         let socialId : String = facebookDict?["id"] as! String? ?? ""
         
-        if mobileNumTextField.text?.characters.count == 0 || validMobileNum == false {
+        if mobileNumTextField.text?.count == 0 || validMobileNum == false {
             showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
             return false
         }
@@ -535,7 +535,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         }
         
         if socialId.isEmpty == true{
-        if (passwordTextField.text?.characters.count)! < 6 {
+        if (passwordTextField.text?.count)! < 6 {
             showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
             return false
         }
@@ -546,17 +546,17 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         }
         }
         
-        if (zipCodeTextField.text?.characters.count)! == 0 {
+        if (zipCodeTextField.text?.count)! == 0 {
             showAlert(title: "", message: "Please enter your zip code.".localized())
             return false
         }
         
-        if (zipCodeTextField.text?.characters.count)! < 5 {
+        if (zipCodeTextField.text?.count)! < 5 {
             showAlert(title: "", message: "Please enter a valid zip code.".localized())
             return false
         }
        
-         if (emailTextField.text?.characters.count)! > 0 {
+         if (emailTextField.text?.count)! > 0 {
             if  validEmail == false {
                 showAlert(title: "", message: "Please enter a valid email address.".localized())
                 return false
@@ -570,7 +570,7 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         }
 
         if contactPreferenceSegmentControl.selectedSegmentIndex == 1 {
-            if (emailTextField.text?.characters.count)! == 0 {
+            if (emailTextField.text?.count)! == 0 {
                     showAlert(title: "", message: "Please enter a valid email address.".localized())
                     return false
             }
@@ -685,11 +685,11 @@ extension SignUpTVC: AITextFieldProtocol {
         }
         
         if textField == zipCodeTextField {
-            let currentCharacterCount = textField.text?.characters.count ?? 0
+            let currentCharacterCount = textField.text?.count ?? 0
             if (range.length + range.location > currentCharacterCount){
                 return false
             }
-            let newLength = currentCharacterCount + string.characters.count - range.length
+            let newLength = currentCharacterCount + string.count - range.length
             return newLength <= 5
         }
         

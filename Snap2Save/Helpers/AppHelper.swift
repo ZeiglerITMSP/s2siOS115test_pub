@@ -160,8 +160,8 @@ class AppHelper {
     
     
     class func removeSpecialCharacters(fromNumber inputString:String) -> String {
-        let validCharacters : Set<Character> = Set("1234567890".characters)
-        return String(inputString.characters.filter {validCharacters.contains($0) })
+        let validCharacters : Set<Character> = Set("1234567890")
+        return String(inputString.filter {validCharacters.contains($0) })
     }
     
     
@@ -173,7 +173,7 @@ class AppHelper {
         let string_to_color = "*"
         let contactStrRange = (mobileNumTxt as NSString).range(of: string_to_color)
         
-        mobileNumTxtAttribute.addAttribute(NSAttributedStringKey.foregroundColor, value: APP_ORANGE_COLOR , range: contactStrRange)
+        mobileNumTxtAttribute.addAttribute(NSAttributedString.Key.foregroundColor, value: APP_ORANGE_COLOR , range: contactStrRange)
         
         return mobileNumTxtAttribute
     }
@@ -263,8 +263,8 @@ extension String {
     
     public func containNumbers1To9() -> Bool {
         
-        let validCharacters : Set<Character> = Set("123456789".characters)
-        let charactersArray = self.characters.filter {validCharacters.contains($0) }
+        let validCharacters : Set<Character> = Set("123456789")
+        let charactersArray = self.filter {validCharacters.contains($0) }
         
         return charactersArray.count > 0 ? true : false
     }
@@ -278,8 +278,8 @@ extension String {
     }
     
     func removeSpecialChars(validCharacters: String) -> String {
-        let okayChars : Set<Character> = Set(validCharacters.characters)
-        return String(self.characters.filter {okayChars.contains($0) })
+        let okayChars : Set<Character> = Set(validCharacters)
+        return String(self.filter {okayChars.contains($0) })
     }
     
     func condenseWhitespace() -> String {
@@ -326,7 +326,7 @@ extension UIColor {
             let start = hexString.index(hexString.startIndex, offsetBy: 1)
             let hexColor = hexString.substring(from: start)
             
-            if hexColor.characters.count == 8 {
+            if hexColor.count == 8 {
                 let scanner = Scanner(string: hexColor)
                 var hexNumber: UInt64 = 0
                 
@@ -416,7 +416,7 @@ extension UINavigationItem {
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(target, action: action, for: .touchUpInside)
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(0,-15, 0, 0)
+        backButton.imageEdgeInsets = UIEdgeInsets.init(top: 0,left: -15, bottom: 0, right: 0)
         
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = backButton
@@ -456,7 +456,7 @@ public extension UIImageView {
     
     
     
-    func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit, failAction:Selector?, target:UIViewController) {
+    func downloadedFrom(url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit, failAction:Selector?, target:UIViewController) {
         contentMode = mode
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard
@@ -483,7 +483,7 @@ public extension UIImageView {
             }.resume()
     }
     
-    func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFit, failAction:Selector?, target:UIViewController) {
+    func downloadedFrom(link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit, failAction:Selector?, target:UIViewController) {
         guard let url = URL(string: link)
             else {
                 

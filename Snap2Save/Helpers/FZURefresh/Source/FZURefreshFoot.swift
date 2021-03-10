@@ -30,7 +30,7 @@ open class FZURefreshFoot: UIView {
         self.scrollView = scrollView
         refreshStatus = .normal
         self.originInset = scrollView.contentInset
-        activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
         super.init(frame: CGRect.zero)
         scrollView.addObserver(self, forKeyPath: "contentOffset", options: .new, context: nil)
         scrollView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
@@ -69,7 +69,7 @@ open class FZURefreshFoot: UIView {
                         
                         activityView.startAnimating()
                         UIView.animate(withDuration: 0.25, animations: {
-                            self.scrollView.contentInset = UIEdgeInsetsMake(self.scrollView.contentInset.top, 0, kFZURefreshFootViewHeight, 0)
+                            self.scrollView.contentInset = UIEdgeInsets.init(top: self.scrollView.contentInset.top, left: 0, bottom: kFZURefreshFootViewHeight, right: 0)
                         })
                     }
                 }

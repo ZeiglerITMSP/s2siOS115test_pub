@@ -73,7 +73,7 @@ open class SwiftLoader: UIView {
         loader.isUserInteractionEnabled = SwiftLoader.sharedInstance.canHideOnTouch
         
         NotificationCenter.default.addObserver(loader, selector: #selector(loader.rotated(_:)),
-                                                         name: NSNotification.Name.UIDeviceOrientationDidChange,
+                                                         name: UIDevice.orientationDidChangeNotification,
                                                          object: nil)
         
         let height : CGFloat = UIScreen.main.bounds.size.height
@@ -115,7 +115,7 @@ open class SwiftLoader: UIView {
         loader.isUserInteractionEnabled = SwiftLoader.sharedInstance.canHideOnTouch
         
         NotificationCenter.default.addObserver(loader, selector: #selector(loader.rotated(_:)),
-                                               name: NSNotification.Name.UIDeviceOrientationDidChange,
+                                               name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
         
         let height : CGFloat = view.bounds.size.height
@@ -280,7 +280,7 @@ open class SwiftLoader: UIView {
             self.backgroundLayer = CAShapeLayer()
             self.backgroundLayer?.strokeColor = self.config.spinnerColor.cgColor
             self.backgroundLayer?.fillColor = self.backgroundColor?.cgColor
-            self.backgroundLayer?.lineCap = kCALineCapRound
+            self.backgroundLayer?.lineCap = CAShapeLayerLineCap.round
             self.backgroundLayer?.lineWidth = CGFloat(self.lineWidth!)
             self.layer.addSublayer(self.backgroundLayer!)
         }

@@ -32,7 +32,7 @@ open class PKHUD: NSObject {
         super.init()
         NotificationCenter.default.addObserver(self,
             selector: #selector(PKHUD.willEnterForeground(_:)),
-            name: NSNotification.Name.UIApplicationWillEnterForeground,
+            name: UIApplication.willEnterForegroundNotification,
             object: nil)
         userInteractionOnUnderlyingViewsEnabled = false
         window.frameView.autoresizingMask = [ .flexibleLeftMargin,

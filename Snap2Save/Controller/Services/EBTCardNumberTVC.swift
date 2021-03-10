@@ -73,7 +73,7 @@ class EBTCardNumberTVC: UITableViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         // Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         
         ebtWebView.responder = self
@@ -98,7 +98,7 @@ class EBTCardNumberTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        self.view.sendSubview(toBack: webView)
+        self.view.sendSubviewToBack(webView)
         webView.isHidden = true
     }
     
@@ -178,7 +178,7 @@ class EBTCardNumberTVC: UITableViewController {
             }
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     
@@ -276,7 +276,7 @@ extension EBTCardNumberTVC {
         ebtWebView.getErrorMessage(completion: { result in
             
             if let errorMessage = result {
-                if errorMessage.characters.count > 0 {
+                if errorMessage.count > 0 {
                     // error message
                     
                     // update view

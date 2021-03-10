@@ -91,7 +91,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         super.viewDidLoad()
         
         self.title = "Register"
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 60
         self.navigationController?.navigationBar.isHidden = false
         
@@ -103,7 +103,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
+        backButton.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -20, bottom: 0, right: 0)
         
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = backButton
@@ -113,7 +113,7 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         // super.setNavigationBarImage(image: navBarBGImg)
         self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         loadTextFields();
         //print("userDetailsDict)
@@ -669,9 +669,9 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
         let hogan = NSMutableAttributedString(string: title)
         
         //Make the attributes, like size and color
-        hogan.addAttribute(NSAttributedStringKey.font, value: UIFont.boldSystemFont(ofSize: 16.0), range: NSMakeRange(0,NSString(string: hogan.string).length))
+        hogan.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 16.0), range: NSMakeRange(0,NSString(string: hogan.string).length))
         
-        hogan.addAttribute(NSAttributedStringKey.foregroundColor, value: APP_GRREN_COLOR, range: NSMakeRange(0, NSString(string: hogan.string).length))
+        hogan.addAttribute(NSAttributedString.Key.foregroundColor, value: APP_GRREN_COLOR, range: NSMakeRange(0, NSString(string: hogan.string).length))
         
         signUpAlert.setValue(hogan, forKey: "attributedTitle")
         
@@ -691,11 +691,11 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if textField == zipCodeTextField {
-            let currentCharacterCount = textField.text?.characters.count ?? 0
+            let currentCharacterCount = textField.text?.count ?? 0
             if (range.length + range.location > currentCharacterCount){
                 return false
             }
-            let newLength = currentCharacterCount + string.characters.count - range.length
+            let newLength = currentCharacterCount + string.count - range.length
             return newLength <= 5
             
         }
@@ -705,12 +705,12 @@ class SignupAdditionalFieldsTVC: UITableViewController ,UITextFieldDelegate,AITe
     
     func isValid() -> Bool {
         
-        if (zipCodeTextField.text?.characters.count)! == 0 {
+        if (zipCodeTextField.text?.count)! == 0 {
             showAlert(title: "", message: "Please enter your zip code.".localized())
             return false
         }
         
-        if (zipCodeTextField.text?.characters.count)! < 5 {
+        if (zipCodeTextField.text?.count)! < 5 {
             showAlert(title: "", message: "Please enter a valid zip code.".localized())
             return false
             

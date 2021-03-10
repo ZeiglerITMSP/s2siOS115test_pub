@@ -74,7 +74,7 @@ class EBTChangeEmailTVC: UITableViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         // Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         
         errorMessageLabel.text = nil
@@ -99,7 +99,7 @@ class EBTChangeEmailTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        self.view.sendSubview(toBack: webView)
+        self.view.sendSubviewToBack(webView)
         webView.isHidden = true
         
     }
@@ -175,7 +175,7 @@ class EBTChangeEmailTVC: UITableViewController {
             }
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     // MARK: -
@@ -252,7 +252,7 @@ extension EBTChangeEmailTVC {
             
             if let resultString = result as? String {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                if resultTrimmed.characters.count > 0 {
+                if resultTrimmed.count > 0 {
                     // status message
                     self.currentEmailField.contentTextField.text = resultTrimmed
 //                    self.tableView.reloadData()
@@ -291,7 +291,7 @@ extension EBTChangeEmailTVC {
         ebtWebView.getErrorMessage(completion: { result in
             
             if let errorMessage = result {
-                if errorMessage.characters.count > 0 {
+                if errorMessage.count > 0 {
                     // error message
                     
                     // update view

@@ -126,7 +126,7 @@ class AdSpotsManager: NSObject {
             
             let type = "\(spot["type"]!)"
             
-            if imageUrl != nil && (imageUrl?.characters.count)! > 0 {
+            if imageUrl != nil && (imageUrl?.count)! > 0 {
                 DispatchQueue.main.async {
                     AppHelper.getImage(fromURL: imageUrl!, name: type, completion: { (image, success, name) -> Void in
                         downloadImages += 1
@@ -183,7 +183,7 @@ class AdSpotsManager: NSObject {
                                                                    label: "Table",
                                                                    value: 1).build()
                     
-                    tracker?.send(builder as [NSObject : AnyObject]!)
+                    tracker?.send(builder as [NSObject : AnyObject]?)
 
                     offerDetails.navigationTitle = ""
                     controller.navigationController?.show(offerDetails, sender: controller)
@@ -205,7 +205,7 @@ class AdSpotsManager: NSObject {
                                                                    label: "Table",
                                                                    value: 1).build()
                     
-                    tracker?.send(builder as [NSObject : AnyObject]!)
+                    tracker?.send(builder as [NSObject : AnyObject]?)
 
                     offerDetails.navigationTitle = ""
 //                    offerDetails.isFromAdditionalOffers = false

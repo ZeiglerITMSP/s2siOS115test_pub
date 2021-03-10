@@ -89,7 +89,7 @@ class EBTSelectPinTVC: UITableViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         // Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         
         errorMessageLabel.text = nil
@@ -115,7 +115,7 @@ class EBTSelectPinTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        self.view.sendSubview(toBack: webView)
+        self.view.sendSubviewToBack(webView)
         webView.isHidden = true
     }
     
@@ -199,7 +199,7 @@ class EBTSelectPinTVC: UITableViewController {
             }
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     // MARK: -
@@ -313,7 +313,7 @@ extension EBTSelectPinTVC {
         ebtWebView.getErrorMessage(completion: { result in
             
             if let errorMessage = result {
-                if errorMessage.characters.count > 0 {
+                if errorMessage.count > 0 {
                     // error message
                     
                     // update view

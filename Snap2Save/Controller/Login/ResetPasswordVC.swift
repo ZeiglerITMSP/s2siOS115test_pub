@@ -29,11 +29,11 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
     @IBOutlet var resetPasswordActivityIndicator: UIActivityIndicatorView!
     @IBAction func resetPasswordButtonAction(_ sender: UIButton) {
         
-        if (passwordTextField.text?.characters.count)! == 0 {
+        if (passwordTextField.text?.count)! == 0 {
             self.showAlert(title: "", message: "Enter new password.".localized())
             return
         }
-        else if (passwordTextField.text?.characters.count)! < 6{
+        else if (passwordTextField.text?.count)! < 6{
             self.showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
             return
         }
@@ -97,8 +97,8 @@ class ResetPasswordVC: UIViewController ,AITextFieldProtocol{
         //let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         //self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
         self.navigationController?.navigationBar.barTintColor = APP_GRREN_COLOR
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: navigationController, action: nil)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: navigationController, action: nil)
         self.navigationItem.leftBarButtonItem = backButton
         reloadContent()
         AppHelper.getScreenName(screenName: "ResetPassword screen")

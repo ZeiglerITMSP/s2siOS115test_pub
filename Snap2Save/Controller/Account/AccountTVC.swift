@@ -44,7 +44,7 @@ class AccountTVC: UITableViewController {
         adSpotManager.delegate = self
         
         // Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.tableView.register(UINib(nibName: "AdSpotTableViewCell", bundle: nil), forCellReuseIdentifier: "AdSpotTableViewCell")
@@ -439,10 +439,10 @@ extension AccountTVC {
                     return height
                 }
             }
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
 }

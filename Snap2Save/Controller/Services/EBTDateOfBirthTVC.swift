@@ -64,7 +64,7 @@ class EBTDateOfBirthTVC: UITableViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         // Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         
         // dob
@@ -100,7 +100,7 @@ class EBTDateOfBirthTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        self.view.sendSubview(toBack: webView)
+        self.view.sendSubviewToBack(webView)
         webView.isHidden = true
     }
     
@@ -179,7 +179,7 @@ class EBTDateOfBirthTVC: UITableViewController {
 //                return 0
 //            }
 //        }
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     
@@ -282,7 +282,7 @@ securityQuestions();
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 //print(trimmedText)
                 
-                if trimmedText.characters.count > 0 {
+                if trimmedText.count > 0 {
                     
                     let components = trimmedText.components(separatedBy: "**")
                     
@@ -293,7 +293,7 @@ securityQuestions();
                         let removedTabs = removedNewLine.replacingOccurrences(of: "\t", with: "*")
                         let cleanText = removedTabs.replacingOccurrences(of: "*", with: "")
                         
-                        if cleanText.characters.count > 0 {
+                        if cleanText.count > 0 {
                             self.questions.append(cleanText)
                         }
                         
@@ -359,7 +359,7 @@ securityQuestions();
         ebtWebView.getErrorMessage(completion: { result in
             
             if let errorMessage = result {
-                if errorMessage.characters.count > 0 {
+                if errorMessage.count > 0 {
                     // error message
                     
                     // update view

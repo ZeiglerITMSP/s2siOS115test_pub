@@ -834,11 +834,11 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if textField == zipCodeTextField  {
-            let currentCharacterCount = textField.text?.characters.count ?? 0
+            let currentCharacterCount = textField.text?.count ?? 0
             if (range.length + range.location > currentCharacterCount){
                 return false
             }
-            let newLength = currentCharacterCount + string.characters.count - range.length
+            let newLength = currentCharacterCount + string.count - range.length
             return newLength <= 5
             
         }
@@ -848,12 +848,12 @@ class PersonalInformationTVC: UITableViewController, AITextFieldProtocol {
     
     func isValid() -> Bool {
         
-        if (zipCodeTextField.text?.characters.count)! == 0 {
+        if (zipCodeTextField.text?.count)! == 0 {
             showAlert(title: "", message: "Please enter your zip code.".localized())
             return false
         }
         
-        if (zipCodeTextField.text?.characters.count)! < 5 {
+        if (zipCodeTextField.text?.count)! < 5 {
                 showAlert(title: "", message: "Please enter a valid zip code.".localized())
                 return false
                 

@@ -36,7 +36,7 @@ class RedeemPointsMessageVC: UIViewController {
 
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: doneButton, radius: 2.0, width: 1.0)
         
-        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: navigationController, action: nil)
+        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: navigationController, action: nil)
         self.navigationItem.leftBarButtonItem = backButton
         
        // self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))

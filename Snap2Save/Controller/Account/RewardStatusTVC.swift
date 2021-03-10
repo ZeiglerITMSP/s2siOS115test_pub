@@ -51,7 +51,7 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
         // tableview automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.tableView.register(UINib(nibName: "AdSpotTableViewCell", bundle: nil), forCellReuseIdentifier: "AdSpotTableViewCell")
@@ -201,7 +201,7 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
                     if code.intValue == 200 {
                         
                         self.rewardStatusDict = responseDict!
-                        if let recentActivityArr = responseDict?["recent_activity"] as? [[String: Any]]! {
+                        if let recentActivityArr = responseDict?["recent_activity"] as? [[String: Any]]? {
                                 self.recentActivityArray = recentActivityArr!
                         }
                         self.reloadDataIfPossible()
@@ -296,14 +296,14 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
          }*/
         
         
-        if (fromDate?.characters.count)! > 0 {
+        if (fromDate?.count)! > 0 {
             let fromDateVal = dateFormatter1.date(from: fromDate!)
             fromDateMilliSec = (fromDateVal?.timeIntervalSince1970)!*1000//            fromDateMilliSecStr = String.init(format: "%ld", fromDateMilliSec)
             fromDateMilliSecStr = "\(fromDateMilliSec)"
             
         }
         
-        if (toDate?.characters.count)! > 0 {
+        if (toDate?.count)! > 0 {
             
             let toDateVal = dateFormatter1.date(from: toDate!)
             toDateMilliSec =  (toDateVal?.timeIntervalSince1970)!*1000
@@ -348,12 +348,12 @@ class RewardStatusTVC: UITableViewController, RewardFilterProtocol {
                     let code = code as! NSNumber
                     if code.intValue == 200 {
                         
-                        if let recentActivityArr = responseDict?["recent_activity"] as? [[String: Any]]! {
+                        if let recentActivityArr = responseDict?["recent_activity"] as? [[String: Any]]? {
                             // append to exsiting activities..
                             self.recentActivityArray = self.recentActivityArray + recentActivityArr!
                             self.tableView.reloadData()
                         }
-                        if let recentActivityArr1 = responseDict?["recent_activity"] as? [[String: Any]]! {
+                        if let recentActivityArr1 = responseDict?["recent_activity"] as? [[String: Any]]? {
                             
                             if recentActivityArr1!.count < self.limit_value
                             {
@@ -461,7 +461,7 @@ extension RewardStatusTVC {
                     return height
                 }
             }
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
             
         } else if indexPath.section == Sections.redeemPoints.rawValue {
             if indexPath.row == 1 {
@@ -469,7 +469,7 @@ extension RewardStatusTVC {
             }
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

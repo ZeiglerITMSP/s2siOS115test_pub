@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // Status
@@ -140,10 +140,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
-        let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
+        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
+        let annotation = options[UIApplication.OpenURLOptionsKey.annotation]
         let urlString : String = url.absoluteString
         var typeValue = ""
         var codeValue = ""
@@ -158,7 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return facebookHandler
         } else {
             
-            if urlString.characters.count > 0 {
+            if urlString.count > 0 {
                 let query = url.query
                 let components = query?.components(separatedBy: "&")
                 for component:String in components!
@@ -265,7 +265,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //let urlScheme = url.scheme
             ////print(""url scheme is\(urlScheme)")
             
-            if urlString.characters.count > 0 {
+            if urlString.count > 0 {
                 let query = url.query
                 let components = query?.components(separatedBy: "&")
                 

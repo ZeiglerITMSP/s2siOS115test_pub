@@ -86,7 +86,7 @@ class EBTHelpVC: UIViewController {
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(target, action: action, for: .touchUpInside)
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
+        backButton.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -20, bottom: 0, right: 0)
         
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = backButton

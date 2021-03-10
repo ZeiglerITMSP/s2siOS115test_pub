@@ -43,7 +43,7 @@ class ServicesWebViewVC: UIViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         servicesWebView.delegate = self
         servicesWebView.scalesPageToFit = true
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         languageSelectionButton = LanguageUtility.createLanguageSelectionButton(withTarge: self, action: #selector(languageButtonClicked))
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
@@ -138,7 +138,7 @@ class ServicesWebViewVC: UIViewController {
                                                            label: self.title,
                                                            value: 1).build()
             
-            tracker?.send(builder as [NSObject : AnyObject]!)
+            tracker?.send(builder as [NSObject : AnyObject]?)
 
             self.title="";
             self.languageSelectionButton.setTitle("language.button.title".localized(), for: .normal)

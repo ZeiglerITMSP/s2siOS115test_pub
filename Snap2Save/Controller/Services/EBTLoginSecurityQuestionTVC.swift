@@ -72,7 +72,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         // Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         
         ebtWebView.responder = self
@@ -102,7 +102,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        self.view.sendSubview(toBack: webView)
+        self.view.sendSubviewToBack(webView)
         webView.isHidden = true
         
         // listen language change notification.
@@ -193,7 +193,7 @@ class EBTLoginSecurityQuestionTVC: UITableViewController {
             }
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     // MARK: -
@@ -302,7 +302,7 @@ extension EBTLoginSecurityQuestionTVC {
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                // print(trimmedText)
                 
-                if trimmedText.characters.count > 0 {
+                if trimmedText.count > 0 {
                     
                     self.securityQuestionLabel.text = trimmedText
                     self.tableView.reloadData()
@@ -329,7 +329,7 @@ extension EBTLoginSecurityQuestionTVC {
         ebtWebView.getErrorMessage(completion: { result in
             
             if let errorMessage = result {
-                if errorMessage.characters.count > 0 {
+                if errorMessage.count > 0 {
                     // error message
                     
                     // update view

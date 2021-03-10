@@ -82,7 +82,7 @@ class TabViewController: UITabBarController {
             separator.backgroundColor = UIColor.lightGray
             
             self.tabBar.addSubview(separator)
-            self.tabBar.bringSubview(toFront: separator)
+            self.tabBar.bringSubviewToFront(separator)
         }
         
     }
@@ -144,7 +144,7 @@ extension TabViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         
         if tabBarController.selectedIndex == 0 {
-            if viewController.childViewControllers.count > 1 {
+            if viewController.children.count > 1 {
                 if let offersNavVC = viewController as? UINavigationController {
                     offersNavVC.popToRootViewController(animated: false)
                 }

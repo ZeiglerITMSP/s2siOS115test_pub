@@ -53,7 +53,7 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
         
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: doneButton, radius: 2.0, width: 1.0)
         
-        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: navigationController, action: nil)
+        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: navigationController, action: nil)
          self.navigationItem.leftBarButtonItem = backButton
         
        // self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
@@ -121,21 +121,21 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
             paragraphStyle.lineHeightMultiple = 1.2
             
             let subscriptionNoticeAttributedString = NSAttributedString(string:subscriptionNotice, attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16),
-                NSAttributedStringKey.paragraphStyle: paragraphStyle,
-                NSAttributedStringKey.foregroundColor: UIColor(red: 0.0/0.0,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.foregroundColor: UIColor(red: 0.0/0.0,
                                                         green: 122.0/255.0,
                                                         blue: 255.0/255.0,
                                                         alpha: 1) ,
                 ])
             let subscriptionNoticeLinkAttributes = [
-                NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16),
-                NSAttributedStringKey.foregroundColor: UIColor(red: 0.0/0.0,
+                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16),
+                NSAttributedString.Key.foregroundColor: UIColor(red: 0.0/0.0,
                                                         green: 122.0/255.0,
                                                         blue: 255.0/255.0,
                                                         alpha: 1),
-                NSAttributedStringKey.underlineStyle: true
-                ] as [NSAttributedStringKey : Any]
+                NSAttributedString.Key.underlineStyle: true
+                ] as [NSAttributedString.Key : Any]
             self.urlLinkLabel.textAlignment = NSTextAlignment.left
             self.urlLinkLabel.delegate = self
             self.urlLinkLabel.numberOfLines = 0
@@ -147,7 +147,7 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
             
             let subscribeLinkRange = (subscriptionNotice as NSString).range(of: "www.clinicatepeyac.org")
             let subscribeURL = NSURL(string:"www.clinicatepeyac.org")!
-            self.urlLinkLabel.addLink(to: subscribeURL as URL!, with:subscribeLinkRange)
+            self.urlLinkLabel.addLink(to: subscribeURL as URL?, with:subscribeLinkRange)
             
             
         }

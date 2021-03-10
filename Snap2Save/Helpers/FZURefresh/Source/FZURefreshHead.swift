@@ -52,8 +52,8 @@ open class FZURefreshHead: UIView {
         self.scrollView.addObserver(self, forKeyPath: "contentOffset", options: .initial, context: nil)
         
         //键盘监听
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboradWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(self.keyboradWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboradWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(self.keyboradWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     required public init?(coder aDecoder: NSCoder) {fatalError("init(coder:) has not been implemented")}
@@ -82,7 +82,7 @@ open class FZURefreshHead: UIView {
     func stopAnimation()
     {
         UIView.animate(withDuration: 0.25, animations: {
-            self.scrollView.contentInset = UIEdgeInsetsMake(self.originTop, 0, 0, 0)
+            self.scrollView.contentInset = UIEdgeInsets.init(top: self.originTop, left: 0, bottom: 0, right: 0)
         })
         self.headImageView.stopAnimating()
     }
@@ -113,7 +113,7 @@ open class FZURefreshHead: UIView {
         
         self.headImageView.startAnimating()
         UIView.animate(withDuration: 0.25, animations: {
-            self.scrollView.contentInset = UIEdgeInsetsMake(self.originTop + kFZURefreshHeadViewHeight, 0, 0, 0)
+            self.scrollView.contentInset = UIEdgeInsets.init(top: self.originTop + kFZURefreshHeadViewHeight, left: 0, bottom: 0, right: 0)
             self.scrollView.contentOffset = CGPoint(x: 0, y: -self.originTop - kFZURefreshHeadViewHeight)
         })
         self.action()

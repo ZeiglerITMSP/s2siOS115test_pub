@@ -70,7 +70,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         toDateField.contentTextField.dateFormatString = "MM/dd/yy"
         
         
-        let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY".localized(), attributes: [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 14.0)]) // Font
+        let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY".localized(), attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 14.0)]) // Font
         fromDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
         toDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
 
@@ -84,7 +84,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
         LanguageUtility.addLanguageButton(languageSelectionButton, toController: self)
         
         // Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -141,7 +141,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
             self.fromDateField.contentTextField.placeholder = "MM/DD/YY".localized()
             self.toDateField.contentTextField.placeholder = "MM/DD/YY".localized()
             
-            let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY".localized(), attributes: [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 14.0)]) // Font
+            let myMutableStringTitle = NSMutableAttributedString(string:"MM/DD/YY".localized(), attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 14.0)]) // Font
             self.fromDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
             self.toDateField.contentTextField.attributedPlaceholder = myMutableStringTitle
             self.tableView.reloadData()
@@ -171,7 +171,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
     func isValid() -> Bool {
         
        
-        if fromDateField.contentTextField.text?.characters.count == 0 || toDateField.contentTextField.text?.characters.count == 0
+        if fromDateField.contentTextField.text?.count == 0 || toDateField.contentTextField.text?.count == 0
         {
             showAlert(title: "", message: "Please enter a date range to view specific transactions.".localized())
             return false
@@ -217,7 +217,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
             
         }
 */
-        if (fromDateField?.contentTextField.text?.characters.count)! > 0 {
+        if (fromDateField?.contentTextField.text?.count)! > 0 {
             let fromDateVal = dateFormatter.date(from: fromDateField.contentTextField.text!)
             
             fromDateMilliSec = (fromDateVal?.timeIntervalSince1970)!*1000
@@ -227,7 +227,7 @@ class RewardFilterTVC: UITableViewController, AITextFieldProtocol {
             //  print("Unsigned value \(fromDateMilliSec)")
         }
         
-        if (toDateField?.contentTextField.text?.characters.count)! > 0 {
+        if (toDateField?.contentTextField.text?.count)! > 0 {
             let toDateVal = dateFormatter.date(from: toDateField.contentTextField.text!)
             //let toDateVal = dateFormatter.date(from: toDateTime)
 

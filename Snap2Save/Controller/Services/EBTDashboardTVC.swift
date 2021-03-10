@@ -71,7 +71,7 @@ class EBTDashboardTVC: UITableViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         // Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.tableView.register(UINib(nibName: "AdSpotTableViewCell", bundle: nil), forCellReuseIdentifier: "AdSpotTableViewCell")
@@ -102,7 +102,7 @@ class EBTDashboardTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        self.view.sendSubview(toBack: webView)
+        self.view.sendSubviewToBack(webView)
         webView.isHidden = true
         
         isViewingDashboard = true
@@ -228,10 +228,10 @@ extension EBTDashboardTVC {
                 }
             }
             
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     
@@ -449,7 +449,7 @@ extension EBTDashboardTVC {
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 //print(trimmedText)
                 
-                if trimmedText.characters.count > 0 {
+                if trimmedText.count > 0 {
                     
                     self.loadTransactionActivityPage(url: trimmedText)
                     
@@ -732,7 +732,7 @@ extension EBTDashboardTVC {
                 let stringResult = result as! String
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 
-                if trimmedText.characters.count > 0 {
+                if trimmedText.count > 0 {
                     // self.transactionsString.append(trimmedText)
                     
                     let json = JSON.parse(trimmedText)

@@ -27,7 +27,7 @@ internal class Window: UIWindow {
     
     fileprivate func commonInit() {
         rootViewController = WindowRootViewController()
-        windowLevel = UIWindowLevelNormal + 500.0
+        windowLevel = UIWindow.Level.normal + 500.0
         backgroundColor = UIColor.clear
         
         addSubview(backgroundView)

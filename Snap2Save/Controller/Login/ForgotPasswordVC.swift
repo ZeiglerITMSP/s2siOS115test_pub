@@ -33,7 +33,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumberTextField.text!)
         let validMobileNum = AppHelper.validate(value: phoneNumber)
         
-        if mobileNumberTextField.text?.characters.count == 0 || validMobileNum == false{
+        if mobileNumberTextField.text?.count == 0 || validMobileNum == false{
             self.showAlert(title: "", message: "Please enter 10-digit cell phone number.".localized())
             return
         }
@@ -56,7 +56,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
+        backButton.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -20, bottom: 0, right: 0)
         
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = backButton
@@ -65,7 +65,7 @@ class ForgotPasswordVC: UIViewController,AITextFieldProtocol {
         let navBarBGImg = AppHelper.imageWithColor(color: APP_GRREN_COLOR)
         // super.setNavigationBarImage(image: navBarBGImg)
         self.navigationController?.navigationBar.setBackgroundImage(navBarBGImg, for: .default)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         
         mobileNumberTextField.textFieldType = AITextField.AITextFieldType.PhoneNumberTextField

@@ -198,13 +198,13 @@ class AITextField: UITextField {
         
         let imageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: Int(self.frame.size.height)))
         
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        imageView.contentMode = UIView.ContentMode.scaleAspectFit
         imageView.image = placeHolderImage
         
         leftGap.addSubview(imageView)
         
         self.leftView = leftGap;
-        self.leftViewMode = UITextFieldViewMode.always
+        self.leftViewMode = UITextField.ViewMode.always
 
     }
     
@@ -215,13 +215,13 @@ class AITextField: UITextField {
         
         let imageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: Int(self.frame.size.height)))
         
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        imageView.contentMode = UIView.ContentMode.scaleAspectFit
         imageView.image = placeHolderImage
         
         rightGap.addSubview(imageView)
         
         self.rightView = rightGap
-        self.rightViewMode = UITextFieldViewMode.always
+        self.rightViewMode = UITextField.ViewMode.always
     }
     
     
@@ -239,7 +239,7 @@ class AITextField: UITextField {
     func addDatePicker()
     {
         self.datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 255))
-        self.datePicker?.datePickerMode = UIDatePickerMode.date
+        self.datePicker?.datePickerMode = UIDatePicker.Mode.date
         let currentLanguage = Localize.currentLanguage()
         self.datePicker?.locale = NSLocale.init(localeIdentifier: currentLanguage) as Locale
         self.inputView = self.datePicker
@@ -249,7 +249,7 @@ class AITextField: UITextField {
     }
     func addTimePicker() {
         self.datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 255))
-        self.datePicker?.datePickerMode = UIDatePickerMode.time
+        self.datePicker?.datePickerMode = UIDatePicker.Mode.time
         self.inputView = self.datePicker
     }
     
@@ -266,7 +266,7 @@ class AITextField: UITextField {
         let doneButton = UIBarButtonItem(title: "Ok".localized(), style: .done, target: self, action: #selector(AITextField.doneButtonClicked))
         let cancelButton = UIBarButtonItem(title: "Cancel".localized(), style: .done, target: self, action:  #selector(AITextField.cancelButtonClicked))
 
-        let flixibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let flixibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
         
         toolBar.items = [cancelButton,flixibleSpace,doneButton]
         
@@ -358,7 +358,7 @@ class AITextField: UITextField {
     {
         self.selectedDate = self.datePicker?.date as NSDate? //NSDate.init(timeIntervalSinceReferenceDate: (self.datePicker?.date.timeIntervalSince1970)!) //self.datePicker?.date as
         let date_Formatter = DateFormatter()
-        date_Formatter.dateFormat = string as String!
+        date_Formatter.dateFormat = string as String?
         let dateString = date_Formatter.string(from: (self.datePicker?.date)!)
         self.text = dateString
         
@@ -369,7 +369,7 @@ class AITextField: UITextField {
         if (self.selectedDate != nil)
         {
             let date_Formatter = DateFormatter()
-            date_Formatter.dateFormat = string as String!
+            date_Formatter.dateFormat = string as String?
             let dateString = date_Formatter.string(from: self.selectedDate as! Date)
             self.text = dateString
 

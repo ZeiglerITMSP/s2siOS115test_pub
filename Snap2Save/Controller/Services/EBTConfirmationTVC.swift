@@ -94,7 +94,7 @@ class EBTConfirmationTVC: UITableViewController {
         self.navigationItem.addBackButton(withTarge: self, action: #selector(backAction))
         
         // Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         
         errorMessageLabel.text = nil
@@ -122,7 +122,7 @@ class EBTConfirmationTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        self.view.sendSubview(toBack: webView)
+        self.view.sendSubviewToBack(webView)
         webView.isHidden = true
         
     }
@@ -204,7 +204,7 @@ class EBTConfirmationTVC: UITableViewController {
             }
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     
@@ -330,7 +330,7 @@ extension EBTConfirmationTVC {
             if let resultString = result as? String {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
                 let resultRemovedExtraWhiteSpaces = resultTrimmed.condenseWhitespace()
-                if resultRemovedExtraWhiteSpaces.characters.count > 0 {
+                if resultRemovedExtraWhiteSpaces.count > 0 {
                     // status message
                     self.confirmationMessageLabel.text = resultRemovedExtraWhiteSpaces
                     self.tableView.reloadData()
@@ -358,7 +358,7 @@ extension EBTConfirmationTVC {
         ebtWebView.checkForSuccessMessage(completion: { result in
             
             if let errorMessage = result {
-                if errorMessage.characters.count > 0 {
+                if errorMessage.count > 0 {
                     // success message
                     
                     // update view
@@ -391,7 +391,7 @@ extension EBTConfirmationTVC {
         ebtWebView.getErrorMessage(completion: { result in
             
             if let errorMessage = result {
-                if errorMessage.characters.count > 0 {
+                if errorMessage.count > 0 {
                     // error message
                     
                     // update view

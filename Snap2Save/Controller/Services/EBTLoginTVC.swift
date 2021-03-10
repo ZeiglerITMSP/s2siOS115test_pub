@@ -145,7 +145,7 @@ class EBTLoginTVC: UITableViewController {
         userIdField.contentTextField.aiDelegate = self
         passwordField.contentTextField.aiDelegate = self
         // Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         
         ebtWebView.responder = self
@@ -218,7 +218,7 @@ class EBTLoginTVC: UITableViewController {
         let webView = ebtWebView.webView!
         
         self.view.addSubview(webView)
-        self.view.sendSubview(toBack: webView)
+        self.view.sendSubviewToBack(webView)
         webView.isHidden = true
         // remove observer
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
@@ -490,7 +490,7 @@ extension EBTLoginTVC {
                         }
                     }
                     
-                    return UITableViewAutomaticDimension
+                    return UITableView.automaticDimension
                 }
             }
             else if indexPath.row == 1 {
@@ -509,12 +509,12 @@ extension EBTLoginTVC {
                         }
                     }
                     
-                    return UITableViewAutomaticDimension
+                    return UITableView.automaticDimension
                 }
             }
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     
@@ -799,7 +799,7 @@ extension EBTLoginTVC {
             
             if let resultString = result as? String {
                 let resultTrimmed = resultString.trimmingCharacters(in: .whitespacesAndNewlines)
-                if resultTrimmed.characters.count > 0 {
+                if resultTrimmed.count > 0 {
                     // status message
                     
 //                    // update view
@@ -830,7 +830,7 @@ extension EBTLoginTVC {
         ebtWebView.getErrorMessage(completion: { result in
             
             if let errorMessage = result {
-                if errorMessage.characters.count > 0 {
+                if errorMessage.count > 0 {
                     // error message
                     
                     if self.ebtWebView.isPageLoading == false {

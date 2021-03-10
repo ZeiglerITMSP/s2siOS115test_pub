@@ -76,7 +76,7 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
+        backButton.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -20, bottom: 0, right: 0)
         
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = backButton
@@ -117,8 +117,8 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         mobileNumTextField.aiDelegate = self
         passwordTextField.aiDelegate = self
     
-        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         bgScrollView.delegate = self
         
@@ -188,10 +188,10 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         
         let userInfo = notification.userInfo!
         
-        let moveUp = (notification.name == NSNotification.Name.UIKeyboardWillShow) as Bool
+        let moveUp = (notification.name == UIResponder.keyboardWillShowNotification) as Bool
         if moveUp
         {
-            var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+            var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
             keyboardFrame = self.bgScrollView.convert(keyboardFrame, from: nil)
             
             var contentInset:UIEdgeInsets = bgScrollView.contentInset
@@ -453,17 +453,17 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         let phoneNumber = AppHelper.removeSpecialCharacters(fromNumber: mobileNumTextField.text!)
         let validNum = AppHelper.validate(value: phoneNumber)
         
-        if ((mobileNumTextField.text?.characters.count)! == 0 || validNum == false ) {
+        if ((mobileNumTextField.text?.count)! == 0 || validNum == false ) {
             showAlert(title: "", message: "Please enter 10-digit cell phone number.".localized())
             return false
         }
             
-        else if passwordTextField.text?.characters.count == 0 {
+        else if passwordTextField.text?.count == 0 {
             self.showAlert(title: "", message: "Please enter password.".localized())
             return false
         }
 
-        else if (passwordTextField.text?.characters.count)! < 6 {
+        else if (passwordTextField.text?.count)! < 6 {
             self.showAlert(title: "", message: "Password must be at least 6 characters in length.".localized())
             return false
         }

@@ -51,7 +51,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         AppHelper.configSwiftLoader()
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 80
         
         reEnterMobileNumberTextField.contentTextField.isHidden = true
@@ -65,7 +65,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
+        backButton.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -20, bottom: 0, right: 0)
         
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = backButton
@@ -376,14 +376,14 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         if indexPath.row == 1 {
             if reEnterEmailTextField.contentTextField.isHidden == false {
-                return UITableViewAutomaticDimension
+                return UITableView.automaticDimension
             }
             else {
                 return 0
             }
         } else if indexPath.row == 3 {
             if reEnterMobileNumberTextField.contentTextField.isHidden == false{
-                return UITableViewAutomaticDimension
+                return UITableView.automaticDimension
             }
             else {
                 return 0
@@ -393,7 +393,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             return 120
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     
@@ -538,7 +538,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         if currentEmail != email {
             if let email = emailPlaceHolderTextField.contentTextField.text {
-                if email.characters.count > 0 {
+                if email.count > 0 {
                     if validEmail == false {
                         self.showAlert(title: "", message: "Please enter a valid email address.".localized())
                         return false
@@ -553,7 +553,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             }
         }
         else {
-            if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
+            if (reEnterEmailTextField.contentTextField.text?.count)! > 0{
                 
                 if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
                     self.showAlert(title: "", message: "Entries must match to proceed.".localized())
@@ -565,7 +565,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         if currentMobileNumber != mobileNumber {
             
-            if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
+            if mobileNumberTextField.contentTextField.text?.count == 0 || validPhoneNumber == false{
                 self.showAlert(title: "", message: "Please enter a 10-digit cell phone number.".localized())
                 return false
             }
@@ -577,7 +577,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             
         }
         else {
-            if (reEnterMobileNumberTextField.contentTextField.text?.characters.count)! > 0 {
+            if (reEnterMobileNumberTextField.contentTextField.text?.count)! > 0 {
                 
                 if reEnterMobileNumberTextField.contentTextField.text != mobileNumberTextField.contentTextField.text{
                     self.showAlert(title: "", message: "Entries must match to proceed.".localized())
@@ -606,7 +606,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
             }
             else {
                 
-                if (reEnterEmailTextField.contentTextField.text?.characters.count)! > 0{
+                if (reEnterEmailTextField.contentTextField.text?.count)! > 0{
                     
                     if reEnterEmailTextField.contentTextField.text != emailPlaceHolderTextField.contentTextField.text{
                         self.showAlert(title: "", message: "Entries must match to proceed.".localized())
@@ -620,7 +620,7 @@ class PreferencesTVC: UITableViewController,AITextFieldProtocol {
         
         if contactPreferenceSegmentControl.selectedSegmentIndex == 0
         {
-            if mobileNumberTextField.contentTextField.text?.characters.count == 0 || validPhoneNumber == false{
+            if mobileNumberTextField.contentTextField.text?.count == 0 || validPhoneNumber == false{
                 self.showAlert(title: "", message: "Please enter 10-digit cell phone number.".localized())
                 return false
             }

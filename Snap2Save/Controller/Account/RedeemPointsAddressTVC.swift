@@ -90,7 +90,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
         super.viewDidLoad()
 
         AppHelper.setRoundCornersToView(borderColor: APP_ORANGE_COLOR, view: redeemNowButton, radius: 2.0, width: 1.0)
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 80
         
         // language button
@@ -178,7 +178,7 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     
@@ -330,11 +330,11 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
     }
     func aiTextField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == zipCodeTf {
-            let currentCharacterCount = textField.text?.characters.count ?? 0
+            let currentCharacterCount = textField.text?.count ?? 0
             if (range.length + range.location > currentCharacterCount){
                 return false
             }
-            let newLength = currentCharacterCount + string.characters.count - range.length
+            let newLength = currentCharacterCount + string.count - range.length
             return newLength <= 5
         }
         return true
@@ -562,15 +562,15 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
     
     func isValidData() -> Bool {
         
-        if firstNameTF.text?.characters.count == 0 {
+        if firstNameTF.text?.count == 0 {
             showAlert(title: "", message: "Please enter your first name.".localized())
             return false
         }
-        if lastNameTf.text?.characters.count == 0 {
+        if lastNameTf.text?.count == 0 {
             showAlert(title: "", message: "Please enter your last name.".localized())
             return false
         }
-        if addressLine1Tf.text?.characters.count == 0  {
+        if addressLine1Tf.text?.count == 0  {
             showAlert(title: "", message: "Please enter your street address.".localized())
             return false
         }
@@ -578,21 +578,21 @@ class RedeemPointsAddressTVC: UITableViewController,AITextFieldProtocol {
 //            showAlert(title: "", message: "Please provide all information.".localized())
 //            return false
 //        }
-        if cityTf.text?.characters.count == 0  {
+        if cityTf.text?.count == 0  {
             showAlert(title: "", message: "Please enter your city.".localized())
             return false
         }
-        if stateTf.text?.characters.count == 0 {
+        if stateTf.text?.count == 0 {
             showAlert(title: "", message: "Please enter your state.".localized())
             return false
         }
         
-        if (zipCodeTf.text?.characters.count)! == 0 {
+        if (zipCodeTf.text?.count)! == 0 {
             showAlert(title: "", message: "Please enter your zip code.".localized())
             return false
         }
 
-        if (zipCodeTf.text?.characters.count)! < 5 {
+        if (zipCodeTf.text?.count)! < 5 {
             showAlert(title: "", message: "Please enter a valid zip code.".localized())
             return false
         }

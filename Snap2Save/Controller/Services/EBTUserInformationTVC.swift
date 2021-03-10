@@ -150,7 +150,7 @@ class EBTUserInformationTVC: UITableViewController {
         
         
         // Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         
         errorMessageLabel.text = nil
@@ -182,7 +182,7 @@ class EBTUserInformationTVC: UITableViewController {
         
         let webView = ebtWebView.webView!
         self.view.addSubview(webView)
-        self.view.sendSubview(toBack: webView)
+        self.view.sendSubviewToBack(webView)
         webView.isHidden = true
     }
     
@@ -288,7 +288,7 @@ class EBTUserInformationTVC: UITableViewController {
             }
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     // MARK: -
@@ -349,7 +349,7 @@ extension EBTUserInformationTVC {
                 let stringResult = result as! String
                 let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 //print(trimmed)
-                if trimmed.characters.count > 0 {
+                if trimmed.count > 0 {
                     
                     
                     let components = trimmed.components(separatedBy: "* ")
@@ -358,7 +358,7 @@ extension EBTUserInformationTVC {
                     for comp in components {
                         
                         let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
-                        if trimmedNew.characters.count > 0 {
+                        if trimmedNew.count > 0 {
                             
                             let final = "* " + trimmedNew
                             list.append(final)
@@ -388,7 +388,7 @@ extension EBTUserInformationTVC {
                 let stringResult = result as! String
                 let trimmed = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 //print(trimmed)
-                if trimmed.characters.count > 0 {
+                if trimmed.count > 0 {
                     
                     let components = trimmed.components(separatedBy: "* ")
                     
@@ -396,7 +396,7 @@ extension EBTUserInformationTVC {
                     for comp in components {
                         
                         let trimmedNew = comp.trimmingCharacters(in: .whitespacesAndNewlines)
-                        if trimmedNew.characters.count > 0 {
+                        if trimmedNew.count > 0 {
                             
                             let final = "* " + trimmedNew
                             list.append(final)
@@ -427,7 +427,7 @@ extension EBTUserInformationTVC {
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                // print(trimmedText)
                 
-                if trimmedText.characters.count > 0 {
+                if trimmedText.count > 0 {
                     
                     let json = JSON.parse(trimmedText)
                    // print("json response \(json)")
@@ -464,7 +464,7 @@ extension EBTUserInformationTVC {
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                 //print(trimmedText)
                 
-                if trimmedText.characters.count > 0 {
+                if trimmedText.count > 0 {
                     
                     let json = JSON.parse(trimmedText)
                    // print("json response \(json)")
@@ -501,7 +501,7 @@ extension EBTUserInformationTVC {
                 let trimmedText = stringResult.trimmingCharacters(in: .whitespacesAndNewlines)
                // print(trimmedText)
                 
-                if trimmedText.characters.count > 0 {
+                if trimmedText.count > 0 {
                     
                     let json = JSON.parse(trimmedText)
                    // print("json response \(json)")
@@ -613,7 +613,7 @@ extension EBTUserInformationTVC {
         ebtWebView.getErrorMessage(completion: { result in
             
             if let errorMessage = result {
-                if errorMessage.characters.count > 0 {
+                if errorMessage.count > 0 {
                     // error message
                     
                     // update view
@@ -693,9 +693,9 @@ extension EBTUserInformationTVC: AIPlaceHolderTextFieldDelegate {
         let messageText = NSMutableAttributedString(
             string: message,
             attributes: [
-                NSAttributedStringKey.paragraphStyle: paragraphStyle,
-                NSAttributedStringKey.font : UIFont(name: "System-Light", size: 12) ?? UIFont.systemFont(ofSize: 12),
-                NSAttributedStringKey.foregroundColor : UIColor.gray
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.font : UIFont(name: "System-Light", size: 12) ?? UIFont.systemFont(ofSize: 12),
+                NSAttributedString.Key.foregroundColor : UIColor.gray
             ]
         )
         

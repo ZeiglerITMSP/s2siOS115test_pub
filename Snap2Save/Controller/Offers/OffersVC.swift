@@ -41,7 +41,7 @@ class OffersVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         // tableview Automatic height
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         // table view cell register
@@ -364,7 +364,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
                 return 120.0
             }
             
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
             
         } else {
             
@@ -380,7 +380,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
     }
     
