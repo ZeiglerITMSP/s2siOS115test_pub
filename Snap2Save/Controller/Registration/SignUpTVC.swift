@@ -287,20 +287,20 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: titleParagraphStyle, range: fullMessageRange)
         
         // linkRange
-        let linkRange = (attributedString.string as NSString).range(of: rangeMessage)
-        attributedString.addAttribute(NSAttributedStringKey.link, value: link, range: linkRange)
+       // let linkRange = (attributedString.string as NSString).range(of: rangeMessage)
+       // attributedString.addAttribute(NSAttributedStringKey.link, value: link, range: linkRange)
         
-        let linkAttributes = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSUnderlineColorAttributeName: UIColor.white,
-            NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue ] as [String : Any]
+       // let linkattributes = [
+        //  NSForegroundColorAttributeName: UIColor.white,
+          //  NSUnderlineColorAttributeName: UIColor.white,
+          //  NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue ] as // // [String : Any]
         
         // textView is a UITextView
-        self.messageTextView.linkTextAttributes = linkAttributes
-        self.messageTextView.attributedText = attributedString
+       // self.messageTextView.linkTextAttributes = linkattributes
+       // self.messageTextView.attributedText = attributedString
         
-        self.messageTextView.isScrollEnabled = false
-        self.messageTextView.delegate = self
+       // self.messageTextView.isScrollEnabled = false
+       // self.messageTextView.delegate = self
     }
 
     func updateTermsText() {
@@ -349,23 +349,23 @@ class SignUpTVC: UITableViewController,FacebookLoginDelegate,FacebookDataDelegat
         
         
         // linkRange
-        let linkRange = (attributedString.string as NSString).range(of: rangeMessage)
-        attributedString.addAttribute(NSAttributedStringKey.link, value: link, range: linkRange)
+    //    let linkRange = (attributedString.string as NSString).range(of: rangeMessage)
+      //  attributedString.addAttribute(NSAttributedStringKey.link, value: link, range: linkRange)
         
-        let linkAttributes = [
-            NSForegroundColorAttributeName: UIColor.black,
-            NSUnderlineColorAttributeName: UIColor.black,
-            NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue ] as [String : Any]
+     //   let linkAttributes = [
+       //     NSForegroundColorAttributeName: UIColor.black,
+         //   NSUnderlineColorAttributeName: UIColor.black,
+           // NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue ] as [String : Any]
         
        // attributedString.append(range2)
         
         // textView is a UITextView
-        self.termsTextView.linkTextAttributes = linkAttributes
-        self.termsTextView.attributedText = attributedString
-        self.termsTextView.textAlignment = .left
-        self.termsTextView.isScrollEnabled = false
+    //    self.termsTextView.linkTextAttributes = linkAttributes
+      //  self.termsTextView.attributedText = attributedString
+        // self.termsTextView.textAlignment = .left
+       // self.termsTextView.isScrollEnabled = false
         
-        self.termsTextView.delegate = self
+       // self.termsTextView.delegate = self
         
        // self.termsTextView.contentSize = self.termsTextView.bounds.size
     }

@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case CantInitializeFirebase
         }
         
-        throw InitilizationError.CantInitializeFirebase;
+      //  throw InitilizationError.CantInitializeFirebase;
         
         // register notification for language change.
         
@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Configure tracker from GoogleService-Info.plist.
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        assert(configureError == nil, "Error configuring Google services: \(String(describing: configureError))")
 
         // Optional: configure GAI options.
         if let gai = GAI.sharedInstance() {
@@ -505,12 +505,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case .success:
                 
                 let json = JSON(data: response.data!)
-                if let responseDict = json.dictionaryObject {
+                if json.dictionaryObject != nil {
                     //print(responseDict)
                 }
                 break
                 
-            case .failure(let error):
+            case .failure( _):
                //print(error)
                 break
             }

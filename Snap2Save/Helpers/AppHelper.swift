@@ -237,13 +237,13 @@ extension String {
     
     public func makeAsRequired() -> NSAttributedString {
         
-        let mobileNumTxt = self + " *"
+        let mobileNumTxt = self + "*"
         let mobileNumTxtAttribute = NSMutableAttributedString.init(string: mobileNumTxt)
         
         let string_to_color = "*"
-        let contactStrRange = (mobileNumTxt as NSString).range(of: string_to_color)
+        _ = (mobileNumTxt as NSString).range(of: string_to_color)
         
-        mobileNumTxtAttribute.addAttNSAttributedStringKey.foregroundColoruteName, value: MandatoryColor , range: contactStrRange)
+      //  mobileNumTxtAttribute.addAttNSAttributedStringKey.foregroundColoruteName, value: MandatoryColor , range: contactStrRange)
         
         return mobileNumTxtAttribute
     }
@@ -253,9 +253,9 @@ extension String {
         let mobileNumTxtAttribute = NSMutableAttributedString.init(string: self)
         
         let string_to_color = "*"
-        let contactStrRange = (self as NSString).range(of: string_to_color)
+        _ = (self as NSString).range(of: string_to_color)
         
-        mobileNumTxtAttribute.addAttNSAttributedStringKey.foregroundColoruteName, value: MandatoryColor , range: contactStrRange)
+       // mobileNumTxtAttribute.addAttNSAttributedStringKey.foregroundColoruteName, value: MandatoryColor , range: contactStrRange)
         
         return mobileNumTxtAttribute
     }

@@ -221,14 +221,13 @@ class LoginVC: UIViewController,AITextFieldProtocol,UITextFieldDelegate,UIScroll
         self.passwordTextField.text = nil
         
         reloadContent()
-        self.navigationController?.navigationBar.isHidden = false;
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController!.navigationBar.isHidden = false;
+        navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
         // Sets shadow (line below the bar) to a blank image
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController!.navigationBar.shadowImage = UIImage()
         // Sets the translucent background color
-        self.navigationController?.navigationBar.backgroundColor = UIColor.clear        // Set translucent. (Default value is already true, so this can be removed if desired.)
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBarNSAttributedStringKey.foregroundColorgroundColorAttributeName: UIColor.white]
+        navigationController!.navigationBar.backgroundColor = UIColor.clear
+        // Set translucent. (Default value is already true, so this can be removed if desired.)
         
         let lineView = UIView(frame: CGRect(x: 0, y: 44, width: SCREEN_WIDTH, height: 1))
         lineView.backgroundColor = UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.4)

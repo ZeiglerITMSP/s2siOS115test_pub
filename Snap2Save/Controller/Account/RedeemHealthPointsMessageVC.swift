@@ -129,13 +129,13 @@ class RedeemHealthPointsMessageVC: UIViewController,TTTAttributedLabelDelegate {
                                                         alpha: 1) ,
                 ])
             let subscriptionNoticeLinkAttributes = [
-                NSFontAttributeName: UIFont.boldSystemFont(ofSize: 16),
-                NSForegroundColorAttributeName: UIColor(red: 0.0/0.0,
+                NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16),
+                NSAttributedStringKey.foregroundColor: UIColor(red: 0.0/0.0,
                                                         green: 122.0/255.0,
                                                         blue: 255.0/255.0,
                                                         alpha: 1),
-                NSUnderlineStyleAttributeName: true
-                ] as [String : Any]
+                NSAttributedStringKey.underlineStyle: true
+                ] as [NSAttributedStringKey : Any]
             self.urlLinkLabel.textAlignment = NSTextAlignment.left
             self.urlLinkLabel.delegate = self
             self.urlLinkLabel.numberOfLines = 0
